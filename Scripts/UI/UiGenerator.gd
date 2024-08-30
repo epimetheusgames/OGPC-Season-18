@@ -1,4 +1,3 @@
-@tool
 extends Node
 
 var default_color: Color
@@ -34,8 +33,6 @@ var keybind_config_data
 	set(val):
 		button_template_path = val
 		reinitialize_ui()
-
-@onready var helper_functions = HelperFunctions.new()
 
 var button_template: Button
 var ready_called := false
@@ -163,7 +160,7 @@ func nodes_from_array(array: Array, caller=self) -> void:
 func generate_ui_elements() -> void:
 	var new_buttons = []
 	var new_entries = []
-	var last_entry_pos: Vector2 = helper_functions.vec2_x_offset(starting_location, -keybind_entry_padding)
+	var last_entry_pos: Vector2 = starting_location - Vector2(keybind_entry_padding, 0)
 	
 	if keybind_config_data["keybinds"].size() > 1:
 		for actionIterator in keybind_config_data["keybinds"].size():

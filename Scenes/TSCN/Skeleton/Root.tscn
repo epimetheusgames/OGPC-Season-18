@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgroth3nseo6"]
 
-[ext_resource type="Script" path="res://Scripts/Skeleton/root.gd" id="1_h2kyx"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
 
 [node name="Root" type="Node"]
