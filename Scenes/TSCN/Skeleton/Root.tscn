@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=4 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
 
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
@@ -27,5 +28,6 @@ offset_left = -444.0
 offset_top = 26.0
 offset_right = -244.0
 offset_bottom = 76.0
+theme = ExtResource("3_gnnuy")
 
 [node name="Game" type="Node" parent="."]
