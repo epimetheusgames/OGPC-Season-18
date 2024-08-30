@@ -1,6 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=3 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/root.gd" id="1_h2kyx"]
+[ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
 
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
+
+[node name="Skeleton" type="Node" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UIGenerator" type="Node" parent="UI"]
+script = ExtResource("2_h48r7")
+keybind_entry_padding = 0
+keybind_entry_element_eadding = 20
+starting_location = Vector2(20, 20)
+button_template_path = NodePath("../TemplateButton")
+
+[node name="TemplateButton" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = -444.0
+offset_top = 26.0
+offset_right = -244.0
+offset_bottom = 76.0
+
+[node name="Game" type="Node" parent="."]

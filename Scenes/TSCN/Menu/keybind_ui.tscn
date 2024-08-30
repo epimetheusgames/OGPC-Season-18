@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1krrr2ucfyga"]
 
-[ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="1_p686s"]
+[ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="1_p686s"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="2_4i5ex"]
 
 [node name="KeybindUi" type="Node2D"]

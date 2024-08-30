@@ -1,68 +1,91 @@
-# WARNING
-# THIS FILE IS DEPRECATED AND SHOULD NOT
-# BE USED IN THE ACTUAL GAME.
-
-
-#i know this code doesnt align with all the fancy formatting standards yall set
-#i will make sure to make all my code formatted well later, probably when the scholyear actually starts and development
-#picks up speed
+@tool
 extends Node
-var buttonTemplate
-var default_color
 
-var viewportRect
+var default_color: Color
+var keybind_config := JSON.new()
+var keybind_config_data
 
-var keybindConfig:JSON = JSON.new()
-var keybindConfigData
+# Controls the background color 
+@export var background := Color("0e0e0e"):
+	set(val):
+		background = val
+		reinitialize_ui()
 
-#this variable controls the background color 
-const background = Color("0e0e0e")
+# Controls the distance between each entry in the keybind menu
+@export var keybind_entry_padding: int = 20:
+	set(val):
+		keybind_entry_padding = val
+		reinitialize_ui()
 
-#this variable controls the distance between each entry in the keybind menu
-const keybindEntryPadding:int = 20
+# Controls the distance between each button to change a specific key
+@export var keybind_entry_element_eadding: int = 10:
+	set(val):
+		keybind_entry_element_eadding = val
+		reinitialize_ui()
 
-#this variable controls the distance between each button to change a specific key
-const keybindEntryElementPadding:int = 10
+# Controls the location of the first entry
+@export var starting_location := Vector2(0,0):
+	set(val):
+		starting_location = val
+		reinitialize_ui()
 
-#this variable controls the location of the first entry
-const startingLocation = Vector2(0,0)
+# Default template button.
+@export_node_path("Button") var button_template_path:
+	set(val):
+		button_template_path = val
+		reinitialize_ui()
 
-#this variable was originally designed to determine whether or not the keybinds.json file has been read and turned into godot actions,
-#but keybinds.json isnt used anymore so this shouldnt need to ever be changed
-var actionsLoaded:bool = false
+@onready var helper_functions = HelperFunctions.new()
 
-#takes an array of actions, and removes the builtin actions
-func remove_stock_keybinds(array:Array)->Array:
-	var values_to_remove = []
-	for y in array.size():
-		if(array[y-1].begins_with("ui_")):
+var button_template: Button
+var ready_called := false
+
+func _ready():
+	ready_called = true
+	reinitialize_ui()
+	
+func reinitialize_ui():
+	if ready_called:
+		button_template = get_node(button_template_path)
+		default_color = RenderingServer.get_default_clear_color()
+		
+		# Get string representing a keybinds.json file generated from the actions set in 
+		# project settings and parse it into a tree
+		keybind_config.parse(json_config_generator())
+		keybind_config_data = keybind_config.data
+		generate_ui_elements()
+
+# Takes an array of actions, and removes the builtin actions
+func remove_stock_keybinds(array: Array) -> Array:
+	var values_to_remove := []
+	for y in range(array.size()):
+		if array[y - 1].begins_with("ui_"):
 			values_to_remove.append(y-1)
 	
-	var returnArray = array.duplicate(true)
-	for x in values_to_remove.size():
-		returnArray.pop_front()
+	var return_array := array.duplicate(true)
+	for x in range(values_to_remove.size()):
+		return_array.pop_front()
 		
-	return returnArray
-func get_inputeventkey_names(array:Array)->Array:
-	
-	var returnArray = []
-	
-	if(array.size()>1):
-		
-		for x in array.size():
-			returnArray.append(OS.get_keycode_string(DisplayServer.keyboard_get_keycode_from_physical(array[x].physical_keycode)))
-			
-	else:
-		
-		returnArray.append(OS.get_keycode_string(DisplayServer.keyboard_get_keycode_from_physical(array[0].physical_keycode)))
-		
-	return returnArray
+	return return_array
 
-#im not using a keybind config file because its easier to just use the built in settings thing to change them
-#this function makes it so i can still take advantage of the ease of use of json arrays 
-#witout having to make it harder for teammates
+func get_input_key_names(array: Array) -> Array:
+	var return_array = []
+	
+	if array.size() > 1:
+		for x in array.size():
+			var keycode := DisplayServer.keyboard_get_keycode_from_physical(array[x].physical_keycode)
+			return_array.append(OS.get_keycode_string(keycode))
+	else:
+		var keycode := DisplayServer.keyboard_get_keycode_from_physical(array[0].physical_keycode)
+		return_array.append(OS.get_keycode_string(keycode))
+		
+	return return_array
+
+# I'm not using a keybind config file because it's easier to just use the built in settings thing to change them
+# this function makes it so I can still take advantage of the ease of use of JSON arrays 
+# without having to make it harder for teammates.
 func json_config_generator()->String:
-	var json_config:String = '{"keybinds":['
+	var json_config: String = '{"keybinds":['
 	var actions = InputMap.get_actions()
 	var usable_actions = remove_stock_keybinds(actions)
 	
@@ -80,112 +103,108 @@ func json_config_generator()->String:
 	
 	#note if your going to remove the hack and replace it with a better solution, please let me know
 	#so i can apply it to the rest of the functions in the file that also utilize the hack
-	if usable_actions.size()>1:
-		
-		for x in usable_actions.size()-1:
-			
+	
+	# Hi sequoia, I'm not going to remove your hack because I don't really understand the code (;
+	# Maybe someday ...
+	
+	if usable_actions.size() > 1:
+		for x in range(usable_actions.size() - 1):
 			var keys = InputMap.action_get_events(usable_actions[x])
-			var key_strings = get_inputeventkey_names(keys)
+			var key_strings = get_input_key_names(keys)
 			
-			json_config = json_config + '{"actionName":"' + usable_actions[x] + '","key":['
+			json_config += '{"actionName":"' + usable_actions[x] + '","key":['
 			 
-			for y in keys.size()-1:
-			
-				json_config = json_config +'"'+ key_strings[y] + '"'
-				if(keys.size()>1 and not y==keys.size()):
-					json_config = json_config + ","
+			for y in keys.size() - 1:
+				json_config += '"'+ key_strings[y] + '"'
+				if keys.size() > 1 && !y == keys.size():
+					json_config += ","
 				
-			json_config = json_config + "]}"
+			json_config += "]}"
 		
-			if(usable_actions.size()>1 and not x==usable_actions.size()):
+			if usable_actions.size() > 1 && !x == usable_actions.size():
 				json_config = json_config + ","
 			
 		json_config = json_config + ']}'
 		return json_config
 	else:
 		var keys = InputMap.action_get_events(usable_actions[0])
-		var key_strings = get_inputeventkey_names(keys)
-		json_config = json_config + '{"actionName":"' + usable_actions[0] + '","key":[' 
 		
-		if(keys.size()>1):
+		# Exception handling for no keys to an event
+		if len(keys) <= 0:
+			print("WARNING: No keys attached to event " + usable_actions[0] + ". This will cause an error ...")
+		
+		var key_strings = get_input_key_names(keys)
+		
+		json_config += '{"actionName":"' + usable_actions[0] + '","key":[' 
+		
+		if keys.size() > 1:
 			for y in keys.size()-1:
-				
-				json_config = json_config +'"'+ key_strings[y] + '"'
-				if(not y==keys.size()):
-					json_config = json_config + ","
+				json_config += '"' + key_strings[y] + '"'
+				if !y == keys.size():
+					json_config += ","
 		else:
+			json_config += '"'+ key_strings[0] + '"'
 			
-			json_config = json_config +'"'+ key_strings[0] + '"'
-			
-		json_config = json_config + "]}]}"
+		json_config += "]}]}"
 		return json_config
+
+# TODO: This function should be replaced with smoother visuals.
 func toggle_ui():
-	self.get_parent().visible = !self.get_parent().visible
+	get_parent().visible = !self.get_parent().visible
 	if(get_parent().visible):
 		RenderingServer.set_default_clear_color(background)
 	else:
 		RenderingServer.set_default_clear_color(default_color)
-func _ready():
-	buttonTemplate = get_parent().get_node("TemplateButton")
-	default_color = RenderingServer.get_default_clear_color()
-	
-	#get string representing a keybinds.json file generated from the actions set in project settings and parse it into a tree
-	print(json_config_generator())
-	keybindConfig.parse(json_config_generator())
-	
-	keybindConfigData = keybindConfig.data
-	generate_UI_elements()
-func nodes_from_array(array:Array,caller=self)->void:
+
+func nodes_from_array(array: Array, caller=self) -> void:
 	for x in array.size():
 		caller.add_child(array[x])
-func xOffsetVector2(vector:Vector2,offset:int)->Vector2:
-	var newVector = vector
-	newVector.x += offset
-	return newVector
-func generate_UI_elements()->void:
-	var newButtons = []
-	var newEntries = []
-	var lastEntryPos:Vector2=xOffsetVector2(startingLocation,-keybindEntryPadding)
-	if(keybindConfigData["keybinds"].size()>1):
-		
-		for actionIterator in keybindConfigData["keybinds"].size():
-			var newText = RichTextLabel.new()
-			newText.text = keybindConfigData["keybinds"][actionIterator]["actionName"]
+
+func generate_ui_elements() -> void:
+	var new_buttons = []
+	var new_entries = []
+	var last_entry_pos: Vector2 = helper_functions.vec2_x_offset(starting_location, -keybind_entry_padding)
 	
-			newText.position = lastEntryPos
+	if keybind_config_data["keybinds"].size() > 1:
+		for actionIterator in keybind_config_data["keybinds"].size():
+			var new_text = RichTextLabel.new()
+			new_text.text = keybind_config_data["keybinds"][actionIterator]["actionName"]
+	
+			new_text.position = last_entry_pos
 		
-			var lastButtonPos = newText.position.x
-			for eventIterator in keybindConfigData["keybinds"][actionIterator]["key"].size():
+			var last_button_pos = new_text.position.x
+			for event_iterator in keybind_config_data["keybinds"][actionIterator]["key"].size():
 				
-				newButtons.append(buttonTemplate.duplicate())
-				newButtons[eventIterator].text = keybindConfigData["keybinds"][actionIterator]["key"]
-				newButtons[eventIterator].position.y = newText.position.y
-				newButtons[eventIterator].position.x = lastButtonPos+keybindEntryElementPadding
+				new_buttons.append(button_template.duplicate())
+				new_buttons[event_iterator].text = keybind_config_data["keybinds"][actionIterator]["key"]
+				new_buttons[event_iterator].position.y = new_text.position.y
+				new_buttons[event_iterator].position.x = last_button_pos+keybind_entry_element_eadding
 			
-			lastEntryPos =  newText.position
+			last_entry_pos =  new_text.position
 	else:
-		var newText = RichTextLabel.new()
+		var new_text = RichTextLabel.new()
 		
-		newText.text = keybindConfigData["keybinds"][0]["actionName"]
-		newText.position = lastEntryPos
-		newEntries.append(newText)
+		new_text.text = keybind_config_data["keybinds"][0]["actionName"]
+		new_text.position = last_entry_pos
+		new_entries.append(new_text)
 		
-		var lastButtonPos = newText.position.x
+		var last_button_pos = new_text.position.x
 		
-		if(keybindConfigData["keybinds"][0]["key"].size()>1):
-			for eventIterator in keybindConfigData["keybinds"][0]["key"].size():
-				newButtons.append(buttonTemplate.new())
-				newButtons[eventIterator].text = keybindConfigData["keybinds"][0]["key"]
-				newButtons[eventIterator].position.y = newText.position.y
-				newButtons[eventIterator].position.x = lastButtonPos.x+(keybindEntryElementPadding*eventIterator)
+		if keybind_config_data["keybinds"][0]["key"].size() > 1:
+			for event_iterator in keybind_config_data["keybinds"][0]["key"].size():
+				new_buttons.append(button_template.new())
+				new_buttons[event_iterator].text = keybind_config_data["keybinds"][0]["key"]
+				new_buttons[event_iterator].position.y = new_text.position.y
+				new_buttons[event_iterator].position.x = last_button_pos.x + keybind_entry_element_eadding * event_iterator
 		else:
-			newButtons.append(buttonTemplate.new())
-			newButtons[0].text = keybindConfigData["keybinds"][0]["key"][0]
-			newButtons[0].position.y = newText.position.y
-			newButtons[0].position.x = lastButtonPos
-		lastEntryPos =  newText.position
-	#stupid functions below ust doesnt run il fix it when im not on a plane 
-	nodes_from_array(newButtons)
-	nodes_from_array(newEntries)
-func _process(delta):
-	pass
+			button_template = get_node(button_template_path)
+			new_buttons.append(button_template.duplicate())
+			new_buttons[0].text = keybind_config_data["keybinds"][0]["key"][0]
+			new_buttons[0].position.y = new_text.position.y
+			new_buttons[0].position.x = last_button_pos
+		
+		last_entry_pos =  new_text.position
+	
+	# Add buttons and entries into scene.
+	nodes_from_array(new_buttons)
+	nodes_from_array(new_entries)
