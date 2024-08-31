@@ -5,6 +5,7 @@ extends Node
 # Globals seem like a good idea, remember to static type these variables though ...
 
 var root_node: Node
+var save_load_framework: Node
 var current_scene_path: String
 
 func get_slot_password(slot_num: int) -> String:

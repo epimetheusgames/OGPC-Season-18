@@ -12,6 +12,9 @@ extends Node
 			if filepath.file == null:
 				filepath.file = FilePathResource.new()
 
+func _ready():
+	Global.av
+
 # Saves a GameSave to memory.
 func _save_config_file(content: GameSave, slot_num) -> void:
 	var config_file = ConfigFile.new()
