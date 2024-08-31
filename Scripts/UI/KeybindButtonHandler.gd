@@ -1,7 +1,8 @@
 extends Button
 
-@onready var keybind_text := text
-var setting_keybind := false
+@onready var keybind_text:String = text
+var setting_keybind:bool = false
+var Parse:JSON = JSON.new()
 
 signal keybind_changed
 
@@ -24,7 +25,28 @@ func _input(event) -> void:
 			keybind_changed.emit()
 		
 		setting_keybind = false
-		
+
+func add_input_action(key:String,actionName:String):
+	var keycode_stringconv = OS.find_keycode_from_string(key)
+	var new_key:InputEventKey = InputEventKey.new()
+	new_key.physical_keycode = keycode_stringconv
+	InputMap.add_action(actionName)
+	InputMap.action_add_event(actionName,new_key)
+
+func reloadKeybinds():
+	var keybindConfig = FileAccess.open("user://keybinds.json",FileAccess.READ)
+	var configText = keybindConfig.get_as_text()
+	
+	var actions = get_parent().get_node("UIGenerator").remove_stock_keybinds(InputMap.get_actions())
+	
+	Parse.parse(configText)
+	var parseData = Parse.data
+	for ygu in parseData["keybinds"].size():
+		for hbnnkjjijo in parseData["keybinds"][ygu]["key"].size():
+			print(InputMap.get_actions())
+			add_input_action(parseData["keybinds"][ygu]["key"][hbnnkjjijo],parseData["keybinds"][ygu]["actionName"])
+	keybindConfig.close()
+			
 func changeKeybind(actionName:String,keybindNumber:int,newKey:String)->bool:
 	#buffer_parse holds the json object that will hold the updated keybinds.json
 	var buffer_parse:JSON = JSON.new()

@@ -77,10 +77,6 @@ func remove_stock_keybinds(array: Array) -> Array:
 		
 	return return_array
 
-func check_for_keybind_savefile():
-	if(FileAccess.file_exists("user://keybinds.json")):
-		var keybind_file = FileAccess.open("user://keybinds.json",FileAccess.WRITE)
-		keybind_file.store_string(json_config_generator())
 func get_input_key_names(array: Array) -> Array:
 	var return_array = []
 	
