@@ -50,6 +50,10 @@ var ready_called := false
 
 func _ready():
 	ready_called = true
+	if(not FileAccess.file_exists("user://keybinds.json")):
+		var keybind_savefile = FileAccess.open("user://keybinds.json",FileAccess.WRITE)
+		keybind_savefile.store_string(json_config_generator())
+		keybind_savefile.close()
 	reinitialize_ui()
 	
 func reinitialize_ui():
