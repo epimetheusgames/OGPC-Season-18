@@ -1,3 +1,4 @@
+# This code was based on code from the Dunebound codebase.
 extends Node
 
 var default_color: Color
