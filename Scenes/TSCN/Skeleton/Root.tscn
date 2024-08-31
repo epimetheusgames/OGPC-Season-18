@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=8 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/SaveLoadFramework.gd" id="2_i3ogj"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
+[ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
@@ -43,5 +44,10 @@ offset_top = 26.0
 offset_right = -244.0
 offset_bottom = 68.0
 theme = ExtResource("3_gnnuy")
+text = "Stylize this button!"
+script = ExtResource("6_oply2")
 
 [node name="Game" type="Node" parent="."]
+
+[connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
+[connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]

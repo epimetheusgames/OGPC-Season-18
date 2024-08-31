@@ -190,6 +190,7 @@ func generate_ui_elements() -> void:
 				new_buttons[-1].text = keybind_config_data["keybinds"][actionIterator]["key"][event_iterator]
 				new_buttons[-1].position.y = new_text.position.y
 				new_buttons[-1].position.x = last_button_pos + keybind_entry_element_padding + button_offset_x
+				new_buttons[-1].keybind_changed.connect(self._on_template_button_keybind_changed)
 			
 			last_entry_pos = new_text.position
 	else:
@@ -223,3 +224,8 @@ func generate_ui_elements() -> void:
 	# Add buttons and entries into scene.
 	nodes_from_array(new_buttons)
 	nodes_from_array(new_entries)
+
+func _on_template_button_keybind_changed() -> void:
+	for child in get_children():
+		if child is Button:
+			child.reset_keybind()
