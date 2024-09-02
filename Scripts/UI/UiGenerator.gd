@@ -1,3 +1,4 @@
+# This code was based on code from the Dunebound codebase.
 extends Node
 
 var default_color: Color
@@ -17,9 +18,19 @@ var keybind_config_data
 		reinitialize_ui()
 
 # Controls the distance between each button to change a specific key
-@export var keybind_entry_element_eadding: int = 10:
+@export var keybind_entry_element_padding: int = 10:
 	set(val):
-		keybind_entry_element_eadding = val
+		keybind_entry_element_padding = val
+		reinitialize_ui()
+
+@export var text_offset_y: int = 0:
+	set(val):
+		text_offset_y = val
+		reinitialize_ui()
+
+@export var button_offset_x: int = 0:
+	set(val):
+		button_offset_x = val
 		reinitialize_ui()
 
 # Controls the location of the first entry
@@ -39,6 +50,10 @@ var ready_called := false
 
 func _ready():
 	ready_called = true
+	if(not FileAccess.file_exists("user://keybinds.json")):
+		var keybind_savefile = FileAccess.open("user://keybinds.json",FileAccess.WRITE)
+		keybind_savefile.store_string(json_config_generator())
+		keybind_savefile.close()
 	reinitialize_ui()
 	
 func reinitialize_ui():
@@ -50,6 +65,7 @@ func reinitialize_ui():
 		# project settings and parse it into a tree
 		keybind_config.parse(json_config_generator())
 		keybind_config_data = keybind_config.data
+		_clear_ui_elements()
 		generate_ui_elements()
 
 # Takes an array of actions, and removes the builtin actions
@@ -81,12 +97,10 @@ func get_input_key_names(array: Array) -> Array:
 # I'm not using a keybind config file because it's easier to just use the built in settings thing to change them
 # this function makes it so I can still take advantage of the ease of use of JSON arrays 
 # without having to make it harder for teammates.
-func json_config_generator()->String:
+func json_config_generator() -> String:
 	var json_config: String = '{"keybinds":['
 	var actions = InputMap.get_actions()
 	var usable_actions = remove_stock_keybinds(actions)
-	
-	print("breakpoint checkpoint")
 	
 	#i hope carson is a smart enough person to know how to iterate through arrays properly
 	#the size-minus-1 method doesnt work when usable_actions.size is less than 2
@@ -105,13 +119,13 @@ func json_config_generator()->String:
 	# Maybe someday ...
 	
 	if usable_actions.size() > 1:
-		for x in range(usable_actions.size() - 1):
+		for x in range(usable_actions.size()):
 			var keys = InputMap.action_get_events(usable_actions[x])
 			var key_strings = get_input_key_names(keys)
 			
 			json_config += '{"actionName":"' + usable_actions[x] + '","key":['
 			 
-			for y in keys.size() - 1:
+			for y in keys.size():
 				json_config += '"'+ key_strings[y] + '"'
 				if keys.size() > 1 && !y == keys.size():
 					json_config += ","
@@ -157,6 +171,10 @@ func nodes_from_array(array: Array, caller=self) -> void:
 	for x in array.size():
 		caller.add_child(array[x])
 
+func _clear_ui_elements() -> void:
+	for child in get_children():
+		child.queue_free()
+
 func generate_ui_elements() -> void:
 	var new_buttons = []
 	var new_entries = []
@@ -165,34 +183,35 @@ func generate_ui_elements() -> void:
 	if keybind_config_data["keybinds"].size() > 1:
 		for actionIterator in keybind_config_data["keybinds"].size():
 			var new_text = RichTextLabel.new()
+			new_text.size = Vector2(100, 50)
 			new_text.text = keybind_config_data["keybinds"][actionIterator]["actionName"]
-	
-			new_text.position = last_entry_pos
+			new_text.position = last_entry_pos + Vector2(0, keybind_entry_element_padding)
+			new_entries.append(new_text)
 		
 			var last_button_pos = new_text.position.x
 			for event_iterator in keybind_config_data["keybinds"][actionIterator]["key"].size():
-				
 				new_buttons.append(button_template.duplicate())
-				new_buttons[event_iterator].text = keybind_config_data["keybinds"][actionIterator]["key"]
-				new_buttons[event_iterator].position.y = new_text.position.y
-				new_buttons[event_iterator].position.x = last_button_pos+keybind_entry_element_eadding
+				new_buttons[-1].text = keybind_config_data["keybinds"][actionIterator]["key"][event_iterator]
+				new_buttons[-1].position.y = new_text.position.y
+				new_buttons[-1].position.x = last_button_pos + keybind_entry_element_padding + button_offset_x
+				new_buttons[-1].keybind_changed.connect(self._on_template_button_keybind_changed)
 			
-			last_entry_pos =  new_text.position
+			last_entry_pos = new_text.position
 	else:
-		var new_text = RichTextLabel.new()
-		
+		var new_text := RichTextLabel.new()
+		new_text.size = Vector2(100, 100)
 		new_text.text = keybind_config_data["keybinds"][0]["actionName"]
 		new_text.position = last_entry_pos
 		new_entries.append(new_text)
 		
-		var last_button_pos = new_text.position.x
+		var last_button_pos = new_text.position.x + new_text.size.y
 		
 		if keybind_config_data["keybinds"][0]["key"].size() > 1:
 			for event_iterator in keybind_config_data["keybinds"][0]["key"].size():
 				new_buttons.append(button_template.new())
 				new_buttons[event_iterator].text = keybind_config_data["keybinds"][0]["key"]
 				new_buttons[event_iterator].position.y = new_text.position.y
-				new_buttons[event_iterator].position.x = last_button_pos.x + keybind_entry_element_eadding * event_iterator
+				new_buttons[event_iterator].position.x = last_button_pos.x + keybind_entry_element_padding * event_iterator
 		else:
 			button_template = get_node(button_template_path)
 			new_buttons.append(button_template.duplicate())
@@ -200,8 +219,17 @@ func generate_ui_elements() -> void:
 			new_buttons[0].position.y = new_text.position.y
 			new_buttons[0].position.x = last_button_pos
 		
-		last_entry_pos =  new_text.position
+		last_entry_pos = new_text.position
+		
+	# Add text offset
+	for entry in new_entries:
+		entry.position.y += text_offset_y
 	
 	# Add buttons and entries into scene.
 	nodes_from_array(new_buttons)
 	nodes_from_array(new_entries)
+
+func _on_template_button_keybind_changed() -> void:
+	for child in get_children():
+		if child is Button:
+			child.reset_keybind()
