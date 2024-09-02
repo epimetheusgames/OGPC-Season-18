@@ -20,7 +20,7 @@
 - Use underscores at the beginning of variables to make them private
 - CONSTANT_CASE constants
 - PascalCase for enum names and CONSTANT_CASE for their members, as they are constants
-- Booleans start with “is” or “has”
+- Booleans start with “is”, “has”, "does", "are"
 
 ### Functions:
 - snake_case function name 
@@ -47,7 +47,6 @@
 - Use and instead of &&
 - Use or instead of ||
 - Use not instead of !
-- I would argue that plain English is not as accessible, plus the symbols make you look smarter.
 
 ### Commenting:
 - Comments (#) should start with a space, but not code that you comment out.
@@ -55,7 +54,7 @@
 
 ### Numbers:
 - Don't remove the leading or trailing zero in floating-point numbers. Otherwise, this makes them less readable and harder to distinguish from integers at a glance
-- Take advantage of GDScript's underscores in literals to make large numbers more readable
+- Take advantage of GDScript's underscores in literals to make large numbers more readable (1_000_000)
 
 ### Ordering:
 ```
@@ -102,3 +101,10 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 - Each scene should be able to run by itself without causing a runtime exception.
 - Use setters/getters instead of setting/getting a property directly
 - A node should refer to its children or its parent but not its siblings.
+
+---
+
+- Do not commit broken code
+- Do not try and fix merge changes if you are unsure of how 
+- Never use commands like "rebase", "reset", "revert", "branch -d", without making sure, these can blow away progress easily
+- In general never delete anything unless it is necessary (git wise)
