@@ -46,6 +46,8 @@ offset_bottom = 68.0
 theme = ExtResource("3_gnnuy")
 text = "Stylize this button!"
 script = ExtResource("6_oply2")
+metadata/key_number = 0
+metadata/action = ""
 
 [node name="Game" type="Node" parent="."]
 

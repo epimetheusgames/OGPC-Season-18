@@ -50,20 +50,28 @@ var ready_called := false
 
 func _ready():
 	ready_called = true
+	
+	#if this is the first time the user has opened the game, create the default keybinds
 	if(not FileAccess.file_exists("user://keybinds.json")):
 		var keybind_savefile = FileAccess.open("user://keybinds.json",FileAccess.WRITE)
 		keybind_savefile.store_string(json_config_generator())
 		keybind_savefile.close()
 	reinitialize_ui()
 	
+func get_keybind_file():
+	var keybind_savefile = FileAccess.open("user://keybinds.json",FileAccess.READ)
+	var return_value = keybind_savefile.get_as_text()
+	keybind_savefile.close()
+	return return_value
 func reinitialize_ui():
 	if ready_called:
 		button_template = get_node(button_template_path)
 		default_color = RenderingServer.get_default_clear_color()
 		
-		# Get string representing a keybinds.json file generated from the actions set in 
+		# Get string representing the users keybinds.json file generated from the actions set in 
 		# project settings and parse it into a tree
-		keybind_config.parse(json_config_generator())
+		var test = get_keybind_file()
+		keybind_config.parse(get_keybind_file())
 		keybind_config_data = keybind_config.data
 		_clear_ui_elements()
 		generate_ui_elements()
@@ -195,7 +203,8 @@ func generate_ui_elements() -> void:
 				new_buttons[-1].position.y = new_text.position.y
 				new_buttons[-1].position.x = last_button_pos + keybind_entry_element_padding + button_offset_x
 				new_buttons[-1].keybind_changed.connect(self._on_template_button_keybind_changed)
-			
+				new_buttons[-1].set_meta("action", keybind_config_data["keybinds"][actionIterator]["actionName"])
+				new_buttons[-1].set_meta("key_number", event_iterator)
 			last_entry_pos = new_text.position
 	else:
 		var new_text := RichTextLabel.new()
