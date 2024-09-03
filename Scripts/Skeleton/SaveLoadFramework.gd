@@ -26,6 +26,11 @@ func _save_config_file(content: GameSave, slot_num) -> void:
 	else:
 		config_file.save("user://slot_" + str(slot_num))
 
+func _save_global_config(content: GlobalSave) -> void:
+	var config_file = ConfigFile.new()
+	config_file.set_value("Main", "GlobalSave", content)
+	config_file.save("user://global")
+
 # Loads a GameSave from memory.
 func _load_config_file(slot_num) -> GameSave:
 	var blank_config = ConfigFile.new()
@@ -48,6 +53,15 @@ func _load_config_file(slot_num) -> GameSave:
 			print("DEBUG: If the file is encrypted, you will probably have to delete it, but game data will be erased.")
 	
 	var game_save: GameSave = blank_config.get_value("Main", "GameSave")
+	return game_save
+
+func _load_global_config() -> GlobalSave:
+	var blank_config = ConfigFile.new()
+	var slot_path = "user://global"
+	
+	blank_config.load(slot_path)
+	
+	var game_save: GlobalSave = blank_config.get_value("Main", "GlobalSave")
 	return game_save
 
 # Loads a level and then adds it to the Game container.
