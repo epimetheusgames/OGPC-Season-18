@@ -1,11 +1,14 @@
+# Global autoload for variables that need to be accessed by all nodes.
+# Avoid setting values in here if you aren't a skeleton node.
+# See https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html 
 extends Node
-
-# Tes globals. its fine to use them because kai used them in dunebound, and anyways
-# this isnt c++ we dont need to worry about them messing up performance...
-# Globals seem like a good idea, remember to static type these variables though ...
 
 var root_node: Node
 var save_load_framework: Node
+var game_skeleton_node: Node
+var ui_root_node: Control
+var game_root_node: Node
+
 var current_scene_path: String
 
 func get_slot_password(slot_num: int) -> String:

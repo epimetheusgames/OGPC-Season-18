@@ -13,6 +13,9 @@ file = "<null>"
 
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
+game_skeleton_node = NodePath("Skeleton")
+ui_root_node = NodePath("UI")
+game_root_node = NodePath("Game")
 
 [node name="Skeleton" type="Node" parent="."]
 
