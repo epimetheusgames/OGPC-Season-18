@@ -1,13 +1,13 @@
 @tool
 extends Resource
-class_name UIDGenerator
+class_name UID
 
 
 @export var uid := -1
 var game_load_error: Error
 
 func _init() -> void:
-	refresh_uid()
+	call_deferred("refresh_uid")
 
 # This has to be in here because I can't find a way to access the scenetree from inside a resource.
 func _save_global_config(content: GlobalSave) -> void:

@@ -10,6 +10,7 @@ var ui_root_node: Control
 var game_root_node: Node
 
 var current_scene_path: String
+var current_game_slot: int
 
 func get_slot_password(slot_num: int) -> String:
 	var result_string = ""

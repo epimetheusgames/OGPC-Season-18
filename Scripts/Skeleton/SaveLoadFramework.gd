@@ -16,25 +16,34 @@ extends Node
 func _ready():
 	Global.save_load_framework = self
 
-# Saves a GameSave to memory.
-func _save_config_file(content: GameSave, slot_num) -> void:
-	var config_file = ConfigFile.new()
-	config_file.set_value("Main", "GameSave", content)
-	
+# Saves a ConfigFile to memory.
+func _save_config_file(config_file: ConfigFile, slot_num) -> void:
 	if save_encrypted:
 		config_file.save_encrypted_pass("user://slot_" + str(slot_num), Global.get_slot_password(int(slot_num)))
 	else:
 		config_file.save("user://slot_" + str(slot_num))
 
+# Saves a GameSave to memory.
+func _save_game_save(content: GameSave, slot_num) -> void:
+	var config_file = ConfigFile.new()
+	config_file.set_value("Main", "GameSave", content)
+	_save_config_file(config_file, slot_num)
+
+# Save global config to memory.
 func _save_global_config(content: GlobalSave) -> void:
 	var config_file = ConfigFile.new()
 	config_file.set_value("Main", "GlobalSave", content)
 	config_file.save("user://global")
 
-# Loads a GameSave from memory.
-func _load_config_file(slot_num) -> GameSave:
-	var blank_config = ConfigFile.new()
-	var slot_path = "user://slot_" + str(slot_num)
+# Save an entity state to its slot.
+func _save_entity(slot_num, uid: UID, content: EntitySave) -> void:
+	var config_file := _load_config_file(slot_num)
+	config_file.set_value("Entities", str(uid.uid), content)
+	_save_config_file(config_file, slot_num)
+
+func _load_config_file(slot_num) -> ConfigFile:
+	var blank_config := ConfigFile.new()
+	var slot_path := "user://slot_" + str(slot_num)
 	
 	var load_error := blank_config.load_encrypted_pass(slot_path, Global.get_slot_password(int(slot_num)))
 	
@@ -52,6 +61,11 @@ func _load_config_file(slot_num) -> GameSave:
 			print("ERROR: Loading unsuccessful, this means there is a problem with the format of the file.")
 			print("DEBUG: If the file is encrypted, you will probably have to delete it, but game data will be erased.")
 	
+	return blank_config
+
+# Loads a GameSave from memory.
+func _load_game_save(slot_num) -> GameSave:
+	var blank_config = _load_config_file(slot_num)
 	var game_save: GameSave = blank_config.get_value("Main", "GameSave")
 	return game_save
 
@@ -64,9 +78,13 @@ func _load_global_config() -> GlobalSave:
 	var game_save: GlobalSave = blank_config.get_value("Main", "GlobalSave")
 	return game_save
 
+func _load_entity(slot_num, uid: UID) -> EntitySave:
+	var config_file := _load_config_file(slot_num)
+	return config_file.get_value("Entities", str(uid.uid))
+
 # Loads a level and then adds it to the Game container.
 func start_game(slot_num: int) -> void:
-	var level_data := _load_config_file(slot_num)
+	var level_data := _load_game_save(slot_num)
 	
 	var ui_generator = get_node(ui_root_node_path).get_node("UIGenerator")
 	if !ui_generator:
@@ -84,11 +102,12 @@ func start_game(slot_num: int) -> void:
 		print("WARNING: Level index is greater than the ammount of levels. Level won't start.")
 		return
 	
+	Global.current_game_slot = slot_num
 	var game_scene = load(level_list[level_data.level].file)
 	game_container.add_child(game_scene)
 
 func exit_to_menu(save_slot: int, game_data: GameSave) -> void:
-	_save_config_file(game_data, save_slot)
+	_save_game_save(game_data, save_slot)
 	
 	var game_container: Node = get_node(game_container_node_path)
 	for child in game_container.get_children():
