@@ -5,8 +5,6 @@ var default_color: Color
 var keybind_config := JSON.new()
 var keybind_config_data
 
-@export var test_uid := UIDGenerator.new()
-
 # Controls the background color 
 @export var background := Color("0e0e0e"):
 	set(val):

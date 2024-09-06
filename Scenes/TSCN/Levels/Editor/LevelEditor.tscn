@@ -1,0 +1,210 @@
+[gd_scene load_steps=6 format=3 uid="uid://csah6gt2cxydw"]
+
+[ext_resource type="Script" path="res://Scripts/LevelEditor/LevelEditorRoot.gd" id="1_36q31"]
+[ext_resource type="Script" path="res://Scripts/LevelEditor/MenuBarManager.gd" id="1_qgpt1"]
+[ext_resource type="Script" path="res://Scripts/LevelEditor/LevelEditorCamera.gd" id="1_rf8o3"]
+[ext_resource type="Script" path="res://Scripts/LevelEditor/NodeRMBoxManager.gd" id="4_4qs7k"]
+[ext_resource type="Script" path="res://Scripts/LevelEditor/SaverLoader.gd" id="5_t6rcf"]
+
+[node name="LevelEditorRoot" type="Node"]
+process_mode = 3
+
+[node name="LevelEditorUIGrid" type="GridContainer" parent="."]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 1915.0
+offset_bottom = 1075.0
+script = ExtResource("1_36q31")
+side_bar_node_tree = NodePath("HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree")
+
+[node name="EntityImportFileDialog" type="FileDialog" parent="LevelEditorUIGrid"]
+title = "Import an Entity"
+position = Vector2i(815, 385)
+size = Vector2i(500, 400)
+popup_window = true
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.tscn", "*.scn")
+
+[node name="LevelSaveDialog" type="FileDialog" parent="LevelEditorUIGrid"]
+auto_translate_mode = 1
+title = "Open a File"
+position = Vector2i(815, 385)
+size = Vector2i(500, 400)
+popup_window = true
+ok_button_text = "Save"
+filters = PackedStringArray("*.tscn", "*.scn")
+
+[node name="LevelLoadDialog" type="FileDialog" parent="LevelEditorUIGrid"]
+auto_translate_mode = 1
+title = "Open a File"
+position = Vector2i(815, 385)
+size = Vector2i(500, 400)
+popup_window = true
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.json", "*.txt")
+
+[node name="MenuBar" type="MenuBar" parent="LevelEditorUIGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_qgpt1")
+level_interface_viewport = NodePath("../HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport")
+entity_tree_container = NodePath("../HSplitContainer/SideBarLeftContainer/SideBarObjects/Entity")
+tilemap_tree_container = NodePath("../HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap")
+static_tree_container = NodePath("../HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static")
+saver_loader = NodePath("../../SaverLoader")
+
+[node name="File" type="PopupMenu" parent="LevelEditorUIGrid/MenuBar"]
+size = Vector2i(102, 100)
+item_count = 3
+item_0/text = "Save Level"
+item_1/text = "Load Level"
+item_1/id = 1
+item_2/text = "New Level"
+item_2/id = 2
+
+[node name="Edit" type="PopupMenu" parent="LevelEditorUIGrid/MenuBar"]
+item_count = 3
+item_0/text = "Import Entity"
+item_1/text = "Import TileMap"
+item_1/id = 1
+item_2/text = "Import Static Node"
+item_2/id = 2
+
+[node name="TabBar" type="TabBar" parent="LevelEditorUIGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 0
+tab_count = 1
+tab_0/title = "Empty Level"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="LevelEditorUIGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+split_offset = -345
+
+[node name="SideBarLeftContainer" type="VSplitContainer" parent="LevelEditorUIGrid/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SideBarNodes" type="VBoxContainer" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SideBarNodeTreeLabel" type="Label" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes"]
+layout_mode = 2
+text = "Nodes"
+
+[node name="SideBarNodeTree" type="Tree" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes"]
+layout_mode = 2
+size_flags_vertical = 3
+allow_rmb_select = true
+
+[node name="SideBarObjects" type="VSplitContainer" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Entity" type="VBoxContainer" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EntityLabel" type="Label" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/Entity"]
+layout_mode = 2
+text = "Entities"
+
+[node name="EntityNodes" type="ItemList" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/Entity"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SeperatorTileMapStatic" type="VSplitContainer" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TileMap" type="VBoxContainer" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TileMapLabel" type="Label" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap"]
+layout_mode = 2
+text = "TileMaps"
+
+[node name="TileMapNodes" type="ItemList" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Static" type="VBoxContainer" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StaticLabel" type="Label" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static"]
+layout_mode = 2
+text = "Static"
+
+[node name="StaticNodes" type="ItemList" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="LevelEditorUIGrid/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelInterfaceContainer" type="SubViewportContainer" parent="LevelEditorUIGrid/HSplitContainer/Panel"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 1289.0
+offset_bottom = 995.0
+size_flags_horizontal = 3
+stretch = true
+
+[node name="LevelInterfaceViewport" type="SubViewport" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer"]
+handle_input_locally = false
+size = Vector2i(1284, 990)
+render_target_update_mode = 4
+
+[node name="LevelEditorCamera" type="Camera2D" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport"]
+script = ExtResource("1_rf8o3")
+level_interface_viewport = NodePath("..")
+entity_tree_container = NodePath("../../../../SideBarLeftContainer/SideBarObjects/Entity")
+tilemap_tree_container = NodePath("../../../../SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap")
+static_tree_container = NodePath("../../../../SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static")
+side_bar_tree_container = NodePath("../../../../SideBarLeftContainer/SideBarNodes")
+level_interface_node_container = NodePath("../LevelInterfaceNodesContainer")
+
+[node name="LevelInterfaceNodesContainer" type="Node" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport"]
+process_mode = 1
+
+[node name="NodeRightClickBox" type="VBoxContainer" parent="."]
+offset_left = -707.0
+offset_top = 385.0
+offset_right = -585.0
+offset_bottom = 416.0
+script = ExtResource("4_4qs7k")
+side_bar_node_tree = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree")
+level_interface_container = NodePath("../LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport")
+
+[node name="DeleteButton" type="Button" parent="NodeRightClickBox"]
+layout_mode = 2
+text = "Delete"
+
+[node name="SaverLoader" type="Node" parent="."]
+script = ExtResource("5_t6rcf")
+level_interface_viewport = NodePath("../LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport")
+entity_nodes = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/Entity/EntityNodes")
+tilemap_nodes = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap/TileMapNodes")
+static_nodes = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static/StaticNodes")
+node_tree = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree")
+
+[connection signal="file_selected" from="LevelEditorUIGrid/EntityImportFileDialog" to="LevelEditorUIGrid/MenuBar" method="_on_entity_import_file_dialog_file_selected"]
+[connection signal="file_selected" from="LevelEditorUIGrid/LevelSaveDialog" to="LevelEditorUIGrid/MenuBar" method="_on_level_save_dialog_file_selected"]
+[connection signal="file_selected" from="LevelEditorUIGrid/LevelLoadDialog" to="SaverLoader" method="load_level"]
+[connection signal="id_pressed" from="LevelEditorUIGrid/MenuBar/File" to="LevelEditorUIGrid/MenuBar" method="_on_file_id_pressed"]
+[connection signal="id_pressed" from="LevelEditorUIGrid/MenuBar/Edit" to="LevelEditorUIGrid/MenuBar" method="_on_edit_id_pressed"]
+[connection signal="item_mouse_selected" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree" to="NodeRightClickBox" method="_on_side_bar_node_tree_item_mouse_selected"]
+[connection signal="item_activated" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/Entity/EntityNodes" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_entity_nodes_item_activated"]
+[connection signal="item_activated" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap/TileMapNodes" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_tile_map_nodes_item_activated"]
+[connection signal="item_activated" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static/StaticNodes" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_static_nodes_item_activated"]
+[connection signal="button_up" from="NodeRightClickBox/DeleteButton" to="NodeRightClickBox" method="_on_delete_button_button_up"]

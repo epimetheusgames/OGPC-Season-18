@@ -3,7 +3,7 @@ extends Resource
 class_name UID
 
 
-@export var uid := -1
+@export var uid: int = -1
 var game_load_error: Error
 
 func _init() -> void:

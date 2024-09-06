@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqmkfwnggl308"]
+
+[ext_resource type="Script" path="res://Scripts/LevelEditor/MouseFollowAddNodeIcon.gd" id="1_xyj5a"]
+
+[node name="MouseFollowAddNodeIcon" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_xyj5a")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 11.0
+offset_top = -22.0
+offset_right = 125.0
+offset_bottom = 1.0
+text = "Adding node:"
+
+[node name="NodeName" type="Label" parent="."]
+offset_left = 11.0
+offset_right = 153.0
+offset_bottom = 23.0
+text = "NODE NAME HERE
+"

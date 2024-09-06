@@ -17,15 +17,15 @@ func _ready():
 	Global.save_load_framework = self
 
 # Saves a ConfigFile to memory.
-func _save_config_file(config_file: ConfigFile, slot_num) -> void:
+func _save_config_file(config_file: ConfigFile, slot_num: int) -> void:
 	if save_encrypted:
-		config_file.save_encrypted_pass("user://slot_" + str(slot_num), Global.get_slot_password(int(slot_num)))
+		config_file.save_encrypted_pass("user://slot_" + str(slot_num), Global.get_slot_password(slot_num))
 	else:
 		config_file.save("user://slot_" + str(slot_num))
 
 # Saves a GameSave to memory.
-func _save_game_save(content: GameSave, slot_num) -> void:
-	var config_file = ConfigFile.new()
+func _save_game_save(content: GameSave, slot_num: int) -> void:
+	var config_file := ConfigFile.new()
 	config_file.set_value("Main", "GameSave", content)
 	_save_config_file(config_file, slot_num)
 
@@ -36,7 +36,7 @@ func _save_global_config(content: GlobalSave) -> void:
 	config_file.save("user://global")
 
 # Save an entity state to its slot.
-func _save_entity(slot_num, uid: UID, content: EntitySave) -> void:
+func _save_entity(slot_num: int, uid: UID, content: EntitySave) -> void:
 	var config_file := _load_config_file(slot_num)
 	config_file.set_value("Entities", str(uid.uid), content)
 	_save_config_file(config_file, slot_num)
@@ -64,21 +64,23 @@ func _load_config_file(slot_num) -> ConfigFile:
 	return blank_config
 
 # Loads a GameSave from memory.
-func _load_game_save(slot_num) -> GameSave:
-	var blank_config = _load_config_file(slot_num)
+func _load_game_save(slot_num: int) -> GameSave:
+	var blank_config := _load_config_file(slot_num)
 	var game_save: GameSave = blank_config.get_value("Main", "GameSave")
 	return game_save
 
+# Loads the global save from memory.
 func _load_global_config() -> GlobalSave:
 	var blank_config = ConfigFile.new()
-	var slot_path = "user://global"
+	var slot_path := "user://global"
 	
 	blank_config.load(slot_path)
 	
 	var game_save: GlobalSave = blank_config.get_value("Main", "GlobalSave")
 	return game_save
 
-func _load_entity(slot_num, uid: UID) -> EntitySave:
+# Loads an entity from memory with a UID.
+func _load_entity(slot_num: int, uid: UID) -> EntitySave:
 	var config_file := _load_config_file(slot_num)
 	return config_file.get_value("Entities", str(uid.uid))
 
@@ -86,7 +88,7 @@ func _load_entity(slot_num, uid: UID) -> EntitySave:
 func start_game(slot_num: int) -> void:
 	var level_data := _load_game_save(slot_num)
 	
-	var ui_generator = get_node(ui_root_node_path).get_node("UIGenerator")
+	var ui_generator: Node = get_node(ui_root_node_path).get_node("UIGenerator")
 	if !ui_generator:
 		print("WARNING: SaveLoadFramework contains no UI Generator node path. Level won't start")
 		return
@@ -106,6 +108,7 @@ func start_game(slot_num: int) -> void:
 	var game_scene = load(level_list[level_data.level].file)
 	game_container.add_child(game_scene)
 
+# Close and save game and exit to menu.
 func exit_to_menu(save_slot: int, game_data: GameSave) -> void:
 	_save_game_save(game_data, save_slot)
 	

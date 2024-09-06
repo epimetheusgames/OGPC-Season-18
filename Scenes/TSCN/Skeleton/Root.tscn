@@ -1,20 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=8 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/SaveLoadFramework.gd" id="2_i3ogj"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/UIDContainer.gd" id="5_c1pbl"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
 file = "<null>"
-
-[sub_resource type="Resource" id="Resource_1v35j"]
-script = ExtResource("5_c1pbl")
-uid = 7
 
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
@@ -38,7 +33,6 @@ offset_bottom = 40.0
 
 [node name="UIGenerator" type="Node" parent="UI"]
 script = ExtResource("2_h48r7")
-test_uid = SubResource("Resource_1v35j")
 keybind_entry_padding = 0
 keybind_entry_element_padding = 44
 text_offset_y = 8
