@@ -35,10 +35,16 @@ func _on_entity_nodes_item_activated(index: int) -> void:
 	var entity_nodes_grid: ItemList = get_node(entity_tree_container).get_node("EntityNodes")
 	_instantiate_add_node_icon(entity_nodes_grid, index)
 
-func _on_tile_map_nodes_item_activated(index: int) -> void:
-	var tilemap_nodes_grid: ItemList = get_node(tilemap_tree_container).get_node("TileMapNodes")
-	_instantiate_add_node_icon(tilemap_nodes_grid, index)
-
 func _on_static_nodes_item_activated(index: int) -> void:
 	var static_nodes_grid: ItemList = get_node(static_tree_container).get_node("StaticNodes")
 	_instantiate_add_node_icon(static_nodes_grid, index)
+
+func _on_side_bar_node_tree_item_mouse_selected(mouse_position: Vector2, mouse_button_index: int) -> void:
+	# Again this is sketchy, but it should work.
+	if mouse_button_index == MOUSE_BUTTON_LEFT:
+		var side_bar_tree: Tree = get_node(side_bar_tree_container).get_node("SideBarNodeTree")
+		var tree_item := side_bar_tree.get_item_at_position(mouse_position)
+		var level_interface_node_container = get_parent().get_node("LevelInterfaceNodesContainer")
+		var node_selected: Node = level_interface_node_container.get_node(tree_item.get_text(0))
+		var object_manipulator = get_parent().get_node("ObjectManipulator")
+		object_manipulator.set_object(node_selected)

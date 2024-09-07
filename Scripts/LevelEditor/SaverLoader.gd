@@ -6,6 +6,7 @@ extends Node
 @export_node_path("ItemList") var tilemap_nodes
 @export_node_path("ItemList") var static_nodes
 @export_node_path("Tree") var node_tree
+@export_node_path("TabBar") var tab_bar
 
 func save_level(path: String) -> void:
 	# Save level as scene 
@@ -52,6 +53,10 @@ func save_level(path: String) -> void:
 	var file = FileAccess.open(path.split(".")[0] + "_editor.json", FileAccess.WRITE)
 	file.store_string(stringified_data)
 	file.close()
+	
+	# Set tab name to level name
+	var level_name = path.split(".")[0].split("/")[-1]
+	get_node(tab_bar).set_tab_title(get_node(tab_bar).current_tab, level_name)
 
 func _add_to_grid(path: String, nodes_grid: ItemList):
 	var scene_name := path.split(".")[0].split("/")[-1]
@@ -94,3 +99,7 @@ func load_level(path: String) -> void:
 	for child in new_root_node.get_children():
 		var new_item: TreeItem = get_node(node_tree).create_item(EditorGlobal.node_tree_root_item)
 		new_item.set_text(0, child.name)
+	
+	# Set tab name to level name
+	var level_name = path.split(".")[0].split("/")[-1]
+	get_node(tab_bar).set_tab_title(get_node(tab_bar).current_tab, level_name)

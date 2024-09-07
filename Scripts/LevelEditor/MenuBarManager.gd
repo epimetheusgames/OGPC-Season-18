@@ -10,6 +10,7 @@ var opening_static := false
 @export_node_path("VBoxContainer") var tilemap_tree_container
 @export_node_path("VBoxContainer") var static_tree_container
 @export_node_path("Node") var saver_loader
+@export_node_path("Node2D") var object_manipulator
 
 # File dialogue
 func _on_file_id_pressed(id: int) -> void:
@@ -22,7 +23,10 @@ func _on_file_id_pressed(id: int) -> void:
 
 # Edit dialogue
 func _on_edit_id_pressed(id: int) -> void:
-	get_parent().get_node("EntityImportFileDialog").visible = true
+	if id == 0 || id == 2:
+		get_parent().get_node("EntityImportFileDialog").visible = true
+	else:
+		get_parent().get_node("TileMapImportFileDialog").visible = true
 	
 	if id == 0:
 		opening_entity = true
@@ -36,6 +40,9 @@ func _on_edit_id_pressed(id: int) -> void:
 		opening_entity = false
 		opening_tilemap = false
 		opening_static = true
+	if id == 3:
+		get_parent().get_node("TileMapImportFileDialog").visible = false
+		get_parent().get_node("SnappingPopup").visible = true
 
 func _add_to_grid(path: String, nodes_grid: ItemList):
 	var scene_name := path.split(".")[0].split("/")[-1]
@@ -55,3 +62,13 @@ func _on_entity_import_file_dialog_file_selected(path: String) -> void:
 
 func _on_level_save_dialog_file_selected(path: String) -> void:
 	get_node(saver_loader).save_level(path)
+
+func _on_snapping_popup_id_pressed(id: int) -> void:
+	var snapping_id_px_converter := {
+		0: 4,
+		1: 8,
+		2: 16,
+		3: 32,
+		4: 64,
+	}
+	get_node(object_manipulator).snapping_ammount = snapping_id_px_converter[id]

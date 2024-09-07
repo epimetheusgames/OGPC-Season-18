@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://csah6gt2cxydw"]
+[gd_scene load_steps=7 format=3 uid="uid://csah6gt2cxydw"]
 
 [ext_resource type="Script" path="res://Scripts/LevelEditor/LevelEditorRoot.gd" id="1_36q31"]
 [ext_resource type="Script" path="res://Scripts/LevelEditor/MenuBarManager.gd" id="1_qgpt1"]
 [ext_resource type="Script" path="res://Scripts/LevelEditor/LevelEditorCamera.gd" id="1_rf8o3"]
+[ext_resource type="PackedScene" uid="uid://bvcgrab6m6yty" path="res://Scenes/TSCN/Levels/Editor/ObjectManipulator.tscn" id="4_1wxhk"]
 [ext_resource type="Script" path="res://Scripts/LevelEditor/NodeRMBoxManager.gd" id="4_4qs7k"]
 [ext_resource type="Script" path="res://Scripts/LevelEditor/SaverLoader.gd" id="5_t6rcf"]
 
@@ -17,14 +18,45 @@ offset_bottom = 1075.0
 script = ExtResource("1_36q31")
 side_bar_node_tree = NodePath("HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree")
 
+[node name="SnappingPopup" type="PopupMenu" parent="LevelEditorUIGrid"]
+size = Vector2i(100, 143)
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+system_menu_id = 3
+item_count = 5
+item_0/text = "4px"
+item_0/checkable = 2
+item_1/text = "8px"
+item_1/checkable = 2
+item_1/id = 1
+item_2/text = "16px"
+item_2/checkable = 2
+item_2/id = 2
+item_3/text = "32px"
+item_3/checkable = 2
+item_3/id = 3
+item_4/text = "64px"
+item_4/checkable = 2
+item_4/id = 4
+
 [node name="EntityImportFileDialog" type="FileDialog" parent="LevelEditorUIGrid"]
-title = "Import an Entity"
+title = "Open a File"
 position = Vector2i(815, 385)
 size = Vector2i(500, 400)
 popup_window = true
 ok_button_text = "Open"
 file_mode = 0
 filters = PackedStringArray("*.tscn", "*.scn")
+
+[node name="TileMapImportFileDialog" type="FileDialog" parent="LevelEditorUIGrid"]
+auto_translate_mode = 1
+title = "Open a File"
+position = Vector2i(815, 385)
+size = Vector2i(500, 400)
+popup_window = true
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.tres", "*.res")
 
 [node name="LevelSaveDialog" type="FileDialog" parent="LevelEditorUIGrid"]
 auto_translate_mode = 1
@@ -54,6 +86,7 @@ entity_tree_container = NodePath("../HSplitContainer/SideBarLeftContainer/SideBa
 tilemap_tree_container = NodePath("../HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap")
 static_tree_container = NodePath("../HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static")
 saver_loader = NodePath("../../SaverLoader")
+object_manipulator = NodePath("../HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/ObjectManipulator")
 
 [node name="File" type="PopupMenu" parent="LevelEditorUIGrid/MenuBar"]
 size = Vector2i(102, 100)
@@ -65,12 +98,15 @@ item_2/text = "New Level"
 item_2/id = 2
 
 [node name="Edit" type="PopupMenu" parent="LevelEditorUIGrid/MenuBar"]
-item_count = 3
+size = Vector2i(167, 116)
+item_count = 4
 item_0/text = "Import Entity"
 item_1/text = "Import TileMap"
 item_1/id = 1
 item_2/text = "Import Static Node"
 item_2/id = 2
+item_3/text = "Edit Snapping"
+item_3/id = 3
 
 [node name="TabBar" type="TabBar" parent="LevelEditorUIGrid"]
 layout_mode = 2
@@ -129,7 +165,8 @@ size_flags_vertical = 3
 
 [node name="TileMapLabel" type="Label" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap"]
 layout_mode = 2
-text = "TileMaps"
+text = "TileMaps (Currently cannot be edited using the level editor ... use Godot instead)"
+clip_text = true
 
 [node name="TileMapNodes" type="ItemList" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap"]
 layout_mode = 2
@@ -155,14 +192,14 @@ size_flags_horizontal = 3
 layout_mode = 2
 offset_left = 5.0
 offset_top = 5.0
-offset_right = 1289.0
+offset_right = 1305.0
 offset_bottom = 995.0
 size_flags_horizontal = 3
 stretch = true
 
 [node name="LevelInterfaceViewport" type="SubViewport" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer"]
 handle_input_locally = false
-size = Vector2i(1284, 990)
+size = Vector2i(1300, 990)
 render_target_update_mode = 4
 
 [node name="LevelEditorCamera" type="Camera2D" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport"]
@@ -176,6 +213,9 @@ level_interface_node_container = NodePath("../LevelInterfaceNodesContainer")
 
 [node name="LevelInterfaceNodesContainer" type="Node" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport"]
 process_mode = 1
+
+[node name="ObjectManipulator" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport" instance=ExtResource("4_1wxhk")]
+position = Vector2(31.25, -17.25)
 
 [node name="NodeRightClickBox" type="VBoxContainer" parent="."]
 offset_left = -707.0
@@ -197,14 +237,17 @@ entity_nodes = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContain
 tilemap_nodes = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap/TileMapNodes")
 static_nodes = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static/StaticNodes")
 node_tree = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree")
+tab_bar = NodePath("../LevelEditorUIGrid/TabBar")
 
+[connection signal="id_pressed" from="LevelEditorUIGrid/SnappingPopup" to="LevelEditorUIGrid/MenuBar" method="_on_snapping_popup_id_pressed"]
 [connection signal="file_selected" from="LevelEditorUIGrid/EntityImportFileDialog" to="LevelEditorUIGrid/MenuBar" method="_on_entity_import_file_dialog_file_selected"]
+[connection signal="file_selected" from="LevelEditorUIGrid/TileMapImportFileDialog" to="LevelEditorUIGrid/MenuBar" method="_on_entity_import_file_dialog_file_selected"]
 [connection signal="file_selected" from="LevelEditorUIGrid/LevelSaveDialog" to="LevelEditorUIGrid/MenuBar" method="_on_level_save_dialog_file_selected"]
 [connection signal="file_selected" from="LevelEditorUIGrid/LevelLoadDialog" to="SaverLoader" method="load_level"]
 [connection signal="id_pressed" from="LevelEditorUIGrid/MenuBar/File" to="LevelEditorUIGrid/MenuBar" method="_on_file_id_pressed"]
 [connection signal="id_pressed" from="LevelEditorUIGrid/MenuBar/Edit" to="LevelEditorUIGrid/MenuBar" method="_on_edit_id_pressed"]
+[connection signal="item_mouse_selected" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_side_bar_node_tree_item_mouse_selected"]
 [connection signal="item_mouse_selected" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree" to="NodeRightClickBox" method="_on_side_bar_node_tree_item_mouse_selected"]
 [connection signal="item_activated" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/Entity/EntityNodes" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_entity_nodes_item_activated"]
-[connection signal="item_activated" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/TileMap/TileMapNodes" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_tile_map_nodes_item_activated"]
 [connection signal="item_activated" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static/StaticNodes" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_static_nodes_item_activated"]
 [connection signal="button_up" from="NodeRightClickBox/DeleteButton" to="NodeRightClickBox" method="_on_delete_button_button_up"]
