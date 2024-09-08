@@ -29,6 +29,9 @@ func clear_level() -> void:
 func save_level(path: String) -> void:
 	save_path = path
 	
+	if path.ends_with("_editor.json"):
+		path = path.replace("_editor.json", ".tscn")
+	
 	# Save level as scene 
 	var node_to_save: Node = get_node(level_interface_viewport).get_node("LevelInterfaceNodesContainer")
 	
@@ -80,6 +83,15 @@ func save_level(path: String) -> void:
 
 func _add_to_grid(path: String, nodes_grid: ItemList):
 	var scene_name := path.split(".")[0].split("/")[-1]
+	
+	# Check if scene_name is already in ItemList.
+	var name_list: Array[String] = []
+	for i in range(nodes_grid.item_count):
+		name_list.append(nodes_grid.get_item_text(i))
+	
+	if name_list.has(scene_name):
+		return
+	
 	nodes_grid.add_item(scene_name)
 	EditorGlobal.object_path_conversion[scene_name] = path
 
