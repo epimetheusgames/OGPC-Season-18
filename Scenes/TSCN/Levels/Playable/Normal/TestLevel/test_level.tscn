@@ -1,10 +1,62 @@
-[gd_scene load_steps=2 format=3 uid="uid://gikngj8b3gf8"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="PackedScene" uid="uid://cgroth3nseo6" path="res://Scenes/TSCN/Skeleton/Root.tscn" id="1_67vpc"]
+[ext_resource type="PackedScene" path="res://Scenes/TSCN/Skeleton/Root.tscn" id="1_67vpc"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="2_0jm2h"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/SaveLoadFramework.gd" id="3_r6auw"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/FilepathResource.gd" id="4_rp0j5"]
+[ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="5_2rsby"]
+[ext_resource type="Theme" path="res://Scenes/Resource/UI/MainTheme.tres" id="6_d1g38"]
+[ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="7_4pv4m"]
+
+[sub_resource type="Resource" id="Resource_ur184"]
+script = ExtResource("4_rp0j5")
+file = "<null>"
 
 [node name="LevelInterfaceNodesContainer" type="Node"]
 process_mode = 1
 
 [node name="Root" parent="." instance=ExtResource("1_67vpc")]
+script = ExtResource("2_0jm2h")
+game_skeleton_node = NodePath("Skeleton")
+ui_root_node = NodePath("UI")
+game_root_node = NodePath("Game")
+
+[node name="SaveLoadFramework" parent="Root/Skeleton" index="0"]
+script = ExtResource("3_r6auw")
+game_container_node_path = NodePath("../../Game")
+ui_root_node_path = NodePath("../../UI")
+level_list = Array[ExtResource("4_rp0j5")]([SubResource("Resource_ur184")])
+save_encrypted = false
+
+[node name="UI" parent="Root" index="1"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UIGenerator" parent="Root/UI" index="0"]
+script = ExtResource("5_2rsby")
+background = Color(0.054902, 0.054902, 0.054902, 1)
+keybind_entry_padding = 0
+keybind_entry_element_padding = 44
+text_offset_y = 8
+button_offset_x = 64
+starting_location = Vector2(20, -30)
+button_template_path = NodePath("../TemplateButton")
+
+[node name="TemplateButton" parent="Root/UI" index="1"]
+layout_mode = 0
+offset_left = -444.0
+offset_top = 26.0
+offset_right = -244.0
+offset_bottom = 68.0
+theme = ExtResource("6_d1g38")
+text = "Stylize this button!"
+script = ExtResource("7_4pv4m")
+metadata/key_number = 0
+metadata/action = ""
+
+[connection signal="button_up" from="Root/UI/TemplateButton" to="Root/UI/TemplateButton" method="_on_button_up"]
+[connection signal="keybind_changed" from="Root/UI/TemplateButton" to="Root/UI/UIGenerator" method="_on_template_button_keybind_changed"]
 
 [editable path="Root"]

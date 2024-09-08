@@ -46,5 +46,9 @@ func _on_side_bar_node_tree_item_mouse_selected(mouse_position: Vector2, mouse_b
 		var tree_item := side_bar_tree.get_item_at_position(mouse_position)
 		var level_interface_node_container = get_parent().get_node("LevelInterfaceNodesContainer")
 		var node_selected: Node = level_interface_node_container.get_node(tree_item.get_text(0))
+		
+		if !node_selected is Node2D:
+			return
+		
 		var object_manipulator = get_parent().get_node("ObjectManipulator")
 		object_manipulator.set_object(node_selected)

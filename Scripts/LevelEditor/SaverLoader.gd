@@ -8,7 +8,27 @@ extends Node
 @export_node_path("Tree") var node_tree
 @export_node_path("TabBar") var tab_bar
 
+var save_path := ""
+var save_path_list: Array[String] = []
+
+func _ready():
+	for i in range(1000):
+		save_path_list.append("")
+
+## Call this function once we're sure the level has been saved.
+func clear_level() -> void:
+	# Clear tree
+	get_node(node_tree).clear()
+	
+	# Delete nodes
+	var level_node_container: Node = get_node(level_interface_viewport).get_node("LevelInterfaceNodesContainer")
+	for child in level_node_container.get_children():
+		child.queue_free()
+
+## Save the current level.
 func save_level(path: String) -> void:
+	save_path = path
+	
 	# Save level as scene 
 	var node_to_save: Node = get_node(level_interface_viewport).get_node("LevelInterfaceNodesContainer")
 	
@@ -65,6 +85,8 @@ func _add_to_grid(path: String, nodes_grid: ItemList):
 
 # This is nice because we can connect the dialogue straight to this.
 func load_level(path: String) -> void:
+	save_path = path
+	
 	# Load file.
 	var data_string := FileAccess.get_file_as_string(path)
 	var parsed_data = JSON.parse_string(data_string)
@@ -101,5 +123,5 @@ func load_level(path: String) -> void:
 		new_item.set_text(0, child.name)
 	
 	# Set tab name to level name
-	var level_name = path.split(".")[0].split("/")[-1]
+	var level_name = path.split(".")[0].split("/")[-1].replace("_editor", "")
 	get_node(tab_bar).set_tab_title(get_node(tab_bar).current_tab, level_name)

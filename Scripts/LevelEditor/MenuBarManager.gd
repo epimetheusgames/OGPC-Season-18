@@ -14,12 +14,25 @@ var opening_static := false
 
 # File dialogue
 func _on_file_id_pressed(id: int) -> void:
-	if id == 0:
-		var level_save_dialog: FileDialog = get_parent().get_node("LevelSaveDialog")
-		level_save_dialog.visible = true
+	if id == 0 || id == 2:
+		if !get_node(saver_loader).save_path:
+			var level_save_dialog: FileDialog = get_parent().get_node("LevelSaveDialog")
+			level_save_dialog.visible = true
+		else:
+			get_node(saver_loader).save_level(get_node(saver_loader).save_path)
 	if id == 1:
 		var level_load_dialog: FileDialog = get_parent().get_node("LevelLoadDialog")
 		level_load_dialog.visible = true
+	if id == 2:
+		var tab_bar: TabBar = get_parent().get_node("TabBar")
+		tab_bar.add_tab("Empty Level")
+		tab_bar.current_tab = tab_bar.tab_count - 1
+		tab_bar.tab_close_display_policy = TabBar.CLOSE_BUTTON_SHOW_ACTIVE_ONLY
+		
+		get_node(saver_loader).save_path_list[tab_bar.current_tab - 1] = get_node(saver_loader).save_path
+		
+		# Everything's saved, we can do this now!
+		get_node(saver_loader).clear_level()
 
 # Edit dialogue
 func _on_edit_id_pressed(id: int) -> void:
@@ -72,3 +85,15 @@ func _on_snapping_popup_id_pressed(id: int) -> void:
 		4: 64,
 	}
 	get_node(object_manipulator).snapping_ammount = snapping_id_px_converter[id]
+
+func _on_tab_bar_tab_close_pressed(tab: int) -> void:
+	var saver: Node = get_node(saver_loader)
+	var tabs: TabBar = get_parent().get_node("TabBar")
+	
+	# Save level, clear it, remove tab, and switch to the level we switched to.
+	_on_file_id_pressed(0)
+	saver.clear_level()
+	tabs.remove_tab(tab)
+	get_parent()._ready()
+	saver.load_level(saver.save_path_list[tabs.current_tab])
+	

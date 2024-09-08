@@ -51,6 +51,8 @@
 ### Commenting:
 - Comments (#) should start with a space, but not code that you comment out.
 - Use correct grammar.
+- Don't end your comment with a period, unless it has multiple sentences
+- If your comment is more than one sentence, maybe your code is too complicated.
 
 ### Numbers:
 - Don't remove the leading or trailing zero in floating-point numbers. Otherwise, this makes them less readable and harder to distinguish from integers at a glance

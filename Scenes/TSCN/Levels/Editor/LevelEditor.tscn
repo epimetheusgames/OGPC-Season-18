@@ -217,6 +217,26 @@ process_mode = 1
 [node name="ObjectManipulator" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport" instance=ExtResource("4_1wxhk")]
 position = Vector2(31.25, -17.25)
 
+[node name="XAxis" type="Line2D" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport"]
+points = PackedVector2Array(-100000, 0, 100000, 0)
+width = 5.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="XAxis2" type="Line2D" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport"]
+position = Vector2(0, 1080)
+points = PackedVector2Array(0, 0, 1920, 0)
+width = 2.0
+
+[node name="YAxis" type="Line2D" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport"]
+points = PackedVector2Array(0, -100000, 0, 100000)
+width = 5.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="YAxis2" type="Line2D" parent="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport"]
+position = Vector2(1920, 0)
+points = PackedVector2Array(0, 0, 0, 1080)
+width = 2.0
+
 [node name="NodeRightClickBox" type="VBoxContainer" parent="."]
 offset_left = -707.0
 offset_top = 385.0
@@ -246,6 +266,7 @@ tab_bar = NodePath("../LevelEditorUIGrid/TabBar")
 [connection signal="file_selected" from="LevelEditorUIGrid/LevelLoadDialog" to="SaverLoader" method="load_level"]
 [connection signal="id_pressed" from="LevelEditorUIGrid/MenuBar/File" to="LevelEditorUIGrid/MenuBar" method="_on_file_id_pressed"]
 [connection signal="id_pressed" from="LevelEditorUIGrid/MenuBar/Edit" to="LevelEditorUIGrid/MenuBar" method="_on_edit_id_pressed"]
+[connection signal="tab_close_pressed" from="LevelEditorUIGrid/TabBar" to="LevelEditorUIGrid/MenuBar" method="_on_tab_bar_tab_close_pressed"]
 [connection signal="item_mouse_selected" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_side_bar_node_tree_item_mouse_selected"]
 [connection signal="item_mouse_selected" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree" to="NodeRightClickBox" method="_on_side_bar_node_tree_item_mouse_selected"]
 [connection signal="item_activated" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/Entity/EntityNodes" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_entity_nodes_item_activated"]
