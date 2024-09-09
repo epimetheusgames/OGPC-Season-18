@@ -96,4 +96,19 @@ func _on_tab_bar_tab_close_pressed(tab: int) -> void:
 	tabs.remove_tab(tab)
 	get_parent()._ready()
 	saver.load_level(saver.save_path_list[tabs.current_tab])
+
+func _on_tab_bar_tab_changed(tab: int) -> void:
+	var saver: Node = get_node(saver_loader)
+	var tabs: TabBar = get_parent().get_node("TabBar")
 	
+	if tabs.get_tab_title(tabs.current_tab) == "Empty Level":
+		saver.clear_level()
+		get_parent()._ready()
+		return
+	
+	# Save level clear it, and load the next level.
+	_on_file_id_pressed(0)
+	saver.save_path = saver.save_path_list[tabs.current_tab]
+	saver.clear_level()
+	get_parent()._ready()
+	saver.load_level(saver.save_path_list[tabs.current_tab])

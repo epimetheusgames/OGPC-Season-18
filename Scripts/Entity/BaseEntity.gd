@@ -7,7 +7,9 @@ extends CharacterBody2D
 @export var uid := UID.new()
 
 # Defaults to the server unless set by another node.
-var multiplayer_authority = 1
+# WARNING: Most entities besides players should be operated by the server,
+# because we can only be sure that the server is connected.
+@export var multiplayer_authority = 1
 
 var save_resource := EntitySave.new()
 
