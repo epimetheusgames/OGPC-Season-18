@@ -5,7 +5,14 @@ extends CharacterBody2D
 
 @export var _has_physics := false
 @export var uid := UID.new()
+
+# Defaults to the server unless set by another node.
+var multiplayer_authority = 1
+
 var save_resource := EntitySave.new()
+
+func _ready() -> void:
+	set_multiplayer_authority(multiplayer_authority, true)
 
 func _process(delta: float) -> void:
 	if _has_physics:
@@ -13,12 +20,21 @@ func _process(delta: float) -> void:
 		
 	save_resource.position = position
 	save_resource.velocity = velocity
+	
+	# Sync variables so that 
+	if Global.is_multiplayer && is_multiplayer_authority():
+		_sync_variables_multiplayer.rpc(position, velocity)
 
 func save_self() -> void:
 	Global.save_load_framework._save_entity(Global.current_game_slot, uid, save_resource)
 	
 func load_self() -> void:
 	save_resource = Global.save_load_framework._load_entity(Global.current_game_slot, uid)
+
+@rpc("call_local", "unreliable")
+func _sync_variables_multiplayer(pos: Vector2, motion: Vector2) -> void:
+	position = pos
+	velocity = motion
 
 # Setters and getters
 
