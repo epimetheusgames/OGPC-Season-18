@@ -33,6 +33,7 @@ func _on_file_id_pressed(id: int) -> void:
 		
 		# Everything's saved, we can do this now!
 		get_node(saver_loader).clear_level()
+		get_node(saver_loader).save_path = ""
 
 # Edit dialogue
 func _on_edit_id_pressed(id: int) -> void:
@@ -103,7 +104,7 @@ func _on_tab_bar_tab_changed(tab: int) -> void:
 	
 	if tabs.get_tab_title(tabs.current_tab) == "Empty Level":
 		saver.clear_level()
-		get_parent()._ready()
+		get_parent().call_deferred("_ready")
 		return
 	
 	# Save level clear it, and load the next level.
