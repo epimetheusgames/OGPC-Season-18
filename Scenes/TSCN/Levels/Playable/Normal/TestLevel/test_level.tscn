@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3]
 
 [ext_resource type="PackedScene" path="res://Scenes/TSCN/Skeleton/Root.tscn" id="1_67vpc"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="2_0jm2h"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/SaveLoadFramework.gd" id="3_r6auw"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="2_4eyif"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/SaveLoadFramework.gd" id="3_a8hib"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/FilepathResource.gd" id="4_rp0j5"]
-[ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="5_2rsby"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/MultiplayerManager.gd" id="5_jq138"]
-[ext_resource type="Theme" path="res://Scenes/Resource/UI/MainTheme.tres" id="6_d1g38"]
-[ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="7_4pv4m"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/MultiplayerManager.gd" id="5_skclu"]
+[ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="6_kfhof"]
+[ext_resource type="Theme" path="res://Scenes/Resource/UI/MainTheme.tres" id="7_1fber"]
+[ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="8_r2o5s"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("4_rp0j5")
@@ -16,45 +16,21 @@ file = "<null>"
 [node name="LevelInterfaceNodesContainer" type="Node"]
 process_mode = 1
 
-[node name="@Node@539" type="Node" parent="." instance=ExtResource("1_67vpc")]
-script = ExtResource("2_0jm2h")
-game_skeleton_node = NodePath("Skeleton")
-ui_root_node = NodePath("UI")
-game_root_node = NodePath("Game")
-
-[node name="@Node@538" type="Node" parent="." instance=ExtResource("1_67vpc")]
-script = ExtResource("2_0jm2h")
-game_skeleton_node = NodePath("Skeleton")
-ui_root_node = NodePath("UI")
-game_root_node = NodePath("Game")
-
-[node name="@Node@537" type="Node" parent="." instance=ExtResource("1_67vpc")]
-script = ExtResource("2_0jm2h")
-game_skeleton_node = NodePath("Skeleton")
-ui_root_node = NodePath("UI")
-game_root_node = NodePath("Game")
-
-[node name="@Node@463" type="Node" parent="." instance=ExtResource("1_67vpc")]
-script = ExtResource("2_0jm2h")
-game_skeleton_node = NodePath("Skeleton")
-ui_root_node = NodePath("UI")
-game_root_node = NodePath("Game")
-
 [node name="Root" parent="." instance=ExtResource("1_67vpc")]
-script = ExtResource("2_0jm2h")
+script = ExtResource("2_4eyif")
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
 
 [node name="SaveLoadFramework" parent="Root/Skeleton" index="0"]
-script = ExtResource("3_r6auw")
+script = ExtResource("3_a8hib")
 game_container_node_path = NodePath("../../Game")
 ui_root_node_path = NodePath("../../UI")
 level_list = Array[ExtResource("4_rp0j5")]([SubResource("Resource_ur184")])
 save_encrypted = false
 
 [node name="MultiplayerManager" parent="Root/Skeleton" index="1"]
-script = ExtResource("5_jq138")
+script = ExtResource("5_skclu")
 
 [node name="UI" parent="Root" index="1"]
 layout_mode = 3
@@ -63,7 +39,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="UIGenerator" parent="Root/UI" index="0"]
-script = ExtResource("5_2rsby")
+script = ExtResource("6_kfhof")
 background = Color(0.054902, 0.054902, 0.054902, 1)
 keybind_entry_padding = 0
 keybind_entry_element_padding = 44
@@ -78,9 +54,9 @@ offset_left = -444.0
 offset_top = 26.0
 offset_right = -244.0
 offset_bottom = 68.0
-theme = ExtResource("6_d1g38")
+theme = ExtResource("7_1fber")
 text = "Stylize this button!"
-script = ExtResource("7_4pv4m")
+script = ExtResource("8_r2o5s")
 metadata/key_number = 0
 metadata/action = ""
 

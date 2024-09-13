@@ -11,6 +11,7 @@ var opening_static := false
 @export_node_path("VBoxContainer") var static_tree_container
 @export_node_path("Node") var saver_loader
 @export_node_path("Node2D") var object_manipulator
+@export_node_path("Window") var select_level_popup
 
 # File dialogue
 func _on_file_id_pressed(id: int) -> void:
@@ -34,6 +35,8 @@ func _on_file_id_pressed(id: int) -> void:
 		# Everything's saved, we can do this now!
 		get_node(saver_loader).clear_level()
 		get_node(saver_loader).save_path = ""
+	if id == 3:
+		get_node(select_level_popup).visible = true
 
 # Edit dialogue
 func _on_edit_id_pressed(id: int) -> void:
