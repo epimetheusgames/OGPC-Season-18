@@ -97,9 +97,10 @@ func _on_tab_bar_tab_close_pressed(tab: int) -> void:
 	# Save level, clear it, remove tab, and switch to the level we switched to.
 	_on_file_id_pressed(0)
 	saver.clear_level()
+	
+	# This should activate the _on_tab_bar_tab_changed signal, and do all 
+	# the level loading work for us.
 	tabs.remove_tab(tab)
-	get_parent()._ready()
-	saver.load_level(saver.save_path_list[tabs.current_tab])
 
 func _on_tab_bar_tab_changed(tab: int) -> void:
 	var saver: Node = get_node(saver_loader)
