@@ -1,12 +1,28 @@
 class_name AttackBoxComponent
-extends BaseComponent
+extends BaseHitboxComponent
 
 
-# Called when the node enters the scene tree for the first time.
+@export var damage := 1.0
+@export var attack_seconds := 0.5
+@export var always_attacking := false
+
+var is_attacking := false
+
 func _ready() -> void:
-	pass # Replace with function body.
+	_init_hurtbox()
+	component_name = "AttackBoxComponent"
+	
+	if hurtbox && !always_attacking:
+		hurtbox.disabled = true
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func attack() -> void:
+	if always_attacking || !hurtbox:
+		return
+	
+	hurtbox.disabled = false
+	is_attacking = true
+	
+	await get_tree().create_timer(attack_seconds).timeout
+	
+	hurtbox.disabled = true
+	is_attacking = false
