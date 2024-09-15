@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://kl6gljjq617"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/BaseBullet.gd" id="1_od670"]
+[ext_resource type="Script" path="res://Scripts/Components/AttackBoxComponent.gd" id="2_07tm7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wxkra"]
+radius = 9.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vebk7"]
+
+[node name="BaseBullet" type="Area2D"]
+script = ExtResource("1_od670")
+
+[node name="BulletCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wxkra")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 9.5)
+texture = SubResource("PlaceholderTexture2D_vebk7")
+
+[node name="AttackBoxComponent" type="Node" parent="."]
+script = ExtResource("2_07tm7")
+always_attacking = true
+hurtbox = NodePath("..")
+component_container = NodePath("..")

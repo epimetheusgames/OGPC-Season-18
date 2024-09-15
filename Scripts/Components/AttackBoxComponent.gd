@@ -17,6 +17,9 @@ func _ready() -> void:
 
 func attack() -> void:
 	if always_attacking || !hurtbox:
+		print("WARNING: Cannot attack because AttackBox because either:")
+		print("- AttackBox is set to allways attacking OR")
+		print("- AttackBox has no hurtbox node attached")
 		return
 	
 	hurtbox.disabled = false
