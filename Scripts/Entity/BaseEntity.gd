@@ -27,13 +27,20 @@ func _process(delta: float) -> void:
 	if Global.is_multiplayer && is_multiplayer_authority():
 		_sync_variables_multiplayer.rpc(position, velocity)
 
-## Check if the entity has a component of class
+## Check if the entity has a component of a specific class
 func has_component(component_type: String) -> bool:
-	for child in get_children():
-		if "component_name" in child && child.component_name == component_type:
-			return true
+	if get_component(component_type):
+		return true
 	
 	return false
+
+## Get the component with the specific component class
+func get_component(component_type: String) -> Node:
+	for child in get_children():
+		if "component_name" in child && child.component_name == component_type:
+			return child
+	
+	return null
 
 # -- Save Load --
 

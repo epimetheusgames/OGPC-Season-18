@@ -12,8 +12,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Make sure the container has the neccesary functions to do the job.
-	if !component_container is CharacterBody2D:
-		print("WARNING: Component PlatformerMovementComponent at path " + str(get_path()) + " must have a parent of type CharacterBody2D")
+	if !component_container is Entity:
+		print("WARNING: Component PlatformerMovementComponent at path " + str(get_path()) + " must have a parent of type Entity")
 		return
 	
 	var final_velocity_addon = Vector2.ZERO

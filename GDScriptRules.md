@@ -110,3 +110,8 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 - Do not try and fix merge changes if you are unsure of how 
 - Never use commands like "rebase", "reset", "revert", "branch -d", without making sure, these can blow away progress easily
 - In general never delete anything unless it is necessary (git wise)
+
+## Collision BitMasks (for non-coliding hitboxes e.g. Area2D)
+
+1: General collision
+2: Hurtbox/attackbox
