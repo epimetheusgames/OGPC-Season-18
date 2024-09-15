@@ -6,6 +6,7 @@ var x_axis_moving := false
 var y_axis_moving := false
 var both_moving := false
 var rotating := false
+var is_snapping_default := false
 var snapping_ammount := 16
 
 func set_object(object: Node2D):
@@ -14,8 +15,8 @@ func set_object(object: Node2D):
 	visible = true
 
 func _process(delta: float) -> void:
-	if object_manipulating:
-		if Input.is_action_pressed("control_key"):
+	if object_manipulating && is_instance_valid(object_manipulating):
+		if (Input.is_action_pressed("control_key") && !is_snapping_default) || (!Input.is_action_pressed("control_key") && is_snapping_default):
 			if x_axis_moving:
 				position.x = snapping_ammount * round(get_global_mouse_position().x / snapping_ammount)
 			if y_axis_moving:

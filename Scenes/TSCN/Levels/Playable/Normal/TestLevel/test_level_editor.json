@@ -1,1 +1,1 @@
-{"level_path":"res://Scenes/TSCN/Levels/Playable/Normal/TestLevel/test_level.tscn","saved_entities":[["Root","res://Scenes/TSCN/Skeleton/Root.tscn"]],"saved_static":[],"saved_tilemaps":[]}
+{"level_path":"res://Scenes/TSCN/Levels/Playable/Normal/TestLevel/test_level.tscn","saved_entities":[["Root","res://Scenes/TSCN/Skeleton/Root.tscn"],["ObjectManipulator","res://Scenes/TSCN/Levels/Editor/ObjectManipulator.tscn"]],"saved_static":[],"saved_tilemaps":[]}

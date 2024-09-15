@@ -18,6 +18,7 @@ corner_radius_bottom_left = 10
 
 [node name="LevelEditorRoot" type="Node"]
 process_mode = 3
+editor_description = "So maybe don't use this not sure if it's very good."
 script = ExtResource("1_khkxk")
 
 [node name="LevelEditorUIGrid" type="GridContainer" parent="."]
@@ -109,6 +110,21 @@ item_2/text = "New Level"
 item_2/id = 2
 item_3/text = "Levels List"
 item_3/id = 3
+
+[node name="Edit" type="PopupMenu" parent="LevelEditorUIGrid/MenuBar"]
+auto_translate_mode = 1
+title = "Edit"
+size = Vector2i(229, 143)
+item_count = 5
+item_0/text = "Import Entity"
+item_1/text = "Import Tilemap"
+item_1/id = 1
+item_2/text = "Import Static"
+item_2/id = 2
+item_3/text = "Snapping Options"
+item_3/id = 3
+item_4/text = "Toggle Snapping as Default"
+item_4/id = 4
 
 [node name="TabBar" type="TabBar" parent="LevelEditorUIGrid"]
 layout_mode = 2
@@ -273,7 +289,7 @@ node_tree = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/
 tab_bar = NodePath("../LevelEditorUIGrid/TabBar")
 
 [node name="SelectLevelPopup" type="Window" parent="."]
-position = Vector2i(536, 236)
+position = Vector2i(525, 236)
 size = Vector2i(800, 400)
 exclusive = true
 unresizable = true
@@ -346,6 +362,7 @@ filters = PackedStringArray("*.json", "*.txt")
 [connection signal="file_selected" from="LevelEditorUIGrid/LevelSaveDialog" to="LevelEditorUIGrid/MenuBar" method="_on_level_save_dialog_file_selected"]
 [connection signal="file_selected" from="LevelEditorUIGrid/LevelLoadDialog" to="SaverLoader" method="load_level"]
 [connection signal="id_pressed" from="LevelEditorUIGrid/MenuBar/File" to="LevelEditorUIGrid/MenuBar" method="_on_file_id_pressed"]
+[connection signal="id_pressed" from="LevelEditorUIGrid/MenuBar/Edit" to="LevelEditorUIGrid/MenuBar" method="_on_edit_id_pressed"]
 [connection signal="tab_changed" from="LevelEditorUIGrid/TabBar" to="LevelEditorUIGrid/MenuBar" method="_on_tab_bar_tab_changed"]
 [connection signal="tab_close_pressed" from="LevelEditorUIGrid/TabBar" to="LevelEditorUIGrid/MenuBar" method="_on_tab_bar_tab_close_pressed"]
 [connection signal="id_pressed" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/Edit" to="LevelEditorUIGrid/MenuBar" method="_on_edit_id_pressed"]

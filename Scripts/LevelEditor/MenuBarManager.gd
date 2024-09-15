@@ -42,7 +42,7 @@ func _on_file_id_pressed(id: int) -> void:
 func _on_edit_id_pressed(id: int) -> void:
 	if id == 0 || id == 2:
 		get_parent().get_node("EntityImportFileDialog").visible = true
-	else:
+	elif id != 4:
 		get_parent().get_node("TileMapImportFileDialog").visible = true
 	
 	if id == 0:
@@ -60,6 +60,9 @@ func _on_edit_id_pressed(id: int) -> void:
 	if id == 3:
 		get_parent().get_node("TileMapImportFileDialog").visible = false
 		get_parent().get_node("SnappingPopup").visible = true
+	if id == 4:
+		var manipulator: Node2D = get_node(object_manipulator)
+		manipulator.is_snapping_default = !manipulator.is_snapping_default
 
 func _add_to_grid(path: String, nodes_grid: ItemList):
 	var scene_name := path.split(".")[0].split("/")[-1]

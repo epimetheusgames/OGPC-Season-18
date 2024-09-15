@@ -1,3 +1,8 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dkoqytf8gdryp"]
+
+[ext_resource type="PackedScene" uid="uid://bvcgrab6m6yty" path="res://Scenes/TSCN/Levels/Editor/ObjectManipulator.tscn" id="1_mmu52"]
 
 [node name="LevelInterfaceNodesContainer" type="Node"]
+
+[node name="ObjectManipulator" parent="." instance=ExtResource("1_mmu52")]
+position = Vector2(131, 0)
