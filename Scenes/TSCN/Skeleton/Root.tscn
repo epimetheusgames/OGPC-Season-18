@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=10 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/MultiplayerManager.gd" id="4_o3y1v"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
+[ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/text_pos_set.gd" id="8_7spfj"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
@@ -55,6 +56,19 @@ text = "Stylize this button!"
 script = ExtResource("6_oply2")
 metadata/key_number = 0
 metadata/action = ""
+
+[node name="dialogText" type="Node2D" parent="UI"]
+script = ExtResource("8_7spfj")
+
+[node name="RichTextLabel" type="TextureRect" parent="UI/dialogText"]
+offset_left = 384.0
+offset_top = 343.0
+offset_right = 1072.0
+offset_bottom = 508.0
+
+[node name="TextureRect" type="RichTextLabel" parent="UI/dialogText"]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Game" type="Node" parent="."]
 

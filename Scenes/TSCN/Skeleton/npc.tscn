@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b8ci245vh1xeo"]
+
+[node name="Npc" type="CharacterBody2D"]
+
+[node name="AudioHandler" type="Node2D" parent="."]
+
+[node name="TalkSound" type="AudioStreamPlayer2D" parent="AudioHandler"]
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+
+[node name="Texture" type="Sprite2D" parent="."]
