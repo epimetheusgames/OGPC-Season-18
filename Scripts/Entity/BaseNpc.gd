@@ -6,6 +6,8 @@ extends Entity
 # Dialog speed in characters per second 
 @export var dialog_speed: int
 
+# Dialog beep sound thingy 
+@export var dialog_sound = "yap_bad.wav"
 
 var dialogue: Array
 var dialogue_json: JSON
@@ -16,8 +18,7 @@ func _get_dialogue():
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

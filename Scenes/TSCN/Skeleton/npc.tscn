@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://b8ci245vh1xeo"]
+[gd_scene load_steps=2 format=3 uid="uid://b8ci245vh1xeo"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/BaseNpc.gd" id="1_3od1n"]
 
 [node name="Npc" type="CharacterBody2D"]
+script = ExtResource("1_3od1n")
 
 [node name="AudioHandler" type="Node2D" parent="."]
 

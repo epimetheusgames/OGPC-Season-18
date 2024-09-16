@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=11 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
@@ -12,6 +12,8 @@
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
 file = "<null>"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
 
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
@@ -65,6 +67,7 @@ offset_left = 384.0
 offset_top = 343.0
 offset_right = 1072.0
 offset_bottom = 508.0
+texture = SubResource("PlaceholderTexture2D_o714b")
 
 [node name="TextureRect" type="RichTextLabel" parent="UI/dialogText"]
 offset_right = 40.0

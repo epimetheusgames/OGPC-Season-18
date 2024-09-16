@@ -49,13 +49,17 @@ var button_template: Button
 var ready_called := false
 
 func _ready():
-	ready_called = true
+	var keybind_savefile = FileAccess.open("user://keybinds.json",FileAccess.READ_WRITE);
+	ready_called = true;
 	
 	#if this is the first time the user has opened the game, create the default keybinds
 	if(not FileAccess.file_exists("user://keybinds.json")):
-		var keybind_savefile = FileAccess.open("user://keybinds.json",FileAccess.WRITE)
-		keybind_savefile.store_string(json_config_generator())
-		keybind_savefile.close()
+		keybind_savefile.store_string(json_config_generator());
+		keybind_savefile.close();
+	var check_thingy = JSON.new().parse(json_config_generator())
+	var other_check_thingy = JSON.new().parse(keybind_savefile.get_as_text())
+	if(check_thingy.data["keybinds"].length>other_check_thingy.data["keybinds"].length):
+		pass
 	reinitialize_ui()
 	
 func get_keybind_file():
