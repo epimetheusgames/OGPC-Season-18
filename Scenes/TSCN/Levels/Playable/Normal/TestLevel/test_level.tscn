@@ -6,9 +6,11 @@
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("4_rp0j5")
 file = "<null>"
+[gd_scene load_steps=2 format=3 uid="uid://dkoqytf8gdryp"]
+
+[ext_resource type="PackedScene" uid="uid://bvcgrab6m6yty" path="res://Scenes/TSCN/Levels/Editor/ObjectManipulator.tscn" id="1_mmu52"]
 
 [node name="LevelInterfaceNodesContainer" type="Node"]
-process_mode = 1
 
 [node name="@Node@539" parent="." instance=ExtResource("1_67vpc")]
 
@@ -27,3 +29,5 @@ level_list = Array[ExtResource("4_rp0j5")]([SubResource("Resource_ur184")])
 background = Color(0.054902, 0.054902, 0.054902, 1)
 
 [editable path="Root"]
+[node name="ObjectManipulator" parent="." instance=ExtResource("1_mmu52")]
+position = Vector2(131, 0)

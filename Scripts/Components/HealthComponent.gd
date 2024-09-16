@@ -1,21 +1,25 @@
 ## A component to manage the health of an entity.
 class_name HealthComponent
-extends Node
+extends BaseComponent
 
 
 @export var max_health: float = 100.0
 @export var iframe_duration: float = 0.25 # In seconds
 
-@onready var parent: Node = $"../"
-
 var _health: float = max_health
 var _iframes_active: bool = false
+
+
+func _ready() -> void:
+	component_name = "HealthComponent"
 
 func take_damage(amount: float) -> void:
 	if not _iframes_active:
 		_health -= amount
 		clampf(max_health, 0.0, max_health)
 		iframes_on(iframe_duration)
+		
+		var parent = get_node(component_container)
 		
 		# Death
 		if _health == 0:

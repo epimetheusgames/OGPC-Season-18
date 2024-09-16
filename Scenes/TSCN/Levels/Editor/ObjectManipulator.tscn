@@ -15,7 +15,7 @@ offset_left = 2.0
 offset_top = -3.0
 offset_right = 55.0
 offset_bottom = 3.0
-mouse_default_cursor_shape = 9
+mouse_default_cursor_shape = 10
 keep_pressed_outside = true
 
 [node name="YAxis" type="TextureButton" parent="."]

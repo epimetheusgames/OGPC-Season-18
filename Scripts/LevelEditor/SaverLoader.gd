@@ -22,8 +22,11 @@ func clear_level() -> void:
 	
 	# Delete nodes
 	var level_node_container: Node = get_node(level_interface_viewport).get_node("LevelInterfaceNodesContainer")
-	for child in level_node_container.get_children():
-		child.queue_free()
+	level_node_container.free()
+	
+	var new_level_node_container = Node.new()
+	new_level_node_container.name = "LevelInterfaceNodesContainer"
+	get_node(level_interface_viewport).add_child(new_level_node_container, true)
 
 ## Save the current level.
 func save_level(path: String) -> void:
@@ -98,6 +101,7 @@ func _add_to_grid(path: String, nodes_grid: ItemList):
 # This is nice because we can connect the dialogue straight to this.
 func load_level(path: String) -> void:
 	save_path = path
+	save_path_list[get_node(tab_bar).current_tab] = path
 	
 	# Load file.
 	var data_string := FileAccess.get_file_as_string(path)

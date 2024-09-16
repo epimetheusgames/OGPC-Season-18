@@ -1,14 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://csah6gt2cxydw"]
+[gd_scene load_steps=9 format=3 uid="uid://csah6gt2cxydw"]
 
 [ext_resource type="Script" path="res://Scripts/LevelEditor/LevelEditorRoot.gd" id="1_36q31"]
+[ext_resource type="Script" path="res://Scripts/LevelEditor/LevelEditorManager.gd" id="1_khkxk"]
 [ext_resource type="Script" path="res://Scripts/LevelEditor/MenuBarManager.gd" id="1_qgpt1"]
 [ext_resource type="Script" path="res://Scripts/LevelEditor/LevelEditorCamera.gd" id="1_rf8o3"]
 [ext_resource type="PackedScene" uid="uid://bvcgrab6m6yty" path="res://Scenes/TSCN/Levels/Editor/ObjectManipulator.tscn" id="4_1wxhk"]
 [ext_resource type="Script" path="res://Scripts/LevelEditor/NodeRMBoxManager.gd" id="4_4qs7k"]
 [ext_resource type="Script" path="res://Scripts/LevelEditor/SaverLoader.gd" id="5_t6rcf"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31pjn"]
+bg_color = Color(0.2484, 0.2484, 0.2484, 1)
+skew = Vector2(8.55e-05, 0)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="LevelEditorRoot" type="Node"]
 process_mode = 3
+editor_description = "So maybe don't use this not sure if it's very good."
+script = ExtResource("1_khkxk")
 
 [node name="LevelEditorUIGrid" type="GridContainer" parent="."]
 offset_left = 5.0
@@ -87,26 +98,33 @@ tilemap_tree_container = NodePath("../HSplitContainer/SideBarLeftContainer/SideB
 static_tree_container = NodePath("../HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static")
 saver_loader = NodePath("../../SaverLoader")
 object_manipulator = NodePath("../HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/ObjectManipulator")
+select_level_popup = NodePath("../../SelectLevelPopup")
 
 [node name="File" type="PopupMenu" parent="LevelEditorUIGrid/MenuBar"]
-size = Vector2i(102, 100)
-item_count = 3
+size = Vector2i(102, 116)
+item_count = 4
 item_0/text = "Save Level"
 item_1/text = "Load Level"
 item_1/id = 1
 item_2/text = "New Level"
 item_2/id = 2
+item_3/text = "Levels List"
+item_3/id = 3
 
 [node name="Edit" type="PopupMenu" parent="LevelEditorUIGrid/MenuBar"]
-size = Vector2i(167, 116)
-item_count = 4
+auto_translate_mode = 1
+title = "Edit"
+size = Vector2i(229, 143)
+item_count = 5
 item_0/text = "Import Entity"
-item_1/text = "Import TileMap"
+item_1/text = "Import Tilemap"
 item_1/id = 1
-item_2/text = "Import Static Node"
+item_2/text = "Import Static"
 item_2/id = 2
-item_3/text = "Edit Snapping"
+item_3/text = "Snapping Options"
 item_3/id = 3
+item_4/text = "Toggle Snapping as Default"
+item_4/id = 4
 
 [node name="TabBar" type="TabBar" parent="LevelEditorUIGrid"]
 layout_mode = 2
@@ -133,6 +151,17 @@ size_flags_vertical = 3
 [node name="SideBarNodeTreeLabel" type="Label" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes"]
 layout_mode = 2
 text = "Nodes"
+
+[node name="Edit" type="PopupMenu" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes"]
+size = Vector2i(167, 116)
+item_count = 4
+item_0/text = "Import Entity"
+item_1/text = "Import TileMap"
+item_1/id = 1
+item_2/text = "Import Static Node"
+item_2/id = 2
+item_3/text = "Edit Snapping"
+item_3/id = 3
 
 [node name="SideBarNodeTree" type="Tree" parent="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes"]
 layout_mode = 2
@@ -259,6 +288,74 @@ static_nodes = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContain
 node_tree = NodePath("../LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree")
 tab_bar = NodePath("../LevelEditorUIGrid/TabBar")
 
+[node name="SelectLevelPopup" type="Window" parent="."]
+position = Vector2i(525, 236)
+size = Vector2i(800, 400)
+exclusive = true
+unresizable = true
+always_on_top = true
+popup_window = true
+
+[node name="AddLevelButton" type="Button" parent="SelectLevelPopup"]
+offset_left = 707.0
+offset_top = 5.0
+offset_right = 787.0
+offset_bottom = 25.0
+size_flags_horizontal = 8
+text = "Add Level"
+
+[node name="Title" type="Label" parent="SelectLevelPopup"]
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 87.0
+offset_bottom = 31.0
+text = "Levels List
+"
+
+[node name="ListBG" type="Panel" parent="SelectLevelPopup"]
+offset_left = 5.0
+offset_top = 40.0
+offset_right = 795.0
+offset_bottom = 395.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_31pjn")
+
+[node name="LevelsList" type="VBoxContainer" parent="SelectLevelPopup"]
+offset_left = 15.0
+offset_top = 47.0
+offset_right = 787.0
+offset_bottom = 447.0
+
+[node name="TemplateLevelBox" type="HBoxContainer" parent="SelectLevelPopup/LevelsList"]
+visible = false
+layout_mode = 2
+
+[node name="Name" type="Label" parent="SelectLevelPopup/LevelsList/TemplateLevelBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.75
+text = "Level Name Here"
+
+[node name="Path" type="Label" parent="SelectLevelPopup/LevelsList/TemplateLevelBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.8
+text = "Level Path Here"
+clip_text = true
+
+[node name="LoadButton" type="Button" parent="SelectLevelPopup/LevelsList/TemplateLevelBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Load"
+
+[node name="LevelsListAddLevelFileDialog" type="FileDialog" parent="SelectLevelPopup"]
+title = "Open a File"
+position = Vector2i(615, 296)
+size = Vector2i(600, 400)
+popup_window = true
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.json", "*.txt")
+
 [connection signal="id_pressed" from="LevelEditorUIGrid/SnappingPopup" to="LevelEditorUIGrid/MenuBar" method="_on_snapping_popup_id_pressed"]
 [connection signal="file_selected" from="LevelEditorUIGrid/EntityImportFileDialog" to="LevelEditorUIGrid/MenuBar" method="_on_entity_import_file_dialog_file_selected"]
 [connection signal="file_selected" from="LevelEditorUIGrid/TileMapImportFileDialog" to="LevelEditorUIGrid/MenuBar" method="_on_entity_import_file_dialog_file_selected"]
@@ -268,8 +365,12 @@ tab_bar = NodePath("../LevelEditorUIGrid/TabBar")
 [connection signal="id_pressed" from="LevelEditorUIGrid/MenuBar/Edit" to="LevelEditorUIGrid/MenuBar" method="_on_edit_id_pressed"]
 [connection signal="tab_changed" from="LevelEditorUIGrid/TabBar" to="LevelEditorUIGrid/MenuBar" method="_on_tab_bar_tab_changed"]
 [connection signal="tab_close_pressed" from="LevelEditorUIGrid/TabBar" to="LevelEditorUIGrid/MenuBar" method="_on_tab_bar_tab_close_pressed"]
+[connection signal="id_pressed" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/Edit" to="LevelEditorUIGrid/MenuBar" method="_on_edit_id_pressed"]
 [connection signal="item_mouse_selected" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_side_bar_node_tree_item_mouse_selected"]
 [connection signal="item_mouse_selected" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarNodes/SideBarNodeTree" to="NodeRightClickBox" method="_on_side_bar_node_tree_item_mouse_selected"]
 [connection signal="item_activated" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/Entity/EntityNodes" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_entity_nodes_item_activated"]
 [connection signal="item_activated" from="LevelEditorUIGrid/HSplitContainer/SideBarLeftContainer/SideBarObjects/SeperatorTileMapStatic/Static/StaticNodes" to="LevelEditorUIGrid/HSplitContainer/Panel/LevelInterfaceContainer/LevelInterfaceViewport/LevelEditorCamera" method="_on_static_nodes_item_activated"]
 [connection signal="button_up" from="NodeRightClickBox/DeleteButton" to="NodeRightClickBox" method="_on_delete_button_button_up"]
+[connection signal="close_requested" from="SelectLevelPopup" to="." method="_on_window_close_requested"]
+[connection signal="button_up" from="SelectLevelPopup/AddLevelButton" to="." method="_on_add_level_button_button_up"]
+[connection signal="file_selected" from="SelectLevelPopup/LevelsListAddLevelFileDialog" to="." method="_on_levels_list_add_level_file_dialog_file_selected"]

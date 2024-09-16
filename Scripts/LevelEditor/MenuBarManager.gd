@@ -11,6 +11,7 @@ var opening_static := false
 @export_node_path("VBoxContainer") var static_tree_container
 @export_node_path("Node") var saver_loader
 @export_node_path("Node2D") var object_manipulator
+@export_node_path("Window") var select_level_popup
 
 # File dialogue
 func _on_file_id_pressed(id: int) -> void:
@@ -33,12 +34,15 @@ func _on_file_id_pressed(id: int) -> void:
 		
 		# Everything's saved, we can do this now!
 		get_node(saver_loader).clear_level()
+		get_node(saver_loader).save_path = ""
+	if id == 3:
+		get_node(select_level_popup).visible = true
 
 # Edit dialogue
 func _on_edit_id_pressed(id: int) -> void:
 	if id == 0 || id == 2:
 		get_parent().get_node("EntityImportFileDialog").visible = true
-	else:
+	elif id != 4:
 		get_parent().get_node("TileMapImportFileDialog").visible = true
 	
 	if id == 0:
@@ -56,6 +60,9 @@ func _on_edit_id_pressed(id: int) -> void:
 	if id == 3:
 		get_parent().get_node("TileMapImportFileDialog").visible = false
 		get_parent().get_node("SnappingPopup").visible = true
+	if id == 4:
+		var manipulator: Node2D = get_node(object_manipulator)
+		manipulator.is_snapping_default = !manipulator.is_snapping_default
 
 func _add_to_grid(path: String, nodes_grid: ItemList):
 	var scene_name := path.split(".")[0].split("/")[-1]
@@ -93,9 +100,10 @@ func _on_tab_bar_tab_close_pressed(tab: int) -> void:
 	# Save level, clear it, remove tab, and switch to the level we switched to.
 	_on_file_id_pressed(0)
 	saver.clear_level()
+	
+	# This should activate the _on_tab_bar_tab_changed signal, and do all 
+	# the level loading work for us.
 	tabs.remove_tab(tab)
-	get_parent()._ready()
-	saver.load_level(saver.save_path_list[tabs.current_tab])
 
 func _on_tab_bar_tab_changed(tab: int) -> void:
 	var saver: Node = get_node(saver_loader)
@@ -103,7 +111,7 @@ func _on_tab_bar_tab_changed(tab: int) -> void:
 	
 	if tabs.get_tab_title(tabs.current_tab) == "Empty Level":
 		saver.clear_level()
-		get_parent()._ready()
+		get_parent().call_deferred("_ready")
 		return
 	
 	# Save level clear it, and load the next level.
