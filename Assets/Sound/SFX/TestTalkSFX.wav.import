@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://gjgw86txtv6h"
-path="res://.godot/imported/yap_bad.wav-d5edceb73be2df4fc9f0336be695fcec.sample"
+path="res://.godot/imported/TestTalkSFX.wav-a9089f7b64ea00825e1472b134e0965d.sample"
 
 [deps]
 
-source_file="res://Assets/Sfx/yap_bad.wav"
-dest_files=["res://.godot/imported/yap_bad.wav-d5edceb73be2df4fc9f0336be695fcec.sample"]
+source_file="res://Assets/Sound/SFX/TestTalkSFX.wav"
+dest_files=["res://.godot/imported/TestTalkSFX.wav-a9089f7b64ea00825e1472b134e0965d.sample"]
 
 [params]
 

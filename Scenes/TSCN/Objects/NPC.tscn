@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/Entity/BaseNpc.gd" id="1_3od1n"]
 
-[node name="Npc" type="CharacterBody2D"]
+[node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_3od1n")
+dialog_speed = 10
+talking_sound = "res://Assets/Sound/SFX/TestTalkSFX.wav"
+conv_obj_name = "test_dialog"
 
 [node name="AudioHandler" type="Node2D" parent="."]
 

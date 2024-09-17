@@ -1,3 +1,5 @@
+## Base class for all NPCs (including enemies!)
+
 class_name NPC
 extends Entity
 
@@ -7,23 +9,33 @@ extends Entity
 @export var dialog_speed: int
 
 # Dialog beep sound thingy 
-@export var dialog_sound = "yap_bad.wav"
+@export_file("*.wav") var talking_sound
 
-var dialogue: Array
-var dialogue_json: JSON
+# Name of our conversational object.
+@export var conv_obj_name := ""
+
+var currently_talking := false
+
+var conversation_index := 0
+var sentence_index := 0
+
+var dialog: Dictionary
+var dialog_json: JSON
+
 func _get_dialogue():
-	# My bad guys just got a little silly
-	dialogue_json.parse(FileAccess.open("res://Scenes/Resource/dialog.json", FileAccess.READ).get_as_text())
-	dialogue = dialogue_json.data
-	
-# Called when the node enters the scene tree for the first time.
+	dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text())
+	dialog = dialog_json.data
+
 func _ready() -> void:
 	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# TODO: Actually write talking code here; somewhere around the lines of:
+	# dialog[conv_obj_name][conversation_index][sentence_index]
 	pass
 
 func die() -> void:
-	
-func yap() -> void:
+	pass
+
+func trigger_talking() -> void:
+	currently_talking = true
