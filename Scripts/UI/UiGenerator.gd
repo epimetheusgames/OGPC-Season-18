@@ -56,10 +56,12 @@ func _ready():
 	if(not FileAccess.file_exists("user://keybinds.json")):
 		keybind_savefile.store_string(json_config_generator());
 		keybind_savefile.close();
-	var check_thingy = JSON.new().parse(json_config_generator())
-	var other_check_thingy = JSON.new().parse(keybind_savefile.get_as_text())
-	if(check_thingy.data["keybinds"].length>other_check_thingy.data["keybinds"].length):
-		pass
+	var check_thingy = JSON.new()
+	check_thingy.parse(json_config_generator())
+	var other_check_thingy = JSON.new()
+	other_check_thingy.parse(keybind_savefile.get_as_text())
+	if(check_thingy.data["keybinds"].size()>other_check_thingy.data["keybinds"].size()):
+		for i in other_check_thingy.data["key"]
 	reinitialize_ui()
 	
 func get_keybind_file():
@@ -101,8 +103,20 @@ func get_input_key_names(array: Array) -> Array:
 			var keycode := DisplayServer.keyboard_get_keycode_from_physical(array[x].physical_keycode)
 			return_array.append(OS.get_keycode_string(keycode))
 	else:
-		var keycode := DisplayServer.keyboard_get_keycode_from_physical(array[0].physical_keycode)
-		return_array.append(OS.get_keycode_string(keycode))
+		if(array[0] is InputEventMouseButton):
+			if(array[0].button_index == 1):
+				return_array.append("Left Click")
+			elif(array[0].button_index == 2):
+				return_array.append("Right Click")
+			elif(array[0].button_index == 3):
+				return_array.append("Middle Click")
+			elif(array[0].button_index == 4):
+				return_array.append("Mousewheel up")
+			elif(array[0].butto_index == 5):
+				return_array.append("Mousewheel down")
+		else:
+			var keycode := DisplayServer.keyboard_get_keycode_from_physical(array[0].physical_keycode)
+			return_array.append(OS.get_keycode_string(keycode))
 		
 	return return_array
 
