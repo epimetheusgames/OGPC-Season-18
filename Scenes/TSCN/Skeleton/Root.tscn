@@ -40,7 +40,6 @@ offset_bottom = 40.0
 
 [node name="UIGenerator" type="Node" parent="UI"]
 script = ExtResource("2_h48r7")
-background = null
 keybind_entry_padding = 0
 keybind_entry_element_padding = 44
 text_offset_y = 8
