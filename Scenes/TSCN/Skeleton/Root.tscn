@@ -59,17 +59,17 @@ script = ExtResource("6_oply2")
 metadata/key_number = 0
 metadata/action = ""
 
-[node name="dialogText" type="Node2D" parent="UI"]
+[node name="TestDialogText" type="Node2D" parent="UI"]
 script = ExtResource("8_7spfj")
 
-[node name="RichTextLabel" type="TextureRect" parent="UI/dialogText"]
+[node name="DialogTextureBG" type="TextureRect" parent="UI/TestDialogText"]
 offset_left = 384.0
 offset_top = 343.0
 offset_right = 1072.0
 offset_bottom = 508.0
 texture = SubResource("PlaceholderTexture2D_o714b")
 
-[node name="TextureRect" type="RichTextLabel" parent="UI/dialogText"]
+[node name="DialogTextLabel" type="RichTextLabel" parent="UI/TestDialogText"]
 offset_right = 40.0
 offset_bottom = 40.0
 
