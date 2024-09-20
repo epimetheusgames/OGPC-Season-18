@@ -20,6 +20,7 @@ script = ExtResource("1_h2kyx")
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
+dialog_text_node = NodePath("Game/DialogText")
 
 [node name="Skeleton" type="Node" parent="."]
 
@@ -59,21 +60,27 @@ script = ExtResource("6_oply2")
 metadata/key_number = 0
 metadata/action = ""
 
-[node name="TestDialogText" type="Node2D" parent="UI"]
+[node name="Game" type="Node" parent="."]
+
+[node name="DialogText" type="Node2D" parent="Game"]
 script = ExtResource("8_7spfj")
 
-[node name="DialogTextureBG" type="TextureRect" parent="UI/TestDialogText"]
+[node name="DialogTextureBG" type="TextureRect" parent="Game/DialogText"]
 offset_left = 384.0
 offset_top = 343.0
 offset_right = 1072.0
 offset_bottom = 508.0
 texture = SubResource("PlaceholderTexture2D_o714b")
 
-[node name="DialogTextLabel" type="RichTextLabel" parent="UI/TestDialogText"]
+[node name="DialogTextLabel" type="RichTextLabel" parent="Game/DialogText"]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Game" type="Node" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Game"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="Game/SubViewportContainer"]
 
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
 [connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]

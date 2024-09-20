@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvcgrab6m6yty"]
 
 [ext_resource type="Script" path="res://Scripts/LevelEditor/ObjectManipulator.gd" id="1_2y444"]
-[ext_resource type="Texture2D" uid="uid://cd38vahv2xj48" path="res://Assets/Art/Sprites/LevelEditor/MovementArrows.png" id="1_ujofq"]
+[ext_resource type="Texture2D" uid="uid://cd38vahv2xj48" path="res://Assets/Art/LevelEditor/MovementArrows.png" id="1_ujofq"]
 
 [node name="ObjectManipulator" type="Node2D"]
 script = ExtResource("1_2y444")
