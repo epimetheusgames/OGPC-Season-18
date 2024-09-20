@@ -14,8 +14,6 @@ extends Entity
 # Name of our conversational object.
 @export var conv_obj_name := ""
 
-var currently_talking := false
-
 var conversation_index := 0
 var sentence_index := 0
 
@@ -29,13 +27,8 @@ func _get_dialogue():
 func _ready() -> void:
 	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
 
-func _process(delta: float) -> void:
-	# TODO: Actually write talking code here; somewhere around the lines of:
-	# dialog[conv_obj_name][conversation_index][sentence_index]
-	pass
-
 func die() -> void:
 	pass
 
 func trigger_talking() -> void:
-	currently_talking = true
+	pass

@@ -12,6 +12,7 @@ func _ready() -> void:
 	get_node("TextureRect").size = get_node("RichTextLabel").size*0.9
 	get_node("TextureRect").position = get_node("RichTextLabel")
 	play_dialog("hi im a silly little dialog thingy doing dialog stuff look at me isnt that interesting",10)
+
 func _process(delta:float):
 	if(not dialog_played):
 		dialog_played_time += delta*60

@@ -49,34 +49,57 @@ var button_template: Button
 var ready_called := false
 
 func _ready():
-	var keybind_savefile = FileAccess.open("user://keybinds.json",FileAccess.READ_WRITE);
-	ready_called = true;
+	var keybind_savefile := FileAccess.open("user://keybinds.json",FileAccess.READ_WRITE)
+	ready_called = true
 	
-	#if this is the first time the user has opened the game, create the default keybinds
+	# If this is the first time the user has opened the game, create the default keybinds
 	if(not FileAccess.file_exists("user://keybinds.json")):
-		keybind_savefile.store_string(json_config_generator());
-		keybind_savefile.close();
-	var current_keybind_config = JSON.new()
+		keybind_savefile.store_string(json_config_generator())
+		keybind_savefile.close()
+	
+	# Save all the keybinds to the file, then reload them from the file.
+	var current_keybind_config := JSON.new()
 	current_keybind_config.parse(json_config_generator())
-	var  user_savedconfig= JSON.new()
-	var user_savedconfig_action_removequeue = []
-	var user_savedconfig_keylist_removequeue = []
-	var user_savedconfig_action_addqueue = []
+	
+	var user_savedconfig := JSON.new()
+	var user_savedconfig_action_removequeue := []
+	var user_savedconfig_keylist_removequeue := []
+	var user_savedconfig_action_addqueue := []
+	
 	user_savedconfig.parse(keybind_savefile.get_as_text())
+	
 	if(current_keybind_config.data["keybinds"].size()>user_savedconfig.data["keybinds"].size()):
 		pass
-	if(current_keybind_config.data["keybinds"].size()<user_savedconfig.data["keybinds"].size()):
-		for i in range(current_keybind_config.data["keybinds"].size()):
-			if(not current_keybind_config.data["keybinds"][i]==user_savedconfig.data["keybinds"][i]):
+	
+	var current_keybinds_data: Array = current_keybind_config.data["keybinds"]
+	var saved_keybinds_data: Array = user_savedconfig.data["keybinds"]
+	var current_config_size: int = current_keybinds_data.size()
+	var saved_config_size: int = saved_keybinds_data.size()
+	
+	# Add objects to remove to queue.
+	if current_config_size < saved_config_size:
+		for i in range(current_config_size):
+			if !current_keybinds_data[i] == saved_keybinds_data[i]:
 				user_savedconfig_action_removequeue.append(i)
 			else:
-				if(not current_keybind_config.data["keybinds"][i]["actionName"]==user_savedconfig.data["keybinds"][i]["actionName"]):
-					user_savedconfig.data["keybinds"][i]["actionName"] = current_keybind_config.data["keybinds"][i]["actionName"]
-				for p in range(current_keybind_config.data["keybinds"][i]["key"].size()):
-					if(current_keybind_config.data["keybinds"][i]["key"][p]==user_savedconfig.data["keybinds"][i]["key"][p]):
-						user_savedconfig_keylist_removequeue.append(p)
+				if !current_keybinds_data[i]["actionName"] == saved_keybinds_data[i]["actionName"]:
+					saved_keybinds_data[i]["actionName"] = current_keybinds_data[i]["actionName"]
+				
+				for j in range(current_keybinds_data[i]["key"].size()):
+					# This removal list contains the index of the action plus the index of the
+					# key, so it's simpler to find later on.
+					if current_keybinds_data[i]["key"][j] == saved_keybinds_data[i]["key"][j]:
+						user_savedconfig_keylist_removequeue.append([i, j])
 					else:
 						pass
+	
+	# Remove queued objects.
+	for action in user_savedconfig_action_removequeue:
+		user_savedconfig.data["keybinds"].pop_at(action)
+	
+	for key in user_savedconfig_keylist_removequeue:
+		user_savedconfig.data["keybinds"][key[0]]["key"].pop_at(key[1])
+	
 	reinitialize_ui()
 	
 func get_keybind_file():
@@ -84,6 +107,7 @@ func get_keybind_file():
 	var return_value = keybind_savefile.get_as_text()
 	keybind_savefile.close()
 	return return_value
+
 func reinitialize_ui():
 	if ready_called:
 		button_template = get_node(button_template_path)
@@ -94,8 +118,8 @@ func reinitialize_ui():
 		var test = get_keybind_file()
 		keybind_config.parse(get_keybind_file())
 		keybind_config_data = keybind_config.data
-		_clear_ui_elements()
-		generate_ui_elements()
+		_queue_clear_ui_elements()
+		call_deferred("generate_ui_elements()")
 
 # Takes an array of actions, and removes the builtin actions
 func remove_stock_keybinds(array: Array) -> Array:
@@ -110,6 +134,7 @@ func remove_stock_keybinds(array: Array) -> Array:
 		
 	return return_array
 
+# Get string names of keys in keybinds list
 func get_input_key_names(array: Array) -> Array:
 	var return_array = []
 	
@@ -143,22 +168,7 @@ func json_config_generator() -> String:
 	var actions = InputMap.get_actions()
 	var usable_actions = remove_stock_keybinds(actions)
 	
-	#i hope carson is a smart enough person to know how to iterate through arrays properly
-	#the size-minus-1 method doesnt work when usable_actions.size is less than 2
-	#which means i have to use this functional and readable, yet not very pretty-looking hack
-	
-	#and thats right carson i used a "hack". before you hop on discord and tell me to get good, please
-	#check out the source leaks of literally any triple-A game, and see how severe those hacks are compared to this one
-	
-	#chances are you arent going to complain and probably dont care that much
-	#but look i gotta be ready for anything
-	
-	#note if your going to remove the hack and replace it with a better solution, please let me know
-	#so i can apply it to the rest of the functions in the file that also utilize the hack
-	
-	# Hi sequoia, I'm not going to remove your hack because I don't really understand the code (;
-	# Maybe someday ...
-	
+	# Hack to make sure there's no errors if there's only one action.
 	if usable_actions.size() > 1:
 		for x in range(usable_actions.size()):
 			var keys = InputMap.action_get_events(usable_actions[x])
@@ -187,7 +197,7 @@ func json_config_generator() -> String:
 		
 		var key_strings = get_input_key_names(keys)
 		
-		json_config += '{"actionName":"' + usable_actions[0] + '","key":[' 
+		json_config += '{"actionName":"' + usable_actions[0] + '","key":['
 		
 		if keys.size() > 1:
 			for y in keys.size()-1:
@@ -200,7 +210,9 @@ func json_config_generator() -> String:
 		json_config += "]}]}"
 		return json_config
 
-# TODO: This function should be replaced with smoother visuals.
+# Toggle's visibility of UI.
+# TODO: This function should be replaced with smoother visuals, or used as a
+# base function after smoother visuals have been ran.
 func toggle_ui():
 	get_parent().visible = !self.get_parent().visible
 	if(get_parent().visible):
@@ -208,14 +220,17 @@ func toggle_ui():
 	else:
 		RenderingServer.set_default_clear_color(default_color)
 
+# Adds all nodes in the array as a child of the caller
 func nodes_from_array(array: Array, caller=self) -> void:
 	for x in array.size():
 		caller.add_child(array[x])
 
-func _clear_ui_elements() -> void:
+# QUEUE frees all UI elements.
+func _queue_clear_ui_elements() -> void:
 	for child in get_children():
 		child.queue_free()
 
+# Regenerates UI elements from keybind data.
 func generate_ui_elements() -> void:
 	var new_buttons = []
 	var new_entries = []
