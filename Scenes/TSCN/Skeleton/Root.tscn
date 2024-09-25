@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=12 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Skeleton/MultiplayerManager.gd" id="4_o3y1v"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/TextPosSet.gd" id="8_7spfj"]
+[ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
@@ -20,13 +21,13 @@ script = ExtResource("1_h2kyx")
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
-dialog_text_node = NodePath("Game/DialogText")
+dialog_text_node = NodePath("Game/GameUIOverlay/DialogText")
 
 [node name="Skeleton" type="Node" parent="."]
 
 [node name="SaveLoadFramework" type="Node" parent="Skeleton"]
 script = ExtResource("2_i3ogj")
-game_container_node_path = NodePath("../../Game")
+game_container_node_path = NodePath("../../Game/GameContainer/GameViewport")
 ui_root_node_path = NodePath("../../UI")
 level_list = Array[ExtResource("3_e6kdq")]([SubResource("Resource_ur184")])
 
@@ -62,27 +63,36 @@ metadata/action = ""
 
 [node name="Game" type="Node" parent="."]
 
-[node name="DialogText" type="Node2D" parent="Game"]
+[node name="GameUIOverlay" type="Control" parent="Game"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogText" type="Node2D" parent="Game/GameUIOverlay"]
 script = ExtResource("8_7spfj")
 
-[node name="DialogTextureBG" type="TextureRect" parent="Game/DialogText"]
+[node name="DialogTextureBG" type="TextureRect" parent="Game/GameUIOverlay/DialogText"]
 offset_left = 514.0
 offset_top = 343.0
 offset_right = 1072.0
 offset_bottom = 508.0
 texture = SubResource("PlaceholderTexture2D_o714b")
 
-[node name="DialogTextLabel" type="RichTextLabel" parent="Game/DialogText"]
+[node name="DialogTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/DialogText"]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Game"]
+[node name="GameContainer" type="SubViewportContainer" parent="Game"]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SubViewport" type="SubViewport" parent="Game/SubViewportContainer"]
+[node name="GameViewport" type="SubViewport" parent="Game/GameContainer"]
 handle_input_locally = false
 render_target_update_mode = 4
+
+[node name="BoidsCalculator" type="Node" parent="Game"]
+script = ExtResource("9_xe7j2")
 
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
 [connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]

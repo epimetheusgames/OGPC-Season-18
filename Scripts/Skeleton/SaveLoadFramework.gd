@@ -2,7 +2,7 @@
 extends Node
 
 
-@export_node_path("Node") var game_container_node_path
+@export_node_path("SubViewport") var game_container_node_path
 @export_node_path("Control") var ui_root_node_path
 @export var level_list: Array[FilePathResource]:
 	set(val):

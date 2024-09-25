@@ -3,6 +3,8 @@ class_name Entity
 extends CharacterBody2D
 
 
+var entity_type = "Entity"
+
 @export var _has_physics := false
 @export var uid := UID.new()
 
@@ -66,3 +68,7 @@ func enable_physics() -> void:
 ## Disable kinematic physics for the entity.
 func disable_physics() -> void:
 	_has_physics = false
+
+## Get the class of the Entity.
+func get_entity_type() -> String:
+	return entity_type

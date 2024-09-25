@@ -8,12 +8,13 @@ var dialog_speed: float = 10
 # In characters per second, this is so theres a lil pause between a period
 #(as you might in real human speech)
 var dialog_speed_period: float = 1
-
 var characters_played: float = 0
-
 var last_played_letterindex: int = 0
 
+var dialog_sfx_node: AudioStreamPlayer
+
 @onready var text_node = get_node("DialogTextLabel")
+
 func _ready() -> void:
 	get_node("DialogTextLabel").size = get_node("DialogTextureBG").size*0.9
 	get_node("DialogTextLabel").position = get_node("DialogTextureBG").position
@@ -30,6 +31,10 @@ func _process(delta:float):
 			dialog_played = true
 		elif int(characters_played) != last_played_letterindex:
 			text_node.text += dialog[int(characters_played)]
+			
+			# Play beep sfx
+			if dialog_sfx_node:
+				dialog_sfx_node.play()
 		
 		last_played_letterindex = int(characters_played)
 	

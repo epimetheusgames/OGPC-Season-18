@@ -64,7 +64,7 @@ func _ready():
 	var user_savedconfig := JSON.new()
 	var user_savedconfig_action_removequeue := []
 	var user_savedconfig_keylist_removequeue := []
-	var user_savedconfig_action_addqueue := []
+	#var user_savedconfig_action_addqueue := []
 	
 	user_savedconfig.parse(keybind_savefile.get_as_text())
 	
@@ -115,7 +115,6 @@ func reinitialize_ui():
 		
 		# Get string representing the users keybinds.json file generated from the actions set in 
 		# project settings and parse it into a tree
-		var test = get_keybind_file()
 		keybind_config.parse(get_keybind_file())
 		keybind_config_data = keybind_config.data
 		_queue_clear_ui_elements()

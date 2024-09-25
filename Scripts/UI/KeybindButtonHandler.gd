@@ -41,7 +41,7 @@ func reloadKeybinds():
 	var keybindConfig = FileAccess.open("user://keybinds.json",FileAccess.READ)
 	var configText = keybindConfig.get_as_text()
 	
-	var actions = get_parent().get_node("UIGenerator").remove_stock_keybinds(InputMap.get_actions())
+	#var actions = get_parent().get_node("UIGenerator").remove_stock_keybinds(InputMap.get_actions())
 	
 	parse.parse(configText)
 	var parseData = parse.data
@@ -86,7 +86,7 @@ func change_keybind(action_name: String, key_number: int, new_key: String) -> bo
 	
 	# Store data to file.
 	raw_json = FileAccess.open("user://keybinds.json", FileAccess.WRITE)
-	raw_json.store_string(buffer_parse.stringify(json_data, "\t"))
+	raw_json.store_string(JSON.stringify(json_data, "\t"))
 	raw_json.close()
 	
 	get_parent().reinitialize_ui()

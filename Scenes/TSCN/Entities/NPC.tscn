@@ -10,7 +10,7 @@ conv_obj_name = "test_dialog"
 
 [node name="AudioHandler" type="Node2D" parent="."]
 
-[node name="TalkSound" type="AudioStreamPlayer2D" parent="AudioHandler"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioHandler"]
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 
