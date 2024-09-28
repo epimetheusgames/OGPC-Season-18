@@ -15,8 +15,12 @@ extends BaseComponent
 var boid_initialized := false
 var boids_calculator: BoidsCalculator
 var boids_index: int
+var index: int
+var raycast: RayCast2D
+@export_node_path("RayCast2D") var raycast_path
 
 func _ready():
+	name = "BoidComponent"
 	component_name = "BoidComponent"
 	
 	if !component_container:
@@ -31,14 +35,16 @@ func _ready():
 	boids_calculator.add_boid_data_at_index(boids_index, view_dist, protected_dist, avoid_factor,
 											matching_factor, centering_factor, turn_factor,
 											max_speed, min_speed, max_accel)
+	
+	get_parent().add_to_group("Boids")
+	raycast = get_node(raycast_path)
+	get_parent().velocity = (raycast.target_position - raycast.position).normalized()
 
 # Update velocity using compute shader outputs from boids calculator node.
-func _process(delta: float) -> void: 
-	# It's okay guys I'm just a silly little guy.
-	get_node(component_container).velocity = Vector2(boids_calculator.shader_output[boids_index * 2], boids_calculator.shader_output[boids_index * 2 + 1])
-
-# Delete the data for the node if it's about to be freed ... if this is causing
-# bugs, just remove it.
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_PREDELETE:
-		boids_calculator.remove_boid_index(boids_index)
+func _physics_process(delta: float) -> void: 
+	if component_container:
+		get_node(component_container).velocity = Vector2(boids_calculator.shader_output[boids_index * 2], boids_calculator.shader_output[boids_index * 2 + 1])
+		get_node(component_container).move_and_slide()
+		get_node(component_container).position += get_node(component_container).velocity
+		
+	get_parent().rotation = atan2(get_parent().velocity.normalized().y, get_parent().velocity.normalized().x) + PI / 2.0 + PI

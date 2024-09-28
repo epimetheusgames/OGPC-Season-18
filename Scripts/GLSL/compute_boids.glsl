@@ -52,15 +52,15 @@ void main() {
     if (id > global_params.num_boids) { return; }
 
     // Get the parameters for this specific boid.
-    float view_dist        = parameters.data[id * 8 + 0];
-    float protected_dist   = parameters.data[id * 8 + 1];
-    float avoid_factor     = parameters.data[id * 8 + 2];
-    float matching_factor  = parameters.data[id * 8 + 3];
-    float centering_factor = parameters.data[id * 8 + 4];
-    float turn_factor      = parameters.data[id * 8 + 5];
-    float max_speed        = parameters.data[id * 8 + 6];
-    float min_speed        = parameters.data[id * 8 + 7];
-    float max_accel        = parameters.data[id * 8 + 8];
+    float view_dist        = parameters.data[id * 9 + 0];
+    float protected_dist   = parameters.data[id * 9 + 1];
+    float avoid_factor     = parameters.data[id * 9 + 2];
+    float matching_factor  = parameters.data[id * 9 + 3];
+    float centering_factor = parameters.data[id * 9 + 4];
+    float turn_factor      = parameters.data[id * 9 + 5];
+    float max_speed        = parameters.data[id * 9 + 6];
+    float min_speed        = parameters.data[id * 9 + 7];
+    float max_accel        = parameters.data[id * 9 + 8];
 
     // Get position and velocity of current boid based on id
     vec2 current_boid_position = vec2(boids_positions.data[id * 2], boids_positions.data[id * 2 + 1]);

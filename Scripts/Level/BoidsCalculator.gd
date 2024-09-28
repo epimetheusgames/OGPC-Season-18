@@ -46,7 +46,9 @@ func _physics_process(delta: float) -> void:
 	for boid_ind in range(boids_list.size()):
 		boids_positions.append(boids_list[boid_ind].position)
 		boids_velocities.append(boids_list[boid_ind].velocity)
-		boids_list[boid_ind].index = boid_ind
+		
+		# TODO: Make this safe.
+		boids_list[boid_ind].get_node("BoidComponent").index = boid_ind
 	
 	# Prepare data for compute shader
 	var global_parameters := PackedFloat32Array([
@@ -63,9 +65,10 @@ func _physics_process(delta: float) -> void:
 	
 	var raycast_data := PackedFloat32Array()
 	for boid in boids_list:
-		raycast_data.append(1 if boid.raycast.get_collider() else 0)
-		raycast_data.append(boid.raycast.get_collision_normal().x)
-		raycast_data.append(boid.raycast.get_collision_normal().y)
+		var boid_component = boid.get_node("BoidComponent")
+		raycast_data.append(1 if boid_component.raycast.get_collider() else 0)
+		raycast_data.append(boid_component.raycast.get_collision_normal().x)
+		raycast_data.append(boid_component.raycast.get_collision_normal().y)
 	var raycast_data_bytes = raycast_data.to_byte_array()
 	
 	var output := PackedFloat32Array()
@@ -130,25 +133,27 @@ func _physics_process(delta: float) -> void:
 	# Get output list
 	var compute_output_bytes := rd.buffer_get_data(output_buffer)
 	shader_output = compute_output_bytes.to_float32_array()
+	
+	pass
 
 # After this please use add_boid_data_at_index to fill in the registered data.
 # Think of this like it's memory allocation in the boids list!
 func register_index(boid_object: BoidComponent) -> int:
 	boids_node_list[boids_index_counter] = boid_object
 	boids_index_counter += 1
-	return boids_index_counter
+	return boids_index_counter - 1
 
 func add_boid_data_at_index(index, view_dist, protected_dist, avoid_factor, matching_factor, 
 							centering_factor, turn_factor, max_speed, min_speed, max_accel):
-	boids_parameters_array.set(index + 0, view_dist)
-	boids_parameters_array.set(index + 1, protected_dist)
-	boids_parameters_array.set(index + 2, avoid_factor)
-	boids_parameters_array.set(index + 3, matching_factor)
-	boids_parameters_array.set(index + 4, centering_factor)
-	boids_parameters_array.set(index + 5, turn_factor)
-	boids_parameters_array.set(index + 6, max_speed)
-	boids_parameters_array.set(index + 7, min_speed)
-	boids_parameters_array.set(index + 8, max_accel)
+	boids_parameters_array.set(index * 9 + 0, view_dist)
+	boids_parameters_array.set(index * 9 + 1, protected_dist)
+	boids_parameters_array.set(index * 9 + 2, avoid_factor)
+	boids_parameters_array.set(index * 9 + 3, matching_factor)
+	boids_parameters_array.set(index * 9 + 4, centering_factor)
+	boids_parameters_array.set(index * 9 + 5, turn_factor)
+	boids_parameters_array.set(index * 9 + 6, max_speed)
+	boids_parameters_array.set(index * 9 + 7, min_speed)
+	boids_parameters_array.set(index * 9 + 8, max_accel)
 	boids_parameters_array_bytes = boids_parameters_array.to_byte_array()
 
 # Do this always before you free a boid ... it's not *particularly* neccesary
