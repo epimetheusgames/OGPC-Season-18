@@ -101,8 +101,9 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 
 - Never set properties of a node from a different node, especially player / core objects.  (player.velocity = 100 from another script is never allowed.)
 - Each scene should be able to run by itself without causing a runtime exception.
-- Use setters/getters instead of setting/getting a property directly
-- A node should refer to its children or its parent but not its siblings.
+- Use setters/getters instead of setting/getting a property directly.
+- Instead of reference a node with get_node(), use @export_node_path which will change if the node's
+  name or path is changed.
 
 ---
 
@@ -115,3 +116,6 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 
 1: General collision
 2: Hurtbox/attackbox
+3: Light area hitbox
+4: Noise area hitbox
+5: Movement hitboxes

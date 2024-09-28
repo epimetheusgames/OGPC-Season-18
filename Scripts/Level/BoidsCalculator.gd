@@ -25,7 +25,7 @@ var boids_node_list := []
 func _ready() -> void:
 	rd = RenderingServer.create_local_rendering_device()
 	
-	var shader_file := load("res://compute_boids.glsl")
+	var shader_file := load("res://Scripts/GLSL/compute_boids.glsl")
 	var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
 	boid_shader = rd.shader_create_from_spirv(shader_spirv)
 	boids_pipeline = rd.compute_pipeline_create(boid_shader)
