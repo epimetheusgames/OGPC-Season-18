@@ -1,13 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://co07maqfriti4"]
+[gd_scene load_steps=3 format=3 uid="uid://co07maqfriti4"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/BaseEntity.gd" id="1_b7ytu"]
 [ext_resource type="Script" path="res://Scripts/Components/BoidComponent.gd" id="2_guibv"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_t1irn"]
-radius = 3.0
-
 [node name="Boid" type="CharacterBody2D"]
 collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_b7ytu")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
@@ -15,9 +13,6 @@ polygon = PackedVector2Array(-2, 3, 2, 3, 0, -4)
 
 [node name="WallRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 116)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_t1irn")
 
 [node name="BoidComponent" type="Node" parent="."]
 script = ExtResource("2_guibv")

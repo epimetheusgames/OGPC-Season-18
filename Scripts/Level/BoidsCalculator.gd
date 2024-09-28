@@ -37,6 +37,7 @@ func _ready() -> void:
 
 # Runs the GPU compute shader every frame! 
 func _physics_process(delta: float) -> void:
+	print(Engine.get_frames_per_second())
 	var boids_list = get_tree().get_nodes_in_group("Boids")
 	var num_boids = boids_list.size()
 	

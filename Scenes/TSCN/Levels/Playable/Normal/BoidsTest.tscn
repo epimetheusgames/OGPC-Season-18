@@ -7,10 +7,11 @@
 
 [node name="BoidsCalculator" type="Node" parent="."]
 script = ExtResource("2_pw0em")
+num_boids = 2000
 
 [node name="BoidsGroup" type="Node" parent="."]
 script = ExtResource("1_esnxd")
-num_boids = 1000
+num_boids = 1500
 spawn_position_node_path = NodePath("../BoidsSpawnPos")
 
 [node name="BoidsSpawnPos" type="Node2D" parent="."]
