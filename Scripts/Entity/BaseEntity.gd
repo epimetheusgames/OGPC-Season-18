@@ -21,7 +21,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if _has_physics:
 		move_and_slide()
-		
+	
 	save_resource.position = position
 	save_resource.velocity = velocity
 	

@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://cia671oco2qhf"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Diver.gd" id="1_5lvev"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8vcgm"]
+radius = 44.0
+height = 228.0
+
+[node name="Diver" type="CharacterBody2D"]
+script = ExtResource("1_5lvev")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+z_index = 1
+shape = SubResource("CapsuleShape2D_8vcgm")
+
+[node name="Animation" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Animation"]
+color = Color(0.529412, 0.717647, 0.529412, 1)
+polygon = PackedVector2Array(-47, -105, -50, 102, 0, 128, 49, 103, 48, -106, -1, -127)
+
+[node name="Arrow" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Arrow"]
+color = Color(1, 0.509804, 1, 1)
+polygon = PackedVector2Array(282, -19, 282, 15, 340, -2)
+
+[node name="Label" type="RichTextLabel" parent="."]
+offset_left = -61.0
+offset_top = -188.0
+offset_right = 62.0
+offset_bottom = -142.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Player 1"
+scroll_active = false
+shortcut_keys_enabled = false
