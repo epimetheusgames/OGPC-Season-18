@@ -21,7 +21,7 @@ func _ready():
 	if "client" in OS.get_cmdline_args():
 		Global.multiplayer_manager._create_client()
 	
-	Global.multiplayer_manager.load_level("res://Scenes/TSCN/Levels/Playable/Normal/BoidsTest.tscn")
+	Global.multiplayer_manager.load_level("res://Scenes/TSCN/Levels/Playable/Normal/TestLevel/player_test.tscn")
 
 # Saves a ConfigFile to memory.
 func _save_config_file(config_file: ConfigFile, slot_num: int) -> void:

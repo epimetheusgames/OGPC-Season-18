@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://cia671oco2qhf"]
+[gd_scene load_steps=3 format=3 uid="uid://b25ee2h2memfl"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver.gd" id="1_5lvev"]
 

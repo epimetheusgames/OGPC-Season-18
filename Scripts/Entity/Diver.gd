@@ -1,5 +1,4 @@
 class_name Diver
-
 extends Entity
 
 const ACCELERATION: int = 300
@@ -16,6 +15,9 @@ func _physics_process(delta):
 	movement(delta)
 
 func movement(delta):
+	if !is_multiplayer_authority():
+		return
+	
 	var input_vector = Vector2.ZERO
 	
 	# Input detection
@@ -47,6 +49,13 @@ func movement(delta):
 		velocity = velocity.normalized() * MAX_SPEED
 	
 	move_and_slide()
+	
+	_sync_variables_diver_multiplayer.rpc(arrow.rotation)
 
 func angle_to_speed(angle: float, speed: float) -> Vector2:
 	return Vector2(speed * cos(angle), speed * sin(angle))
+
+@rpc("call_local", "unreliable")
+func _sync_variables_diver_multiplayer(arrow_rotation: float) -> void:
+	arrow.rotation = arrow_rotation
+	
