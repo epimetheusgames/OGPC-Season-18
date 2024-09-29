@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	
 	# Sync variables so that 
 	if Global.is_multiplayer && is_multiplayer_authority():
-		_sync_variables_multiplayer.rpc(position, velocity)
+		_sync_variables_multiplayer.rpc(position, velocity, rotation)
 
 ## Check if the entity has a component of a specific class
 func has_component(component_type: String) -> bool:
@@ -55,9 +55,10 @@ func load_self() -> void:
 # -- Networking --
 
 @rpc("call_local", "unreliable")
-func _sync_variables_multiplayer(pos: Vector2, motion: Vector2) -> void:
+func _sync_variables_multiplayer(pos: Vector2, motion: Vector2, rot: float) -> void:
 	position = pos
 	velocity = motion
+	rotation = rot
 
 # -- Setters and getters --
 

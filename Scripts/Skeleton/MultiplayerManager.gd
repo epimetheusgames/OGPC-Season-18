@@ -2,7 +2,7 @@ extends Node
 
 
 var PORT: int = 6000
-var IP_ADDRESS := "localhoast"
+var IP_ADDRESS := "127.0.0.1"
 var MAX_CLIENTS: int = 4
 
 var peers_connected: int = 0
@@ -10,6 +10,7 @@ var peer_ids_list: Array[int] = []
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_peer_connected)
+	Global.multiplayer_manager = self
 
 @rpc("call_local", "reliable")
 func load_level(multiplayer_level_path: String) -> void:

@@ -25,14 +25,14 @@ dialog_text_node = NodePath("Game/GameUIOverlay/DialogText")
 
 [node name="Skeleton" type="Node" parent="."]
 
-[node name="MultiplayerManager" type="Node" parent="Skeleton"]
-script = ExtResource("4_o3y1v")
-
 [node name="SaveLoadFramework" type="Node" parent="Skeleton"]
 script = ExtResource("2_i3ogj")
 game_container_node_path = NodePath("../../Game/GameContainer/GameViewport")
 ui_root_node_path = NodePath("../../UI")
 level_list = Array[ExtResource("3_e6kdq")]([SubResource("Resource_ur184")])
+
+[node name="MultiplayerManager" type="Node" parent="Skeleton"]
+script = ExtResource("4_o3y1v")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://co07maqfriti4"]
+[gd_scene load_steps=5 format=3 uid="uid://co07maqfriti4"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/BaseEntity.gd" id="1_b7ytu"]
 [ext_resource type="Script" path="res://Scripts/Components/BoidComponent.gd" id="2_guibv"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/UIDContainer.gd" id="2_yva8s"]
+
+[sub_resource type="Resource" id="Resource_lqutn"]
+script = ExtResource("2_yva8s")
+uid = 1501
 
 [node name="Boid" type="CharacterBody2D"]
+rotation = 2.40403
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_b7ytu")
+uid = SubResource("Resource_lqutn")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-2, 3, 2, 3, 0, -4)

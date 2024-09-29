@@ -7,7 +7,7 @@ extends Node
 @export var spawn_variation: float = 10
 
 func _ready():
-	var boids_scene := load("res://Scenes/TSCN/Entities/Boid.tscn")
+	var boids_scene = Global.boids_calculator_node.boids_scene
 	var rng := RandomNumberGenerator.new()
 	var spawn_position: Node2D = get_node(spawn_position_node_path)
 	

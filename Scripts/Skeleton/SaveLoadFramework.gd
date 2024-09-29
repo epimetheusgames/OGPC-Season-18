@@ -15,6 +15,13 @@ extends Node
 
 func _ready():
 	Global.save_load_framework = self
+	
+	if "host" in OS.get_cmdline_args():
+		Global.multiplayer_manager._create_server()
+	if "client" in OS.get_cmdline_args():
+		Global.multiplayer_manager._create_client()
+	
+	Global.multiplayer_manager.load_level("res://Scenes/TSCN/Levels/Playable/Normal/BoidsTest.tscn")
 
 # Saves a ConfigFile to memory.
 func _save_config_file(config_file: ConfigFile, slot_num: int) -> void:
@@ -87,7 +94,16 @@ func _load_entity(slot_num: int, uid: UID) -> EntitySave:
 # Loads a level and then adds it to the Game container.
 func start_game(slot_num: int) -> void:
 	var level_data := _load_game_save(slot_num)
+		
+	if level_data.level > level_list.size():
+		print("WARNING: Level index is greater than the ammount of levels. Level won't start.")
+		return
 	
+	Global.current_game_slot = slot_num
+	
+	load_level(level_list[level_data.level].file)
+
+func load_level(level_path: String):
 	var ui_generator: Node = get_node(ui_root_node_path).get_node("UIGenerator")
 	if !ui_generator:
 		print("WARNING: SaveLoadFramework contains no UI Generator node path. Level won't start")
@@ -99,14 +115,9 @@ func start_game(slot_num: int) -> void:
 	if !game_container:
 		print("WARNING: SaveLoadFramework contains no game container node path. Level won't start.")
 		return
-		
-	if level_data.level > level_list.size():
-		print("WARNING: Level index is greater than the ammount of levels. Level won't start.")
-		return
 	
-	Global.current_game_slot = slot_num
-	var game_scene = load(level_list[level_data.level].file)
-	game_container.add_child(game_scene)
+	var level_loaded := load(level_path)
+	game_container.add_child(level_loaded.instantiate())
 
 # Close and save game and exit to menu.
 func exit_to_menu(save_slot: int, game_data: GameSave) -> void:

@@ -10,6 +10,8 @@ var boids_velocities := []
 @export var num_boids = 1000
 @export var bin_size = 32
 
+@onready var boids_scene := preload("res://Scenes/TSCN/Entities/Boid.tscn")
+
 var bins = Vector2.ZERO
 var num_bins = 0
 var rd: RenderingDevice
@@ -36,8 +38,10 @@ func _ready() -> void:
 	Global.boids_calculator_node = self
 
 # Runs the GPU compute shader every frame! 
-func _physics_process(delta: float) -> void:
-	print(Engine.get_frames_per_second())
+func _process(delta: float) -> void:
+	if !is_multiplayer_authority():
+		return
+	
 	var boids_list = get_tree().get_nodes_in_group("Boids")
 	var num_boids = boids_list.size()
 	
@@ -134,8 +138,6 @@ func _physics_process(delta: float) -> void:
 	# Get output list
 	var compute_output_bytes := rd.buffer_get_data(output_buffer)
 	shader_output = compute_output_bytes.to_float32_array()
-	
-	pass
 
 # After this please use add_boid_data_at_index to fill in the registered data.
 # Think of this like it's memory allocation in the boids list!

@@ -41,7 +41,10 @@ func _ready():
 	get_parent().velocity = (raycast.target_position - raycast.position).normalized()
 
 # Update velocity using compute shader outputs from boids calculator node.
-func _physics_process(delta: float) -> void: 
+func _process(delta: float) -> void: 
+	if !is_multiplayer_authority():
+		return
+	
 	if component_container:
 		get_node(component_container).velocity = Vector2(boids_calculator.shader_output[boids_index * 2], boids_calculator.shader_output[boids_index * 2 + 1])
 		get_node(component_container).move_and_slide()
