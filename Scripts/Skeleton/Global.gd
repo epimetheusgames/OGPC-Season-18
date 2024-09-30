@@ -12,8 +12,14 @@ var current_scene_path: String
 var current_game_slot: int
 var is_multiplayer: bool
 var dialog_text_node: Node2D
-var boids_calculator_node: Node
-var multiplayer_manager: Node
+var boids_calculator_node: BoidsCalculator
+var multiplayer_manager: MultiplayerManager
+
+enum MULTIPLAYER_MODE {
+	SINGLEPLAYER,
+	LOCAL_NETWORK,
+	GD_SYNC,
+}
 
 func get_slot_password(slot_num: int) -> String:
 	var result_string = ""
@@ -26,3 +32,21 @@ func get_slot_password(slot_num: int) -> String:
 		result_string += str(semi_random_number)
 	
 	return result_string
+
+func is_multiplayer_host() -> bool:
+	var multiplayer_type := get_multiplayer_type()
+	
+	if multiplayer_type == MULTIPLAYER_MODE.GD_SYNC && GDSync.is_host():
+		return true
+	elif multiplayer_type == MULTIPLAYER_MODE.LOCAL_NETWORK && is_multiplayer_authority():
+		return true
+	
+	return false
+
+func get_multiplayer_type() -> MULTIPLAYER_MODE:
+	if GDSync.is_active():
+		return MULTIPLAYER_MODE.GD_SYNC
+	elif is_multiplayer:
+		return MULTIPLAYER_MODE.LOCAL_NETWORK
+	else:
+		return MULTIPLAYER_MODE.SINGLEPLAYER

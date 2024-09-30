@@ -8,6 +8,13 @@
 
 config_version=5
 
+[GD-Sync]
+
+version="0.6"
+publicKey="43bf3b57495bbf16"
+privateKey="13caa0f648fe99ca"
+protectedMode=false
+
 [addons]
 
 universal_fade/patterns_directory="res://addons/UniversalFade/Patterns"
@@ -24,6 +31,7 @@ config/icon="res://icon.svg"
 Global="*res://Scripts/Skeleton/Global.gd"
 EditorGlobal="*res://Scripts/LevelEditor/EditorGlobal.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 
 [display]
 
@@ -31,11 +39,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/subwindows/embed_subwindows=false
 window/stretch/aspect="expand"
-window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/godotversionupdater/plugin.cfg")
+enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/godotversionupdater/plugin.cfg")
 
 [input]
 

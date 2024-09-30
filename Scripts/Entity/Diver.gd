@@ -49,13 +49,14 @@ func movement(delta):
 		velocity = velocity.normalized() * MAX_SPEED
 	
 	move_and_slide()
-	
-	_sync_variables_diver_multiplayer.rpc(arrow.rotation)
 
 func angle_to_speed(angle: float, speed: float) -> Vector2:
 	return Vector2(speed * cos(angle), speed * sin(angle))
 
 @rpc("call_local", "unreliable")
-func _sync_variables_diver_multiplayer(arrow_rotation: float) -> void:
+func _local_network_sync_variables_diver_multiplayer(arrow_rotation: float) -> void:
 	arrow.rotation = arrow_rotation
+
+func _gd_sync_variables_diver_multiplayer():
+	GDSync.sync_var(arrow, "rotation")
 	

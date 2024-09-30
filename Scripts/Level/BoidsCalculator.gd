@@ -45,6 +45,9 @@ func _process(delta: float) -> void:
 	var boids_list = get_tree().get_nodes_in_group("Boids")
 	var num_boids = boids_list.size()
 	
+	if num_boids == 0:
+		return
+	
 	boids_positions = []
 	boids_velocities = []
 	

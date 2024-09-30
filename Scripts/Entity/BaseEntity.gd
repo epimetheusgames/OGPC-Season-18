@@ -25,9 +25,14 @@ func _process(delta: float) -> void:
 	save_resource.position = position
 	save_resource.velocity = velocity
 	
-	# Sync variables so that 
-	if Global.is_multiplayer && is_multiplayer_authority():
-		_sync_variables_multiplayer.rpc(position, velocity, rotation)
+	var multiplayer_type := Global.get_multiplayer_type()
+	
+	# Sync variables so that everything's the same.
+	if Global.is_multiplayer_host():
+		if multiplayer_type == Global.MULTIPLAYER_MODE.LOCAL_NETWORK:
+			_local_sync_variables_multiplayer.rpc(position, velocity, rotation)
+		if multiplayer_type == Global.MULTIPLAYER_MODE.GD_SYNC:
+			_gd_sync_variables_multiplayer()
 
 ## Check if the entity has a component of a specific class
 func has_component(component_type: String) -> bool:
@@ -55,10 +60,15 @@ func load_self() -> void:
 # -- Networking --
 
 @rpc("call_local", "unreliable")
-func _sync_variables_multiplayer(pos: Vector2, motion: Vector2, rot: float) -> void:
+func _local_sync_variables_multiplayer(pos: Vector2, motion: Vector2, rot: float) -> void:
 	position = pos
 	velocity = motion
 	rotation = rot
+
+func _gd_sync_variables_multiplayer() -> void:
+	GDSync.sync_var(self, "position")
+	GDSync.sync_var(self, "velocity")
+	GDSync.sync_var(self, "rotation")
 
 # -- Setters and getters --
 
