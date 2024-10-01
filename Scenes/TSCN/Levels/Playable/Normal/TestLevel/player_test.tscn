@@ -1,8 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://cr5scuilsl4p4"]
 
-[ext_resource type="PackedScene" uid="uid://b25ee2h2memfl" path="res://Scenes/TSCN/Entities/Diver.tscn" id="1_6sjem"]
+[ext_resource type="Script" path="res://Scripts/Components/MultiplayerPlayerSpawnerComponent.gd" id="1_tdhm2"]
 
 [node name="PlayerTest" type="Node2D"]
 
-[node name="Diver" parent="." instance=ExtResource("1_6sjem")]
-position = Vector2(666, 554)
+[node name="MultiplayerPlayerSpawnerComponent" type="Node" parent="."]
+script = ExtResource("1_tdhm2")
+spawn_filepath = "res://Scenes/TSCN/Entities/NewDiver.tscn"
+component_container = NodePath("..")

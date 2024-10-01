@@ -20,6 +20,7 @@ func _ready():
 	GDSync.lobby_creation_failed.connect(_lobby_creation_failed)
 	GDSync.lobby_joined.connect(_lobby_joined)
 	GDSync.lobby_join_failed.connect(_lobby_join_failed)
+	GDSync.client_joined.connect(_client_joined)
 	
 	GDSync.start_multiplayer()
 	
@@ -29,14 +30,22 @@ func _ready():
 func gd_sync_create_lobby(lobby_name: String, password: String):
 	GDSync.create_lobby(lobby_name, password, true, 4)
 	GDSync.join_lobby(lobby_name, password)
+	Global.is_multiplayer = true
 
 # Joins a lobby
 func gd_sync_join_lobby(lobby_name: String, password: String):
 	GDSync.join_lobby(lobby_name, password)
+	Global.is_multiplayer = true
 
 # Exits the current lobby regardless of platform.
 func exit_lobby():
 	GDSync.leave_lobby()
+	Global.is_multiplayer = false
+
+func _client_joined(client_id: int) -> void:
+	print("Client with id " + str(client_id) + " has joined GD-Sync lobby.")
+	peers_connected += 1
+	peer_ids_list.append(client_id)
 
 func _connected():
 	print("Connected to GD-Sync servers.")
