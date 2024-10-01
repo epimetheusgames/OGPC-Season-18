@@ -22,13 +22,15 @@ func _process(delta: float) -> void:
 	if _has_physics:
 		move_and_slide()
 	
+	if Global.is_multiplayer && !_is_node_owned_by_current_instance():
+		return
+	
 	save_resource.position = position
 	save_resource.velocity = velocity
 	
-	var multiplayer_type := Global.get_multiplayer_type()
-	
 	# Sync variables so that everything's the same.
-	if Global.is_multiplayer_host():
+	if Global.is_multiplayer:
+		var multiplayer_type := Global.get_multiplayer_type()
 		if multiplayer_type == Global.MULTIPLAYER_MODE.LOCAL_NETWORK:
 			_local_sync_variables_multiplayer.rpc(position, velocity, rotation)
 		if multiplayer_type == Global.MULTIPLAYER_MODE.GD_SYNC:
@@ -69,6 +71,18 @@ func _gd_sync_variables_multiplayer() -> void:
 	GDSync.sync_var(self, "position")
 	GDSync.sync_var(self, "velocity")
 	GDSync.sync_var(self, "rotation")
+
+func _is_node_owned_by_current_instance() -> bool:
+	var multiplayer_type: Global.MULTIPLAYER_MODE = Global.get_multiplayer_type()
+	
+	if multiplayer_type == Global.MULTIPLAYER_MODE.GD_SYNC:
+		if GDSync.is_gdsync_owner(self):
+			return true
+	elif multiplayer_type == Global.MULTIPLAYER_MODE.LOCAL_NETWORK:
+		if is_multiplayer_authority():
+			return true
+	
+	return false
 
 # -- Setters and getters --
 

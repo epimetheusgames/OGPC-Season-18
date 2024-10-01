@@ -24,10 +24,10 @@ func _ready():
 	await GDSync.connected
 	
 	if "host" in OS.get_cmdline_args():
-		Global.multiplayer_manager.gd_sync_create_lobby("TEST", "TEST")
+		Global.multiplayer_manager.gd_sync_create_lobby("TEST2", "TEST")
 	if "client" in OS.get_cmdline_args():
 		await get_tree().create_timer(5).timeout
-		Global.multiplayer_manager.gd_sync_join_lobby("TEST", "TEST")
+		Global.multiplayer_manager.gd_sync_join_lobby("TEST2", "TEST")
 	
 	load_level("res://Scenes/TSCN/Levels/Playable/Normal/TestLevel/player_test.tscn")
 

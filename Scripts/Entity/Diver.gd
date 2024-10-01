@@ -15,7 +15,7 @@ func _physics_process(delta):
 	movement(delta)
 
 func movement(delta):
-	if !is_multiplayer_authority():
+	if !_is_node_owned_by_current_instance():
 		return
 	
 	var input_vector = Vector2.ZERO
