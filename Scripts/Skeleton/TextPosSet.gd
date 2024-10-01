@@ -22,9 +22,9 @@ var dialog_sfx_node: AudioStreamPlayer
 
 func _ready() -> void:
 	response_buttons.append(get_node("ResponseButtonOne"))
-	response_buttons[1].append(get_node("ResponseButtonTwo"))
-	response_buttons[2].append(get_node("ResponseButtonThree"))
-	response_buttons[3].append(get_node("ResponseButtonFour"))
+	response_buttons.append(get_node("ResponseButtonTwo"))
+	response_buttons.append(get_node("ResponseButtonThree"))
+	response_buttons.append(get_node("ResponseButtonFour"))
 	response_buttons[0].button_down.connect(response_option_one)
 	response_buttons[1].button_down.connect(response_option_two)
 	response_buttons[2].button_down.connect(response_option_three)
