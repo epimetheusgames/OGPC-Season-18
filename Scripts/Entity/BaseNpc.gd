@@ -8,11 +8,11 @@ extends Entity
 # Dialog speed in characters per second 
 @export var dialog_speed: int
 
+# The position in the dialogue tree
+var dialog_layer_tree_position:int
+
 # Dialog beep sound thingy 
 @export_file("*.wav") var talking_sound
-
-# Name of our conversational object.
-@export var conv_obj_name := ""
 
 var conversation_index := 0
 var sentence_index := 0
@@ -31,4 +31,7 @@ func die() -> void:
 	pass
 
 func trigger_talking() -> void:
-	pass
+	
+func next_dialogue_layer_in_tree():
+	dialog_layer_tree_position += 1
+	

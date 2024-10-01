@@ -95,5 +95,25 @@ texture = SubResource("PlaceholderTexture2D_o714b")
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="ResponseButtonOne" type="Button" parent="Game/GameUIOverlay/DialogText"]
+offset_right = 8.0
+offset_bottom = 8.0
+disabled = true
+
+[node name="ResponseButtonTwo" type="Button" parent="Game/GameUIOverlay/DialogText"]
+offset_right = 8.0
+offset_bottom = 8.0
+disabled = true
+
+[node name="ResponseButtonThree" type="Button" parent="Game/GameUIOverlay/DialogText"]
+offset_right = 8.0
+offset_bottom = 8.0
+disabled = true
+
+[node name="ResponseButtonFour" type="Button" parent="Game/GameUIOverlay/DialogText"]
+offset_right = 8.0
+offset_bottom = 8.0
+disabled = true
+
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
 [connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]
