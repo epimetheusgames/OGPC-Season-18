@@ -6,5 +6,5 @@
 
 [node name="MultiplayerPlayerSpawnerComponent" type="Node" parent="."]
 script = ExtResource("1_tdhm2")
-spawn_filepath = "res://Scenes/TSCN/Entities/Diver.tscn"
+spawn_filepath = "res://Scenes/TSCN/Entities/NewDiver.tscn"
 component_container = NodePath("..")
