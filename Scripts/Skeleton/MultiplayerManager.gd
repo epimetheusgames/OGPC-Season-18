@@ -22,7 +22,7 @@ func _ready():
 	GDSync.lobby_join_failed.connect(_lobby_join_failed)
 	GDSync.client_joined.connect(_client_joined)
 	
-	GDSync.start_multiplayer()
+	#GDSync.start_multiplayer()
 	
 	await GDSync.connected
 

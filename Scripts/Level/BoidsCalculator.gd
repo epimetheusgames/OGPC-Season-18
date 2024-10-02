@@ -9,7 +9,10 @@ var boids_velocities := []
 @export var protected_dist = 10
 @export var num_boids = 1000
 @export var bin_size = 32
-@export var boid_sync_batch_size = 50
+@export var boid_gd_sync_batch_size = 50
+
+# Local network sync is a lot more efficient.
+@export var boid_local_network_sync_batch_size = 500
 
 @onready var boids_scene := preload("res://Scenes/TSCN/Entities/Boid.tscn")
 
@@ -38,11 +41,13 @@ func _ready() -> void:
 	
 	Global.boids_calculator_node = self
 	
-	await get_tree().create_timer(10).timeout
+	if Global.get_multiplayer_type() == Global.MULTIPLAYER_MODE.GD_SYNC:
+		await get_tree().create_timer(10).timeout
 	
-	if GDSync.is_host():
+	if Global.is_multiplayer_host():
 		_sync_boids()
 
+# Slowly sync boids so there isn't too much lag.
 func _sync_boids():
 	var i = 0
 	while true:
@@ -56,19 +61,22 @@ func _sync_boids():
 		if i > boids_size - 1:
 			i = 0
 		
-		for j in range(boid_sync_batch_size):
-			GDSync.sync_var(boids_list[i + j], "position")
-			GDSync.sync_var(boids_list[i + j], "velocity")
+		if Global.get_multiplayer_type() == Global.MULTIPLAYER_MODE.GD_SYNC:
+			for j in range(boid_gd_sync_batch_size):
+				GDSync.sync_var(boids_list[i + j], "position")
+				GDSync.sync_var(boids_list[i + j], "velocity")
+				
+			i += boid_gd_sync_batch_size
+		if Global.get_multiplayer_type() == Global.MULTIPLAYER_MODE.LOCAL_NETWORK:
+			for j in range(boid_local_network_sync_batch_size):
+				boids_list[i + j]._local_sync_variables_multiplayer.rpc(boids_list[i + j].position, boids_list[i + j].velocity, boids_list[i + j].rotation)
 		
-		i += boid_sync_batch_size
+			i += boid_local_network_sync_batch_size
 		
 		await get_tree().create_timer(0.001).timeout
 
 # Runs the GPU compute shader every frame! 
 func _process(delta: float) -> void:
-	if !is_multiplayer_authority():
-		return
-	
 	var boids_list = get_tree().get_nodes_in_group("Boids")
 	var num_boids = boids_list.size()
 	
@@ -153,13 +161,13 @@ func _process(delta: float) -> void:
 	# Create uniform set
 	var uniform_set := rd.uniform_set_create(
 		[
-			parameters_uniform, 
+			parameters_uniform,
 			global_parameters_uniform,
-			positions_uniform, 
-			velocities_uniform, 
-			raycast_data_uniform, 
+			positions_uniform,
+			velocities_uniform,
+			raycast_data_uniform,
 			output_uniform,
-		], 
+		],
 		boid_shader, 0
 	)
 	
@@ -176,8 +184,8 @@ func register_index(boid_object: BoidComponent) -> int:
 	boids_index_counter += 1
 	return boids_index_counter - 1
 
-func add_boid_data_at_index(index, view_dist, protected_dist, avoid_factor, matching_factor, 
-							centering_factor, turn_factor, max_speed, min_speed, max_accel):
+func add_boid_data_at_index(index, view_dist, protected_dist, avoid_factor, matching_factor,
+	centering_factor, turn_factor, max_speed, min_speed, max_accel):
 	boids_parameters_array.set(index * 9 + 0, view_dist)
 	boids_parameters_array.set(index * 9 + 1, protected_dist)
 	boids_parameters_array.set(index * 9 + 2, avoid_factor)
