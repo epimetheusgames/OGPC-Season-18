@@ -9,6 +9,7 @@ var boids_velocities := []
 @export var protected_dist = 10
 @export var num_boids = 1000
 @export var bin_size = 32
+@export var boid_sync_batch_size = 50
 
 @onready var boids_scene := preload("res://Scenes/TSCN/Entities/Boid.tscn")
 
@@ -17,7 +18,7 @@ var num_bins = 0
 var rd: RenderingDevice
 var boid_shader: RID
 var boids_pipeline: RID
-var shader_output = []
+var shader_output: PackedFloat32Array
 var boids_index_counter := 0
 var boids_parameters_array: PackedFloat32Array
 var boids_parameters_array_bytes: PackedByteArray
@@ -36,6 +37,32 @@ func _ready() -> void:
 	boids_node_list.resize(2000)
 	
 	Global.boids_calculator_node = self
+	
+	await get_tree().create_timer(10).timeout
+	
+	if GDSync.is_host():
+		_sync_boids()
+
+func _sync_boids():
+	var i = 0
+	while true:
+		var boids_list = get_tree().get_nodes_in_group("Boids")
+		var boids_size = boids_list.size()
+		
+		if boids_size == 0:
+			await get_tree().create_timer(0.01).timeout
+			continue
+		
+		if i > boids_size - 1:
+			i = 0
+		
+		for j in range(boid_sync_batch_size):
+			GDSync.sync_var(boids_list[i + j], "position")
+			GDSync.sync_var(boids_list[i + j], "velocity")
+		
+		i += boid_sync_batch_size
+		
+		await get_tree().create_timer(0.001).timeout
 
 # Runs the GPU compute shader every frame! 
 func _process(delta: float) -> void:

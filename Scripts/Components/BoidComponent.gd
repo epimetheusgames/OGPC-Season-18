@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 	if !is_multiplayer_authority():
 		return
 	
-	if component_container:
+	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
 		get_node(component_container).velocity = Vector2(boids_calculator.shader_output[boids_index * 2], boids_calculator.shader_output[boids_index * 2 + 1])
 		get_node(component_container).move_and_slide()
 		get_node(component_container).position += get_node(component_container).velocity

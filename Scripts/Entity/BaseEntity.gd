@@ -12,24 +12,29 @@ var entity_type = "Entity"
 # WARNING: Most entities besides players should be operated by the server,
 # because we can only be sure that the server is connected.
 @export var multiplayer_authority = 1
+@export var has_multiplayer_sync: bool = true
+@export var sync_by_increment: bool = false
+@export var sync_increment: float = 0
 
 var save_resource := EntitySave.new()
 
 func _ready() -> void:
 	set_multiplayer_authority(multiplayer_authority, true)
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	if _is_node_owned_by_current_instance() && sync_by_increment:
+		_loop_sync_by_increment([_gd_sync_variables_multiplayer], sync_increment)
 
 func _process(delta: float) -> void:
 	if _has_physics:
 		move_and_slide()
 	
-	if Global.is_multiplayer && !_is_node_owned_by_current_instance():
-		return
-	
 	save_resource.position = position
 	save_resource.velocity = velocity
 	
 	# Sync variables so that everything's the same.
-	if Global.is_multiplayer:
+	if Global.is_multiplayer && !sync_by_increment && has_multiplayer_sync && _is_node_owned_by_current_instance():
 		var multiplayer_type := Global.get_multiplayer_type()
 		if multiplayer_type == Global.MULTIPLAYER_MODE.LOCAL_NETWORK:
 			_local_sync_variables_multiplayer.rpc(position, velocity, rotation)
@@ -72,11 +77,17 @@ func _gd_sync_variables_multiplayer() -> void:
 	GDSync.sync_var(self, "velocity")
 	GDSync.sync_var(self, "rotation")
 
+func _loop_sync_by_increment(sync_call_functions: Array[Callable], increment: float) -> void:
+	while true:
+		for function in sync_call_functions:
+			function.call()
+		await get_tree().create_timer(increment).timeout
+
 func _is_node_owned_by_current_instance() -> bool:
 	var multiplayer_type: Global.MULTIPLAYER_MODE = Global.get_multiplayer_type()
 	
 	if multiplayer_type == Global.MULTIPLAYER_MODE.GD_SYNC:
-		if GDSync.is_gdsync_owner(self):
+		if GDSync.is_gdsync_owner(self) || (GDSync.get_gdsync_owner(self) == -1 && GDSync.is_host()):
 			return true
 	elif multiplayer_type == Global.MULTIPLAYER_MODE.LOCAL_NETWORK:
 		if is_multiplayer_authority():
