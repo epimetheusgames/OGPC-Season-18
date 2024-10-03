@@ -43,9 +43,6 @@ func _ready() -> void:
 	
 	if Global.get_multiplayer_type() == Global.MULTIPLAYER_MODE.GD_SYNC:
 		await get_tree().create_timer(10).timeout
-	
-	if Global.is_multiplayer_host():
-		_sync_boids()
 
 # Slowly sync boids so there isn't too much lag.
 func _sync_boids():
@@ -77,6 +74,7 @@ func _sync_boids():
 
 # Runs the GPU compute shader every frame! 
 func _process(delta: float) -> void:
+	print(Engine.get_frames_per_second())
 	var boids_list = get_tree().get_nodes_in_group("Boids")
 	var num_boids = boids_list.size()
 	

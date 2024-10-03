@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=13 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Skeleton/MultiplayerManager.gd" id="4_o3y1v"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/TextPosSet.gd" id="8_7spfj"]
+[ext_resource type="Script" path="res://Scripts/Components/MultiplayerBatchSyncComponent.gd" id="9_bm86a"]
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
@@ -65,6 +66,14 @@ metadata/action = ""
 
 [node name="BoidsCalculator" type="Node" parent="Game"]
 script = ExtResource("9_xe7j2")
+
+[node name="MultiplayerBatchSyncComponent" type="Node" parent="Game/BoidsCalculator"]
+script = ExtResource("9_bm86a")
+local_network_batch_size = 100
+node_group_name = "Boids"
+gd_sync_node_value_names = Array[String](["position", "velocity"])
+local_network_node_rpc_function_names = Array[String](["_local_sync_variables_multiplayer"])
+local_network_node_rpc_function_values = Array[PackedStringArray]([PackedStringArray("position", "velocity", "rotation")])
 
 [node name="GameContainer" type="SubViewportContainer" parent="Game"]
 offset_right = 512.0
