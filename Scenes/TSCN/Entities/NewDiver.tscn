@@ -1,35 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=11 format=3 uid="uid://qx2mbnb3jg2j"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/Diver.gd" id="1_xb41x"]
+[ext_resource type="Script" path="res://Scripts/Entity/NewDiver.gd" id="1_k6jjc"]
+[ext_resource type="Script" path="res://Scripts/Entity/NewDiverAnimation.gd" id="2_3siqq"]
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/PlayerSkin.png" id="2_5upde"]
+[ext_resource type="Script" path="res://Scripts/Entity/NewDiverMovement.gd" id="2_najvs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
 height = 100.0
 
 [sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_v7jax"]
-target_nodepath = NodePath("ArmIkTarget1")
+target_nodepath = NodePath("../ArmIkTarget1")
 joint_one_bone_idx = 2
 joint_one_bone2d_node = NodePath("Torso/UpperArm1")
 joint_two_bone_idx = 3
 joint_two_bone2d_node = NodePath("Torso/UpperArm1/Forearm1")
 
 [sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_78rlc"]
-target_nodepath = NodePath("ArmIkTarget2")
+target_nodepath = NodePath("../ArmIkTarget2")
 joint_one_bone_idx = 4
 joint_one_bone2d_node = NodePath("Torso/UpperArm2")
 joint_two_bone_idx = 5
 joint_two_bone2d_node = NodePath("Torso/UpperArm2/Forearm2")
 
 [sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_ybnnp"]
-target_nodepath = NodePath("LegIkTarget1")
+target_nodepath = NodePath("../LegIkTarget1")
 joint_one_bone_idx = 6
 joint_one_bone2d_node = NodePath("Torso/Thigh1")
 joint_two_bone_idx = 7
 joint_two_bone2d_node = NodePath("Torso/Thigh1/Calf1")
 
 [sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_db2b6"]
-target_nodepath = NodePath("LegIkTarget2")
+target_nodepath = NodePath("../LegIkTarget2")
 joint_one_bone_idx = 8
 joint_one_bone2d_node = NodePath("Torso/Thigh2")
 joint_two_bone_idx = 9
@@ -44,7 +46,10 @@ modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_ybnnp")
 modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_db2b6")
 
 [node name="Diver" type="CharacterBody2D"]
-script = ExtResource("1_xb41x")
+script = ExtResource("1_k6jjc")
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("2_najvs")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ghsq1")
@@ -56,124 +61,127 @@ position = Vector2(105, -1)
 color = Color(1, 0, 1, 1)
 polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
 
-[node name="Polygons" type="Node2D" parent="."]
+[node name="Animation" type="Node2D" parent="."]
+script = ExtResource("2_3siqq")
+
+[node name="Polygons" type="Node2D" parent="Animation"]
 texture_filter = 1
 
-[node name="Head" type="Polygon2D" parent="Polygons"]
+[node name="Head" type="Polygon2D" parent="Animation/Polygons"]
 z_index = 1
 position = Vector2(0, -71)
 offset = Vector2(-128, -33)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
 uv = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 1, 2)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="UpperArm1" type="Polygon2D" parent="Polygons"]
+[node name="UpperArm1" type="Polygon2D" parent="Animation/Polygons"]
 texture_repeat = 1
 position = Vector2(39, -55)
 rotation = 1.5708
 offset = Vector2(-167.993, -54.2543)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(158.595, 31.1322, 158.659, 80.7521, 177.346, 80.8158, 177.027, 30.3031)
 uv = PackedVector2Array(158.595, 31.1322, 158.659, 80.7521, 177.346, 80.8158, 177.027, 30.3031)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="Forearm1" type="Polygon2D" parent="Polygons"]
+[node name="Forearm1" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(81, -55)
 rotation = 1.5708
 offset = Vector2(-56, -41)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(46.9619, 15.5686, 46.2722, 65.2294, 65.5847, 65.2294, 65.1824, 14.8789)
 uv = PackedVector2Array(46.9619, 15.5686, 46.2722, 65.2294, 65.5847, 65.2294, 65.1824, 14.8789)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Forearm1", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Forearm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="UpperArm2" type="Polygon2D" parent="Polygons"]
+[node name="UpperArm2" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(-36, -55)
 rotation = 1.5708
 offset = Vector2(-88, -55)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(79.3924, 31.5152, 79.2307, 80.2438, 96.4576, 80.5269, 96.1745, 30.7873)
 uv = PackedVector2Array(79.3924, 31.5152, 79.2307, 80.2438, 96.4576, 80.5269, 96.1745, 30.7873)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="Forearm2" type="Polygon2D" parent="Polygons"]
+[node name="Forearm2" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(-82, -55)
 rotation = -1.5708
 offset = Vector2(-56.0993, -40.2919)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(47.2143, 15.4954, 47.116, 64.5229, 64.703, 64.7194, 64.8013, 14.8567)
 uv = PackedVector2Array(47.2143, 15.4954, 47.116, 64.5229, 64.703, 64.7194, 64.8013, 14.8567)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Forearm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Forearm2", PackedFloat32Array(1, 1, 1, 1), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="Body" type="Polygon2D" parent="Polygons"]
+[node name="Body" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(3, -39)
 offset = Vector2(-131, -87)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(111.851, 70.0117, 118.529, 69.9653, 118.437, 62.9157, 136.617, 62.6838, 136.895, 69.8725, 145.151, 70.1044, 145.554, 129.179, 109.889, 129.179, 110.422, 69.7281, 127.376, 98.5866)
 uv = PackedVector2Array(111.851, 70.0117, 118.529, 69.9653, 118.437, 62.9157, 136.617, 62.6838, 136.895, 69.8725, 145.151, 70.1044, 145.554, 129.179, 109.889, 129.179, 110.422, 69.7281, 127.376, 98.5866)
 polygons = [PackedInt32Array(9, 1, 2), PackedInt32Array(9, 3, 2), PackedInt32Array(9, 4, 3), PackedInt32Array(9, 5, 4), PackedInt32Array(5, 6, 9), PackedInt32Array(9, 6, 7), PackedInt32Array(9, 8, 7), PackedInt32Array(9, 1, 0), PackedInt32Array(9, 0, 8)]
 bones = ["Torso", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
 internal_vertex_count = 1
 
-[node name="Thigh1" type="Polygon2D" parent="Polygons"]
+[node name="Thigh1" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(10, 24)
 offset = Vector2(-168, -128)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(158.633, 95.1684, 158.633, 160.791, 176.701, 160.791, 176.756, 94.9467)
 uv = PackedVector2Array(158.633, 95.1684, 158.633, 160.791, 176.701, 160.791, 176.756, 94.9467)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(1, 1, 1, 1), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="Calf1" type="Polygon2D" parent="Polygons"]
+[node name="Calf1" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(10, 82)
 offset = Vector2(-152, -208)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(142.862, 174.73, 142.729, 241.366, 160.951, 241.056, 161.306, 174.863)
 uv = PackedVector2Array(142.862, 174.73, 142.729, 241.366, 160.951, 241.056, 161.306, 174.863)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(1, 1, 1, 1), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="Thigh2" type="Polygon2D" parent="Polygons"]
+[node name="Thigh2" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(-10, 23)
 offset = Vector2(-88, -127)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(78.6611, 94.4609, 97.2638, 94.3767, 97.348, 161.128, 77.146, 160.875)
 uv = PackedVector2Array(78.6611, 94.4609, 97.2638, 94.3767, 97.348, 161.128, 77.146, 160.875)
 polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(1, 1, 1, 1), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 
-[node name="Calf2" type="Polygon2D" parent="Polygons"]
+[node name="Calf2" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(-10, 81)
 offset = Vector2(-104, -207)
 texture = ExtResource("2_5upde")
-skeleton = NodePath("../../Skeleton2D")
+skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(94.9078, 174.952, 94.6873, 240.382, 113.098, 240.382, 112.767, 174.952)
 uv = PackedVector2Array(94.9078, 174.952, 94.6873, 240.382, 113.098, 240.382, 112.767, 174.952)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(1, 1, 1, 1)]
 
-[node name="Skeleton2D" type="Skeleton2D" parent="."]
+[node name="Skeleton" type="Skeleton2D" parent="Animation"]
 modification_stack = SubResource("SkeletonModificationStack2D_xgw1b")
 
-[node name="Torso" type="Bone2D" parent="Skeleton2D"]
+[node name="Torso" type="Bone2D" parent="Animation/Skeleton"]
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 metadata/_edit_lock_ = true
 
-[node name="Head" type="Bone2D" parent="Skeleton2D/Torso"]
+[node name="Head" type="Bone2D" parent="Animation/Skeleton/Torso"]
 position = Vector2(0, -62)
 rest = Transform2D(1, 0, 0, 1, 0, -62)
 auto_calculate_length_and_angle = false
@@ -181,13 +189,13 @@ length = 21.83
 bone_angle = -89.643
 metadata/_edit_lock_ = true
 
-[node name="UpperArm1" type="Bone2D" parent="Skeleton2D/Torso"]
+[node name="UpperArm1" type="Bone2D" parent="Animation/Skeleton/Torso"]
 position = Vector2(18, -55)
 rotation = -0.26717
 rest = Transform2D(0.964522, -0.264003, 0.264003, 0.964522, 18, -55)
 metadata/_local_pose_override_enabled_ = true
 
-[node name="Forearm1" type="Bone2D" parent="Skeleton2D/Torso/UpperArm1"]
+[node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
 position = Vector2(40.2459, 12.0526)
 rotation = -0.172191
 scale = Vector2(1.08388, 1.00115)
@@ -197,13 +205,13 @@ length = 43.402
 bone_angle = 25.0
 metadata/_local_pose_override_enabled_ = true
 
-[node name="UpperArm2" type="Bone2D" parent="Skeleton2D/Torso"]
+[node name="UpperArm2" type="Bone2D" parent="Animation/Skeleton/Torso"]
 position = Vector2(-18, -55)
 rotation = 0.178766
 rest = Transform2D(0.984064, 0.177815, -0.177815, 0.984064, -18, -55)
 metadata/_local_pose_override_enabled_ = true
 
-[node name="Forearm2" type="Bone2D" parent="Skeleton2D/Torso/UpperArm2"]
+[node name="Forearm2" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm2"]
 position = Vector2(-41.3307, 7.46825)
 rotation = 0.17594
 rest = Transform2D(0.984562, 0.175033, -0.175033, 0.984562, -41.3307, 7.46825)
@@ -212,7 +220,7 @@ length = 45.651
 bone_angle = 159.0
 metadata/_local_pose_override_enabled_ = true
 
-[node name="Thigh1" type="Bone2D" parent="Skeleton2D/Torso"]
+[node name="Thigh1" type="Bone2D" parent="Animation/Skeleton/Torso"]
 position = Vector2(9, -4)
 rest = Transform2D(1, 0, 0, 1, 9, -4)
 auto_calculate_length_and_angle = false
@@ -221,7 +229,7 @@ bone_angle = 90.0
 metadata/_edit_lock_ = true
 metadata/_local_pose_override_enabled_ = true
 
-[node name="Calf1" type="Bone2D" parent="Skeleton2D/Torso/Thigh1"]
+[node name="Calf1" type="Bone2D" parent="Animation/Skeleton/Torso/Thigh1"]
 position = Vector2(2, 56)
 scale = Vector2(0.996554, 1)
 rest = Transform2D(0.996554, 0, 0, 1, 2, 56)
@@ -231,7 +239,7 @@ bone_angle = 90.0
 metadata/_edit_lock_ = true
 metadata/_local_pose_override_enabled_ = true
 
-[node name="Thigh2" type="Bone2D" parent="Skeleton2D/Torso"]
+[node name="Thigh2" type="Bone2D" parent="Animation/Skeleton/Torso"]
 position = Vector2(-9, -4)
 rest = Transform2D(1, 0, 0, 1, -9, -4)
 auto_calculate_length_and_angle = false
@@ -240,7 +248,7 @@ bone_angle = 90.0
 metadata/_edit_lock_ = true
 metadata/_local_pose_override_enabled_ = true
 
-[node name="Calf2" type="Bone2D" parent="Skeleton2D/Torso/Thigh2"]
+[node name="Calf2" type="Bone2D" parent="Animation/Skeleton/Torso/Thigh2"]
 position = Vector2(-2, 57)
 rest = Transform2D(1, 0, 0, 1, -2, 57)
 auto_calculate_length_and_angle = false
@@ -249,16 +257,14 @@ bone_angle = 90.0
 metadata/_edit_lock_ = true
 metadata/_local_pose_override_enabled_ = true
 
-[node name="ArmIkTarget1" type="Node2D" parent="Skeleton2D"]
+[node name="ArmIkTarget1" type="Node2D" parent="Animation"]
 position = Vector2(78, 21)
 
-[node name="ArmIkTarget2" type="Node2D" parent="Skeleton2D"]
+[node name="ArmIkTarget2" type="Node2D" parent="Animation"]
 position = Vector2(-71, 17)
 
-[node name="LegIkTarget1" type="Node2D" parent="Skeleton2D"]
+[node name="LegIkTarget1" type="Node2D" parent="Animation"]
 position = Vector2(17, 150)
 
-[node name="LegIkTarget2" type="Node2D" parent="Skeleton2D"]
-position = Vector2(-62, 157)
-
-[node name="Node2D" type="Node2D" parent="."]
+[node name="LegIkTarget2" type="Node2D" parent="Animation"]
+position = Vector2(-40, 147)
