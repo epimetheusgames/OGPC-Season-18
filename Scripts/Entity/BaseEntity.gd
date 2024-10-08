@@ -1,5 +1,6 @@
 # Base class for all entities
 class_name Entity
+
 extends CharacterBody2D
 
 
