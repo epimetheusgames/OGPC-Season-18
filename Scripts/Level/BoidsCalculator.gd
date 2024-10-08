@@ -29,6 +29,11 @@ var boids_node_list := []
 
 # Load compute shader, and resize arrays.
 func _ready() -> void:
+	print(RenderingServer.get_video_adapter_api_version())
+	if RenderingServer.get_video_adapter_api_version().begins_with("3") || RenderingServer.get_video_adapter_api_version().begins_with("4"):
+		print("ERROR: Compatibility (OpenGL) renderer does not support compute shaders. Boids will not run.")
+		return
+	
 	rd = RenderingServer.create_local_rendering_device()
 	
 	var shader_file := load("res://Scripts/GLSL/compute_boids.glsl")
@@ -41,40 +46,13 @@ func _ready() -> void:
 	
 	Global.boids_calculator_node = self
 	
-	if Global.get_multiplayer_type() == Global.MULTIPLAYER_MODE.GD_SYNC:
-		await get_tree().create_timer(10).timeout
-
-# Slowly sync boids so there isn't too much lag.
-func _sync_boids():
-	var i = 0
-	while true:
-		var boids_list = get_tree().get_nodes_in_group("Boids")
-		var boids_size = boids_list.size()
-		
-		if boids_size == 0:
-			await get_tree().create_timer(0.01).timeout
-			continue
-		
-		if i > boids_size - 1:
-			i = 0
-		
-		if Global.get_multiplayer_type() == Global.MULTIPLAYER_MODE.GD_SYNC:
-			for j in range(boid_gd_sync_batch_size):
-				GDSync.sync_var(boids_list[i + j], "position")
-				GDSync.sync_var(boids_list[i + j], "velocity")
-				
-			i += boid_gd_sync_batch_size
-		if Global.get_multiplayer_type() == Global.MULTIPLAYER_MODE.LOCAL_NETWORK:
-			for j in range(boid_local_network_sync_batch_size):
-				boids_list[i + j]._local_sync_variables_multiplayer.rpc(boids_list[i + j].position, boids_list[i + j].velocity, boids_list[i + j].rotation)
-		
-			i += boid_local_network_sync_batch_size
-		
-		await get_tree().create_timer(0.001).timeout
+	await get_tree().create_timer(5).timeout
+	
+	if Global.godot_steam_abstraction.is_lobby_owner:
+		sync_at_integrals()
 
 # Runs the GPU compute shader every frame! 
 func _process(delta: float) -> void:
-	print(Engine.get_frames_per_second())
 	var boids_list = get_tree().get_nodes_in_group("Boids")
 	var num_boids = boids_list.size()
 	
@@ -174,6 +152,13 @@ func _process(delta: float) -> void:
 	# Get output list
 	var compute_output_bytes := rd.buffer_get_data(output_buffer)
 	shader_output = compute_output_bytes.to_float32_array()
+
+func sync_at_integrals():
+	while true:
+		if Global.godot_steam_abstraction.is_lobby_owner:
+			Global.godot_steam_abstraction.sync_var_in_group("Boids", "position")
+			Global.godot_steam_abstraction.sync_var_in_group("Boids", "velocity")
+		await get_tree().create_timer(0.01).timeout
 
 # After this please use add_boid_data_at_index to fill in the registered data.
 # Think of this like it's memory allocation in the boids list!

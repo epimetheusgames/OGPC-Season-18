@@ -16,11 +16,11 @@ extends Node
 func _ready():
 	Global.save_load_framework = self
 	
-	if "host" in OS.get_cmdline_args():
-		Global.multiplayer_manager._local_network_create_server()
-	if "client" in OS.get_cmdline_args():
-		Global.multiplayer_manager._local_network_create_client()
-	
+	#if "host" in OS.get_cmdline_args():
+		#Global.multiplayer_manager._local_network_create_server()
+	#if "client" in OS.get_cmdline_args():
+		#Global.multiplayer_manager._local_network_create_client()
+	#
 	#await GDSync.connected
 	#
 	#if "host" in OS.get_cmdline_args():
@@ -28,8 +28,8 @@ func _ready():
 	#if "client" in OS.get_cmdline_args():
 		#await get_tree().create_timer(5).timeout
 		#Global.multiplayer_manager.gd_sync_join_lobby("TEST2", "TEST")
-	
-	load_level("res://Scenes/TSCN/Levels/Playable/Normal/BoidsTest.tscn")
+	#
+	load_level("res://Scenes/TSCN/Levels/Playable/Normal/TestLevel/player_test.tscn")
 
 # Saves a ConfigFile to memory.
 func _save_config_file(config_file: ConfigFile, slot_num: int) -> void:
