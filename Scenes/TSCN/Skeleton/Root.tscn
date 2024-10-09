@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Skeleton/SaveLoadFramework.gd" id="2_i3ogj"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/MultiplayerManager.gd" id="4_o3y1v"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/GodotSteamAbstraction.gd" id="5_65j18"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/TextPosSet.gd" id="8_7spfj"]
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
@@ -25,8 +25,8 @@ dialog_text_node = NodePath("Game/GameUIOverlay/DialogText")
 
 [node name="Skeleton" type="Node" parent="."]
 
-[node name="MultiplayerManager" type="Node" parent="Skeleton"]
-script = ExtResource("4_o3y1v")
+[node name="GodotSteamAbstraction" type="Node" parent="Skeleton"]
+script = ExtResource("5_65j18")
 
 [node name="SaveLoadFramework" type="Node" parent="Skeleton"]
 script = ExtResource("2_i3ogj")

@@ -9,6 +9,10 @@ var boids_velocities := []
 @export var protected_dist = 10
 @export var num_boids = 1000
 @export var bin_size = 32
+@export var boid_gd_sync_batch_size = 50
+
+# Local network sync is a lot more efficient.
+@export var boid_local_network_sync_batch_size = 500
 
 @onready var boids_scene := preload("res://Scenes/TSCN/Entities/Boid.tscn")
 
@@ -17,7 +21,7 @@ var num_bins = 0
 var rd: RenderingDevice
 var boid_shader: RID
 var boids_pipeline: RID
-var shader_output = []
+var shader_output: PackedFloat32Array
 var boids_index_counter := 0
 var boids_parameters_array: PackedFloat32Array
 var boids_parameters_array_bytes: PackedByteArray
@@ -25,6 +29,11 @@ var boids_node_list := []
 
 # Load compute shader, and resize arrays.
 func _ready() -> void:
+	print(RenderingServer.get_video_adapter_api_version())
+	if RenderingServer.get_video_adapter_api_version().begins_with("3") || RenderingServer.get_video_adapter_api_version().begins_with("4"):
+		print("ERROR: Compatibility (OpenGL) renderer does not support compute shaders. Boids will not run.")
+		return
+	
 	rd = RenderingServer.create_local_rendering_device()
 	
 	var shader_file := load("res://Scripts/GLSL/compute_boids.glsl")
@@ -36,12 +45,14 @@ func _ready() -> void:
 	boids_node_list.resize(2000)
 	
 	Global.boids_calculator_node = self
+	
+	await get_tree().create_timer(5).timeout
+	
+	if Global.godot_steam_abstraction.is_lobby_owner:
+		sync_at_integrals()
 
 # Runs the GPU compute shader every frame! 
 func _process(delta: float) -> void:
-	if !is_multiplayer_authority():
-		return
-	
 	var boids_list = get_tree().get_nodes_in_group("Boids")
 	var num_boids = boids_list.size()
 	
@@ -126,13 +137,13 @@ func _process(delta: float) -> void:
 	# Create uniform set
 	var uniform_set := rd.uniform_set_create(
 		[
-			parameters_uniform, 
+			parameters_uniform,
 			global_parameters_uniform,
-			positions_uniform, 
-			velocities_uniform, 
-			raycast_data_uniform, 
+			positions_uniform,
+			velocities_uniform,
+			raycast_data_uniform,
 			output_uniform,
-		], 
+		],
 		boid_shader, 0
 	)
 	
@@ -142,6 +153,13 @@ func _process(delta: float) -> void:
 	var compute_output_bytes := rd.buffer_get_data(output_buffer)
 	shader_output = compute_output_bytes.to_float32_array()
 
+func sync_at_integrals():
+	while true:
+		if Global.godot_steam_abstraction.is_lobby_owner:
+			Global.godot_steam_abstraction.sync_var_in_group("Boids", "position")
+			Global.godot_steam_abstraction.sync_var_in_group("Boids", "velocity")
+		await get_tree().create_timer(0.01).timeout
+
 # After this please use add_boid_data_at_index to fill in the registered data.
 # Think of this like it's memory allocation in the boids list!
 func register_index(boid_object: BoidComponent) -> int:
@@ -149,8 +167,8 @@ func register_index(boid_object: BoidComponent) -> int:
 	boids_index_counter += 1
 	return boids_index_counter - 1
 
-func add_boid_data_at_index(index, view_dist, protected_dist, avoid_factor, matching_factor, 
-							centering_factor, turn_factor, max_speed, min_speed, max_accel):
+func add_boid_data_at_index(index, view_dist, protected_dist, avoid_factor, matching_factor,
+	centering_factor, turn_factor, max_speed, min_speed, max_accel):
 	boids_parameters_array.set(index * 9 + 0, view_dist)
 	boids_parameters_array.set(index * 9 + 1, protected_dist)
 	boids_parameters_array.set(index * 9 + 2, avoid_factor)
