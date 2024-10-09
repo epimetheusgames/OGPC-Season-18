@@ -52,6 +52,9 @@ func _ready():
 	var keybind_savefile := FileAccess.open("user://keybinds.json",FileAccess.READ_WRITE)
 	ready_called = true
 	
+	if !keybind_savefile:
+		return
+	
 	# If this is the first time the user has opened the game, create the default keybinds
 	if(not FileAccess.file_exists("user://keybinds.json")):
 		keybind_savefile.store_string(json_config_generator())

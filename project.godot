@@ -33,6 +33,10 @@ EditorGlobal="*res://Scripts/LevelEditor/EditorGlobal.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+
 [display]
 
 window/size/viewport_width=1920
