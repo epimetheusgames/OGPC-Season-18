@@ -1,0 +1,115 @@
+[gd_scene load_steps=16 format=3 uid="uid://b8iotem83uvu0"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/FishEnemy.gd" id="1_c1y28"]
+[ext_resource type="Texture2D" uid="uid://dgi5korrp8ou" path="res://Assets/Art/Sprites/Entity/PlaceholderEnemyFishSpritesheet.png" id="2_xp6fr"]
+[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="3_bwuq6"]
+[ext_resource type="Script" path="res://Scripts/Components/AttackBoxComponent.gd" id="4_p5whe"]
+[ext_resource type="Script" path="res://Scripts/Components/HurtboxComponent.gd" id="5_cg6aa"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_gkgqs"]
+vertices = PackedVector2Array(67.0781, -31.1562, 90.8672, 13.6797, 15.1875, 34.0234, -75.0312, 35.6562, -52.6016, -33.7812)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(75, -44, 110, 22, 17, 47, -93, 49, -62, -47)])
+agent_radius = 13.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7umgp"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18rfv"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2xx6"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1hae"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4eev"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3j5h7"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vceji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7umgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18rfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2xx6")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_b1hae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4eev")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3j5h7")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d8n50"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpu2o"]
+radius = 6.08276
+
+[node name="FishEnemy" type="CharacterBody2D"]
+script = ExtResource("1_c1y28")
+
+[node name="FishCollison" type="CollisionShape2D" parent="."]
+
+[node name="FishNavRegion" type="NavigationRegion2D" parent="."]
+position = Vector2(4, -4)
+navigation_polygon = SubResource("NavigationPolygon_gkgqs")
+
+[node name="FishAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vceji")
+animation = &"Attack"
+autoplay = "Idle"
+frame_progress = 0.596816
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_bwuq6")
+component_container = NodePath("..")
+
+[node name="AttackBoxComponent" type="Node" parent="."]
+script = ExtResource("4_p5whe")
+component_container = NodePath("..")
+
+[node name="HurtboxComponent" type="Node" parent="."]
+script = ExtResource("5_cg6aa")
+attachable_health_component = NodePath("../HealthComponent")
+hurtbox = NodePath("../Hurtbox")
+component_container = NodePath("..")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_d8n50")
+
+[node name="AttackBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(-5, -1)
+shape = SubResource("CircleShape2D_lpu2o")

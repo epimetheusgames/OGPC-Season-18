@@ -197,15 +197,21 @@ metadata/_edit_lock_ = true
 
 [node name="UpperArm1" type="Bone2D" parent="Animation/Skeleton/Torso"]
 position = Vector2(18, -55)
-rotation = -0.26717
+rotation = 2.08284
+scale = Vector2(0.999944, 0.999944)
 rest = Transform2D(0.964522, -0.264003, 0.264003, 0.964522, 18, -55)
 metadata/_local_pose_override_enabled_ = true
 metadata/_edit_lock_ = true
 
 [node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
 position = Vector2(40.2459, 12.0526)
+<<<<<<< HEAD
 rotation = -0.172192
+=======
+rotation = 2.44716
+>>>>>>> 8ef62c2 (Started working on fish enemy, push2pull)
 scale = Vector2(1.08388, 1.00115)
+skew = -5.62668e-05
 rest = Transform2D(1.06785, -0.185714, 0.171539, 0.986349, 40.2459, 12.0526)
 auto_calculate_length_and_angle = false
 length = 43.402

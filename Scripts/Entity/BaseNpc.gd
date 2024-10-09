@@ -31,6 +31,7 @@ func die() -> void:
 	pass
 
 func trigger_talking() -> void:
+	pass
 	
 func next_dialogue_layer_in_tree():
 	dialog_layer_tree_position += 1
