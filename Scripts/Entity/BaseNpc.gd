@@ -31,7 +31,7 @@ var dialog_json: JSON
 func _option_chosen():
 	current_location+="["+String(Global.dialog_core.response)+"][0]"
 	current_location_responses+="["+String(Global.dialog_core.response)+"][1]"
-	Global.dialog_core.
+	Global.dialog_core.play_dialog(Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location+';'),dialog_speed,Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location_responses+';'))
 func _get_dialogue():
 	dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text())
 	dialog = dialog_json.data
@@ -45,6 +45,6 @@ func die() -> void:
 
 func trigger_talking() -> void:
 	#index 0 is the dialogue, [0][1] [0][2] [0][3] and [0][4] are responses
-	Global.dialog_core.play_dialog(dialog["dialog"][npc_name][0])
+	Global.dialog_core.play_dialog(dialog["dialog"][npc_name][0],dialog_speed,dialog["dialog"][npc_name][0])
 
 	
