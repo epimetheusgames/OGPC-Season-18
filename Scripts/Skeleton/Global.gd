@@ -14,6 +14,7 @@ var is_multiplayer: bool
 var dialog_text_node: Node2D
 var boids_calculator_node: BoidsCalculator
 var multiplayer_manager: MultiplayerManager
+var dialog_core: Node2D
 
 enum MULTIPLAYER_MODE {
 	SINGLEPLAYER,
@@ -50,3 +51,12 @@ func get_multiplayer_type() -> MULTIPLAYER_MODE:
 		return MULTIPLAYER_MODE.LOCAL_NETWORK
 	else:
 		return MULTIPLAYER_MODE.SINGLEPLAYER
+
+# Run code from a string
+func eval(input):
+	var script_holder = RefCounted.new()
+	var script = GDScript.new()
+	script.set_source_code("func eval():" + input)
+	script.reload()
+	script_holder.set_script(script)
+	return script_holder.eval()

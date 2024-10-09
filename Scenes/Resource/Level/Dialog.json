@@ -1,11 +1,21 @@
 {
-	"dialog":
-	{
-		"test_dialog": 
-		[
+	"dialog": {
+		"test_dialog": [
+			"hey whats good",
 			[
-				"hey whats good"
+				[
+					"hi",
+					[
+						"wow another dialog layer"
+					]
+				],
+				[
+					"bye",
+					[
+						"wow i hate myself"
+					]
+				]
 			]
-		],
+		]
 	}
 }
