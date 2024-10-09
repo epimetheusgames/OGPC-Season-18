@@ -2,7 +2,9 @@ class_name DiverMovement
 
 extends Node
 
-const ACCELERATION: int = 300
+const CONST_ACCEL: int = 5
+const TAP_ACCEL: int = 300
+
 const MAX_SPEED: int = 700
 
 var current_angle: float = 0
@@ -35,10 +37,13 @@ func update_current_angle(delta: float) -> void:
 		current_angle = lerp_angle(current_angle, input_angle, 0.1 * delta)
 
 func update_movement_velocity(delta: float):
-	velocity = velocity * 0.99
+	velocity = velocity * 0.97
+	
+	if input_vector != Vector2.ZERO: 
+		velocity += Util.angle_to_vector(current_angle, CONST_ACCEL * delta)
 	
 	if Input.is_action_just_pressed("move"):
-		velocity += Util.angle_to_vector(current_angle, ACCELERATION * delta)
+		velocity += Util.angle_to_vector(current_angle, TAP_ACCEL * delta)
 	
 	# Clamp velocity to MAX_SPEED
 	if velocity.length() > MAX_SPEED:

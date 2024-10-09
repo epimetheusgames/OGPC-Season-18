@@ -1,4 +1,3 @@
-class_name Diver
 extends Entity
 
 const ACCELERATION: int = 300

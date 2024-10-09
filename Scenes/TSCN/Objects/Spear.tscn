@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c63r227251q0k"]
+
+[ext_resource type="PackedScene" uid="uid://kl6gljjq617" path="res://Scenes/TSCN/Objects/BaseBullet.tscn" id="1_qq1mj"]
+
+[node name="Spear" type="Node2D"]
+
+[node name="BaseBullet" parent="." instance=ExtResource("1_qq1mj")]

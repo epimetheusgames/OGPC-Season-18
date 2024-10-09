@@ -20,6 +20,7 @@ static func safeguard_null(variable: Object, variable_class_name: String) -> Obj
 
 # -- Math --
 
+# Turns an angle and a magnitude to a vector.
 static func angle_to_vector(angle: float, magnitude: float) -> Vector2:
 	var x: float = magnitude * cos(angle)
 	var y: float = magnitude * sin(angle)
