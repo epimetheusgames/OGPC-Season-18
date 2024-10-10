@@ -21,6 +21,7 @@ var dialog_sfx_node: AudioStreamPlayer
 @onready var text_node = get_node("DialogTextLabel")
 
 func _ready() -> void:
+	Global.dialog_core = self
 	response_buttons.append(get_node("ResponseButtonOne"))
 	response_buttons.append(get_node("ResponseButtonTwo"))
 	response_buttons.append(get_node("ResponseButtonThree"))
@@ -50,6 +51,8 @@ func _process(delta:float)->void:
 		
 		last_played_letterindex = int(characters_played)
 	
+func get_response()->int:
+	return response
 func response_option_one()->void:
 	response = 0
 	dialog_played = true
