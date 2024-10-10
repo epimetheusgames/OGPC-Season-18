@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qx2mbnb3jg2j"]
+[gd_scene load_steps=14 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiver.gd" id="1_k6jjc"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiverAnimation.gd" id="2_3siqq"]
@@ -46,6 +46,9 @@ modifications/0 = SubResource("SkeletonModification2DTwoBoneIK_v7jax")
 modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_78rlc")
 modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_ybnnp")
 modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_db2b6")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wi5t0"]
+height = 86.0
 
 [node name="Diver" type="CharacterBody2D"]
 script = ExtResource("1_k6jjc")
@@ -205,13 +208,9 @@ metadata/_edit_lock_ = true
 
 [node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
 position = Vector2(40.2459, 12.0526)
-<<<<<<< HEAD
 rotation = -0.172192
-=======
-rotation = 2.44716
->>>>>>> 8ef62c2 (Started working on fish enemy, push2pull)
 scale = Vector2(1.08388, 1.00115)
-skew = -5.62668e-05
+skew = -5.6386e-05
 rest = Transform2D(1.06785, -0.185714, 0.171539, 0.986349, 40.2459, 12.0526)
 auto_calculate_length_and_angle = false
 length = 43.402
@@ -303,3 +302,8 @@ script = ExtResource("6_5oexd")
 [node name="LightTexture" type="Polygon2D" parent="Flashlight"]
 color = Color(1, 1, 1, 0.352941)
 polygon = PackedVector2Array(379, -167, 0, 0, 381, 201)
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("CapsuleShape2D_wi5t0")

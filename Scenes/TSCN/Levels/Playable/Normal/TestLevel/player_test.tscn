@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cr5scuilsl4p4"]
+[gd_scene load_steps=4 format=3 uid="uid://cr5scuilsl4p4"]
 
 [ext_resource type="Script" path="res://Scripts/Components/MultiplayerPlayerSpawnerComponent.gd" id="1_tdhm2"]
+[ext_resource type="PackedScene" uid="uid://b8iotem83uvu0" path="res://Scenes/TSCN/Entities/FishEnemy.tscn" id="2_hxeir"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_waxhy"]
+vertices = PackedVector2Array(1842.83, 61.8438, 1827.16, 992.062, 65.9375, 1002.93, 61.0469, 35.1484)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(56, 1013, 1837, 1002, 1853, 52, 51, 25)])
 
 [node name="PlayerTest" type="Node2D"]
 
@@ -8,3 +14,12 @@
 script = ExtResource("1_tdhm2")
 spawn_filepath = "res://Scenes/TSCN/Entities/NewDiver.tscn"
 component_container = NodePath("..")
+
+[node name="FishEnemy" parent="." instance=ExtResource("2_hxeir")]
+position = Vector2(798, 421)
+scale = Vector2(5, 5)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_waxhy")
+
+[editable path="FishEnemy"]

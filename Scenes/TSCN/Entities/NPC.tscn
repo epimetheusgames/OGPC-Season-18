@@ -6,9 +6,6 @@
 script = ExtResource("1_3od1n")
 dialog_speed = 10
 talking_sound = "res://Assets/Sound/SFX/TestTalkSFX.wav"
-conv_obj_name = "test_dialog"
-_has_physics = null
-multiplayer_authority = null
 
 [node name="AudioHandler" type="Node2D" parent="."]
 
