@@ -1,3 +1,4 @@
+## Diver movement system.
 class_name DiverMovement
 
 extends Node

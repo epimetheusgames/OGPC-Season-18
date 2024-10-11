@@ -1,3 +1,4 @@
+class_name AnimatedFishEnemy
 extends Enemy
 
 
@@ -17,11 +18,6 @@ func _target_reached():
 
 func _process(delta: float) -> void:
 	_process_enemy(delta)
-	
-	if velocity.x < 0:
-		scale.x = 5
-	else:
-		scale.x = -5
 	
 	if player_in_area:
 		_path_changed()
@@ -53,5 +49,6 @@ func _process(delta: float) -> void:
 	if !reached_target:
 		var target_position = $FishNavigation.get_next_path_position()
 		velocity = (target_position - position).normalized()
+		rotation = velocity.normalized().angle() + PI
 		position += velocity * delta * 60
 	

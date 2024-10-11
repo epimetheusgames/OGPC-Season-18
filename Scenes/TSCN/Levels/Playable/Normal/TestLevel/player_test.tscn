@@ -16,6 +16,7 @@ spawn_filepath = "res://Scenes/TSCN/Entities/NewDiver.tscn"
 component_container = NodePath("..")
 
 [node name="FishEnemy" parent="." instance=ExtResource("2_hxeir")]
+z_index = 5
 position = Vector2(798, 421)
 scale = Vector2(5, 5)
 

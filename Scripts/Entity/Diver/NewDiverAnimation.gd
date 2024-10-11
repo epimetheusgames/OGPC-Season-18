@@ -1,3 +1,4 @@
+## Diver procedural animation system.
 class_name DiverAnimation
 
 extends Node2D

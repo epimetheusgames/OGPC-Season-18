@@ -32,12 +32,12 @@ func _process_enemy(delta: float) -> void:
 		player_in_area = true
 
 func _area_entered(area: Area2D) -> void:
-	if area.name == "PlayerHurtbox":
+	if area.name == "PlayerVisualDetectionArea":
 		num_players_in_area += 1
 		players_list.append(area.get_parent())
 
 func _area_exited(area: Area2D) -> void:
-	if area.name == "PlayerHurtbox":
+	if area.name == "PlayerVisualDetectionArea":
 		num_players_in_area -= 1
 		players_list.remove_at(players_list.find(area.get_parent()))
 		

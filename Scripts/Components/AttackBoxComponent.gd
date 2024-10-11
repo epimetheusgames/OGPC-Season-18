@@ -14,6 +14,9 @@ func _ready() -> void:
 	
 	if hurtbox && !always_attacking:
 		hurtbox_collision.disabled = true
+		
+		# Set to zero because we don't want to be detecting other AttackBoxes.
+		hurtbox_node.collision_mask = 0
 
 func attack() -> void:
 	if always_attacking || !hurtbox:
