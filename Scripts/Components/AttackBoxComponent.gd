@@ -1,3 +1,4 @@
+## Component for an attackbox. When attack() is called other HurtboxComponents in the area will be notified.
 class_name AttackBoxComponent
 extends BaseHitboxComponent
 
@@ -12,7 +13,10 @@ func _ready() -> void:
 	component_name = "AttackBoxComponent"
 	
 	if hurtbox && !always_attacking:
-		hurtbox.disabled = true
+		hurtbox_collision.disabled = true
+		
+		# Set to zero because we don't want to be detecting other AttackBoxes.
+		hurtbox_node.collision_mask = 0
 
 func attack() -> void:
 	if always_attacking || !hurtbox:
@@ -21,10 +25,10 @@ func attack() -> void:
 		print("- AttackBox has no hurtbox node attached")
 		return
 	
-	hurtbox.disabled = false
+	hurtbox_collision.disabled = false
 	is_attacking = true
 	
 	await get_tree().create_timer(attack_seconds).timeout
 	
-	hurtbox.disabled = true
+	hurtbox_collision.disabled = true
 	is_attacking = false

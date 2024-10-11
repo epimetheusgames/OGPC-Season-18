@@ -5,12 +5,17 @@ extends BaseHitboxComponent
 
 @export_node_path("HealthComponent") var attachable_health_component
 
+signal damage_taken(damage_ammount: int)
+
 func _ready() -> void:
 	_init_hurtbox()
 	
 	# Connect signals
 	if hurtbox:
 		hurtbox_node.area_entered.connect(_area_entered)
+		
+		# Set to zero because we don't want anyone getting hurt by our hurtbox.
+		hurtbox_node.collision_layer = 0
 	
 	component_name = "HurtboxComponent"
 	
@@ -24,3 +29,4 @@ func _area_entered(area: Area2D) -> void:
 				damage_ammount = attack_box_component.damage
 		
 		get_node(attachable_health_component).take_damage(damage_ammount)
+		damage_taken.emit(damage_ammount)

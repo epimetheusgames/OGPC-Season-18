@@ -13,13 +13,9 @@ var current_game_slot: int
 var is_multiplayer: bool
 var dialog_text_node: Node2D
 var boids_calculator_node: BoidsCalculator
-var godot_steam_abstraction: GodotSteamAbstraction
 
-enum MULTIPLAYER_MODE {
-	SINGLEPLAYER,
-	LOCAL_NETWORK,
-	GD_SYNC,
-}
+var dialog_core: Node2D
+var godot_steam_abstraction: GodotSteamAbstraction
 
 func get_slot_password(slot_num: int) -> String:
 	var result_string = ""
@@ -34,19 +30,13 @@ func get_slot_password(slot_num: int) -> String:
 	return result_string
 
 func is_multiplayer_host() -> bool:
-	var multiplayer_type := get_multiplayer_type()
-	
-	if multiplayer_type == MULTIPLAYER_MODE.GD_SYNC && GDSync.is_host():
-		return true
-	elif multiplayer_type == MULTIPLAYER_MODE.LOCAL_NETWORK && is_multiplayer_authority():
-		return true
-	
-	return false
+	return godot_steam_abstraction.is_lobby_owner
 
-func get_multiplayer_type() -> MULTIPLAYER_MODE:
-	if GDSync.is_active():
-		return MULTIPLAYER_MODE.GD_SYNC
-	elif is_multiplayer:
-		return MULTIPLAYER_MODE.LOCAL_NETWORK
-	else:
-		return MULTIPLAYER_MODE.SINGLEPLAYER
+# Run code from a string
+func run_code_from_string(input: String):
+	var script_holder = RefCounted.new()
+	var script = GDScript.new()
+	script.set_source_code("func eval():" + input)
+	script.reload()
+	script_holder.set_script(script)
+	return script_holder.eval()

@@ -1,6 +1,5 @@
 class_name Diver
-
-extends CharacterBody2D
+extends Entity
 
 @onready var diver_movement: DiverMovement = $"Movement"
 @onready var diver_animation: DiverAnimation = $"Animation"
