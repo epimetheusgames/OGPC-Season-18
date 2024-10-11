@@ -16,9 +16,15 @@ extends Node2D
 
 @onready var arrow: Node2D = $"Arrow"
 
+
+# Leg oscillation (did i spell that right)
+const DIST_FROM_BODY = -110
+const MIN_LEG_DIST = -25
+const MAX_LEG_DIST = 25
+
 var leg_osc_counter1: float = 0
 var leg_osc_counter2: float = 0
-var osc_speed: float = 2.0  # Speed of leg oscillation
+var osc_speed: float = 2.0
 
 func _process(delta: float) -> void:
 	# Update the arrow rotation
@@ -26,11 +32,9 @@ func _process(delta: float) -> void:
 	
 	var osc_speed: float =  diver.velocity.length() / 100
 	
-	# Update the leg oscillation counters
 	leg_osc_counter1 += delta * osc_speed
 	leg_osc_counter2 += delta * osc_speed
 	
-	# Apply cosine equations for smooth oscillation
 	var t1: float = (cos(leg_osc_counter1) / 2.0) + 0.5  # Cosine equation for leg 1
 	var t2: float = (cos(leg_osc_counter2 + PI) / 2.0) + 0.5  # Cosine equation for leg 2 (phase-shifted by PI)
 	
@@ -38,9 +42,6 @@ func _process(delta: float) -> void:
 	leg_target1.global_position = get_leg_pos(t1)
 	leg_target2.global_position = get_leg_pos(t2)
 
-const DIST_FROM_BODY = -110  # Distance from the diver's body
-const MIN_LEG_DIST = -25  # Minimum distance for leg oscillation
-const MAX_LEG_DIST = 25   # Maximum distance for leg oscillation
 
 func get_leg_pos(t: float) -> Vector2:
 	# Ensure 't' is clamped between 0 and 1
