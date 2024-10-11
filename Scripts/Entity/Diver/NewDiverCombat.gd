@@ -1,6 +1,5 @@
 ## Diver combat system.
 class_name DiverCombat
-
 extends Node2D
 
 @onready var knife: Node2D = $"knife"

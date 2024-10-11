@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b8iotem83uvu0"]
+[gd_scene load_steps=20 format=3 uid="uid://b8iotem83uvu0"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/FishEnemy.gd" id="1_c1y28"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/EnemyBehaviorSettings.gd" id="2_eew6s"]
@@ -14,9 +14,10 @@ health = 0
 damage = 0
 agressiveness = 0.0
 view_range = null
-view_distance = 10.0
+view_distance = 70.0
 attack_distance = 100.0
 sensor_type = 0
+wander_type = 0
 
 [sub_resource type="Resource" id="Resource_mkt0s"]
 script = ExtResource("3_j1siw")
@@ -85,13 +86,9 @@ radius = 12.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_lpu2o"]
 radius = 6.08276
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jbmmu"]
-radius = 62.8258
-
 [node name="FishEnemy" type="CharacterBody2D"]
 script = ExtResource("1_c1y28")
 settings = SubResource("Resource_sd441")
-_player_detection_area_node_path = NodePath("PlayerDetectionArea")
 uid = SubResource("Resource_mkt0s")
 
 [node name="FishNavigation" type="NavigationAgent2D" parent="."]
@@ -137,8 +134,3 @@ shape = SubResource("CircleShape2D_d8n50")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 position = Vector2(-5, -1)
 shape = SubResource("CircleShape2D_lpu2o")
-
-[node name="PlayerDetectionArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea"]
-shape = SubResource("CircleShape2D_jbmmu")

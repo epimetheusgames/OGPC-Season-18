@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cr5scuilsl4p4"]
 
 [ext_resource type="Script" path="res://Scripts/Components/MultiplayerPlayerSpawnerComponent.gd" id="1_tdhm2"]
-[ext_resource type="PackedScene" path="res://Scenes/TSCN/Entities/FishEnemy.tscn" id="2_hxeir"]
+[ext_resource type="PackedScene" uid="uid://b8iotem83uvu0" path="res://Scenes/TSCN/Entities/FishEnemy.tscn" id="2_hxeir"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_waxhy"]
 vertices = PackedVector2Array(1842.83, 61.8438, 1827.16, 992.062, 65.9375, 1002.93, 61.0469, 35.1484)

@@ -75,7 +75,8 @@ multiplayer and can't just ask a friend to test it with you.
 	usable.
 36: Now that you have everything set up you can test multiplayer. When writing code try to write it
 	in the VM because it will update on your main computer immediately but that doesn't seem to be 
-	the case vis versa. 
+	the case vis versa.
+37: Happy editing!
 
 ## NAMING:
 
@@ -191,8 +192,8 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 
 ## Collision BitMasks (for non-coliding hitboxes e.g. Area2D)
 
-1: General collision
-2: Hurtbox/attackbox
-3: Light area hitbox
-4: Noise area hitbox
-5: Movement hitboxes
+1  (00001): General collision
+2  (00010): Hurtbox/attackbox
+4  (00100): Light area hitbox
+8  (01000): Noise area hitbox
+16 (10000): Movement hitboxes
