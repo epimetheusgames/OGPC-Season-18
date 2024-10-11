@@ -1,6 +1,6 @@
 ## A base class for all enemies.
 ## If inheriting from this class you must call _process_enemy at the start of your 
-## process function.
+## process function, and call _enemy_ready at the start of your ready function.
 class_name Enemy
 extends NPC
 
@@ -15,6 +15,9 @@ var players_list = []
 ## TODO: IMPLEMENT ENEMY BEHAVIOR SETTINGS
 
 func _ready():
+	_enemy_ready()
+
+func _enemy_ready() -> void:
 	_player_detection_area = get_node(_player_detection_area_node_path)
 	_player_detection_area.area_entered.connect(_area_entered)
 	_player_detection_area.area_exited.connect(_area_exited)

@@ -301,7 +301,7 @@ script = ExtResource("6_5oexd")
 
 [node name="LightTexture" type="Polygon2D" parent="Flashlight"]
 color = Color(1, 1, 1, 0.352941)
-polygon = PackedVector2Array(379, -167, 0, 0, 381, 201)
+polygon = PackedVector2Array(381, -200, 0, 0, 381, 200)
 
 [node name="PlayerHurtbox" type="Area2D" parent="."]
 

@@ -27,5 +27,5 @@ func attack() -> void:
 	
 	await get_tree().create_timer(attack_seconds).timeout
 	
-	hurtbox.disabled = true
+	hurtbox_collision.disabled = true
 	is_attacking = false
