@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://os6ytsadrm1v"]
+
+[ext_resource type="Script" path="res://Scripts/Components/AttackBoxComponent.gd" id="1_snkfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6xgf"]
+size = Vector2(81, 30)
+
+[node name="Knife" type="Node2D"]
+
+[node name="AttackBox" type="Area2D" parent="."]
+script = ExtResource("1_snkfq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(34.5, 1)
+shape = SubResource("RectangleShape2D_f6xgf")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.4, 0, 0, 1)
+polygon = PackedVector2Array(0, -4, 0, 5, 33, 5, 33, 12, 71, 0, 33, -9, 33, -4)
+
+[node name="Hand1" type="Node2D" parent="."]
+position = Vector2(18, 0)
