@@ -10,6 +10,9 @@ func attack():
 func slashy():
 	knife
 
+func _process(delta: float) -> void:
+	print($HealthComponent._health)
+
 func shoot():
 	var new_bullet: BaseBullet = load("res://Scenes/TSCN/Objects/BaseBullet.tscn").instantiate()
 	new_bullet.top_level = true

@@ -17,7 +17,7 @@ attack_distance = 100.0
 sensor_type = 0
 wander_type = 0
 wander_range = 800.0
-view_range = 230.0
+view_range = 90.0
 view_distance = 70.0
 sound_max_distance = 0.0
 

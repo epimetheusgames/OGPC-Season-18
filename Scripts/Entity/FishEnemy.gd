@@ -6,6 +6,10 @@ func _ready() -> void:
 	
 	$FishNavigation.path_changed.connect(_path_changed)
 	$FishNavigation.navigation_finished.connect(_target_reached)
+	
+	$AttackBoxComponent.damage = settings.damage
+	$HealthComponent.set_max_health(settings.health)
+	$HealthComponent.set_health(settings.health)
 
 func _path_changed():
 	reached_target = false
@@ -29,6 +33,8 @@ func _process(delta: float) -> void:
 	if !reached_target:
 		var target_position = $FishNavigation.get_next_path_position()
 		velocity = (target_position - position).normalized()
+		if player_in_area:
+			velocity *= 1 + settings.agressiveness
 		
 		var target_angle := velocity.normalized().angle() + PI
 		var angle_diff: float = angle_difference(rotation, target_angle)

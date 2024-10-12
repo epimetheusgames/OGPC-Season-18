@@ -6,6 +6,7 @@ extends NPC
 
 @export var settings: EnemyBehaviorSettings
 @export var target_reached_min_dst: int = 10
+@export var forward_direction: Vector2 = Vector2(-1, 0)
 
 var _player_detection_area: Area2D
 var _player_detection_collision_shape: CollisionShape2D
@@ -25,8 +26,6 @@ enum WANDER_MODE {
 	NOT_WANDERING,
 }
 
-## TODO: IMPLEMENT ENEMY BEHAVIOR SETTINGS
-
 func _ready():
 	_enemy_ready()
 
@@ -43,7 +42,10 @@ func _enemy_ready() -> void:
 		_player_detection_area.collision_mask = 16
 	
 	_player_detection_collision_shape = CollisionShape2D.new()
-	_player_detection_collision_shape.shape = CircleShape2D.new()
+	
+	var shape := ConvexPolygonShape2D.new()
+	shape.points = _generate_view_polygon(settings.view_range, settings.view_distance)
+	_player_detection_collision_shape.shape = shape
 	
 	_player_detection_area.area_entered.connect(_area_entered)
 	_player_detection_area.area_exited.connect(_area_exited)
@@ -53,7 +55,6 @@ func _enemy_ready() -> void:
 	
 	# Initialize enemy behavior settings.
 	health = settings.health
-	_player_detection_collision_shape.shape.radius = settings.view_distance
 
 func _target_reached() -> void:
 	if wander_state == WANDER_MODE.WANDERING_TO_POINT:
@@ -68,31 +69,40 @@ func _process_enemy(delta: float) -> void:
 	else:
 		player_in_area = true
 	
-	# If player in area calculate closest player.
+	# If player in area calculate closest player, else wander.
 	if player_in_area:
-		# If there is one player
-		if num_players_in_area == 1:
-			closest_player = players_list[0]
-			
-		# Else find the closest player
-		else:
-			var closest_dist := 99999999
-			var closest_ind := 0
-			for i in range(players_list.size()):
-				var distance: int = position.distance_to(players_list[i].position)
-				if distance < closest_dist:
-					closest_dist = distance
-					closest_ind = i
-			
-			closest_player = players_list[closest_ind]
-		
-		target_position = closest_player.position
+		_update_target_position()
+	elif wander_state == WANDER_MODE.NOT_WANDERING || wander_state == WANDER_MODE.WANDER_POINT_REACHED:
+		_update_wander_point()
+
+func _generate_view_polygon(angle: float, radius: float) -> PackedVector2Array:
+	var output := PackedVector2Array([Vector2(0, 0)])
+	var start := int(forward_direction.normalized().angle()) + 180
+	for i in range(start - int(angle) / 2, start + int(angle) / 2):
+		var fi = i * PI / 180
+		output.append(Vector2(radius * cos(fi), radius * sin(fi)))
 	
-	# Else wander
+	return output
+
+func _update_target_position():
+	# If there is one player
+	if num_players_in_area == 1:
+		closest_player = players_list[0]
+		
+	# Else find the closest player
 	else:
-		if wander_state == WANDER_MODE.NOT_WANDERING || wander_state == WANDER_MODE.WANDER_POINT_REACHED:
-			_update_wander_point()
-			
+		var closest_dist := 99999999
+		var closest_ind := 0
+		for i in range(players_list.size()):
+			var distance: int = position.distance_to(players_list[i].position)
+			if distance < closest_dist:
+				closest_dist = distance
+				closest_ind = i
+		
+		closest_player = players_list[closest_ind]
+	
+	target_position = closest_player.position
+
 func _update_wander_point():
 	var valid_point_found := false
 	var space_state := get_world_2d().direct_space_state

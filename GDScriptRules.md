@@ -192,8 +192,9 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 
 ## Collision BitMasks (for non-coliding hitboxes e.g. Area2D)
 
-1  (00001): General collision
-2  (00010): Hurtbox/attackbox
-4  (00100): Light area hitbox
-8  (01000): Noise area hitbox
-16 (10000): Movement hitboxes
+1 (0001): General collision
+2 (0010): Hurtbox/attackbox
+4 (0100): Light area hitbox
+8 (1000): Movement hitboxes
+
+Sound should be based on a pathfind to the sound.
