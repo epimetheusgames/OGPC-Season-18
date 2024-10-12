@@ -5,15 +5,25 @@ class_name Enemy
 extends NPC
 
 @export var settings: EnemyBehaviorSettings
+@export var target_reached_min_dst: int = 10
 
 var _player_detection_area: Area2D
 var _player_detection_collision_shape: CollisionShape2D
 var closest_player: Diver
-var player_in_area = false
+var player_in_area := false
+var reached_target := false
+var wander_state := WANDER_MODE.NOT_WANDERING
 var num_players_in_area = 0
 var players_list = []
 
 var health: int
+var target_position: Vector2
+
+enum WANDER_MODE {
+	WANDER_POINT_REACHED,
+	WANDERING_TO_POINT,
+	NOT_WANDERING,
+}
 
 ## TODO: IMPLEMENT ENEMY BEHAVIOR SETTINGS
 
@@ -21,6 +31,8 @@ func _ready():
 	_enemy_ready()
 
 func _enemy_ready() -> void:
+	target_position = position
+	
 	_player_detection_area = Area2D.new()
 	_player_detection_area.collision_layer = 0
 	if settings.sensor_type == EnemyBehaviorSettings.SENSOR_TYPE.LIGHT:
@@ -43,6 +55,10 @@ func _enemy_ready() -> void:
 	health = settings.health
 	_player_detection_collision_shape.shape.radius = settings.view_distance
 
+func _target_reached() -> void:
+	if wander_state == WANDER_MODE.WANDERING_TO_POINT:
+		wander_state = WANDER_MODE.WANDER_POINT_REACHED
+
 func _process(delta: float) -> void:
 	_process_enemy(delta)
 
@@ -52,8 +68,9 @@ func _process_enemy(delta: float) -> void:
 	else:
 		player_in_area = true
 	
+	# If player in area calculate closest player.
 	if player_in_area:
-		# If there is one player, go towards that.
+		# If there is one player
 		if num_players_in_area == 1:
 			closest_player = players_list[0]
 			
@@ -68,6 +85,33 @@ func _process_enemy(delta: float) -> void:
 					closest_ind = i
 			
 			closest_player = players_list[closest_ind]
+		
+		target_position = closest_player.position
+	
+	# Else wander
+	else:
+		if wander_state == WANDER_MODE.NOT_WANDERING || wander_state == WANDER_MODE.WANDER_POINT_REACHED:
+			_update_wander_point()
+			
+func _update_wander_point():
+	var valid_point_found := false
+	var space_state := get_world_2d().direct_space_state
+	while !valid_point_found:
+		var rng := RandomNumberGenerator.new()
+		var random_direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
+		var random_multiplier := rng.randf_range(0, settings.wander_range)
+		target_position = global_position + random_direction * random_multiplier
+		
+		var pointcast = PhysicsPointQueryParameters2D.new()
+		pointcast.position = target_position
+		var result = space_state.intersect_point(pointcast)
+		
+		# We didn't colide with anything.
+		if !result:
+			valid_point_found = true
+	
+	reached_target = false
+	wander_state = WANDER_MODE.WANDERING_TO_POINT
 
 func _area_entered(area: Area2D) -> void:
 	if area.name == "PlayerVisualDetectionArea":

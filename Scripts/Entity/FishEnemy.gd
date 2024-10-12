@@ -1,19 +1,19 @@
 class_name AnimatedEnemy
 extends Enemy
 
-
-var reached_target := false
-
 func _ready() -> void:
 	_enemy_ready()
 	
 	$FishNavigation.path_changed.connect(_path_changed)
-	$FishNavigation.target_reached.connect(_target_reached)
+	$FishNavigation.navigation_finished.connect(_target_reached)
 
 func _path_changed():
 	reached_target = false
 
 func _target_reached():
+	if wander_state == WANDER_MODE.WANDERING_TO_POINT:
+		wander_state = WANDER_MODE.WANDER_POINT_REACHED
+	
 	reached_target = true
 
 func _process(delta: float) -> void:
@@ -22,14 +22,19 @@ func _process(delta: float) -> void:
 	if player_in_area:
 		_path_changed()
 		
-		$FishNavigation.target_position = closest_player.position
 		if position.distance_to(closest_player.position) < settings.attack_distance && !$AttackBoxComponent.is_attacking:
 			$AttackBoxComponent.attack()
-			$FishAnimation.play("Attackd")
+			$FishAnimation.play("Attack")
 	
 	if !reached_target:
 		var target_position = $FishNavigation.get_next_path_position()
 		velocity = (target_position - position).normalized()
-		rotation = velocity.normalized().angle() + PI
+		
+		var target_angle := velocity.normalized().angle() + PI
+		var angle_diff: float = angle_difference(rotation, target_angle)
+		rotation += clamp(angle_diff * 0.05, -0.1, 0.1)
+		
 		position += velocity * delta * 60
-	
+
+func _on_pathfind_update_timer_timeout() -> void:
+	$FishNavigation.target_position = target_position

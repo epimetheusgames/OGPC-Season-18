@@ -11,5 +11,11 @@ extends Resource
 @export var sensor_type: SENSOR_TYPE
 @export var wander_type: WANDER_TYPE
 
+@export_group("Random Wander Settings")
+@export var wander_range: float
+
+@export_group("Sound Sensor Settings")
+@export var sound_max_distance: float
+
 enum SENSOR_TYPE {LIGHT, MOTION, NOISE}
 enum WANDER_TYPE {RANDOM_POSITION, ATTACH_TO_WALL}

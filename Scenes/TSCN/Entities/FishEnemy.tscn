@@ -18,6 +18,8 @@ view_distance = 70.0
 attack_distance = 100.0
 sensor_type = 0
 wander_type = 0
+wander_range = 800.0
+sound_max_distance = 0.0
 
 [sub_resource type="Resource" id="Resource_mkt0s"]
 script = ExtResource("3_j1siw")
@@ -93,10 +95,12 @@ uid = SubResource("Resource_mkt0s")
 
 [node name="FishNavigation" type="NavigationAgent2D" parent="."]
 target_desired_distance = 5.0
+path_postprocessing = 1
 avoidance_enabled = true
 radius = 15.0
 neighbor_distance = 50.0
 max_neighbors = 5
+debug_enabled = true
 
 [node name="FishCollison" type="CollisionShape2D" parent="."]
 position = Vector2(4, 0)
@@ -134,3 +138,9 @@ shape = SubResource("CircleShape2D_d8n50")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 position = Vector2(-5, -1)
 shape = SubResource("CircleShape2D_lpu2o")
+
+[node name="PathfindUpdateTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="PathfindUpdateTimer" to="." method="_on_pathfind_update_timer_timeout"]

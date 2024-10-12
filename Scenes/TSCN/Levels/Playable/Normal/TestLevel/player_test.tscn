@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://b8iotem83uvu0" path="res://Scenes/TSCN/Entities/FishEnemy.tscn" id="2_hxeir"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_waxhy"]
-vertices = PackedVector2Array(1842.83, 61.8438, 1827.16, 992.062, 65.9375, 1002.93, 61.0469, 35.1484)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(56, 1013, 1837, 1002, 1853, 52, 51, 25)])
+vertices = PackedVector2Array(688.219, 58.6172, 1842.82, 61.9688, 1827.16, 992.062, 672.938, 999.188, 523.969, 875.07, 364.789, 1001.09, 505.562, 872.781, 412.539, 187.148, 545.492, 57.9609, 296.453, 57.1172, 393.75, 184.977, 193.758, 881.547, 253.023, 1001.78, 65.8984, 1002.93, 175.023, 880.406, 57.0938, 56.0391, 173.008, 56.5703)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(4, 3, 5, 6), PackedInt32Array(6, 5, 7, 8), PackedInt32Array(9, 8, 7, 10), PackedInt32Array(11, 9, 10, 12), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(14, 13, 15, 16)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(56, 1013, 261.445, 1011.73, 402, 196, 354.185, 1011.16, 672.997, 1009.19, 1837, 1002, 1853, 52, 680.058, 48.5993, 516, 864, 556, 48, 287.626, 47.0909, 185, 871, 182.989, 46.6165, 47, 46)])
 
 [node name="PlayerTest" type="Node2D"]
 
