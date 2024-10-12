@@ -79,6 +79,9 @@ func _process_enemy(delta: float) -> void:
 		if result["collider"] == closest_player:
 			player_visible = true
 		else:
+			# The fish will be able to see the player for a bit even after it leaves the area.
+			if num_players_in_area == 1 && player_visible:
+				await get_tree().create_timer(settings.disable_period_length).timeout
 			player_visible = false
 		
 	# If player in area calculate closest player, else wander.
@@ -127,7 +130,7 @@ func _update_wander_point():
 		var rng := RandomNumberGenerator.new()
 		var random_direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
 		var random_multiplier := rng.randf_range(0, settings.wander_range)
-		target_position = global_position + random_direction * random_multiplier
+		target_position = global_position + velocity.normalized() * settings.wander_range / 4 + random_direction * random_multiplier
 		
 		var pointcast = PhysicsPointQueryParameters2D.new()
 		pointcast.position = target_position
@@ -147,6 +150,10 @@ func _area_entered(area: Area2D) -> void:
 
 func _area_exited(area: Area2D) -> void:
 	if area.name == "PlayerVisualDetectionArea":
+		# The fish will be able to see the player for a bit even after it leaves the area.
+		if num_players_in_area == 1 && player_visible:
+			await get_tree().create_timer(settings.disable_period_length).timeout
+		
 		num_players_in_area -= 1
 		players_list.remove_at(players_list.find(area.get_parent()))
 		

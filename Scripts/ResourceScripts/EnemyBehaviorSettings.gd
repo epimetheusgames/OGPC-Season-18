@@ -16,6 +16,7 @@ extends Resource
 @export_group("View Sensor Settings")
 @export_range(0, 360) var view_range
 @export var view_distance: float
+@export var disable_period_length: float = 1
 
 @export_group("Sound Sensor Settings")
 @export var sound_max_distance: float

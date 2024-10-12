@@ -31,15 +31,17 @@ func _process(delta: float) -> void:
 			$FishAnimation.play("Attack")
 	
 	if !reached_target:
-		var target_position = $FishNavigation.get_next_path_position()
-		velocity = (target_position - position).normalized()
+		var target_position: Vector2 = $FishNavigation.get_next_path_position()
+		var target_velocity := (target_position - position).normalized()
 		
 		if player_visible:
-			velocity *= 1 + settings.agressiveness
+			target_velocity *= 1 + settings.agressiveness
+		
+		velocity += (target_velocity - velocity) * 0.05
 		
 		var target_angle := velocity.normalized().angle() + PI
 		var angle_diff: float = angle_difference(rotation, target_angle)
-		rotation += clamp(angle_diff * 0.05, -0.1, 0.1)
+		rotation += clamp(angle_diff * 0.03, -0.1, 0.1)
 		
 	move_and_slide()
 	position += velocity * delta * 60

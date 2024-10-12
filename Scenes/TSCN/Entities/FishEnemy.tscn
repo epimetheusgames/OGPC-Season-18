@@ -20,13 +20,16 @@ attack_mode = 0
 wander_range = 800.0
 view_range = 230.0
 view_distance = 70.0
+disable_period_length = 10.0
 sound_max_distance = 0.0
 
 [sub_resource type="Resource" id="Resource_mkt0s"]
 script = ExtResource("3_j1siw")
 uid = 1726
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rq2jk"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_joiil"]
+radius = 6.0
+height = 20.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7umgp"]
 atlas = ExtResource("2_xp6fr")
@@ -104,10 +107,12 @@ max_neighbors = 5
 debug_enabled = true
 
 [node name="FishCollison" type="CollisionShape2D" parent="."]
-position = Vector2(4, 0)
-shape = SubResource("CircleShape2D_rq2jk")
+position = Vector2(6, 0)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_joiil")
 
 [node name="FishAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 0)
 sprite_frames = SubResource("SpriteFrames_vceji")
 animation = &"Attack"
 autoplay = "Idle"
@@ -129,12 +134,14 @@ hurtbox = NodePath("../Hurtbox")
 component_container = NodePath("..")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(2, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(4, 0)
 shape = SubResource("CircleShape2D_d8n50")
 
 [node name="AttackBox" type="Area2D" parent="."]
+position = Vector2(2, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 position = Vector2(-5, -1)
