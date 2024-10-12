@@ -12,6 +12,7 @@ var _player_detection_area: Area2D
 var _player_detection_collision_shape: CollisionShape2D
 var closest_player: Diver
 var player_in_area := false
+var player_visible := false
 var reached_target := false
 var wander_state := WANDER_MODE.NOT_WANDERING
 var num_players_in_area = 0
@@ -66,11 +67,22 @@ func _process(delta: float) -> void:
 func _process_enemy(delta: float) -> void:
 	if num_players_in_area == 0:
 		player_in_area = false
+		player_visible = false
 	else:
 		player_in_area = true
 	
-	# If player in area calculate closest player, else wander.
 	if player_in_area:
+		_update_closest_player()
+		var space_state := get_world_2d().direct_space_state
+		var raycast := PhysicsRayQueryParameters2D.create(global_position, closest_player.global_position)
+		var result := space_state.intersect_ray(raycast)
+		if result["collider"] == closest_player:
+			player_visible = true
+		else:
+			player_visible = false
+		
+	# If player in area calculate closest player, else wander.
+	if player_visible:
 		_update_target_position()
 	elif wander_state == WANDER_MODE.NOT_WANDERING || wander_state == WANDER_MODE.WANDER_POINT_REACHED:
 		_update_wander_point()
@@ -78,13 +90,13 @@ func _process_enemy(delta: float) -> void:
 func _generate_view_polygon(angle: float, radius: float) -> PackedVector2Array:
 	var output := PackedVector2Array([Vector2(0, 0)])
 	var start := int(forward_direction.normalized().angle()) + 180
-	for i in range(start - int(angle) / 2, start + int(angle) / 2):
+	for i in range(start - int(angle) / 2, start + int(angle) / 2, 10):
 		var fi = i * PI / 180
 		output.append(Vector2(radius * cos(fi), radius * sin(fi)))
 	
 	return output
 
-func _update_target_position():
+func _update_closest_player():
 	# If there is one player
 	if num_players_in_area == 1:
 		closest_player = players_list[0]
@@ -100,8 +112,13 @@ func _update_target_position():
 				closest_ind = i
 		
 		closest_player = players_list[closest_ind]
-	
-	target_position = closest_player.position
+
+func _update_target_position():
+	if player_visible:
+		if settings.attack_mode == EnemyBehaviorSettings.ATTACK_MODE.ATTACK:
+			target_position = closest_player.position
+		elif settings.attack_mode == EnemyBehaviorSettings.ATTACK_MODE.RUN:
+			target_position = position - (closest_player.position - position)
 
 func _update_wander_point():
 	var valid_point_found := false

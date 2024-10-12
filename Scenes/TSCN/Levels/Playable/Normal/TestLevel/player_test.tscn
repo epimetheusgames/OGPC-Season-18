@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://b8iotem83uvu0" path="res://Scenes/TSCN/Entities/FishEnemy.tscn" id="2_hxeir"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_waxhy"]
-vertices = PackedVector2Array(688.219, 58.6172, 1842.82, 61.9688, 1827.16, 992.062, 672.938, 999.188, 523.969, 875.07, 364.789, 1001.09, 505.562, 872.781, 412.539, 187.148, 545.492, 57.9609, 296.453, 57.1172, 393.75, 184.977, 193.758, 881.547, 253.023, 1001.78, 65.8984, 1002.93, 175.023, 880.406, 57.0938, 56.0391, 173.008, 56.5703)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(4, 3, 5, 6), PackedInt32Array(6, 5, 7, 8), PackedInt32Array(9, 8, 7, 10), PackedInt32Array(11, 9, 10, 12), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(14, 13, 15, 16)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(56, 1013, 261.445, 1011.73, 402, 196, 354.185, 1011.16, 672.997, 1009.19, 1837, 1002, 1853, 52, 680.058, 48.5993, 516, 864, 556, 48, 287.626, 47.0909, 185, 871, 182.989, 46.6165, 47, 46)])
+vertices = PackedVector2Array(597.297, 510.602, 612.562, 434.789, 741.422, 40.0234, 1929.86, 59.8125, 1828.02, 992.047, 672.938, 999.188, 540.578, 792.523, 523.969, 875.07, 364.789, 1001.09, 505.562, 872.781, 396.43, 461.648, 523.133, 514.289, 65.8984, 1002.93, 57.0938, 56.0391, 173.008, 56.5703, 175.023, 880.406, 253.023, 1001.78, 193.758, 881.547, 393.75, 184.977, 296.453, 57.1172, 545.492, 57.9609, 412.539, 187.148, 527.453, 426.273, 397.422, 444.844, 688.672, 56.3906)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 6, 5), PackedInt32Array(7, 5, 8, 9), PackedInt32Array(9, 8, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 12, 15, 17), PackedInt32Array(18, 16, 17, 19), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(21, 20, 22, 23), PackedInt32Array(0, 11, 10, 23, 22, 1), PackedInt32Array(2, 1, 24)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(56, 1013, 261.445, 1011.73, 402, 196, 387.438, 444.253, 386.452, 461.065, 354.185, 1011.16, 672.997, 1009.19, 1837, 1002, 1941, 50, 740, 30, 680.058, 48.5993, 530.779, 790.545, 516, 864, 532.675, 523.827, 630, 519, 665, 430, 537.899, 417.262, 556, 48, 287.626, 47.0909, 185, 871, 182.989, 46.6165, 47, 46)])
 
 [node name="PlayerTest" type="Node2D"]
 
@@ -22,5 +22,13 @@ scale = Vector2(5, 5)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_waxhy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(188, 848, 287, 37, 560, 45, 542, 412, 606, 417, 671, 45, 738, -24, 1958, 42, 1848, 1013, 340, 1018, 399, 208, 259, 1031, 41, 1021, -66, -74, 188, 39, 178, 865, 187, 851, 180, 840, 230, -136, -175, -125, -133, 1244, 2035, 1175, 2120, -122, 257, -133)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(532, 524, 591, 518, 515, 865)
 
 [editable path="FishEnemy"]

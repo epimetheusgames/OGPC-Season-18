@@ -23,7 +23,7 @@ func _target_reached():
 func _process(delta: float) -> void:
 	_process_enemy(delta)
 	
-	if player_in_area:
+	if player_visible:
 		_path_changed()
 		
 		if position.distance_to(closest_player.position) < settings.attack_distance && !$AttackBoxComponent.is_attacking:
@@ -33,14 +33,16 @@ func _process(delta: float) -> void:
 	if !reached_target:
 		var target_position = $FishNavigation.get_next_path_position()
 		velocity = (target_position - position).normalized()
-		if player_in_area:
+		
+		if player_visible:
 			velocity *= 1 + settings.agressiveness
 		
 		var target_angle := velocity.normalized().angle() + PI
 		var angle_diff: float = angle_difference(rotation, target_angle)
 		rotation += clamp(angle_diff * 0.05, -0.1, 0.1)
 		
-		position += velocity * delta * 60
+	move_and_slide()
+	position += velocity * delta * 60
 
 func _on_pathfind_update_timer_timeout() -> void:
 	$FishNavigation.target_position = target_position
