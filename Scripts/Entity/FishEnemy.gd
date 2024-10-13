@@ -30,6 +30,8 @@ func _process(delta: float) -> void:
 			$AttackBoxComponent.attack()
 			$FishAnimation.play("Attack")
 	
+	var intended_velocity = velocity
+	
 	if !reached_target:
 		var target_position: Vector2 = $FishNavigation.get_next_path_position()
 		var target_velocity := (target_position - position).normalized()
@@ -37,14 +39,19 @@ func _process(delta: float) -> void:
 		if player_visible:
 			target_velocity *= 1 + settings.agressiveness
 		
-		velocity += (target_velocity - velocity) * 0.05
+		intended_velocity += (target_velocity - velocity) * 0.05
 		
 		var target_angle := velocity.normalized().angle() + PI
 		var angle_diff: float = angle_difference(rotation, target_angle)
 		rotation += clamp(angle_diff * 0.03, -0.1, 0.1)
-		
+	
+	$FishNavigation.set_velocity(intended_velocity)
 	move_and_slide()
-	position += velocity * delta * 60
+	if !(closest_player && (position.distance_to(closest_player.position) < settings.closest_distance)):
+		position += velocity * delta * 60
 
 func _on_pathfind_update_timer_timeout() -> void:
 	$FishNavigation.target_position = target_position
+
+func _on_fish_navigation_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity

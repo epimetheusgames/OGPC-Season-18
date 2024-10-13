@@ -3,6 +3,7 @@ class_name AttackBoxComponent
 extends BaseHitboxComponent
 
 @export var damage := 1.0
+@export var knockback_velocity := 5.0
 @export var attack_seconds := 0.5
 @export var always_attacking := false
 

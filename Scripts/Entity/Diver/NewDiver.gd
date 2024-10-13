@@ -20,6 +20,11 @@ func _physics_process(delta: float):
 	var angle_diff: float = angle_difference(rotation, target_angle)
 	rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
 	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		if collision && collision.get_collider() is CharacterBody2D:
+			collision.get_collider().velocity = -collision.get_normal() * 5
+	
 	move_and_slide()
 	
 	if Input.is_action_just_pressed("attack"):

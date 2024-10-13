@@ -186,7 +186,7 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 ---
 
 - Do not commit broken code
-- Do not try and fix merge changes if you are unsure of how 
+- Do not try and fix merge changes if you are unsure of how (everythings gonna die)
 - Never use commands like "rebase", "reset", "revert", "branch -d", without making sure, these can blow away progress easily
 - In general never delete anything unless it is necessary (git wise)
 

@@ -14,6 +14,7 @@ health = 0
 damage = 0
 agressiveness = 1.0
 attack_distance = 100.0
+closest_distance = 85.0
 sensor_type = 0
 wander_type = 0
 attack_mode = 0
@@ -28,8 +29,8 @@ script = ExtResource("3_j1siw")
 uid = 1726
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_joiil"]
-radius = 6.0
-height = 20.0
+radius = 4.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7umgp"]
 atlas = ExtResource("2_xp6fr")
@@ -93,6 +94,8 @@ radius = 12.0
 radius = 6.08276
 
 [node name="FishEnemy" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 16
 script = ExtResource("1_c1y28")
 settings = SubResource("Resource_sd441")
 uid = SubResource("Resource_mkt0s")
@@ -101,13 +104,13 @@ uid = SubResource("Resource_mkt0s")
 target_desired_distance = 20.0
 path_postprocessing = 1
 avoidance_enabled = true
-radius = 15.0
-neighbor_distance = 50.0
+radius = 30.0
 max_neighbors = 5
+max_speed = 10.0
 debug_enabled = true
 
 [node name="FishCollison" type="CollisionShape2D" parent="."]
-position = Vector2(6, 0)
+position = Vector2(3, 0)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_joiil")
 
@@ -124,12 +127,14 @@ component_container = NodePath("..")
 
 [node name="AttackBoxComponent" type="Node" parent="."]
 script = ExtResource("4_p5whe")
+knockback_velocity = 500.0
 hurtbox = NodePath("../AttackBox")
 component_container = NodePath("..")
 
 [node name="HurtboxComponent" type="Node" parent="."]
 script = ExtResource("5_cg6aa")
 attachable_health_component = NodePath("../HealthComponent")
+attack_box_to_exclude = NodePath("../AttackBoxComponent")
 hurtbox = NodePath("../Hurtbox")
 component_container = NodePath("..")
 
@@ -151,4 +156,5 @@ shape = SubResource("CircleShape2D_lpu2o")
 wait_time = 0.1
 autostart = true
 
+[connection signal="velocity_computed" from="FishNavigation" to="." method="_on_fish_navigation_velocity_computed"]
 [connection signal="timeout" from="PathfindUpdateTimer" to="." method="_on_pathfind_update_timer_timeout"]

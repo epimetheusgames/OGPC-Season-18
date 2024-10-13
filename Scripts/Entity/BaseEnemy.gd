@@ -76,13 +76,16 @@ func _process_enemy(delta: float) -> void:
 		var space_state := get_world_2d().direct_space_state
 		var raycast := PhysicsRayQueryParameters2D.create(global_position, closest_player.global_position)
 		var result := space_state.intersect_ray(raycast)
-		if result["collider"] == closest_player:
-			player_visible = true
+		if result:
+			if result["collider"] == closest_player:
+				player_visible = true
+			else:
+				# The fish will be able to see the player for a bit even after it leaves the area.
+				if num_players_in_area == 1 && player_visible:
+					await get_tree().create_timer(settings.disable_period_length).timeout
+				player_visible = false
 		else:
-			# The fish will be able to see the player for a bit even after it leaves the area.
-			if num_players_in_area == 1 && player_visible:
-				await get_tree().create_timer(settings.disable_period_length).timeout
-			player_visible = false
+			print("WARNING: Something went wrong.")
 		
 	# If player in area calculate closest player, else wander.
 	if player_visible:

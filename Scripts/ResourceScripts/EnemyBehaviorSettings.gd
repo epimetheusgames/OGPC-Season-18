@@ -6,6 +6,7 @@ extends Resource
 @export var damage: int
 @export_range(0, 1) var agressiveness: float
 @export var attack_distance: float
+@export var closest_distance: float
 @export var sensor_type: SENSOR_TYPE
 @export var wander_type: WANDER_TYPE
 @export var attack_mode: ATTACK_MODE

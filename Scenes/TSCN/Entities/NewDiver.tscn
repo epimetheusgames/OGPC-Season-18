@@ -308,16 +308,17 @@ script = ExtResource("5_e1cji")
 [node name="HealthComponent" type="Node" parent="Combat"]
 script = ExtResource("6_vwpct")
 max_health = 5.0
-component_container = NodePath("..")
+component_container = NodePath("../..")
 
 [node name="HurtboxComponent" type="Node" parent="Combat"]
 script = ExtResource("6_7jryt")
 attachable_health_component = NodePath("../HealthComponent")
 hurtbox = NodePath("../PlayerHurtbox")
-component_container = NodePath("..")
+component_container = NodePath("../..")
 
 [node name="PlayerHurtbox" type="Area2D" parent="Combat"]
 rotation = -0.000201209
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Combat/PlayerHurtbox"]
 shape = SubResource("CapsuleShape2D_wi5t0")
