@@ -62,6 +62,12 @@ shape = SubResource("CapsuleShape2D_ghsq1")
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("2_najvs")
 
+[node name="RightWallRaycast" type="RayCast2D" parent="Movement"]
+target_position = Vector2(57, 0)
+
+[node name="LeftWallRaycast" type="RayCast2D" parent="Movement"]
+target_position = Vector2(-57, -1)
+
 [node name="Animation" type="Node2D" parent="."]
 script = ExtResource("2_3siqq")
 
