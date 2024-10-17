@@ -57,7 +57,7 @@ func _ready() -> void:
 	
 	# Check for command line arguments
 	check_command_line()
-	
+	return
 	if "host" in OS.get_cmdline_args():
 		create_lobby()
 	if "client" in OS.get_cmdline_args():

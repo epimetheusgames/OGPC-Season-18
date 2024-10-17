@@ -29,6 +29,7 @@ func _ready():
 		#await get_tree().create_timer(5).timeout
 		#Global.multiplayer_manager.gd_sync_join_lobby("TEST2", "TEST")
 	#
+	return
 	load_level("res://Scenes/TSCN/Levels/Playable/Normal/TestLevel/player_test.tscn")
 
 # Saves a ConfigFile to memory.
