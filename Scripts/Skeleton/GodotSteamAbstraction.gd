@@ -19,6 +19,8 @@ var lobbies_list: Array[Array] = []
 var lobby_owner: int = 0
 var is_lobby_owner := false
 var handshake_completed_ids: Array[int] = []
+var new_lobby_name: String
+var new_lobby_mode: String
 
 signal lobby_joined
 signal user_joined_lobby(user_id, user_name)
@@ -59,7 +61,7 @@ func _ready() -> void:
 	check_command_line()
 	return
 	if "host" in OS.get_cmdline_args():
-		create_lobby()
+		create_lobby("TEST", "GodotSteam TEST")
 	if "client" in OS.get_cmdline_args():
 		get_lobby_list()
 		await Steam.lobby_match_list
@@ -97,8 +99,10 @@ func check_command_line() -> void:
 				print("DEBUG: Command line lobby ID: %s" % these_arguments[1])
 				join_lobby(int(these_arguments[1]))
 
-func create_lobby() -> void:
+func create_lobby(lobby_name: String, lobby_mode: String) -> void:
 	if lobby_id == 0:
+		new_lobby_name = lobby_name
+		new_lobby_mode = lobby_mode
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_members_max)
 
 func join_lobby(this_lobby_id: int) -> void:
@@ -143,8 +147,8 @@ func _on_lobby_created(connect: int, this_lobby_id: int) -> void:
 		print("DEBUG: Created a lobby: %s" % lobby_id)
 		
 		Steam.setLobbyJoinable(lobby_id, true)
-		Steam.setLobbyData(lobby_id, "name", "TEST")
-		Steam.setLobbyData(lobby_id, "mode", "GodotSteam TEST")
+		Steam.setLobbyData(lobby_id, "name", new_lobby_name)
+		Steam.setLobbyData(lobby_id, "mode", new_lobby_mode)
 		
 		user_joined_lobby.emit(steam_id, Steam.getFriendPersonaName(steam_id))
 		

@@ -23,3 +23,4 @@ func _init_hurtbox() -> void:
 		
 		# 2 = 0100 in binary (see collision mask dataset in GDSCRIPTRULES.md)
 		hurtbox_node.collision_mask = 2
+		hurtbox_node.collision_layer = 2

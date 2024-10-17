@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=16 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiver.gd" id="1_k6jjc"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiverAnimation.gd" id="2_3siqq"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiverMovement.gd" id="2_najvs"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiverCombat.gd" id="5_e1cji"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiverFlashlight.gd" id="6_5oexd"]
+[ext_resource type="Script" path="res://Scripts/Components/HurtboxComponent.gd" id="6_7jryt"]
+[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="6_vwpct"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -48,7 +50,8 @@ modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_ybnnp")
 modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_db2b6")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wi5t0"]
-height = 86.0
+radius = 26.0
+height = 124.0
 
 [node name="Diver" type="CharacterBody2D"]
 script = ExtResource("1_k6jjc")
@@ -58,6 +61,12 @@ shape = SubResource("CapsuleShape2D_ghsq1")
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("2_najvs")
+
+[node name="RightWallRaycast" type="RayCast2D" parent="Movement"]
+target_position = Vector2(48, 0)
+
+[node name="LeftWallRaycast" type="RayCast2D" parent="Movement"]
+target_position = Vector2(-48, 0)
 
 [node name="Animation" type="Node2D" parent="."]
 script = ExtResource("2_3siqq")
@@ -296,14 +305,35 @@ polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
 rotation = 0.000201209
 script = ExtResource("5_e1cji")
 
+[node name="HealthComponent" type="Node" parent="Combat"]
+script = ExtResource("6_vwpct")
+max_health = 5.0
+component_container = NodePath("../..")
+
+[node name="HurtboxComponent" type="Node" parent="Combat"]
+script = ExtResource("6_7jryt")
+attachable_health_component = NodePath("../HealthComponent")
+hurtbox = NodePath("../PlayerHurtbox")
+component_container = NodePath("../..")
+
+[node name="PlayerHurtbox" type="Area2D" parent="Combat"]
+rotation = -0.000201209
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Combat/PlayerHurtbox"]
+shape = SubResource("CapsuleShape2D_wi5t0")
+debug_color = Color(0, 0.649449, 0.143183, 0.42)
+
 [node name="Flashlight" type="Node2D" parent="."]
 script = ExtResource("6_5oexd")
 
 [node name="LightTexture" type="Polygon2D" parent="Flashlight"]
 color = Color(1, 1, 1, 0.352941)
-polygon = PackedVector2Array(379, -167, 0, 0, 381, 201)
+polygon = PackedVector2Array(381, -200, 0, 0, 381, 200)
 
-[node name="PlayerHurtbox" type="Area2D" parent="."]
+[node name="PlayerVisualDetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisualDetectionArea"]
 shape = SubResource("CapsuleShape2D_wi5t0")

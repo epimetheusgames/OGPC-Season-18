@@ -3,6 +3,7 @@ class_name AttackBoxComponent
 extends BaseHitboxComponent
 
 @export var damage := 1.0
+@export var knockback_velocity := 5.0
 @export var attack_seconds := 0.5
 @export var always_attacking := false
 
@@ -14,6 +15,9 @@ func _ready() -> void:
 	
 	if hurtbox && !always_attacking:
 		hurtbox_collision.disabled = true
+		
+		# Set to zero because we don't want to be detecting other AttackBoxes.
+		hurtbox_node.collision_mask = 0
 
 func attack() -> void:
 	if always_attacking || !hurtbox:
@@ -27,5 +31,5 @@ func attack() -> void:
 	
 	await get_tree().create_timer(attack_seconds).timeout
 	
-	hurtbox.disabled = true
+	hurtbox_collision.disabled = true
 	is_attacking = false

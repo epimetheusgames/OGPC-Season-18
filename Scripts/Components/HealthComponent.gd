@@ -6,7 +6,7 @@ extends BaseComponent
 @export var max_health: float = 100.0
 @export var iframe_duration: float = 0.25 # In seconds
 
-var _health: float = max_health
+@onready var _health: float = max_health
 var _iframes_active: bool = false
 
 
@@ -40,3 +40,6 @@ func set_iframe_duration(iframe_duration: float) -> void:
 
 func get_health() -> float:
 	return _health
+
+func set_health(new_health: int) -> void:
+	_health = new_health

@@ -1,25 +1,57 @@
+class_name AnimatedEnemy
 extends Enemy
+
+func _ready() -> void:
+	_enemy_ready()
+	
+	$FishNavigation.path_changed.connect(_path_changed)
+	$FishNavigation.navigation_finished.connect(_target_reached)
+	
+	$AttackBoxComponent.damage = settings.damage
+	$HealthComponent.set_max_health(settings.health)
+	$HealthComponent.set_health(settings.health)
+
+func _path_changed():
+	reached_target = false
+
+func _target_reached():
+	if wander_state == WANDER_MODE.WANDERING_TO_POINT:
+		wander_state = WANDER_MODE.WANDER_POINT_REACHED
+	
+	reached_target = true
 
 func _process(delta: float) -> void:
 	_process_enemy(delta)
 	
-	if player_in_area:
-		# If there is one player, go towards that.
-		if num_players_in_area == 1:
-			$FishNavigation.target_position = players_list[0].position
-			
-		# Else find the closest player
-		else:
-			var closest_dist := 99999999
-			var closest_ind := 0
-			for i in range(players_list.size()):
-				var distance: int = position.distance_to(players_list[i].position)
-				if distance < closest_dist:
-					closest_dist = distance
-					closest_ind = i
-			
-			$FishNavigation.target_position = players_list[closest_ind].position
+	if player_visible:
+		_path_changed()
+		
+		if position.distance_to(closest_player.position) < settings.attack_distance && !$AttackBoxComponent.is_attacking:
+			$AttackBoxComponent.attack()
+			$FishAnimation.play("Attack")
 	
-	var target_position = $FishNavigation.get_next_path_position()
-	position += (target_position - position).normalized() * delta * 60
+	var intended_velocity = velocity
 	
+	if !reached_target:
+		var target_position: Vector2 = $FishNavigation.get_next_path_position()
+		var target_velocity := (target_position - position).normalized()
+		
+		if player_visible:
+			target_velocity *= 1 + settings.agressiveness
+		
+		intended_velocity += (target_velocity - velocity) * 0.05
+		
+		var target_angle := velocity.normalized().angle() + PI
+		var angle_diff: float = angle_difference(rotation, target_angle)
+		rotation += clamp(angle_diff * 0.03, -0.1, 0.1)
+	
+	$FishNavigation.set_velocity(intended_velocity)
+	move_and_slide()
+	if !(closest_player && (position.distance_to(closest_player.position) < settings.closest_distance)):
+		position += velocity * delta * 60
+
+func _on_pathfind_update_timer_timeout() -> void:
+	$FishNavigation.target_position = target_position
+
+func _on_fish_navigation_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://mq5dramo38mh"]
+
+[ext_resource type="Script" path="res://Scripts/PointToLineDemo.gd" id="1_qdjmh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ohwuf"]
+radius = 28.6356
+
+[node name="PointToLineDemo" type="Node2D"]
+script = ExtResource("1_qdjmh")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(450, 226, 1131, 457, 949.016, 781.185, 330, 746)
+closed = true
+
+[node name="Point" type="Node2D" parent="."]
+position = Vector2(416, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Point"]
+shape = SubResource("CircleShape2D_ohwuf")
+
+[node name="EndPoint" type="Node2D" parent="."]
+position = Vector2(416, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndPoint"]
+shape = SubResource("CircleShape2D_ohwuf")
