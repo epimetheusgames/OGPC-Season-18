@@ -16,6 +16,7 @@ extends Node
 func _ready():
 	Global.save_load_framework = self
 	
+
 	load_level("res://Scenes/TSCN/Levels/Playable/Normal/TestLevel/player_test.tscn")
 
 # Saves a ConfigFile to memory.
