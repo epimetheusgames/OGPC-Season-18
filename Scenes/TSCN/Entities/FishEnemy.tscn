@@ -127,12 +127,14 @@ component_container = NodePath("..")
 
 [node name="AttackBoxComponent" type="Node" parent="."]
 script = ExtResource("4_p5whe")
+hitbox_type = 1
 knockback_velocity = 500.0
 hurtbox = NodePath("../AttackBox")
 component_container = NodePath("..")
 
 [node name="HurtboxComponent" type="Node" parent="."]
 script = ExtResource("5_cg6aa")
+hitbox_type = 1
 attachable_health_component = NodePath("../HealthComponent")
 attack_box_to_exclude = NodePath("../AttackBoxComponent")
 hurtbox = NodePath("../Hurtbox")

@@ -10,6 +10,7 @@ extends Node2D
 
 @export var start_anchor_node: Node2D
 @export var end_anchor_node: Node2D
+@export var collision_polygon: Line2D
 
 const DIST_BETWEEN_POINTS: float = 5
 
@@ -67,7 +68,6 @@ func pull_toward_anchor2():
 			line.set_point_position(
 				length - i - 2, constrain_distance(point_1, point_2, DIST_BETWEEN_POINTS)
 			)
-
 
 # Project point onto circle around anchor
 func constrain_distance(point: Vector2, anchor: Vector2, distance: float) -> Vector2:

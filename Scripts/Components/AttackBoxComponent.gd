@@ -2,6 +2,7 @@
 class_name AttackBoxComponent
 extends BaseHitboxComponent
 
+@export var hitbox_type: HITBOX_TYPE
 @export var damage := 1.0
 @export var knockback_velocity := 5.0
 @export var attack_seconds := 0.5
@@ -18,11 +19,18 @@ func _ready() -> void:
 		
 		# Set to zero because we don't want to be detecting other AttackBoxes.
 		hurtbox_node.collision_mask = 0
+	
+	if hitbox_type == HITBOX_TYPE.PLAYER:
+		hurtbox_node.collision_layer = Global.bitmask_conversion["Player Attackbox / Enemy Hurtbox"]
+	if hitbox_type == HITBOX_TYPE.ENEMY:
+		hurtbox_node.collision_layer = Global.bitmask_conversion["Player Hurtbox / Enemy Attackbox"]
+	if hitbox_type == HITBOX_TYPE.ENTITY_INTERACT:
+		hurtbox_node.collision_layer = Global.bitmask_conversion["Interaction"]
 
 func attack() -> void:
 	if always_attacking || !hurtbox:
 		print("WARNING: Cannot attack because AttackBox because either:")
-		print("- AttackBox is set to allways attacking OR")
+		print("- AttackBox is set to always attacking OR")
 		print("- AttackBox has no hurtbox node attached")
 		return
 	

@@ -99,10 +99,12 @@ attack={
 [layer_names]
 
 2d_physics/layer_1="General Collision"
-2d_physics/layer_2="Hurtbox"
+2d_physics/layer_2="Enemy Attackbox or Player Hurtbox"
 2d_physics/layer_3="Light Areas"
 2d_physics/layer_4="Movement Area"
 2d_physics/layer_5="Wall Collision 2"
+2d_physics/layer_6="Enemy Hurtbox or Player Attackbox"
+2d_physics/layer_7="Interaction Hitbox"
 
 [rendering]
 

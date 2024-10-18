@@ -7,6 +7,9 @@ extends BaseComponent
 
 var hurtbox_node: Area2D
 var hurtbox_collision: CollisionShape2D
+var collision_bitmask := 0
+
+enum HITBOX_TYPE {PLAYER, ENEMY, ENTITY_INTERACT}
 
 func _ready() -> void:
 	component_name = "BaseHitboxComponent"

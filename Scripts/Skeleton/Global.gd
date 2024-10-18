@@ -17,6 +17,17 @@ var boids_calculator_node: BoidsCalculator
 var dialog_core: Node2D
 var godot_steam_abstraction: GodotSteamAbstraction
 
+# Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
+var bitmask_conversion = {
+	"General Collision": 1,
+	"Player Hurtbox / Enemy Attackbox": 2,
+	"Light": 4,
+	"Movement": 8,
+	"Wall Layer 2": 16,
+	"Player Attackbox / Enemy Hurtbox": 32,
+	"Interaction": 64,
+}
+
 func get_slot_password(slot_num: int) -> String:
 	var result_string = ""
 	

@@ -138,7 +138,7 @@ multiplayer and can't just ask a friend to test it with you.
 
 ### Ordering:
 ```
-01. # [Script description (optional)]
+01. ## [Script description (optional but recomended)]
 02. @tool
 03. class_name
 04. extends
@@ -155,10 +155,11 @@ multiplayer and can't just ask a friend to test it with you.
 13. optional built-in virtual _init method
 14. optional built-in virtual _enter_tree() method
 15. optional built-in virtual _ready method
-16. remaining built-in virtual methods
-18. private methods
+16. optional built-in _process method
+17. optional built-in _physics_process method
 17. public methods
-19. subclasses
+18. private methods
+19. subclasses (not reccomended, they should be their own script)
 ```
 
 ### Classes:
@@ -167,7 +168,8 @@ multiplayer and can't just ask a friend to test it with you.
 ### Static Typing:
 - Static type all variables, unless it is impossible (for example a built-in function that returns a Variant, meaning that you cannot static type the variable that you are assigning the result of the function to.)
 ```
-var health: int = 0 # The type can be int or float, and thus should be stated explicitly.
+var health := 0 # The type can be int or float, and thus should be stated explicitly.
+var health: float = 0 # The editor knows this is a float because of the explicit statement.
 var another_number := 0.0 # This is a float for the interpreter.
 var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 ```
@@ -175,9 +177,10 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 
 ---
 
-## GENERAL CODING PRACICES
+## General Coding Practices
 
-- Never set properties of a node from a different node, especially player / core objects.  (player.velocity = 100 from another script is never allowed.)
+- If you inherit from a script class always make sure to call its custom _ready/_process function from your _ready/_process function.
+- Never set properties of a node from a different node, especially player / core objects. (player.velocity = 100 from another script is never allowed.)
 - Each scene should be able to run by itself without causing a runtime exception.
 - Use setters/getters instead of setting/getting a property directly.
 - Instead of reference a node with get_node(), use @export_node_path which will change if the node's
@@ -192,9 +195,12 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 
 ## Collision BitMasks (for non-coliding hitboxes e.g. Area2D)
 
-1 (0001): General collision
-2 (0010): Hurtbox/attackbox
-4 (0100): Light area hitbox
-8 (1000): Movement hitboxes
+1  (0000001): General Collision
+2  (0000010): Player Hurtbox / Enemy Attackbox
+4  (0000100): Light
+8  (0001000): Movement
+16 (0010000): Wall Layer 2
+32 (0100000): Player Attackbox / Enemy Hurtbox
+64 (1000000): Interaction
 
 Sound should be based on a pathfind to the sound.

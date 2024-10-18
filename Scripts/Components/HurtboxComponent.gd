@@ -3,6 +3,7 @@
 class_name HurtboxComponent
 extends BaseHitboxComponent
 
+@export var hitbox_type: HITBOX_TYPE
 @export_node_path("HealthComponent") var attachable_health_component
 @export_node_path("AttackBoxComponent") var attack_box_to_exclude
 
@@ -11,6 +12,8 @@ signal damage_taken(damage_ammount: int)
 func _ready() -> void:
 	_init_hurtbox()
 	
+	component_name = "HurtboxComponent"
+	
 	# Connect signals
 	if hurtbox:
 		hurtbox_node.area_entered.connect(_area_entered)
@@ -18,12 +21,22 @@ func _ready() -> void:
 		# Set to zero because we don't want anyone getting hurt by our hurtbox.
 		hurtbox_node.collision_layer = 0
 	
-	component_name = "HurtboxComponent"
+	if hitbox_type == HITBOX_TYPE.PLAYER:
+		hurtbox_node.collision_mask = Global.bitmask_conversion["Player Hurtbox / Enemy Attackbox"]
+	if hitbox_type == HITBOX_TYPE.ENEMY:
+		hurtbox_node.collision_mask = Global.bitmask_conversion["Player Attackbox / Enemy Hurtbox"]
+	if hitbox_type == HITBOX_TYPE.ENTITY_INTERACT:
+		hurtbox_node.collision_mask = Global.bitmask_conversion["Interaction"]
 	
 func _area_entered(area: Area2D) -> void:
 	if attachable_health_component:
 		var damage_ammount := 1.0
-		var parent: Entity = area.get_parent()
+		var parent = area.get_parent()
+		if !(parent is Entity):
+			parent = parent.get_parent()
+		if !(parent is Entity):
+			print("WARNING: Hurtbox entered by area at path " + str(area.get_path()) + ", which doesn't have a parent or grandparent that is of type Entity. This will not be detected.")
+			return
 		if parent is Entity:
 			var attack_box_component: AttackBoxComponent = parent.get_component("AttackBoxComponent")
 			if attack_box_component && ((!attack_box_to_exclude) || attack_box_component != get_node(attack_box_to_exclude)):
