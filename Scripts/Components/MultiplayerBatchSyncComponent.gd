@@ -10,6 +10,8 @@ extends BaseComponent
 func _ready() -> void:
 	component_name = "MultiplayerBatchSyncComponent"
 	
+	_base_component_ready_post()
+	
 	await get_tree().create_timer(3).timeout
 	
 	if Global.godot_steam_abstraction.is_lobby_owner:

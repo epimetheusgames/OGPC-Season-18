@@ -13,6 +13,8 @@ extends BaseComponent
 
 func _ready() -> void:
 	component_name = "PlatformerMovementComponent"
+	
+	_base_component_ready_post()
 
 func _process(delta: float) -> void:
 	# Make sure the container has the neccesary functions to do the job.

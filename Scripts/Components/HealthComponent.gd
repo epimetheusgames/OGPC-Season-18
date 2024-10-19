@@ -12,6 +12,8 @@ var _iframes_active: bool = false
 
 func _ready() -> void:
 	component_name = "HealthComponent"
+	
+	_base_component_ready_post()
 
 func take_damage(amount: float) -> void:
 	if not _iframes_active:

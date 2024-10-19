@@ -39,6 +39,8 @@ func _ready():
 	get_parent().add_to_group("Boids")
 	raycast = get_node(raycast_path)
 	get_parent().velocity = (raycast.target_position - raycast.position).normalized()
+	
+	_base_component_ready_post()
 
 # Update velocity using compute shader outputs from boids calculator node.
 func _process(delta: float) -> void: 

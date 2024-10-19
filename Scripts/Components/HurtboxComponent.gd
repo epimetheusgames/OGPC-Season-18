@@ -10,7 +10,7 @@ extends BaseHitboxComponent
 signal damage_taken(damage_ammount: int)
 
 func _ready() -> void:
-	_init_hurtbox()
+	_base_hitbox_ready()
 	
 	component_name = "HurtboxComponent"
 	
@@ -28,6 +28,8 @@ func _ready() -> void:
 	if hitbox_type == HITBOX_TYPE.ENTITY_INTERACT:
 		hurtbox_node.collision_mask = Global.bitmask_conversion["Interaction"]
 	
+	_base_component_ready_post()
+	
 func _area_entered(area: Area2D) -> void:
 	if attachable_health_component:
 		var damage_ammount := 1.0
@@ -37,14 +39,18 @@ func _area_entered(area: Area2D) -> void:
 		if !(parent is Entity):
 			print("WARNING: Hurtbox entered by area at path " + str(area.get_path()) + ", which doesn't have a parent or grandparent that is of type Entity. This will not be detected.")
 			return
+		
 		if parent is Entity:
 			var attack_box_component: AttackBoxComponent = parent.get_component("AttackBoxComponent")
+			
 			if attack_box_component && ((!attack_box_to_exclude) || attack_box_component != get_node(attack_box_to_exclude)):
 				damage_ammount = attack_box_component.damage
 				var container = get_node(component_container)
-				var other_container_position = attack_box_component.get_node(attack_box_component.component_container).position
+				var other_container = attack_box_component.get_node(attack_box_component.component_container)
+				var other_container_position = other_container.position
 				var direction = (container.position - other_container_position).normalized()
 				container.velocity = direction * attack_box_component.knockback_velocity
+				container.position += direction * attack_box_component.knockback_velocity
 				
 				if container is Diver:
 					container.get_diver_movement().velocity = container.velocity

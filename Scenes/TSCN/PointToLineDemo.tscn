@@ -25,8 +25,7 @@ position = Vector2(416, 440)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EndPoint"]
 shape = SubResource("CircleShape2D_ohwuf")
 
-[node name="Rope" type="Node2D" parent="." node_paths=PackedStringArray("start_anchor_node", "end_anchor_node", "collision_polygon")]
+[node name="Rope" type="Node2D" parent="." node_paths=PackedStringArray("start_anchor_node", "end_anchor_node")]
 script = ExtResource("2_a6m7v")
 start_anchor_node = NodePath("../Point")
 end_anchor_node = NodePath("../EndPoint")
-collision_polygon = NodePath("../Line2D")

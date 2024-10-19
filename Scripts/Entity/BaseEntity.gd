@@ -17,8 +17,8 @@ var entity_type = "Entity"
 @export var sync_increment: float = 0
 
 var node_owner = 0
-
 var save_resource := EntitySave.new()
+var components_dictionary = {}
 
 func _process(delta: float) -> void:
 	if _has_physics:
@@ -42,11 +42,13 @@ func has_component(component_type: String) -> bool:
 
 ## Get the component with the specific component class
 func get_component(component_type: String) -> Node:
-	for child in get_children():
-		if "component_name" in child && child.component_name == component_type:
-			return child
+	if component_type in components_dictionary:
+		return components_dictionary[component_type]
 	
 	return null
+
+func add_component(component_type: String, component: BaseComponent) -> void:
+	components_dictionary[component_type] = component
 
 # -- Multiplayer --
 
