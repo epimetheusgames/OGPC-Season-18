@@ -4,6 +4,7 @@ class_name HurtboxComponent
 extends BaseHitboxComponent
 
 @export var hitbox_type: HITBOX_TYPE
+@export var has_nockback: bool = true
 @export_node_path("HealthComponent") var attachable_health_component
 @export_node_path("AttackBoxComponent") var attack_box_to_exclude
 
@@ -45,12 +46,12 @@ func _area_entered(area: Area2D) -> void:
 			
 			if attack_box_component && ((!attack_box_to_exclude) || attack_box_component != get_node(attack_box_to_exclude)):
 				damage_ammount = attack_box_component.damage
-				var container = get_node(component_container)
+				var container: Entity = get_node(component_container)
 				var other_container = attack_box_component.get_node(attack_box_component.component_container)
 				var other_container_position = other_container.position
 				var direction = (container.position - other_container_position).normalized()
-				container.velocity = direction * attack_box_component.knockback_velocity
-				container.position += direction * attack_box_component.knockback_velocity
+				
+				container.set_new_velocity(direction * attack_box_component.knockback_velocity)
 				
 				if container is Diver:
 					container.get_diver_movement().velocity = container.velocity

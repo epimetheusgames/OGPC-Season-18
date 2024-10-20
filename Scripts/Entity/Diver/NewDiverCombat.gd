@@ -4,13 +4,14 @@ extends Node2D
 
 @onready var knife: Node2D = $"knife"
 
-func attack():
-	slashy()
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("attack"):
+		attack()
 
-func slashy():
-	knife
+func attack() -> void:
+	$AttackBoxComponent.attack()
 
-func shoot():
+func shoot() -> void:
 	var new_bullet: BaseBullet = load("res://Scenes/TSCN/Objects/BaseBullet.tscn").instantiate()
 	new_bullet.top_level = true
 	new_bullet.global_position = global_position

@@ -68,6 +68,10 @@ func load_self() -> void:
 
 # -- Setters and getters --
 
+## Can be overriden by children to have a custom set velocity function.
+func set_new_velocity(new_velocity: Vector2) -> void:
+	velocity = new_velocity
+
 ## Set kinematic physics to true for the entity.
 func enable_physics() -> void:
 	_has_physics = true

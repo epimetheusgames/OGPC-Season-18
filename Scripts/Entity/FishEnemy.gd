@@ -1,6 +1,8 @@
 class_name AnimatedEnemy
 extends Enemy
 
+var _physics_velocity = Vector2.ZERO
+
 func _ready() -> void:
 	_enemy_ready()
 	
@@ -30,7 +32,9 @@ func _process(delta: float) -> void:
 			$AttackBoxComponent.attack()
 			$FishAnimation.play("Attack")
 	
-	var intended_velocity = velocity
+	var intended_velocity = velocity + _physics_velocity
+	
+	_physics_velocity /= 2.0
 	
 	if !reached_target:
 		var target_position: Vector2 = $FishNavigation.get_next_path_position()
@@ -49,6 +53,9 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	if !(closest_player && (position.distance_to(closest_player.position) < settings.closest_distance)):
 		position += velocity * delta * 60
+
+func set_new_velocity(new_velocity: Vector2) -> void:
+	_physics_velocity = new_velocity
 
 func _on_pathfind_update_timer_timeout() -> void:
 	$FishNavigation.target_position = target_position

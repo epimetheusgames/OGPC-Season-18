@@ -322,8 +322,7 @@ component_container = NodePath("../..")
 
 [node name="AttackBoxComponent" type="Node" parent="Combat"]
 script = ExtResource("8_58pps")
-knockback_velocity = 500.0
-always_attacking = true
+knockback_velocity = 300.0
 hurtbox = NodePath("../AttackBox")
 component_container = NodePath("../..")
 
