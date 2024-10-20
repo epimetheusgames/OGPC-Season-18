@@ -233,12 +233,13 @@ func sync_var_in_group(group: String, variable_name: String) -> void:
 		"var_values": variables
 	})
 
-func run_remote_function(node: Node, function_name: String, args: Array):
+func run_remote_function(node: Node, function_name: String, args: Array, args_as_node_paths=false):
 	send_packet(0, {
 		"message": "run_function",
 		"node_path": node.get_path(),
 		"func_name": function_name,
-		"args": args
+		"args": args,
+		"args_as_node_paths": args_as_node_paths,
 	})
 
 func read_packet() -> void:
@@ -259,7 +260,7 @@ func read_packet() -> void:
 			handshake_completed_ids.append(packet_sender)
 			send_packet(0, {"message": "handshake_received", "from": steam_id})
 		
-		if readable_data["message"] == "remote_print":
+		elif readable_data["message"] == "remote_print":
 			print("REMOTE DEBUG: " + readable_data["content"])
 		
 		# Parse packet if it's node data.
@@ -267,7 +268,10 @@ func read_packet() -> void:
 			var node_path: String = readable_data["node_path"]
 			var variable_name: String = readable_data["var_name"]
 			var variable_value = readable_data["var_val"]
-			get_node(node_path).set(variable_name, variable_value)
+			if get_node_or_null(node_path):
+				get_node(node_path).set(variable_name, variable_value)
+			else:
+				print("ERROR: Remote set on null node. This isn't neccesarily bad but it might mean some things are out of synced and something broke.")
 		
 		elif readable_data["message"] == "sync_group_var":
 			var nodes_list = get_tree().get_nodes_in_group(readable_data["group"])
@@ -277,8 +281,19 @@ func read_packet() -> void:
 		elif readable_data["message"] == "run_function":
 			var node_path: String = readable_data["node_path"]
 			var function_name: String = readable_data["func_name"]
+			
 			var function_args = readable_data["args"]
-			get_node(node_path).callv(function_name, function_args)
+			if readable_data["args_as_node_paths"]:
+				for i in range(len(function_args)):
+					function_args[i] = get_node(function_args[i])
+					if !function_args[i]:
+						print("ERROR: Remote function call on node has an argument to a nonexistant node path.")
+						return
+			
+			if get_node_or_null(node_path):
+				get_node(node_path).callv(function_name, function_args)
+			else:
+				print("ERROR: Remote function call on null node. This isn't neccesarily bad but it might mean some things are out of synced and something broke.")
 		
 		else:
 			print("ERROR: Invalid packet received. Data: " + str(readable_data))

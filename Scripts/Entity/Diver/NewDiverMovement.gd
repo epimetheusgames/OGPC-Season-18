@@ -13,10 +13,11 @@ var input_vector: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-	input_vector = get_wasd_input_vector()
-	
-	update_current_angle(delta * 60)
-	update_movement_velocity(delta * 60)
+	if !Global.is_multiplayer || get_parent()._is_node_owner():
+		input_vector = get_wasd_input_vector()
+		
+		update_current_angle(delta * 60)
+		update_movement_velocity(delta * 60)
 
 func get_wasd_input_vector() -> Vector2:
 	var input_vector: Vector2 = Vector2.ZERO

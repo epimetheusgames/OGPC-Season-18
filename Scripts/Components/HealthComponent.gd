@@ -12,6 +12,9 @@ var _iframes_active: bool = false
 signal damage_taken(health)
 signal died
 
+func _process(delta: float) -> void:
+	print(_health)
+
 func _ready() -> void:
 	component_name = "HealthComponent"
 	

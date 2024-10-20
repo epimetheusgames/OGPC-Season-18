@@ -32,6 +32,7 @@ func _ready() -> void:
 	_base_component_ready_post()
 	
 func _area_entered(area: Area2D) -> void:
+	
 	if attachable_health_component:
 		var damage_ammount := 1.0
 		var parent = area.get_parent()
@@ -40,6 +41,12 @@ func _area_entered(area: Area2D) -> void:
 		if !(parent is Entity):
 			print("WARNING: Hurtbox entered by area at path " + str(area.get_path()) + ", which doesn't have a parent or grandparent that is of type Entity. This will not be detected.")
 			return
+		
+		parent = parent as Entity
+		
+		# Take damage on all clients.
+		if Global.is_multiplayer && parent._is_node_owner():
+			Global.godot_steam_abstraction.run_remote_function(self, "_area_entered", [str(area.get_path())], true)
 		
 		if parent is Entity:
 			var attack_box_component: AttackBoxComponent = parent.get_component("AttackBoxComponent")

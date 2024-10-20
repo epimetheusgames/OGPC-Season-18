@@ -27,9 +27,10 @@ func _physics_process(delta: float):
 		var left_arm_offset = Util.angle_to_vector($Movement/LeftWallRaycast.get_collision_normal().angle() + PI / 2, -left_ik_multiplier)
 		diver_animation.arm_target1.global_position += ($Movement/RightWallRaycast.get_collision_point() + right_arm_offset - diver_animation.arm_target1.global_position) * 0.1
 		diver_animation.arm_target2.global_position += ($Movement/LeftWallRaycast.get_collision_point() + left_arm_offset - diver_animation.arm_target2.global_position) * 0.1
-		
-	var angle_diff: float = angle_difference(rotation, target_angle)
-	rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
+	
+	if !Global.is_multiplayer || _is_node_owner():
+		var angle_diff: float = angle_difference(rotation, target_angle)
+		rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
 	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
