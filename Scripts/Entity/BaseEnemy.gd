@@ -91,6 +91,9 @@ func _process_enemy(delta: float) -> void:
 	if player_visible:
 		_update_target_position()
 	elif wander_state == WANDER_MODE.NOT_WANDERING || wander_state == WANDER_MODE.WANDER_POINT_REACHED:
+		if settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.ATTACH_TO_WALL && !(wander_state == WANDER_MODE.NOT_WANDERING):
+			return
+		
 		_update_wander_point()
 
 func _generate_view_polygon(angle: float, radius: float) -> PackedVector2Array:
@@ -120,6 +123,8 @@ func _update_closest_player():
 		closest_player = players_list[closest_ind]
 
 func _update_target_position():
+	wander_state = WANDER_MODE.NOT_WANDERING
+	
 	if player_visible:
 		if settings.attack_mode == EnemyBehaviorSettings.ATTACK_MODE.ATTACK:
 			target_position = closest_player.position
@@ -129,20 +134,32 @@ func _update_target_position():
 func _update_wander_point():
 	var valid_point_found := false
 	var space_state := get_world_2d().direct_space_state
+	
 	while !valid_point_found:
 		var rng := RandomNumberGenerator.new()
 		var random_direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
-		var random_multiplier := rng.randf_range(0, settings.wander_range)
-		target_position = global_position + velocity.normalized() * settings.wander_range / 4 + random_direction * random_multiplier
 		
-		var pointcast = PhysicsPointQueryParameters2D.new()
-		pointcast.position = target_position
-		var result = space_state.intersect_point(pointcast)
-		
-		# We didn't colide with anything.
-		if !result:
-			valid_point_found = true
+		if settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.RANDOM_POSITION:
+			var random_multiplier := rng.randf_range(0, settings.wander_range)
+			target_position = global_position + velocity.normalized() * settings.wander_range / 4 + random_direction * random_multiplier
+			
+			var pointcast = PhysicsPointQueryParameters2D.new()
+			pointcast.position = target_position
+			var result = space_state.intersect_point(pointcast)
+			
+			# We didn't colide with anything.
+			if !result:
+				valid_point_found = true
 	
+		# If this is our first update to wander then do that.
+		elif settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.ATTACH_TO_WALL:
+			var raycast = PhysicsRayQueryParameters2D.create(global_position, global_position + random_direction * settings.wander_range)
+			var result = space_state.intersect_ray(raycast)
+			
+			if result:
+				valid_point_found = true
+				target_position = result["position"] + result["normal"] * 50
+		
 	reached_target = false
 	wander_state = WANDER_MODE.WANDERING_TO_POINT
 
