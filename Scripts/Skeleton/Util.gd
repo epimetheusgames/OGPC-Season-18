@@ -20,6 +20,21 @@ static func safeguard_null(variable: Object, variable_class_name: String) -> Obj
 
 # -- Math --
 
+# Framerate independant linear interpolation. A and B can be vectors of floats
+# and the function will still work.
+static func better_lerp(a: float, b: float, decay: float, delta: float):
+	# Convert decay from 0-1 to 1-25.
+	decay = (decay * 25.0)
+	return b + (a - b) * exp(-decay * delta)
+
+static func better_vec2_lerp(a: Vector2, b: Vector2, decay: float, delta: float):
+	return Vector2(better_lerp(a.x, b.x, decay, delta), better_lerp(a.y, b.y, decay, delta))
+
+# Framerate independant linear interpolation for angles.
+static func better_angle_lerp(a: float, b: float, decay: float, delta: float):
+	decay = (decay * 25) + 1
+	return b + (angle_difference(a, b)) * exp(-decay * delta)
+
 # Turns an angle and a magnitude to a vector.
 static func angle_to_vector(angle: float, magnitude: float) -> Vector2:
 	var x: float = magnitude * cos(angle)

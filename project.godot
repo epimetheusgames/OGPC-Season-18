@@ -32,6 +32,7 @@ Global="*res://Scripts/Skeleton/Global.gd"
 EditorGlobal="*res://Scripts/LevelEditor/EditorGlobal.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
+DebugDraw="*res://addons/DebugDraw2D/DebugDraw2D.gd"
 
 [debug]
 

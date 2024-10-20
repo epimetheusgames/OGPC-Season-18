@@ -28,10 +28,17 @@ var sentence_index := 0
 var dialog: Dictionary
 var dialog_json: JSON
 
+func _process(delta: float) -> void:
+	_npc_process(delta)
+
+func _npc_process(delta: float) -> void:
+	_entity_process(delta)
+
 func _option_chosen():
 	current_location+="["+String(Global.dialog_core.response)+"][0]"
 	current_location_responses+="["+String(Global.dialog_core.response)+"][1]"
 	Global.dialog_core.play_dialog(Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location+';'),dialog_speed,Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location_responses+';'))
+
 func _get_dialogue():
 	dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text())
 	dialog = dialog_json.data

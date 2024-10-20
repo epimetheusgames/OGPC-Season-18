@@ -65,6 +65,8 @@ func _process(delta: float) -> void:
 	_process_enemy(delta)
 
 func _process_enemy(delta: float) -> void:
+	_npc_process(delta)
+	
 	if num_players_in_area == 0:
 		player_in_area = false
 		player_visible = false
@@ -85,7 +87,7 @@ func _process_enemy(delta: float) -> void:
 					await get_tree().create_timer(settings.disable_period_length).timeout
 				player_visible = false
 		else:
-			print("WARNING: Something went wrong.")
+			print("WARNING: Raycast to player got no results???")
 		
 	# If player in area calculate closest player, else wander.
 	if player_visible:

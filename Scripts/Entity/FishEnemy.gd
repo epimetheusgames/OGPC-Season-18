@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 			$AttackBoxComponent.attack()
 			$FishAnimation.play("Attack")
 	
-	var intended_velocity = velocity + _physics_velocity
+	var intended_velocity = velocity
 	
 	_physics_velocity /= 2.0
 	
@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 		if player_visible:
 			target_velocity *= 1 + settings.agressiveness
 		
-		intended_velocity += (target_velocity - velocity) * 0.05
+		intended_velocity = Util.better_vec2_lerp(velocity, target_velocity, 0.05, delta)
 		
 		var target_angle := velocity.normalized().angle() + PI
 		var angle_diff: float = angle_difference(rotation, target_angle)
@@ -61,4 +61,5 @@ func _on_pathfind_update_timer_timeout() -> void:
 	$FishNavigation.target_position = target_position
 
 func _on_fish_navigation_velocity_computed(safe_velocity: Vector2) -> void:
-	velocity = safe_velocity
+	if safe_velocity != Vector2.ZERO:
+		velocity = safe_velocity + _physics_velocity

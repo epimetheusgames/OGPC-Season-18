@@ -1,6 +1,6 @@
+## Save this as a resource for specific enemies.
 class_name EnemyBehaviorSettings
 extends Resource
-
 
 @export var health: int
 @export var damage: int
