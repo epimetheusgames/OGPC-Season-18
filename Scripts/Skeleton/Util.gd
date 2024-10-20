@@ -32,8 +32,8 @@ static func better_vec2_lerp(a: Vector2, b: Vector2, decay: float, delta: float)
 
 # Framerate independant linear interpolation for angles.
 static func better_angle_lerp(a: float, b: float, decay: float, delta: float):
-	decay = (decay * 25) + 1
-	return b + (angle_difference(a, b)) * exp(-decay * delta)
+	decay = (decay * 25.0)
+	return b + (angle_difference(b, a)) * exp(-decay * delta)
 
 # Turns an angle and a magnitude to a vector.
 static func angle_to_vector(angle: float, magnitude: float) -> Vector2:

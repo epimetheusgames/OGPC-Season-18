@@ -43,11 +43,10 @@ func _process(delta: float) -> void:
 		if player_visible:
 			target_velocity *= 1 + settings.agressiveness
 		
-		intended_velocity = Util.better_vec2_lerp(velocity, target_velocity, 0.05, delta)
+		intended_velocity = Util.better_vec2_lerp(velocity, target_velocity, 0.09, delta)
 		
 		var target_angle := velocity.normalized().angle() + PI
-		var angle_diff: float = angle_difference(rotation, target_angle)
-		rotation += clamp(angle_diff * 0.03, -0.1, 0.1)
+		rotation = Util.better_angle_lerp(rotation, target_angle, 0.1, delta)
 	
 	$FishNavigation.set_velocity(intended_velocity)
 	move_and_slide()
