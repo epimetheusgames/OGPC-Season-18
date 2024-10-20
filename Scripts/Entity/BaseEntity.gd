@@ -15,7 +15,6 @@ var entity_type = "Entity"
 @export var has_multiplayer_sync: bool = true
 @export var sync_by_increment: bool = false
 @export var sync_increment: float = 0
-@export var debug_things: bool = false
 
 var node_owner = 0
 var save_resource := EntitySave.new()
@@ -36,11 +35,6 @@ func _entity_process(delta: float) -> void:
 		Global.godot_steam_abstraction.sync_var(self, "position")
 		Global.godot_steam_abstraction.sync_var(self, "velocity")
 		Global.godot_steam_abstraction.sync_var(self, "rotation")
-	
-	if debug_things:
-		DebugDraw.arrow(global_position, global_position + velocity * 75, Color(0.184, 0.545, 0.784))
-		DebugDraw.arrow(global_position, global_position + Util.angle_to_vector(rotation, 1) * 75, Color(0.923, 0, 0.514))
-		DebugDraw.circle(global_position, 5, 16, Color.BLACK)
 
 ## Check if the entity has a component of a specific class
 func has_component(component_type: String) -> bool:

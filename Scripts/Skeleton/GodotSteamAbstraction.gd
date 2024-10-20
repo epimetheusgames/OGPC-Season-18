@@ -258,7 +258,6 @@ func read_packet() -> void:
 		if readable_data["message"] == "handshake":
 			print("DEBUG: Handshake received from " + Steam.getFriendPersonaName(readable_data["from"]))
 			handshake_completed_ids.append(packet_sender)
-			send_packet(0, {"message": "handshake_received", "from": steam_id})
 		
 		elif readable_data["message"] == "remote_print":
 			print("REMOTE DEBUG: " + readable_data["content"])
