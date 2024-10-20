@@ -99,7 +99,6 @@ collision_mask = 16
 script = ExtResource("1_c1y28")
 settings = SubResource("Resource_sd441")
 uid = SubResource("Resource_mkt0s")
-debug_things = true
 
 [node name="FishNavigation" type="NavigationAgent2D" parent="."]
 target_desired_distance = 20.0
