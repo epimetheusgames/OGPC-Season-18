@@ -210,42 +210,6 @@ func get_lobby_members() -> void:
 		var member_steam_name: String = Steam.getFriendPersonaName(member_steam_id)
 		lobby_members.append({"steam_id": member_steam_id, "steam_name": member_steam_name})
 
-func read_packet() -> void:
-	var packet_size: int = Steam.getAvailableP2PPacketSize(0)
-	
-	if packet_size > 0:
-		var this_packet: Dictionary = Steam.readP2PPacket(packet_size, 0)
-		
-		if this_packet.is_empty() || this_packet == null:
-			printerr("WARNING: Read an empty packet with non-zero size!")
-		
-		var packet_sender: int = this_packet["remote_steam_id"]
-		var packet_code: PackedByteArray = this_packet["data"]
-		var readable_data: Dictionary = bytes_to_var(packet_code)
-		
-		if readable_data["message"] == "handshake":
-			print("DEBUG: Handshake received from " + Steam.getFriendPersonaName(readable_data["from"]))
-			handshake_completed_ids.append(packet_sender)
-			send_packet(0, {"message": "handshake_received", "from": steam_id})
-		
-		# Parse packet if it's node data.
-		if readable_data["message"] == "sync_var":
-			var node_path: String = readable_data["node_path"]
-			var variable_name: String = readable_data["var_name"]
-			var variable_value = readable_data["var_val"]
-			get_node(node_path).set(variable_name, variable_value)
-		
-		if readable_data["message"] == "sync_group_var":
-			var nodes_list = get_tree().get_nodes_in_group(readable_data["group"])
-			for node_index in range(nodes_list.size()):
-				nodes_list[node_index].set(readable_data["var_name"], readable_data["var_values"][node_index])
-		
-		if readable_data["message"] == "run_function":
-			var node_path: String = readable_data["node_path"]
-			var function_name: String = readable_data["func_name"]
-			var function_args = readable_data["args"]
-			get_node(node_path).callv(function_name, function_args)
-
 func make_handshake():
 	print("DEBUG: Sending P2P handshake to the lobby.")
 	send_packet(0, {"message": "handshake", "from": steam_id})
@@ -277,6 +241,48 @@ func run_remote_function(node: Node, function_name: String, args: Array):
 		"args": args
 	})
 
+func read_packet() -> void:
+	var packet_size: int = Steam.getAvailableP2PPacketSize(0)
+	
+	if packet_size > 0:
+		var this_packet: Dictionary = Steam.readP2PPacket(packet_size, 0)
+		
+		if this_packet.is_empty() || this_packet == null:
+			printerr("WARNING: Read an empty packet with non-zero size!")
+		
+		var packet_sender: int = this_packet["remote_steam_id"]
+		var packet_code: PackedByteArray = this_packet["data"]
+		var readable_data: Dictionary = bytes_to_var(packet_code)
+		
+		if readable_data["message"] == "handshake":
+			print("DEBUG: Handshake received from " + Steam.getFriendPersonaName(readable_data["from"]))
+			handshake_completed_ids.append(packet_sender)
+			send_packet(0, {"message": "handshake_received", "from": steam_id})
+		
+		if readable_data["message"] == "remote_print":
+			print("REMOTE DEBUG: " + readable_data["content"])
+		
+		# Parse packet if it's node data.
+		elif readable_data["message"] == "sync_var":
+			var node_path: String = readable_data["node_path"]
+			var variable_name: String = readable_data["var_name"]
+			var variable_value = readable_data["var_val"]
+			get_node(node_path).set(variable_name, variable_value)
+		
+		elif readable_data["message"] == "sync_group_var":
+			var nodes_list = get_tree().get_nodes_in_group(readable_data["group"])
+			for node_index in range(nodes_list.size()):
+				nodes_list[node_index].set(readable_data["var_name"], readable_data["var_values"][node_index])
+		
+		elif readable_data["message"] == "run_function":
+			var node_path: String = readable_data["node_path"]
+			var function_name: String = readable_data["func_name"]
+			var function_args = readable_data["args"]
+			get_node(node_path).callv(function_name, function_args)
+		
+		else:
+			print("ERROR: Invalid packet received. Data: " + str(readable_data))
+
 # If this_target is 0, send to all peers.
 func send_packet(this_target: int, packet_data: Dictionary) -> void:
 	var send_type: int = Steam.P2P_SEND_RELIABLE
@@ -296,7 +302,6 @@ func send_packet(this_target: int, packet_data: Dictionary) -> void:
 			# Loop through all members that aren't us
 			for this_member in lobby_members:
 				if this_member["steam_id"] != steam_id && (this_member["steam_id"] in handshake_completed_ids || packet_data["message"] == "handshake"):
-					print("sent packet")
 					Steam.sendP2PPacket(this_member["steam_id"], this_data, send_type, channel)
 	else:
 		Steam.sendP2PPacket(this_target, this_data, send_type, channel)

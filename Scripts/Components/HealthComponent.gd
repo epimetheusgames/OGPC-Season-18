@@ -9,6 +9,8 @@ extends BaseComponent
 @onready var _health: float = max_health
 var _iframes_active: bool = false
 
+signal damage_taken(health)
+signal died
 
 func _ready() -> void:
 	component_name = "HealthComponent"
@@ -23,10 +25,11 @@ func take_damage(amount: float) -> void:
 		
 		var parent = get_node(component_container)
 		
+		damage_taken.emit(_health)
+		
 		# Death
 		if _health == 0:
-			if parent.has_method("die"):
-				parent.die()
+			died.emit()
 
 func iframes_on(duration: float) -> void:
 	_iframes_active = true

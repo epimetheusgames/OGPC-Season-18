@@ -1,4 +1,4 @@
-# GODOT RULES
+# Godot Rules
 
 ## Testing With GodotSteam
 
@@ -78,24 +78,21 @@ multiplayer and can't just ask a friend to test it with you.
 	the case vis versa.
 37: Happy editing!
 
-## NAMING:
+## Naming
 
-### General:
+### General
 - Use descriptive names
-- Preferably, numbers go at the end
+- Numbers go at the end
 
-### Scenes:
+### Scenes, Scripts, Nodes, Folders, Files, and Classes
 - PascalCase
+- The reason these are all PascalCase is because these are all object-like structures which if you
+  go down the tree far enough contian more fundamental things like functions/variables, neither of 
+  which can "permanently" store any information.
 
-### Scripts:
-- PascalCase
-
-### Nodes:
-- PascalCase
-
-### Variables:
+### Variables
 - snake_case variables
-- Use underscores at the beginning of variables to make them private
+- Use underscores at the beginning of variables to make them private (variables are not *actually* private)
 - CONSTANT_CASE constants
 - PascalCase for enum names and CONSTANT_CASE for their members, as they are constants
 - Booleans start with “is”, “has”, "does", "are"
@@ -104,39 +101,34 @@ multiplayer and can't just ask a friend to test it with you.
 - snake_case function name 
 - Verb-noun naming (ie play_sound)
 
-### Folders:
+## Code
 
-### Files:
-- PascalCase
-
-### Classes:
-- PascalCase
-
-## CODE:
-
-### Indentation / Empty Space:
+### Indentation / Empty Space
 - Each indent level should be one greater than the block containing it
 - Use 2 indent levels to distinguish continuation lines from regular code blocks (Exceptions to this rule are arrays, dictionaries, and enums)
 - Use a trailing comma on the last line in arrays, dictionaries, and enums (except with single-line lists)
 - Surround functions with one blank line and class definitions with two blank lines
 
-### Boolean Operators:
+### Boolean Operators
 - Prefer the plain English versions of boolean operators, as they are the most accessible:
 - Use and instead of &&
 - Use or instead of ||
 - Use not instead of !
 
-### Commenting:
+### Commenting
 - Comments (#) should start with a space, but not code that you comment out.
+- Double hashtag (##) for file descriptors.
+- Use TODO it makes it orange.
 - Use correct grammar.
 - Don't end your comment with a period, unless it has multiple sentences
-- If your comment is more than one sentence, maybe your code is too complicated.
+- If your comment is more than one sentence, maybe your code is too complicated
 
-### Numbers:
+### Numbers
 - Don't remove the leading or trailing zero in floating-point numbers. Otherwise, this makes them less readable and harder to distinguish from integers at a glance
 - Take advantage of GDScript's underscores in literals to make large numbers more readable (1_000_000)
+- Don't hardcode large numbers
 
-### Ordering:
+### Ordering
 ```
 01. ## [Script description (optional but recomended)]
 02. @tool
@@ -162,10 +154,10 @@ multiplayer and can't just ask a friend to test it with you.
 19. subclasses (not reccomended, they should be their own script)
 ```
 
-### Classes:
+### Classes
 - If the code is meant to run in the editor, place the @tool annotation on the first line of the script
 
-### Static Typing:
+### Static Typing
 - Static type all variables, unless it is impossible (for example a built-in function that returns a Variant, meaning that you cannot static type the variable that you are assigning the result of the function to.)
 ```
 var health := 0 # The type can be int or float, and thus should be stated explicitly.
@@ -179,17 +171,18 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 
 ## General Coding Practices
 
-- If you inherit from a script class always make sure to call its custom _ready/_process function from your _ready/_process function.
+- If you inherit from a script class always make sure to call its custom _ready/_process function from your _ready/_process function. 
+  Yeah I know, I wish the overriden functions would get called too ...
 - Never set properties of a node from a different node, especially player / core objects. (player.velocity = 100 from another script is never allowed.)
 - Each scene should be able to run by itself without causing a runtime exception.
 - Use setters/getters instead of setting/getting a property directly.
-- Instead of reference a node with get_node(), use @export_node_path which will change if the node's
+- Instead of referencing a node with get_node(), use @export_node_path or just @export var name: TypeInheritsNode which will change if the node's 
   name or path is changed.
 
 ---
 
 - Do not commit broken code
-- Do not try and fix merge changes if you are unsure of how (everythings gonna die)
+- Do not try and fix merge conflicts if you are unsure of how (everythings gonna die) (ask someone for help)
 - Never use commands like "rebase", "reset", "revert", "branch -d", without making sure, these can blow away progress easily
 - In general never delete anything unless it is necessary (git wise)
 

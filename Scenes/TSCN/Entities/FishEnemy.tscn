@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_sd441"]
 script = ExtResource("2_eew6s")
-health = 0
+health = 5
 damage = 0
 agressiveness = 1.0
 attack_distance = 100.0

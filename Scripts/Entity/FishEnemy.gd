@@ -8,6 +8,7 @@ func _ready() -> void:
 	
 	$FishNavigation.path_changed.connect(_path_changed)
 	$FishNavigation.navigation_finished.connect(_target_reached)
+	$HealthComponent.died.connect(_died)
 	
 	$AttackBoxComponent.damage = settings.damage
 	$HealthComponent.set_max_health(settings.health)
@@ -15,6 +16,9 @@ func _ready() -> void:
 
 func _path_changed():
 	reached_target = false
+
+func _died():
+	queue_free()
 
 func _target_reached():
 	if wander_state == WANDER_MODE.WANDERING_TO_POINT:
