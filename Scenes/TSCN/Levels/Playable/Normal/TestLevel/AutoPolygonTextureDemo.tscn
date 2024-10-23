@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdg0gyclxvqs4"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/AutoPolygonTexture.gd" id="1_muetc"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/PolygonDepthShader.gdshader" id="2_b3s2m"]
+[ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Sprites/Level/WallTexture.png" id="2_vx0ru"]
+
+[sub_resource type="Gradient" id="Gradient_2s48v"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5bdf5"]
+gradient = SubResource("Gradient_2s48v")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3joij"]
+shader = ExtResource("2_b3s2m")
+shader_parameter/points = PackedVector2Array(887, 622, 441, 339, -36, 298, 406, -263, -458, -219, -339, 65, -832, 249, -132, 692)
+shader_parameter/num_points = 8
+shader_parameter/global_position = Vector2(907, 263)
+shader_parameter/fade_width = 115
+shader_parameter/tex_scale = 103.0
+shader_parameter/in_tex = SubResource("GradientTexture1D_5bdf5")
+shader_parameter/edge_tex = ExtResource("2_vx0ru")
+
+[node name="AutoPolygonTexture" type="Node2D"]
+script = ExtResource("1_muetc")
+
+[node name="Body" type="Polygon2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_3joij")
+position = Vector2(907, 263)
+texture = ExtResource("2_vx0ru")
+polygon = PackedVector2Array(887, 622, 441, 339, -36, 298, 406, -263, -458, -219, -339, 65, -832, 249, -132, 692)
+
+[node name="Outline" type="Line2D" parent="."]
+visible = false
+position = Vector2(907, 263)
+points = PackedVector2Array(887, 622, 441, 339, -36, 298, 406, -263, -458, -219, -339, 65, -832, 249, -132, 692)
+closed = true
+texture = ExtResource("2_vx0ru")
+texture_mode = 1
+joint_mode = 2
+round_precision = 32
