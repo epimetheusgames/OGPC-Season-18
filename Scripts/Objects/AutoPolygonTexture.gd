@@ -1,14 +1,24 @@
 @tool
-extends Node2D
+class_name AutoPolygonTexture
+extends Polygon2D
 
+func _ready():
+	if !get_node_or_null("Collision"):
+		var new_collision := StaticBody2D.new()
+		new_collision.name = "Collision"
+		
+		var new_collision_polygon := CollisionPolygon2D.new()
+		new_collision_polygon.name = "Polygon"
+		
+		add_child(new_collision, true)
+		new_collision.add_child(new_collision_polygon, true)
 
 func _process(delta: float) -> void:
-	$Outline.points = $Body.polygon
-	$Outline.position = $Body.position
+	$Collision/Polygon.polygon = polygon
+	$Collision/Polygon.position = Vector2.ZERO
+	$Collision.position = Vector2.ZERO
 	
-	var shader_material: ShaderMaterial = $Body.material
-	
-	shader_material.set_shader_parameter("points", $Body.polygon)
-	shader_material.set_shader_parameter("num_points", $Body.polygon.size())
-	shader_material.set_shader_parameter("global_position", $Body.global_position)
+	material.set_shader_parameter("points", polygon)
+	material.set_shader_parameter("num_points", polygon.size())
+	material.set_shader_parameter("global_position", global_position)
 	
