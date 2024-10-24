@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh0cluhw5hbar"]
+
+[ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_b33aw"]
+
+[node name="Mission1" type="Node2D"]
+
+[node name="Diver" parent="." instance=ExtResource("1_b33aw")]
+position = Vector2(343, 287)

@@ -19,7 +19,7 @@ func shoot() -> void:
 	new_bullet.set_velocity(Util.angle_to_vector(new_bullet.rotation, 20))
 	add_child(new_bullet)
 	
-	var new_rope: Rope = Rope.new()
+	var new_rope := FabrikRopeComponent.new()
 	new_rope.top_level = true
 	new_rope.start_anchor_node = new_bullet
 	new_rope.end_anchor_node = self

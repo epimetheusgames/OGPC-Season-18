@@ -7,7 +7,7 @@ extends Node2D
 @export var gravity: Vector2 = Vector2(0, 100)
 @export var enable_collisions: bool = true  # Toggle for enabling/disabling collisions
 
-@onready var line: Line2D = $"Line"
+@export var line: Line2D
 
 var nodes: Array[VerletNode] = []
 
