@@ -1,4 +1,4 @@
-class_name Rope
+class_name FabrikRopeComponent
 extends Node2D
 
 @export var length = 100

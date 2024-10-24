@@ -46,7 +46,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/godotversionupdater/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg")
 
 [input]
 
