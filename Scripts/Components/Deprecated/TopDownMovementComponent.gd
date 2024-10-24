@@ -1,4 +1,4 @@
-## TODO: Have a base MovementComponent class because there is some duplicate code in here.
+## DEPRECATED
 class_name TopDownMovementComponent
 extends BaseComponent
 

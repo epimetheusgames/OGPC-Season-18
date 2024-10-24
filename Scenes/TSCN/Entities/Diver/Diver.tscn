@@ -1,14 +1,14 @@
 [gd_scene load_steps=18 format=3 uid="uid://5g1k55gpynrt"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiver.gd" id="1_k6jjc"]
-[ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiverAnimation.gd" id="2_3siqq"]
-[ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/PlayerSkin.png" id="2_5upde"]
-[ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiverMovement.gd" id="2_najvs"]
-[ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiverCombat.gd" id="5_e1cji"]
-[ext_resource type="Script" path="res://Scripts/Entity/Diver/NewDiverFlashlight.gd" id="6_5oexd"]
-[ext_resource type="Script" path="res://Scripts/Components/HurtboxComponent.gd" id="6_7jryt"]
-[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="6_vwpct"]
-[ext_resource type="Script" path="res://Scripts/Components/AttackBoxComponent.gd" id="8_58pps"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
+[ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverCombat.gd" id="5_mjta2"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="6_dvqx5"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="7_3b7lw"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="8_spc27"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -58,13 +58,13 @@ height = 124.0
 radius = 48.0417
 
 [node name="Diver" type="CharacterBody2D"]
-script = ExtResource("1_k6jjc")
+script = ExtResource("1_1l6ma")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ghsq1")
 
 [node name="Movement" type="Node2D" parent="."]
-script = ExtResource("2_najvs")
+script = ExtResource("2_lxvv3")
 
 [node name="RightWallRaycast" type="RayCast2D" parent="Movement"]
 target_position = Vector2(48, 0)
@@ -73,7 +73,7 @@ target_position = Vector2(48, 0)
 target_position = Vector2(-48, 0)
 
 [node name="Animation" type="Node2D" parent="."]
-script = ExtResource("2_3siqq")
+script = ExtResource("3_k6pml")
 
 [node name="Polygons" type="Node2D" parent="Animation"]
 texture_filter = 1
@@ -82,7 +82,7 @@ texture_filter = 1
 z_index = 1
 position = Vector2(0, -71)
 offset = Vector2(-128, -33)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
 uv = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
@@ -95,7 +95,7 @@ texture_repeat = 1
 position = Vector2(39, -55)
 rotation = 1.5708
 offset = Vector2(-167.993, -54.2543)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(158.595, 31.1322, 158.659, 80.7521, 177.346, 80.8158, 177.027, 30.3031)
 uv = PackedVector2Array(158.595, 31.1322, 158.659, 80.7521, 177.346, 80.8158, 177.027, 30.3031)
@@ -107,7 +107,7 @@ metadata/_edit_lock_ = true
 position = Vector2(81, -55)
 rotation = 1.5708
 offset = Vector2(-56, -41)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(46.9619, 15.5686, 46.2722, 65.2294, 65.5847, 65.2294, 65.1824, 14.8789)
 uv = PackedVector2Array(46.9619, 15.5686, 46.2722, 65.2294, 65.5847, 65.2294, 65.1824, 14.8789)
@@ -119,7 +119,7 @@ metadata/_edit_lock_ = true
 position = Vector2(-36, -55)
 rotation = 1.5708
 offset = Vector2(-88, -55)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(79.3924, 31.5152, 79.2307, 80.2438, 96.4576, 80.5269, 96.1745, 30.7873)
 uv = PackedVector2Array(79.3924, 31.5152, 79.2307, 80.2438, 96.4576, 80.5269, 96.1745, 30.7873)
@@ -131,7 +131,7 @@ metadata/_edit_lock_ = true
 position = Vector2(-82, -55)
 rotation = -1.5708
 offset = Vector2(-56.0993, -40.2919)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(47.2143, 15.4954, 47.116, 64.5229, 64.703, 64.7194, 64.8013, 14.8567)
 uv = PackedVector2Array(47.2143, 15.4954, 47.116, 64.5229, 64.703, 64.7194, 64.8013, 14.8567)
@@ -142,7 +142,7 @@ metadata/_edit_lock_ = true
 [node name="Body" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(3, -39)
 offset = Vector2(-131, -87)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(111.851, 70.0117, 118.529, 69.9653, 118.437, 62.9157, 136.617, 62.6838, 136.895, 69.8725, 145.151, 70.1044, 145.554, 129.179, 109.889, 129.179, 110.422, 69.7281, 127.376, 98.5866)
 uv = PackedVector2Array(111.851, 70.0117, 118.529, 69.9653, 118.437, 62.9157, 136.617, 62.6838, 136.895, 69.8725, 145.151, 70.1044, 145.554, 129.179, 109.889, 129.179, 110.422, 69.7281, 127.376, 98.5866)
@@ -154,7 +154,7 @@ metadata/_edit_lock_ = true
 [node name="Thigh1" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(10, 24)
 offset = Vector2(-168, -128)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(158.633, 95.1684, 158.633, 160.791, 176.701, 160.791, 176.756, 94.9467)
 uv = PackedVector2Array(158.633, 95.1684, 158.633, 160.791, 176.701, 160.791, 176.756, 94.9467)
@@ -165,7 +165,7 @@ metadata/_edit_lock_ = true
 [node name="Calf1" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(10, 82)
 offset = Vector2(-152, -208)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(142.862, 174.73, 142.729, 241.366, 160.951, 241.056, 161.306, 174.863)
 uv = PackedVector2Array(142.862, 174.73, 142.729, 241.366, 160.951, 241.056, 161.306, 174.863)
@@ -176,7 +176,7 @@ metadata/_edit_lock_ = true
 [node name="Thigh2" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(-10, 23)
 offset = Vector2(-88, -127)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(78.6611, 94.4609, 97.2638, 94.3767, 97.348, 161.128, 77.146, 160.875)
 uv = PackedVector2Array(78.6611, 94.4609, 97.2638, 94.3767, 97.348, 161.128, 77.146, 160.875)
@@ -187,7 +187,7 @@ metadata/_edit_lock_ = true
 [node name="Calf2" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(-10, 81)
 offset = Vector2(-104, -207)
-texture = ExtResource("2_5upde")
+texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(94.9078, 174.952, 94.6873, 240.382, 113.098, 240.382, 112.767, 174.952)
 uv = PackedVector2Array(94.9078, 174.952, 94.6873, 240.382, 113.098, 240.382, 112.767, 174.952)
@@ -307,21 +307,21 @@ polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
 
 [node name="Combat" type="Node2D" parent="."]
 rotation = 0.000201209
-script = ExtResource("5_e1cji")
+script = ExtResource("5_mjta2")
 
 [node name="HealthComponent" type="Node" parent="Combat"]
-script = ExtResource("6_vwpct")
+script = ExtResource("6_dvqx5")
 max_health = 5.0
 component_container = NodePath("../..")
 
 [node name="HurtboxComponent" type="Node" parent="Combat"]
-script = ExtResource("6_7jryt")
+script = ExtResource("7_3b7lw")
 attachable_health_component = NodePath("../HealthComponent")
 hurtbox = NodePath("../PlayerHurtbox")
 component_container = NodePath("../..")
 
 [node name="AttackBoxComponent" type="Node" parent="Combat"]
-script = ExtResource("8_58pps")
+script = ExtResource("8_spc27")
 knockback_velocity = 20.0
 hurtbox = NodePath("../AttackBox")
 component_container = NodePath("../..")
@@ -344,7 +344,7 @@ shape = SubResource("CircleShape2D_ls4ex")
 debug_color = Color(0.862718, 0.286752, 0.557432, 0.42)
 
 [node name="Flashlight" type="Node2D" parent="."]
-script = ExtResource("6_5oexd")
+script = ExtResource("9_xqhlv")
 
 [node name="LightTexture" type="Polygon2D" parent="Flashlight"]
 color = Color(1, 1, 1, 0.352941)

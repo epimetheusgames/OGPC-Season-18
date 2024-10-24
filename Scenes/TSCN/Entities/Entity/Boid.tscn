@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://co07maqfriti4"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/BaseEntity.gd" id="1_b7ytu"]
-[ext_resource type="Script" path="res://Scripts/Components/BoidComponent.gd" id="2_guibv"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/UIDContainer.gd" id="2_yva8s"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/BoidComponent.gd" id="2_guibv"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_yva8s"]
 
 [sub_resource type="Resource" id="Resource_lqutn"]
 script = ExtResource("2_yva8s")

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cdg0gyclxvqs4"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/AutoPolygonTexture.gd" id="1_muetc"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/PolygonDepthShader.gdshader" id="2_b3s2m"]
-[ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Sprites/Level/WallTexture.png" id="2_vx0ru"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="1_run5o"]
+[ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Sprites/Level/WallTexture.png" id="2_bqhry"]
+[ext_resource type="Script" path="res://Scripts/Objects/AutoPolygonTexture.gd" id="3_ut3q7"]
 
 [sub_resource type="Gradient" id="Gradient_2s48v"]
 offsets = PackedFloat32Array(0)
@@ -12,22 +12,22 @@ colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
 gradient = SubResource("Gradient_2s48v")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3joij"]
-shader = ExtResource("2_b3s2m")
+shader = ExtResource("1_run5o")
 shader_parameter/points = PackedVector2Array(887, 622, 441, 339, 82, 156, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
 shader_parameter/num_points = 8
 shader_parameter/global_position = Vector2(992, 334)
 shader_parameter/fade_width = 115
 shader_parameter/tex_scale = 103.0
 shader_parameter/in_tex = SubResource("GradientTexture1D_5bdf5")
-shader_parameter/edge_tex = ExtResource("2_vx0ru")
+shader_parameter/edge_tex = ExtResource("2_bqhry")
 
 [node name="Body" type="Polygon2D"]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_3joij")
 position = Vector2(992, 334)
-texture = ExtResource("2_vx0ru")
+texture = ExtResource("2_bqhry")
 polygon = PackedVector2Array(887, 622, 441, 339, 82, 156, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
-script = ExtResource("1_muetc")
+script = ExtResource("3_ut3q7")
 
 [node name="Collision" type="StaticBody2D" parent="."]
 

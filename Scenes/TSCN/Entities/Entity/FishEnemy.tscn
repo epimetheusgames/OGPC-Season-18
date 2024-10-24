@@ -1,12 +1,12 @@
 [gd_scene load_steps=20 format=3 uid="uid://b8iotem83uvu0"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/FishEnemy.gd" id="1_c1y28"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/EnemyBehaviorSettings.gd" id="2_eew6s"]
+[ext_resource type="Script" path="res://Scripts/Entity/Enemy/AnimatedEnemy.gd" id="1_teovo"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_eew6s"]
 [ext_resource type="Texture2D" uid="uid://dgi5korrp8ou" path="res://Assets/Art/Sprites/Entity/PlaceholderEnemyFishSpritesheet.png" id="2_xp6fr"]
-[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="3_bwuq6"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/UIDContainer.gd" id="3_j1siw"]
-[ext_resource type="Script" path="res://Scripts/Components/AttackBoxComponent.gd" id="4_p5whe"]
-[ext_resource type="Script" path="res://Scripts/Components/HurtboxComponent.gd" id="5_cg6aa"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="3_bwuq6"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_j1siw"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="4_p5whe"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="5_cg6aa"]
 
 [sub_resource type="Resource" id="Resource_sd441"]
 script = ExtResource("2_eew6s")
@@ -96,7 +96,7 @@ radius = 6.08276
 [node name="FishEnemy" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 16
-script = ExtResource("1_c1y28")
+script = ExtResource("1_teovo")
 settings = SubResource("Resource_sd441")
 uid = SubResource("Resource_mkt0s")
 
