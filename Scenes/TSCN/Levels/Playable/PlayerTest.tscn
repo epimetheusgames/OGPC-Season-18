@@ -12,7 +12,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(56, 1013, 224, 973, 335
 
 [node name="MultiplayerPlayerSpawnerComponent" type="Node" parent="."]
 script = ExtResource("1_21nbo")
-spawn_filepath = "res://Scenes/TSCN/Entities/NewDiver.tscn"
+spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 component_container = NodePath("..")
 
 [node name="FishEnemy" parent="." instance=ExtResource("2_nrsxp")]

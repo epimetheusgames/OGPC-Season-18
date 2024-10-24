@@ -1,18 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://co07maqfriti4"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/BaseEntity.gd" id="1_b7ytu"]
-[ext_resource type="Script" path="res://Scripts/Components/Misc/BoidComponent.gd" id="2_guibv"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_yva8s"]
+[ext_resource type="Script" path="res://Scripts/Entity/BaseEntity.gd" id="1_y6pwu"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_3kea4"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/BoidComponent.gd" id="3_2it7s"]
 
 [sub_resource type="Resource" id="Resource_lqutn"]
-script = ExtResource("2_yva8s")
+script = ExtResource("2_3kea4")
 uid = 1501
 
 [node name="Boid" type="CharacterBody2D"]
 rotation = 2.40403
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("1_b7ytu")
+script = ExtResource("1_y6pwu")
 uid = SubResource("Resource_lqutn")
 has_multiplayer_sync = false
 sync_increment = 1.0
@@ -24,7 +24,7 @@ polygon = PackedVector2Array(-2, 3, 2, 3, 0, -4)
 target_position = Vector2(0, 116)
 
 [node name="BoidComponent" type="Node" parent="."]
-script = ExtResource("2_guibv")
+script = ExtResource("3_2it7s")
 max_speed = 3.0
 raycast_path = NodePath("../WallRaycast")
 component_container = NodePath("..")

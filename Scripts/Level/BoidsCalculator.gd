@@ -14,7 +14,7 @@ var boids_velocities := []
 # Local network sync is a lot more efficient.
 @export var boid_local_network_sync_batch_size = 500
 
-@onready var boids_scene := preload("res://Scenes/TSCN/Entities/Boid.tscn")
+@onready var boids_scene := preload("res://Scenes/TSCN/Entities/Entity/Boid.tscn")
 
 var bins = Vector2.ZERO
 var num_bins = 0
@@ -36,7 +36,7 @@ func _ready() -> void:
 	
 	rd = RenderingServer.create_local_rendering_device()
 	
-	var shader_file := load("res://Scripts/GLSL/compute_boids.glsl")
+	var shader_file := load("res://Scripts/GLSL/Compute/compute_boids.glsl")
 	var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
 	boid_shader = rd.shader_create_from_spirv(shader_spirv)
 	boids_pipeline = rd.compute_pipeline_create(boid_shader)
