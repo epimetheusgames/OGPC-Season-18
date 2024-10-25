@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://s03l7ul37h1c"]
+
+[ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRopeComponent.gd" id="1_ec0om"]
+[ext_resource type="Script" path="res://Scenes/TSCN/Demos/Anchor1.gd" id="2_ia5hy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tjhxv"]
+radius = 97.0464
+
+[node name="VerletRopeDemo" type="Node2D"]
+
+[node name="Obsticales" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obsticales"]
+polygon = PackedVector2Array(192, 587, 300, 46, 979, 203, 554, 346, 696, 561, 696, 561, 537, 538)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obsticales"]
+position = Vector2(1225, 649)
+shape = SubResource("CircleShape2D_tjhxv")
+
+[node name="VerletRope" type="Node2D" parent="." node_paths=PackedStringArray("line")]
+script = ExtResource("1_ec0om")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="VerletRope"]
+
+[node name="Anchor1" type="Sprite2D" parent="."]
+script = ExtResource("2_ia5hy")

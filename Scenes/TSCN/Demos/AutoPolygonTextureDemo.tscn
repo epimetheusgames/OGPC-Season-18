@@ -29,7 +29,7 @@ texture_repeat = 2
 material = SubResource("ShaderMaterial_3joij")
 position = Vector2(992, 334)
 texture = ExtResource("2_bqhry")
-polygon = PackedVector2Array(887, 622, 441, 339, 82, 156, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
+polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
 script = ExtResource("3_ut3q7")
 
 [node name="Collision" type="StaticBody2D" parent="."]
