@@ -18,6 +18,20 @@ static func safeguard_null(variable: Object, variable_class_name: String) -> Obj
 	
 	return variable
 
+# -- Physics --
+
+# Perform a raycast in the world. Uses GLOBAL positions.
+static func do_raycast(world_2d: World2D, from: Vector2, to: Vector2) -> Dictionary:
+	var space_state := world_2d.direct_space_state
+	var raycast := PhysicsRayQueryParameters2D.create(from, to)
+	return space_state.intersect_ray(raycast)
+
+static func do_pointcast(world_2d: World2D, point: Vector2) -> Array[Dictionary]:
+	var space_state := world_2d.direct_space_state
+	var pointcast = PhysicsPointQueryParameters2D.new()
+	pointcast.position = point
+	return space_state.intersect_point(pointcast)
+
 # -- Math --
 
 # Framerate independant linear interpolation. A and B can be vectors of floats

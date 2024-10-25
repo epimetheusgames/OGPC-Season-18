@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c87cypd3uk4dv"]
+
+[ext_resource type="PackedScene" uid="uid://cdg0gyclxvqs4" path="res://Scenes/TSCN/Demos/AutoPolygonTextureDemo.tscn" id="1_2ocv4"]
+[ext_resource type="Script" path="res://Scripts/Components/Graphics/ShadowComponent.gd" id="2_p0rqk"]
+
+[node name="LightDemo" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+offset_left = -5.0
+offset_top = -43.0
+offset_right = 1969.0
+offset_bottom = 1134.0
+color = Color(0.0537267, 0.0523666, 0.300462, 1)
+
+[node name="Body" parent="." instance=ExtResource("1_2ocv4")]
+polygon = PackedVector2Array(-681, 20, -101, -156, 377, -114, -271, 178, -427, 396)
+
+[node name="ShadowComponent" type="Node" parent="Body" node_paths=PackedStringArray("attachable_polygon", "debug_lines")]
+script = ExtResource("2_p0rqk")
+shadow_color = Color(0, 0, 0, 0.494118)
+offset_angle = 45.0
+offset_length = 162.9
+floating = false
+attachable_polygon = NodePath("..")
+debug_lines = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="Body/ShadowComponent"]
