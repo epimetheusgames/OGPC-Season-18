@@ -1,5 +1,5 @@
 class_name ShadowComponent
-extends BaseComponent
+extends Node
 
 
 var _polygon: Polygon2D
@@ -12,10 +12,8 @@ var _polygon: Polygon2D
 @export var debug_lines: Line2D
 
 func _ready() -> void:
-	component_name = "ShadowComponent"
-	
 	_polygon = Polygon2D.new()
-	_polygon.z_index = -2
+	_polygon.z_index = 2
 	add_child(_polygon)
 	
 func _process(delta: float) -> void:
@@ -26,7 +24,8 @@ func _process(delta: float) -> void:
 	
 	if floating:
 		_polygon.polygon = attachable_polygon.polygon
-		_polygon.position = attachable_polygon.global_position + vector_offset
+		_polygon.position = vector_offset
+		_polygon.global_rotation = get_parent().global_rotation
 	
 	# Basically just reimplement shadows.
 	else:
@@ -40,7 +39,7 @@ func _process(delta: float) -> void:
 			var point := attachable_polygon.polygon[point_ind]
 			var shadow_end_for_point := point + vector_offset.normalized()
 			var end_global := attachable_polygon.global_position + shadow_end_for_point
-			var pointcast_results = Util.do_pointcast(attachable_polygon.get_world_2d(), end_global)
+			var pointcast_results = Util.do_pointcast(attachable_polygon.get_world_2d(), end_global, 128)
 			
 			if !pointcast_results:
 				points_on_polygon.append(point)
@@ -94,9 +93,12 @@ func _process(delta: float) -> void:
 		points_offset.reverse()
 		final_points.append_array(points_offset)
 		_polygon.polygon = final_points
-		debug_lines.points = final_points
+		
+		if debug_lines:
+			debug_lines.points = final_points
 		
 		_polygon.position = attachable_polygon.global_position
 		
-	debug_lines.position = _polygon.position
+	if debug_lines:
+		debug_lines.position = _polygon.position
 	_polygon.color = shadow_color

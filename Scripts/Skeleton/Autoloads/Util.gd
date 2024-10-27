@@ -26,10 +26,11 @@ static func do_raycast(world_2d: World2D, from: Vector2, to: Vector2) -> Diction
 	var raycast := PhysicsRayQueryParameters2D.create(from, to)
 	return space_state.intersect_ray(raycast)
 
-static func do_pointcast(world_2d: World2D, point: Vector2) -> Array[Dictionary]:
+static func do_pointcast(world_2d: World2D, point: Vector2, mask: int = 0xFFFFFFFF) -> Array[Dictionary]:
 	var space_state := world_2d.direct_space_state
 	var pointcast = PhysicsPointQueryParameters2D.new()
 	pointcast.position = point
+	pointcast.collision_mask = mask
 	return space_state.intersect_point(pointcast)
 
 # -- Math --

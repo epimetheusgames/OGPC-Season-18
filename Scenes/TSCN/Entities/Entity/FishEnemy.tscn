@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b8iotem83uvu0"]
+[gd_scene load_steps=21 format=3 uid="uid://b8iotem83uvu0"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Enemy/AnimatedEnemy.gd" id="1_teovo"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_eew6s"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_j1siw"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="4_p5whe"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="5_cg6aa"]
+[ext_resource type="Script" path="res://Scripts/Components/Graphics/ShadowComponent.gd" id="8_bcqer"]
 
 [sub_resource type="Resource" id="Resource_sd441"]
 script = ExtResource("2_eew6s")
@@ -157,6 +158,16 @@ shape = SubResource("CircleShape2D_lpu2o")
 [node name="PathfindUpdateTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-7, 1, -7, 0, -6, 0, -6, -1, -5, -1, -5, -3, -4, -3, -4, -4, -3, -4, -3, -5, -1, -5, -1, -6, 6, -6, 6, -5, 9, -5, 9, -4, 10, -4, 10, -3, 12, -3, 12, -2, 13, -2, 13, -1, 14, -1, 14, -3, 15, -3, 15, -4, 16, -4, 16, -5, 17, -5, 17, -6, 18, -6, 18, 5, 16, 5, 16, 4, 15, 4, 15, 3, 14, 3, 14, 2, 12, 2, 12, 3, 11, 3, 11, 4, 10, 4, 10, 5, 8, 5, 8, 6, 7, 6, 7, 7, 1, 7, 1, 6, -1, 6, -1, 5, -3, 5, -3, 4, -5, 4, -5, 2, -6, 2, -6, 1)
+
+[node name="ShadowComponent" type="Node2D" parent="." node_paths=PackedStringArray("attachable_polygon")]
+script = ExtResource("8_bcqer")
+offset_angle = 20.0
+offset_length = 27.15
+attachable_polygon = NodePath("../Polygon2D")
 
 [connection signal="velocity_computed" from="FishNavigation" to="." method="_on_fish_navigation_velocity_computed"]
 [connection signal="timeout" from="PathfindUpdateTimer" to="." method="_on_pathfind_update_timer_timeout"]

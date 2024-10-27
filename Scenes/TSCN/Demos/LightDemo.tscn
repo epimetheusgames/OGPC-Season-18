@@ -1,31 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://c87cypd3uk4dv"]
+[gd_scene load_steps=14 format=3 uid="uid://c87cypd3uk4dv"]
 
 [ext_resource type="PackedScene" uid="uid://cdg0gyclxvqs4" path="res://Scenes/TSCN/Demos/AutoPolygonTextureDemo.tscn" id="1_2ocv4"]
-[ext_resource type="Script" path="res://Scripts/Components/Graphics/ShadowComponent.gd" id="2_p0rqk"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Pixelate.gdshader" id="3_wac5c"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="3_y44d8"]
+[ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_ij7yc"]
+[ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="5_sou66"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lahql"]
+load_path = "res://.godot/imported/WallTexture.png-6996c64947de4685171d9de8914e92d7.ctex"
+
+[sub_resource type="Gradient" id="Gradient_frakl"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vfjrj"]
+gradient = SubResource("Gradient_frakl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_22oev"]
+shader = ExtResource("3_y44d8")
+shader_parameter/points = PackedVector2Array(107, -307, 437, 199, -241, 181, -823, -11)
+shader_parameter/num_points = 4
+shader_parameter/global_position = Vector2(1703, 809)
+shader_parameter/fade_width = 115
+shader_parameter/tex_scale = 103.0
+shader_parameter/in_tex = SubResource("GradientTexture1D_vfjrj")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_lahql")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gpgg6"]
+polygon = PackedVector2Array(107, -307, 437, 199, -241, 181, -823, -11)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5khwq"]
+shader = ExtResource("3_wac5c")
+shader_parameter/pixel_size = 2
+
+[sub_resource type="Gradient" id="Gradient_ophov"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f64sp"]
+gradient = SubResource("Gradient_ophov")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [node name="LightDemo" type="Node2D"]
 
 [node name="Background" type="ColorRect" parent="."]
 z_index = -10
-offset_left = -54.0
-offset_top = -28.0
-offset_right = 1920.0
-offset_bottom = 1149.0
+offset_left = -6534.0
+offset_top = -7.0
+offset_right = 11184.0
+offset_bottom = 5421.0
 color = Color(0.0537267, 0.0523666, 0.300462, 1)
 
-[node name="ShadowComponent" type="Node" parent="." node_paths=PackedStringArray("attachable_polygon", "debug_lines")]
-script = ExtResource("2_p0rqk")
-shadow_color = Color(0, 0, 0, 0.494118)
-offset_angle = 45.0
-offset_length = 469.2
-floating = false
-attachable_polygon = NodePath("../Body")
-debug_lines = NodePath("Line2D")
-
-[node name="Line2D" type="Line2D" parent="ShadowComponent"]
-points = PackedVector2Array(882, 534)
-
 [node name="Body" parent="." instance=ExtResource("1_2ocv4")]
-polygon = PackedVector2Array(-605, -110, 4, -169, -118, 9, 193, 37, -146, 263, -232, 8, -271, 178, -427, 396)
+z_index = 3
+position = Vector2(933, 369)
+polygon = PackedVector2Array(-591, -116, -388, -275, 4, -169, -118, 9, -25, 42, 150, 264, -211, 345, -271, 178, -385.13, 337.489, -433, 846, -1434, 670, -1002, -28)
+
+[node name="Body2" parent="." instance=ExtResource("1_2ocv4")]
+z_index = 3
+material = SubResource("ShaderMaterial_22oev")
+position = Vector2(1703, 809)
+polygon = PackedVector2Array(107, -307, 437, 199, -241, 181, -823, -11)
+
+[node name="Polygon" parent="Body2/Collision" index="0"]
+polygon = PackedVector2Array(107, -307, 437, 199, -241, 181, -823, -11)
+
+[node name="LightOccluder" parent="Body2" index="1"]
+occluder = SubResource("OccluderPolygon2D_gpgg6")
 
 [node name="Node2D" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_5khwq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Diver" parent="." instance=ExtResource("4_ij7yc")]
+z_index = 4
+position = Vector2(1267, 540)
+
+[node name="PointLight2D" type="PointLight2D" parent="Diver"]
+position = Vector2(-1, -7)
+shadow_enabled = true
+shadow_filter = 2
+texture = SubResource("GradientTexture2D_f64sp")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+rotation = -0.789162
+shadow_enabled = true
+shadow_filter = 2
+
+[node name="Waves" parent="." instance=ExtResource("5_sou66")]
+position = Vector2(-4418, -143)
+
+[editable path="Body2"]

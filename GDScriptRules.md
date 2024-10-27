@@ -188,12 +188,13 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 
 ## Collision BitMasks (for non-coliding hitboxes e.g. Area2D)
 
-1  (0000001): General Collision
-2  (0000010): Player Hurtbox / Enemy Attackbox
-4  (0000100): Light
-8  (0001000): Movement
-16 (0010000): Wall Layer 2
-32 (0100000): Player Attackbox / Enemy Hurtbox
-64 (1000000): Interaction
+1   (00000001): General Collision
+2   (00000010): Player Hurtbox / Enemy Attackbox
+4   (00000100): Light
+8   (00001000): Movement
+16  (00010000): Wall Layer 2
+32  (00100000): Player Attackbox / Enemy Hurtbox
+64  (01000000): Interaction
+128 (10000000): Shadowcaster
 
 Sound should be based on a pathfind to the sound.
