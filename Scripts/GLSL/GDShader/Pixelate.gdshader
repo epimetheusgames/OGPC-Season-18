@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform int pixel_size = 4;
+uniform float pixel_size = 4;
 
 uniform sampler2D screen_texture: hint_screen_texture, repeat_disable, filter_nearest;
 
