@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var diver: Diver = get_parent()
 
-@onready var light_texture: Polygon2D = $"LightTexture"
+@onready var light_texture: PointLight2D = $"Light"
 
 func _process(delta: float) -> void:
 	var mouse_pos: Vector2 = get_global_mouse_position()
@@ -17,4 +17,4 @@ func set_light_position(pos: Vector2) -> void:
 	light_texture.global_position = pos
 
 func set_light_rotation(rot: float) -> void:
-	light_texture.global_rotation = rot
+	light_texture.global_rotation = rot + PI / 2.0

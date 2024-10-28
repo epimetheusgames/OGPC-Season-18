@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=19 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="7_3b7lw"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="8_spc27"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
+[ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -346,10 +347,10 @@ debug_color = Color(0.862718, 0.286752, 0.557432, 0.42)
 [node name="Flashlight" type="Node2D" parent="."]
 script = ExtResource("9_xqhlv")
 
-[node name="LightTexture" type="Polygon2D" parent="Flashlight"]
-visible = false
-color = Color(1, 1, 1, 0.352941)
-polygon = PackedVector2Array(381, -200, 0, 0, 381, 200)
+[node name="Light" type="PointLight2D" parent="Flashlight"]
+shadow_enabled = true
+shadow_filter = 2
+texture = ExtResource("10_qg316")
 
 [node name="PlayerVisualDetectionArea" type="Area2D" parent="."]
 collision_layer = 4

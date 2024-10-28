@@ -4,11 +4,5 @@ uniform vec4 water_col;
 
 void light() {
 	vec4 light = LIGHT_COLOR * LIGHT_ENERGY;
-	
-	if (LIGHT_IS_DIRECTIONAL) {
-		
-	}
-	else {
-		LIGHT = water_col * light;
-	}
+	LIGHT = water_col * light;
 }
