@@ -8,10 +8,17 @@ extends Node2D
 @export var spread = 0.4
 @export var target_height = 0
 
+@export var spacing := 4.0:
+	set(val):
+		spacing = val
+		if ready_called:
+			_ready()
+
+var multiplier = 4
 var spring_positions = []
 var spring_velocities = []
-var multiplier = 4
 var boat_index = 20
+var ready_called = false
 
 var background_waves = [[8, 0.05, 0], [-8, 0.08, 1.5], [5, 0.12, 1.5], [1, 0.5, 3], [30, 0.0005, 0], [0.5, 0.7, 2]]
 #var background_waves = [[100, 0.01, 0]]
@@ -26,11 +33,12 @@ func _run_spring(index):
 	spring_velocities[index] += acceleration
 	
 func _ready():
+	ready_called = true
+	spring_positions = []
+	spring_velocities = []
 	for i in range($Line2D.polygon.size() - 2):
-		spring_positions.append(Vector2(i * multiplier * 4, target_height))
+		spring_positions.append(Vector2(i * spacing, target_height))
 		spring_velocities.append(0)
-	
-	var rng = RandomNumberGenerator.new()
 
 func _process(delta: float) -> void:
 	time += delta

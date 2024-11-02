@@ -351,12 +351,15 @@ script = ExtResource("9_xqhlv")
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("10_qg316")
+metadata/_edit_lock_ = true
 
 [node name="PlayerVisualDetectionArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisualDetectionArea"]
+visible = false
 shape = SubResource("CapsuleShape2D_wi5t0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.7, 0.7)

@@ -131,8 +131,8 @@ multiplayer and can't just ask a friend to test it with you.
 ### Ordering
 ```
 01. ## [Script description (optional but recomended)]
-02. @tool
-03. class_name
+02. @tool (optional)
+03. class_name (optional)
 04. extends
 05. # docstring
 
