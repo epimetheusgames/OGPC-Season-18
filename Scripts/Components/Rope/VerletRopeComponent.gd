@@ -23,6 +23,8 @@ var raycast_query: PhysicsRayQueryParameters2D
 
 
 func _ready() -> void:
+	top_level = true
+	
 	raycast_query = PhysicsRayQueryParameters2D.new()
 	
 	var spawn_pos: Vector2 = start_anchor_pos

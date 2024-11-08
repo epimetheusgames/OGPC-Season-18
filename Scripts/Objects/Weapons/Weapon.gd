@@ -9,3 +9,8 @@ var enabled: bool = false
 
 func attack() -> void:
 	pass
+
+func set_hand1(pos: Vector2) -> void:
+	hand1 = pos
+func set_hand2(pos: Vector2) -> void:
+	hand2 = pos

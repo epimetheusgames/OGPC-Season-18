@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkiqku8nhydo3"]
+
+[ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Spear.png" id="1_mdbjp"]
+[ext_resource type="Script" path="res://Scripts/Objects/Weapons/Spear.gd" id="1_x2dlv"]
+
+[node name="Spear" type="Node2D"]
+scale = Vector2(1.00204, 0.995548)
+script = ExtResource("1_x2dlv")
+
+[node name="SpearSprite" type="Sprite2D" parent="."]
+position = Vector2(-4, 3)
+texture = ExtResource("1_mdbjp")
