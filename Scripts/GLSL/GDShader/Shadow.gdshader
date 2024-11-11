@@ -35,5 +35,5 @@ void fragment() {
 	}
 
 	// Pass data through.
-	COLOR = vec4(vec3(accum, alpha, 0.0), 1.0);
+	COLOR = vec4(vec3(accum, alpha * color.a, 0.0), 1.0);
 }
