@@ -6,11 +6,24 @@ uniform int num_points;
 uniform vec2 global_position;
 uniform int fade_width;
 uniform float tex_scale;
+uniform bool sprite_dir_based_on_edge;
 
 uniform sampler2D in_tex : repeat_enable;
 uniform sampler2D edge_tex : repeat_enable;
 
 varying vec2 world_pos;
+
+// https://godotshaders.com/snippet/rotate/
+vec2 rotate(vec2 uv, vec2 pivot, float angle)
+{
+	mat2 rotation = mat2(vec2(sin(angle), -cos(angle)),
+						vec2(cos(angle), sin(angle)));
+
+	uv -= pivot;
+	uv = uv * rotation;
+	uv += pivot;
+	return uv;
+}
 
 void vertex() {
 	world_pos = VERTEX;
@@ -18,9 +31,10 @@ void vertex() {
 
 void fragment() {
 	vec2 position = world_pos;
+
 	vec2 closest_point_pos = vec2(0.0, 0.0);
 	float closest_point_dist = 999999999.0;
-
+	float rot_angle = 0.0;
 	for (int i = 0; i < num_points; i++) {
 		int to_use = i - 1;
 		if (i == 0) {
@@ -50,6 +64,9 @@ void fragment() {
 		float dist = distance(position, closest_point);
 
 		if (dist < closest_point_dist) {
+			vec2 unclamped_point = p1 + n * d;
+			vec2 dir = normalize(unclamped_point - position);
+			rot_angle = atan(dir.y, dir.x);
 			closest_point_pos = closest_point;
 			closest_point_dist = dist;
 		}
@@ -58,7 +75,7 @@ void fragment() {
 	float fade_amm = clamp(closest_point_dist / float(fade_width), 0.0, 1.0);
 
 	vec4 in_pixel = texture(in_tex, position / tex_scale);
-	vec4 edge_pixel = texture(edge_tex, position / tex_scale);
+	vec4 edge_pixel = texture(edge_tex, sprite_dir_based_on_edge ? rotate(position / tex_scale, vec2(0.0, 0.0), rot_angle) : position / tex_scale);
 
 	COLOR = mix(edge_pixel, in_pixel, fade_amm);
 }

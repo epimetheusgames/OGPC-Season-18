@@ -44,6 +44,11 @@ window/size/viewport_height=1080
 window/subwindows/embed_subwindows=false
 window/stretch/aspect="expand"
 
+[editor]
+
+naming/scene_name_casing=1
+naming/script_name_casing=1
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg")
@@ -106,11 +111,19 @@ attack={
 2d_physics/layer_6="Enemy Hurtbox or Player Attackbox"
 2d_physics/layer_7="Interaction Hitbox"
 2d_physics/layer_8="Shadow Caster"
+avoidance/script_name_casing=1
+avoidance/scene_name_casing=1
+avoidance/gdscript/max_call_stack=2047
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality.mobile=3
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
 anti_aliasing/quality/msaa_2d=3
 viewport/hdr_2d=true
 anti_aliasing/quality/screen_space_aa=1
 anti_aliasing/quality/use_debanding=true
+2d/sdf/oversize=3
+2d/sdf/scale=0

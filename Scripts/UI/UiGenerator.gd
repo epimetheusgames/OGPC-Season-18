@@ -121,7 +121,7 @@ func reinitialize_ui():
 		keybind_config.parse(get_keybind_file())
 		keybind_config_data = keybind_config.data
 		_queue_clear_ui_elements()
-		call_deferred("generate_ui_elements()")
+		call_deferred("generate_ui_elements")
 
 # Takes an array of actions, and removes the builtin actions
 func remove_stock_keybinds(array: Array) -> Array:

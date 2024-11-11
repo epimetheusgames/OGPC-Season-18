@@ -1,6 +1,5 @@
 ## Diver procedural animation system.
 class_name DiverAnimation
-
 extends Node2D
 
 @onready var diver: Diver = get_parent()

@@ -18,6 +18,7 @@ shader_parameter/num_points = 12
 shader_parameter/global_position = Vector2(933, 369)
 shader_parameter/fade_width = 115
 shader_parameter/tex_scale = 103.0
+shader_parameter/sprite_dir_based_on_edge = false
 shader_parameter/in_tex = SubResource("GradientTexture1D_5bdf5")
 shader_parameter/edge_tex = ExtResource("2_bqhry")
 

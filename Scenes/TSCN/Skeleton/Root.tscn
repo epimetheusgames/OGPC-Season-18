@@ -35,7 +35,6 @@ ui_root_node_path = NodePath("../../UI")
 level_list = Array[ExtResource("3_e6kdq")]([SubResource("Resource_ur184")])
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
