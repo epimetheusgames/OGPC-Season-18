@@ -267,7 +267,6 @@ metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/Head"]
 position = Vector2(0, -9.00003)
-scale = Vector2(1, 1)
 occluder = SubResource("OccluderPolygon2D_p7tt7")
 occluder_light_mask = 2
 
@@ -331,7 +330,6 @@ metadata/_edit_lock_ = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm2/Forearm2"]
 position = Vector2(-20.7467, 7.335)
 rotation = -1.92815
-scale = Vector2(1, 1)
 occluder = SubResource("OccluderPolygon2D_5lcxe")
 occluder_light_mask = 2
 

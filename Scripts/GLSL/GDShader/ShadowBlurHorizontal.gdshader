@@ -46,7 +46,7 @@ void fragment() {
 	int offset_found = 0;
 	bool found = false;
 	if (texture(screen_texture, SCREEN_UV).r >= 480.0) {
-		for (int i = 1; i <= int(blur) * 4; i++) {
+		for (int i = 1; i <= int(blur) * 4; i += 4) {
 			vec4 data = texture(screen_texture, SCREEN_UV + vec2(float(i) * SCREEN_PIXEL_SIZE.x, 0.0));
 			if (data.r < 480.0) {
 				accum = data.r/max_dist * blur;
@@ -56,7 +56,7 @@ void fragment() {
 			}
 		}
 		if (!found) {
-			for (int i = -1; i >= -int(blur) * 4; i--) {
+			for (int i = -1; i >= -int(blur) * 4; i -= 4) {
 				vec4 data = texture(screen_texture, SCREEN_UV + vec2(float(i) * SCREEN_PIXEL_SIZE.x, 0.0));
 				if (data.r < 480.0) {
 					accum = data.r/max_dist * blur;

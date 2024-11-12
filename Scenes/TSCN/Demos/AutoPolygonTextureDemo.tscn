@@ -18,12 +18,15 @@ shader_parameter/num_points = 9
 shader_parameter/global_position = Vector2(1013, 479)
 shader_parameter/fade_width = 115
 shader_parameter/tex_scale = 103.0
-shader_parameter/sprite_dir_based_on_edge = false
 shader_parameter/in_tex = SubResource("GradientTexture1D_5bdf5")
 shader_parameter/edge_tex = ExtResource("2_bqhry")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4g6wi"]
+<<<<<<< HEAD
 polygon = PackedVector2Array(186, 550, 441, 339, 556, 13, -284, 253, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
+=======
+polygon = PackedVector2Array(-591, -116, -331, -373, -26, -194, -12, -183, -4, -171, -7, -156, -13.3542, -143.68, -118, 9, -25, 42, 131, 240, 138, 250, 140, 254, 141, 258, 138, 262, 133, 265, 121, 269, -198, 335, -207, 335, -214, 333, -217.942, 325.679, -265.776, 192.54, -268, 188, -273, 185, -278, 187, -282, 191, -379, 328, -383, 334, -385, 340, -386, 347, -386.658, 353.719, -433, 846, -1434, 670, -1002, -28)
+>>>>>>> eb7b789 (Optimized shadow shader ... not sure if I'll be able to get it below 23 texture lookups per pixel ... such is the sad reality of gaussian bluring.)
 
 [node name="Body" type="Polygon2D"]
 texture_repeat = 2
