@@ -13,9 +13,9 @@ gradient = SubResource("Gradient_2s48v")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3joij"]
 shader = ExtResource("1_run5o")
-shader_parameter/points = PackedVector2Array(-591, -116, -388, -275, 4, -169, -118, 9, -25, 42, 150, 264, -211, 345, -271, 178, -385.13, 337.489, -433, 846, -1434, 670, -1002, -28)
-shader_parameter/num_points = 12
-shader_parameter/global_position = Vector2(933, 369)
+shader_parameter/points = PackedVector2Array(186, 550, 441, 339, 556, 13, -284, 253, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
+shader_parameter/num_points = 9
+shader_parameter/global_position = Vector2(1013, 479)
 shader_parameter/fade_width = 115
 shader_parameter/tex_scale = 103.0
 shader_parameter/sprite_dir_based_on_edge = false
@@ -23,7 +23,7 @@ shader_parameter/in_tex = SubResource("GradientTexture1D_5bdf5")
 shader_parameter/edge_tex = ExtResource("2_bqhry")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4g6wi"]
-polygon = PackedVector2Array(-591, -116, -388, -275, 4, -169, -118, 9, -25, 42, 150, 264, -211, 345, -271, 178, -385.13, 337.489, -433, 846, -1434, 670, -1002, -28)
+polygon = PackedVector2Array(186, 550, 441, 339, 556, 13, -284, 253, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
 
 [node name="Body" type="Polygon2D"]
 texture_repeat = 2

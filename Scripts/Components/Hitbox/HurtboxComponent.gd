@@ -1,4 +1,4 @@
-## Component for a simple hitbox, contains support for a HealthComponent to be
+## Component for a simple hitbox, has support for a HealthComponent to be
 ## attached to it.
 class_name HurtboxComponent
 extends BaseHitboxComponent
@@ -32,36 +32,38 @@ func _ready() -> void:
 	_base_component_ready_post()
 	
 func _area_entered(area: Area2D) -> void:
+	if not attachable_health_component:
+		return
 	
-	if attachable_health_component:
-		var damage_ammount := 1.0
-		var parent = area.get_parent()
-		if !(parent is Entity):
-			parent = parent.get_parent()
-		if !(parent is Entity):
-			print("WARNING: Hurtbox entered by area at path " + str(area.get_path()) + ", which doesn't have a parent or grandparent that is of type Entity. This will not be detected.")
-			return
+	# Kinda silly
+	var damage_ammount := 1.0
+	var parent = area.get_parent()
+	if !(parent is Entity):
+		parent = parent.get_parent()
+	if !(parent is Entity):
+		print("WARNING: Hurtbox entered by area at path " + str(area.get_path()) + ", which doesn't have a parent or grandparent that is of type Entity. This will not be detected.")
+		return
+	
+	parent = parent as Entity
+	
+	# Take damage on all clients.
+	if Global.is_multiplayer && parent._is_node_owner():
+		Global.godot_steam_abstraction.run_remote_function(self, "_area_entered", [str(area.get_path())], true)
+	
+	if parent is Entity:
+		var attack_box_component: AttackBoxComponent = parent.get_component("AttackBoxComponent")
 		
-		parent = parent as Entity
-		
-		# Take damage on all clients.
-		if Global.is_multiplayer && parent._is_node_owner():
-			Global.godot_steam_abstraction.run_remote_function(self, "_area_entered", [str(area.get_path())], true)
-		
-		if parent is Entity:
-			var attack_box_component: AttackBoxComponent = parent.get_component("AttackBoxComponent")
+		if attack_box_component && ((!attack_box_to_exclude) || attack_box_component != get_node(attack_box_to_exclude)):
+			damage_ammount = attack_box_component.damage
+			var container: Entity = get_node(component_container)
+			var other_container = attack_box_component.get_node(attack_box_component.component_container)
+			var other_container_position = other_container.position
+			var direction = (container.position - other_container_position).normalized()
 			
-			if attack_box_component && ((!attack_box_to_exclude) || attack_box_component != get_node(attack_box_to_exclude)):
-				damage_ammount = attack_box_component.damage
-				var container: Entity = get_node(component_container)
-				var other_container = attack_box_component.get_node(attack_box_component.component_container)
-				var other_container_position = other_container.position
-				var direction = (container.position - other_container_position).normalized()
-				
-				container.set_new_velocity(direction * attack_box_component.knockback_velocity)
-				
-				if container is Diver:
-					container.get_diver_movement().velocity = container.velocity
-		
-		get_node(attachable_health_component).take_damage(damage_ammount)
-		damage_taken.emit(damage_ammount)
+			container.set_new_velocity(direction * attack_box_component.knockback_velocity)
+			
+			if container is Diver:
+				container.get_diver_movement().velocity = container.velocity
+	
+	get_node(attachable_health_component).take_damage(damage_ammount)
+	damage_taken.emit(damage_ammount)

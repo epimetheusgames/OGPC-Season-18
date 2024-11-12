@@ -161,6 +161,7 @@ offset_bottom = 10836.0
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
 
 [node name="Body" parent="WorldNode2D" instance=ExtResource("1_2ocv4")]
+
 z_index = 3
 material = SubResource("ShaderMaterial_itdjb")
 position = Vector2(933, 369)
@@ -197,6 +198,7 @@ spacing = 17.34
 
 [node name="Line2D" parent="WorldNode2D/Waves" index="0"]
 material = SubResource("ShaderMaterial_lvisp")
+
 position = Vector2(-2116, -86)
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
 texture = SubResource("PlaceholderTexture2D_u17pl")

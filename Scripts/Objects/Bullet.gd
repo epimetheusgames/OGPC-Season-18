@@ -8,7 +8,7 @@ var _damage := 1.0
 func _process(delta: float) -> void:
 	position += _velocity * delta * 60
 
-## Setters and getters
+# Setters and getters
 func set_damage(new_damage: float) -> void:
 	_damage = new_damage
 	$AttackBoxComponent.damage = new_damage

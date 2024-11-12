@@ -2,26 +2,44 @@
 class_name DiverCombat
 extends Node2D
 
-@onready var knife: Node2D = $"knife"
+@onready var diver: Diver = get_parent()
+
+var weapons: Array[Weapon] = [
+	null,
+	null,
+	null,
+]
+var enabled_weapon: Weapon
+
+var speargun: PackedScene = preload("res://Scenes/TSCN/Objects/Weapons/Speargun.tscn")
+
+func _ready() -> void:
+	add_weapon(speargun)
+	pass
+	#set_weapon(0)
 
 func _process(delta: float) -> void:
+	pass
+	#enabled_weapon.hand1 = diver.diver_animation.get_hand1_position()
+	#enabled_weapon.hand2 = diver.diver_animation.get_hand2_position()
+
+func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
-		attack()
+		enabled_weapon.attack()
 
-func attack() -> void:
-	$AttackBoxComponent.attack()
 
-func shoot() -> void:
-	var new_bullet: BaseBullet = load("res://Scenes/TSCN/Objects/BaseBullet.tscn").instantiate()
-	new_bullet.top_level = true
-	new_bullet.global_position = global_position
-	new_bullet.rotation = global_position.angle_to_point(get_global_mouse_position())
-	new_bullet.set_velocity(Util.angle_to_vector(new_bullet.rotation, 20))
-	add_child(new_bullet)
+func add_weapon(scene: PackedScene) -> void:
+	var new_weapon = scene.instantiate()
 	
-	var new_rope := FabrikRopeComponent.new()
-	new_rope.top_level = true
-	new_rope.start_anchor_node = new_bullet
-	new_rope.end_anchor_node = self
-	new_rope.length = 200
-	add_child(new_rope)
+	if new_weapon is Weapon:
+		add_child(new_weapon)
+		weapons.append(new_weapon)
+
+func remove_weapon(index: int) -> void:
+	weapons.remove_at(index)
+
+# Enables weapon at index
+func set_weapon(index: int):
+	if index < 0 || index > weapons.size() - 1:
+		enabled_weapon
+	enabled_weapon = weapons[index]

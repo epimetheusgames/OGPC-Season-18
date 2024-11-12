@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=4 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_b33aw"]
+[ext_resource type="PackedScene" uid="uid://cdg0gyclxvqs4" path="res://Scenes/TSCN/Demos/AutoPolygonTextureDemo.tscn" id="2_x6ep8"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera.gd" id="3_f7guv"]
 
 [node name="Mission1" type="Node2D"]
 
 [node name="Diver" parent="." instance=ExtResource("1_b33aw")]
 position = Vector2(343, 287)
+
+[node name="Body" parent="." instance=ExtResource("2_x6ep8")]
+position = Vector2(1013, 479)
+polygon = PackedVector2Array(186, 550, 441, 339, 556, 13, -284, 253, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target_node")]
+position = Vector2(951, 541)
+zoom = Vector2(1.2, 1.2)
+position_smoothing_enabled = true
+script = ExtResource("3_f7guv")
+target_node = NodePath("../Diver")

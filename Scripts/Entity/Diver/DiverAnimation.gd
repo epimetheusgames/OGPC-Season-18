@@ -5,7 +5,10 @@ extends Node2D
 @onready var diver: Diver = get_parent()
 
 @onready var skeleton: Skeleton2D = $"Skeleton"
+
 @onready var head: Bone2D = $"Skeleton/Torso/Head"
+@onready var arm1: Bone2D = $"Skeleton/Torso/UpperArm1/Forearm1"
+@onready var arm2: Bone2D = $"Skeleton/Torso/UpperArm2/Forearm2"
 
 @onready var arm_target1: Node2D = $"ArmIkTarget1"
 @onready var arm_target2: Node2D = $"ArmIkTarget2"
@@ -63,3 +66,13 @@ func get_head_position() -> Vector2:
 	var pos: Vector2 = head.global_position
 	var rot: float = head.get_bone_angle() + head.get_global_rotation()
 	return pos + Util.angle_to_vector(rot, head.get_length())
+
+func get_hand1_position() -> Vector2:
+	var pos: Vector2 = arm1.global_position
+	var rot: float = arm1.get_bone_angle() + arm1.get_global_rotation()
+	return pos + Util.angle_to_vector(rot, arm1.get_length())
+
+func get_hand2_position() -> Vector2:
+	var pos: Vector2 = arm2.global_position
+	var rot: float = arm2.get_bone_angle() + arm2.get_global_rotation()
+	return pos + Util.angle_to_vector(rot, arm2.get_length())

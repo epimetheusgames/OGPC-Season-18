@@ -1,6 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=21 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Diver.gdshader" id="1_7v8rn"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
@@ -10,6 +11,10 @@
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="8_spc27"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_046kn"]
+shader = ExtResource("1_7v8rn")
+shader_parameter/resolution = 128.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -89,6 +94,7 @@ height = 124.0
 radius = 48.0417
 
 [node name="Diver" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_046kn")
 script = ExtResource("1_1l6ma")
 
 [node name="Body" type="CollisionShape2D" parent="."]
@@ -104,13 +110,17 @@ target_position = Vector2(48, 0)
 target_position = Vector2(-48, 0)
 
 [node name="Animation" type="Node2D" parent="."]
+use_parent_material = true
 script = ExtResource("3_k6pml")
 
 [node name="Polygons" type="Node2D" parent="Animation"]
 texture_filter = 1
+use_parent_material = true
+metadata/_edit_lock_ = true
 
 [node name="Head" type="Polygon2D" parent="Animation/Polygons"]
 z_index = 1
+use_parent_material = true
 position = Vector2(0, -71)
 offset = Vector2(-128, -33)
 texture = ExtResource("4_do014")
@@ -123,6 +133,7 @@ metadata/_edit_lock_ = true
 
 [node name="UpperArm1" type="Polygon2D" parent="Animation/Polygons"]
 texture_repeat = 1
+use_parent_material = true
 position = Vector2(39, -55)
 rotation = 1.5708
 offset = Vector2(-167.993, -54.2543)
@@ -135,6 +146,7 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="Forearm1" type="Polygon2D" parent="Animation/Polygons"]
+use_parent_material = true
 position = Vector2(81, -55)
 rotation = 1.5708
 offset = Vector2(-56, -41)
@@ -147,6 +159,7 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="UpperArm2" type="Polygon2D" parent="Animation/Polygons"]
+use_parent_material = true
 position = Vector2(-36, -55)
 rotation = 1.5708
 offset = Vector2(-88, -55)
@@ -159,6 +172,7 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="Forearm2" type="Polygon2D" parent="Animation/Polygons"]
+use_parent_material = true
 position = Vector2(-82, -55)
 rotation = -1.5708
 offset = Vector2(-56.0993, -40.2919)
@@ -171,6 +185,7 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="Body" type="Polygon2D" parent="Animation/Polygons"]
+use_parent_material = true
 position = Vector2(3, -39)
 offset = Vector2(-131, -87)
 texture = ExtResource("4_do014")
@@ -183,6 +198,7 @@ internal_vertex_count = 1
 metadata/_edit_lock_ = true
 
 [node name="Thigh1" type="Polygon2D" parent="Animation/Polygons"]
+use_parent_material = true
 position = Vector2(10, 24)
 offset = Vector2(-168, -128)
 texture = ExtResource("4_do014")
@@ -194,6 +210,7 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="Calf1" type="Polygon2D" parent="Animation/Polygons"]
+use_parent_material = true
 position = Vector2(10, 82)
 offset = Vector2(-152, -208)
 texture = ExtResource("4_do014")
@@ -205,6 +222,7 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="Thigh2" type="Polygon2D" parent="Animation/Polygons"]
+use_parent_material = true
 position = Vector2(-10, 23)
 offset = Vector2(-88, -127)
 texture = ExtResource("4_do014")
@@ -216,6 +234,7 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="Calf2" type="Polygon2D" parent="Animation/Polygons"]
+use_parent_material = true
 position = Vector2(-10, 81)
 offset = Vector2(-104, -207)
 texture = ExtResource("4_do014")
@@ -227,13 +246,17 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="Skeleton" type="Skeleton2D" parent="Animation"]
+use_parent_material = true
 modification_stack = SubResource("SkeletonModificationStack2D_xgw1b")
+metadata/_edit_lock_ = true
 
 [node name="Torso" type="Bone2D" parent="Animation/Skeleton"]
+use_parent_material = true
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 metadata/_edit_lock_ = true
 
 [node name="Head" type="Bone2D" parent="Animation/Skeleton/Torso"]
+use_parent_material = true
 position = Vector2(0, -62)
 scale = Vector2(0.999997, 0.999997)
 rest = Transform2D(1, 0, 0, 1, 0, -62)
@@ -249,6 +272,7 @@ occluder = SubResource("OccluderPolygon2D_p7tt7")
 occluder_light_mask = 2
 
 [node name="UpperArm1" type="Bone2D" parent="Animation/Skeleton/Torso"]
+use_parent_material = true
 position = Vector2(18, -55)
 rotation = 2.08284
 scale = Vector2(0.999944, 0.999944)
@@ -257,6 +281,7 @@ metadata/_local_pose_override_enabled_ = true
 metadata/_edit_lock_ = true
 
 [node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
+use_parent_material = true
 position = Vector2(40.2459, 12.0526)
 rotation = -0.172192
 scale = Vector2(1.08388, 1.00115)
@@ -284,6 +309,7 @@ occluder = SubResource("OccluderPolygon2D_u101i")
 occluder_light_mask = 2
 
 [node name="UpperArm2" type="Bone2D" parent="Animation/Skeleton/Torso"]
+use_parent_material = true
 position = Vector2(-18, -55)
 rotation = 0.178766
 rest = Transform2D(0.984064, 0.177815, -0.177815, 0.984064, -18, -55)
@@ -291,6 +317,7 @@ metadata/_local_pose_override_enabled_ = true
 metadata/_edit_lock_ = true
 
 [node name="Forearm2" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm2"]
+use_parent_material = true
 position = Vector2(-41.3307, 7.46825)
 rotation = 0.175939
 scale = Vector2(0.999999, 0.999999)
@@ -315,6 +342,7 @@ occluder = SubResource("OccluderPolygon2D_uacx1")
 occluder_light_mask = 2
 
 [node name="Thigh1" type="Bone2D" parent="Animation/Skeleton/Torso"]
+use_parent_material = true
 position = Vector2(9, -4)
 rest = Transform2D(1, 0, 0, 1, 9, -4)
 auto_calculate_length_and_angle = false
@@ -324,6 +352,7 @@ metadata/_edit_lock_ = true
 metadata/_local_pose_override_enabled_ = true
 
 [node name="Calf1" type="Bone2D" parent="Animation/Skeleton/Torso/Thigh1"]
+use_parent_material = true
 position = Vector2(2, 56)
 scale = Vector2(0.996554, 1)
 rest = Transform2D(0.996554, 0, 0, 1, 2, 56)
@@ -348,6 +377,7 @@ occluder = SubResource("OccluderPolygon2D_xwppb")
 occluder_light_mask = 2
 
 [node name="Thigh2" type="Bone2D" parent="Animation/Skeleton/Torso"]
+use_parent_material = true
 position = Vector2(-9, -4)
 rest = Transform2D(1, 0, 0, 1, -9, -4)
 auto_calculate_length_and_angle = false
@@ -357,6 +387,7 @@ metadata/_edit_lock_ = true
 metadata/_local_pose_override_enabled_ = true
 
 [node name="Calf2" type="Bone2D" parent="Animation/Skeleton/Torso/Thigh2"]
+use_parent_material = true
 position = Vector2(-2, 57)
 rest = Transform2D(1, 0, 0, 1, -2, 57)
 auto_calculate_length_and_angle = false
@@ -381,6 +412,7 @@ occluder = SubResource("OccluderPolygon2D_0ulgu")
 occluder_light_mask = 2
 
 [node name="ArmIkTarget1" type="Node2D" parent="Animation"]
+
 position = Vector2(116, -54)
 
 [node name="ArmIkTarget2" type="Node2D" parent="Animation"]
@@ -393,46 +425,52 @@ position = Vector2(10, 121)
 position = Vector2(-9, 122)
 
 [node name="Arrow" type="Node2D" parent="Animation"]
+use_parent_material = true
 
 [node name="Polygon2D" type="Polygon2D" parent="Animation/Arrow"]
+use_parent_material = true
 position = Vector2(105, -1)
 color = Color(1, 0, 1, 1)
 polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
 
-[node name="Combat" type="Node2D" parent="."]
+[node name="Health" type="Node2D" parent="."]
 rotation = 0.000201209
 script = ExtResource("5_mjta2")
 
-[node name="HealthComponent" type="Node" parent="Combat"]
+[node name="HealthComponent" type="Node" parent="Health"]
 script = ExtResource("6_dvqx5")
 max_health = 5.0
 component_container = NodePath("../..")
 
-[node name="HurtboxComponent" type="Node" parent="Combat"]
+[node name="HurtboxComponent" type="Node" parent="Health"]
 script = ExtResource("7_3b7lw")
 attachable_health_component = NodePath("../HealthComponent")
 hurtbox = NodePath("../PlayerHurtbox")
 component_container = NodePath("../..")
 
-[node name="AttackBoxComponent" type="Node" parent="Combat"]
-script = ExtResource("8_spc27")
-knockback_velocity = 20.0
-hurtbox = NodePath("../AttackBox")
-component_container = NodePath("../..")
-
-[node name="PlayerHurtbox" type="Area2D" parent="Combat"]
+[node name="PlayerHurtbox" type="Area2D" parent="Health"]
 rotation = -0.000201209
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Combat/PlayerHurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Health/PlayerHurtbox"]
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
-[node name="AttackBox" type="Area2D" parent="Combat"]
+[node name="Combat" type="Node2D" parent="."]
+script = ExtResource("5_mjta2")
+
+[node name="AttackBoxComponent" type="Node" parent="Combat"]
+script = ExtResource("8_spc27")
+knockback_velocity = 20.0
+hurtbox = NodePath("AttackBox")
+component_container = NodePath("../..")
+
+[node name="AttackBox" type="Area2D" parent="Combat/AttackBoxComponent"]
+rotation = 0.000201209
 collision_layer = 32
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Combat/AttackBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Combat/AttackBoxComponent/AttackBox"]
 position = Vector2(-0.0126762, -63)
 shape = SubResource("CircleShape2D_ls4ex")
 debug_color = Color(0.862718, 0.286752, 0.557432, 0.42)
@@ -441,6 +479,7 @@ debug_color = Color(0.862718, 0.286752, 0.557432, 0.42)
 script = ExtResource("9_xqhlv")
 
 [node name="Light" type="PointLight2D" parent="Flashlight"]
+position = Vector2(2, -2)
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("10_qg316")
@@ -453,6 +492,3 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisualDetectionArea"]
 visible = false
 shape = SubResource("CapsuleShape2D_wi5t0")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.7, 0.7)
