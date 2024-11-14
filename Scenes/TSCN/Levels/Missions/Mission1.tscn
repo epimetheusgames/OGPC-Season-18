@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_b33aw"]
 [ext_resource type="PackedScene" uid="uid://cdg0gyclxvqs4" path="res://Scenes/TSCN/Demos/AutoPolygonTextureDemo.tscn" id="2_x6ep8"]
-[ext_resource type="Script" path="res://Scripts/Objects/Camera.gd" id="3_f7guv"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera/Camera.gd" id="3_f7guv"]
 
 [node name="Mission1" type="Node2D"]
 

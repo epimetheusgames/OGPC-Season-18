@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://cdoc3r7p4ruvc"]
+
+[ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_edi0r"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera/Camera.gd" id="2_0ewuu"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera/ShaderManager.gd" id="3_t0and"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="4_ggnjt"]
+[ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="6_4t2rt"]
+[ext_resource type="Texture2D" uid="uid://fvg2fww4sy5j" path="res://Scenes/TSCN/Levels/mountain.jpg" id="6_mc12c"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="7_errr2"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="7_txxgb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3swsc"]
+shader = ExtResource("7_txxgb")
+shader_parameter/screen_size = Vector2(1152, 648)
+shader_parameter/pixel_size = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yb4lt"]
+shader = ExtResource("7_errr2")
+shader_parameter/color_palette = null
+shader_parameter/colors_amount = 10
+
+[node name="KaiTest" type="Node2D"]
+
+[node name="Mountain" type="Sprite2D" parent="."]
+position = Vector2(1133.75, 1011.5)
+scale = Vector2(6.50369, 9.00538)
+texture = ExtResource("6_mc12c")
+
+[node name="Diver" parent="." instance=ExtResource("1_edi0r")]
+position = Vector2(484, 792)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target_node")]
+script = ExtResource("2_0ewuu")
+target_node = NodePath("../Diver")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Camera2D"]
+color = Color(0, 0, 0, 1)
+
+[node name="ShaderManager" type="CanvasLayer" parent="Camera2D"]
+script = ExtResource("3_t0and")
+
+[node name="PaletteLoader" type="Node" parent="Camera2D/ShaderManager"]
+script = ExtResource("4_ggnjt")
+palette = ExtResource("6_4t2rt")
+
+[node name="BackBufferCopy1" type="BackBufferCopy" parent="Camera2D/ShaderManager"]
+rect = Rect2(0, 0, 1920, 1080)
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/ShaderManager/BackBufferCopy1"]
+material = SubResource("ShaderMaterial_3swsc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
+
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="Camera2D/ShaderManager"]
+rect = Rect2(0, 0, 1920, 1080)
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/ShaderManager/BackBufferCopy2"]
+material = SubResource("ShaderMaterial_yb4lt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true

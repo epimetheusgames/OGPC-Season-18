@@ -25,7 +25,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
-		enabled_weapon.attack()
+		pass
+		#enabled_weapon.attack()
 
 
 func add_weapon(scene: PackedScene) -> void:
