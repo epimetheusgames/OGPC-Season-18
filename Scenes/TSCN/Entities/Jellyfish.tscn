@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk5y5253vbhe4"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
+[ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
+[ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
+[ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="4_y38hh"]
+
+[sub_resource type="Resource" id="Resource_rbmc1"]
+script = ExtResource("3_5yh7k")
+color = Color(0.546871, 0.83725, 1.54018e-06, 1)
+length = 300.0
+thickness = 6.0
+amount = 8
+bottom_width = 140.0
+
+[node name="Jellyfish" type="Node2D"]
+script = ExtResource("1_dd7wo")
+
+[node name="Tentacles" type="Node2D" parent="."]
+script = ExtResource("2_7lbwn")
+tentacles = Array[ExtResource("3_5yh7k")]([SubResource("Resource_rbmc1")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -139.0
+offset_top = -56.0
+offset_right = 147.0
+offset_bottom = 53.0
+color = Color(0.712, 1, 0.46, 1)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(4, 3)
+scale = Vector2(51.6, 26.7)
+texture = ExtResource("4_y38hh")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdoc3r7p4ruvc"]
+[gd_scene load_steps=13 format=3 uid="uid://cdoc3r7p4ruvc"]
 
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_edi0r"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Camera.gd" id="2_0ewuu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://fvg2fww4sy5j" path="res://Scenes/TSCN/Levels/mountain.jpg" id="6_mc12c"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="7_errr2"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="7_txxgb"]
+[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="9_dpin1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3swsc"]
 shader = ExtResource("7_txxgb")
@@ -19,15 +20,12 @@ shader = ExtResource("7_errr2")
 shader_parameter/color_palette = null
 shader_parameter/colors_amount = 10
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_86gkk"]
+vertices = PackedVector2Array(2294.37, -54.5391, 2205.46, 1334.38, 14.8438, 1978.97, -184.969, -185.398)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(6, 1992, -196, -196, 2305, -64, 2215, 1342)])
+
 [node name="KaiTest" type="Node2D"]
-
-[node name="Mountain" type="Sprite2D" parent="."]
-position = Vector2(1133.75, 1011.5)
-scale = Vector2(6.50369, 9.00538)
-texture = ExtResource("6_mc12c")
-
-[node name="Diver" parent="." instance=ExtResource("1_edi0r")]
-position = Vector2(484, 792)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target_node")]
 script = ExtResource("2_0ewuu")
@@ -74,3 +72,18 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 color = Color(1, 1, 1, 0)
 metadata/_edit_lock_ = true
+
+[node name="Mountain" type="Sprite2D" parent="."]
+position = Vector2(1133.75, 1011.5)
+scale = Vector2(6.50369, 9.00538)
+texture = ExtResource("6_mc12c")
+
+[node name="Diver" parent="." instance=ExtResource("1_edi0r")]
+position = Vector2(484, 792)
+
+[node name="Jellyfish" parent="." instance=ExtResource("9_dpin1")]
+position = Vector2(520, 475)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_86gkk")

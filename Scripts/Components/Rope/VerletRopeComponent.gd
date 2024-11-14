@@ -4,18 +4,17 @@ extends Node2D
 @export var iterations: int = 80
 @export var nodes_amount: int = 100
 @export var nodes_separation: float = 40
+
 @export var gravity: Vector2 = Vector2(0, 100)
-@export var enable_collisions: bool = true  # Toggle for enabling/disabling collisions
+@export var damping: float = 0.98  # 1 = no damping, < 1 slows movement
+@export var enable_collisions: bool = true 
 
 @export var line: Line2D
 
 var nodes: Array[VerletNode] = []
 
-var start_anchor: bool = false
-var start_anchor_pos: Vector2
-
-var end_anchor: bool = false
-var end_anchor_pos: Vector2
+var start_anchor_node: Node2D
+var end_anchor_node: Node2D
 
 const timestep: float = 0.1
 
@@ -27,7 +26,9 @@ func _ready() -> void:
 	
 	raycast_query = PhysicsRayQueryParameters2D.new()
 	
-	var spawn_pos: Vector2 = start_anchor_pos
+	var spawn_pos: Vector2
+	if start_anchor_node:
+		spawn_pos = start_anchor_node.global_position
 	
 	for i in range(nodes_amount):
 		nodes.append(VerletNode.new())
@@ -55,7 +56,9 @@ func simulate():
 	for i in range(nodes_amount):
 		var node: VerletNode = nodes[i]
 		var temp: Vector2 = node.position
-		var velocity: Vector2 = (node.position - node.old_position) + gravity * timestep * timestep
+		
+		# Calculate velocity, applying damping to slow down the points
+		var velocity: Vector2 = (node.position - node.old_position) * damping + gravity * timestep * timestep
 		
 		# Iteratively resolve collisions or simply move the node if collisions are disabled
 		var resolved_position = node.position
@@ -68,16 +71,17 @@ func simulate():
 		
 		node.position = resolved_position
 		
+		# Update the previous position for the next step
 		node.old_position = temp
 
 
 # Apply constraints such as anchor positions and node separation
 func apply_constraints():
 	# Pull toward anchors, and keep node distance constraints
-	if start_anchor:
-		nodes[0].position = start_anchor_pos
-	if end_anchor:
-		nodes[nodes_amount - 1].position = end_anchor_pos
+	if start_anchor_node:
+		nodes[0].position = start_anchor_node.global_position
+	if end_anchor_node:
+		nodes[nodes_amount - 1].position = end_anchor_node.global_position
 
 	# Apply node-to-node constraints
 	for i in range(nodes_amount - 1):

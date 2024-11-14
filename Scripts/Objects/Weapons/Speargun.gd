@@ -1,9 +1,8 @@
 # Lightweight gun powered by rubbers or air canisters,
 # used for spearing small / medium fish
-
 class_name Speargun
 extends Weapon
-
+"""
 @onready var spear: Spear = $"Spear"
 
 @onready var reel_line: VerletRopeComponent = $"ReelLine"
@@ -38,4 +37,4 @@ func attack() -> void:
 	#var tween := get_tree().create_tween()
 	#reel_line.nodes_amount = 5
 	#tween.tween_property(reel_line, "nodes_amount", 20, 5)
-	
+"""

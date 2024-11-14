@@ -23,6 +23,8 @@ func load_colors():
 			
 			if color.a > 0.0:
 				colors.append(color)
+	
+	print("Colors amount: " + str(colors.size()))
 
 func get_colors(): 
 	return colors

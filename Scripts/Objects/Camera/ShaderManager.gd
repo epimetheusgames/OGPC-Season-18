@@ -1,12 +1,12 @@
-extends Node
+@tool
 
-@export var shaders_in_editor: bool = false
+extends Node
 
 @export var pixelize_on: bool = true
 @export var quantize_on: bool = true
 
-@onready var pixelize_shader: ShaderMaterial = $"BackBufferCopy1/ColorRect".material
-@onready var quantize_shader: ShaderMaterial = $"BackBufferCopy2/ColorRect".material
+@onready var pixelize_shader: ColorRect = $"BackBufferCopy1/ColorRect"
+@onready var quantize_shader: ColorRect = $"BackBufferCopy2/ColorRect"
 
 @onready var palette_loader: Node = $"PaletteLoader"
 
@@ -20,12 +20,12 @@ func _ready() -> void:
 		var vec4_color = Vector4(color.r, color.g, color.b, color.a)
 		vec4_palette.append(vec4_color)
 	
-	quantize_shader.set_shader_parameter("color_palette", vec4_palette)
+	quantize_shader.material.set_shader_parameter("color_palette", vec4_palette)
+	quantize_shader.material.set_shader_parameter("colors_amount", vec4_palette.size())
 	
 	# Set shader mats
-	var in_engine: bool = not Engine.is_editor_hint()
-	var in_editor_and_enabled: bool = Engine.is_editor_hint() and shaders_in_editor
-	
-	if in_engine or in_editor_and_enabled:
-		pixelize_shader.shader = null if not pixelize_on else pixelize_shader.shader
-		quantize_shader.shader = null if not quantize_on else quantize_shader.shader
+	if Engine.is_editor_hint():
+		pixelize_shader.material = null
+	else:
+		pixelize_shader.material = null if not pixelize_on else pixelize_shader.material
+		quantize_shader.material = null if not quantize_on else quantize_shader.material

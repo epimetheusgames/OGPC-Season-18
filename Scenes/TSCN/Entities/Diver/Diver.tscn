@@ -1,7 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=30 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Diver.gdshader" id="1_7v8rn"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
@@ -12,10 +11,6 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="12_u28jr"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_046kn"]
-shader = ExtResource("1_7v8rn")
-shader_parameter/resolution = 128.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -95,7 +90,6 @@ height = 124.0
 radius = 48.0417
 
 [node name="Diver" type="CharacterBody2D"]
-material = SubResource("ShaderMaterial_046kn")
 script = ExtResource("1_1l6ma")
 
 [node name="Body" type="CollisionShape2D" parent="."]
@@ -455,6 +449,7 @@ shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
 [node name="Combat" type="Node2D" parent="."]
+visible = false
 script = ExtResource("5_mjta2")
 
 [node name="AttackBoxComponent" type="Node" parent="Combat"]
