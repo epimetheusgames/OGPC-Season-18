@@ -18,6 +18,18 @@ static func safeguard_null(variable: Object, variable_class_name: String) -> Obj
 	
 	return variable
 
+# https://www.youtube.com/watch?v=Bf7vDBBOBUA
+static func find_all_children_of_type(on: Node, type: String) -> Array[Object]:
+	var output: Array[Object] = []
+	
+	for child in on.get_children():
+		if child.get_class() == type:
+			output.append(child)
+		
+		output.append_array(find_all_children_of_type(child, type))
+	
+	return output
+
 # -- Physics --
 
 # Perform a raycast in the world. Uses GLOBAL positions.
