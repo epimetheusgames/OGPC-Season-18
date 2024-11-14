@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgiqymjjt6jkp"
-path="res://.godot/imported/Speargun.png-d1b7731234faad2fa415d1a9ca8291f7.ctex"
+uid="uid://fvg2fww4sy5j"
+path="res://.godot/imported/mountain.jpg-8ff01fd1cb5614a9d06ce7c00d789e3a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Speargun.png"
-dest_files=["res://.godot/imported/Speargun.png-d1b7731234faad2fa415d1a9ca8291f7.ctex"]
+source_file="res://Scenes/TSCN/Levels/mountain.jpg"
+dest_files=["res://.godot/imported/mountain.jpg-8ff01fd1cb5614a9d06ce7c00d789e3a.ctex"]
 
 [params]
 

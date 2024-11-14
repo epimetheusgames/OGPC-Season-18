@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=32 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Diver.gdshader" id="1_7v8rn"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="8_spc27"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
+[ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="12_u28jr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_046kn"]
 shader = ExtResource("1_7v8rn")
@@ -267,7 +268,6 @@ metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/Head"]
 position = Vector2(0, -9.00003)
-scale = Vector2(1, 1)
 occluder = SubResource("OccluderPolygon2D_p7tt7")
 occluder_light_mask = 2
 
@@ -331,7 +331,6 @@ metadata/_edit_lock_ = true
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm2/Forearm2"]
 position = Vector2(-20.7467, 7.335)
 rotation = -1.92815
-scale = Vector2(1, 1)
 occluder = SubResource("OccluderPolygon2D_5lcxe")
 occluder_light_mask = 2
 
@@ -412,7 +411,6 @@ occluder = SubResource("OccluderPolygon2D_0ulgu")
 occluder_light_mask = 2
 
 [node name="ArmIkTarget1" type="Node2D" parent="Animation"]
-
 position = Vector2(116, -54)
 
 [node name="ArmIkTarget2" type="Node2D" parent="Animation"]
@@ -484,6 +482,11 @@ shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("10_qg316")
 metadata/_edit_lock_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="Flashlight"]
+position = Vector2(-2.99999, 16)
+scale = Vector2(11.8, 26.8)
+texture = ExtResource("12_u28jr")
 
 [node name="PlayerVisualDetectionArea" type="Area2D" parent="."]
 collision_layer = 4

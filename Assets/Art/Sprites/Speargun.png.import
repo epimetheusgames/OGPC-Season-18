@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://447pglvl377e"
-path="res://.godot/imported/Spear.png-c003d70c9482173204656c5675fcd140.ctex"
+uid="uid://cgiqymjjt6jkp"
+path="res://.godot/imported/Speargun.png-ab32cd270132f2af30e8091955681e44.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Spear.png"
-dest_files=["res://.godot/imported/Spear.png-c003d70c9482173204656c5675fcd140.ctex"]
+source_file="res://Assets/Art/Sprites/Speargun.png"
+dest_files=["res://.godot/imported/Speargun.png-ab32cd270132f2af30e8091955681e44.ctex"]
 
 [params]
 
