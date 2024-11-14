@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=31 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Diver.gdshader" id="1_7v8rn"]
@@ -410,7 +410,6 @@ occluder = SubResource("OccluderPolygon2D_0ulgu")
 occluder_light_mask = 2
 
 [node name="ArmIkTarget1" type="Node2D" parent="Animation"]
-
 position = Vector2(116, -54)
 
 [node name="ArmIkTarget2" type="Node2D" parent="Animation"]
