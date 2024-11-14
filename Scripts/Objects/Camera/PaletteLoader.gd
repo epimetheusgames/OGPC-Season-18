@@ -5,7 +5,7 @@ extends Node
 
 var colors: Array[Color] = []
 
-func _ready() -> void:
+func load_colors():
 	if not palette:
 		printerr("Palette image not set")
 		print_stack()
@@ -24,5 +24,5 @@ func _ready() -> void:
 			if color.a > 0.0:
 				colors.append(color)
 
-func get_palette_colors(): 
+func get_colors(): 
 	return colors

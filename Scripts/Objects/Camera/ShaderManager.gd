@@ -1,21 +1,31 @@
 extends Node
 
+@export var shaders_in_editor: bool = false
 
-@export var shader_on: bool = true
+@export var pixelize_on: bool = true
+@export var quantize_on: bool = true
 
-@onready var palette_loader = $"PaletteLoader"
-@onready var color_rect = $"ColorRect"
+@onready var pixelize_shader: ShaderMaterial = $"BackBufferCopy1/ColorRect".material
+@onready var quantize_shader: ShaderMaterial = $"BackBufferCopy2/ColorRect".material
+
+@onready var palette_loader: Node = $"PaletteLoader"
 
 func _ready() -> void:
-	#bye await palette_loader.ready
-	var palette = palette_loader.get_palette_colors()
-	print("SKIBDIIDFS")
-	print(palette)
+	# Get the palette colors
+	palette_loader.load_colors()
+	var palette: Array[Color] = palette_loader.get_colors()
 	
-	var rgb_palette = []
+	var vec4_palette = []
 	for color in palette:
-		var color_vec4 = Vector4(color.r, color.g, color.b, color.a)
-		rgb_palette.append(color_vec4)
+		var vec4_color = Vector4(color.r, color.g, color.b, color.a)
+		vec4_palette.append(vec4_color)
 	
-	var mat: ShaderMaterial = color_rect.material
-	mat.set_shader_parameter("color_palette", rgb_palette)
+	quantize_shader.set_shader_parameter("color_palette", vec4_palette)
+	
+	# Set shader mats
+	var in_engine: bool = not Engine.is_editor_hint()
+	var in_editor_and_enabled: bool = Engine.is_editor_hint() and shaders_in_editor
+	
+	if in_engine or in_editor_and_enabled:
+		pixelize_shader.shader = null if not pixelize_on else pixelize_shader.shader
+		quantize_shader.shader = null if not quantize_on else quantize_shader.shader
