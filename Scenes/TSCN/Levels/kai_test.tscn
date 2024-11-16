@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4xd2rbmf0vue"]
+[gd_scene load_steps=13 format=3 uid="uid://cdoc3r7p4ruvc"]
 
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_edi0r"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Camera.gd" id="2_0ewuu"]

@@ -51,9 +51,13 @@ func _get_dialogue():
 	dialog = dialog_json.data
 
 func _ready() -> void:
+	call_deferred("deferred_ready")
+
+func deferred_ready():
 	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
 	Global.dialog_text_node.dialog_option_chosen.connect(_option_chosen)
 	get_node("Hitbox").ready.connect(do_that_thingy)
+
 func do_that_thingy() -> void:
 	#hitbox for interacting with npc, you shouldnt need to be touching them to talk with them
 	var dialog_area = get_node("DialogHitbox")
