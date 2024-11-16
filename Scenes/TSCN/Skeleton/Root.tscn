@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=13 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="2_h48r7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 [ext_resource type="Script" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
+[ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
@@ -21,7 +22,8 @@ script = ExtResource("1_h2kyx")
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
-dialog_text_node = NodePath("Game/GameUIOverlay/DialogText")
+dialog_text_node = NodePath("Game/GameContainer/GameViewport/GameUIOverlay/DialogText")
+KeyactionHandler = NodePath("Game/keyactionHandler")
 
 [node name="Skeleton" type="Node" parent="."]
 
@@ -66,6 +68,9 @@ metadata/action = ""
 [node name="BoidsCalculator" type="Node" parent="Game"]
 script = ExtResource("9_xe7j2")
 
+[node name="keyactionHandler" type="Node2D" parent="Game"]
+script = ExtResource("9_rhklt")
+
 [node name="GameContainer" type="SubViewportContainer" parent="Game"]
 offset_right = 512.0
 offset_bottom = 512.0
@@ -75,42 +80,42 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="GameUIOverlay" type="Control" parent="Game"]
+[node name="GameUIOverlay" type="Control" parent="Game/GameContainer/GameViewport"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="DialogText" type="Node2D" parent="Game/GameUIOverlay"]
+[node name="DialogText" type="Node2D" parent="Game/GameContainer/GameViewport/GameUIOverlay"]
 script = ExtResource("8_7spfj")
 
-[node name="DialogTextureBG" type="TextureRect" parent="Game/GameUIOverlay/DialogText"]
+[node name="DialogTextureBG" type="TextureRect" parent="Game/GameContainer/GameViewport/GameUIOverlay/DialogText"]
 offset_left = 1083.0
 offset_top = -191.0
 offset_right = 1641.0
 offset_bottom = -26.0
 texture = SubResource("PlaceholderTexture2D_o714b")
 
-[node name="DialogTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/DialogText"]
+[node name="DialogTextLabel" type="RichTextLabel" parent="Game/GameContainer/GameViewport/GameUIOverlay/DialogText"]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ResponseButtonOne" type="Button" parent="Game/GameUIOverlay/DialogText"]
+[node name="ResponseButtonOne" type="Button" parent="Game/GameContainer/GameViewport/GameUIOverlay/DialogText"]
 offset_right = 8.0
 offset_bottom = 8.0
 disabled = true
 
-[node name="ResponseButtonTwo" type="Button" parent="Game/GameUIOverlay/DialogText"]
+[node name="ResponseButtonTwo" type="Button" parent="Game/GameContainer/GameViewport/GameUIOverlay/DialogText"]
 offset_right = 8.0
 offset_bottom = 8.0
 disabled = true
 
-[node name="ResponseButtonThree" type="Button" parent="Game/GameUIOverlay/DialogText"]
+[node name="ResponseButtonThree" type="Button" parent="Game/GameContainer/GameViewport/GameUIOverlay/DialogText"]
 offset_right = 8.0
 offset_bottom = 8.0
 disabled = true
 
-[node name="ResponseButtonFour" type="Button" parent="Game/GameUIOverlay/DialogText"]
+[node name="ResponseButtonFour" type="Button" parent="Game/GameContainer/GameViewport/GameUIOverlay/DialogText"]
 offset_right = 8.0
 offset_bottom = 8.0
 disabled = true

@@ -8,6 +8,7 @@ var save_load_framework: Node
 var game_skeleton_node: Node
 var ui_root_node: Control
 var game_root_node: Node
+var KeyactionHandler: Node2D
 var current_scene_path: String
 var current_game_slot: int
 var is_multiplayer: bool

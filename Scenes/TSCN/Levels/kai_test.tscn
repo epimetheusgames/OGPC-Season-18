@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4xd2rbmf0vue"]
+[gd_scene load_steps=13 format=3 uid="uid://c4xd2rbmf0vue"]
 
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_edi0r"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Camera.gd" id="2_0ewuu"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="7_errr2"]
 [ext_resource type="Script" path="res://Scripts/UI/DevPanel.gd" id="9_aamap"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="9_dpin1"]
+[ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/Entity/NPC.tscn" id="10_4dkfk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yb4lt"]
 shader = ExtResource("7_errr2")
@@ -154,3 +155,7 @@ layout_mode = 2
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_86gkk")
+
+[node name="TestNPC" parent="." instance=ExtResource("10_4dkfk")]
+position = Vector2(585, 494)
+npc_name = "test_npc"
