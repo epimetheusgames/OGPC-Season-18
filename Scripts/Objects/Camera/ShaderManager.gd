@@ -1,5 +1,3 @@
-@tool
-
 extends Node
 
 @export var pixelize_on: bool = true
@@ -24,8 +22,8 @@ func _ready() -> void:
 	quantize_shader.material.set_shader_parameter("colors_amount", vec4_palette.size())
 	
 	# Set shader mats
-	if Engine.is_editor_hint():
-		pixelize_shader.material = null
-	else:
+	#if :
+	#	pixelize_shader.material = null
+	if true:
 		pixelize_shader.material = null if not pixelize_on else pixelize_shader.material
 		quantize_shader.material = null if not quantize_on else quantize_shader.material
