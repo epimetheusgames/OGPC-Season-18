@@ -1,9 +1,14 @@
 extends Node2D
 
-
-@onready var polygons: Array[CollisionPolygon2D] = [$NavigationMeshObject1/CollisionPolygon2D, $NavigationMeshObject2/CollisionPolygon2D]
-
 func _ready():
+	var static_bodies := Util.find_all_children_of_type(self, "StaticBody2D")
+	
+	var polygons: Array[CollisionPolygon2D]
+	for body in static_bodies:
+		for child in body.get_children():
+			if child is CollisionPolygon2D:
+				polygons.append(child)
+	
 	for polygon in polygons:
 		var nav_polygon = Polygon2D.new()
 		nav_polygon.polygon = polygon.polygon
