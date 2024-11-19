@@ -1,29 +1,23 @@
-extends Node
+@tool
+extends CanvasLayer
 
-@export var pixelize_on: bool = true
 @export var quantize_on: bool = true
+@export var pixelize_on: bool = true
 
-@onready var pixelize_shader: ColorRect = $"BackBufferCopy1/ColorRect"
-@onready var quantize_shader: ColorRect = $"BackBufferCopy2/ColorRect"
-
-@onready var palette_loader: Node = $"PaletteLoader"
+@onready var quantize_shader: BackBufferCopy = $"Quantize"
+@onready var pixelize_shader: BackBufferCopy = $"Pixelize"
 
 func _ready() -> void:
-	# Get the palette colors
-	palette_loader.load_colors()
-	var palette: Array[Color] = palette_loader.get_colors()
-	
-	var vec4_palette = []
-	for color in palette:
-		var vec4_color = Vector4(color.r, color.g, color.b, color.a)
-		vec4_palette.append(vec4_color)
-	
-	quantize_shader.material.set_shader_parameter("color_palette", vec4_palette)
-	quantize_shader.material.set_shader_parameter("colors_amount", vec4_palette.size())
-	
-	# Set shader mats
-	#if :
-	#	pixelize_shader.material = null
-	if true:
-		pixelize_shader.material = null if not pixelize_on else pixelize_shader.material
-		quantize_shader.material = null if not quantize_on else quantize_shader.material
+	if Engine.is_editor_hint():
+		quantize_shader.set_shader_process(false)
+		pixelize_shader.set_shader_process(false)
+	else:
+		if quantize_on:
+			quantize_shader.set_shader_process(true)
+		else:
+			quantize_shader.set_shader_process(false)
+		
+		if pixelize_on:
+			pixelize_shader.set_shader_process(true)
+		else:
+			pixelize_shader.set_shader_process(false)

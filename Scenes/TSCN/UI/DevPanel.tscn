@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://c82fjb0hbad0q"]
+
+[ext_resource type="Script" path="res://Scripts/UI/DevPanel.gd" id="1_v2vno"]
+[ext_resource type="PackedScene" uid="uid://20xbyodnd0y" path="res://Scenes/TSCN/UI/CustomCheckbox.tscn" id="2_byiqo"]
+
+[node name="DevPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v2vno")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 419.0
+offset_bottom = 15.0
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Text" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="HBox1" type="HBoxContainer" parent="HBoxContainer/Text"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Text/HBox1"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Pixelization on:"
+scroll_active = false
+
+[node name="HBox2" type="HBoxContainer" parent="HBoxContainer/Text"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Text/HBox2"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Quantization on:"
+scroll_active = false
+
+[node name="HBox3" type="HBoxContainer" parent="HBoxContainer/Text"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Text/HBox3"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Shadows On:"
+scroll_active = false
+
+[node name="Buttons" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="HBox1" type="HBoxContainer" parent="HBoxContainer/Buttons"]
+layout_mode = 2
+
+[node name="CustomCheckbox" parent="HBoxContainer/Buttons/HBox1" instance=ExtResource("2_byiqo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="HBox2" type="HBoxContainer" parent="HBoxContainer/Buttons"]
+layout_mode = 2
+
+[node name="CustomCheckbox" parent="HBoxContainer/Buttons/HBox2" instance=ExtResource("2_byiqo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="HBox3" type="HBoxContainer" parent="HBoxContainer/Buttons"]
+layout_mode = 2
+
+[node name="CustomCheckbox" parent="HBoxContainer/Buttons/HBox3" instance=ExtResource("2_byiqo")]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2

@@ -1,14 +1,11 @@
 @tool
-
 extends Node
 
 @export var text_box_size: Vector2 = Vector2(300, 50)
-@export var text_size: int = 30
-
 @export var button_box_size: Vector2 = Vector2(50, 50)
 
-@onready var text_container: VBoxContainer = $"Text"
-@onready var button_container: VBoxContainer = $"Buttons"
+@onready var text_container: VBoxContainer = $"HBoxContainer/Text"
+@onready var button_container: VBoxContainer = $"HBoxContainer/Buttons"
 
 func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
@@ -20,9 +17,19 @@ func _process(delta: float) -> void:
 	
 	for text_h_box in text_h_boxes:
 		var text = text_h_box.get_child(0) as RichTextLabel
-		text.custom_minimum_size = text_box_size
-		text.set("theme_override_font_sizes/font_size", text_size)
+		if text:
+			text.custom_minimum_size = text_box_size
 	
 	for button_h_box in button_h_boxes:
 		var button = button_h_box.get_child(0) as Button
-		button.custom_minimum_size = button_box_size
+		if button:
+			button.custom_minimum_size = button_box_size
+
+func get_pixelization_button() -> CustomCheckbox:
+	return $"HBoxContainer/Buttons/HBox1/CustomCheckbox"
+
+func get_quantization_button() -> CustomCheckbox:
+	return $"HBoxContainer/Buttons/HBox2/CustomCheckbox"
+
+func get_shadows_button() -> CustomCheckbox:
+	return $"HBoxContainer/Buttons/HBox3/CustomCheckbox"

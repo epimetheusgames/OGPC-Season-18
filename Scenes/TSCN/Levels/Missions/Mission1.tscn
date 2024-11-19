@@ -1,21 +1,94 @@
-[gd_scene load_steps=4 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=17 format=3 uid="uid://dh0cluhw5hbar"]
 
+[ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
+[ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="1_awqxm"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_b33aw"]
-[ext_resource type="PackedScene" uid="uid://cdg0gyclxvqs4" path="res://Scenes/TSCN/Demos/AutoPolygonTextureDemo.tscn" id="2_x6ep8"]
-[ext_resource type="Script" path="res://Scripts/Objects/Camera/Camera.gd" id="3_f7guv"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera/ShaderManager.gd" id="1_s361y"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera/Quantize.gd" id="2_fhpdt"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera/Camera.gd" id="3_mnoyi"]
+[ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="4_0q3xc"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="4_5lji5"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="5_rc3kh"]
+[ext_resource type="Script" path="res://Scripts/Objects/Camera/Pixelize.gd" id="5_t6m55"]
+[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="6_sqcin"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yo3nw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
+vertices = PackedVector2Array(2014.07, -112.008, 2023.92, 1182.14, 1936.48, 912.156, 1822.42, 471.609, 997.703, 367.078, 709.359, 833.812, 552.367, 538, 520.438, 418.812, 1171.31, 225.5, 1726.8, 880.32, 1381.71, 816.297, 520.438, 657.188, 1376.56, 827.844, -100.961, 1212.85, 715.289, 844.141, 1180.48, 212.797, -96.0312, -114.977, 433.188, 331.562, 314, 299.633, 433.188, 744.438, 314, 776.367, 194.812, 744.438, 107.562, 657.188, 194.812, 331.562, 107.562, 418.812, 75.6328, 538)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 4), PackedInt32Array(11, 6, 5), PackedInt32Array(12, 9, 2, 1, 13, 14), PackedInt32Array(0, 3, 15), PackedInt32Array(16, 0, 15), PackedInt32Array(16, 15, 8, 4, 17, 18), PackedInt32Array(19, 11, 5), PackedInt32Array(12, 10, 9), PackedInt32Array(19, 5, 14, 13, 20), PackedInt32Array(21, 20, 13), PackedInt32Array(22, 21, 13), PackedInt32Array(4, 7, 17), PackedInt32Array(16, 18, 23), PackedInt32Array(16, 23, 24), PackedInt32Array(16, 24, 25), PackedInt32Array(13, 16, 25), PackedInt32Array(13, 25, 22)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-111, 1223, -106, -125, 2024, -122, 2034, 1192)])
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_57j0e"]
+radius = 228.02
 
 [node name="Mission1" type="Node2D"]
+
+[node name="Shaders" type="CanvasLayer" parent="."]
+script = ExtResource("1_s361y")
+
+[node name="Quantize" type="BackBufferCopy" parent="Shaders"]
+rect = Rect2(0, 0, 1920, 1080)
+script = ExtResource("2_fhpdt")
+shader = ExtResource("5_rc3kh")
+
+[node name="PaletteLoader" type="Node2D" parent="Shaders/Quantize"]
+script = ExtResource("1_awqxm")
+palette = ExtResource("4_0q3xc")
+
+[node name="ColorRect" type="ColorRect" parent="Shaders/Quantize"]
+material = SubResource("ShaderMaterial_yo3nw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Pixelize" type="BackBufferCopy" parent="Shaders"]
+rect = Rect2(0, 0, 1920, 1080)
+script = ExtResource("5_t6m55")
+shader = ExtResource("4_5lji5")
+pixel_size = 3
+
+[node name="ColorRect" type="ColorRect" parent="Shaders/Pixelize"]
+material = SubResource("ShaderMaterial_g5871")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DevPanel" parent="UI" instance=ExtResource("1_6r47m")]
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target_node")]
+script = ExtResource("3_mnoyi")
+target_node = NodePath("../Diver")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_jsraf")
+script = ExtResource("1_2ttir")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NavigationRegion2D/StaticBody2D"]
+polygon = PackedVector2Array(721, 834, 999, 384, 1370, 818)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="NavigationRegion2D/StaticBody2D"]
+polygon = PackedVector2Array(1814, 479, 1184, 225, 1732, 871, 1923, 900)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/StaticBody2D"]
+position = Vector2(314, 538)
+shape = SubResource("CircleShape2D_57j0e")
 
 [node name="Diver" parent="." instance=ExtResource("1_b33aw")]
 position = Vector2(343, 287)
 
-[node name="Body" parent="." instance=ExtResource("2_x6ep8")]
-position = Vector2(1013, 479)
-polygon = PackedVector2Array(186, 550, 441, 339, 556, 13, -284, 253, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
-
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target_node")]
-position = Vector2(951, 541)
-zoom = Vector2(1.2, 1.2)
-position_smoothing_enabled = true
-script = ExtResource("3_f7guv")
-target_node = NodePath("../Diver")
+[node name="Jellyfish" parent="." instance=ExtResource("6_sqcin")]
+position = Vector2(462, 1027)
