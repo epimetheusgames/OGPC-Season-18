@@ -21,7 +21,6 @@ var dialog_sfx_node: AudioStreamPlayer
 @onready var text_node = get_node("DialogTextLabel")
 
 func _ready() -> void:
-	Global.dialog_core = self
 	response_buttons.append(get_node("ResponseButtonOne"))
 	response_buttons.append(get_node("ResponseButtonTwo"))
 	response_buttons.append(get_node("ResponseButtonThree"))
