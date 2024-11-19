@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4xd2rbmf0vue"]
+[gd_scene load_steps=12 format=3 uid="uid://c4xd2rbmf0vue"]
 
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_edi0r"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Camera.gd" id="2_0ewuu"]
@@ -87,7 +87,6 @@ offset_right = 366.0
 offset_bottom = 168.0
 script = ExtResource("9_aamap")
 text_box_size = Vector2(300, 100)
-text_size = 400
 button_box_size = Vector2(100, 100)
 
 [node name="Text" type="VBoxContainer" parent="UI/DevPanel"]
