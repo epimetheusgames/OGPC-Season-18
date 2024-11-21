@@ -30,10 +30,14 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		new_rope.nodes_separation = 40
 		new_rope.nodes_amount = round(tentacle_data.length / 40)
 		
-		var new_line := Line2D.new()
-		new_line.name = "Line"
-		new_line.default_color = tentacle_data.color
-		new_line.width = tentacle_data.thickness
+		var new_line = Line2D.new()
+		new_line.name = "SmoothedLine"
+		new_line.visible = false
+		
+		var new_smoothed_line := Line2D.new()
+		new_smoothed_line.name = "SmoothedLine"
+		new_smoothed_line.default_color = tentacle_data.color
+		new_smoothed_line.width = tentacle_data.thickness
 		
 		add_child(new_tentacle_anchor, true)
 		
@@ -41,9 +45,11 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		ropes.append(new_rope)
 		
 		new_rope.add_child(new_line)
+		new_rope.add_child(new_smoothed_line)
 		
 		new_rope.start_anchor_node = new_tentacle_anchor
 		new_rope.line = new_line
+		new_rope.smoothed_line = new_smoothed_line
 
 func boost(speed: float) -> void:
 	boosting = true

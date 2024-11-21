@@ -10,6 +10,7 @@ extends Node2D
 @export var enable_collisions: bool = true 
 
 @export var line: Line2D
+@export var smoothed_line: Line2D
 
 var nodes: Array[VerletNode] = []
 
@@ -151,6 +152,33 @@ func collide_and_translate(origin: Vector2, motion: Vector2) -> Vector2:
 		return adjusted_motion + remaining_motion * 1  # Increased sliding damping
 	return adjusted_motion
 
+# Generate a cubic hermite spline based on the rope we've already calculated.
+func smooth_line():
+	if !smoothed_line:
+		return
+	
+	var resoulution_multiplier: float = 4
+	var new_smoothed_points: PackedVector2Array = []
+	var tangents: PackedVector2Array = []
+	
+	# Generate tangents ... This is making it a catmull-rom spline.
+	# https://en.wikipedia.org/wiki/Cubic_Hermite_spline, Catmull-Rom section.
+	for i in range(1, len(line.points) - 1):
+		tangents.append((line.points[i + 1] - line.points[i - 1]) / 2.0)
+	
+	for i in range(1, len(line.points) - 3):
+		for big_t in range(0, resoulution_multiplier):
+			var t = big_t / resoulution_multiplier
+			
+			# Massive polynomial, who knows what it means.
+			var pos = ((2 * t ** 3) - (3 * t ** 2) + 1) * line.points[i] + \
+					  ((t ** 3) - (2 * t ** 2) + t) * tangents[i - 1] + \
+					  ((-2 * t ** 3) + (3 * t ** 2)) * line.points[i + 1] + \
+					  ((t ** 3) - (t ** 2)) * tangents[i]
+			
+			new_smoothed_points.append(pos)
+	
+	smoothed_line.points = new_smoothed_points
 
 # Update the visual line2d
 func update_line():
@@ -159,6 +187,7 @@ func update_line():
 		display_nodes.append(node.position)
 	
 	line.points = display_nodes
+	smooth_line()
 
 
 class VerletNode:

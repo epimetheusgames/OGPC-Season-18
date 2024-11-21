@@ -479,6 +479,7 @@ texture = ExtResource("10_qg316")
 metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="Flashlight"]
+visible = false
 position = Vector2(-2.99999, 16)
 scale = Vector2(11.8, 26.8)
 texture = ExtResource("12_u28jr")

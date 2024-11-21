@@ -14,6 +14,7 @@ var current_game_slot: int
 var is_multiplayer: bool
 var dialog_text_node: Node2D
 var boids_calculator_node: BoidsCalculator
+var player: Diver
 
 var dialog_core: Node2D
 var godot_steam_abstraction: GodotSteamAbstraction

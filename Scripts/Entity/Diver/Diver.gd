@@ -11,6 +11,9 @@ extends Entity
 
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
 
+func _ready() -> void:
+	Global.player = self
+
 func _physics_process(delta: float):
 	velocity = diver_movement.get_velocity()
 	

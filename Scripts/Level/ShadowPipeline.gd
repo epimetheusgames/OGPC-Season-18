@@ -1,15 +1,17 @@
-extends Node2D
-
+class_name ShadowPipeline
+extends Node
 
 var static_occluders: Array[LightOccluder2D] = []
 var moving_occluders: Array[LightOccluder2D] = []
 
+@export var level_container: Node2D
+@export var camera: Node2D
 @export var occluder_offset: Vector2
 
 func _ready():
-	var world = $WorldNode2D
-	remove_child(world)
-	$World.add_child(world)
+	var parent = level_container.get_parent()
+	parent.remove_child.call_deferred(level_container)
+	$World.add_child.call_deferred(level_container)
 	
 	$World.size = get_viewport().size
 	$StaticShadowPass.size = get_viewport().size
@@ -19,7 +21,7 @@ func _ready():
 	$WorldShadowBlendPass.size = get_viewport().size 
 	
 	# Find all the occluders in the scene and move them over.
-	_recursively_search_for_occluders($World)
+	_recursively_search_for_occluders.call_deferred($World)
 	
 	$Final.visible = true
 	
@@ -41,10 +43,10 @@ func _process(delta: float) -> void:
 	
 func duplicate_occluder(occluder, on):
 	var new_occluder = occluder.duplicate()
-	new_occluder.position = occluder.global_position + occluder_offset - $World/WorldNode2D/Diver/Camera2D.global_position
+	new_occluder.position = occluder.global_position + occluder_offset - camera.global_position
 	new_occluder.rotation = occluder.global_rotation
 	on.add_child(new_occluder)
-	on.scale = $World/WorldNode2D/Diver/Camera2D.zoom
+	on.scale = camera.zoom
 
 func _recursively_search_for_occluders(root: Node):
 	for node in root.get_children():

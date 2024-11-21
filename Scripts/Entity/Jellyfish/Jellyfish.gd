@@ -20,7 +20,7 @@ var target_rotation: float
 @onready var tentacles: JellyfishTentacles = $"Tentacles"
 
 func _process(delta: float) -> void:
-	nav_agent.target_position = $"../Diver".global_position
+	nav_agent.target_position = Global.player.global_positions
 
 	# Countdown boost timer (if needed for specific boost duration)
 	if boost_timer > 0:
@@ -43,7 +43,6 @@ func _physics_process(delta: float) -> void:
 	global_rotation = lerp_angle(global_rotation, target_rotation, ROTATION_SPEED * delta)
 	
 	global_position += velocity * delta
-
 
 func boost():
 	current_speed = BASE_SPEED * BOOST_MULTIPLIER
