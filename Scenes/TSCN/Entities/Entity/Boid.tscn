@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BoidComponent.gd" id="3_2it7s"]
 
 [sub_resource type="Resource" id="Resource_lqutn"]
+resource_local_to_scene = true
 script = ExtResource("2_3kea4")
 uid = 1501
 

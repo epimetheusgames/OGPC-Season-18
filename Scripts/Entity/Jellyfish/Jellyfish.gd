@@ -20,7 +20,7 @@ var target_rotation: float
 @onready var tentacles: JellyfishTentacles = $"Tentacles"
 
 func _process(delta: float) -> void:
-	nav_agent.target_position = Global.player.global_positions
+	nav_agent.target_position = Global.player.global_position
 
 	# Countdown boost timer (if needed for specific boost duration)
 	if boost_timer > 0:

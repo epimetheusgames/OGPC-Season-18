@@ -1,6 +1,6 @@
 # Base class for all entities
+@tool
 class_name Entity
-
 extends CharacterBody2D
 
 
@@ -21,9 +21,17 @@ var save_resource := EntitySave.new()
 var components_dictionary = {}
 
 func _process(delta: float) -> void:
-	_entity_process(delta)
+	# Create our UID automatically.
+	if Engine.is_editor_hint() && !uid:
+		uid = UID.new()
+	
+	if !Engine.is_editor_hint():
+		_entity_process(delta)
 
 func _entity_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+		
 	if _has_physics:
 		move_and_slide()
 	

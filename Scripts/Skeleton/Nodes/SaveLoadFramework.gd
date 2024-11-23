@@ -2,7 +2,7 @@
 extends Node
 
 
-@export_node_path("SubViewport") var game_container_node_path
+@export_node_path("Node") var game_container_node_path
 @export_node_path("Control") var ui_root_node_path
 @export var level_list: Array[FilePathResource]:
 	set(val):
@@ -16,7 +16,8 @@ extends Node
 func _ready():
 	Global.save_load_framework = self
 	
-	load_level("res://Scenes/TSCN/Levels/kai_test.tscn")
+	#load_level("res://Scenes/TSCN/Levels/Missions/Mission1.tscn")
+	load_level("res://Scenes/TSCN/Levels/Playable/BoidsTest.tscn")
 
 # Saves a ConfigFile to memory.
 func _save_config_file(config_file: ConfigFile, slot_num: int) -> void:

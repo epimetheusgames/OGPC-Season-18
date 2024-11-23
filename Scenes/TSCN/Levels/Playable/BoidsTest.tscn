@@ -11,9 +11,12 @@ spawn_position_node_path = NodePath("../BoidsSpawnPos")
 spawn_variation = 20.0
 
 [node name="BoidsSpawnPos" type="Node2D" parent="."]
-position = Vector2(863, 492)
+position = Vector2(66, 100)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-944, -578)
 polygon = PackedVector2Array(69, 91, 163, 25, 1811, 33, 1869, 111, 1894, 988, 1818, 1043, 137, 1033, 42, 943, 32, 76, 132, 0, -44, 38, -46, 1270, 2032, 1172, 2045, 149, 1710, -164, 226, -91)
+
+[node name="Camera2D" type="Camera2D" parent="."]

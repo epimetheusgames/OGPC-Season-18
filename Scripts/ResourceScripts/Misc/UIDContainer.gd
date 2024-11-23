@@ -7,7 +7,10 @@ class_name UID
 var game_load_error: Error
 
 func _init() -> void:
-	call_deferred("refresh_uid")
+	resource_local_to_scene = true
+	
+	if uid == -1:
+		call_deferred("refresh_uid")
 
 # This has to be in here because I can't find a way to access the scenetree from inside a resource.
 func _save_global_config(content: GlobalSave) -> void:
@@ -25,12 +28,11 @@ func _load_global_config() -> GlobalSave:
 	return game_save
 
 func refresh_uid() -> void:
-	if uid == -1:
-		var game_save: GlobalSave = _load_global_config()
-		
-		if game_load_error != OK:
-			game_save = GlobalSave.new()
-		
-		game_save.uid_counter += 1
-		uid = game_save.uid_counter
-		_save_global_config(game_save)
+	var game_save: GlobalSave = _load_global_config()
+	
+	if game_load_error != OK:
+		game_save = GlobalSave.new()
+	
+	game_save.uid_counter += 1
+	uid = game_save.uid_counter
+	_save_global_config(game_save)

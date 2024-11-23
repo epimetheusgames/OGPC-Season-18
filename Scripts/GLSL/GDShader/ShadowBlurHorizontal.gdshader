@@ -10,9 +10,9 @@ uniform sampler2D screen_texture;
 void fragment() {
 	float accum = COLOR.r;
 	float max_dist = len;
-	
+
 	accum = accum/max_dist * blur;
-	
+
 	//if (unweighted_accum > max_dist) {
 		//unweighted_accum = texture(screen_texture, SCREEN_UV + vec2(accum * 4.0 * -SCREEN_PIXEL_SIZE.y, 0.0)).r;
 		//accum = unweighted_accum/max_dist * blur;
@@ -21,7 +21,7 @@ void fragment() {
 		//unweighted_accum = texture(screen_texture, SCREEN_UV + vec2(accum * 4.0 * SCREEN_PIXEL_SIZE.y, 0.0)).r;
 		//accum = unweighted_accum/max_dist * blur;
 	//}
-	
+
 	 //vec4 ours = texture(screen_texture, SCREEN_UV);
 	//vec4 col = ours;
 	//col.g *= 0.16;
@@ -42,7 +42,7 @@ void fragment() {
 		//col += left;
 		//col += right;
 	//}
-	
+
 	int offset_found = 0;
 	bool found = false;
 	if (texture(screen_texture, SCREEN_UV).r >= 480.0) {
@@ -67,7 +67,7 @@ void fragment() {
 			}
 		}
 	}
-	
+
     vec4 col = texture(screen_texture, SCREEN_UV) * 0.16;
     col += texture(screen_texture, SCREEN_UV + vec2(accum * SCREEN_PIXEL_SIZE.x, 0.0)) * 0.15;
     col += texture(screen_texture, SCREEN_UV + vec2(accum * -SCREEN_PIXEL_SIZE.x, 0.0)) * 0.15;
