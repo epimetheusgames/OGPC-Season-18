@@ -1,5 +1,49 @@
 # Godot Rules
 
+## Overridable Classes
+
+### Enemy
+
+This class is very important and should be inherited by EVERY enemy in the game.
+It allows us to standardize movement into one class. Any node that inherits this 
+class simply needs to implement NAVIGATION towards the target_position variable and 
+the Enemy class will take care of the rest. Enemy behavior for individual enemies 
+can be easily tweaked using the attachable EnemyBehaviorSettings resource which 
+the Enemy class implements.
+
+Note that the Enemy class does NOT do navigation, this has to be setup by inheriting
+classes. It simply gives a target position which inheriting classes should navigate
+towards.
+
+The Enemy class also has some other features and requirements, which I describe
+below.
+
+#### Variables
+
+There are a few variables that can be used by classes inheriting the Enemy class.
+
+- closest_player (Diver): Self-explanatory
+- player_in_area (bool): Self-explanatory
+- player_visible (bool): Self-explanatory
+- reached_target (bool): Inheriting classes use this to tell the Enemy class if
+		   	 if they have reached the target navigation position.
+- wander_state (enum): Self-explanatory
+- num_players_in_area (int): The ammount of players that have been detected and
+			     are visible.
+- players_list (Array[Diver]): An array of all the visible players.
+
+#### Overriding the _ready function
+
+If you override the _ready function, make sure to call _enemy_ready() before 
+anything else. _enemy_ready initializes the target_position, creates the 
+detection area, sets up sensors, and initializes health.
+
+#### Overriding thte _process function
+
+If you override the _process function, make sure to call _process_enemy() 
+before anything else. This function is responsible for updating the target 
+position and detecting the player.
+
 ## Testing With GodotSteam
 
 Below are step-by-step instructions on running the project with the GodotSteam
