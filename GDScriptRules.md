@@ -29,7 +29,7 @@ There are a few variables that can be used by classes inheriting the Enemy class
 		   	 if they have reached the target navigation position.
 - wander_state (enum): Self-explanatory
 - num_players_in_area (int): The ammount of players that have been detected and
-			     are visible.
+				 are visible.
 - players_list (Array[Diver]): An array of all the visible players.
 
 #### Overriding the _ready function

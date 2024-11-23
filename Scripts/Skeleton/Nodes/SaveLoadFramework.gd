@@ -16,8 +16,7 @@ extends Node
 func _ready():
 	Global.save_load_framework = self
 	
-	#load_level("res://Scenes/TSCN/Levels/Missions/Mission1.tscn")
-	load_level("res://Scenes/TSCN/Levels/Playable/BoidsTest.tscn")
+	load_level("res://Scenes/TSCN/Levels/Missions/Mission1.tscn")
 
 # Saves a ConfigFile to memory.
 func _save_config_file(config_file: ConfigFile, slot_num: int) -> void:

@@ -1,9 +1,9 @@
 class_name VerletRopeComponent
 extends Node2D
 
-@export var iterations: int = 80
-@export var nodes_amount: int = 100
-@export var nodes_separation: float = 40
+@export var iterations: int = 10
+@export var nodes_amount: int = 30
+@export var nodes_separation: float = 133
 
 @export var gravity: Vector2 = Vector2(0, 100)
 @export var damping: float = 0.98  # 1 = no damping, < 1 slows movement
@@ -20,7 +20,6 @@ var end_anchor_node: Node2D
 const timestep: float = 0.1
 
 var raycast_query: PhysicsRayQueryParameters2D
-
 
 func _ready() -> void:
 	top_level = true

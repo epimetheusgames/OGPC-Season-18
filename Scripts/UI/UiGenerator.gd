@@ -1,9 +1,10 @@
 # This code was based on code from the Dunebound codebase.
 extends Node
 
-var default_color: Color
 var keybind_config := JSON.new()
 var keybind_config_data
+
+@export var default_color := Color("4d4d4d")
 
 # Controls the background color 
 @export var background := Color("0e0e0e"):
