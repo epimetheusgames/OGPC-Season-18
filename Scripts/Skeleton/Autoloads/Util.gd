@@ -14,7 +14,8 @@ static func multiframe_function_batches_on_group(group: Array[Node], function_na
 		for j in range(batch_size):
 			group[i * batch_size + j].callv(function_name, args)
 		
-		await 
+		# Essentially wait a frame.
+		await tree.create_timer(0.001).timeout
 
 # Returns a new object of the same type if the variable is null.
 static func safeguard_null(variable: Object, variable_class_name: String) -> Object:

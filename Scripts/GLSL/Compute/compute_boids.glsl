@@ -97,7 +97,7 @@ void main() {
         neighboring_boids += 1;
 
         if (distance(current_boid_position, boid_position) < protected_dist) {
-            close_dir += normalize(current_boid_position - boid_position) * 100.0;
+            close_dir += normalize(current_boid_position - boid_position) * 1.0;
         }
     }
 
@@ -134,9 +134,7 @@ void main() {
         total_velocity = (total_velocity / speed) * min_speed; 
     }
 
-    float rotation = better_angle_lerp(rotations.data[id], atan(total_velocity.y, total_velocity.x) + 3.1415 / 2.0 + 3.1415, 0.1, global_params.delta);
-
     outputs.data[id * 3 + 0] = total_velocity.x;
     outputs.data[id * 3 + 1] = total_velocity.y;
-    outputs.data[id * 3 + 2] = rotation;
+    outputs.data[id * 3 + 2] = rotations.data[id];
 }
