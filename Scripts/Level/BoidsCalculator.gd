@@ -27,6 +27,12 @@ var boids_index_counter := 0
 var boids_parameters_array: PackedFloat32Array
 var boids_parameters_array_bytes: PackedByteArray
 var boids_node_list := []
+var threads_delta: float = 0
+
+var mutex: Mutex
+var semaphore: Semaphore
+var thread: Thread
+var exit_thread := false
 
 # Load compute shader, and resize arrays.
 func _ready() -> void:
@@ -45,6 +51,14 @@ func _ready() -> void:
 	boids_parameters_array.resize(2000 * 8)
 	boids_node_list.resize(2000)
 	
+	# Setup up threading
+	mutex = Mutex.new()
+	semaphore = Semaphore.new()
+	exit_thread = false
+	
+	thread = Thread.new()
+	thread.start(_boids_compute)
+	
 	Global.boids_calculator_node = self
 	
 	await get_tree().create_timer(5).timeout
@@ -52,14 +66,11 @@ func _ready() -> void:
 	if Global.godot_steam_abstraction.is_lobby_owner:
 		sync_at_integrals()
 
-# Runs the GPU compute shader every frame! 
 func _process(delta: float) -> void:
 	var boids_list = get_tree().get_nodes_in_group("Boids")
-	var num_boids = boids_list.size()
 	
-	if num_boids == 0:
-		return
-	
+	mutex.lock()
+	threads_delta = delta
 	boids_positions = []
 	boids_velocities = []
 	boids_rotations = []
@@ -71,100 +82,144 @@ func _process(delta: float) -> void:
 		boids_rotations.append(boid.rotation)
 		
 		boid.get_component("BoidComponent").index = boid_ind
+	mutex.unlock()
 	
-	# Prepare data for compute shader
-	var global_parameters := PackedFloat32Array([
-		num_boids,
-		delta,
-	])
-	var global_parameters_bytes = global_parameters.to_byte_array()
-	
-	var positions := PackedVector2Array(boids_positions)
-	var positions_bytes = positions.to_byte_array()
-	
-	var velocities := PackedVector2Array(boids_velocities)
-	var velocities_bytes = velocities.to_byte_array()
-	
-	var rotations = PackedVector2Array(boids_rotations)
-	var rotations_bytes = rotations.to_byte_array()
-	
-	var raycast_data := PackedFloat32Array()
-	for boid in boids_list:
-		var boid_component = boid.get_component("BoidComponent")
-		raycast_data.append(1 if boid_component.raycast.get_collider() else 0)
-		raycast_data.append(boid_component.raycast.get_collision_normal().x)
-		raycast_data.append(boid_component.raycast.get_collision_normal().y)
-	
-	var raycast_data_bytes = raycast_data.to_byte_array()
-	
-	var output := PackedFloat32Array()
-	output.resize(num_boids * 3)
-	var output_bytes = output.to_byte_array()
-	
-	var bin_params_buffer_bytes = PackedFloat32Array([bin_size, bins.x, bins.y, num_bins]).to_byte_array()
-	
-	# Create data uniforms
-	var parameters_buffer := rd.storage_buffer_create(boids_parameters_array_bytes.size(), boids_parameters_array_bytes)
-	var parameters_uniform := RDUniform.new()
-	parameters_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
-	parameters_uniform.binding = 0
-	parameters_uniform.add_id(parameters_buffer)
-	
-	var global_parameters_buffer := rd.storage_buffer_create(global_parameters_bytes.size(), global_parameters_bytes)
-	var global_parameters_uniform := RDUniform.new()
-	global_parameters_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
-	global_parameters_uniform.binding = 1
-	global_parameters_uniform.add_id(global_parameters_buffer)
-	
-	var positions_buffer := rd.storage_buffer_create(positions_bytes.size(), positions_bytes)
-	var positions_uniform := RDUniform.new()
-	positions_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
-	positions_uniform.binding = 2
-	positions_uniform.add_id(positions_buffer)
-	
-	var velocities_buffer := rd.storage_buffer_create(velocities_bytes.size(), velocities_bytes)
-	var velocities_uniform := RDUniform.new()
-	velocities_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
-	velocities_uniform.binding = 3
-	velocities_uniform.add_id(velocities_buffer)
-	
-	var raycast_data_buffer := rd.storage_buffer_create(raycast_data_bytes.size(), raycast_data_bytes)
-	var raycast_data_uniform := RDUniform.new()
-	raycast_data_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
-	raycast_data_uniform.binding = 4
-	raycast_data_uniform.add_id(raycast_data_buffer)
-	
-	var output_buffer := rd.storage_buffer_create(output_bytes.size(), output_bytes)
-	var output_uniform := RDUniform.new()
-	output_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
-	output_uniform.binding = 5
-	output_uniform.add_id(output_buffer)
-	
-	var rotations_buffer := rd.storage_buffer_create(rotations_bytes.size(), rotations_bytes)
-	var rotations_uniform := RDUniform.new()
-	rotations_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
-	rotations_uniform.binding = 6
-	rotations_uniform.add_id(rotations_buffer)
-	
-	# Create uniform set
-	var uniform_set := rd.uniform_set_create(
-		[
-			parameters_uniform,
-			global_parameters_uniform,
-			positions_uniform,
-			velocities_uniform,
-			raycast_data_uniform,
-			output_uniform,
-			rotations_uniform
-		],
-		boid_shader, 0
-	)
-	
-	_run_compute_shader(boids_pipeline, uniform_set)
-	
-	# Get output list
-	var compute_output_bytes := rd.buffer_get_data(output_buffer)
-	shader_output = compute_output_bytes.to_float32_array()
+	semaphore.post()
+
+# Runs the GPU compute shader every frame! 
+func _boids_compute() -> void:
+	while true:
+		semaphore.wait()
+		
+		mutex.lock()
+		var threads_boids_positions = boids_positions
+		var threads_boids_velocities = boids_velocities
+		var threads_boids_rotations = boids_rotations
+		var threads_boid_shader = boid_shader
+		var threads_boids_pipeline = boids_pipeline
+		var should_exit = exit_thread
+		var delta = threads_delta
+		var boids_list = get_tree().get_nodes_in_group("Boids")
+		var num_boids = boids_list.size()
+		mutex.unlock()
+		
+		if num_boids == 0:
+			return
+		
+		# Prepare data for compute shader
+		var global_parameters := PackedFloat32Array([
+			num_boids,
+			delta,
+		])
+		var global_parameters_bytes = global_parameters.to_byte_array()
+		
+		var positions := PackedVector2Array(threads_boids_positions)
+		var positions_bytes = positions.to_byte_array()
+		
+		var velocities := PackedVector2Array(threads_boids_velocities)
+		var velocities_bytes = velocities.to_byte_array()
+		
+		var rotations = PackedVector2Array(threads_boids_rotations)
+		var rotations_bytes = rotations.to_byte_array()
+		
+		# TODO: This is probably unsafe, create a seperate array of raycasts to set later.
+		mutex.lock()
+		var raycast_data := PackedFloat32Array()
+		for boid in boids_list:
+			var boid_component = boid.get_component("BoidComponent")
+			raycast_data.append(1 if boid_component.raycast.get_collider() else 0)
+			raycast_data.append(boid_component.raycast.get_collision_normal().x)
+			raycast_data.append(boid_component.raycast.get_collision_normal().y)
+		mutex.unlock()
+		
+		var raycast_data_bytes = raycast_data.to_byte_array()
+		
+		var output := PackedFloat32Array()
+		output.resize(num_boids * 3)
+		var output_bytes = output.to_byte_array()
+		
+		# Create data uniforms
+		var parameters_buffer := rd.storage_buffer_create(boids_parameters_array_bytes.size(), boids_parameters_array_bytes)
+		var parameters_uniform := RDUniform.new()
+		parameters_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+		parameters_uniform.binding = 0
+		parameters_uniform.add_id(parameters_buffer)
+		
+		var global_parameters_buffer := rd.storage_buffer_create(global_parameters_bytes.size(), global_parameters_bytes)
+		var global_parameters_uniform := RDUniform.new()
+		global_parameters_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+		global_parameters_uniform.binding = 1
+		global_parameters_uniform.add_id(global_parameters_buffer)
+		
+		var positions_buffer := rd.storage_buffer_create(positions_bytes.size(), positions_bytes)
+		var positions_uniform := RDUniform.new()
+		positions_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+		positions_uniform.binding = 2
+		positions_uniform.add_id(positions_buffer)
+		
+		var velocities_buffer := rd.storage_buffer_create(velocities_bytes.size(), velocities_bytes)
+		var velocities_uniform := RDUniform.new()
+		velocities_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+		velocities_uniform.binding = 3
+		velocities_uniform.add_id(velocities_buffer)
+		
+		var raycast_data_buffer := rd.storage_buffer_create(raycast_data_bytes.size(), raycast_data_bytes)
+		var raycast_data_uniform := RDUniform.new()
+		raycast_data_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+		raycast_data_uniform.binding = 4
+		raycast_data_uniform.add_id(raycast_data_buffer)
+		
+		var output_buffer := rd.storage_buffer_create(output_bytes.size(), output_bytes)
+		var output_uniform := RDUniform.new()
+		output_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+		output_uniform.binding = 5
+		output_uniform.add_id(output_buffer)
+		
+		var rotations_buffer := rd.storage_buffer_create(rotations_bytes.size(), rotations_bytes)
+		var rotations_uniform := RDUniform.new()
+		rotations_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+		rotations_uniform.binding = 6
+		rotations_uniform.add_id(rotations_buffer)
+		
+		# Create uniform set
+		var uniform_set := rd.uniform_set_create(
+			[
+				parameters_uniform,
+				global_parameters_uniform,
+				positions_uniform,
+				velocities_uniform,
+				raycast_data_uniform,
+				output_uniform,
+				rotations_uniform
+			],
+			threads_boid_shader, 0
+		)
+		
+		# Create compute pipeline
+		var compute_list := rd.compute_list_begin()
+		rd.compute_list_bind_compute_pipeline(compute_list, threads_boids_pipeline)
+		rd.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
+		rd.compute_list_dispatch(compute_list, num_boids, 1, 1)
+		rd.compute_list_end()
+		
+		# Execute compute shader ... this is not particularly efficient becuase we have to wait 
+		# for the gpu to finish processing, but seeing as we're doing this every frame, I'm not sure 
+		# what else we could do.
+		rd.submit()
+		rd.sync()
+		
+		# Get output list
+		var compute_output_bytes := rd.buffer_get_data(output_buffer)
+		
+		mutex.lock()
+		shader_output = compute_output_bytes.to_float32_array()
+		mutex.unlock()
+
+func get_shader_output():
+	mutex.lock()
+	var ret = shader_output
+	mutex.unlock()
+	return ret
 
 func sync_at_integrals():
 	while true:
@@ -209,7 +264,7 @@ func remove_boid_index(id):
 func _run_compute_shader(pipeline, uniform_set):
 	# Create compute pipeline
 	var compute_list := rd.compute_list_begin()
-	rd.compute_list_bind_compute_pipeline(compute_list, boids_pipeline)
+	rd.compute_list_bind_compute_pipeline(compute_list, pipeline)
 	rd.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
 	rd.compute_list_dispatch(compute_list, num_boids, 1, 1)
 	rd.compute_list_end()

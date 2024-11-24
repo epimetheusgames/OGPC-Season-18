@@ -29,7 +29,7 @@
 [sub_resource type="Resource" id="Resource_pwaxv"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
-uid = 913
+uid = 954
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 vertices = PackedVector2Array(2014.07, -112.008, 2023.92, 1182.14, 1936.48, 912.156, 1822.42, 471.609, 997.703, 367.078, 709.359, 833.812, 552.367, 538, 520.438, 418.812, 1171.31, 225.5, 1726.8, 880.32, 1381.71, 816.297, 520.438, 657.188, 1376.56, 827.844, -100.961, 1212.85, 715.289, 844.141, 1180.48, 212.797, -96.0312, -114.977, 433.188, 331.562, 314, 299.633, 433.188, 744.438, 314, 776.367, 194.812, 744.438, 107.562, 657.188, 194.812, 331.562, 107.562, 418.812, 75.6328, 538)
@@ -59,7 +59,7 @@ shader_parameter/depth_color_tex = ExtResource("12_c52vc")
 [sub_resource type="Resource" id="Resource_fubrg"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
-uid = 914
+uid = 955
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xbwca"]
 shader = ExtResource("16_ctau1")
