@@ -4,6 +4,7 @@ extends Node
 
 var boids_positions := []
 var boids_velocities := []
+var boids_rotations := []
 
 @export var view_dist = 50
 @export var protected_dist = 10
@@ -61,13 +62,15 @@ func _process(delta: float) -> void:
 	
 	boids_positions = []
 	boids_velocities = []
+	boids_rotations = []
 	
 	for boid_ind in range(boids_list.size()):
-		boids_positions.append(boids_list[boid_ind].position)
-		boids_velocities.append(boids_list[boid_ind].velocity)
+		var boid = boids_list[boid_ind]
+		boids_positions.append(boid.position)
+		boids_velocities.append(boid.velocity)
+		boids_rotations.append(boid.rotation)
 		
-		# TODO: Make this safe.
-		boids_list[boid_ind].get_node("BoidComponent").index = boid_ind
+		boid.get_component("BoidComponent").index = boid_ind
 	
 	# Prepare data for compute shader
 	var global_parameters := PackedFloat32Array([
@@ -82,17 +85,20 @@ func _process(delta: float) -> void:
 	var velocities := PackedVector2Array(boids_velocities)
 	var velocities_bytes = velocities.to_byte_array()
 	
+	var rotations = PackedVector2Array(boids_rotations)
+	var rotations_bytes = rotations.to_byte_array()
+	
 	var raycast_data := PackedFloat32Array()
 	for boid in boids_list:
-		var boid_component = boid.get_node("BoidComponent")
+		var boid_component = boid.get_component("BoidComponent")
 		raycast_data.append(1 if boid_component.raycast.get_collider() else 0)
 		raycast_data.append(boid_component.raycast.get_collision_normal().x)
 		raycast_data.append(boid_component.raycast.get_collision_normal().y)
+	
 	var raycast_data_bytes = raycast_data.to_byte_array()
 	
 	var output := PackedFloat32Array()
-	for i in range(num_boids):
-		output.append_array([0, 0, 0, 0, 0, 0, 0])
+	output.resize(num_boids * 3)
 	var output_bytes = output.to_byte_array()
 	
 	var bin_params_buffer_bytes = PackedFloat32Array([bin_size, bins.x, bins.y, num_bins]).to_byte_array()
@@ -134,6 +140,12 @@ func _process(delta: float) -> void:
 	output_uniform.binding = 5
 	output_uniform.add_id(output_buffer)
 	
+	var rotations_buffer := rd.storage_buffer_create(rotations_bytes.size(), rotations_bytes)
+	var rotations_uniform := RDUniform.new()
+	rotations_uniform.uniform_type = RenderingDevice.UNIFORM_TYPE_STORAGE_BUFFER
+	rotations_uniform.binding = 6
+	rotations_uniform.add_id(rotations_buffer)
+	
 	# Create uniform set
 	var uniform_set := rd.uniform_set_create(
 		[
@@ -143,6 +155,7 @@ func _process(delta: float) -> void:
 			velocities_uniform,
 			raycast_data_uniform,
 			output_uniform,
+			rotations_uniform
 		],
 		boid_shader, 0
 	)

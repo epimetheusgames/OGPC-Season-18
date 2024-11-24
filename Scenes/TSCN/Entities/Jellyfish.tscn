@@ -16,9 +16,10 @@ bottom_width = 140.0
 [node name="Jellyfish" type="Node2D"]
 script = ExtResource("1_dd7wo")
 
-[node name="Tentacles" type="Node2D" parent="."]
+[node name="Tentacles" type="Node2D" parent="." node_paths=PackedStringArray("on_screen_notifier")]
 script = ExtResource("2_7lbwn")
 tentacles = Array[ExtResource("3_5yh7k")]([SubResource("Resource_rbmc1")])
+on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -139.0
@@ -33,3 +34,7 @@ color = Color(0.712, 1, 0.46, 1)
 position = Vector2(4, 3)
 scale = Vector2(51.6, 26.7)
 texture = ExtResource("4_y38hh")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.499992, 132)
+scale = Vector2(21.85, 12.7)

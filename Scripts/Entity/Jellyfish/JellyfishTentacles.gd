@@ -6,7 +6,9 @@ extends Node2D
 @onready var jellyfish: Jellyfish = get_parent()
 
 var boosting: bool = false
+var is_on_screen := false
 var ropes: Array[VerletRopeComponent] = []
+@export var on_screen_notifier: VisibleOnScreenNotifier2D
 
 func _ready() -> void:
 	for tentacle in tentacles: 
@@ -68,6 +70,9 @@ func boost(speed: float) -> void:
 	boosting = false
 
 func _process(delta: float) -> void:
+	for rope in ropes:
+		rope.is_on_screen = on_screen_notifier.is_on_screen()
+		
 	if not boosting:
 		var tentacle_gravity: Vector2 = Vector2(0, 50)
 		tentacle_gravity = tentacle_gravity.rotated(jellyfish.global_rotation)

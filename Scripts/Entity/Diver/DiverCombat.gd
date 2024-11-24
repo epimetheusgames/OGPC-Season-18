@@ -14,7 +14,6 @@ var enabled_weapon: Weapon
 var speargun: PackedScene = preload("res://Scenes/TSCN/Objects/Weapons/Speargun.tscn")
 
 func _ready() -> void:
-	add_weapon(speargun)
 	pass
 	#set_weapon(0)
 

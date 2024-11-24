@@ -16,6 +16,7 @@ var nodes: Array[VerletNode] = []
 
 var start_anchor_node: Node2D
 var end_anchor_node: Node2D
+var is_on_screen := true
 
 const timestep: float = 0.1
 
@@ -36,9 +37,20 @@ func _ready() -> void:
 		
 		spawn_pos += Vector2(0, nodes_separation)
 
-func _physics_process(delta: float) -> void:
-	if not line:
+func _process(delta: float) -> void:
+	if !line:
 		return
+	
+	if !is_on_screen:
+		if smoothed_line:
+			smoothed_line.visible = false
+		line.visible = false
+		return
+	
+	if smoothed_line:
+		smoothed_line.visible = true
+	else:
+		line.visible = true
 	
 	# Simulate Verlet integration
 	simulate()

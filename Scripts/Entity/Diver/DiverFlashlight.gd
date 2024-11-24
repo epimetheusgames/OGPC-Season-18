@@ -7,7 +7,7 @@ extends Node2D
 @onready var light_texture: PointLight2D = $"Light"
 
 func _process(delta: float) -> void:
-	var mouse_pos: Vector2 = get_global_mouse_position()
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var head_pos: Vector2 = diver.diver_animation.get_head_position()
 	
 	set_light_position(head_pos)

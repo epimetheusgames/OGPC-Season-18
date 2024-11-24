@@ -22,7 +22,7 @@ sync_increment = 1.0
 polygon = PackedVector2Array(-2, 3, 2, 3, 0, -4)
 
 [node name="WallRaycast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 116)
+target_position = Vector2(0, 200)
 
 [node name="BoidComponent" type="Node" parent="."]
 script = ExtResource("3_2it7s")
