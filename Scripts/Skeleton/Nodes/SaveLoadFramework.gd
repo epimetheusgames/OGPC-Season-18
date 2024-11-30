@@ -1,4 +1,5 @@
 # Script responsible for saving and loading levels.
+class_name SaveLoadFramework
 extends Node
 
 
@@ -9,14 +10,14 @@ extends Node
 		level_list = val
 		
 		for filepath in level_list:
-			if filepath.file == null:
-				filepath.file = FilePathResource.new()
+			if filepath == null:
+				filepath = FilePathResource.new()
 @export var save_encrypted := false
 
 func _ready():
 	Global.save_load_framework = self
 	
-	load_level("res://Scenes/TSCN/Levels/Missions/Mission1.tscn")
+	#load_level("res://Scenes/TSCN/Levels/Missions/Mission1.tscn")
 
 # Saves a ConfigFile to memory.
 func _save_config_file(config_file: ConfigFile, slot_num: int) -> void:
@@ -61,7 +62,7 @@ func _load_config_file(slot_num) -> ConfigFile:
 			print("DEBUG: Loading successful, ignore warning.")
 		else:
 			print("ERROR: Loading unsuccessful, this means there is a problem with the format of the file.")
-			print("DEBUG: If the file is encrypted, you will probably have to delete it, but game data will be erased.")
+			print("DEBUG: If the file is encrypted, you will probably have to delete it, and game data will be erased.")
 	
 	return blank_config
 
