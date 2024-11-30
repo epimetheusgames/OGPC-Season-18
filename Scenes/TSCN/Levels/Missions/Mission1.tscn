@@ -29,7 +29,7 @@
 [sub_resource type="Resource" id="Resource_pwaxv"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
-uid = 1114
+uid = 1143
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 vertices = PackedVector2Array(1171.31, 225.5, 1390.5, 483.891, 993.727, 372.117, 698.898, 966.898, 552.367, 538, 520.438, 418.812, 520.438, 657.188, 4554, 4036.29, 4554, 381.508, 11582, -361, 11582, 11377.7, -6892.83, 10922.2, -2824.69, 3823.67, -6702.17, -361, -2385.55, 1103.22, 4537.23, 378.758, 3638.01, 3049.39, 1936.48, 912.156, 1822.42, 471.609, 1856.47, 1566.85, 1765.99, 886.273, 433.188, 744.438, 650.25, 1024.78, 948.922, 2728.79, -1407.52, 2635.57, 933.281, 2717.36, 1772.56, 1488.55, -1651.53, 1875.12, 653.398, 1041.51, 1679.17, 824.203, 1495.07, 607.18, 714.969, 976.344, 1019.67, 532.852, 314, 776.367, 194.812, 744.438, 107.562, 657.188, 75.6328, 538, 107.562, 418.812, 433.188, 331.562, 1180.48, 212.797, 194.812, 331.562, 314, 299.633)
@@ -59,7 +59,7 @@ shader_parameter/depth_color_tex = ExtResource("12_c52vc")
 [sub_resource type="Resource" id="Resource_fubrg"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
-uid = 1115
+uid = 1144
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xbwca"]
 shader = ExtResource("16_ctau1")
@@ -189,6 +189,7 @@ uid = SubResource("Resource_pwaxv")
 [node name="Level" type="Node2D" parent="LevelContainer"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="LevelContainer/Level"]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = ExtResource("1_2ttir")
 metadata/_edit_lock_ = true
