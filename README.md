@@ -24,7 +24,7 @@ It's a diving game.
 Copyright (C) 2024 Carson Bates, Liam Siegel, Alejandro Belgique, Sequoia Haynes, Kai Benson, Oscar Jones, and Xavier Jin.
 All rights reserved.
 
-Any scripts and assets (and files) in this repository are co-copyrighted under Carson Bates, Liam Siegel, Elouan Grimm, Alejandro Belgique, and Ranier Szatlocky EVEN if they do not contain an explicit copyright notice. 
+Any scripts and assets (and files) in this repository are co-copyrighted under Carson Bates, Liam Siegel, Alejandro Belgique, Sequoia Haynes, Kai Benson, Oscar Jones, and Xavier Jin EVEN if they do not contain an explicit copyright notice. 
 You may only distribute copies of this software if you have WRITTEN permission from one of the copyright holders.
 
 If you've received a copy of this software from anywhere other than an official Epimetheus Games source (for our [itch.io](https://epimetheusgamesogpc.itch.io/) page, or our [website](epimetheus.games)) do not run it and delete it immediately as it could contain malware and is not a legitimate copy of the game.
