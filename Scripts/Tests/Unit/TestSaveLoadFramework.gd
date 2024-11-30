@@ -61,3 +61,18 @@ func test_save_game():
 	var saved_game_save = slf._load_game_save(6)
 	assert_eq(saved_game_save.slot, 6)
 	assert_eq(saved_game_save.level, 5)
+
+func test_load_level():
+	var game_container := Node.new()
+	slf.game_container = game_container
+	slf.load_level("res://Scenes/TSCN/Levels/Missions/Mission1.tscn")
+	assert_eq(len(game_container.get_children()), 1)
+	
+	var test_exit_game_save = GameSave.new()
+	test_exit_game_save.level = 0
+	test_exit_game_save.slot = 6
+	slf.exit_to_menu(6, test_exit_game_save)
+	var loaded_save := slf._load_game_save(6)
+	assert_eq(game_container.get_children()[0].is_queued_for_deletion(), true)
+	assert_eq(loaded_save.level, 0)
+	assert_eq(loaded_save.slot, 6)

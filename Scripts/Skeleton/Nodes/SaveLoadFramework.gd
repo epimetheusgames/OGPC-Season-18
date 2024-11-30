@@ -3,7 +3,7 @@ class_name SaveLoadFramework
 extends Node
 
 
-@export_node_path("Node") var game_container_node_path
+@export var game_container: Node
 @export_node_path("Control") var ui_root_node_path
 @export var level_list: Array[FilePathResource]:
 	set(val):
@@ -100,30 +100,41 @@ func start_game(slot_num: int) -> void:
 	load_level(level_list[level_data.level].file)
 
 func load_level(level_path: String):
-	var ui_generator: Node = get_node(ui_root_node_path).get_node("UIGenerator")
-	if !ui_generator:
-		print("WARNING: SaveLoadFramework contains no UI Generator node path. Level won't start")
-		return
+	if !ui_root_node_path:
+		print("WARNING: SaveLoadFramework contains no UI root node path. UI actions won't run.")
+	else:
+		var ui_generator: Node = get_node(ui_root_node_path).get_node("UIGenerator")
+		if !ui_generator:
+			print("WARNING: SaveLoadFramework contains no UI Generator node path. UI actions won't run.")
+		
+		else: 
+			ui_generator.toggle_ui()
 	
-	ui_generator.toggle_ui()
-	
-	var game_container: Node = get_node(game_container_node_path)
 	if !game_container:
 		print("WARNING: SaveLoadFramework contains no game container node path. Level won't start.")
 		return
 	
 	var level_loaded := load(level_path)
-	game_container.add_child(level_loaded.instantiate())
+	var instantiated = level_loaded.instantiate()
+	game_container.add_child(instantiated)
+	instantiated.owner = game_container
 
 # Close and save game and exit to menu.
 func exit_to_menu(save_slot: int, game_data: GameSave) -> void:
 	_save_game_save(game_data, save_slot)
 	
-	var game_container: Node = get_node(game_container_node_path)
 	for child in game_container.get_children():
 		child.queue_free()
 	
+	if !ui_root_node_path:
+		print("WARNING: SaveLoadFramework contains no UI root node, no menu to exit to.")
+		return
+	
 	var ui_generator: Node = get_node(ui_root_node_path).get_node("UIGenerator")
 	
+	if !ui_generator:
+		print("WARNING: SaveLoadFramework contains no UI generator path, no menu to exit to.")
+		return
+
 	ui_generator.toggle_ui()
 	
