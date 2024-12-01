@@ -1,4 +1,5 @@
 # This code was based on code from the Dunebound codebase.
+# HI SEQUOIA WHATS GOOD!
 extends Node
 
 var keybind_config := JSON.new()
