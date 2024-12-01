@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=13 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
+[ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_fsoev"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 [ext_resource type="Script" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
 [ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
@@ -41,6 +42,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="UIGenerator" type="Node" parent="UI"]
+script = ExtResource("5_fsoev")
+button_template_path = NodePath("../TemplateButton")
 
 [node name="TemplateButton" type="Button" parent="UI"]
 layout_mode = 0
