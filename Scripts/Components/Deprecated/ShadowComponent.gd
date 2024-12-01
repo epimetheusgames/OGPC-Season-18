@@ -1,3 +1,5 @@
+# DEPRECATED
+
 class_name ShadowComponent
 extends Node
 
