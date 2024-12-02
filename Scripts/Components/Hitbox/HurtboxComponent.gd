@@ -1,5 +1,6 @@
 ## Component for a simple hitbox, has support for a HealthComponent to be
 ## attached to it.
+# Owned by: carsonetb
 class_name HurtboxComponent
 extends BaseHitboxComponent
 

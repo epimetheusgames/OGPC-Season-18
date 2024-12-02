@@ -1,5 +1,6 @@
 # This script automatically fades between two repeating textures on the inside
 # and edges of the polygon.
+# Owned by: carsonetb
 @tool
 class_name AutoPolygonTexture
 extends Polygon2D

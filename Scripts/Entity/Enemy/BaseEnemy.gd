@@ -1,6 +1,7 @@
 ## A base class for all enemies.
 ## If inheriting from this class you must call _process_enemy at the start of your 
 ## process function, and call _enemy_ready at the start of your ready function.
+# Owned by: carsonetb
 class_name Enemy
 extends NPC
 

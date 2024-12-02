@@ -1,3 +1,4 @@
+# Owned by: carsonetb
 class_name BaseComponent
 extends Node
 

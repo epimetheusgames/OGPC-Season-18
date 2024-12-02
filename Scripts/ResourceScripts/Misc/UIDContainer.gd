@@ -1,3 +1,4 @@
+# Owned by: carsonetb
 @tool
 extends Resource
 class_name UID
