@@ -1,4 +1,5 @@
 ## Save this as a resource for specific enemies.
+# Owned by: carsonetb
 class_name EnemyBehaviorSettings
 extends Resource
 

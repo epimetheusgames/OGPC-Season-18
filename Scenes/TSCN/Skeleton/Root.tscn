@@ -32,9 +32,9 @@ script = ExtResource("5_65j18")
 
 [node name="SaveLoadFramework" type="Node" parent="Skeleton" node_paths=PackedStringArray("game_container")]
 script = ExtResource("2_i3ogj")
+game_container = NodePath("../../Game/GameContainer")
 ui_root_node_path = NodePath("../../UI")
 level_list = Array[ExtResource("3_e6kdq")]([SubResource("Resource_ur184")])
-game_container = NodePath("../../Game/GameContainer")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

@@ -1,3 +1,4 @@
+# Owned by: carsonetb
 class_name BoidsCalculator
 extends Node
 

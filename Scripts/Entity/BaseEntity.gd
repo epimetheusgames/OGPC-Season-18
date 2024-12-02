@@ -1,4 +1,5 @@
 # Base class for all entities
+# Owned by: carsonetb
 @tool
 class_name Entity
 extends CharacterBody2D

@@ -1,4 +1,5 @@
 ## Component for an attackbox. When attack() is called other HurtboxComponents in the area will be notified.
+# Owned by: carsonetb
 class_name AttackBoxComponent
 extends BaseHitboxComponent
 
