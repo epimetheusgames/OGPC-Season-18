@@ -5,7 +5,6 @@
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
-[ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_wwd8b"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 [ext_resource type="Script" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
 [ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
@@ -43,7 +42,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="UIGenerator" type="Node" parent="UI"]
+<<<<<<< HEAD
 script = ExtResource("5_wwd8b")
+=======
+script = ExtResource("5_fsoev")
+button_template_path = NodePath("../TemplateButton")
+>>>>>>> 34ea10ffe69958681804652370aa137f11995346
 
 [node name="TemplateButton" type="Button" parent="UI"]
 layout_mode = 0

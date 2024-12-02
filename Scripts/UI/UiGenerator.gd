@@ -106,7 +106,7 @@ func _ready():
 		user_savedconfig.data["keybinds"][key[0]]["key"].pop_at(key[1])
 	
 	reinitialize_ui()
-	
+		
 func get_keybind_file():
 	var keybind_savefile = FileAccess.open("user://keybinds.json",FileAccess.READ)
 	var return_value = keybind_savefile.get_as_text()
@@ -223,7 +223,8 @@ func toggle_ui():
 		RenderingServer.set_default_clear_color(background)
 	else:
 		RenderingServer.set_default_clear_color(default_color)
-
+	for x in self.get_child_count():
+		self.get_children()[x].visible = false
 # Adds all nodes in the array as a child of the caller
 func nodes_from_array(array: Array, caller=self) -> void:
 	for x in array.size():
@@ -244,14 +245,14 @@ func generate_ui_elements() -> void:
 		for actionIterator in keybind_config_data["keybinds"].size():
 			var new_text = RichTextLabel.new()
 			new_text.size = Vector2(100, 50)
-			new_text.text = keybind_config_data["keybinds"][actionIterator]["actionName"]
+			new_text.text = keybind_config_data["keybinds"][actionIterator]["actionName"].capitalize()
 			new_text.position = last_entry_pos + Vector2(0, keybind_entry_element_padding)
 			new_entries.append(new_text)
 		
 			var last_button_pos = new_text.position.x
 			for event_iterator in keybind_config_data["keybinds"][actionIterator]["key"].size():
 				new_buttons.append(button_template.duplicate())
-				new_buttons[-1].text = keybind_config_data["keybinds"][actionIterator]["key"][event_iterator]
+				new_buttons[-1].text = keybind_config_data["keybinds"][actionIterator]["key"][event_iterator].capitalize()
 				new_buttons[-1].position.y = new_text.position.y
 				new_buttons[-1].position.x = last_button_pos + keybind_entry_element_padding + button_offset_x
 				new_buttons[-1].keybind_changed.connect(self._on_template_button_keybind_changed)
@@ -261,7 +262,7 @@ func generate_ui_elements() -> void:
 	else:
 		var new_text := RichTextLabel.new()
 		new_text.size = Vector2(100, 100)
-		new_text.text = keybind_config_data["keybinds"][0]["actionName"]
+		new_text.text = keybind_config_data["keybinds"][0]["actionName"].capitalize()
 		new_text.position = last_entry_pos
 		new_entries.append(new_text)
 		
@@ -270,13 +271,13 @@ func generate_ui_elements() -> void:
 		if keybind_config_data["keybinds"][0]["key"].size() > 1:
 			for event_iterator in keybind_config_data["keybinds"][0]["key"].size():
 				new_buttons.append(button_template.new())
-				new_buttons[event_iterator].text = keybind_config_data["keybinds"][0]["key"]
+				new_buttons[event_iterator].text = keybind_config_data["keybinds"][0]["key"].capitalize()
 				new_buttons[event_iterator].position.y = new_text.position.y
 				new_buttons[event_iterator].position.x = last_button_pos.x + keybind_entry_element_padding * event_iterator
 		else:
 			button_template = get_node(button_template_path)
 			new_buttons.append(button_template.duplicate())
-			new_buttons[0].text = keybind_config_data["keybinds"][0]["key"][0]
+			new_buttons[0].text = keybind_config_data["keybinds"][0]["key"][0].capitalize()
 			new_buttons[0].position.y = new_text.position.y
 			new_buttons[0].position.x = last_button_pos
 		
