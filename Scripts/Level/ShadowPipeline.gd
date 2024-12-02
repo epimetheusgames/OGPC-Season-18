@@ -12,9 +12,9 @@ var moving_occluders: Array[LightOccluder2D] = []
 func _ready():
 	var parent = level_container.get_parent()
 	parent.remove_child.call_deferred(level_container)
-	$World.add_child.call_deferred(level_container)
+	$WorldContainer/World.add_child.call_deferred(level_container)
 	
-	$World.size = get_viewport().size
+	$WorldContainer/World.size = get_viewport().size
 	$StaticShadowPass.size = get_viewport().size
 	$StaticShadowBlurPass.size = get_viewport().size
 	$MovingShadowBlurPass.size = get_viewport().size
@@ -22,7 +22,7 @@ func _ready():
 	$WorldShadowBlendPass.size = get_viewport().size 
 	
 	# Find all the occluders in the scene and move them over.
-	_recursively_search_for_occluders.call_deferred($World)
+	_recursively_search_for_occluders.call_deferred($WorldContainer/World)
 	
 	$Final.visible = true
 	

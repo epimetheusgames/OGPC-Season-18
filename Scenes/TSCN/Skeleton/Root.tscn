@@ -44,6 +44,7 @@ offset_bottom = 40.0
 
 [node name="UIGenerator" type="Node" parent="UI"]
 script = ExtResource("5_7cj4s")
+button_template_path = NodePath("../TemplateButton")
 
 [node name="TemplateButton" type="Button" parent="UI"]
 layout_mode = 0

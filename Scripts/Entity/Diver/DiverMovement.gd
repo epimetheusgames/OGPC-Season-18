@@ -13,6 +13,7 @@ var velocity: Vector2 = Vector2.ZERO
 @onready var diver_root: Diver = get_parent()
 
 func _physics_process(delta: float) -> void:
+	print(get_global_mouse_position())
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
 		input_vector = get_wasd_input_vector()
 		

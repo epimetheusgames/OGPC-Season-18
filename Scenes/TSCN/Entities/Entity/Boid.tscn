@@ -11,6 +11,7 @@ script = ExtResource("2_3kea4")
 uid = 1501
 
 [node name="Boid" type="CharacterBody2D"]
+modulate = Color(0.747338, 0.800303, 0.927192, 1)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_y6pwu")

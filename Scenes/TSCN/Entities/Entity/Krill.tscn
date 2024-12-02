@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://jvcm2ceq2fe3"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Krill.gd" id="1_5mwas"]
+[ext_resource type="Texture2D" uid="uid://dpxtame3hkbqg" path="res://Assets/Art/Sprites/Entity/Krill.png" id="1_ubv3t"]
+
+[node name="Krill" type="CharacterBody2D"]
+script = ExtResource("1_5mwas")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ubv3t")
