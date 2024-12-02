@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=13 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
+[ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_wwd8b"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 [ext_resource type="Script" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
 [ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
@@ -29,8 +30,9 @@ KeyactionHandler = NodePath("Game/KeyActionHandler")
 [node name="GodotSteamAbstraction" type="Node" parent="Skeleton"]
 script = ExtResource("5_65j18")
 
-[node name="SaveLoadFramework" type="Node" parent="Skeleton"]
+[node name="SaveLoadFramework" type="Node" parent="Skeleton" node_paths=PackedStringArray("game_container")]
 script = ExtResource("2_i3ogj")
+game_container = NodePath("../../Game/GameContainer")
 ui_root_node_path = NodePath("../../UI")
 level_list = Array[ExtResource("3_e6kdq")]([SubResource("Resource_ur184")])
 
@@ -41,6 +43,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="UIGenerator" type="Node" parent="UI"]
+script = ExtResource("5_wwd8b")
 
 [node name="TemplateButton" type="Button" parent="UI"]
 layout_mode = 0
@@ -103,6 +106,8 @@ disabled = true
 offset_right = 8.0
 offset_bottom = 8.0
 disabled = true
+
+[node name="MousePositionGetter" type="Node2D" parent="."]
 
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
 [connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]

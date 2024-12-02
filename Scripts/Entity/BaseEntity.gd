@@ -8,6 +8,7 @@ var entity_type = "Entity"
 
 @export var _has_physics := false
 @export var uid := UID.new()
+@export var boid_colors: Array[Color]
 
 # Defaults to the server unless set by another node.
 # WARNING: Most entities besides players should be operated by the server,
@@ -19,6 +20,10 @@ var entity_type = "Entity"
 var node_owner = 0
 var save_resource := EntitySave.new()
 var components_dictionary = {}
+
+func _ready() -> void:
+	var rng := RandomNumberGenerator.new()
+	modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
 
 func _process(delta: float) -> void:
 	# Create our UID automatically.

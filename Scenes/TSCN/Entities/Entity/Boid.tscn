@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://co07maqfriti4"]
+[gd_scene load_steps=6 format=3 uid="uid://co07maqfriti4"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/BaseEntity.gd" id="1_y6pwu"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_3kea4"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BoidComponent.gd" id="3_2it7s"]
+[ext_resource type="Texture2D" uid="uid://cx2ypxydjaxys" path="res://Assets/Art/Sprites/Entity/BoidsFishSprite.png" id="4_hemyd"]
 
 [sub_resource type="Resource" id="Resource_lqutn"]
 resource_local_to_scene = true
@@ -10,16 +11,17 @@ script = ExtResource("2_3kea4")
 uid = 1501
 
 [node name="Boid" type="CharacterBody2D"]
-rotation = 2.40403
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_y6pwu")
 uid = SubResource("Resource_lqutn")
+boid_colors = Array[Color]([Color(0.655061, 0.738082, 0.877045, 1), Color(0.747338, 0.800303, 0.927192, 1), Color(0.720003, 0.778689, 0.920294, 1), Color(0.703839, 0.771199, 0.884796, 1), Color(0.746311, 0.820793, 0.923492, 1)])
 has_multiplayer_sync = false
 sync_increment = 1.0
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-2, 3, 2, 3, 0, -4)
+[node name="FishSprite" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("4_hemyd")
 
 [node name="WallRaycast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 1000)

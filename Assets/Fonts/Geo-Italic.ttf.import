@@ -15,7 +15,6 @@ dest_files=["res://.godot/imported/Geo-Italic.ttf-dc06f38103ae9d81cd81d1800f68e4
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
-disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
