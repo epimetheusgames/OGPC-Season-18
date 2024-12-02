@@ -11,11 +11,15 @@ var input_vector: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 
 @onready var diver_root: Diver = get_parent()
+@export var use_mouse_movement := false
 
 func _physics_process(delta: float) -> void:
 	print(get_global_mouse_position())
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
-		input_vector = get_wasd_input_vector()
+		if use_mouse_movement:
+			input_vector = get_mouse_input_vector()
+		else:
+			input_vector = get_wasd_input_vector()
 		
 		update_current_angle(delta * 60)
 		update_movement_velocity(delta * 60)
@@ -47,6 +51,11 @@ func get_wasd_input_vector() -> Vector2:
 		input_vector += Vector2.DOWN
 	
 	return input_vector.normalized()
+
+# This is mostly a workaround for now until the bug with getting the mouse 
+# position inside a viewport gets fixed (https://github.com/godotengine/godot/issues/99912)
+func get_mouse_input_vector() -> Vector2:
+	return (Vector2(DisplayServer.mouse_get_position()) - Vector2(960, 540)).normalized()
 
 func update_current_angle(delta: float) -> void:
 	if input_vector != Vector2.ZERO:
