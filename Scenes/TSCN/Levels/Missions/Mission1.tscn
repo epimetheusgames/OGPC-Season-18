@@ -69,7 +69,7 @@ shader_parameter/len = 480.851
 shader_parameter/fade_margin = 5.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fb083"]
-viewport_path = NodePath("ShadowPipeline/World")
+viewport_path = NodePath("ShadowPipeline/WorldContainer/World")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_425di"]
 viewport_path = NodePath("ShadowPipeline/StaticShadowPass")
@@ -95,7 +95,7 @@ shader_parameter/len = 480.851
 shader_parameter/fade_margin = 5.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_noj7m"]
-viewport_path = NodePath("ShadowPipeline/World")
+viewport_path = NodePath("ShadowPipeline/WorldContainer/World")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_mdxb6"]
 viewport_path = NodePath("ShadowPipeline/MovingShadowPass")
@@ -126,7 +126,7 @@ shader_parameter/static_shadow_tex = SubResource("ViewportTexture_i2mhq")
 shader_parameter/moving_shadow_tex = SubResource("ViewportTexture_dvhxd")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_o024e"]
-viewport_path = NodePath("ShadowPipeline/World")
+viewport_path = NodePath("ShadowPipeline/WorldContainer/World")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ve0rw"]
 viewport_path = NodePath("ShadowPipeline/WorldShadowBlendPass")
@@ -253,8 +253,7 @@ boids_scene = NodePath("../Boid")
 position = Vector2(1224, 1021)
 
 [node name="Boid" parent="LevelContainer/Entities" instance=ExtResource("16_a7n5p")]
-modulate = Color(0.720003, 0.778689, 0.920294, 1)
-rotation = 2.40403
+modulate = Color(0.655061, 0.738082, 0.877045, 1)
 uid = SubResource("Resource_fubrg")
 
 [node name="WallRaycast" parent="LevelContainer/Entities/Boid" index="1"]
@@ -273,7 +272,15 @@ level_container = NodePath("../LevelContainer")
 camera = NodePath("../LevelContainer/Player/Diver/Camera2D")
 occluder_offset = Vector2(957, 539)
 
-[node name="World" type="SubViewport" parent="ShadowPipeline"]
+[node name="WorldContainer" type="SubViewportContainer" parent="ShadowPipeline"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="World" type="SubViewport" parent="ShadowPipeline/WorldContainer"]
+handle_input_locally = false
 msaa_2d = 3
 use_debanding = true
 use_hdr_2d = true

@@ -14,6 +14,7 @@ var velocity: Vector2 = Vector2.ZERO
 @export var use_mouse_movement := false
 
 func _physics_process(delta: float) -> void:
+	print(get_global_mouse_position())
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
 		if use_mouse_movement:
 			input_vector = get_mouse_input_vector()
