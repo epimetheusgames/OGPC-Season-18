@@ -1,5 +1,10 @@
+# Jellyfish flap around in the water,
+# and they also have cool tentacles that you can customize
+
+# Owned by: kaitaobenson
+
 class_name Jellyfish
-extends Node2D
+extends Enemy
 
 const BASE_SPEED: float = 100.0
 const BOOST_MULTIPLIER: float = 7
@@ -9,7 +14,6 @@ const BOOST_DURATION: float = 0.2  # Boost lasts half a second
 
 var time_since_boost: float = 0.0
 
-var velocity: Vector2 = Vector2.ZERO
 var current_speed: float = BASE_SPEED
 var boost_timer: float = 0.0
 
