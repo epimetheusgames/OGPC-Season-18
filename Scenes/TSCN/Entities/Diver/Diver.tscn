@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=33 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_d2a8o"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="12_u28jr"]
+[ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Sprites/Player/TranquilizerPistol.png" id="14_nja23"]
 
 [sub_resource type="Resource" id="Resource_3ikhh"]
 resource_local_to_scene = true
@@ -498,3 +499,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisualDetectionArea"]
 visible = false
 shape = SubResource("CapsuleShape2D_wi5t0")
+
+[node name="TranquilizerPistol" type="Sprite2D" parent="."]
+position = Vector2(109, -57)
+texture = ExtResource("14_nja23")

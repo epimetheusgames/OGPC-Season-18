@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=47 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
@@ -189,6 +189,7 @@ uid = SubResource("Resource_pwaxv")
 [node name="Level" type="Node2D" parent="LevelContainer"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="LevelContainer/Level"]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = ExtResource("1_2ttir")
 metadata/_edit_lock_ = true
@@ -253,7 +254,7 @@ boids_scene = NodePath("../Boid")
 position = Vector2(1224, 1021)
 
 [node name="Boid" parent="LevelContainer/Entities" instance=ExtResource("16_a7n5p")]
-modulate = Color(0.655061, 0.738082, 0.877045, 1)
+modulate = Color(0.746311, 0.820793, 0.923492, 1)
 uid = SubResource("Resource_fubrg")
 
 [node name="WallRaycast" parent="LevelContainer/Entities/Boid" index="1"]
@@ -266,6 +267,9 @@ avoid_factor = 0.7
 turn_factor = 3.5
 min_speed = 10.0
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="LevelContainer"]
+environment = SubResource("Environment_23dp7")
+
 [node name="ShadowPipeline" type="Node" parent="." node_paths=PackedStringArray("level_container", "camera")]
 script = ExtResource("16_0m2co")
 level_container = NodePath("../LevelContainer")
@@ -273,6 +277,7 @@ camera = NodePath("../LevelContainer/Player/Diver/Camera2D")
 occluder_offset = Vector2(957, 539)
 
 [node name="WorldContainer" type="SubViewportContainer" parent="ShadowPipeline"]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
