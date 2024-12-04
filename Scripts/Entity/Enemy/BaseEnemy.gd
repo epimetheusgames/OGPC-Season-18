@@ -63,9 +63,9 @@ func _target_reached() -> void:
 		wander_state = WANDER_MODE.WANDER_POINT_REACHED
 
 func _process(delta: float) -> void:
-	_process_enemy(delta)
+	_enemy_process(delta)
 
-func _process_enemy(delta: float) -> void:
+func _enemy_process(delta: float) -> void:
 	_npc_process(delta)
 	
 	if num_players_in_area == 0:
@@ -179,4 +179,3 @@ func _area_exited(area: Area2D) -> void:
 		
 		num_players_in_area -= 1
 		players_list.remove_at(players_list.find(area.get_parent()))
-		

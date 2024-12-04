@@ -1,3 +1,6 @@
+## This adds and sets the tentacles on the jelly
+# Owned by: kaitaobenson
+
 class_name JellyfishTentacles
 extends Node2D
 

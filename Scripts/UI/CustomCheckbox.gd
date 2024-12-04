@@ -1,3 +1,6 @@
+## It has a texture you can set! lol
+## Used for dev panel
+
 class_name CustomCheckbox
 extends Button
 

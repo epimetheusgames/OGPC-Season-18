@@ -1,5 +1,5 @@
-# Jellyfish flap around in the water,
-# and they also have cool tentacles that you can customize
+## Jellyfish flap around in the water,
+## and they also have cool tentacles that you can customize
 
 # Owned by: kaitaobenson
 
@@ -24,7 +24,8 @@ var target_rotation: float
 @onready var tentacles: JellyfishTentacles = $"Tentacles"
 
 func _process(delta: float) -> void:
-	nav_agent.target_position = Global.player.global_position
+	_enemy_process(delta)
+	nav_agent.target_position = target_position
 
 	# Countdown boost timer (if needed for specific boost duration)
 	if boost_timer > 0:

@@ -1,3 +1,7 @@
+## This rope uses Verlet Integration to more accurately simulate
+## ropes.  Collision is super jank
+# Owned by: kaitaobenson
+
 class_name VerletRopeComponent
 extends Node2D
 

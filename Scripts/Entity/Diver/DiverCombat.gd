@@ -1,5 +1,9 @@
 ## Diver combat system.
-# Owned by kaitaobenson
+# Owned by: kaitaobenson
+
+# but carsons working on it so deelelele ;[
+# [[]]][[][ -_--~```--_---`-------_--`_`_`--_-`-
+
 class_name DiverCombat
 extends Node2D
 

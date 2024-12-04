@@ -1,4 +1,6 @@
 ## A component to manage the health of an entity.
+# Owned by: kaitaobenson
+
 class_name HealthComponent
 extends BaseComponent
 

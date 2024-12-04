@@ -1,5 +1,6 @@
 ## Diver movement system.
-# Owned by kaitaobenson
+# Owned by: kaitaobenson
+
 class_name DiverMovement
 extends Node2D
 

@@ -1,4 +1,8 @@
 ## Diver procedural animation system.
+## It uses the built-in skeleton2d.
+# Owned by: kaitaobenson
+
+
 class_name DiverAnimation
 extends Node2D
 
