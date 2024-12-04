@@ -1,3 +1,6 @@
+## The player of the game.
+# Owned by: kaitaobenson
+
 class_name Diver
 extends Entity
 

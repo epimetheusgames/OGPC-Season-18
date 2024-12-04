@@ -1,3 +1,6 @@
+## Dev panel useful for debugging while the game is running
+# Owned by: kaitaobenson
+
 @tool
 extends Node
 
