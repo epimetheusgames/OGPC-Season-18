@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=32 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_d2a8o"]
@@ -12,12 +12,11 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="12_u28jr"]
-[ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Sprites/Player/TranquilizerPistol.png" id="14_nja23"]
 
 [sub_resource type="Resource" id="Resource_3ikhh"]
 resource_local_to_scene = true
 script = ExtResource("2_d2a8o")
-uid = 1481
+uid = 1574
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -272,6 +271,7 @@ metadata/_edit_lock_ = true
 position = Vector2(0, -9.00003)
 occluder = SubResource("OccluderPolygon2D_p7tt7")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="UpperArm1" type="Bone2D" parent="Animation/Skeleton/Torso"]
 use_parent_material = true
@@ -285,7 +285,7 @@ metadata/_edit_lock_ = true
 [node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
 use_parent_material = true
 position = Vector2(40.2459, 12.0526)
-rotation = -0.172192
+rotation = -0.145358
 scale = Vector2(1.08388, 1.00115)
 skew = -5.6386e-05
 rest = Transform2D(1.06785, -0.185714, 0.171539, 0.986349, 40.2459, 12.0526)
@@ -302,6 +302,7 @@ scale = Vector2(0.986316, 0.936111)
 skew = 0.0597258
 occluder = SubResource("OccluderPolygon2D_k7w8u")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm1"]
 position = Vector2(118.86, -140.568)
@@ -309,6 +310,7 @@ rotation = 1.85157
 scale = Vector2(1.00006, 1.00006)
 occluder = SubResource("OccluderPolygon2D_u101i")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="UpperArm2" type="Bone2D" parent="Animation/Skeleton/Torso"]
 use_parent_material = true
@@ -335,12 +337,14 @@ position = Vector2(-20.7467, 7.335)
 rotation = -1.92815
 occluder = SubResource("OccluderPolygon2D_5lcxe")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm2"]
 position = Vector2(-17.7418, 3.03804)
 rotation = 1.40121
 occluder = SubResource("OccluderPolygon2D_uacx1")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="Thigh1" type="Bone2D" parent="Animation/Skeleton/Torso"]
 use_parent_material = true
@@ -370,12 +374,14 @@ scale = Vector2(1.00346, 1)
 skew = 5.51939e-05
 occluder = SubResource("OccluderPolygon2D_e2u5c")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D2" type="LightOccluder2D" parent="Animation/Skeleton/Torso/Thigh1"]
 position = Vector2(0.775972, 28.0071)
 rotation = 0.0079999
 occluder = SubResource("OccluderPolygon2D_xwppb")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="Thigh2" type="Bone2D" parent="Animation/Skeleton/Torso"]
 use_parent_material = true
@@ -401,16 +407,19 @@ metadata/_local_pose_override_enabled_ = true
 position = Vector2(1, 28)
 occluder = SubResource("OccluderPolygon2D_v5vmu")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/Thigh2"]
 position = Vector2(19, 86)
 occluder = SubResource("OccluderPolygon2D_4oaia")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso"]
 position = Vector2(3, -39)
 occluder = SubResource("OccluderPolygon2D_0ulgu")
 occluder_light_mask = 2
+metadata/_edit_lock_ = true
 
 [node name="ArmIkTarget1" type="Node2D" parent="Animation"]
 position = Vector2(116, -54)
@@ -457,7 +466,6 @@ shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
 [node name="Combat" type="Node2D" parent="."]
-visible = false
 script = ExtResource("5_mjta2")
 
 [node name="AttackBoxComponent" type="Node" parent="Combat"]
@@ -499,7 +507,3 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisualDetectionArea"]
 visible = false
 shape = SubResource("CapsuleShape2D_wi5t0")
-
-[node name="TranquilizerPistol" type="Sprite2D" parent="."]
-position = Vector2(109, -57)
-texture = ExtResource("14_nja23")

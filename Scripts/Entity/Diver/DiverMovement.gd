@@ -1,4 +1,5 @@
 ## Diver movement system.
+# Owned by kaitaobenson
 class_name DiverMovement
 extends Node2D
 
@@ -14,12 +15,8 @@ var velocity: Vector2 = Vector2.ZERO
 @export var use_mouse_movement := false
 
 func _physics_process(delta: float) -> void:
-	print(get_global_mouse_position())
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
-		if use_mouse_movement:
-			input_vector = get_mouse_input_vector()
-		else:
-			input_vector = get_wasd_input_vector()
+		input_vector = get_input_vector()
 		
 		update_current_angle(delta * 60)
 		update_movement_velocity(delta * 60)
@@ -37,6 +34,11 @@ func handle_floating(input_vector: Vector2, delta: float) -> void:
 	var x_index := int((global_position.x - water_start_pos.x) / diver_root.water_manager.spacing)
 	var current_water_height := diver_root.water_polygon.polygon[x_index].y
 	diver_root.position.y = Util.better_lerp(diver_root.position.y, diver_root.water_polygon.global_position.y + current_water_height, 0.5, delta)
+
+func get_input_vector() -> Vector2:
+	if use_mouse_movement:
+		return get_mouse_input_vector()
+	return get_wasd_input_vector()
 
 func get_wasd_input_vector() -> Vector2:
 	var input_vector: Vector2 = Vector2.ZERO

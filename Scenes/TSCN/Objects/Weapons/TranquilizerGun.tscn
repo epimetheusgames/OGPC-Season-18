@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://dul1o4r1c8ash"]
+
+[ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Sprites/Player/TranquilizerPistol.png" id="1_2gvrx"]
+[ext_resource type="Script" path="res://Scripts/Objects/Weapons/TranquilizerGun.gd" id="1_n4wnc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpy5q"]
+atlas = ExtResource("1_2gvrx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y2vb"]
+atlas = ExtResource("1_2gvrx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u40w"]
+atlas = ExtResource("1_2gvrx")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywnjs"]
+atlas = ExtResource("1_2gvrx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_inovh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpy5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y2vb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u40w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywnjs")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_qpy5q")
+}],
+"loop": false,
+"name": &"Shoot",
+"speed": 18.0
+}]
+
+[node name="TranquilizerGun" type="Node2D"]
+script = ExtResource("1_n4wnc")
+
+[node name="TranquilizerGunSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_inovh")
+animation = &"Shoot"
+frame = 4
+frame_progress = 1.0
