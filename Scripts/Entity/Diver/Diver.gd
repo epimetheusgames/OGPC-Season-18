@@ -9,13 +9,13 @@ extends Entity
 @onready var diver_combat: DiverCombat = $"Combat"
 @onready var diver_flashlight: DiverFlashlight = $"Flashlight"
 
-@export var water_surface_height: int
 @export var water_manager: Node2D
 
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
 
 func _ready() -> void:
 	Global.player = self
+	$BuoyancyComponent.waves = water_manager
 
 func _physics_process(delta: float):
 	velocity = diver_movement.get_velocity()
@@ -29,3 +29,7 @@ func _physics_process(delta: float):
 
 func get_diver_movement() -> DiverMovement:
 	return diver_movement
+
+func set_new_velocity(new_velocity: Vector2) -> void:
+	velocity = new_velocity
+	diver_movement.velocity = new_velocity
