@@ -29,7 +29,3 @@ func _physics_process(delta: float):
 
 func get_diver_movement() -> DiverMovement:
 	return diver_movement
-
-func set_new_velocity(new_velocity: Vector2) -> void:
-	velocity = new_velocity
-	diver_movement.velocity = new_velocity
