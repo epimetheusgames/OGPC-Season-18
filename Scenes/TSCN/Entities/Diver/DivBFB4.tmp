@@ -17,7 +17,7 @@
 [sub_resource type="Resource" id="Resource_3ikhh"]
 resource_local_to_scene = true
 script = ExtResource("2_d2a8o")
-uid = 1829
+uid = 1648
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -512,7 +512,7 @@ shape = SubResource("CapsuleShape2D_wi5t0")
 [node name="BuoyancyComponent" type="Node" parent="." node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("13_arg6r")
 center_of_mass = NodePath("..")
-gravity = 20
-buoyancy_accel = 1.0
+gravity = 40
+buoyancy_accel = 0.1
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
