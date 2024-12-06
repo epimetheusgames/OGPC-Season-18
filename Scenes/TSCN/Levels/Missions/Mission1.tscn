@@ -32,8 +32,8 @@ script = ExtResource("17_j8dce")
 uid = 1830
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
-vertices = PackedVector2Array(1171.31, 225.5, 1390.5, 483.891, 993.727, 372.117, 698.898, 966.898, 552.367, 538, 520.438, 418.812, 520.438, 657.188, 4554, 4036.29, 4554, 381.508, 11582, -361, 11582, 11377.7, -6892.83, 10922.2, -2824.69, 3823.67, -6702.17, -361, -2385.55, 1103.22, 4537.23, 378.758, 3638.01, 3049.39, 1936.48, 912.156, 1822.42, 471.609, 1856.47, 1566.85, 1765.99, 886.273, 433.188, 744.438, 650.25, 1024.78, 948.922, 2728.79, -1407.52, 2635.57, 933.281, 2717.36, 1772.56, 1488.55, -1651.53, 1875.12, 653.398, 1041.51, 1679.17, 824.203, 1495.07, 607.18, 714.969, 976.344, 1019.67, 532.852, 314, 776.367, 194.812, 744.438, 107.562, 657.188, 75.6328, 538, 107.562, 418.812, 433.188, 331.562, 1180.48, 212.797, 194.812, 331.562, 314, 299.633)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(2, 3, 4, 5), PackedInt32Array(6, 4, 3), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(7, 10, 11, 12), PackedInt32Array(12, 11, 13, 14), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(19, 20, 17, 16), PackedInt32Array(21, 6, 3, 22), PackedInt32Array(23, 19, 16), PackedInt32Array(23, 16, 24), PackedInt32Array(25, 23, 24), PackedInt32Array(26, 25, 24, 27, 28, 29), PackedInt32Array(30, 29, 28, 22, 31), PackedInt32Array(31, 32, 30), PackedInt32Array(3, 31, 22), PackedInt32Array(33, 21, 22), PackedInt32Array(33, 22, 14, 34), PackedInt32Array(35, 34, 14), PackedInt32Array(36, 35, 14), PackedInt32Array(37, 36, 14, 13), PackedInt32Array(0, 2, 5, 38, 39), PackedInt32Array(40, 37, 13), PackedInt32Array(39, 38, 41), PackedInt32Array(15, 18, 39), PackedInt32Array(41, 40, 13), PackedInt32Array(9, 8, 15), PackedInt32Array(13, 9, 15, 39), PackedInt32Array(41, 13, 39)])
+vertices = PackedVector2Array(520.438, 657.188, 552.367, 538, 1171.31, 225.5, 1679.17, 824.203, 650.25, 1024.78, 4554, 4036.29, 4554, 381.508, 11582, -361, 11582, 11377.7, -6892.83, 10922.2, -2824.69, 3823.67, -6702.17, -361, -2385.55, 1103.22, 4537.23, 378.758, 3638.01, 3049.39, 1936.48, 912.156, 1822.42, 471.609, 1856.47, 1566.85, 1765.99, 886.273, 520.438, 418.812, 948.922, 2728.79, -1407.52, 2635.57, 933.281, 2717.36, 1772.56, 1488.55, -1651.53, 1875.12, 653.398, 1041.51, 433.188, 744.438, 314, 776.367, 194.812, 744.438, 107.562, 657.188, 75.6328, 538, 107.562, 418.812, 433.188, 331.562, 1180.48, 212.797, 194.812, 331.562, 314, 299.633)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(5, 8, 9, 10), PackedInt32Array(10, 9, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 18, 15, 14), PackedInt32Array(2, 1, 19), PackedInt32Array(20, 17, 14), PackedInt32Array(20, 14, 21), PackedInt32Array(22, 20, 21), PackedInt32Array(23, 22, 21, 24, 25, 3), PackedInt32Array(3, 25, 4), PackedInt32Array(26, 0, 4), PackedInt32Array(27, 26, 4), PackedInt32Array(27, 4, 12, 28), PackedInt32Array(29, 28, 12), PackedInt32Array(30, 29, 12), PackedInt32Array(31, 30, 12, 11), PackedInt32Array(2, 19, 32, 33), PackedInt32Array(34, 31, 11), PackedInt32Array(33, 32, 35), PackedInt32Array(13, 16, 33), PackedInt32Array(35, 34, 11), PackedInt32Array(7, 6, 13), PackedInt32Array(11, 7, 13, 33), PackedInt32Array(35, 11, 33)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_57j0e"]
@@ -190,6 +190,7 @@ uid = SubResource("Resource_pwaxv")
 [node name="Level" type="Node2D" parent="LevelContainer"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="LevelContainer/Level"]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = ExtResource("1_2ttir")
 metadata/_edit_lock_ = true
@@ -197,7 +198,7 @@ metadata/_edit_lock_ = true
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Level/NavigationRegion2D"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Level/NavigationRegion2D/StaticBody2D"]
-polygon = PackedVector2Array(712, 963, 999, 384, 1716, 586, 1846, 1564, 947, 2715, 1783, 1491, 1661, 623, 1015, 522)
+polygon = PackedVector2Array(1716, 586, 1846, 1564, 947, 2715, 1783, 1491, 1661, 623)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="LevelContainer/Level/NavigationRegion2D/StaticBody2D"]
 polygon = PackedVector2Array(1814, 479, 1184, 225, 1732, 871, 1923, 900)
@@ -256,6 +257,7 @@ boids_scene = NodePath("../Boid")
 position = Vector2(1224, 1021)
 
 [node name="Boid" parent="LevelContainer/Entities" instance=ExtResource("16_a7n5p")]
+modulate = Color(0.747338, 0.800303, 0.927192, 1)
 uid = SubResource("Resource_fubrg")
 
 [node name="WallRaycast" parent="LevelContainer/Entities/Boid" index="1"]

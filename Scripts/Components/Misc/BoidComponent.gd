@@ -19,6 +19,8 @@ var boids_index: int
 var index: int
 var raycast: RayCast2D
 @export_node_path("RayCast2D") var raycast_path
+@export var follow_position: Node2D
+@onready var component_container_node = get_node(component_container)
 
 func _ready():
 	name = "BoidComponent"
@@ -47,7 +49,6 @@ func _ready():
 func _process(delta: float) -> void: 
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
 		var output = boids_calculator.get_shader_output()
-		var component_container_node = get_node(component_container)
 		component_container_node.velocity = Vector2(output[boids_index * 3], output[boids_index * 3 + 1])
 		component_container_node.position += component_container_node.velocity
 		

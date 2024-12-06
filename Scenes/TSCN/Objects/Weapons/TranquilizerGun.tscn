@@ -3,49 +3,50 @@
 [ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Sprites/Player/TranquilizerPistol.png" id="1_2gvrx"]
 [ext_resource type="Script" path="res://Scripts/Objects/Weapons/TranquilizerGun.gd" id="1_n4wnc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qpy5q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bmgj"]
+atlas = ExtResource("1_2gvrx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkops"]
 atlas = ExtResource("1_2gvrx")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2y2vb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvbnt"]
 atlas = ExtResource("1_2gvrx")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1u40w"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3xwt"]
 atlas = ExtResource("1_2gvrx")
 region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ywnjs"]
-atlas = ExtResource("1_2gvrx")
-region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_inovh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qpy5q")
+"texture": SubResource("AtlasTexture_8bmgj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2y2vb")
+"texture": SubResource("AtlasTexture_qkops")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1u40w")
+"texture": SubResource("AtlasTexture_xvbnt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ywnjs")
+"texture": SubResource("AtlasTexture_a3xwt")
 }, {
-"duration": 10.0,
-"texture": SubResource("AtlasTexture_qpy5q")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bmgj")
 }],
 "loop": false,
 "name": &"Shoot",
-"speed": 18.0
+"speed": 25.0
 }]
 
 [node name="TranquilizerGun" type="Node2D"]
 script = ExtResource("1_n4wnc")
 
 [node name="TranquilizerGunSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_inovh")
 animation = &"Shoot"
 frame = 4

@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	
 	if center_of_mass.global_position.y < current_water_height:
 		bouyancy_velocity.y += gravity * delta * 60
-	elif abs(center_of_mass.velocity.y) < max_buoyancy_vel:
+	elif abs(bouyancy_velocity.y) < max_buoyancy_vel:
 		bouyancy_velocity = bouyancy_velocity * 0.97
 		bouyancy_velocity.y -= buoyancy_accel * delta * 60
 	else:

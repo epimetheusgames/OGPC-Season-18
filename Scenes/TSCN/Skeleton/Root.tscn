@@ -13,7 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
-file = "<null>"
+file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
 
