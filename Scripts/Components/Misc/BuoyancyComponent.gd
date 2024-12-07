@@ -45,5 +45,4 @@ func _physics_process(delta: float) -> void:
 	else:
 		bouyancy_velocity = bouyancy_velocity * 0.97
 	
-	print(bouyancy_velocity)
 	center_of_mass.position += bouyancy_velocity * delta

@@ -216,6 +216,7 @@ diver = NodePath("../../Player/Diver")
 spacing = 17.34
 
 [node name="Line2D" parent="LevelContainer/Level/Waves" index="0"]
+z_index = -1
 material = SubResource("ShaderMaterial_drxv4")
 position = Vector2(-2116, -86)
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
@@ -257,7 +258,7 @@ boids_scene = NodePath("../Boid")
 position = Vector2(1224, 1021)
 
 [node name="Boid" parent="LevelContainer/Entities" instance=ExtResource("16_a7n5p")]
-modulate = Color(0.747338, 0.800303, 0.927192, 1)
+modulate = Color(0.720003, 0.778689, 0.920294, 1)
 uid = SubResource("Resource_fubrg")
 
 [node name="WallRaycast" parent="LevelContainer/Entities/Boid" index="1"]
