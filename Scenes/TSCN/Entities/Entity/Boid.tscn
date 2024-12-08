@@ -16,7 +16,6 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_y6pwu")
 uid = SubResource("Resource_lqutn")
-boid_colors = Array[Color]([Color(0.655061, 0.738082, 0.877045, 1), Color(0.747338, 0.800303, 0.927192, 1), Color(0.720003, 0.778689, 0.920294, 1), Color(0.703839, 0.771199, 0.884796, 1), Color(0.746311, 0.820793, 0.923492, 1)])
 has_multiplayer_sync = false
 sync_increment = 1.0
 
@@ -31,4 +30,5 @@ target_position = Vector2(0, 1000)
 script = ExtResource("3_2it7s")
 max_speed = 3.0
 raycast_path = NodePath("../WallRaycast")
+boid_colors = Array[Color]([Color(1, 1, 1, 1), Color(1, 1, 1, 1)])
 component_container = NodePath("..")

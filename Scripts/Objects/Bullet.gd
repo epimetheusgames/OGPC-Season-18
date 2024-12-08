@@ -1,3 +1,4 @@
+# Owned by carsonetb
 class_name BaseBullet
 extends Area2D
 

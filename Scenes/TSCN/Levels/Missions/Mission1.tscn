@@ -245,7 +245,6 @@ metadata/_edit_lock_ = true
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
 [node name="Jellyfish" parent="LevelContainer/Entities" instance=ExtResource("6_sqcin")]
-visible = false
 position = Vector2(462, 1027)
 
 [node name="BoidsGroup" type="Node" parent="LevelContainer/Entities" node_paths=PackedStringArray("boids_scene")]

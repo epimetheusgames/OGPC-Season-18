@@ -18,9 +18,11 @@ var boids_calculator: BoidsCalculator
 var boids_index: int
 var index: int
 var raycast: RayCast2D
+
 @export_node_path("RayCast2D") var raycast_path
 @export var follow_position: Node2D
 @onready var component_container_node = get_node(component_container)
+@export var boid_colors: Array[Color]
 
 func _ready():
 	name = "BoidComponent"
@@ -42,6 +44,9 @@ func _ready():
 	get_parent().add_to_group("Boids")
 	raycast = get_node(raycast_path)
 	get_parent().velocity = (raycast.target_position - raycast.position).normalized()
+	
+	var rng := RandomNumberGenerator.new()
+	component_container_node.modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
 	
 	_base_component_ready_post()
 

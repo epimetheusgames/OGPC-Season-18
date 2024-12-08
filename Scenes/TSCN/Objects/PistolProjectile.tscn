@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://d24oi85rw114u"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/PistolProjectile.gd" id="1_0erac"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_yd357"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sxw75"]
+radius = 9.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k58o7"]
+
+[node name="PistolProjectile" type="Area2D"]
+z_index = 5
+script = ExtResource("1_0erac")
+
+[node name="BulletCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sxw75")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 9.5)
+texture = SubResource("PlaceholderTexture2D_k58o7")
+
+[node name="AttackBoxComponent" type="Node" parent="."]
+script = ExtResource("2_yd357")
+damage = 2.0
+knockback_velocity = 0.0
+always_attacking = true
+hurtbox = NodePath("..")
+
+[node name="EnemyDetector" type="Area2D" parent="."]
+
+[node name="BulletCollision" type="CollisionShape2D" parent="EnemyDetector"]
+shape = SubResource("CircleShape2D_sxw75")
+
+[connection signal="area_entered" from="EnemyDetector" to="." method="_on_area_entered"]

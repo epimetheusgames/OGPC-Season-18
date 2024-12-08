@@ -3,10 +3,16 @@ class_name TranquilizerGun
 extends Weapon
 
 var combat: DiverCombat
+var diver: Diver
 var flipped := false
+
+@export var bullet_velocity = 20
+
+@onready var loaded_bullet = preload("res://Scenes/TSCN/Objects/PistolProjectile.tscn")
 
 func _ready() -> void:
 	combat = get_parent()
+	diver = combat.diver
 
 func _process(delta: float) -> void:
 	var mouse_position := get_global_mouse_position()
@@ -15,7 +21,6 @@ func _process(delta: float) -> void:
 	global_rotation = combat.diver.diver_animation.get_node("Skeleton/Torso/UpperArm2/Forearm2").global_position.angle_to_point(hand_primary)
 	combat.move_hand_toward_mouse("right")
 	
-	print(rad_to_deg(global_rotation))
 	if !$TranquilizerGunSprite.animation == "Flip":
 		if (rad_to_deg(global_rotation) < -90 || rad_to_deg(global_rotation) > 90) && !flipped:
 			$TranquilizerGunSprite.play("Flip")
@@ -23,10 +28,18 @@ func _process(delta: float) -> void:
 			$TranquilizerGunSprite.play("Flip")
 
 func attack() -> void:
-	$TranquilizerGunSprite.play("Shoot")
-	# Shoot bullet code here
+	if !$TranquilizerGunSprite.animation == "Shoot":
+		$TranquilizerGunSprite.play("Shoot")
+		
+		var bullet: PistolProjectile = loaded_bullet.instantiate()
+		diver.get_parent().add_child(bullet, true)
+		bullet.set_velocity(Vector2.from_angle(global_rotation) * bullet_velocity + diver.velocity / 60)
+		bullet.global_position = $BulletShootPosition.global_position
 
 func _on_tranquilizer_gun_sprite_animation_finished() -> void:
+	if $TranquilizerGunSprite.animation == "Shoot":
+		$TranquilizerGunSprite.play("Idle")
+	
 	if $TranquilizerGunSprite.animation != "Flip":
 		return
 		

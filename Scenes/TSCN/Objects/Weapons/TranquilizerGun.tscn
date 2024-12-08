@@ -75,5 +75,8 @@ sprite_frames = SubResource("SpriteFrames_inovh")
 animation = &"Flip"
 autoplay = "Shoot"
 
+[node name="BulletShootPosition" type="Node2D" parent="."]
+position = Vector2(24, -15)
+
 [connection signal="animation_changed" from="TranquilizerGunSprite" to="." method="_on_tranquilizer_gun_sprite_animation_changed"]
 [connection signal="animation_finished" from="TranquilizerGunSprite" to="." method="_on_tranquilizer_gun_sprite_animation_finished"]

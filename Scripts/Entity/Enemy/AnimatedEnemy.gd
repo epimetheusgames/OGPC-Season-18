@@ -28,7 +28,7 @@ func _target_reached():
 	reached_target = true
 
 func _process(delta: float) -> void:
-	_process_enemy(delta)
+	_enemy_process(delta)
 	
 	if player_visible:
 		_path_changed()

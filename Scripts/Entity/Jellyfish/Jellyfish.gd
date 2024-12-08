@@ -23,6 +23,9 @@ var target_rotation: float
 @onready var nav_agent: NavigationAgent2D = $"NavigationAgent2D"
 @onready var tentacles: JellyfishTentacles = $"Tentacles"
 
+func _ready() -> void:
+	_enemy_ready()
+
 func _process(delta: float) -> void:
 	_enemy_process(delta)
 	nav_agent.target_position = target_position

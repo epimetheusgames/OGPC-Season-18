@@ -1,24 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=11 format=3 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_5x2qs"]
 [ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
 [ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="4_y38hh"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="6_gyt63"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="7_bltm7"]
 
 [sub_resource type="Resource" id="Resource_8tk4o"]
 script = ExtResource("2_5x2qs")
-health = 0
-damage = 0
+health = 10
+damage = 1
+base_speed = 5.0
 agressiveness = 0.671
-attack_distance = 0.0
-closest_distance = 0.0
+attack_distance = 150.0
+closest_distance = 100.0
 sensor_type = 0
 wander_type = 0
 attack_mode = 0
-wander_range = 0.0
+wander_range = 700.0
 view_range = 270.0
-view_distance = 1000.0
+view_distance = 700.0
 disable_period_length = 1.0
 sound_max_distance = 0.0
 
@@ -30,9 +33,15 @@ thickness = 6.0
 amount = 8
 bottom_width = 140.0
 
-[node name="Jellyfish" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgvvg"]
+size = Vector2(301, 125)
+
+[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "health_component")]
 script = ExtResource("1_dd7wo")
 settings = SubResource("Resource_8tk4o")
+forward_direction = Vector2(0, -1)
+hurtbox_component = NodePath("HurtboxComponent")
+health_component = NodePath("HealthComponent")
 
 [node name="Tentacles" type="Node2D" parent="." node_paths=PackedStringArray("on_screen_notifier")]
 script = ExtResource("2_7lbwn")
@@ -57,3 +66,27 @@ texture = ExtResource("4_y38hh")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-0.499992, 132)
 scale = Vector2(21.85, 12.7)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(4.5, -0.5)
+shape = SubResource("RectangleShape2D_qgvvg")
+
+[node name="BulletDetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetectionArea"]
+position = Vector2(4.5, -0.5)
+shape = SubResource("RectangleShape2D_qgvvg")
+
+[node name="HurtboxComponent" type="Node" parent="."]
+script = ExtResource("6_gyt63")
+hitbox_type = 1
+attachable_health_component = NodePath("../HealthComponent")
+hurtbox = NodePath("../Hurtbox")
+component_container = NodePath("..")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("7_bltm7")
+max_health = 0.0
+component_container = NodePath("..")
