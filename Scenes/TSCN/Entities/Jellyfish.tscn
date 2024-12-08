@@ -34,7 +34,7 @@ amount = 8
 bottom_width = 140.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgvvg"]
-size = Vector2(301, 125)
+size = Vector2(286, 108)
 
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "health_component")]
 script = ExtResource("1_dd7wo")
@@ -76,7 +76,7 @@ shape = SubResource("RectangleShape2D_qgvvg")
 [node name="BulletDetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetectionArea"]
-position = Vector2(4.5, -0.5)
+position = Vector2(4, -2)
 shape = SubResource("RectangleShape2D_qgvvg")
 
 [node name="HurtboxComponent" type="Node" parent="."]

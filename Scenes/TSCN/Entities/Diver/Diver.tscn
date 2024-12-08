@@ -445,7 +445,6 @@ polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
 
 [node name="Health" type="Node2D" parent="."]
 rotation = 0.000201209
-script = ExtResource("5_mjta2")
 
 [node name="HealthComponent" type="Node" parent="Health"]
 script = ExtResource("6_dvqx5")

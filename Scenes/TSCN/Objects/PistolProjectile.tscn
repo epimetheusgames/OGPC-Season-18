@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d24oi85rw114u"]
+[gd_scene load_steps=6 format=3 uid="uid://d24oi85rw114u"]
 
 [ext_resource type="Script" path="res://Scripts/Objects/PistolProjectile.gd" id="1_0erac"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_yd357"]
@@ -8,27 +8,36 @@ radius = 9.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_k58o7"]
 
-[node name="PistolProjectile" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3pv1"]
+size = Vector2(4, 10)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+mass = 0.1
+linear_damp = 3.0
+
+[node name="PistolProjectile" type="Area2D" parent="."]
 z_index = 5
 script = ExtResource("1_0erac")
 
-[node name="BulletCollision" type="CollisionShape2D" parent="."]
+[node name="BulletCollision" type="CollisionShape2D" parent="PistolProjectile"]
 shape = SubResource("CircleShape2D_sxw75")
 
-[node name="BulletSprite" type="Sprite2D" parent="."]
+[node name="BulletSprite" type="Sprite2D" parent="PistolProjectile"]
 scale = Vector2(4, 9.5)
 texture = SubResource("PlaceholderTexture2D_k58o7")
 
-[node name="AttackBoxComponent" type="Node" parent="."]
+[node name="AttackBoxComponent" type="Node" parent="PistolProjectile"]
 script = ExtResource("2_yd357")
 damage = 2.0
 knockback_velocity = 0.0
-always_attacking = true
 hurtbox = NodePath("..")
 
-[node name="EnemyDetector" type="Area2D" parent="."]
+[node name="EnemyDetector" type="Area2D" parent="PistolProjectile"]
 
-[node name="BulletCollision" type="CollisionShape2D" parent="EnemyDetector"]
+[node name="BulletCollision" type="CollisionShape2D" parent="PistolProjectile/EnemyDetector"]
 shape = SubResource("CircleShape2D_sxw75")
 
-[connection signal="area_entered" from="EnemyDetector" to="." method="_on_area_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b3pv1")
+
+[connection signal="area_entered" from="PistolProjectile/EnemyDetector" to="PistolProjectile" method="_on_area_entered"]

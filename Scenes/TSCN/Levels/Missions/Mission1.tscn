@@ -190,7 +190,6 @@ uid = SubResource("Resource_pwaxv")
 [node name="Level" type="Node2D" parent="LevelContainer"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="LevelContainer/Level"]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = ExtResource("1_2ttir")
 metadata/_edit_lock_ = true

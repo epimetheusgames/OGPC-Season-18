@@ -125,6 +125,10 @@ avoidance/script_name_casing=1
 avoidance/scene_name_casing=1
 avoidance/gdscript/max_call_stack=2047
 
+[physics]
+
+2d/default_gravity=0.0
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

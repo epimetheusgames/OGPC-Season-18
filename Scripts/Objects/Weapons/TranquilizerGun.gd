@@ -5,6 +5,7 @@ extends Weapon
 var combat: DiverCombat
 var diver: Diver
 var flipped := false
+var shooting := false
 
 @export var bullet_velocity = 20
 
@@ -28,16 +29,18 @@ func _process(delta: float) -> void:
 			$TranquilizerGunSprite.play("Flip")
 
 func attack() -> void:
-	if !$TranquilizerGunSprite.animation == "Shoot":
+	if !$TranquilizerGunSprite.animation == "Shoot" && !shooting:
 		$TranquilizerGunSprite.play("Shoot")
 		
-		var bullet: PistolProjectile = loaded_bullet.instantiate()
+		shooting = true
+		var bullet = loaded_bullet.instantiate()
 		diver.get_parent().add_child(bullet, true)
-		bullet.set_velocity(Vector2.from_angle(global_rotation) * bullet_velocity + diver.velocity / 60)
+		bullet.linear_velocity  = (Vector2.from_angle(global_rotation) * bullet_velocity * 60 + diver.velocity)
 		bullet.global_position = $BulletShootPosition.global_position
 
 func _on_tranquilizer_gun_sprite_animation_finished() -> void:
 	if $TranquilizerGunSprite.animation == "Shoot":
+		shooting = false
 		$TranquilizerGunSprite.play("Idle")
 	
 	if $TranquilizerGunSprite.animation != "Flip":

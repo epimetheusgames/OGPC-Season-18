@@ -68,6 +68,7 @@ animations = [{
 
 [node name="TranquilizerGun" type="Node2D"]
 script = ExtResource("1_n4wnc")
+bullet_velocity = 40
 
 [node name="TranquilizerGunSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)
