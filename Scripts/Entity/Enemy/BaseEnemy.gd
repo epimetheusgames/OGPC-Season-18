@@ -81,7 +81,7 @@ func _process(delta: float) -> void:
 
 func _enemy_process(delta: float) -> void:
 	_npc_process(delta)
-	print(health)
+	
 	
 	if num_players_in_area == 0:
 		player_in_area = false
