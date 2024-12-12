@@ -1,8 +1,11 @@
+## It has a texture you can set! lol
+## Used for dev panel
+
 class_name CustomCheckbox
 extends Button
 
-@export var checked_texture: CompressedTexture2D = load("res://Assets/Art/UI/CheckBox.png")
-@export var unchecked_texture: CompressedTexture2D = load("res://Assets/Art/UI/EmptyBox.png")
+@export var checked_texture: CompressedTexture2D = load("res://Assets/Art/Sprites/UI/CheckBox.png")
+@export var unchecked_texture: CompressedTexture2D = load("res://Assets/Art/Sprites/UI/EmptyBox.png")
 
 @export var checked: bool = false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4xd2rbmf0vue"]
+[gd_scene load_steps=15 format=3 uid="uid://c4xd2rbmf0vue"]
 
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_edi0r"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Camera.gd" id="2_0ewuu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="6_4t2rt"]
 [ext_resource type="Texture2D" uid="uid://fvg2fww4sy5j" path="res://Scenes/TSCN/Levels/mountain.jpg" id="6_mc12c"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="7_errr2"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="8_4qs6g"]
 [ext_resource type="Script" path="res://Scripts/UI/DevPanel.gd" id="9_aamap"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="9_dpin1"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/Entity/NPC.tscn" id="10_4dkfk"]
@@ -15,6 +16,11 @@
 shader = ExtResource("7_errr2")
 shader_parameter/color_palette = [Vector4(0.0313726, 0.0117647, 0.054902, 1), Vector4(0.0588235, 0.0745098, 0.0784314, 1), Vector4(0.105882, 0.121569, 0.121569, 1), Vector4(0.192157, 0.215686, 0.219608, 1), Vector4(0.337255, 0.4, 0.380392, 1), Vector4(0.423529, 0.52549, 0.501961, 1), Vector4(0.117647, 0.0117647, 0.0666667, 1), Vector4(0.227451, 0.0431373, 0.0901961, 1), Vector4(0.294118, 0.0980392, 0.121569, 1), Vector4(0.560784, 0.145098, 0.180392, 1), Vector4(0.698039, 0.227451, 0.227451, 1), Vector4(0.741176, 0.364706, 0.286275, 1), Vector4(0.745098, 0.631373, 0.631373, 1), Vector4(0.847059, 0.701961, 0.701961, 1), Vector4(0.937255, 0.854902, 0.854902, 1), Vector4(0.976471, 0.956863, 0.956863, 1), Vector4(0.109804, 0.0392157, 0.0156863, 1), Vector4(0.184314, 0.105882, 0.054902, 1), Vector4(0.258824, 0.156863, 0.0901961, 1), Vector4(0.317647, 0.223529, 0.121569, 1), Vector4(0.380392, 0.294118, 0.172549, 1), Vector4(0.435294, 0.368627, 0.211765, 1), Vector4(0.505882, 0.466667, 0.266667, 1), Vector4(0.619608, 0.6, 0.384314, 1), Vector4(0.729412, 0.701961, 0.501961, 1), Vector4(0.623529, 0.290196, 0.0705882, 1), Vector4(0.713726, 0.372549, 0.105882, 1), Vector4(0.780392, 0.478431, 0.145098, 1), Vector4(0.85098, 0.584314, 0.227451, 1), Vector4(0.941176, 0.756863, 0.317647, 1), Vector4(0.941176, 0.843137, 0.470588, 1), Vector4(0.956863, 0.886275, 0.631373, 1), Vector4(0.415686, 0.427451, 0.27451, 1), Vector4(0.529412, 0.545098, 0.352941, 1), Vector4(0.584314, 0.662745, 0.403922, 1), Vector4(0.713726, 0.780392, 0.494118, 1), Vector4(0.745098, 0.85098, 0.513726, 1), Vector4(0.843137, 0.901961, 0.596078, 1), Vector4(0.92549, 0.945098, 0.721569, 1), Vector4(0.0509804, 0.258824, 0.109804, 1), Vector4(0.0705882, 0.337255, 0.113725, 1), Vector4(0.176471, 0.470588, 0.184314, 1), Vector4(0.262745, 0.556863, 0.243137, 1), Vector4(0.396078, 0.658824, 0.309804, 1), Vector4(0.552941, 0.756863, 0.407843, 1), Vector4(0, 0.305882, 0.470588, 1), Vector4(0.12549, 0.435294, 0.521569, 1), Vector4(0.180392, 0.572549, 0.596078, 1), Vector4(0.258824, 0.741176, 0.709804, 1), Vector4(0.470588, 0.85098, 0.768627, 1), Vector4(0.658824, 0.921569, 0.74902, 1), Vector4(0.0823529, 0.105882, 0.278431, 1), Vector4(0.121569, 0.164706, 0.337255, 1), Vector4(0.180392, 0.239216, 0.376471, 1), Vector4(0.243137, 0.317647, 0.454902, 1), Vector4(0.301961, 0.431373, 0.529412, 1), Vector4(0.380392, 0.611765, 0.647059, 1), Vector4(0.176471, 0.0901961, 0.172549, 1), Vector4(0.270588, 0.160784, 0.247059, 1), Vector4(0.317647, 0.184314, 0.380392, 1), Vector4(0.501961, 0.345098, 0.631373, 1), Vector4(0.6, 0.458824, 0.8, 1), Vector4(0.662745, 0.627451, 0.960784, 1)]
 shader_parameter/colors_amount = 63
+
+[sub_resource type="Resource" id="Resource_mcpo7"]
+resource_local_to_scene = true
+script = ExtResource("8_4qs6g")
+uid = 39
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_86gkk"]
 vertices = PackedVector2Array(2294.37, -54.5391, 2205.46, 1334.38, 14.8438, 1978.97, -184.969, -185.398)
@@ -75,6 +81,7 @@ texture = ExtResource("6_mc12c")
 
 [node name="Diver" parent="." instance=ExtResource("1_edi0r")]
 position = Vector2(484, 792)
+uid = SubResource("Resource_mcpo7")
 
 [node name="Jellyfish" parent="." instance=ExtResource("9_dpin1")]
 position = Vector2(520, 475)

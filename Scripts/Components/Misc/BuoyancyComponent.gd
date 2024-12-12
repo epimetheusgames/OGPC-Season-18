@@ -1,0 +1,48 @@
+## Adds bouyancy functionality to objects. It's not super soffisticated (eg based 
+## the hitbox and all that stuff, but it should work for now).
+# Owned by carsonetb.
+class_name BuoyancyComponent
+extends BaseComponent
+
+
+@export var center_of_mass: Node2D
+@export var waves: Node2D
+
+# Acceleration in pixels per frame (locked framerate)
+@export var gravity := 16
+@export var buoyancy_accel := 5.0
+@export var max_buoyancy_vel := 100.0
+
+var polygon: Polygon2D
+var bouyancy_velocity := Vector2.ZERO
+
+func _ready() -> void:
+	component_name = "BuoyancyComponent"
+	
+	if waves:
+		polygon = waves.get_node("Line2D")
+	else:
+		print("ERROR: Buoyancy component at path " + str(get_path()) + " has no waves.")
+	
+	_base_component_ready_post()
+
+func _physics_process(delta: float) -> void:
+	if !waves:
+		return
+	
+	if !polygon:
+		polygon = waves.get_node("Line2D")
+	
+	var water_start_pos: Vector2 = polygon.polygon[0] + polygon.global_position
+	var x_index := int((center_of_mass.global_position.x - water_start_pos.x) / waves.spacing)
+	var current_water_height := polygon.polygon[x_index].y + polygon.global_position.y
+	
+	if center_of_mass.global_position.y < current_water_height:
+		bouyancy_velocity.y += gravity * delta * 60
+	elif abs(bouyancy_velocity.y) < max_buoyancy_vel:
+		bouyancy_velocity = bouyancy_velocity * 0.97
+		bouyancy_velocity.y -= buoyancy_accel * delta * 60
+	else:
+		bouyancy_velocity = bouyancy_velocity * 0.97
+	
+	center_of_mass.position += bouyancy_velocity * delta

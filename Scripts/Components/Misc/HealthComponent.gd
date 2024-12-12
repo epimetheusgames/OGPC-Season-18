@@ -1,4 +1,6 @@
 ## A component to manage the health of an entity.
+# Owned by: kaitaobenson
+
 class_name HealthComponent
 extends BaseComponent
 
@@ -22,8 +24,6 @@ func take_damage(amount: float) -> void:
 		_health -= amount
 		clampf(max_health, 0.0, max_health)
 		iframes_on(iframe_duration)
-		
-		var parent = get_node(component_container)
 		
 		damage_taken.emit(_health)
 		

@@ -1,5 +1,6 @@
 # TODO: FIX THIS GOOFY AHH CODE SEQUOIA!!!
 # TODO: I LITERALLY CANNOT UNDERSTAND WHAT IS BEING DONE HERE!!!
+# code owned by sequoia (as you could probably tell)
 extends Button
 
 
@@ -63,7 +64,7 @@ func change_keybind(action_name: String, key_number: int, new_key: String) -> bo
 	buffer_parse.parse(json_text)
 	
 	var json_data = buffer_parse.data
-	json_text.close()
+	raw_json.close()
 	
 	# Attempt to find the index of the named action in the keybinds array
 	var found_action_number := -1

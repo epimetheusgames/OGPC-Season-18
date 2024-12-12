@@ -1,3 +1,5 @@
+## A silly class for storing tentacle data
+
 class_name Tentacles
 extends Resource
 

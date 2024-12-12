@@ -1,10 +1,11 @@
 ## Component for a simple hitbox, has support for a HealthComponent to be
 ## attached to it.
+# Owned by: carsonetb
 class_name HurtboxComponent
 extends BaseHitboxComponent
 
 @export var hitbox_type: HITBOX_TYPE
-@export var has_nockback: bool = true
+@export var has_knockback: bool = true
 @export_node_path("HealthComponent") var attachable_health_component
 @export_node_path("AttackBoxComponent") var attack_box_to_exclude
 

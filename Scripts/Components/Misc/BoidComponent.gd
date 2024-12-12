@@ -1,3 +1,4 @@
+# Owned by: carsonetb
 class_name BoidComponent
 extends BaseComponent
 
@@ -17,7 +18,11 @@ var boids_calculator: BoidsCalculator
 var boids_index: int
 var index: int
 var raycast: RayCast2D
+
 @export_node_path("RayCast2D") var raycast_path
+@export var follow_position: Node2D
+@onready var component_container_node = get_node(component_container)
+@export var boid_colors: Array[Color]
 
 func _ready():
 	name = "BoidComponent"
@@ -40,13 +45,16 @@ func _ready():
 	raycast = get_node(raycast_path)
 	get_parent().velocity = (raycast.target_position - raycast.position).normalized()
 	
+	var rng := RandomNumberGenerator.new()
+	component_container_node.modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
+	
 	_base_component_ready_post()
 
 # Update velocity using compute shader outputs from boids calculator node.
 func _process(delta: float) -> void: 
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
-		get_node(component_container).velocity = Vector2(boids_calculator.shader_output[boids_index * 2], boids_calculator.shader_output[boids_index * 2 + 1])
-		get_node(component_container).move_and_slide()
-		get_node(component_container).position += get_node(component_container).velocity
+		var output = boids_calculator.get_shader_output()
+		component_container_node.velocity = Vector2(output[boids_index * 3], output[boids_index * 3 + 1])
+		component_container_node.position += component_container_node.velocity
 		
-	get_parent().rotation = atan2(get_parent().velocity.normalized().y, get_parent().velocity.normalized().x) + PI / 2.0 + PI
+	get_parent().rotation = Util.better_angle_lerp(get_parent().rotation, atan2(get_parent().velocity.normalized().y, get_parent().velocity.normalized().x) + PI / 2.0 + PI, 0.1, delta)

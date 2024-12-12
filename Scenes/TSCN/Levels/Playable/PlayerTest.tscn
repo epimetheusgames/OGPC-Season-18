@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr5scuilsl4p4"]
+[gd_scene load_steps=6 format=3 uid="uid://cr5scuilsl4p4"]
 
 [ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="1_21nbo"]
 [ext_resource type="PackedScene" uid="uid://b8iotem83uvu0" path="res://Scenes/TSCN/Entities/Entity/FishEnemy.tscn" id="2_nrsxp"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_o14wi"]
+
+[sub_resource type="Resource" id="Resource_3purp"]
+resource_local_to_scene = true
+script = ExtResource("3_o14wi")
+uid = 37
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_waxhy"]
 vertices = PackedVector2Array(741.422, 40.0234, 1929.86, 59.8125, 1828.02, 992.047, 672.938, 999.188, 597.508, 510.594, 612.797, 434.812, 683.82, 82.9062, 523.969, 875.07, 364.789, 1001.09, 505.562, 872.781, 396.43, 461.648, 523.133, 514.289, 296.453, 57.1172, 545.492, 57.9609, 527.453, 426.273, 343.211, 162.781, 65.8828, 1000.36, 57.0938, 56.0391, 173.008, 56.5703, 175.023, 880.406, 215.031, 964.852, 193.758, 881.547, 326.258, 163.227, 397.5, 443.578, 688.773, 56.3594)
@@ -19,6 +25,7 @@ component_container = NodePath("..")
 z_index = 5
 position = Vector2(798, 421)
 scale = Vector2(5, 5)
+uid = SubResource("Resource_3purp")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_waxhy")

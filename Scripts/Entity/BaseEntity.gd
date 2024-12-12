@@ -1,4 +1,5 @@
 # Base class for all entities
+# Owned by: carsonetb
 @tool
 class_name Entity
 extends CharacterBody2D
@@ -94,3 +95,6 @@ func disable_physics() -> void:
 ## Get the class of the Entity.
 func get_entity_type() -> String:
 	return entity_type
+
+func update_uid() -> void:
+	uid = UID.new()

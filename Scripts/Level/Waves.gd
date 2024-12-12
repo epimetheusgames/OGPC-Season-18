@@ -1,3 +1,4 @@
+# Owned by: carsonetb
 @tool
 extends Node2D
 
@@ -7,6 +8,7 @@ extends Node2D
 @export var d = 0.05
 @export var spread = 0.4
 @export var target_height = 0
+@export var diver: Diver
 
 @export var spacing := 4.0:
 	set(val):
@@ -70,7 +72,13 @@ func _process(delta: float) -> void:
 			#if i < spring_positions.size() - 1:
 				#spring_positions[i + 1].y += right_deltas[i]
 	
+	if diver.global_position.y - 1000 > spring_positions[0].y :
+		return 
+	
 	for i in range(spring_positions.size()):
+		if spring_positions[i].x + global_position.x < diver.global_position.x + 1000 || spring_positions[i].x + global_position.x > diver.global_position.x + 3200:
+			continue
+		
 		for wave in background_waves:
 			var amp = wave[0]
 			var period = wave[1] * multiplier

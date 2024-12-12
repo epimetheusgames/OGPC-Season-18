@@ -1,3 +1,4 @@
+# Owned by: carsonetb
 class_name BaseComponent
 extends Node
 
@@ -10,6 +11,10 @@ func _ready() -> void:
 	_base_component_ready_post()
 
 func _base_component_ready_post() -> void:
+	if !component_container:
+		print("WARNING: Component at path " + str(get_path()) + " does not have a container.")
+		return
+	
 	if (!get_node(component_container) is Entity):
 		print("WARNING: Component at path " + str(get_path()) + " does not have a container of type entity.")
 		return

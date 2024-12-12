@@ -1,4 +1,6 @@
 ## Diver movement system.
+# Owned by: kaitaobenson
+
 class_name DiverMovement
 extends Node2D
 
@@ -11,27 +13,20 @@ var input_vector: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 
 @onready var diver_root: Diver = get_parent()
+@export var use_mouse_movement := false
 
 func _physics_process(delta: float) -> void:
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
 		if get_parent().get_state() != "DRIVING_SUBMARINE":
-			input_vector = get_wasd_input_vector()
+			input_vector = get_input_vector()
+			
 			update_current_angle(delta * 60)
 			update_movement_velocity(delta * 60)
-			handle_floating(input_vector, delta)
 
-func handle_floating(input_vector: Vector2, delta: float) -> void:
-	if !diver_root.water_manager || !diver_root.water_polygon || !diver_root.water_surface_height:
-		print("WARNING: Diver doesn't have water information set ... floating won't work.")
-		return
-	
-	if global_position.y > diver_root.water_surface_height || input_vector.y > 0:
-		return
-		
-	var water_start_pos: Vector2 = diver_root.water_polygon.polygon[0]
-	var x_index := int((global_position.x - water_start_pos.x) / diver_root.water_manager.spacing)
-	var current_water_height := diver_root.water_polygon.polygon[x_index].y
-	diver_root.position.y = Util.better_lerp(diver_root.position.y, diver_root.water_polygon.global_position.y + current_water_height, 0.5, delta)
+func get_input_vector() -> Vector2:
+	if use_mouse_movement:
+		return get_mouse_input_vector()
+	return get_wasd_input_vector()
 
 func get_wasd_input_vector() -> Vector2:
 	var input_vector: Vector2 = Vector2.ZERO
@@ -46,6 +41,11 @@ func get_wasd_input_vector() -> Vector2:
 		input_vector += Vector2.DOWN
 	
 	return input_vector.normalized()
+
+# This is mostly a workaround for now until the bug with getting the mouse 
+# position inside a viewport gets fixed (https://github.com/godotengine/godot/issues/99912)
+func get_mouse_input_vector() -> Vector2:
+	return (Vector2(DisplayServer.mouse_get_position()) - Vector2(960, 540)).normalized()
 
 func update_current_angle(delta: float) -> void:
 	if input_vector != Vector2.ZERO:

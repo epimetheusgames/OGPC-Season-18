@@ -1,12 +1,16 @@
 ## A base class for all enemies.
 ## If inheriting from this class you must call _process_enemy at the start of your 
 ## process function, and call _enemy_ready at the start of your ready function.
+# Owned by: carsonetb
 class_name Enemy
 extends NPC
 
 @export var settings: EnemyBehaviorSettings
 @export var target_reached_min_dst: int = 10
 @export var forward_direction: Vector2 = Vector2(-1, 0)
+@export var hurtbox_component: HurtboxComponent
+@export var attackbox_component: AttackBoxComponent
+@export var health_component: HealthComponent
 
 var _player_detection_area: Area2D
 var _player_detection_collision_shape: CollisionShape2D
@@ -20,6 +24,7 @@ var players_list = []
 
 var health: int
 var target_position: Vector2
+var target_speed: float
 
 enum WANDER_MODE {
 	WANDER_POINT_REACHED,
@@ -56,16 +61,26 @@ func _enemy_ready() -> void:
 	
 	# Initialize enemy behavior settings.
 	health = settings.health
+	
+	if health_component:
+		health_component.set_health(health)
+		health_component.damage_taken.connect(_take_damage)
+
+func _take_damage(new_health) -> void:
+	health = new_health
+	if health <= 0:
+		queue_free()
 
 func _target_reached() -> void:
 	if wander_state == WANDER_MODE.WANDERING_TO_POINT:
 		wander_state = WANDER_MODE.WANDER_POINT_REACHED
 
 func _process(delta: float) -> void:
-	_process_enemy(delta)
+	_enemy_process(delta)
 
-func _process_enemy(delta: float) -> void:
+func _enemy_process(delta: float) -> void:
 	_npc_process(delta)
+	print(health)
 	
 	if num_players_in_area == 0:
 		player_in_area = false
@@ -75,32 +90,36 @@ func _process_enemy(delta: float) -> void:
 	
 	if player_in_area:
 		_update_closest_player()
-		var space_state := get_world_2d().direct_space_state
-		var raycast := PhysicsRayQueryParameters2D.create(global_position, closest_player.global_position)
-		var result := space_state.intersect_ray(raycast)
-		if result:
-			if result["collider"] == closest_player:
-				player_visible = true
-			else:
-				# The fish will be able to see the player for a bit even after it leaves the area.
-				if num_players_in_area == 1 && player_visible:
-					await get_tree().create_timer(settings.disable_period_length).timeout
-				player_visible = false
-		else:
-			print("WARNING: Raycast to player got no results???")
+		_update_player_visible()
+	
+	target_speed = settings.base_speed
 		
 	# If player in area calculate closest player, else wander.
 	if player_visible:
 		_update_target_position()
+		target_speed *= 1 + settings.agressiveness
+		
+		var dist_to_player = position.distance_to(closest_player.position)
+		if attackbox_component && dist_to_player < settings.attack_distance && !attackbox_component.is_attacking:
+			attackbox_component.attack()
+			attack()
+		
+		if dist_to_player < settings.closest_distance:
+			target_position = position
+		
 	elif wander_state == WANDER_MODE.NOT_WANDERING || wander_state == WANDER_MODE.WANDER_POINT_REACHED:
 		if settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.ATTACH_TO_WALL && !(wander_state == WANDER_MODE.NOT_WANDERING):
 			return
 		
 		_update_wander_point()
 
+# Overridable by children.
+func attack() -> void:
+	pass
+
 func _generate_view_polygon(angle: float, radius: float) -> PackedVector2Array:
 	var output := PackedVector2Array([Vector2(0, 0)])
-	var start := int(forward_direction.normalized().angle()) + 180
+	var start := int(rad_to_deg(forward_direction.normalized().angle()))
 	for i in range(start - int(angle) / 2, start + int(angle) / 2, 10):
 		var fi = i * PI / 180
 		output.append(Vector2(radius * cos(fi), radius * sin(fi)))
@@ -123,6 +142,21 @@ func _update_closest_player():
 				closest_ind = i
 		
 		closest_player = players_list[closest_ind]
+
+func _update_player_visible():
+	var space_state := get_world_2d().direct_space_state
+	var raycast := PhysicsRayQueryParameters2D.create(global_position, closest_player.global_position)
+	var result := space_state.intersect_ray(raycast)
+	if result:
+		if result["collider"] == closest_player:
+			player_visible = true
+		else:
+			# The fish will be able to see the player for a bit even after it leaves the area.
+			if num_players_in_area == 1 && player_visible:
+				await get_tree().create_timer(settings.disable_period_length).timeout
+			player_visible = false
+	else:
+		print("WARNING: Raycast to player got no results???")
 
 func _update_target_position():
 	wander_state = WANDER_MODE.NOT_WANDERING
@@ -178,4 +212,3 @@ func _area_exited(area: Area2D) -> void:
 		
 		num_players_in_area -= 1
 		players_list.remove_at(players_list.find(area.get_parent()))
-		

@@ -1,6 +1,7 @@
 ## Base class for components which use a hitbox. Do not assign multiple CollisionShape2Ds as a child of the hurtbox.
 ## This shouldn't be used on its own as it doesn't really have any functionality by itself ... use a child of it 
 ## instead.
+# Owned by: carsonetb
 class_name BaseHitboxComponent
 extends BaseComponent
 

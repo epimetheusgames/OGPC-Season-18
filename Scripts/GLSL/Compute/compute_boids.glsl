@@ -44,6 +44,20 @@ layout(binding = 5) restrict buffer Output {
 }
 outputs;
 
+layout(binding = 6) restrict buffer BoidsRotations {
+    float data[];
+} 
+rotations;
+
+float angle_difference(float from, float to) {
+    return mod(abs(from - to) + 3.1415, 2 * 3.1415) - 3.1415;
+}
+
+float better_angle_lerp(float a, float b, float decay, float delta) {
+    decay = (decay * 25.0);
+    return b + (angle_difference(b, a)) * exp(-decay * delta);
+}
+
 // The code we want to execute in each invocation
 void main() {
 	// gl_GlobalInvocationID.x uniquely identifies this invocation across all work groups
@@ -82,10 +96,10 @@ void main() {
 		pos_avg += boid_position;
 		neighboring_boids += 1;
 
-		if (distance(current_boid_position, boid_position) < protected_dist) {
-			close_dir += current_boid_position - boid_position;
-		}
-	}
+        if (distance(current_boid_position, boid_position) < protected_dist) {
+            close_dir += normalize(current_boid_position - boid_position) * 1.0;
+        }
+    }
 
 	if (neighboring_boids > 0) {
 		vel_avg /= neighboring_boids;
@@ -120,6 +134,7 @@ void main() {
 		total_velocity = (total_velocity / speed) * min_speed; 
 	}
 
-	outputs.data[id * 2 + 0] = total_velocity.x;
-	outputs.data[id * 2 + 1] = total_velocity.y;
+    outputs.data[id * 3 + 0] = total_velocity.x;
+    outputs.data[id * 3 + 1] = total_velocity.y;
+    outputs.data[id * 3 + 2] = rotations.data[id];
 }

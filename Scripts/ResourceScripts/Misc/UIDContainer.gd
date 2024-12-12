@@ -1,3 +1,4 @@
+# Owned by: carsonetb
 @tool
 extends Resource
 class_name UID
@@ -9,8 +10,7 @@ var game_load_error: Error
 func _init() -> void:
 	resource_local_to_scene = true
 	
-	if uid == -1:
-		call_deferred("refresh_uid")
+	call_deferred("check_uid")
 
 # This has to be in here because I can't find a way to access the scenetree from inside a resource.
 func _save_global_config(content: GlobalSave) -> void:
@@ -26,6 +26,10 @@ func _load_global_config() -> GlobalSave:
 	var game_save: GlobalSave = blank_config.get_value("Main", "GlobalSave")
 	
 	return game_save
+
+func check_uid() -> void:
+	if uid == -1:
+		call_deferred("refresh_uid")
 
 func refresh_uid() -> void:
 	var game_save: GlobalSave = _load_global_config()

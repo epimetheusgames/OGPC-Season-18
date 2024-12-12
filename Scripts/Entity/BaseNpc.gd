@@ -1,3 +1,4 @@
+# code owned by sequoia
 ## Base class for all NPCs (including enemies!)
 
 class_name NPC

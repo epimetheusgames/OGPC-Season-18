@@ -1,3 +1,8 @@
+## Fabrik (Forwards and backwards reaching inverse kinematics)
+## is a way of doing IK that works by constraining points to a certain distance from each other
+# Owned by: kaitaobenson
+
+
 class_name FabrikRopeComponent
 extends Node2D
 

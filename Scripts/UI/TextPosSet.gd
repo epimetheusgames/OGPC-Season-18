@@ -1,3 +1,4 @@
+# code made by sequoia
 extends Node2D
 
 signal dialog_option_chosen

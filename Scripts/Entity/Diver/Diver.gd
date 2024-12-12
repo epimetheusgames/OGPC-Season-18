@@ -1,3 +1,6 @@
+## The player of the game.
+# Owned by: kaitaobenson
+
 class_name Diver
 extends Entity
 
@@ -14,7 +17,6 @@ var player_state : STATE_ENUM
 @onready var diver_combat: DiverCombat = $"Combat"
 @onready var diver_flashlight: DiverFlashlight = $"Flashlight"
 
-@export var water_surface_height: int
 @export var water_manager: Node2D
 
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
@@ -22,6 +24,7 @@ var player_state : STATE_ENUM
 func _ready() -> void:
 	set_state("SWIMMING")
 	Global.player = self
+	$BuoyancyComponent.waves = water_manager
 
 func _physics_process(delta: float):
 	velocity = diver_movement.get_velocity()
