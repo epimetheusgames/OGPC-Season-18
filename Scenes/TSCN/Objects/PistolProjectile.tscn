@@ -12,6 +12,7 @@ radius = 9.0
 size = Vector2(4, 10)
 
 [node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 0
 mass = 0.1
 linear_damp = 3.0
 
