@@ -1,6 +1,14 @@
 class_name Diver
 extends Entity
 
+enum STATE_ENUM {
+	SWIMMING,
+	IN_SUBMARINE,
+	DRIVING_SUBMARINE,
+}
+
+var player_state : STATE_ENUM
+
 @onready var diver_movement: DiverMovement = $"Movement"
 @onready var diver_animation: DiverAnimation = $"Animation"
 @onready var diver_combat: DiverCombat = $"Combat"
@@ -12,6 +20,7 @@ extends Entity
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
 
 func _ready() -> void:
+	set_state("SWIMMING")
 	Global.player = self
 
 func _physics_process(delta: float):
@@ -26,3 +35,16 @@ func _physics_process(delta: float):
 
 func get_diver_movement() -> DiverMovement:
 	return diver_movement
+
+func set_state(state : String):
+	if state == "SWIMMING":
+		player_state = STATE_ENUM.SWIMMING
+	elif state == "IN_SUBMARINE":
+		player_state = STATE_ENUM.IN_SUBMARINE
+	elif state == "DRIVING_SUBMARINE":
+		player_state = STATE_ENUM.DRIVING_SUBMARINE
+	else:
+		print("ERROR: Player state " + state + " not found")
+
+func get_state() -> String:
+	return STATE_ENUM.keys()[player_state]
