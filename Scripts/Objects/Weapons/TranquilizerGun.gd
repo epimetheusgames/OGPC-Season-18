@@ -27,6 +27,9 @@ func _process(delta: float) -> void:
 			$TranquilizerGunSprite.play("Flip")
 		elif !(rad_to_deg(global_rotation) < -90 || rad_to_deg(global_rotation) > 90) && flipped:
 			$TranquilizerGunSprite.play("Flip")
+	
+	if !$TranquilizerGunSprite.animation == "Shoot":
+		shooting = false
 
 func attack() -> void:
 	if !$TranquilizerGunSprite.animation == "Shoot" && !shooting:

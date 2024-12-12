@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=51 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
@@ -12,8 +12,10 @@
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Pixelize.gd" id="5_t6m55"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="6_sqcin"]
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="10_gbtle"]
+[ext_resource type="PackedScene" uid="uid://cdg0gyclxvqs4" path="res://Scenes/TSCN/Demos/AutoPolygonTextureDemo.tscn" id="11_f0f4i"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="12_oa2ar"]
 [ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/ShadowPipeline.gd" id="16_0m2co"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
@@ -32,12 +34,27 @@ script = ExtResource("17_j8dce")
 uid = 1830
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
-vertices = PackedVector2Array(520.438, 657.188, 552.367, 538, 1171.31, 225.5, 1679.17, 824.203, 650.25, 1024.78, 4554, 4036.29, 4554, 381.508, 11582, -361, 11582, 11377.7, -6892.83, 10922.2, -2824.69, 3823.67, -6702.17, -361, -2385.55, 1103.22, 4537.23, 378.758, 3638.01, 3049.39, 1936.48, 912.156, 1822.42, 471.609, 1856.47, 1566.85, 1765.99, 886.273, 520.438, 418.812, 948.922, 2728.79, -1407.52, 2635.57, 933.281, 2717.36, 1772.56, 1488.55, -1651.53, 1875.12, 653.398, 1041.51, 433.188, 744.438, 314, 776.367, 194.812, 744.438, 107.562, 657.188, 75.6328, 538, 107.562, 418.812, 433.188, 331.562, 1180.48, 212.797, 194.812, 331.562, 314, 299.633)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(5, 8, 9, 10), PackedInt32Array(10, 9, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 18, 15, 14), PackedInt32Array(2, 1, 19), PackedInt32Array(20, 17, 14), PackedInt32Array(20, 14, 21), PackedInt32Array(22, 20, 21), PackedInt32Array(23, 22, 21, 24, 25, 3), PackedInt32Array(3, 25, 4), PackedInt32Array(26, 0, 4), PackedInt32Array(27, 26, 4), PackedInt32Array(27, 4, 12, 28), PackedInt32Array(29, 28, 12), PackedInt32Array(30, 29, 12), PackedInt32Array(31, 30, 12, 11), PackedInt32Array(2, 19, 32, 33), PackedInt32Array(34, 31, 11), PackedInt32Array(33, 32, 35), PackedInt32Array(13, 16, 33), PackedInt32Array(35, 34, 11), PackedInt32Array(7, 6, 13), PackedInt32Array(11, 7, 13, 33), PackedInt32Array(35, 11, 33)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_57j0e"]
-radius = 228.02
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ytpl8"]
+load_path = "res://.godot/imported/WallTexture.png-6996c64947de4685171d9de8914e92d7.ctex"
+
+[sub_resource type="Gradient" id="Gradient_spb85"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5ndqp"]
+gradient = SubResource("Gradient_spb85")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1377u"]
+shader = ExtResource("12_oa2ar")
+shader_parameter/points = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 947, 2715, -1376, 2765, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
+shader_parameter/num_points = 14
+shader_parameter/global_position = Vector2(0, 0)
+shader_parameter/fade_width = 115
+shader_parameter/tex_scale = 103.0
+shader_parameter/in_tex = SubResource("GradientTexture1D_5ndqp")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_ytpl8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drxv4"]
 shader = ExtResource("11_wv41s")
@@ -194,20 +211,13 @@ navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = ExtResource("1_2ttir")
 metadata/_edit_lock_ = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Level/NavigationRegion2D"]
+[node name="AutoPolygon" parent="LevelContainer/Level/NavigationRegion2D" instance=ExtResource("11_f0f4i")]
+material = SubResource("ShaderMaterial_1377u")
+position = Vector2(0, 0)
+polygon = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 947, 2715, -1376, 2765, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
+child_of_navigation = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Level/NavigationRegion2D/StaticBody2D"]
-polygon = PackedVector2Array(1716, 586, 1846, 1564, 947, 2715, 1783, 1491, 1661, 623)
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="LevelContainer/Level/NavigationRegion2D/StaticBody2D"]
-polygon = PackedVector2Array(1814, 479, 1184, 225, 1732, 871, 1923, 900)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Level/NavigationRegion2D/StaticBody2D"]
-position = Vector2(314, 538)
-shape = SubResource("CircleShape2D_57j0e")
-
-[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="LevelContainer/Level/NavigationRegion2D/StaticBody2D"]
-polygon = PackedVector2Array(642, 1035, -1664, 1869, -1415, 2645, 3645, 3060, 4544, 390, 4544, 4026, -2813, 3814, -2377, 1113)
+[node name="Line2D" type="Line2D" parent="LevelContainer/Level/NavigationRegion2D/AutoPolygon"]
 
 [node name="Waves" parent="LevelContainer/Level" node_paths=PackedStringArray("diver") instance=ExtResource("10_gbtle")]
 position = Vector2(-4418, -143)

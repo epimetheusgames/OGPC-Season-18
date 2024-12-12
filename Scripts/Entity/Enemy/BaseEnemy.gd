@@ -72,6 +72,7 @@ func _take_damage(new_health) -> void:
 		queue_free()
 
 func _target_reached() -> void:
+	reached_target = true
 	if wander_state == WANDER_MODE.WANDERING_TO_POINT:
 		wander_state = WANDER_MODE.WANDER_POINT_REACHED
 
