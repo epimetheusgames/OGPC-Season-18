@@ -6,7 +6,8 @@
 
 [node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_3od1n")
-dialog_hitbox_size = 20
+dialog_hitbox_size = 100
+dialog_area = NodePath("DialogHitbox")
 dialog_speed = 10
 talking_sound = "res://Assets/Sound/SFX/TestTalkSFX.wav"
 
