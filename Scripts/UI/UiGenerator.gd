@@ -35,6 +35,7 @@ var keybind_config_data
 		button_offset_x = val
 		reinitialize_ui()
 
+# code made by sequoia
 # Controls the location of the first entry
 @export var starting_location := Vector2(0,0):
 	set(val):
