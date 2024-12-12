@@ -5,6 +5,9 @@
 
 [node name="Krill" type="CharacterBody2D"]
 script = ExtResource("1_5mwas")
+sine_height = 50
+sine_speed = 0.1
 
 [node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(119, 61)
 texture = ExtResource("1_ubv3t")

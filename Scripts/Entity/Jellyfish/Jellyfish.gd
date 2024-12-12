@@ -37,6 +37,9 @@ func _process(delta: float) -> void:
 	# Decay speed only if it's above BASE_SPEED
 	if current_speed > BASE_SPEED:
 		current_speed = lerp(current_speed, BASE_SPEED, BOOST_DECAY_RATE * delta)
+	
+	if position.distance_to(target_position) < 10:
+		_target_reached()
 
 func _physics_process(delta: float) -> void:
 	time_since_boost += delta

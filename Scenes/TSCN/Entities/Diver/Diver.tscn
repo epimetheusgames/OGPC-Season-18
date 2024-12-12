@@ -97,6 +97,7 @@ height = 124.0
 radius = 48.0417
 
 [node name="Diver" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_1l6ma")
 uid = SubResource("Resource_3ikhh")
 

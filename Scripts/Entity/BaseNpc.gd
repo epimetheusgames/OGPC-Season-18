@@ -7,6 +7,8 @@ extends Entity
 @export_node_path("Area2D") var dialog_area
 # Dialog will be undertale-style rectangle thingies with text, and funny beeping sounds 
 
+var doo_doo
+
 # Make dialog name in dialog.json this name
 @export var npc_name:String
 
@@ -37,12 +39,13 @@ func _npc_process(delta: float) -> void:
 	_entity_process(delta)
 
 func touching_bodies() -> bool:
-	var bodies = dialog_area.get_overlapping_bodies()
+	var bodies = get_node(dialog_area).get_overlapping_bodies()
 	#omg functional programming moment (lambdas)
+	doo_doo = bodies
 	bodies = bodies.filter(func(node): return node is CharacterBody2D)
 	print("chat are the bodies finna touching the npc")
 	print(bodies)
-	return bodies.length>0
+	return bodies.size()>0
 func _option_chosen():
 	current_location+="["+String(Global.dialog_core.response)+"][0]"
 	current_location_responses+="["+String(Global.dialog_core.response)+"][1]"
@@ -57,15 +60,12 @@ func _ready() -> void:
 func deferred_ready():
 	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
 	Global.dialog_text_node.dialog_option_chosen.connect(_option_chosen)
+	#doo_doo = 
+	if(get_node("Hitbox").is_node_ready()):
+		do_that_thingy()
 	get_node("Hitbox").ready.connect(do_that_thingy)
 
 func do_that_thingy() -> void:
-	#hitbox for interacting with npc, you shouldnt need to be touching them to talk with them
-	var dialog_area = get_node("DialogHitbox")
-	var dialog_hitbox = CollisionShape2D.new()
-	dialog_hitbox.shape = RectangleShape2D.new()
-	dialog_hitbox.shape.size = get_node("Hitbox").size + Vector2(dialog_hitbox_size,dialog_hitbox_size)
-	dialog_area.add_child(dialog_hitbox)
 	Global.KeyactionHandler.interact.connect(try_trigger_talking)
 func die() -> void:
 	#play some skibidi death animation or something
