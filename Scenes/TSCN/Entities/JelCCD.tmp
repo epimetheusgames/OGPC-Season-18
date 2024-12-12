@@ -12,7 +12,7 @@
 script = ExtResource("2_5x2qs")
 health = 10
 damage = 1
-base_speed = 2.0
+base_speed = 3.0
 agressiveness = 0.671
 attack_distance = 150.0
 closest_distance = 100.0

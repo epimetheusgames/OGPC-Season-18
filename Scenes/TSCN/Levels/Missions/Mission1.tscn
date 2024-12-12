@@ -35,6 +35,8 @@ script = ExtResource("17_j8dce")
 uid = 1830
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
+vertices = PackedVector2Array(11582, -361, 11582, 11377.7, 2120.62, 1529.14, 1887.39, 622.469, 1808.75, 2150.84, -6892.83, 10922.2, 950.133, 2724.93, -1391.83, 2775.34, -6702.17, -361, -427.758, 698.648, 917.703, 688.539, -412.328, 701.727, 1839.83, 611, 1780.78, 1504.39, 1176.46, 2361.44, -341.711, 2440.75, 913.406, 700.891, 1856.81, 611, 1818.12, 616.156, 1789, 620.039)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 2, 1), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(7, 6, 5), PackedInt32Array(7, 5, 8, 9), PackedInt32Array(9, 8, 0), PackedInt32Array(10, 11, 9, 0, 12), PackedInt32Array(13, 14, 15, 11, 16), PackedInt32Array(10, 16, 11), PackedInt32Array(0, 3, 17), PackedInt32Array(12, 18, 19, 10), PackedInt32Array(0, 17, 12)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ytpl8"]
@@ -220,8 +222,6 @@ material = SubResource("ShaderMaterial_1377u")
 position = Vector2(0, 0)
 polygon = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 947, 2715, -1376, 2765, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
 child_of_navigation = true
-
-[node name="Line2D" type="Line2D" parent="LevelContainer/Level/NavigationRegion2D/AutoPolygon"]
 
 [node name="Waves" parent="LevelContainer/Level" node_paths=PackedStringArray("diver") instance=ExtResource("10_gbtle")]
 position = Vector2(-4418, -143)
