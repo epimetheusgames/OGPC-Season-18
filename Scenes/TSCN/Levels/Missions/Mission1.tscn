@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=53 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="22_bmqry"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yo3nw"]
@@ -221,8 +222,6 @@ position = Vector2(0, 0)
 polygon = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 947, 2715, -1376, 2765, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
 child_of_navigation = true
 
-[node name="Line2D" type="Line2D" parent="LevelContainer/Level/NavigationRegion2D/AutoPolygon"]
-
 [node name="Waves" parent="LevelContainer/Level" node_paths=PackedStringArray("diver") instance=ExtResource("10_gbtle")]
 position = Vector2(-4418, -143)
 diver = NodePath("../../Player/Diver")
@@ -262,19 +261,17 @@ position = Vector2(462, 1027)
 
 [node name="BoidsGroup" type="Node" parent="LevelContainer/Entities" node_paths=PackedStringArray("boids_scene")]
 script = ExtResource("15_at1j7")
-num_boids = 10
+num_boids = 1000
 spawn_position_node_path = NodePath("../BoidsSpawnPos")
 boids_scene = NodePath("../Boid")
 
 [node name="BoidsSpawnPos" type="Node2D" parent="LevelContainer/Entities"]
-position = Vector2(1224, 1021)
+position = Vector2(904, 1253)
 
 [node name="Boid" parent="LevelContainer/Entities" instance=ExtResource("16_a7n5p")]
 modulate = Color(0.720003, 0.778689, 0.920294, 1)
+z_index = 10
 uid = SubResource("Resource_fubrg")
-
-[node name="FishSprite" parent="LevelContainer/Entities/Boid" index="0"]
-texture = null
 
 [node name="WallRaycast" parent="LevelContainer/Entities/Boid" index="1"]
 target_position = Vector2(0, 400)
@@ -285,6 +282,15 @@ protected_dist = 20.0
 avoid_factor = 0.7
 turn_factor = 3.5
 min_speed = 10.0
+
+[node name="BuoyancyComponent" type="Node" parent="LevelContainer/Entities/Boid" node_paths=PackedStringArray("center_of_mass", "waves")]
+script = ExtResource("21_pr3qq")
+center_of_mass = NodePath("..")
+waves = NodePath("../../../Level/Waves")
+gravity = 20
+buoyancy_accel = 1.0
+max_buoyancy_vel = 10.0
+component_container = NodePath("..")
 
 [node name="ShadowPipeline" type="Node" parent="." node_paths=PackedStringArray("level_container", "camera")]
 script = ExtResource("16_0m2co")

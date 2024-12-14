@@ -73,15 +73,13 @@ func _take_damage(new_health) -> void:
 
 func _target_reached() -> void:
 	reached_target = true
-	if wander_state == WANDER_MODE.WANDERING_TO_POINT:
-		wander_state = WANDER_MODE.WANDER_POINT_REACHED
+	wander_state = WANDER_MODE.WANDER_POINT_REACHED
 
 func _process(delta: float) -> void:
 	_enemy_process(delta)
 
 func _enemy_process(delta: float) -> void:
 	_npc_process(delta)
-	
 	
 	if num_players_in_area == 0:
 		player_in_area = false
@@ -171,12 +169,13 @@ func _update_target_position():
 func _update_wander_point():
 	var valid_point_found := false
 	var space_state := get_world_2d().direct_space_state
+	var points_tested := 0
 	
 	while !valid_point_found:
 		var rng := RandomNumberGenerator.new()
 		var random_direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
 		
-		if settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.RANDOM_POSITION:
+		if settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.RANDOM_POSITION || points_tested > 40:
 			var random_multiplier := rng.randf_range(0, settings.wander_range)
 			target_position = global_position + velocity.normalized() * settings.wander_range / 4 + random_direction * random_multiplier
 			
@@ -196,6 +195,8 @@ func _update_wander_point():
 			if result:
 				valid_point_found = true
 				target_position = result["position"] + result["normal"] * 50
+		
+		points_tested += 1
 		
 	reached_target = false
 	wander_state = WANDER_MODE.WANDERING_TO_POINT

@@ -26,7 +26,8 @@ There are a few variables that can be used by classes inheriting the Enemy class
 - player_in_area (bool): Self-explanatory
 - player_visible (bool): Self-explanatory
 - reached_target (bool): Inheriting classes use this to tell the Enemy class if
-		   	 if they have reached the target navigation position.
+		   	 if they have reached the target navigation position. Also call the
+			 _target_reached function.
 - wander_state (enum): Self-explanatory
 - num_players_in_area (int): The ammount of players that have been detected and
 				 are visible.
