@@ -207,7 +207,7 @@ uid = SubResource("Resource_pwaxv")
 [node name="Camera2D" type="Camera2D" parent="LevelContainer/Player/Diver"]
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("22_bmqry")]
-position = Vector2(1063, 1114)
+position = Vector2(968, 1368)
 
 [node name="Level" type="Node2D" parent="LevelContainer"]
 
@@ -305,6 +305,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="World" type="SubViewport" parent="ShadowPipeline/WorldContainer"]
 handle_input_locally = false
