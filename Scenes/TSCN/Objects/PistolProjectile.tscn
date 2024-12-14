@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d24oi85rw114u"]
+[gd_scene load_steps=8 format=3 uid="uid://d24oi85rw114u"]
 
 [ext_resource type="Script" path="res://Scripts/Objects/PistolProjectile.gd" id="1_0erac"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_yd357"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="3_mdrr1"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t1ndh"]
+bounce = 0.37
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxw75"]
 radius = 9.0
@@ -11,9 +15,10 @@ radius = 9.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3pv1"]
 size = Vector2(4, 10)
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="PistolProjectile" type="RigidBody2D"]
 collision_layer = 0
 mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_t1ndh")
 linear_damp = 3.0
 
 [node name="PistolProjectile" type="Area2D" parent="."]
@@ -40,5 +45,9 @@ shape = SubResource("CircleShape2D_sxw75")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_b3pv1")
+
+[node name="BuoyancyComponent" type="Node" parent="." node_paths=PackedStringArray("center_of_mass")]
+script = ExtResource("3_mdrr1")
+center_of_mass = NodePath("..")
 
 [connection signal="area_entered" from="PistolProjectile/EnemyDetector" to="PistolProjectile" method="_on_area_entered"]

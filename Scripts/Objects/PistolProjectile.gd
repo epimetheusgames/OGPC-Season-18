@@ -1,9 +1,22 @@
 class_name PistolProjectile
 extends BaseBullet
 
+@onready var buoyancy_component: BuoyancyComponent = get_node("../BuoyancyComponent")
+
 func _ready():
 	set_damage($AttackBoxComponent.damage)
 	set_velocity(Vector2.ZERO)
+
+func _process(delta: float) -> void:
+	# TODO: This is really bad, fix it at some point.
+	# (By this I mean this whole goddamn function it's horrible)
+	buoyancy_component.waves = get_node("../../../Level/Waves")
+	
+	if get_parent() is RigidBody2D:
+		if buoyancy_component.is_in_air:
+			get_parent().linear_damp = 0
+		else:
+			get_parent().linear_damp = 3
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Enemy:

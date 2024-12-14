@@ -15,6 +15,7 @@ extends BaseComponent
 
 var polygon: Polygon2D
 var bouyancy_velocity := Vector2.ZERO
+var is_in_air := false
 
 func _ready() -> void:
 	component_name = "BuoyancyComponent"
@@ -38,11 +39,17 @@ func _physics_process(delta: float) -> void:
 	var current_water_height := polygon.polygon[x_index].y + polygon.global_position.y
 	
 	if center_of_mass.global_position.y < current_water_height:
+		is_in_air = true
 		bouyancy_velocity.y += gravity * delta * 60
 	elif abs(bouyancy_velocity.y) < max_buoyancy_vel:
+		is_in_air = false
 		bouyancy_velocity = bouyancy_velocity * 0.97
 		bouyancy_velocity.y -= buoyancy_accel * delta * 60
 	else:
+		is_in_air = false
 		bouyancy_velocity = bouyancy_velocity * 0.97
 	
-	center_of_mass.position += bouyancy_velocity * delta
+	if !center_of_mass is RigidBody2D:
+		center_of_mass.position += bouyancy_velocity * delta
+	else: # Special physics for rigidbodies.
+		(center_of_mass as RigidBody2D).apply_central_force(bouyancy_velocity / 4)
