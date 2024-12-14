@@ -48,17 +48,15 @@ func _physics_process(delta: float) -> void:
 		time_since_boost = 0.0
 		boost()
 	
-	if time_since_boost < 2.0 && time_since_boost > 1.0:
-		update_targets()
+	update_targets()
 	
 	velocity = Util.better_vec2_lerp(velocity, target_velocity, 0.1, delta)
 	global_rotation = lerp_angle(global_rotation, target_rotation, ROTATION_SPEED * delta)
 	
-	print(velocity)
 	global_position += velocity * delta * 60
 
 func boost():
-	current_speed = base_speed * BOOST_MULTIPLIER
+	current_speed = target_speed * BOOST_MULTIPLIER
 	boost_timer = BOOST_DURATION
 	
 	tentacles.boost(1.0)
