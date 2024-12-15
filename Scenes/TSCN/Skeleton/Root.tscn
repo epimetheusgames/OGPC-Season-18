@@ -69,6 +69,7 @@ script = ExtResource("9_rhklt")
 [node name="GameContainer" type="Node" parent="Game"]
 
 [node name="GameUIOverlay" type="Control" parent="Game"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
