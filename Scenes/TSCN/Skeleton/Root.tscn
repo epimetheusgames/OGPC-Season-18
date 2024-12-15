@@ -78,10 +78,10 @@ offset_bottom = 40.0
 script = ExtResource("8_7spfj")
 
 [node name="DialogTextureBG" type="TextureRect" parent="Game/GameUIOverlay/DialogText"]
-offset_left = 1083.0
-offset_top = -191.0
-offset_right = 1641.0
-offset_bottom = -26.0
+offset_left = 207.0
+offset_top = 566.0
+offset_right = 765.0
+offset_bottom = 731.0
 texture = SubResource("PlaceholderTexture2D_o714b")
 
 [node name="DialogTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/DialogText"]

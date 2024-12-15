@@ -19,9 +19,9 @@ var doo_doo
 var dialog_thingy
 
 #the current array path to the next dialog
-var current_location:String = 'dialog["dialog"]['+npc_name+']'
+@onready var current_location:String = 'dialog["dialog"]["'+npc_name+'"]'
 #the current array path to the next set of responses
-var current_location_responses:String = 'dialog["dialog"]['+npc_name+']'
+@onready var current_location_responses:String = 'dialog["dialog"]["'+npc_name+'"]'
 
 # Dialog beep sound thingy 
 @export_file("*.wav") var talking_sound
@@ -43,14 +43,15 @@ func touching_bodies() -> bool:
 	#omg functional programming moment (lambdas)
 	doo_doo = bodies
 	bodies = bodies.filter(func(node): return node is CharacterBody2D)
+	bodies.remove_at(0)
 	print("chat are the bodies finna touching the npc")
 	print(bodies)
 	return bodies.size()>0
 func _option_chosen():
-	current_location+="["+String(Global.dialog_core.response)+"][0]"
-	current_location_responses+="["+String(Global.dialog_core.response)+"][1]"
+	current_location+="["+str(Global.dialog_core.response)+"][0][1][0]"
+	current_location_responses+= "["+str(Global.dialog_core.response)+"][1]"
 	Global.dialog_core.play_dialog(Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location+';'),dialog_speed,Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location_responses+';'))
-func _get_dialogue():
+func _get_dialog():
 	dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text())
 	dialog = dialog_json.data
 
@@ -58,6 +59,8 @@ func _ready() -> void:
 	call_deferred("deferred_ready")
 
 func deferred_ready():
+	dialog_json = JSON.new()
+	_get_dialog()
 	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
 	Global.dialog_text_node.dialog_option_chosen.connect(_option_chosen)
 	#doo_doo = 
@@ -75,7 +78,7 @@ func try_trigger_talking() -> void:
 	if(touching_bodies()):
 		trigger_talking()
 func trigger_talking() -> void:
-	#index 0 is the dialogue, [0][1] [0][2] [0][3] and [0][4] are responses
-	Global.dialog_core.play_dialog(dialog["dialog"][npc_name][0],dialog_speed,dialog["dialog"][npc_name][0])
+	#index [0] is the dialogue, [1][0] [1][1] [1][2] and  etc are responses
+	Global.dialog_core.play_dialog(dialog["dialog"][npc_name][0],dialog_speed,dialog["dialog"][npc_name][1])
 
 	
