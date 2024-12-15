@@ -49,5 +49,8 @@ shape = SubResource("RectangleShape2D_b3pv1")
 [node name="BuoyancyComponent" type="Node" parent="." node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("3_mdrr1")
 center_of_mass = NodePath("..")
+gravity = 32
+buoyancy_accel = 2.0
+max_buoyancy_vel = 25.0
 
 [connection signal="area_entered" from="PistolProjectile/EnemyDetector" to="PistolProjectile" method="_on_area_entered"]

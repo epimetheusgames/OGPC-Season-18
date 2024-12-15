@@ -98,7 +98,7 @@ shader_parameter/color = Vector4(0, 0, 0, 0.9)
 shader_parameter/angle = 222.128
 shader_parameter/len = 480.851
 shader_parameter/fade_margin = 5.0
-shader_parameter/blur = 12.0
+shader_parameter/blur = 6.0
 shader_parameter/screen_texture = SubResource("ViewportTexture_425di")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_e5nkv"]
@@ -186,6 +186,12 @@ position = Vector2(0, 0)
 polygon = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 947, 2715, -1376, 2765, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
 child_of_navigation = true
 
+[node name="Polygon" parent="LevelContainer/Level/NavigationRegion2D/AutoPolygon/Collision" index="0"]
+polygon = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 947, 2715, -1376, 2765, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
+
+[node name="LightOccluder" parent="LevelContainer/Level/NavigationRegion2D/AutoPolygon" index="1"]
+visible = true
+
 [node name="Waves" parent="LevelContainer/Level" node_paths=PackedStringArray("diver") instance=ExtResource("10_gbtle")]
 position = Vector2(-4418, -143)
 diver = NodePath("../../Player/Diver")
@@ -225,7 +231,7 @@ position = Vector2(462, 1027)
 
 [node name="BoidsGroup" type="Node" parent="LevelContainer/Entities" node_paths=PackedStringArray("boids_scene")]
 script = ExtResource("15_at1j7")
-num_boids = 1000
+num_boids = 200
 spawn_position_node_path = NodePath("../BoidsSpawnPos")
 boids_scene = NodePath("../Boid")
 
@@ -405,5 +411,6 @@ layer = 3
 
 [node name="DevPanel" parent="UI" instance=ExtResource("1_6r47m")]
 
+[editable path="LevelContainer/Level/NavigationRegion2D/AutoPolygon"]
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Entities/Boid"]

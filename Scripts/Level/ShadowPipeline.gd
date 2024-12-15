@@ -51,7 +51,9 @@ func duplicate_occluder(occluder, on):
 
 func _recursively_search_for_occluders(root: Node):
 	for node in root.get_children():
+		print(node.name, " ", node.get_class())
 		if node is LightOccluder2D:
+			print("FOUND!")
 			if node.occluder_light_mask == 1:
 				static_occluders.append(node)
 			if node.occluder_light_mask == 2:
