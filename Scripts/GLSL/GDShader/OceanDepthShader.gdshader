@@ -11,7 +11,7 @@ uniform float height = 1.0;
 void fragment() {
 	if (blend_alpha) {
 		float depth = !always_top ? UV.y : 0.0;
-		COLOR.a = mix(0.6, max_alpha, clamp(depth * height, 0.0, 1.0));
+		COLOR.a = mix(0.8, max_alpha, clamp(depth * height, 0.0, 1.0));
 	}
 }
 

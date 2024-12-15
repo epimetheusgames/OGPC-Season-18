@@ -85,6 +85,8 @@ func _process(delta: float) -> void:
 	for i in range(spring_positions.size()):
 		$Line2D.polygon[i] = spring_positions[i] + Vector2(diver.global_position.x + 1000 - global_position.x, bg_waves_total[i])
 	
+	var end_p1 = $Line2D.polygon[-1]
+	var end_p2 = $Line2D.polygon[-2]
 	$Debug.points = $Line2D.polygon
 	$Line2D2.polygon = $Line2D.polygon
 	$Line2D3.polygon = $Line2D.polygon
@@ -92,6 +94,19 @@ func _process(delta: float) -> void:
 	$Line2D5.polygon = $Line2D.polygon
 	$Line2D6.polygon = $Line2D.polygon
 	$Line2D7.polygon = $Line2D.polygon
+	
+	$Line2D2.polygon[-1] = end_p1 - ($Line2D2.position - $Line2D.position)
+	$Line2D2.polygon[-2] = end_p2 - ($Line2D2.position - $Line2D.position)
+	$Line2D3.polygon[-1] = end_p1 - ($Line2D3.position - $Line2D.position)
+	$Line2D3.polygon[-2] = end_p2 - ($Line2D3.position - $Line2D.position)
+	$Line2D4.polygon[-1] = end_p1 - ($Line2D4.position - $Line2D.position)
+	$Line2D4.polygon[-2] = end_p2 - ($Line2D4.position - $Line2D.position)
+	$Line2D5.polygon[-1] = end_p1 - ($Line2D5.position - $Line2D.position)
+	$Line2D5.polygon[-2] = end_p2 - ($Line2D5.position - $Line2D.position)
+	$Line2D6.polygon[-1] = end_p1 - ($Line2D6.position - $Line2D.position)
+	$Line2D6.polygon[-2] = end_p2 - ($Line2D6.position - $Line2D.position)
+	$Line2D7.polygon[-1] = end_p1 - ($Line2D7.position - $Line2D.position)
+	$Line2D7.polygon[-2] = end_p2 - ($Line2D7.position - $Line2D.position)
 	
 	#$StaticBody2D.position = $Line2D.position + $Line2D.polygon[boat_index + 3] - Vector2(0, 0)
 	#$StaticBody2D2.position = $Line2D.position + $Line2D.polygon[boat_index + 30] - Vector2(0, 0)
