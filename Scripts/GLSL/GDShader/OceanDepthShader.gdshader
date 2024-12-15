@@ -4,6 +4,16 @@ uniform vec4 water_col;
 uniform vec4 shallow_water_col;
 uniform sampler2D depth_color_tex : filter_linear;
 uniform bool always_top = false;
+uniform bool blend_alpha = false;
+uniform float max_alpha = 0.2;
+uniform float height = 1.0;
+
+void fragment() {
+	if (blend_alpha) {
+		float depth = !always_top ? UV.y : 0.0;
+		COLOR.a = mix(0.6, max_alpha, clamp(depth * height, 0.0, 1.0));
+	}
+}
 
 void light() {
 	vec4 light = LIGHT_COLOR * LIGHT_ENERGY;

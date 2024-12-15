@@ -43,6 +43,8 @@ func _process(delta: float) -> void:
 		duplicate_occluder(occluder, $MovingShadowBlurPass/OccludersContainer)
 	
 func duplicate_occluder(occluder, on):
+	if !is_instance_valid(occluder):
+		return
 	var new_occluder = occluder.duplicate()
 	new_occluder.position = occluder.global_position + occluder_offset - camera.global_position
 	new_occluder.rotation = occluder.global_rotation

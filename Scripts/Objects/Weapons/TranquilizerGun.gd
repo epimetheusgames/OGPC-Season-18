@@ -39,6 +39,7 @@ func attack() -> void:
 		var bullet = loaded_bullet.instantiate()
 		diver.get_parent().add_child(bullet, true)
 		bullet.linear_velocity  = (Vector2.from_angle(global_rotation) * bullet_velocity * 60 + diver.velocity)
+		bullet.rotation = global_rotation + PI / 2.0
 		bullet.global_position = $BulletShootPosition.global_position
 
 func _on_tranquilizer_gun_sprite_animation_finished() -> void:
