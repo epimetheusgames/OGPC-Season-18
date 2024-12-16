@@ -171,6 +171,9 @@ func _update_wander_point():
 	var space_state := get_world_2d().direct_space_state
 	var points_tested := 0
 	
+	if settings.wander_range == 0:
+		return
+	
 	while !valid_point_found:
 		var rng := RandomNumberGenerator.new()
 		var random_direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
