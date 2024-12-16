@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5rb3ffgkimtn"
-path="res://.godot/imported/TranquilizerPistol.png-6d45ce3161b9e72537f094cef8d1843c.ctex"
+uid="uid://dp8fcfs56tdru"
+path="res://.godot/imported/SemiAutoPistolFlip.png-b8b91a6de7b25439cce4e3c53d652cd7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Sprites/Player/TranquilizerPistol.png"
-dest_files=["res://.godot/imported/TranquilizerPistol.png-6d45ce3161b9e72537f094cef8d1843c.ctex"]
+source_file="res://Assets/Art/Sprites/Diver/SemiAutoPistolFlip.png"
+dest_files=["res://.godot/imported/SemiAutoPistolFlip.png-b8b91a6de7b25439cce4e3c53d652cd7.ctex"]
 
 [params]
 

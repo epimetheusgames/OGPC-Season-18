@@ -19,6 +19,7 @@ func _ready() -> void:
 	
 	for i in range(0, palette_image.get_height(), size):
 		for j in range(0, palette_image.get_width(), size):
+			
 			var color: Color = palette_image.get_pixel(j, i)
 			
 			if color.a > 0.0:

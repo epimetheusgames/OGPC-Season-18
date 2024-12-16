@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=54 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
@@ -25,6 +25,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="22_bmqry"]
+[ext_resource type="PackedScene" uid="uid://cjosqlpq56cv6" path="res://Scenes/TSCN/Entities/Entity/Leviathan.tscn" id="26_hqg88"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yo3nw"]
 
@@ -153,8 +154,8 @@ viewport_path = NodePath("ShadowPipeline/WorldShadowBlendPass")
 [node name="Mission1" type="Node2D"]
 
 [node name="Shaders" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("1_s361y")
+quantize_on = false
 
 [node name="Quantize" type="BackBufferCopy" parent="Shaders"]
 rect = Rect2(0, 0, 1920, 1080)
@@ -196,6 +197,9 @@ visible = false
 [node name="DevPanel" parent="UI" instance=ExtResource("1_6r47m")]
 
 [node name="LevelContainer" type="Node2D" parent="."]
+
+[node name="Leviathan" parent="LevelContainer" instance=ExtResource("26_hqg88")]
+position = Vector2(917, 899)
 
 [node name="Player" type="Node2D" parent="LevelContainer"]
 
