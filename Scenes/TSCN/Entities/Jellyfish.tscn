@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=12 format=3 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_5x2qs"]
@@ -36,6 +36,9 @@ bottom_width = 140.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgvvg"]
 size = Vector2(286, 108)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fvllq"]
+polygon = PackedVector2Array(-139, -57, 148, -56, 147, 54, -139, 53)
+
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "health_component")]
 script = ExtResource("1_dd7wo")
 settings = SubResource("Resource_8tk4o")
@@ -57,7 +60,6 @@ color = Color(0.712, 1, 0.46, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(4, 3)
@@ -91,3 +93,7 @@ component_container = NodePath("..")
 script = ExtResource("7_bltm7")
 max_health = 0.0
 component_container = NodePath("..")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_fvllq")
+occluder_light_mask = 2

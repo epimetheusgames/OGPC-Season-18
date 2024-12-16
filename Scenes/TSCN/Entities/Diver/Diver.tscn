@@ -490,6 +490,7 @@ script = ExtResource("9_xqhlv")
 
 [node name="Light" type="PointLight2D" parent="Flashlight"]
 position = Vector2(2, -2)
+range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("10_qg316")
@@ -499,6 +500,7 @@ metadata/_edit_lock_ = true
 visible = false
 position = Vector2(-2.99999, 16)
 scale = Vector2(11.8, 26.8)
+range_item_cull_mask = 3
 texture = ExtResource("12_u28jr")
 
 [node name="PlayerVisualDetectionArea" type="Area2D" parent="."]

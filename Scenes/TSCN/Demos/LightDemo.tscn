@@ -198,7 +198,6 @@ occluder = SubResource("OccluderPolygon2D_gpgg6")
 [node name="Diver" parent="WorldNode2D" node_paths=PackedStringArray("water_manager") instance=ExtResource("4_ij7yc")]
 z_index = 4
 position = Vector2(1267, -164)
-water_surface_height = -150
 water_manager = NodePath("../Waves")
 uid = SubResource("Resource_tgjm2")
 
