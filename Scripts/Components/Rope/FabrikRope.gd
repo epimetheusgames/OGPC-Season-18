@@ -3,7 +3,11 @@
 # Owned by: kaitaobenson
 
 class_name FabrikRope
-extends Rope
+extends BaseRope
+
+func _ready() -> void:
+	component_name = "FabrikRope"
+	_base_component_ready_post()
 
 func _process(delta):
 	pull_toward_anchor2()

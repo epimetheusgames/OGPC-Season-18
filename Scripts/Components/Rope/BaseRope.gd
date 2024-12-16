@@ -2,7 +2,7 @@
 ## Ropes must update 'points' and be go from 'start_node' to 'end_node'
 # Owned by: kaitaobenson
 
-class_name Rope
+class_name BaseRope
 extends BaseComponent
 
 @export var point_amount: int = 100
@@ -21,6 +21,7 @@ var end_pos_on: bool = false
 var points: Array[Vector2]
 
 func _ready():
+	component_name = "BaseRope"
 	points.resize(point_amount)
 	points.fill(Vector2(0, 0))
 	
@@ -29,8 +30,6 @@ func _ready():
 	if end_anchor_node:
 		end_pos_on = true
 	
-	# Base component stuff
-
 func _process(delta: float) -> void:
 	if start_anchor_node:
 		start_pos = start_anchor_node.global_position

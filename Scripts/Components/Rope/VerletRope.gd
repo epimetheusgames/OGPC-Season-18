@@ -3,7 +3,7 @@
 # Owned by: kaitaobenson
 
 class_name VerletRope
-extends Rope
+extends BaseRope
 
 const TIMESTEP: float = 0.1
 
@@ -17,10 +17,14 @@ var verlet_nodes: Array[VerletNode]
 var raycast_query: PhysicsRayQueryParameters2D
 
 func _ready() -> void:
+	component_name = "FabrikRope"
+	
 	raycast_query = PhysicsRayQueryParameters2D.new()
 	
 	verlet_nodes.resize(point_amount)
 	verlet_nodes.fill(VerletNode.new())
+	
+	_base_component_ready_post()
 
 func _process(delta: float) -> void:
 	simulate()  # Simulate Verlet integration
@@ -49,7 +53,6 @@ func simulate():
 		
 		# Update the previous position for the next step
 		node.old_position = temp
-
 
 # Apply constraints such as anchor positions and node separation
 func apply_constraints():
@@ -87,7 +90,6 @@ func apply_constraints():
 		node_1.position += final_translate_1
 		node_2.position += final_translate_2
 
-
 # Collision resolution (with option to disable it)
 func collide_and_translate(origin: Vector2, motion: Vector2) -> Vector2:
 	# If collisions are disabled, just move as normal
@@ -99,7 +101,8 @@ func collide_and_translate(origin: Vector2, motion: Vector2) -> Vector2:
 	raycast_query.collide_with_areas = true
 	raycast_query.collide_with_bodies = true
 	
-	var result: Dictionary = get_world_2d().direct_space_state.intersect_ray(raycast_query)
+	# Only Node2D has get_world_2d, hopefully our parent is a Node2D ...
+	var result: Dictionary = get_parent().get_world_2d().direct_space_state.intersect_ray(raycast_query)
 	
 	if not result:
 		# No collision detected, move as normal
