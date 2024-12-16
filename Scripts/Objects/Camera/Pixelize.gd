@@ -1,3 +1,4 @@
+@tool
 extends BackBufferCopy
 
 @export var shader: Shader
