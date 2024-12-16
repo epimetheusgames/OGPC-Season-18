@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=14 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="8_1a1ie"]
 [ext_resource type="Script" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
 [ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
@@ -62,13 +63,44 @@ metadata/action = ""
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+script = ExtResource("8_1a1ie")
 
 [node name="GameTitle" type="Label" parent="UI/MainMenu"]
 layout_mode = 0
+offset_top = 73.0
 offset_right = 1921.0
-offset_bottom = 132.0
+offset_bottom = 205.0
 theme_override_font_sizes/font_size = 96
 text = "Diving Game Title"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 318.0
+offset_right = 1081.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Start"
+
+[node name="SettingsButton" type="Button" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 414.0
+offset_right = 1081.0
+offset_bottom = 488.0
+theme_override_font_sizes/font_size = 36
+text = "Settings
+"
+
+[node name="QuitButton" type="Button" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 510.0
+offset_right = 1081.0
+offset_bottom = 584.0
+theme_override_font_sizes/font_size = 36
+text = "Quit"
 
 [node name="Game" type="Node" parent="."]
 
@@ -125,3 +157,5 @@ disabled = true
 
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
 [connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]
+[connection signal="button_up" from="UI/MainMenu/StartButton" to="UI/MainMenu" method="_on_start_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/QuitButton" to="UI/MainMenu" method="_on_quit_button_button_up"]
