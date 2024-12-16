@@ -369,9 +369,7 @@ render_target_update_mode = 4
 
 [node name="StaticShadowPass" type="SubViewport" parent="ShadowPipeline"]
 transparent_bg = true
-msaa_2d = 3
 use_debanding = true
-use_hdr_2d = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
@@ -398,7 +396,6 @@ texture = SubResource("ViewportTexture_e5nkv")
 
 [node name="MovingShadowPass" type="SubViewport" parent="ShadowPipeline"]
 transparent_bg = true
-use_hdr_2d = true
 size = Vector2i(1920, 1080)
 
 [node name="TextureRect" type="TextureRect" parent="ShadowPipeline/MovingShadowPass"]
@@ -411,7 +408,6 @@ texture = SubResource("ViewportTexture_noj7m")
 
 [node name="MovingShadowBlurPass" type="SubViewport" parent="ShadowPipeline"]
 transparent_bg = true
-use_hdr_2d = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
