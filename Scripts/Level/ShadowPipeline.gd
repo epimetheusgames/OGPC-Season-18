@@ -43,6 +43,8 @@ func _process(delta: float) -> void:
 		duplicate_occluder(occluder, $MovingShadowBlurPass/OccludersContainer)
 	
 func duplicate_occluder(occluder, on):
+	if !is_instance_valid(occluder):
+		return
 	var new_occluder = occluder.duplicate()
 	new_occluder.position = occluder.global_position + occluder_offset - camera.global_position
 	new_occluder.rotation = occluder.global_rotation
@@ -51,7 +53,9 @@ func duplicate_occluder(occluder, on):
 
 func _recursively_search_for_occluders(root: Node):
 	for node in root.get_children():
+		print(node.name, " ", node.get_class())
 		if node is LightOccluder2D:
+			print("FOUND!")
 			if node.occluder_light_mask == 1:
 				static_occluders.append(node)
 			if node.occluder_light_mask == 2:

@@ -76,19 +76,37 @@ func _process(delta: float) -> void:
 		return 
 	
 	for i in range(spring_positions.size()):
-		if spring_positions[i].x + global_position.x < diver.global_position.x + 1000 || spring_positions[i].x + global_position.x > diver.global_position.x + 3200:
-			continue
-		
 		for wave in background_waves:
 			var amp = wave[0]
 			var period = wave[1] * multiplier
 			var phase = wave[2] + (time / multiplier) * (amp * amp) * 2
-			bg_waves_total[i] += amp * sin(period * (i + phase))
+			bg_waves_total[i] += amp * sin(period * (i + phase + diver.global_position.x / spacing))
 	
 	for i in range(spring_positions.size()):
-		$Line2D.polygon[i] = spring_positions[i] + Vector2(0, bg_waves_total[i])
+		$Line2D.polygon[i] = spring_positions[i] + Vector2(diver.global_position.x + 1000 - global_position.x, bg_waves_total[i])
 	
+	var end_p1 = $Line2D.polygon[-1]
+	var end_p2 = $Line2D.polygon[-2]
 	$Debug.points = $Line2D.polygon
+	$Line2D2.polygon = $Line2D.polygon
+	$Line2D3.polygon = $Line2D.polygon
+	$Line2D4.polygon = $Line2D.polygon
+	$Line2D5.polygon = $Line2D.polygon
+	$Line2D6.polygon = $Line2D.polygon
+	$Line2D7.polygon = $Line2D.polygon
+	
+	$Line2D2.polygon[-1] = end_p1 - ($Line2D2.position - $Line2D.position)
+	$Line2D2.polygon[-2] = end_p2 - ($Line2D2.position - $Line2D.position)
+	$Line2D3.polygon[-1] = end_p1 - ($Line2D3.position - $Line2D.position)
+	$Line2D3.polygon[-2] = end_p2 - ($Line2D3.position - $Line2D.position)
+	$Line2D4.polygon[-1] = end_p1 - ($Line2D4.position - $Line2D.position)
+	$Line2D4.polygon[-2] = end_p2 - ($Line2D4.position - $Line2D.position)
+	$Line2D5.polygon[-1] = end_p1 - ($Line2D5.position - $Line2D.position)
+	$Line2D5.polygon[-2] = end_p2 - ($Line2D5.position - $Line2D.position)
+	$Line2D6.polygon[-1] = end_p1 - ($Line2D6.position - $Line2D.position)
+	$Line2D6.polygon[-2] = end_p2 - ($Line2D6.position - $Line2D.position)
+	$Line2D7.polygon[-1] = end_p1 - ($Line2D7.position - $Line2D.position)
+	$Line2D7.polygon[-2] = end_p2 - ($Line2D7.position - $Line2D.position)
 	
 	#$StaticBody2D.position = $Line2D.position + $Line2D.polygon[boat_index + 3] - Vector2(0, 0)
 	#$StaticBody2D2.position = $Line2D.position + $Line2D.polygon[boat_index + 30] - Vector2(0, 0)

@@ -46,7 +46,7 @@ func is_multiplayer_host() -> bool:
 	return godot_steam_abstraction.is_lobby_owner
 
 # Run code from a string
-func run_code_from_string(input: String):
+func eval(input: String):
 	var script_holder = RefCounted.new()
 	var script = GDScript.new()
 	script.set_source_code("func eval():" + input)

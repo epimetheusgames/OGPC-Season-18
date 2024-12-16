@@ -34,9 +34,7 @@ func _physics_process(delta: float) -> void:
 	if !polygon:
 		polygon = waves.get_node("Line2D")
 	
-	var water_start_pos: Vector2 = polygon.polygon[0] + polygon.global_position
-	var x_index := int((center_of_mass.global_position.x - water_start_pos.x) / waves.spacing)
-	var current_water_height := polygon.polygon[x_index].y + polygon.global_position.y
+	var current_water_height := polygon.polygon[int(polygon.polygon.size() / 2)].y + polygon.global_position.y
 	
 	if center_of_mass.global_position.y < current_water_height:
 		is_in_air = true

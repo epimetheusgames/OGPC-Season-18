@@ -34,9 +34,9 @@ func _process(delta: float) -> void:
 		both_hands_weapon.hand_secondary = diver.diver_animation.get_hand2_position()
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") && right_hand_weapon != null:
 		right_hand_weapon.attack()
-	if Input.is_action_just_pressed("secondary_attack"):
+	if Input.is_action_just_pressed("secondary_attack") && left_hand_weapon != null:
 		left_hand_weapon.attack()
 
 func move_hand_toward_mouse(hand: String) -> void:
