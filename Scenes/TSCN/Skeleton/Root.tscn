@@ -58,6 +58,18 @@ script = ExtResource("6_oply2")
 metadata/key_number = 0
 metadata/action = ""
 
+[node name="MainMenu" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="GameTitle" type="Label" parent="UI/MainMenu"]
+layout_mode = 0
+offset_right = 1921.0
+offset_bottom = 132.0
+theme_override_font_sizes/font_size = 96
+text = "Diving Game Title"
+
 [node name="Game" type="Node" parent="."]
 
 [node name="BoidsCalculator" type="Node" parent="Game"]
