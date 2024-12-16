@@ -1,8 +1,9 @@
 ## Base class for ropes.
 ## Ropes must update 'points' and be go from 'start_node' to 'end_node'
+# Owned by: kaitaobenson
 
 class_name Rope
-extends Node2D
+extends BaseComponent
 
 @export var point_amount: int = 100
 @export var point_separation: float = 10.0
@@ -27,6 +28,8 @@ func _ready():
 		start_pos_on = true
 	if end_anchor_node:
 		end_pos_on = true
+	
+	# Base component stuff
 
 func _process(delta: float) -> void:
 	if start_anchor_node:
