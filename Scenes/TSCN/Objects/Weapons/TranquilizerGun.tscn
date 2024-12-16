@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dul1o4r1c8ash"]
 
-[ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Sprites/Player/TranquilizerPistol.png" id="1_2gvrx"]
+[ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Sprites/Diver/TranquilizerPistol.png" id="1_2gvrx"]
 [ext_resource type="Script" path="res://Scripts/Objects/Weapons/TranquilizerGun.gd" id="1_n4wnc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6uma"]

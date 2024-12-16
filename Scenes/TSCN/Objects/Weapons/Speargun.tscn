@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Objects/Weapons/Speargun.gd" id="1_6b6mx"]
 [ext_resource type="Texture2D" uid="uid://cgiqymjjt6jkp" path="res://Assets/Art/Sprites/Speargun.png" id="2_ftc3n"]
 [ext_resource type="PackedScene" uid="uid://dkiqku8nhydo3" path="res://Scenes/TSCN/Objects/Weapons/Spear.tscn" id="3_krdtr"]
-[ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRopeComponent.gd" id="4_lm3mr"]
+[ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRope.gd" id="4_lm3mr"]
 
 [node name="Speargun" type="Node2D"]
 position = Vector2(716, 462)

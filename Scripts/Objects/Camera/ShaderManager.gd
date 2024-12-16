@@ -1,4 +1,3 @@
-@tool
 extends CanvasLayer
 
 @export var quantize_on: bool = true
