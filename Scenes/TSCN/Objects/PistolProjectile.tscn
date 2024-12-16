@@ -22,7 +22,8 @@ width = 4
 size = Vector2(4, 16)
 
 [node name="PistolProjectile" type="RigidBody2D"]
-collision_layer = 0
+collision_layer = 256
+collision_mask = 257
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_t1ndh")
 linear_damp = 3.0
