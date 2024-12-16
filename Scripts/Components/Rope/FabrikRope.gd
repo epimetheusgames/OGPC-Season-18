@@ -3,7 +3,7 @@
 # Owned by: kaitaobenson
 
 class_name FabrikRope
-extends Rope
+extends BaseRope
 
 func _process(delta):
 	pull_toward_anchor2()

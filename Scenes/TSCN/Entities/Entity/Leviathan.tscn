@@ -15,12 +15,12 @@ extends Enemy
 @onready var start_node: LeviathanNode = $\"StartNode\"
 @onready var rope_component: FabrikRope = $\"FabrikRope\"
 
-var leviathan_nodes: Array[LeviathanNode] = [
+@onready var leviathan_nodes: Array[LeviathanNode] = [
 	start_node
 ]
 
 func _ready() -> void:
-	for i in range(rope_component.line.points.size()):
+	for i in range(rope_component.point_amount):
 		var new_node: LeviathanNode = LEVIATHAN_NODE.instantiate()
 		
 		new_node.set_target_node(leviathan_nodes[i])
@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	global_position = get_global_mouse_position()
 	
 	for i in range(leviathan_nodes.size() - 1):
-		leviathan_nodes[i + 1].global_position = rope_component.line.points[i]
+		leviathan_nodes[i + 1].global_position = rope_component.points[i]
 "
 
 [sub_resource type="Resource" id="Resource_mnlvr"]
@@ -57,18 +57,19 @@ script = SubResource("GDScript_pigha")
 LEVIATHAN_NODE = ExtResource("1_ljr6s")
 settings = SubResource("Resource_mnlvr")
 
-[node name="LeviathanSegment" parent="." instance=ExtResource("1_ljr6s")]
+[node name="StartNode" parent="." instance=ExtResource("1_ljr6s")]
+is_start_node = true
 
-[node name="Polygon2D" parent="LeviathanSegment" index="0"]
+[node name="Polygon2D" parent="StartNode" index="0"]
 polygon = PackedVector2Array(-40, 2, -38, -32, -18, -36, 7, -43, 26, -35, 44, -12, 44, 17, 25, 38, 1, 39, -31, 35)
 
-[node name="Polygon2D3" type="Polygon2D" parent="LeviathanSegment"]
+[node name="Polygon2D3" type="Polygon2D" parent="StartNode"]
 position = Vector2(-36, -9)
 scale = Vector2(1.1, 0.486486)
 color = Color(0, 0, 1, 1)
 polygon = PackedVector2Array(47.4545, -41.3333, 72, 3.88889, 50.1818, -4.33334, 39.2727, -6.38889)
 
-[node name="Polygon2D2" type="Polygon2D" parent="LeviathanSegment"]
+[node name="Polygon2D2" type="Polygon2D" parent="StartNode"]
 position = Vector2(-29, -11)
 color = Color(0, 0, 1, 1)
 polygon = PackedVector2Array(50, 16, 72, 8, 50, 45, 42, 33)
@@ -76,4 +77,4 @@ polygon = PackedVector2Array(50, 16, 72, 8, 50, 45, 42, 33)
 [node name="FabrikRope" type="Node2D" parent="."]
 script = ExtResource("1_7l8up")
 
-[editable path="LeviathanSegment"]
+[editable path="StartNode"]

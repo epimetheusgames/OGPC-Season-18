@@ -2,7 +2,7 @@
 ## Ropes must update 'points' and be go from 'start_node' to 'end_node'
 # Owned by: kaitaobenson
 
-class_name Rope
+class_name BaseRope
 extends BaseComponent
 
 @export var point_amount: int = 100
