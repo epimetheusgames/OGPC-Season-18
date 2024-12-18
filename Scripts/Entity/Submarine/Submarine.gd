@@ -8,7 +8,7 @@ func _ready() -> void:
 	pass
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#if Input.is_action_just_pressed("interact"):
 	#	if diver.get_state() == "IN_SUBMARINE": 
 	#		get_parent().get_node("Diver").set_state("DRIVING_SUBMARINE")

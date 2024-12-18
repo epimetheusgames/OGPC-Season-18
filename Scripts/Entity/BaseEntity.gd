@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	if !Engine.is_editor_hint():
 		_entity_process(delta)
 
-func _entity_process(delta: float) -> void:
+func _entity_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 		

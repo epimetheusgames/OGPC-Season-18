@@ -29,7 +29,7 @@ func get_input_vector() -> Vector2:
 	return get_wasd_input_vector()
 
 func get_wasd_input_vector() -> Vector2:
-	var input_vector: Vector2 = Vector2.ZERO
+	input_vector = Vector2.ZERO
 	
 	if Input.is_action_pressed("right"):
 		input_vector += Vector2.RIGHT

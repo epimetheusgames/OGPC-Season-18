@@ -56,7 +56,7 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		new_rope.line = new_line
 		new_rope.smoothed_line = new_smoothed_line
 
-func boost(speed: float) -> void:
+func boost(_speed: float) -> void:
 	boosting = true
 	
 	for rope in ropes:
@@ -72,7 +72,7 @@ func boost(speed: float) -> void:
 	await get_tree().create_timer(1.5).timeout
 	boosting = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for rope in ropes:
 		rope.is_on_screen = on_screen_notifier.is_on_screen()
 		

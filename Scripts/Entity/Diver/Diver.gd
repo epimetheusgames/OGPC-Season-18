@@ -26,7 +26,7 @@ func _ready() -> void:
 	Global.player = self
 	$BuoyancyComponent.waves = water_manager
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	velocity = diver_movement.get_velocity()
 	
 	var target_angle: float = velocity.angle() + PI/2

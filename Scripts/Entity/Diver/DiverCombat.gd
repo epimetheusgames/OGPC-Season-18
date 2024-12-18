@@ -22,7 +22,7 @@ var both_hands_weapon: Weapon
 func _ready():
 	add_weapon("TranquilizerGun", "right")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if left_hand_weapon:
 		left_hand_weapon.hand_primary = diver.diver_animation.get_hand1_position()
 		left_hand_weapon.hand_secondary = diver.diver_animation.get_hand2_position()
@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		both_hands_weapon.hand_primary = diver.diver_animation.get_hand1_position()
 		both_hands_weapon.hand_secondary = diver.diver_animation.get_hand2_position()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("attack") && right_hand_weapon != null:
 		right_hand_weapon.attack()
 	if Input.is_action_just_pressed("secondary_attack") && left_hand_weapon != null:

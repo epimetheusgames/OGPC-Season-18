@@ -27,5 +27,5 @@ func update_texture() -> void:
 func is_checked() -> bool:
 	return checked
 
-func set_checked(checked: bool) -> void:
-	self.checked = checked
+func set_checked(val: bool) -> void:
+	checked = val

@@ -67,13 +67,14 @@ func _ready() -> void:
 		get_lobby_list()
 		await Steam.lobby_match_list
 		
-		var lobby_join_id: int = 0
+		# TODO: This variable will be used at some point.
+		var _lobby_join_id: int = 0
 		for lobby in lobbies_list:
 			if lobby[1] == "TEST":
 				join_lobby(lobby[0])
 				lobby_joined.emit()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 	
 	if lobby_id > 0:
@@ -142,8 +143,8 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 		print("DEBUG: Failed to join the lobby, but I'm not gonna tell you what the error is.")
 		print("DEBUG: Fine, I'll at least tell you the number, it's %s" % response)
 
-func _on_lobby_created(connect: int, this_lobby_id: int) -> void:
-	if connect == 1:
+func _on_lobby_created(connect_info: int, this_lobby_id: int) -> void:
+	if connect_info == 1:
 		lobby_id = this_lobby_id
 		print("DEBUG: Created a lobby: %s" % lobby_id)
 		
@@ -161,8 +162,8 @@ func _on_lobby_match_list(these_lobbies: Array) -> void:
 		var lobby_name: String = Steam.getLobbyData(this_lobby, "name")
 		var lobby_mode: String = Steam.getLobbyData(this_lobby, "mode")
 		var lobby_num_members: int = Steam.getNumLobbyMembers(this_lobby)
-		var lobby_data := [this_lobby, lobby_name, lobby_mode, lobby_num_members]
-		lobbies_list.append(lobby_data)
+		var formatted_lobby_data := [this_lobby, lobby_name, lobby_mode, lobby_num_members]
+		lobbies_list.append(formatted_lobby_data)
 
 func read_all_packets(read_count: int = 0):
 	if read_count >= PACKET_READ_LIMIT:
@@ -182,8 +183,8 @@ func _on_session_request(remote_id: int) -> void:
 	
 	make_handshake()
 
-func _on_session_connect_fail(steam_id: int, session_error: int) -> void:
-	print("ERROR: Steam connect failed for target %s, the error code is %s, go figure out what it means for yourself." % [steam_id, session_error])
+func _on_session_connect_fail(failed_steam_id: int, session_error: int) -> void:
+	print("ERROR: Steam connect failed for target %s, the error code is %s, go figure out what it means for yourself." % [failed_steam_id, session_error])
 
 func _on_persona_change(this_steam_id: int, _flag: int) -> void:
 	if lobby_id > 0:
