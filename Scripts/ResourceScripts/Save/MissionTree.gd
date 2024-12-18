@@ -1,0 +1,2 @@
+class_name MissionTreeProgress
+extends Resource
