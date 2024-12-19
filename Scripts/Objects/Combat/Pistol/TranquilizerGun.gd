@@ -1,4 +1,6 @@
 # Owned by carsonetb
+
+"""
 class_name TranquilizerGun
 extends Weapon
 
@@ -18,7 +20,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var mouse_position := get_global_mouse_position()
 	
-	global_position = hand_primary
+	global_position = hand1_pos
 	global_rotation = combat.diver.diver_animation.get_node("Skeleton/Torso/UpperArm2/Forearm2").global_position.angle_to_point(hand_primary)
 	combat.move_hand_toward_mouse("right")
 	
@@ -58,3 +60,4 @@ func _on_tranquilizer_gun_sprite_animation_finished() -> void:
 		$TranquilizerGunSprite.scale.y = 1
 	
 	$TranquilizerGunSprite.play("Idle")
+"""

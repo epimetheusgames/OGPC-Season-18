@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://d24oi85rw114u"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/PistolProjectile.gd" id="1_0erac"]
+[ext_resource type="Script" path="res://Scripts/Objects/Combat/Pistol/PistolProjectile.gd" id="1_0erac"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_yd357"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="3_mdrr1"]
 
