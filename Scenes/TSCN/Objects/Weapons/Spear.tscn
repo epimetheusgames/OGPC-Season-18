@@ -1,12 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkiqku8nhydo3"]
+[gd_scene load_steps=5 format=3 uid="uid://dkiqku8nhydo3"]
 
 [ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Sprites/Spear.png" id="1_mdbjp"]
 [ext_resource type="Script" path="res://Scripts/Objects/Combat/Speargun/Spear.gd" id="1_x2dlv"]
 
-[node name="Spear" type="Node2D"]
-scale = Vector2(1.00204, 0.995548)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwnx7"]
+size = Vector2(58, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cwwnu"]
+radius = 17.0
+
+[node name="Spear" type="RigidBody2D"]
+linear_damp = 0.1
 script = ExtResource("1_x2dlv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hwnx7")
 
 [node name="SpearSprite" type="Sprite2D" parent="."]
 position = Vector2(-4, 3)
 texture = ExtResource("1_mdbjp")
+metadata/_edit_lock_ = true
+
+[node name="SpearheadArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpearheadArea"]
+position = Vector2(33, 0)
+shape = SubResource("CircleShape2D_cwwnu")
+debug_color = Color(0.987742, 0.107629, 0, 0.42)
+
+[connection signal="body_entered" from="SpearheadArea" to="." method="_on_spearhead_area_body_entered"]

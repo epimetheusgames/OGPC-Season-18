@@ -24,10 +24,11 @@ func get_gun_rotation() -> float:
 	return hand1_pos.angle_to_point(mouse_pos)
 
 func attack() -> void:
-	var new_bullet = bullet_scene.instantiate()
+	var new_bullet: Spear = bullet_scene.instantiate()
 	
 	new_bullet.top_level = true
 	new_bullet.global_position = emit_point.global_position
 	new_bullet.global_rotation = rotation
 	
 	add_child(new_bullet)
+	new_bullet.move_forwards(1000)
