@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=31 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_d2a8o"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
@@ -13,11 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="12_u28jr"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
-
-[sub_resource type="Resource" id="Resource_3ikhh"]
-resource_local_to_scene = true
-script = ExtResource("2_d2a8o")
-uid = 1829
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -99,7 +93,6 @@ radius = 48.0417
 [node name="Diver" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_1l6ma")
-uid = SubResource("Resource_3ikhh")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ghsq1")

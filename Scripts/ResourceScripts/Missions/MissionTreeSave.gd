@@ -14,9 +14,20 @@ func get_available_missions() -> Array[Mission]:
 	
 	return out
 
-func complete_mission(mission: Mission):
-	if not mission_tree.get_mission_by_resource(mission):
+func complete_mission(mission: Mission) -> void:
+	if !mission_tree.get_mission_by_resource(mission):
 		print("ERROR: A MissionTreeProgress save resources was asked to complete a mission (" + mission.title + "), but that mission was not in the tree. Printing stack.")
 		print_stack()
 		return
 	completed.append(mission)
+
+func debug() -> void:
+	print("DEBUG: MissionTreeProgress: Missions:")
+	for mission in mission_tree.missions:
+		mission.debug()
+	print("DEBUG: MissionTreeProgress: Completed:")
+	for mission in completed:
+		mission.debug()
+	print("DEBUG: MissionTreeProgress: Available:")
+	for mission in get_available_missions():
+		mission.debug()

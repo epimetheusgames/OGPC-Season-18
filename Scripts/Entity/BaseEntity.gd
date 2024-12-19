@@ -73,10 +73,10 @@ func _is_node_owner() -> bool:
 # -- Save Load --
 
 func save_self() -> void:
-	Global.save_load_framework._save_entity(Global.current_game_slot, uid, save_resource)
+	Global.save_load_framework._save_entity(uid, save_resource)
 	
 func load_self() -> void:
-	save_resource = Global.save_load_framework._load_entity(Global.current_game_slot, uid)
+	save_resource = Global.save_load_framework._load_entity(uid)
 
 # -- Setters and getters --
 

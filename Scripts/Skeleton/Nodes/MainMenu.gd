@@ -7,4 +7,5 @@ func _on_quit_button_button_up() -> void:
 	get_tree().quit()
 
 func _on_start_button_button_up() -> void:
-	Global.save_load_framework.load_level("res://Scenes/TSCN/Levels/Missions/Mission1.tscn")
+	# Peak oop
+	Global.save_load_framework.start_game(0, Global.mission_system.default_mission_tree.missions[0]) 
