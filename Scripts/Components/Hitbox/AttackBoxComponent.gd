@@ -13,6 +13,7 @@ var is_attacking := false
 
 func _ready() -> void:
 	_base_hitbox_ready()
+	_ready_base_component()
 	component_name = "AttackBoxComponent"
 	
 	if hurtbox && !always_attacking:
@@ -27,8 +28,6 @@ func _ready() -> void:
 		hurtbox_node.collision_layer = Global.bitmask_conversion["Player Hurtbox / Enemy Attackbox"]
 	if hitbox_type == HITBOX_TYPE.ENTITY_INTERACT:
 		hurtbox_node.collision_layer = Global.bitmask_conversion["Interaction"]
-	
-	_base_component_ready_post()
 
 func attack() -> void:
 	if always_attacking || !hurtbox:

@@ -1,5 +1,5 @@
 ## Base class for ropes.
-## Ropes must update 'points' and be go from 'start_node' to 'end_node'
+## Ropes must update 'points' and go from 'start_node' to 'end_node'
 # Owned by: kaitaobenson
 
 class_name BaseRope
@@ -20,8 +20,13 @@ var end_pos_on: bool = false
 
 var points: Array[Vector2]
 
-func _ready():
+func _ready() -> void:
+	_ready_rope()
+
+func _ready_rope():
+	_ready_base_component()
 	component_name = "BaseRope"
+	
 	points.resize(point_amount)
 	points.fill(Vector2(0, 0))
 	
@@ -29,7 +34,7 @@ func _ready():
 		start_pos_on = true
 	if end_anchor_node:
 		end_pos_on = true
-	
+
 func _process(delta: float) -> void:
 	if start_anchor_node:
 		start_pos = start_anchor_node.global_position

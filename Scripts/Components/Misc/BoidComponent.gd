@@ -25,6 +25,7 @@ var raycast: RayCast2D
 @export var boid_colors: Array[Color]
 
 func _ready():
+	_ready_base_component()
 	name = "BoidComponent"
 	component_name = "BoidComponent"
 	
@@ -47,8 +48,6 @@ func _ready():
 	
 	var rng := RandomNumberGenerator.new()
 	component_container_node.modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
-	
-	_base_component_ready_post()
 
 # Update velocity using compute shader outputs from boids calculator node.
 func _process(delta: float) -> void: 

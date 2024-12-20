@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjosqlpq56cv6"]
+[gd_scene load_steps=6 format=3 uid="uid://bn4kt5yw10r8y"]
 
 [ext_resource type="Script" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
-[ext_resource type="PackedScene" uid="uid://dwxcjl4jrkyw3" path="res://Scenes/TSCN/Entities/Entity/LeviathanNode.tscn" id="1_ljr6s"]
+[ext_resource type="PackedScene" path="res://Scenes/TSCN/Entities/Entity/LeviathanNode.tscn" id="1_ljr6s"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="1_txg70"]
 
 [sub_resource type="GDScript" id="GDScript_pigha"]
@@ -29,6 +29,7 @@ func _ready() -> void:
 		leviathan_nodes.append(new_node)
 
 func _physics_process(delta: float) -> void:
+	print(rope_component.points)
 	global_position = get_global_mouse_position()
 	
 	for i in range(leviathan_nodes.size() - 1):
@@ -74,7 +75,8 @@ position = Vector2(-29, -11)
 color = Color(0, 0, 1, 1)
 polygon = PackedVector2Array(50, 16, 72, 8, 50, 45, 42, 33)
 
-[node name="FabrikRope" type="Node2D" parent="."]
+[node name="FabrikRope" type="Node2D" parent="." node_paths=PackedStringArray("start_anchor_node")]
 script = ExtResource("1_7l8up")
+start_anchor_node = NodePath("../StartNode")
 
 [editable path="StartNode"]

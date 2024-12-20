@@ -6,10 +6,9 @@ extends BaseComponent
 @export_file() var spawn_filepath: String 
 
 func _ready() -> void:
+	_ready_base_component()
 	component_name = "MultiplayerPlayerSpawnerComponent"
 	Global.godot_steam_abstraction.user_joined_lobby.connect(_client_joined)
-	
-	_base_component_ready_post()
 
 func _client_joined(client_id: int, client_name: String):
 	print("DEBUG: Spawning player with client id " + str(client_id))

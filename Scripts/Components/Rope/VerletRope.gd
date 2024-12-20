@@ -17,14 +17,13 @@ var verlet_nodes: Array[VerletNode]
 var raycast_query: PhysicsRayQueryParameters2D
 
 func _ready() -> void:
-	component_name = "FabrikRope"
+	_ready_rope()
+	component_name = "VerletRope"
 	
 	raycast_query = PhysicsRayQueryParameters2D.new()
 	
 	verlet_nodes.resize(point_amount)
 	verlet_nodes.fill(VerletNode.new())
-	
-	_base_component_ready_post()
 
 func _process(delta: float) -> void:
 	simulate()  # Simulate Verlet integration
