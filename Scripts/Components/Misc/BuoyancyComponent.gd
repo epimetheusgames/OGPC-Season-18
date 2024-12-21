@@ -18,8 +18,7 @@ var bouyancy_velocity := Vector2.ZERO
 var is_in_air := false
 
 func _ready() -> void:
-	_ready_base_component()
-	component_name = "BuoyancyComponent"
+	super._ready_base_component()
 	
 	if waves:
 		polygon = waves.get_node("Line2D")

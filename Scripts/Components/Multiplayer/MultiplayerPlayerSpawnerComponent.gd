@@ -7,7 +7,6 @@ extends BaseComponent
 
 func _ready() -> void:
 	_ready_base_component()
-	component_name = "MultiplayerPlayerSpawnerComponent"
 	Global.godot_steam_abstraction.user_joined_lobby.connect(_client_joined)
 
 func _client_joined(client_id: int, client_name: String):

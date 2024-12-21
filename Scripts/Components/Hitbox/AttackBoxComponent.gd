@@ -12,9 +12,8 @@ extends BaseHitboxComponent
 var is_attacking := false
 
 func _ready() -> void:
-	_base_hitbox_ready()
-	_ready_base_component()
-	component_name = "AttackBoxComponent"
+	_base_hitbox_ready()  # TODO: fix this
+	super._ready_base_component()
 	
 	if hurtbox && !always_attacking:
 		hurtbox_collision.disabled = true

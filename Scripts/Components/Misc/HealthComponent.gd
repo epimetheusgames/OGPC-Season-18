@@ -15,8 +15,7 @@ signal damage_taken(health)
 signal died
 
 func _ready() -> void:
-	_ready_base_component()
-	component_name = "HealthComponent"
+	super._ready_base_component()
 
 func take_damage(amount: float) -> void:
 	if not _iframes_active:

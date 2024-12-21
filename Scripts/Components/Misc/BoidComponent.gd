@@ -25,9 +25,9 @@ var raycast: RayCast2D
 @export var boid_colors: Array[Color]
 
 func _ready():
-	_ready_base_component()
-	name = "BoidComponent"
 	component_name = "BoidComponent"
+	
+	name = "BoidComponent"
 	
 	if !component_container:
 		return

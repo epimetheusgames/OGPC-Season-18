@@ -12,10 +12,8 @@ extends BaseHitboxComponent
 signal damage_taken(damage_ammount: int)
 
 func _ready() -> void:
-	_ready_base_component()
-	_base_hitbox_ready()
-	
-	component_name = "HurtboxComponent"
+	super._ready_base_component()
+	_base_hitbox_ready()  # TODO: fix this
 	
 	# Connect signals
 	if hurtbox:
