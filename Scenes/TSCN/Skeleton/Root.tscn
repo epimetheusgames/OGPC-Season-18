@@ -106,6 +106,68 @@ offset_bottom = 392.0
 theme_override_font_sizes/font_size = 36
 text = "Start"
 
+[node name="MultiplayerButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 688.0
+offset_top = 318.0
+offset_right = 945.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Multiplayer"
+
+[node name="SingleplayerButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Singleplayer"
+
+[node name="MultiplayerJoinButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 688.0
+offset_top = 318.0
+offset_right = 945.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Join
+"
+
+[node name="MultiplayerHostButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Host"
+
+[node name="MultiplayerJoinGameButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Join
+"
+
+[node name="MultiplayerHostGameButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Host"
+
 [node name="SettingsButton" type="Button" parent="UI/MainMenu"]
 layout_mode = 0
 offset_left = 824.0
@@ -124,6 +186,32 @@ offset_right = 1081.0
 offset_bottom = 584.0
 theme_override_font_sizes/font_size = 36
 text = "Quit"
+
+[node name="LobbyNameInput" type="LineEdit" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 688.0
+offset_top = 318.0
+offset_right = 945.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+placeholder_text = "Lobby name"
+alignment = 1
+
+[node name="MultiplayerStatus" type="Label" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 595.0
+offset_right = 1080.0
+offset_bottom = 618.0
+horizontal_alignment = 1
+
+[node name="Members" type="RichTextLabel" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 623.0
+offset_right = 1081.0
+offset_bottom = 766.0
 
 [node name="Game" type="Node" parent="."]
 
@@ -181,4 +269,10 @@ disabled = true
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
 [connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]
 [connection signal="button_up" from="UI/MainMenu/StartButton" to="UI/MainMenu" method="_on_start_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerButton" to="UI/MainMenu" method="_on_multiplayer_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/SingleplayerButton" to="UI/MainMenu" method="_on_singleplayer_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerJoinButton" to="UI/MainMenu" method="_on_multiplayer_join_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerHostButton" to="UI/MainMenu" method="_on_multiplayer_host_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerJoinGameButton" to="UI/MainMenu" method="_on_multiplayer_join_game_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerHostGameButton" to="UI/MainMenu" method="_on_multiplayer_host_game_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/QuitButton" to="UI/MainMenu" method="_on_quit_button_button_up"]

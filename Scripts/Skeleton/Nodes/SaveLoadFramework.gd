@@ -131,6 +131,9 @@ func _load_global_config() -> GlobalSave:
 func _load_entity(uid: UID) -> EntitySave:
 	return Global.current_game_save.entities[uid.uid]
 
+func start_game_remote(slot_num: int, custom_mission_id: int = -1):
+	start_game(slot_num, Global.mission_system.default_mission_tree.missions[custom_mission_id] if custom_mission_id != -1 else null)
+
 # Loads a level and then adds it to the Game container.
 func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	var level_data := _load_game_save(slot_num)

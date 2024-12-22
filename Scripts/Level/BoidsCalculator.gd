@@ -37,6 +37,8 @@ var exit_thread := false
 
 # Load compute shader, and resize arrays.
 func _ready() -> void:
+	Global.boids_calculator_node = self
+	
 	print(RenderingServer.get_video_adapter_api_version())
 	if RenderingServer.get_video_adapter_api_version().begins_with("3") || RenderingServer.get_video_adapter_api_version().begins_with("4"):
 		print("ERROR: Compatibility (OpenGL) renderer does not support compute shaders. Boids will not run.")
@@ -63,8 +65,6 @@ func _ready() -> void:
 	
 	thread = Thread.new()
 	thread.start(_boids_compute)
-	
-	Global.boids_calculator_node = self
 	
 	await get_tree().create_timer(5).timeout
 	
@@ -248,6 +248,8 @@ func sync_at_integrals():
 # After this please use add_boid_data_at_index to fill in the registered data.
 # Think of this like it's memory allocation in the boids list!
 func register_index(boid_object: BoidComponent) -> int:
+	if self.process_mode == Node.PROCESS_MODE_DISABLED:
+		return 0
 	boids_node_list[boids_index_counter] = boid_object
 	boids_index_counter += 1
 	return boids_index_counter - 1

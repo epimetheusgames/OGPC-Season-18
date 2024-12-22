@@ -1,13 +1,15 @@
-[gd_scene load_steps=58 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=60 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
+[ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="1_awqxm"]
-[ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="1_b33aw"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/ShaderManager.gd" id="1_s361y"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Quantize.gd" id="2_fhpdt"]
+[ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="4_0q3xc"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="4_5lji5"]
+[ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="5_rc3kh"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Pixelize.gd" id="5_t6m55"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="6_sqcin"]
@@ -26,7 +28,6 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
-[ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="22_bmqry"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
@@ -94,6 +95,9 @@ uid = 1831
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
 glow_enabled = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_su1cl"]
+viewport_path = NodePath("ShadowPipeline/WorldContainer/World")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xbwca"]
 shader = ExtResource("16_ctau1")
@@ -175,21 +179,20 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 
 [node name="Mission1" type="Node2D"]
+script = ExtResource("1_314ux")
 
 [node name="LevelContainer" type="Node2D" parent="."]
 
-[node name="Player" type="Node2D" parent="LevelContainer"]
-
-[node name="Diver" parent="LevelContainer/Player" node_paths=PackedStringArray("water_manager") instance=ExtResource("1_b33aw")]
-position = Vector2(1229, 1113)
-water_manager = NodePath("../../Level/Waves")
-
-[node name="Camera2D" type="Camera2D" parent="LevelContainer/Player/Diver"]
-
-[node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("22_bmqry")]
-position = Vector2(968, 1368)
-
 [node name="Level" type="Node2D" parent="LevelContainer"]
+
+[node name="MultiplayerPlayerSpawnerComponent" type="Node" parent="LevelContainer/Level"]
+script = ExtResource("4_iytd7")
+spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
+
+[node name="Diver" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
+position = Vector2(1012, 1089)
+
+[node name="Camera2D" type="Camera2D" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="LevelContainer/Level"]
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
@@ -215,7 +218,7 @@ metadata/_edit_lock_ = true
 [node name="Waves" parent="LevelContainer/Level" node_paths=PackedStringArray("diver") instance=ExtResource("10_gbtle")]
 position = Vector2(-4418, -143)
 spread = 14.4
-diver = NodePath("../../Player/Diver")
+diver = NodePath("../MultiplayerPlayerSpawnerComponent/Diver")
 spacing = 40.0
 
 [node name="Line2D" parent="LevelContainer/Level/Waves" index="0"]
@@ -347,8 +350,9 @@ environment = SubResource("Environment_5ulyy")
 [node name="ShadowPipeline" type="Node" parent="." node_paths=PackedStringArray("level_container", "camera")]
 script = ExtResource("16_0m2co")
 level_container = NodePath("../LevelContainer")
-camera = NodePath("../LevelContainer/Player/Diver/Camera2D")
+camera = NodePath("../LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver/Camera2D")
 occluder_offset = Vector2(957, 539)
+world_vieport = SubResource("ViewportTexture_su1cl")
 
 [node name="WorldContainer" type="SubViewportContainer" parent="ShadowPipeline"]
 modulate = Color(1, 1, 1, 0)

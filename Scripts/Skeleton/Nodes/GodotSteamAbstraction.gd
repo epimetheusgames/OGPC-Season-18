@@ -25,6 +25,7 @@ var new_lobby_mode: String
 
 signal lobby_joined
 signal user_joined_lobby(user_id, user_name)
+signal handshake_received(user_id, user_name)
 
 func _init() -> void:
 	OS.set_environment("SteamAppId", str(steam_app_id))
@@ -62,18 +63,18 @@ func _ready() -> void:
 	# Check for command line arguments
 	check_command_line()
 	
-	if "host" in OS.get_cmdline_args():
-		create_lobby("TEST", "GodotSteam TEST")
-	if "client" in OS.get_cmdline_args():
-		get_lobby_list()
-		await Steam.lobby_match_list
-		
-		# TODO: This variable will be used at some point.
-		var _lobby_join_id: int = 0
-		for lobby in lobbies_list:
-			if lobby[1] == "TEST":
-				join_lobby(lobby[0])
-				lobby_joined.emit()
+	#if "host" in OS.get_cmdline_args():
+		#create_lobby("TEST", "GodotSteam TEST")
+	#if "client" in OS.get_cmdline_args():
+		#get_lobby_list()
+		#await Steam.lobby_match_list
+		#
+		## TODO: This variable will be used at some point.
+		#var _lobby_join_id: int = 0
+		#for lobby in lobbies_list:
+			#if lobby[1] == "TEST":
+				#join_lobby(lobby[0])
+				#lobby_joined.emit()
 
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
@@ -107,6 +108,23 @@ func create_lobby(lobby_name: String, lobby_mode: String) -> void:
 		new_lobby_name = lobby_name
 		new_lobby_mode = lobby_mode
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_members_max)
+
+func join_lobby_by_name(name: String):
+	get_lobby_list()
+	await Steam.lobby_match_list
+	
+	if Global.verbose_debug:
+		print("DEBUG: Fetched lobby list.")
+	
+	for lobby in lobbies_list:
+		if Global.verbose_debug:
+			print("DEBUG: Found lobby with data: " + str(lobby))
+		if lobby[1] == name:
+			join_lobby(lobby[0])
+			lobby_joined.emit()
+			return
+	
+	print("WARNING: Lobby not found.")
 
 func join_lobby(this_lobby_id: int) -> void:
 	if Global.verbose_debug:
@@ -270,6 +288,7 @@ func read_packet() -> void:
 			if Global.verbose_debug:
 				print("DEBUG: Handshake received from " + Steam.getFriendPersonaName(readable_data["from"]))
 			handshake_completed_ids.append(packet_sender)
+			handshake_received.emit(packet_sender, Steam.getFriendPersonaName(readable_data["from"]))
 		
 		elif readable_data["message"] == "remote_print":
 			print("REMOTE DEBUG: " + readable_data["content"])

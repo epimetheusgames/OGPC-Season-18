@@ -1,5 +1,4 @@
 # Owned by: carsonetb
-@tool
 extends Node2D
 
 @export var water_rect: Rect2

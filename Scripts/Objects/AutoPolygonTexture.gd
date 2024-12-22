@@ -24,6 +24,10 @@ func _ready() -> void:
 			get_parent().bake_navigation_polygon()
 
 func _process(delta: float) -> void:
+	if !Engine.is_editor_hint() && Global.super_efficient:
+		material = null
+		return
+	
 	_make_sure_nodes_instantiated()
 	
 	# Update relevant polygons.

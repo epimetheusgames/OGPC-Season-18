@@ -8,6 +8,8 @@ var moving_occluders: Array[LightOccluder2D] = []
 @export var level_container: Node2D
 @export var camera: Node2D
 @export var occluder_offset: Vector2
+@onready var disabled = Global.super_efficient
+@export var world_vieport: ViewportTexture
 
 func _ready():
 	var parent = level_container.get_parent()
@@ -21,12 +23,24 @@ func _ready():
 	$MovingShadowPass.size = get_viewport().size
 	$WorldShadowBlendPass.size = get_viewport().size 
 	
+	if disabled:
+		$StaticShadowPass.queue_free()
+		$StaticShadowBlurPass.queue_free()
+		$MovingShadowPass.queue_free()
+		$MovingShadowBlurPass.queue_free()
+		$WorldShadowBlendPass.queue_free()
+		
+		$Final.texture = world_vieport
+	
 	# Find all the occluders in the scene and move them over.
 	_recursively_search_for_occluders.call_deferred($WorldContainer/World)
 	
 	$Final.visible = true
 	
 func _process(_delta: float) -> void:
+	if disabled:
+		return
+	
 	# These static shadows aren't moving technically but they are relative to 
 	# the player camera.
 	_remove_all_occluders($StaticShadowPass/OccludersContainer)

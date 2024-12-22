@@ -41,6 +41,11 @@ func _ready_boid() -> void:
 		return
 	
 	boids_calculator = Global.boids_calculator_node
+	
+	if boids_calculator.process_mode == Node.PROCESS_MODE_DISABLED:
+		component_container_node.queue_free()
+		return
+	
 	boids_index = boids_calculator.register_index(self)
 	boids_calculator.add_boid_data_at_index(boids_index, view_dist, protected_dist, avoid_factor,
 											matching_factor, centering_factor, turn_factor,
@@ -56,6 +61,9 @@ func _ready_boid() -> void:
 
 # Update velocity using compute shader outputs from boids calculator node.
 func _process(delta: float) -> void: 
+	if boids_calculator.process_mode == Node.PROCESS_MODE_DISABLED:
+		return
+	
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
 		var output = boids_calculator.get_shader_output()
 		component_container_node.velocity = Vector2(output[boids_index * 3], output[boids_index * 3 + 1])

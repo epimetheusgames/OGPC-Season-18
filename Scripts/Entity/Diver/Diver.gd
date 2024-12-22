@@ -23,7 +23,8 @@ var player_state : STATE_ENUM
 
 func _ready() -> void:
 	set_state("SWIMMING")
-	Global.player = self
+	if !Global.player:
+		Global.player = self
 	$BuoyancyComponent.waves = water_manager
 
 func _physics_process(_delta: float):

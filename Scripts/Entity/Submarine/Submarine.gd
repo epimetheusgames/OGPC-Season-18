@@ -24,9 +24,9 @@ func _physics_process(_delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Diver:
-		get_parent().get_node("Diver").set_state("IN_SUBMARINE")
+		Global.player.set_state("IN_SUBMARINE")
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is Diver:
-		get_parent().get_node("Diver").set_state("SWIMMING")
+		Global.player.set_state("SWIMMING")
