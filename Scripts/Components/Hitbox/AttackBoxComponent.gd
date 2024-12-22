@@ -15,8 +15,7 @@ func _ready() -> void:
 	_ready_attack_box()
 
 func _ready_attack_box() -> void:
-	_base_hitbox_ready()  # TODO: fix this
-	_ready_base_component()
+	_base_hitbox_ready()  
 	
 	if hurtbox && !always_attacking:
 		hurtbox_collision.disabled = true

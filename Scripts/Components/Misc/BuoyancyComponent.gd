@@ -21,7 +21,6 @@ func _ready() -> void:
 	_ready_buoyancy()
 
 func _ready_buoyancy() -> void:
-	component_name = "BuoyancyComponent"
 	_ready_base_component()
 	
 	if waves:

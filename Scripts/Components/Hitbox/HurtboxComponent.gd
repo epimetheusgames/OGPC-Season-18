@@ -16,8 +16,7 @@ func _ready() -> void:
 
 func _ready_hurtbox() -> void:
 	component_name = "HurtboxComponent"
-	_ready_base_component()
-	_base_hitbox_ready()  # TODO: fix this
+	_base_hitbox_ready() 
 	
 	# Connect signals
 	if hurtbox:
