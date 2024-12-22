@@ -15,6 +15,8 @@ const TIMESTEP: float = 0.1
 
 var verlet_nodes: Array[VerletNode]
 var raycast_query: PhysicsRayQueryParameters2D
+var is_on_screen := true
+var rope_drawer: RopeLineDrawer
 
 func _ready() -> void:
 	_ready_rope()
@@ -22,14 +24,29 @@ func _ready() -> void:
 	
 	raycast_query = PhysicsRayQueryParameters2D.new()
 	
+	var spawn_pos: Vector2
+	if start_anchor_node:
+		spawn_pos = start_anchor_node.global_position
+	
 	verlet_nodes.resize(point_amount)
-	verlet_nodes.fill(VerletNode.new())
+	for i in range(point_amount):
+		verlet_nodes[i] = VerletNode.new()
+		verlet_nodes[i].set_up(spawn_pos) 
+		spawn_pos += Vector2(0, point_separation)
 
 func _process(delta: float) -> void:
+	# quick fix
+	start_pos = start_anchor_node.global_position
 	simulate()  # Simulate Verlet integration
 	
 	for i in range(iterations):
 		apply_constraints()  # Apply constraints and resolve collisions
+	
+	for i in range(verlet_nodes.size()):
+		points[i] = verlet_nodes[i].position
+		
+	if rope_drawer:
+		rope_drawer.points = points
 
 func simulate():
 	for i in range(point_amount):
@@ -56,7 +73,7 @@ func simulate():
 # Apply constraints such as anchor positions and node separation
 func apply_constraints():
 	# Pull toward anchors, and keep node distance constraints
-	if start_pos_on:
+	if start_pos != Vector2.ZERO:
 		verlet_nodes[0].position = start_pos
 	if end_pos_on:
 		verlet_nodes[point_amount - 1].position = end_pos

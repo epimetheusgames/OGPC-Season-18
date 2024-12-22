@@ -10,8 +10,6 @@ func _ready() -> void:
 	_ready_base_component()
 
 func _ready_base_component() -> void:
-	print(component_name)
-	
 	if !component_container:
 		print("WARNING: Component at path " + str(get_path()) + " does not have a container.")
 		return

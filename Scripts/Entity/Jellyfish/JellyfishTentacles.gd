@@ -32,6 +32,7 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		new_tentacle_anchor.position = Vector2(x_pos, 0)
 		
 		var new_rope := VerletRope.new()
+		new_rope.component_container = get_parent().get_path()
 		new_rope.name = "TentacleRope"
 		new_rope.enable_collisions = false
 		new_rope.damping = 0.5
@@ -49,6 +50,7 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		new_line.smoothing_on = true
 		
 		new_rope.add_child(new_line)
+		new_rope.rope_drawer = new_line
 		
 		new_rope.start_anchor_node = new_tentacle_anchor
 
@@ -69,9 +71,6 @@ func boost(_speed: float) -> void:
 	boosting = false
 
 func _process(_delta: float) -> void:
-	for rope in ropes:
-		rope.is_on_screen = on_screen_notifier.is_on_screen()
-		
 	if not boosting:
 		var tentacle_gravity: Vector2 = Vector2(0, 50)
 		tentacle_gravity = tentacle_gravity.rotated(jellyfish.global_rotation)
