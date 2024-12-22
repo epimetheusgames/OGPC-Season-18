@@ -117,7 +117,8 @@ func collide_and_translate(origin: Vector2, motion: Vector2) -> Vector2:
 	raycast_query.collide_with_areas = true
 	raycast_query.collide_with_bodies = true
 	
-	var result: Dictionary = component_container.get_world_2d().direct_space_state.intersect_ray(raycast_query)
+	var world2d: World2D = get_node(component_container).get_world_2d()  # This line makes me depressed
+	var result: Dictionary = world2d.direct_space_state.intersect_ray(raycast_query)
 	
 	if not result:
 		# No collision detected, move as normal
