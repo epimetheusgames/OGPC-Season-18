@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bn4kt5yw10r8y"]
+[gd_scene load_steps=6 format=3 uid="uid://cek510kfqmfha"]
 
 [ext_resource type="Script" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
-[ext_resource type="PackedScene" path="res://Scenes/TSCN/Entities/Entity/LeviathanNode.tscn" id="1_ljr6s"]
+[ext_resource type="PackedScene" uid="uid://dwxcjl4jrkyw3" path="res://Scenes/TSCN/Entities/Entity/LeviathanNode.tscn" id="1_ljr6s"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="1_txg70"]
 
 [sub_resource type="GDScript" id="GDScript_pigha"]
@@ -12,12 +12,10 @@ extends Enemy
 
 @export var length: float = 1000
 
-@onready var start_node: LeviathanNode = $\"StartNode\"
+@onready var start_node: LeviathanNode = $\"Head\"
 @onready var rope_component: FabrikRope = $\"FabrikRope\"
 
-@onready var leviathan_nodes: Array[LeviathanNode] = [
-	start_node
-]
+@onready var leviathan_nodes: Array[LeviathanNode] = [start_node]
 
 func _ready() -> void:
 	for i in range(rope_component.point_amount):
@@ -29,11 +27,13 @@ func _ready() -> void:
 		leviathan_nodes.append(new_node)
 
 func _physics_process(delta: float) -> void:
-	print(rope_component.points)
 	global_position = get_global_mouse_position()
+	$Head.rotation = rope_component.points[0].angle_to_point(rope_component.points[1]) + PI
+	leviathan_nodes[-1].visible = false
+	rope_component.start_pos = get_global_mouse_position()
 	
 	for i in range(leviathan_nodes.size() - 1):
-		leviathan_nodes[i + 1].global_position = rope_component.points[i]
+		leviathan_nodes[i].global_position = rope_component.points[i]
 "
 
 [sub_resource type="Resource" id="Resource_mnlvr"]
@@ -58,25 +58,28 @@ script = SubResource("GDScript_pigha")
 LEVIATHAN_NODE = ExtResource("1_ljr6s")
 settings = SubResource("Resource_mnlvr")
 
-[node name="StartNode" parent="." instance=ExtResource("1_ljr6s")]
+[node name="Head" parent="." instance=ExtResource("1_ljr6s")]
 is_start_node = true
 
-[node name="Polygon2D" parent="StartNode" index="0"]
+[node name="Polygon2D" parent="Head" index="0"]
 polygon = PackedVector2Array(-40, 2, -38, -32, -18, -36, 7, -43, 26, -35, 44, -12, 44, 17, 25, 38, 1, 39, -31, 35)
 
-[node name="Polygon2D3" type="Polygon2D" parent="StartNode"]
+[node name="Polygon2D3" type="Polygon2D" parent="Head"]
 position = Vector2(-36, -9)
 scale = Vector2(1.1, 0.486486)
 color = Color(0, 0, 1, 1)
 polygon = PackedVector2Array(47.4545, -41.3333, 72, 3.88889, 50.1818, -4.33334, 39.2727, -6.38889)
 
-[node name="Polygon2D2" type="Polygon2D" parent="StartNode"]
+[node name="Polygon2D2" type="Polygon2D" parent="Head"]
 position = Vector2(-29, -11)
 color = Color(0, 0, 1, 1)
 polygon = PackedVector2Array(50, 16, 72, 8, 50, 45, 42, 33)
 
 [node name="FabrikRope" type="Node2D" parent="." node_paths=PackedStringArray("start_anchor_node")]
 script = ExtResource("1_7l8up")
-start_anchor_node = NodePath("../StartNode")
+point_amount = 20
+point_separation = 50.0
+start_anchor_node = NodePath("../Head")
+component_container = NodePath("..")
 
-[editable path="StartNode"]
+[editable path="Head"]

@@ -31,7 +31,6 @@ func pull_toward_anchor2():
 			var point_2 = points[point_amount - i - 1]
 			points[point_amount - i - 2] = constrain_distance(point_1, point_2, point_separation)
 
-
 # Project point onto circle around anchor
 func constrain_distance(point: Vector2, anchor: Vector2, distance: float) -> Vector2:
 	var direction: Vector2 = point - anchor
