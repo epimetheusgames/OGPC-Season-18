@@ -70,3 +70,4 @@ func remove_weapon(hand: String) -> void:
 		both_hands_weapon = null
 	else:
 		print("ERROR: Invalid hand for remove_weapon call. Printing stack.")
+		print_stack()

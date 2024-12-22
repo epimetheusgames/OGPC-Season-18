@@ -32,10 +32,6 @@ func _client_joined(client_id: int, client_name: String):
 	add_child(client_player)
 	client_player.node_owner = client_id
 	
-	await get_tree().create_timer(10).timeout
-	
-	client_player.position = Vector2.ZERO
-	
 func _get_player_node(id: int) -> Entity:
 	var client_player: Entity = load(spawn_filepath).instantiate()
 	client_player.name = str(id)

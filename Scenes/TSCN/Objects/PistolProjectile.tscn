@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://d24oi85rw114u"]
+[gd_scene load_steps=10 format=3 uid="uid://d24oi85rw114u"]
 
 [ext_resource type="Script" path="res://Scripts/Objects/PistolProjectile.gd" id="1_0erac"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_yd357"]
+[ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerSpecialSyncComponent.gd" id="3_b7twj"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="3_mdrr1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t1ndh"]
@@ -60,5 +61,10 @@ center_of_mass = NodePath("..")
 gravity = 32
 buoyancy_accel = 2.0
 max_buoyancy_vel = 25.0
+
+[node name="MultiplayerSpecialSyncComponent" type="Node" parent="." node_paths=PackedStringArray("on")]
+script = ExtResource("3_b7twj")
+var_names = Array[String](["global_position", "linear_velocity", "rotation"])
+on = NodePath("..")
 
 [connection signal="area_entered" from="PistolProjectile/EnemyDetector" to="PistolProjectile" method="_on_area_entered"]

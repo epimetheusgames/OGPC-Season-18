@@ -36,11 +36,16 @@ func attack() -> void:
 		$TranquilizerGunSprite.play("Shoot")
 		
 		shooting = true
-		var bullet = loaded_bullet.instantiate()
-		diver.get_parent().add_child(bullet, true)
-		bullet.linear_velocity  = (Vector2.from_angle(global_rotation) * bullet_velocity * 60 + diver.velocity)
-		bullet.rotation = global_rotation + PI / 2.0
-		bullet.global_position = $BulletShootPosition.global_position
+		if diver._is_node_owner() || !Global.is_multiplayer:
+			spawn_bullet($BulletShootPosition.global_position, (Vector2.from_angle(global_rotation) * bullet_velocity * 60 + diver.velocity), global_rotation + PI / 2.0)
+			Global.godot_steam_abstraction.run_remote_function(self, "spawn_bullet", [$BulletShootPosition.global_position, (Vector2.from_angle(global_rotation) * bullet_velocity * 60 + diver.velocity), global_rotation + PI / 2.0])
+
+func spawn_bullet(pos: Vector2, velocity: Vector2, rot: float) -> void:
+	var bullet = loaded_bullet.instantiate()
+	diver.get_parent().add_child(bullet, true)
+	bullet.linear_velocity = velocity
+	bullet.rotation = rot
+	bullet.global_position = pos
 
 func _on_tranquilizer_gun_sprite_animation_finished() -> void:
 	if $TranquilizerGunSprite.animation == "Shoot":
