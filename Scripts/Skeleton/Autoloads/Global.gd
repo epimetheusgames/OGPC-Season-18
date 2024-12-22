@@ -4,7 +4,7 @@
 extends Node
 
 var root_node: Node
-var save_load_framework: Node
+var save_load_framework: SaveLoadFramework
 var game_skeleton_node: Node
 var ui_root_node: Control
 var game_root_node: Node
@@ -15,7 +15,6 @@ var is_multiplayer: bool
 var dialog_text_node: Node2D
 var boids_calculator_node: BoidsCalculator
 var player: Diver
-
 var dialog_core: Node2D
 var godot_steam_abstraction: GodotSteamAbstraction
 

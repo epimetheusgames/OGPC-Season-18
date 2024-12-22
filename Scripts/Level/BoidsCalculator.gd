@@ -59,6 +59,9 @@ func _ready() -> void:
 	semaphore = Semaphore.new()
 	exit_thread = false
 	
+	await Global.save_load_framework.game_started
+	await get_tree().create_timer(1)
+	
 	thread = Thread.new()
 	thread.start(_boids_compute)
 	
@@ -91,6 +94,9 @@ func _process(delta: float) -> void:
 
 # Runs the GPU compute shader every frame! 
 func _boids_compute() -> void:
+	# Magic^TM delay fixes everything...
+	OS.delay_msec(300)
+	
 	while true:
 		semaphore.wait()
 		

@@ -27,6 +27,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="22_bmqry"]
+
 [ext_resource type="PackedScene" uid="uid://bn4kt5yw10r8y" path="res://Scenes/TSCN/Entities/Entity/Leviathan.tscn" id="26_hqg88"]
 
 [sub_resource type="Resource" id="Resource_pwaxv"]
@@ -180,9 +181,6 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 [node name="Mission1" type="Node2D"]
 
 [node name="LevelContainer" type="Node2D" parent="."]
-
-[node name="Leviathan" parent="LevelContainer" instance=ExtResource("26_hqg88")]
-position = Vector2(917, 899)
 
 [node name="Player" type="Node2D" parent="LevelContainer"]
 
@@ -373,7 +371,6 @@ render_target_update_mode = 4
 
 [node name="StaticShadowPass" type="SubViewport" parent="ShadowPipeline"]
 transparent_bg = true
-msaa_2d = 3
 use_debanding = true
 use_hdr_2d = true
 size = Vector2i(1920, 1080)
@@ -415,7 +412,6 @@ texture = SubResource("ViewportTexture_noj7m")
 
 [node name="MovingShadowBlurPass" type="SubViewport" parent="ShadowPipeline"]
 transparent_bg = true
-use_hdr_2d = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
