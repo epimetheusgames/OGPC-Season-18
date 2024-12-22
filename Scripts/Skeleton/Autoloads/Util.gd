@@ -10,7 +10,7 @@ static func multiframe_function_batches_on_group(group: Array[Node], function_na
 		print("ERROR: Trying to call function batches with a group size not divisible by batch size. The last few objects will not have their functions called. Printing stack trace.")
 		print_stack()
 	
-	for i in range(int(group.size() / batch_size)):
+	for i in range(int(group.size() / float(batch_size))):
 		for j in range(batch_size):
 			group[i * batch_size + j].callv(function_name, args)
 		

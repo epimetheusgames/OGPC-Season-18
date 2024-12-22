@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 	# Update the arrow rotation
 	arrow.global_rotation = diver.get_diver_movement().get_current_angle()
 	
-	var osc_speed: float =  diver.velocity.length() / 100
+	osc_speed = diver.velocity.length() / 100
 	
 	leg_osc_counter1 += delta * osc_speed
 	leg_osc_counter2 += delta * osc_speed

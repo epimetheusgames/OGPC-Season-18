@@ -36,7 +36,8 @@ func _ready() -> void:
 	## Tests for GodotSteam stun
 	# Initialize steam
 	var initialize_response: Dictionary = Steam.steamInitEx()
-	print("DEBUG: Steam initialization status: %s " % initialize_response)
+	if Global.verbose_debug:
+		print("DEBUG: Steam initialization status: %s " % initialize_response)
 	
 	if initialize_response["status"] > 0:
 		print("ERROR: Failed to initialize Steam, shutting down.") 
@@ -67,13 +68,14 @@ func _ready() -> void:
 		get_lobby_list()
 		await Steam.lobby_match_list
 		
-		var lobby_join_id: int = 0
+		# TODO: This variable will be used at some point.
+		var _lobby_join_id: int = 0
 		for lobby in lobbies_list:
 			if lobby[1] == "TEST":
 				join_lobby(lobby[0])
 				lobby_joined.emit()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 	
 	if lobby_id > 0:
@@ -88,17 +90,17 @@ func ext_join_lobby(lobby_index: int):
 func get_lobby_list() -> void:
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
 	
-	print("DEBUG: Requesting lobby list.")
+	if Global.verbose_debug:
+		print("DEBUG: Requesting lobby list.")
 	Steam.requestLobbyList()
 
 func check_command_line() -> void:
 	var these_arguments: Array = OS.get_cmdline_args()
 	
-	if these_arguments.size() > 0:
-		if these_arguments[0] == "+connect_lobby":
-			if int(these_arguments[1]) > 0:
-				print("DEBUG: Command line lobby ID: %s" % these_arguments[1])
-				join_lobby(int(these_arguments[1]))
+	if these_arguments.size() > 0 && these_arguments[0] == "+connect_lobby" && int(these_arguments[1]) > 0:
+		if Global.verbose_debug:
+			print("DEBUG: Command line lobby ID: %s" % these_arguments[1])
+		join_lobby(int(these_arguments[1]))
 
 func create_lobby(lobby_name: String, lobby_mode: String) -> void:
 	if lobby_id == 0:
@@ -107,7 +109,8 @@ func create_lobby(lobby_name: String, lobby_mode: String) -> void:
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_members_max)
 
 func join_lobby(this_lobby_id: int) -> void:
-	print("DEBUG: Attempting to join lobby %s" % this_lobby_id)
+	if Global.verbose_debug:
+		print("DEBUG: Attempting to join lobby %s" % this_lobby_id)
 	lobby_members.clear()
 	Steam.joinLobby(this_lobby_id)
 
@@ -139,13 +142,14 @@ func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, resp
 		for member in lobby_members:
 			user_joined_lobby.emit(member["steam_id"], member["steam_name"])
 	else:
-		print("DEBUG: Failed to join the lobby, but I'm not gonna tell you what the error is.")
-		print("DEBUG: Fine, I'll at least tell you the number, it's %s" % response)
+		print("ERROR: Failed to join the lobby, but I'm not gonna tell you what the error is.")
+		print("ERROR: Fine, I'll at least tell you the number, it's %s" % response)
 
-func _on_lobby_created(connect: int, this_lobby_id: int) -> void:
-	if connect == 1:
+func _on_lobby_created(connect_info: int, this_lobby_id: int) -> void:
+	if connect_info == 1:
 		lobby_id = this_lobby_id
-		print("DEBUG: Created a lobby: %s" % lobby_id)
+		if Global.verbose_debug:
+			print("DEBUG: Created a lobby: %s" % lobby_id)
 		
 		Steam.setLobbyJoinable(lobby_id, true)
 		Steam.setLobbyData(lobby_id, "name", new_lobby_name)
@@ -154,15 +158,16 @@ func _on_lobby_created(connect: int, this_lobby_id: int) -> void:
 		user_joined_lobby.emit(steam_id, Steam.getFriendPersonaName(steam_id))
 		
 		var set_relay: bool = Steam.allowP2PPacketRelay(true)
-		print("DEBUG: Allowing Steam to relay backup: %s" % set_relay)
+		if Global.verbose_debug:
+			print("DEBUG: Allowing Steam to relay backup: %s" % set_relay)
 
 func _on_lobby_match_list(these_lobbies: Array) -> void:
 	for this_lobby in these_lobbies:
 		var lobby_name: String = Steam.getLobbyData(this_lobby, "name")
 		var lobby_mode: String = Steam.getLobbyData(this_lobby, "mode")
 		var lobby_num_members: int = Steam.getNumLobbyMembers(this_lobby)
-		var lobby_data := [this_lobby, lobby_name, lobby_mode, lobby_num_members]
-		lobbies_list.append(lobby_data)
+		var formatted_lobby_data := [this_lobby, lobby_name, lobby_mode, lobby_num_members]
+		lobbies_list.append(formatted_lobby_data)
 
 func read_all_packets(read_count: int = 0):
 	if read_count >= PACKET_READ_LIMIT:
@@ -176,14 +181,16 @@ func read_all_packets(read_count: int = 0):
 func _on_session_request(remote_id: int) -> void:
 	# Get the requester's name
 	var this_requester: String = Steam.getFriendPersonaName(remote_id)
-	print("DEBUG: %s is requesting a P2P session" % this_requester)
+	
+	if Global.verbose_debug:
+		print("DEBUG: %s is requesting a P2P session" % this_requester)
 	
 	Steam.acceptP2PSessionWithUser(remote_id)
 	
 	make_handshake()
 
-func _on_session_connect_fail(steam_id: int, session_error: int) -> void:
-	print("ERROR: Steam connect failed for target %s, the error code is %s, go figure out what it means for yourself." % [steam_id, session_error])
+func _on_session_connect_fail(failed_steam_id: int, session_error: int) -> void:
+	print("ERROR: Steam connect failed for target %s, the error code is %s, go figure out what it means for yourself." % [failed_steam_id, session_error])
 
 func _on_persona_change(this_steam_id: int, _flag: int) -> void:
 	if lobby_id > 0:
@@ -193,10 +200,11 @@ func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id:
 	var changer_name: String = Steam.getFriendPersonaName(change_id)
 	
 	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
-		print("DEBUG: %s has joined the lobby." % changer_name)
+		if Global.verbose_debug:
+			print("DEBUG: %s has joined the lobby." % changer_name)
 		user_joined_lobby.emit(change_id, changer_name)
 	
-	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_LEFT:
+	elif chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_LEFT && Global.verbose_debug:
 		print("DEBUG: %s has left the lobby." % changer_name)
 	
 	get_lobby_members()
@@ -212,7 +220,8 @@ func get_lobby_members() -> void:
 		lobby_members.append({"steam_id": member_steam_id, "steam_name": member_steam_name})
 
 func make_handshake():
-	print("DEBUG: Sending P2P handshake to the lobby.")
+	if Global.verbose_debug:
+		print("DEBUG: Sending P2P handshake to the lobby.")
 	send_packet(0, {"message": "handshake", "from": steam_id})
 
 func sync_var(node: Node, variable_name: String) -> void:
@@ -227,6 +236,7 @@ func sync_var_in_group(group: String, variable_name: String) -> void:
 	var variables = []
 	for node in get_tree().get_nodes_in_group(group):
 		variables.append(node.get(variable_name))
+		
 	send_packet(0, {
 		"message": "sync_group_var",
 		"group": group,
@@ -249,15 +259,16 @@ func read_packet() -> void:
 	if packet_size > 0:
 		var this_packet: Dictionary = Steam.readP2PPacket(packet_size, 0)
 		
-		if this_packet.is_empty() || this_packet == null:
-			printerr("WARNING: Read an empty packet with non-zero size!")
+		if this_packet.is_empty() || this_packet == null && Global.verbose_debug:
+				printerr("WARNING: Read an empty packet with non-zero size!")
 		
 		var packet_sender: int = this_packet["remote_steam_id"]
 		var packet_code: PackedByteArray = this_packet["data"]
 		var readable_data: Dictionary = bytes_to_var(packet_code)
 		
 		if readable_data["message"] == "handshake":
-			print("DEBUG: Handshake received from " + Steam.getFriendPersonaName(readable_data["from"]))
+			if Global.verbose_debug:
+				print("DEBUG: Handshake received from " + Steam.getFriendPersonaName(readable_data["from"]))
 			handshake_completed_ids.append(packet_sender)
 		
 		elif readable_data["message"] == "remote_print":
@@ -270,7 +281,7 @@ func read_packet() -> void:
 			var variable_value = readable_data["var_val"]
 			if get_node_or_null(node_path):
 				get_node(node_path).set(variable_name, variable_value)
-			else:
+			elif Global.verbose_debug:
 				print("ERROR: Remote set on null node. This isn't neccesarily bad but it might mean some things are out of synced and something broke.")
 		
 		elif readable_data["message"] == "sync_group_var":
@@ -286,16 +297,16 @@ func read_packet() -> void:
 			if readable_data["args_as_node_paths"]:
 				for i in range(len(function_args)):
 					function_args[i] = get_node(function_args[i])
-					if !function_args[i]:
+					if !function_args[i] && Global.verbose_debug:
 						print("ERROR: Remote function call on node has an argument to a nonexistant node path.")
 						return
 			
 			if get_node_or_null(node_path):
 				get_node(node_path).callv(function_name, function_args)
-			else:
+			elif Global.verbose_debug:
 				print("ERROR: Remote function call on null node. This isn't neccesarily bad but it might mean some things are out of synced and something broke.")
 		
-		else:
+		elif Global.verbose_debug:
 			print("ERROR: Invalid packet received. Data: " + str(readable_data))
 
 # If this_target is 0, send to all peers.

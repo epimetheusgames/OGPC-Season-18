@@ -13,7 +13,7 @@ func _ready() -> void:
 func _physics_process(delta):
 	movement(delta)
 
-func movement(delta):
+func movement(_delta):
 	if !Global.is_multiplayer || _is_node_owner():
 		var input_vector = Vector2.ZERO
 		

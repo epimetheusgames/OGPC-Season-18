@@ -42,8 +42,8 @@ func _process(delta: float) -> void:
 	_physics_velocity /= 2.0
 	
 	if !reached_target:
-		var target_position: Vector2 = $FishNavigation.get_next_path_position()
-		var target_velocity := (target_position - position).normalized()
+		var target_path_position: Vector2 = $FishNavigation.get_next_path_position()
+		var target_velocity := (target_path_position - position).normalized()
 		
 		if player_visible:
 			target_velocity *= 1 + settings.agressiveness

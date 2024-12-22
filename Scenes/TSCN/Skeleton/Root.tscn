@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=20 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
@@ -6,7 +6,10 @@
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
 [ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="5_gpbxv"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="6_krpp0"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="7_u3v81"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="8_1a1ie"]
 [ext_resource type="Script" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
 [ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
@@ -16,10 +19,26 @@
 script = ExtResource("3_e6kdq")
 file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
 
+[sub_resource type="Resource" id="Resource_mkq3y"]
+script = ExtResource("3_e6kdq")
+file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
+
+[sub_resource type="Resource" id="Resource_564pu"]
+script = ExtResource("6_krpp0")
+mission_filepath = SubResource("Resource_mkq3y")
+title = "First mission"
+description = "Kill a fish"
+unlocks = Array[ExtResource("3_e6kdq")]([])
+
+[sub_resource type="Resource" id="Resource_1tmkv"]
+script = ExtResource("7_u3v81")
+missions = Array[ExtResource("6_krpp0")]([SubResource("Resource_564pu")])
+
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
 
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
+verbose_debug = true
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
@@ -36,6 +55,10 @@ script = ExtResource("2_i3ogj")
 game_container = NodePath("../../Game/GameContainer")
 ui_root_node_path = NodePath("../../UI")
 level_list = Array[ExtResource("3_e6kdq")]([SubResource("Resource_ur184")])
+
+[node name="MissionSystem" type="Node" parent="Skeleton"]
+script = ExtResource("5_gpbxv")
+default_mission_tree = SubResource("Resource_1tmkv")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

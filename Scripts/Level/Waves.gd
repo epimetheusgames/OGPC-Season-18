@@ -16,7 +16,7 @@ extends Node2D
 		if ready_called:
 			_ready()
 
-var multiplier = 4
+var multiplier = 8
 var spring_positions = []
 var spring_velocities = []
 var boat_index = 20
