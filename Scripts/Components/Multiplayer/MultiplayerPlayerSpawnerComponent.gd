@@ -6,6 +6,9 @@ extends BaseComponent
 @export_file() var spawn_filepath: String 
 
 func _ready() -> void:
+	_ready_multiplayer_player_spawner()
+
+func _ready_multiplayer_player_spawner() -> void:
 	_ready_base_component()
 	Global.godot_steam_abstraction.user_joined_lobby.connect(_client_joined)
 

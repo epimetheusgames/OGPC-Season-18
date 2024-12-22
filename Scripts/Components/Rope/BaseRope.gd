@@ -24,7 +24,7 @@ func _ready() -> void:
 	_ready_rope()
 
 func _ready_rope():
-	super._ready_base_component()
+	_ready_base_component()
 	
 	points.resize(point_amount)
 	points.fill(Vector2(0, 0))

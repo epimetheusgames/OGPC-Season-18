@@ -8,7 +8,7 @@ var editor_offset: Vector2
 
 func _ready() -> void:
 	editor_offset = position
-	print(position)
+	#print(position)
 
 func _physics_process(delta: float) -> void:
 	global_position += velocity * delta

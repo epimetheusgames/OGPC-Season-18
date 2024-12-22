@@ -27,7 +27,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="22_bmqry"]
-[ext_resource type="PackedScene" uid="uid://cek510kfqmfha" path="res://Scenes/TSCN/Entities/Entity/Leviathan.tscn" id="26_hqg88"]
+[ext_resource type="PackedScene" uid="uid://bn4kt5yw10r8y" path="res://Scenes/TSCN/Entities/Entity/Leviathan.tscn" id="26_hqg88"]
 
 [sub_resource type="Resource" id="Resource_pwaxv"]
 resource_local_to_scene = true
