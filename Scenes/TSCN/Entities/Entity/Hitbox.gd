@@ -7,4 +7,3 @@ func _ready():
 	dialog_hitbox.shape = RectangleShape2D.new()
 	dialog_hitbox.shape.size = get_parent().get_node("Hitbox").shape.size + Vector2(get_parent().dialog_hitbox_size,get_parent().dialog_hitbox_size)
 	self.get_parent().get_node("DialogHitbox").add_child(dialog_hitbox)
-	print("edging")

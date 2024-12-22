@@ -183,7 +183,6 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 [node name="Diver" parent="LevelContainer/Player" node_paths=PackedStringArray("water_manager") instance=ExtResource("1_b33aw")]
 position = Vector2(1229, 1113)
 water_manager = NodePath("../../Level/Waves")
-uid = null
 
 [node name="Camera2D" type="Camera2D" parent="LevelContainer/Player/Diver"]
 

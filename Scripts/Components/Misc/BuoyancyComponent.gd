@@ -18,14 +18,15 @@ var bouyancy_velocity := Vector2.ZERO
 var is_in_air := false
 
 func _ready() -> void:
-	component_name = "BuoyancyComponent"
+	_ready_buoyancy()
+
+func _ready_buoyancy() -> void:
+	_ready_base_component()
 	
 	if waves:
 		polygon = waves.get_node("Line2D")
 	else:
 		print("ERROR: Buoyancy component at path " + str(get_path()) + " has no waves.")
-	
-	_base_component_ready_post()
 
 func _physics_process(delta: float) -> void:
 	if !waves:

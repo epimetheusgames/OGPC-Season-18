@@ -20,12 +20,10 @@ metadata/_edit_lock_ = true
 [node name="ReelLineAnchor" type="Node2D" parent="."]
 position = Vector2(65, -7)
 
-[node name="ReelLine" type="Node2D" parent="." node_paths=PackedStringArray("line")]
+[node name="ReelLine" type="Node2D" parent="."]
 script = ExtResource("4_lm3mr")
 iterations = 50
-nodes_amount = 20
 gravity = Vector2(0, 0)
-line = NodePath("Line2D")
 
 [node name="Line2D" type="Line2D" parent="ReelLine"]
 width = 3.0

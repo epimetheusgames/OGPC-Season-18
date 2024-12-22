@@ -12,9 +12,11 @@ extends BaseHitboxComponent
 signal damage_taken(damage_ammount: int)
 
 func _ready() -> void:
-	_base_hitbox_ready()
-	
+	_ready_hurtbox()
+
+func _ready_hurtbox() -> void:
 	component_name = "HurtboxComponent"
+	_base_hitbox_ready() 
 	
 	# Connect signals
 	if hurtbox:
@@ -29,9 +31,8 @@ func _ready() -> void:
 		hurtbox_node.collision_mask = Global.bitmask_conversion["Player Attackbox / Enemy Hurtbox"]
 	if hitbox_type == HITBOX_TYPE.ENTITY_INTERACT:
 		hurtbox_node.collision_mask = Global.bitmask_conversion["Interaction"]
-	
-	_base_component_ready_post()
-	
+
+
 func _area_entered(area: Area2D) -> void:
 	if not attachable_health_component:
 		return

@@ -2,15 +2,14 @@
 class_name BaseComponent
 extends Node
 
-
-var component_name = "BaseComponent"
-
 @export_node_path("Entity") var component_container
 
-func _ready() -> void:
-	_base_component_ready_post()
+var component_name: String = ""
 
-func _base_component_ready_post() -> void:
+func _ready() -> void:
+	_ready_base_component()
+
+func _ready_base_component() -> void:
 	if !component_container:
 		print("WARNING: Component at path " + str(get_path()) + " does not have a container.")
 		return

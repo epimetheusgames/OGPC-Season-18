@@ -9,9 +9,10 @@ extends BaseComponent
 @export var gd_sync_node_value_names: Array[String] = []
 
 func _ready() -> void:
-	component_name = "MultiplayerBatchSyncComponent"
-	
-	_base_component_ready_post()
+	_ready_multiplayer_batch_sync()
+
+func _ready_multiplayer_batch_sync() -> void:
+	_ready_base_component()
 	
 	await get_tree().create_timer(3).timeout
 	

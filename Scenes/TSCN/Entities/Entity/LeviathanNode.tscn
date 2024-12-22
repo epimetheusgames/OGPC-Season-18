@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwxcjl4jrkyw3"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Enemy/LeviathanNode.gd" id="1_dth6h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pq0sw"]
+radius = 37.1214
+
+[node name="LeviathanSegment" type="CollisionShape2D"]
+shape = SubResource("CircleShape2D_pq0sw")
+script = ExtResource("1_dth6h")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+z_index = -1
+polygon = PackedVector2Array(-40, 2, -38, -32, -18, -36, 7, -43, 26, -35, 120, 4, 44, 17, 25, 38, 1, 39, -31, 35)
