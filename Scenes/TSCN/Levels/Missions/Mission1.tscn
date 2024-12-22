@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=58 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
@@ -27,11 +27,6 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="22_bmqry"]
-
-[sub_resource type="Resource" id="Resource_pwaxv"]
-resource_local_to_scene = true
-script = ExtResource("17_j8dce")
-uid = 1830
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
@@ -188,7 +183,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 [node name="Diver" parent="LevelContainer/Player" node_paths=PackedStringArray("water_manager") instance=ExtResource("1_b33aw")]
 position = Vector2(1229, 1113)
 water_manager = NodePath("../../Level/Waves")
-uid = SubResource("Resource_pwaxv")
+uid = null
 
 [node name="Camera2D" type="Camera2D" parent="LevelContainer/Player/Diver"]
 

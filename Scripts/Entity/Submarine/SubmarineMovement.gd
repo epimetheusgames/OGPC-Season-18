@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 	update_movement_velocity(delta * 60)
 
 func get_input_direction() -> int:
-	var input_direction = 0
+	input_direction = 0
 	
 	if Input.is_action_pressed("right"):
 		input_direction += 1

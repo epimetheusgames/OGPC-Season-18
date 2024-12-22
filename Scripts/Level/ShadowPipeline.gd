@@ -26,7 +26,7 @@ func _ready():
 	
 	$Final.visible = true
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# These static shadows aren't moving technically but they are relative to 
 	# the player camera.
 	_remove_all_occluders($StaticShadowPass/OccludersContainer)
