@@ -14,6 +14,7 @@ extends Node
 			if filepath == null:
 				filepath = FilePathResource.new()
 @export var save_encrypted := false
+@export var default_level: FilePathResource
 
 signal game_started(slot_num: int)
 
@@ -148,8 +149,7 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	if custom_mission:
 		load_level(custom_mission.mission_filepath.file)
 	else:
-		print("ERROR: Actually no default level yet so nothing will load.")
-		return
+		load_level(default_level.file)
 
 func load_level(level_path: String):
 	if !ui_root_node_path:

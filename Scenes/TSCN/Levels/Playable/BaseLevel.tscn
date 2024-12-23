@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmv7365ahqee5"]
+[gd_scene load_steps=2 format=3 uid="uid://c0nn12ilucaoj"]
 
-[ext_resource type="PackedScene" uid="uid://cld3bfg3e67wa" path="res://Scenes/TSCN/UI/MissionUiBox.tscn" id="1_42acu"]
+[ext_resource type="PackedScene" uid="uid://c38y5lkdchimf" path="res://Scenes/TSCN/UI/MissionUiBox.tscn" id="1_42acu"]
 
 [node name="BaseLevel" type="Node2D"]
 

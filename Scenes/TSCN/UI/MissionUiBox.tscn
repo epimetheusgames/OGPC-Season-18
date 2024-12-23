@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cld3bfg3e67wa"]
+[gd_scene load_steps=11 format=3 uid="uid://c38y5lkdchimf"]
 
 [ext_resource type="Script" path="res://Scripts/UI/MissionUiBox.gd" id="1_0up1m"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="1_xywor"]
-[ext_resource type="Resource" uid="uid://dp7vinigeqpme" path="res://Scenes/Resource/Level/Mission1.tres" id="2_olbpw"]
+[ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="2_olbpw"]
 
 [sub_resource type="Gradient" id="Gradient_2mbfx"]
 
@@ -42,8 +42,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1630.0
-offset_bottom = -790.0
+offset_left = 28.0
+offset_top = 15.0
+offset_right = -1602.0
+offset_bottom = -775.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0up1m")
@@ -106,3 +108,5 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_cxoof")
 theme_override_styles/normal = SubResource("StyleBoxFlat_fddsw")
 icon_alignment = 1
 metadata/_edit_lock_ = true
+
+[connection signal="button_up" from="MissionButton" to="." method="_on_mission_button_button_up"]
