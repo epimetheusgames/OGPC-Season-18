@@ -32,6 +32,13 @@ var leg_osc_counter1: float = 0
 var leg_osc_counter2: float = 0
 var osc_speed: float = 2.0
 
+func _ready() -> void:
+	var mod_stack: SkeletonModificationStack2D = $Skeleton.get_modification_stack()
+	var arm_mod1: SkeletonModification2D = mod_stack.get_modification(0)
+	var arm_mod2: SkeletonModification2D = mod_stack.get_modification(0)
+	var leg_mod1: SkeletonModification2D = mod_stack.get_modification(0)
+	var leg_mod2: SkeletonModification2D = mod_stack.get_modification(0)
+
 func _process(delta: float) -> void:
 	# Update the arrow rotation
 	arrow.global_rotation = diver.get_diver_movement().get_current_angle()

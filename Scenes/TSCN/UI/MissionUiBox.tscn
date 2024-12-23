@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=3 uid="uid://cld3bfg3e67wa"]
+
+[ext_resource type="Script" path="res://Scripts/UI/MissionUiBox.gd" id="1_0up1m"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="1_xywor"]
+[ext_resource type="Resource" uid="uid://dp7vinigeqpme" path="res://Scenes/Resource/Level/Mission1.tres" id="2_olbpw"]
+
+[sub_resource type="Gradient" id="Gradient_2mbfx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bo5ax"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u8vmk"]
+width = 217
+height = 200
+color_ramp = SubResource("Gradient_2mbfx")
+noise = SubResource("FastNoiseLite_bo5ax")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2vlu"]
+bg_color = Color(0.1188, 0.162653, 0.22, 1)
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26ulq"]
+bg_color = Color(0.47, 0.47, 0.47, 0)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.0918, 0.124383, 0.17, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cxoof"]
+bg_color = Color(0, 0, 0, 0.145098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fddsw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="MissionUIBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1630.0
+offset_bottom = -790.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0up1m")
+associated_mission = ExtResource("2_olbpw")
+
+[node name="MissionTexture" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 290.0
+offset_bottom = 204.0
+texture = SubResource("NoiseTexture2D_u8vmk")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 194.0
+offset_right = 291.0
+offset_bottom = 290.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l2vlu")
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 144.0
+offset_bottom = 36.0
+theme = ExtResource("1_xywor")
+theme_override_font_sizes/font_size = 22
+text = "Mission Title"
+metadata/_edit_lock_ = true
+
+[node name="Description" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 37.0
+offset_right = 278.0
+offset_bottom = 84.0
+theme_override_colors/default_color = Color(0.634965, 0.634965, 0.634965, 1)
+theme_override_font_sizes/normal_font_size = 14
+text = "Here's a really really long description that fills up the text box."
+metadata/_edit_lock_ = true
+
+[node name="Border" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -7.0
+offset_top = -5.0
+offset_right = 297.0
+offset_bottom = 290.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_26ulq")
+metadata/_edit_lock_ = true
+
+[node name="MissionButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = -7.0
+offset_top = -5.0
+offset_right = 297.0
+offset_bottom = 290.0
+theme_override_styles/hover = SubResource("StyleBoxFlat_cxoof")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fddsw")
+icon_alignment = 1
+metadata/_edit_lock_ = true

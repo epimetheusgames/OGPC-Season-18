@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmv7365ahqee5"]
+
+[ext_resource type="PackedScene" uid="uid://cld3bfg3e67wa" path="res://Scenes/TSCN/UI/MissionUiBox.tscn" id="1_42acu"]
+
+[node name="BaseLevel" type="Node2D"]
+
+[node name="MissionUIBox" parent="." instance=ExtResource("1_42acu")]
+offset_left = 771.0
+offset_top = 196.0
+offset_right = 771.0
+offset_bottom = 196.0

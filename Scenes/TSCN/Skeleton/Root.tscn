@@ -1,38 +1,28 @@
-[gd_scene load_steps=20 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=19 format=3 uid="uid://cgroth3nseo6"]
 
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
+[ext_resource type="Script" uid="uid://cpcx3o3l1ot5k" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
+[ext_resource type="Script" uid="uid://xbtxx41o6kwx" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
+[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
-[ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
+[ext_resource type="Script" uid="uid://ikyxxfvqr0v7" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="5_gpbxv"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="6_krpp0"]
-[ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="7_u3v81"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="8_1a1ie"]
-[ext_resource type="Script" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
-[ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
-[ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
+[ext_resource type="Script" uid="uid://by5vx2ueocu6p" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="5_gpbxv"]
+[ext_resource type="Script" uid="uid://dkwpi7b8msow2" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="6_krpp0"]
+[ext_resource type="Script" uid="uid://b8mfn5wlw7u7c" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
+[ext_resource type="Resource" uid="uid://dp7vinigeqpme" path="res://Scenes/Resource/Level/Mission1.tres" id="7_27r5q"]
+[ext_resource type="Script" uid="uid://cciubioihs8jn" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="7_u3v81"]
+[ext_resource type="Script" uid="uid://d0etpqaicfh02" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="8_1a1ie"]
+[ext_resource type="Script" uid="uid://c2ef1nf4sixh3" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
+[ext_resource type="Script" uid="uid://b5in43fhhsplp" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
+[ext_resource type="Script" uid="uid://1cn4ot883p4h" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
 file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
 
-[sub_resource type="Resource" id="Resource_mkq3y"]
-script = ExtResource("3_e6kdq")
-file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
-
-[sub_resource type="Resource" id="Resource_564pu"]
-script = ExtResource("6_krpp0")
-mission_filepath = SubResource("Resource_mkq3y")
-title = "First mission"
-description = "Kill a fish"
-unlocks = Array[ExtResource("3_e6kdq")]([])
-
 [sub_resource type="Resource" id="Resource_1tmkv"]
 script = ExtResource("7_u3v81")
-missions = Array[ExtResource("6_krpp0")]([SubResource("Resource_564pu")])
+missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
 

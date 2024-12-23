@@ -7,7 +7,7 @@ void fragment() {
 	vec4 static_col = texture(static_shadow_tex, SCREEN_UV);
 	vec4 moving_col = texture(moving_shadow_tex, SCREEN_UV);
 	vec4 final_col = max(static_col, moving_col);
-	
+
 	COLOR = mix(COLOR, vec4(0.0, 0.0, 0.0, 1.0), final_col.a);
 }
 
