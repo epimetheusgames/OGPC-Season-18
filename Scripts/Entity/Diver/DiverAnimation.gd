@@ -34,10 +34,19 @@ var osc_speed: float = 2.0
 
 func _ready() -> void:
 	var mod_stack: SkeletonModificationStack2D = $Skeleton.get_modification_stack()
-	var arm_mod1: SkeletonModification2D = mod_stack.get_modification(0)
-	var arm_mod2: SkeletonModification2D = mod_stack.get_modification(0)
-	var leg_mod1: SkeletonModification2D = mod_stack.get_modification(0)
-	var leg_mod2: SkeletonModification2D = mod_stack.get_modification(0)
+	var arm_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
+	var arm_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
+	var leg_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
+	var leg_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
+	arm_mod1.target_nodepath = arm_target1.get_path()
+	arm_mod2.target_nodepath = arm_target2.get_path()
+	leg_mod1.target_nodepath = leg_target1.get_path()
+	leg_mod2.target_nodepath = leg_target2.get_path()
+	mod_stack.set_modification(0, arm_mod1)
+	mod_stack.set_modification(0, arm_mod2)
+	mod_stack.set_modification(0, leg_mod1)
+	mod_stack.set_modification(0, leg_mod2)
+	$Skeleton.set_modification_stack(mod_stack)
 
 func _process(delta: float) -> void:
 	# Update the arrow rotation

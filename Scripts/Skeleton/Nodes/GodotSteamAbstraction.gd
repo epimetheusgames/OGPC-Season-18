@@ -22,6 +22,7 @@ var is_lobby_owner := false
 var handshake_completed_ids: Array[int] = []
 var new_lobby_name: String
 var new_lobby_mode: String
+var packets_queue: Dictionary = {}
 
 signal lobby_joined
 signal user_joined_lobby(user_id, user_name)
@@ -62,6 +63,8 @@ func _ready() -> void:
 	
 	# Check for command line arguments
 	check_command_line()
+	
+	sync_packets()
 	
 	#if "host" in OS.get_cmdline_args():
 		#create_lobby("TEST", "GodotSteam TEST")
@@ -240,10 +243,10 @@ func get_lobby_members() -> void:
 func make_handshake():
 	if Global.verbose_debug:
 		print("DEBUG: Sending P2P handshake to the lobby.")
-	send_packet(0, {"message": "handshake", "from": steam_id})
+	send_packet("HANDSHAKE", {"message": "handshake", "from": steam_id})
 
 func sync_var(node: Node, variable_name: String) -> void:
-	send_packet(0, {
+	send_packet(str(node.get_path())+variable_name, {
 		"message": "sync_var",
 		"node_path": node.get_path(),
 		"var_name": variable_name,
@@ -255,7 +258,7 @@ func sync_var_in_group(group: String, variable_name: String) -> void:
 	for node in get_tree().get_nodes_in_group(group):
 		variables.append(node.get(variable_name))
 		
-	send_packet(0, {
+	send_packet(group+variable_name, {
 		"message": "sync_group_var",
 		"group": group,
 		"var_name": variable_name,
@@ -263,7 +266,7 @@ func sync_var_in_group(group: String, variable_name: String) -> void:
 	})
 
 func run_remote_function(node: Node, function_name: String, args: Array, args_as_node_paths=false):
-	send_packet(0, {
+	send_packet(str(node.get_path())+function_name, {
 		"message": "run_function",
 		"node_path": node.get_path(),
 		"func_name": function_name,
@@ -328,25 +331,39 @@ func read_packet() -> void:
 		elif Global.verbose_debug:
 			print("ERROR: Invalid packet received. Data: " + str(readable_data))
 
+func sync_packets() -> void:
+	while true:
+		await get_tree().create_timer(0.2).timeout
+		
+		#if Global.verbose_debug:
+			#print("DEBUG: Sending packets. Packet queue: " + str(packets_queue))
+		
+		for key in packets_queue.keys():
+			var packet_data: Dictionary = packets_queue[key]
+			var this_target: int = 0
+			var send_type: int = Steam.P2P_SEND_RELIABLE
+			var channel: int = 0
+			
+			# Create a data array to send the data through
+			var this_data: PackedByteArray
+			
+			# Compress data.
+			var compressed_data: PackedByteArray = var_to_bytes(packet_data)
+			this_data.append_array(compressed_data)
+			
+			# If sending a packet to everyone
+			if this_target == 0:
+				# If there is more than one user, send packets
+				if lobby_members.size() > 1:
+					# Loop through all members that aren't us
+					for this_member in lobby_members:
+						if this_member["steam_id"] != steam_id && (this_member["steam_id"] in handshake_completed_ids || packet_data["message"] == "handshake"):
+							Steam.sendP2PPacket(this_member["steam_id"], this_data, send_type, channel)
+			else:
+				Steam.sendP2PPacket(this_target, this_data, send_type, channel)
+		
+		packets_queue = {}
+
 # If this_target is 0, send to all peers.
-func send_packet(this_target: int, packet_data: Dictionary) -> void:
-	var send_type: int = Steam.P2P_SEND_RELIABLE
-	var channel: int = 0
-	
-	# Create a data array to send the data through
-	var this_data: PackedByteArray
-	
-	# Compress data.
-	var compressed_data: PackedByteArray = var_to_bytes(packet_data)
-	this_data.append_array(compressed_data)
-	
-	# If sending a packet to everyone
-	if this_target == 0:
-		# If there is more than one user, send packets
-		if lobby_members.size() > 1:
-			# Loop through all members that aren't us
-			for this_member in lobby_members:
-				if this_member["steam_id"] != steam_id && (this_member["steam_id"] in handshake_completed_ids || packet_data["message"] == "handshake"):
-					Steam.sendP2PPacket(this_member["steam_id"], this_data, send_type, channel)
-	else:
-		Steam.sendP2PPacket(this_target, this_data, send_type, channel)
+func send_packet(key: String, packet_data: Dictionary) -> void:
+	packets_queue[key] = packet_data
