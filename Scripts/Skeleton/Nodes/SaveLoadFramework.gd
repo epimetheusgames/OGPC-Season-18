@@ -15,7 +15,7 @@ extends Node
 				filepath = FilePathResource.new()
 @export var save_encrypted := false
 
-signal game_started
+signal game_started(slot_num: int)
 
 enum LOAD_ERROR {
 	OK,
@@ -166,7 +166,7 @@ func load_level(level_path: String):
 		print("WARNING: SaveLoadFramework contains no game container node path. Level won't start.")
 		return
 	
-	game_started.emit()
+	game_started.emit(Global.current_game_slot)
 	var level_loaded := load(level_path)
 	var instantiated = level_loaded.instantiate()
 	game_container.add_child(instantiated)

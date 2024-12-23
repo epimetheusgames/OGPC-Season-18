@@ -305,6 +305,7 @@ func read_packet() -> void:
 				get_node(node_path).set(variable_name, variable_value)
 			elif Global.verbose_debug:
 				print("ERROR: Remote set on null node. This isn't neccesarily bad but it might mean some things are out of synced and something broke.")
+				print("DEBUG: The path was " + str(node_path))
 		
 		elif readable_data["message"] == "sync_group_var":
 			var nodes_list = get_tree().get_nodes_in_group(readable_data["group"])

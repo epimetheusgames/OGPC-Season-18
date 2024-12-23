@@ -28,6 +28,10 @@ func _ready() -> void:
 	$BuoyancyComponent.waves = water_manager
 
 func _physics_process(_delta: float):
+	if Global.is_multiplayer && has_multiplayer_sync && !_is_node_owner():
+		move_and_slide()
+		return
+	
 	velocity = diver_movement.get_velocity()
 	
 	var target_angle: float = velocity.angle() + PI/2

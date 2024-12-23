@@ -34,6 +34,7 @@ var osc_speed: float = 2.0
 
 func _ready() -> void:
 	var mod_stack: SkeletonModificationStack2D = $Skeleton.get_modification_stack()
+	mod_stack = mod_stack.duplicate(true)
 	var arm_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
 	var arm_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
 	var leg_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
