@@ -40,6 +40,7 @@ size = Vector2(286, 108)
 polygon = PackedVector2Array(-139, -57, 148, -56, 147, 54, -139, 53)
 
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "health_component")]
+motion_mode = 1
 script = ExtResource("1_dd7wo")
 settings = SubResource("Resource_8tk4o")
 forward_direction = Vector2(0, -1)

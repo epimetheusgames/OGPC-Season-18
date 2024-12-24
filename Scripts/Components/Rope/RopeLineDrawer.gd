@@ -1,3 +1,6 @@
+## Draws a rope onto a line with smoothing options
+# Owned by: kaitaobenson
+
 class_name RopeLineDrawer
 extends Line2D
 

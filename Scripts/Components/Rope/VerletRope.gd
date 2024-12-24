@@ -19,8 +19,8 @@ var is_on_screen := true
 var rope_drawer: RopeLineDrawer
 
 func _ready() -> void:
-	_ready_rope()
 	component_name = "VerletRope"
+	_ready_rope()
 	
 	raycast_query = PhysicsRayQueryParameters2D.new()
 	
@@ -73,7 +73,7 @@ func simulate():
 # Apply constraints such as anchor positions and node separation
 func apply_constraints():
 	# Pull toward anchors, and keep node distance constraints
-	if start_pos != Vector2.ZERO:
+	if start_pos_on:
 		verlet_nodes[0].position = start_pos
 	if end_pos_on:
 		verlet_nodes[point_amount - 1].position = end_pos

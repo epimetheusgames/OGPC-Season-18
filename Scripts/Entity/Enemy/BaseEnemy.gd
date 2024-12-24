@@ -33,9 +33,9 @@ enum WANDER_MODE {
 }
 
 func _ready():
-	_enemy_ready()
+	_ready_enemy()
 
-func _enemy_ready() -> void:
+func _ready_enemy() -> void:
 	target_position = position
 	
 	_player_detection_area = Area2D.new()
@@ -76,9 +76,9 @@ func _target_reached() -> void:
 	wander_state = WANDER_MODE.WANDER_POINT_REACHED
 
 func _process(delta: float) -> void:
-	_enemy_process(delta)
+	_process_enemy(delta)
 
-func _enemy_process(delta: float) -> void:
+func _process_enemy(delta: float) -> void:
 	_npc_process(delta)
 	
 	if num_players_in_area == 0:

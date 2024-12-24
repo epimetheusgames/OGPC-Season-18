@@ -14,7 +14,7 @@ func _process(delta):
 	pull_toward_anchor1()
 
 func pull_toward_anchor1():
-	if start_anchor_node:
+	if start_pos_on:
 		points[0] = start_pos
 		
 		for i in range(point_amount - 1):
@@ -23,7 +23,7 @@ func pull_toward_anchor1():
 			points[i + 1] = constrain_distance(point_1, point_2, point_separation)
 
 func pull_toward_anchor2():
-	if end_anchor_node:
+	if end_pos_on:
 		points[point_amount - 1] = end_pos
 		
 		for i in range(point_amount - 1):
