@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=63 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://ckq65xf2cmmwg" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
@@ -28,6 +28,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" uid="uid://c1psbyqa4c16x" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
 [ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/Entity/Leviathan.tscn" id="29_1r7oa"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
@@ -178,6 +179,14 @@ shader_parameter/intensity = 0.2
 shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
+shader = ExtResource("28_ss3wm")
+shader_parameter/inner_radius = 0.1
+shader_parameter/outer_radius = 1.0
+shader_parameter/vignette_strength = 1.0
+shader_parameter/dither_strength = 0.03
+shader_parameter/vignette_color = null
 
 [node name="Mission1" type="Node2D"]
 script = ExtResource("1_314ux")
@@ -492,8 +501,21 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
+[node name="Vignette" type="BackBufferCopy" parent="Shaders"]
+rect = Rect2(0, 0, 1920, 1080)
+
+[node name="ColorRect" type="ColorRect" parent="Shaders/Vignette"]
+material = SubResource("ShaderMaterial_g7l6p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
+visible = false
 
 [node name="DevPanel" parent="UI" instance=ExtResource("1_6r47m")]
 

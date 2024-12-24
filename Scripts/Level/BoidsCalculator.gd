@@ -116,7 +116,7 @@ func _boids_compute() -> void:
 		mutex.unlock()
 		
 		if num_boids_copy == 0:
-			return
+			continue
 		
 		if should_exit: 
 			break
