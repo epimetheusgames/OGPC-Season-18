@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dk5y5253vbhe4"]
 
-[ext_resource type="Script" uid="uid://cixlk6crp4xq5" path="res://Scripts/Entity/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
+[ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" uid="uid://cmh34bsgyx1yg" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_5x2qs"]
 [ext_resource type="Script" uid="uid://c4smdn0ryci46" path="res://Scripts/Entity/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
 [ext_resource type="Script" uid="uid://bnjvarxl3565b" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
