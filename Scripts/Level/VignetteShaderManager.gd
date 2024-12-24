@@ -1,0 +1,13 @@
+extends BackBufferCopy
+
+@export var player: Diver
+
+func _ready() -> void:
+	visible = true
+
+func _process(delta: float) -> void:
+	var mat: ShaderMaterial = $ColorRect.material
+	if player.position.y > 1000 && mat.get_shader_parameter("vignette_strength") < 1:
+		mat.set_shader_parameter("vignette_strength", mat.get_shader_parameter("vignette_strength") + 0.005 * delta * 60)
+	elif mat.get_shader_parameter("vignette_strength") > 0:
+		mat.set_shader_parameter("vignette_strength", mat.get_shader_parameter("vignette_strength") - 0.005 * delta * 60)
