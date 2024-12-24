@@ -12,7 +12,7 @@ func _on_start_button_button_up() -> void:
 	$StartButton.visible = false
 
 func _on_singleplayer_button_button_up() -> void:
-	Global.save_load_framework.start_game(0, Global.mission_system.default_mission_tree.missions[0]) 
+	Global.save_load_framework.start_game(0) 
 
 func _on_multiplayer_button_button_up() -> void:
 	$MultiplayerButton.visible = false
@@ -48,8 +48,8 @@ func _on_multiplayer_host_game_button_button_up() -> void:
 	else:
 		if Global.verbose_debug:
 			print("DEBUG: Starting multiplayer game.")
-		Global.save_load_framework.start_game(0, Global.mission_system.default_mission_tree.missions[0]) 
-		Global.godot_steam_abstraction.run_remote_function(Global.save_load_framework, "start_game_remote", [0, 0])
+		Global.save_load_framework.start_game(0) 
+		Global.godot_steam_abstraction.run_remote_function(Global.save_load_framework, "start_game_remote", [0])
 
 func _on_multiplayer_join_game_button_button_up() -> void:
 	Global.godot_steam_abstraction.join_lobby_by_name($LobbyNameInput.text)
