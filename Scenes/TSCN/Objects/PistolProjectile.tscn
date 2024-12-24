@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://d24oi85rw114u"]
 
 [ext_resource type="Script" path="res://Scripts/Objects/PistolProjectile.gd" id="1_0erac"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_yd357"]
-[ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerSpecialSyncComponent.gd" id="3_b7twj"]
-[ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="3_mdrr1"]
+[ext_resource type="Script" uid="uid://coa0p5vrelt4" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_yd357"]
+[ext_resource type="Script" uid="uid://c0lpbdxcsg0ht" path="res://Scripts/Components/Multiplayer/MultiplayerSpecialSyncComponent.gd" id="3_b7twj"]
+[ext_resource type="Script" uid="uid://c1psbyqa4c16x" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="3_mdrr1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t1ndh"]
 bounce = 0.37

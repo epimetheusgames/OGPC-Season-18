@@ -10,6 +10,8 @@ func _ready():
 func _process(delta: float) -> void:
 	# TODO: This is really bad, fix it at some point.
 	# (By this I mean this whole goddamn function it's horrible)
+	if !get_node_or_null("../../../Level/Waves"):
+		return
 	buoyancy_component.waves = get_node("../../../Level/Waves")
 	
 	if get_parent() is RigidBody2D:
