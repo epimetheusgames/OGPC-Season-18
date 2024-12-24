@@ -4,13 +4,13 @@
 class_name SubmarineMovement
 extends Node2D
 
-const CONST_ACCEL: int = 25
+const CONST_ACCEL: int = 20
 const TAP_ACCEL: int = 50
-const MAX_SPEED: int = 500
-const MAX_ROTATION: float= 90.0
-const ROTATION_RATE: float = 2.0
+const MAX_SPEED: int = 750
+const MAX_ROTATION: float = 30.0
+const ROTATION_RATE: float = 1.5
 
-#@onready var diver = $"../../Diver"
+@onready var diver = Global.player
 
 var current_angle: float = 0.0
 var target_angle: float = 0.0
@@ -18,14 +18,14 @@ var input_direction: int = 0
 var velocity: Vector2 = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-#	if !Global.is_multiplayer || get_parent()._is_node_owner():
-#		if diver.get_state() == "DRIVING_SUBMARINE":
-	update_target_angle(delta)
-	update_current_angle(delta * 60)
-	print(rad_to_deg(current_angle))
-	get_parent().rotation = current_angle
-	input_direction = get_input_direction()
-	update_movement_velocity(delta * 60)
+	if !Global.is_multiplayer || get_parent()._is_node_owner():
+		if diver.get_state() == "DRIVING_SUBMARINE":
+			update_target_angle(delta)
+			update_current_angle(delta * 60)
+			print(rad_to_deg(current_angle))
+			get_parent().rotation = current_angle
+			input_direction = get_input_direction()
+			update_movement_velocity(delta * 60)
 
 func get_input_direction() -> int:
 	input_direction = 0

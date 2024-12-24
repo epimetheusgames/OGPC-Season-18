@@ -32,14 +32,16 @@ func _physics_process(_delta: float):
 		move_and_slide()
 		return
 	
-	velocity = diver_movement.get_velocity()
+	if get_state() != "DRIVING_SUBMARINE":
+		velocity = diver_movement.get_velocity()
 	
-	var target_angle: float = velocity.angle() + PI/2
+		var target_angle: float = velocity.angle() + PI/2
+		
+		var angle_diff: float = angle_difference(rotation, target_angle)
+		rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
 	
-	var angle_diff: float = angle_difference(rotation, target_angle)
-	rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
+		move_and_slide()
 	
-	move_and_slide()
 	
 	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
 		Global.godot_steam_abstraction.sync_var($Animation/ArmIkTarget1, "global_position")
@@ -52,10 +54,13 @@ func get_diver_movement() -> DiverMovement:
 
 func set_state(state : String):
 	if state == "SWIMMING":
+		get_node("Body").disabled = false
 		player_state = STATE_ENUM.SWIMMING
 	elif state == "IN_SUBMARINE":
+		get_node("Body").disabled = false
 		player_state = STATE_ENUM.IN_SUBMARINE
 	elif state == "DRIVING_SUBMARINE":
+		get_node("Body").disabled = true
 		player_state = STATE_ENUM.DRIVING_SUBMARINE
 	else:
 		print("ERROR: Player state " + state + " not found")
