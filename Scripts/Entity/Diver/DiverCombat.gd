@@ -20,7 +20,7 @@ var both_hands_weapon: Weapon
 func _ready():
 	add_weapon("TranquilizerGun", "right")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if left_hand_weapon:
 		left_hand_weapon.hand_primary = diver.diver_animation.get_hand1_position()
 		left_hand_weapon.hand_secondary = diver.diver_animation.get_hand2_position()
@@ -31,13 +31,19 @@ func _process(delta: float) -> void:
 		both_hands_weapon.hand_primary = diver.diver_animation.get_hand1_position()
 		both_hands_weapon.hand_secondary = diver.diver_animation.get_hand2_position()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	if Global.is_multiplayer && diver.has_multiplayer_sync && !diver._is_node_owner():
+		return
+	
 	if Input.is_action_just_pressed("attack") && right_hand_weapon != null:
 		right_hand_weapon.attack()
 	if Input.is_action_just_pressed("secondary_attack") && left_hand_weapon != null:
 		left_hand_weapon.attack()
 
 func move_hand_toward_mouse(hand: String) -> void:
+	if Global.is_multiplayer && diver.has_multiplayer_sync && !diver._is_node_owner():
+		return
+		
 	if hand == "left":
 		diver.diver_animation.arm_target1.global_position = get_global_mouse_position()
 	if hand == "right":
@@ -68,3 +74,4 @@ func remove_weapon(hand: String) -> void:
 		both_hands_weapon = null
 	else:
 		print("ERROR: Invalid hand for remove_weapon call. Printing stack.")
+		print_stack()

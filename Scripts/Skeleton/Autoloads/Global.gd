@@ -17,6 +17,10 @@ var boids_calculator_node: BoidsCalculator
 var player: Diver
 var dialog_core: Node2D
 var godot_steam_abstraction: GodotSteamAbstraction
+var current_game_save: GameSave
+var mission_system: MissionSystem
+var verbose_debug: bool
+var super_efficient: bool
 
 # Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {

@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 		return
 
 func _base_hitbox_ready() -> void:
+	_ready_base_component()
 	component_name = "BaseHitboxComponent"
 	if hurtbox:
 		hurtbox_node = get_node(hurtbox)

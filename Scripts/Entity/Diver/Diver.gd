@@ -23,10 +23,15 @@ var player_state : STATE_ENUM
 
 func _ready() -> void:
 	set_state("SWIMMING")
-	Global.player = self
+	if !Global.player:
+		Global.player = self
 	$BuoyancyComponent.waves = water_manager
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
+	if Global.is_multiplayer && has_multiplayer_sync && !_is_node_owner():
+		move_and_slide()
+		return
+	
 	velocity = diver_movement.get_velocity()
 	
 	var target_angle: float = velocity.angle() + PI/2
@@ -35,6 +40,12 @@ func _physics_process(delta: float):
 	rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
 	
 	move_and_slide()
+	
+	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
+		Global.godot_steam_abstraction.sync_var($Animation/ArmIkTarget1, "global_position")
+		Global.godot_steam_abstraction.sync_var($Animation/ArmIkTarget2, "global_position")
+		Global.godot_steam_abstraction.sync_var($Animation/LegIkTarget1, "global_position")
+		Global.godot_steam_abstraction.sync_var($Animation/LegIkTarget2, "global_position")
 
 func get_diver_movement() -> DiverMovement:
 	return diver_movement

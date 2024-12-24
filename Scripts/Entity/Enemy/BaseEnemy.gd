@@ -33,9 +33,9 @@ enum WANDER_MODE {
 }
 
 func _ready():
-	_enemy_ready()
+	_ready_enemy()
 
-func _enemy_ready() -> void:
+func _ready_enemy() -> void:
 	target_position = position
 	
 	_player_detection_area = Area2D.new()
@@ -76,9 +76,9 @@ func _target_reached() -> void:
 	wander_state = WANDER_MODE.WANDER_POINT_REACHED
 
 func _process(delta: float) -> void:
-	_enemy_process(delta)
+	_process_enemy(delta)
 
-func _enemy_process(delta: float) -> void:
+func _process_enemy(delta: float) -> void:
 	_npc_process(delta)
 	
 	if num_players_in_area == 0:
@@ -119,7 +119,7 @@ func attack() -> void:
 func _generate_view_polygon(angle: float, radius: float) -> PackedVector2Array:
 	var output := PackedVector2Array([Vector2(0, 0)])
 	var start := int(rad_to_deg(forward_direction.normalized().angle()))
-	for i in range(start - int(angle) / 2, start + int(angle) / 2, 10):
+	for i in range(start - int(int(angle) / 2.0), start + int((angle) / 2.0), 10):
 		var fi = i * PI / 180
 		output.append(Vector2(radius * cos(fi), radius * sin(fi)))
 	
@@ -132,10 +132,10 @@ func _update_closest_player():
 		
 	# Else find the closest player
 	else:
-		var closest_dist := 99999999
+		var closest_dist := 99999999.0
 		var closest_ind := 0
 		for i in range(players_list.size()):
-			var distance: int = position.distance_to(players_list[i].position)
+			var distance: float = position.distance_to(players_list[i].position)
 			if distance < closest_dist:
 				closest_dist = distance
 				closest_ind = i

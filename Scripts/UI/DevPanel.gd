@@ -10,7 +10,7 @@ extends Node
 @onready var text_container: VBoxContainer = $"HBoxContainer/Text"
 @onready var button_container: VBoxContainer = $"HBoxContainer/Buttons"
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint():
 		return
 	

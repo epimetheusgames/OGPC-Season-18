@@ -1,25 +1,39 @@
-[gd_scene load_steps=14 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=20 format=3 uid="uid://cgroth3nseo6"]
 
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
+[ext_resource type="Script" uid="uid://cpcx3o3l1ot5k" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
+[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
-[ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
+[ext_resource type="Script" uid="uid://ikyxxfvqr0v7" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
-[ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
+[ext_resource type="Script" uid="uid://by5vx2ueocu6p" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="5_gpbxv"]
+[ext_resource type="Script" uid="uid://dkwpi7b8msow2" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="6_krpp0"]
+[ext_resource type="Script" uid="uid://b8mfn5wlw7u7c" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
+[ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="7_27r5q"]
+[ext_resource type="Script" uid="uid://cciubioihs8jn" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="7_u3v81"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="8_1a1ie"]
-[ext_resource type="Script" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
-[ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
-[ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
+[ext_resource type="Script" uid="uid://c2ef1nf4sixh3" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
+[ext_resource type="Script" uid="uid://b5in43fhhsplp" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
+[ext_resource type="Script" uid="uid://1cn4ot883p4h" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
 file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
 
+[sub_resource type="Resource" id="Resource_wq34i"]
+script = ExtResource("3_e6kdq")
+file = "res://Scenes/TSCN/Levels/Playable/BaseLevel.tscn"
+
+[sub_resource type="Resource" id="Resource_1tmkv"]
+script = ExtResource("7_u3v81")
+missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
+
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
 
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
+verbose_debug = true
+super_efficient = true
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
@@ -36,6 +50,11 @@ script = ExtResource("2_i3ogj")
 game_container = NodePath("../../Game/GameContainer")
 ui_root_node_path = NodePath("../../UI")
 level_list = Array[ExtResource("3_e6kdq")]([SubResource("Resource_ur184")])
+default_level = SubResource("Resource_wq34i")
+
+[node name="MissionSystem" type="Node" parent="Skeleton"]
+script = ExtResource("5_gpbxv")
+default_mission_tree = SubResource("Resource_1tmkv")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -83,6 +102,68 @@ offset_bottom = 392.0
 theme_override_font_sizes/font_size = 36
 text = "Start"
 
+[node name="MultiplayerButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 688.0
+offset_top = 318.0
+offset_right = 945.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Multiplayer"
+
+[node name="SingleplayerButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Singleplayer"
+
+[node name="MultiplayerJoinButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 688.0
+offset_top = 318.0
+offset_right = 945.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Join
+"
+
+[node name="MultiplayerHostButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Host"
+
+[node name="MultiplayerJoinGameButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Join
+"
+
+[node name="MultiplayerHostGameButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Host"
+
 [node name="SettingsButton" type="Button" parent="UI/MainMenu"]
 layout_mode = 0
 offset_left = 824.0
@@ -101,6 +182,32 @@ offset_right = 1081.0
 offset_bottom = 584.0
 theme_override_font_sizes/font_size = 36
 text = "Quit"
+
+[node name="LobbyNameInput" type="LineEdit" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 688.0
+offset_top = 318.0
+offset_right = 945.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+placeholder_text = "Lobby name"
+alignment = 1
+
+[node name="MultiplayerStatus" type="Label" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 595.0
+offset_right = 1080.0
+offset_bottom = 618.0
+horizontal_alignment = 1
+
+[node name="Members" type="RichTextLabel" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 623.0
+offset_right = 1081.0
+offset_bottom = 766.0
 
 [node name="Game" type="Node" parent="."]
 
@@ -158,4 +265,10 @@ disabled = true
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
 [connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]
 [connection signal="button_up" from="UI/MainMenu/StartButton" to="UI/MainMenu" method="_on_start_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerButton" to="UI/MainMenu" method="_on_multiplayer_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/SingleplayerButton" to="UI/MainMenu" method="_on_singleplayer_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerJoinButton" to="UI/MainMenu" method="_on_multiplayer_join_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerHostButton" to="UI/MainMenu" method="_on_multiplayer_host_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerJoinGameButton" to="UI/MainMenu" method="_on_multiplayer_join_game_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerHostGameButton" to="UI/MainMenu" method="_on_multiplayer_host_game_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/QuitButton" to="UI/MainMenu" method="_on_quit_button_button_up"]

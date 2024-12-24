@@ -37,6 +37,8 @@ var exit_thread := false
 
 # Load compute shader, and resize arrays.
 func _ready() -> void:
+	Global.boids_calculator_node = self
+	
 	print(RenderingServer.get_video_adapter_api_version())
 	if RenderingServer.get_video_adapter_api_version().begins_with("3") || RenderingServer.get_video_adapter_api_version().begins_with("4"):
 		print("ERROR: Compatibility (OpenGL) renderer does not support compute shaders. Boids will not run.")
@@ -60,12 +62,9 @@ func _ready() -> void:
 	exit_thread = false
 	
 	await Global.save_load_framework.game_started
-	await get_tree().create_timer(1)
 	
 	thread = Thread.new()
 	thread.start(_boids_compute)
-	
-	Global.boids_calculator_node = self
 	
 	await get_tree().create_timer(5).timeout
 	
@@ -95,11 +94,15 @@ func _process(delta: float) -> void:
 # Runs the GPU compute shader every frame! 
 func _boids_compute() -> void:
 	# Magic^TM delay fixes everything...
+	# EDIT: I realized that we return if the number of boids is zero.
 	OS.delay_msec(300)
 	
 	while true:
+		# Wait for an update call from outside of the thread.
 		semaphore.wait()
 		
+		# Lock the mutex. Whenever the variables that we access are used outside of the thread,
+		# the mutex should be locked then too.
 		mutex.lock()
 		var threads_boids_positions = boids_positions
 		var threads_boids_velocities = boids_velocities
@@ -109,15 +112,18 @@ func _boids_compute() -> void:
 		var should_exit = exit_thread
 		var delta = threads_delta
 		var boids_list = get_tree().get_nodes_in_group("Boids")
-		var num_boids = boids_list.size()
+		var num_boids_copy = boids_list.size()
 		mutex.unlock()
 		
-		if num_boids == 0:
+		if num_boids_copy == 0:
 			return
+		
+		if should_exit: 
+			break
 		
 		# Prepare data for compute shader
 		var global_parameters := PackedFloat32Array([
-			num_boids,
+			num_boids_copy,
 			delta,
 		])
 		var global_parameters_bytes = global_parameters.to_byte_array()
@@ -132,6 +138,7 @@ func _boids_compute() -> void:
 		var rotations_bytes = rotations.to_byte_array()
 		
 		# TODO: This is probably unsafe, create a seperate array of raycasts to set later.
+		# EDIT: I haven't seen any errors, that's not to say there aren't any.
 		mutex.lock()
 		var raycast_data := PackedFloat32Array()
 		for boid in boids_list:
@@ -208,12 +215,13 @@ func _boids_compute() -> void:
 		var compute_list := rd.compute_list_begin()
 		rd.compute_list_bind_compute_pipeline(compute_list, threads_boids_pipeline)
 		rd.compute_list_bind_uniform_set(compute_list, uniform_set, 0)
-		rd.compute_list_dispatch(compute_list, num_boids, 1, 1)
+		rd.compute_list_dispatch(compute_list, num_boids_copy, 1, 1)
 		rd.compute_list_end()
 		
 		# Execute compute shader ... this is not particularly efficient becuase we have to wait 
 		# for the gpu to finish processing, but seeing as we're doing this every frame, I'm not sure 
 		# what else we could do.
+		# EDIT: Now that this is a seperate thread it's chill.
 		rd.submit()
 		rd.sync()
 		
@@ -240,14 +248,16 @@ func sync_at_integrals():
 # After this please use add_boid_data_at_index to fill in the registered data.
 # Think of this like it's memory allocation in the boids list!
 func register_index(boid_object: BoidComponent) -> int:
+	if self.process_mode == Node.PROCESS_MODE_DISABLED:
+		return 0
 	boids_node_list[boids_index_counter] = boid_object
 	boids_index_counter += 1
 	return boids_index_counter - 1
 
-func add_boid_data_at_index(index, view_dist, protected_dist, avoid_factor, matching_factor,
+func add_boid_data_at_index(index, view_distance, protected_distance, avoid_factor, matching_factor,
 	centering_factor, turn_factor, max_speed, min_speed, max_accel):
-	boids_parameters_array.set(index * 9 + 0, view_dist)
-	boids_parameters_array.set(index * 9 + 1, protected_dist)
+	boids_parameters_array.set(index * 9 + 0, view_distance)
+	boids_parameters_array.set(index * 9 + 1, protected_distance)
 	boids_parameters_array.set(index * 9 + 2, avoid_factor)
 	boids_parameters_array.set(index * 9 + 3, matching_factor)
 	boids_parameters_array.set(index * 9 + 4, centering_factor)

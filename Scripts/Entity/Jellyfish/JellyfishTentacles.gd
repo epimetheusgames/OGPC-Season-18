@@ -10,7 +10,7 @@ extends Node2D
 
 var boosting: bool = false
 var is_on_screen := false
-var ropes: Array[VerletRopeComponent] = []
+var ropes: Array[VerletRope] = []
 @export var on_screen_notifier: VisibleOnScreenNotifier2D
 
 func _ready() -> void:
@@ -19,44 +19,42 @@ func _ready() -> void:
 
 func add_tentacle(tentacle_data: Tentacles) -> void:
 	for i in range(tentacle_data.amount):
+		# ANCHOR
 		var new_tentacle_anchor := Node2D.new()
 		new_tentacle_anchor.name = "Anchor"
 		
+		add_child(new_tentacle_anchor, true)
+		
+		# ROPE
 		var spacing = tentacle_data.bottom_width / (tentacle_data.amount - 1)
 		var x_pos = (-tentacle_data.bottom_width / 2) + (i * spacing) + randf_range(-spacing * 0.1, spacing * 0.1)
 		
 		new_tentacle_anchor.position = Vector2(x_pos, 0)
 		
-		var new_rope := VerletRopeComponent.new()
+		var new_rope := VerletRope.new()
+		new_rope.component_container = get_parent().get_path()
 		new_rope.name = "TentacleRope"
 		new_rope.enable_collisions = false
 		new_rope.damping = 0.5
 		
-		new_rope.nodes_separation = 40
-		new_rope.nodes_amount = round(tentacle_data.length / 40)
-		
-		var new_line = Line2D.new()
-		new_line.name = "SmoothedLine"
-		new_line.visible = false
-		
-		var new_smoothed_line := Line2D.new()
-		new_smoothed_line.name = "SmoothedLine"
-		new_smoothed_line.default_color = tentacle_data.color
-		new_smoothed_line.width = tentacle_data.thickness
-		
-		add_child(new_tentacle_anchor, true)
+		new_rope.point_separation = 40
+		new_rope.point_amount = round(tentacle_data.length / 40)
 		
 		new_tentacle_anchor.add_child(new_rope)
 		ropes.append(new_rope)
 		
+		# LINE
+		var new_line = RopeLineDrawer.new()
+		new_line.name = "SmoothedLine"
+		new_line.rope = new_rope
+		new_line.smoothing_on = true
+		
 		new_rope.add_child(new_line)
-		new_rope.add_child(new_smoothed_line)
+		new_rope.rope_drawer = new_line
 		
 		new_rope.start_anchor_node = new_tentacle_anchor
-		new_rope.line = new_line
-		new_rope.smoothed_line = new_smoothed_line
 
-func boost(speed: float) -> void:
+func boost(_speed: float) -> void:
 	boosting = true
 	
 	for rope in ropes:
@@ -72,10 +70,7 @@ func boost(speed: float) -> void:
 	await get_tree().create_timer(1.5).timeout
 	boosting = false
 
-func _process(delta: float) -> void:
-	for rope in ropes:
-		rope.is_on_screen = on_screen_notifier.is_on_screen()
-		
+func _process(_delta: float) -> void:
 	if not boosting:
 		var tentacle_gravity: Vector2 = Vector2(0, 50)
 		tentacle_gravity = tentacle_gravity.rotated(jellyfish.global_rotation)

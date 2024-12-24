@@ -24,11 +24,11 @@ var base_speed: float
 @onready var tentacles: JellyfishTentacles = $"Tentacles"
 
 func _ready() -> void:
-	_enemy_ready()
+	_ready_enemy()
 	base_speed = settings.base_speed
 
 func _process(delta: float) -> void:
-	_enemy_process(delta)
+	_process_enemy(delta)
 	nav_agent.target_position = target_position
 
 	# Countdown boost timer (if needed for specific boost duration)

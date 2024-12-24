@@ -14,8 +14,15 @@ extends Node
 			if filepath == null:
 				filepath = FilePathResource.new()
 @export var save_encrypted := false
+@export var default_level: FilePathResource
 
-signal game_started
+signal game_started(slot_num: int)
+
+enum LOAD_ERROR {
+	OK,
+	NEEDS_INITIALIZATION,
+	CORRUPTED,
+}
 
 func _ready():
 	Global.save_load_framework = self
@@ -43,37 +50,72 @@ func _save_global_config(content: GlobalSave) -> void:
 	config_file.save("user://global")
 
 # Save an entity state to its slot.
-func _save_entity(slot_num: int, uid: UID, content: EntitySave) -> void:
-	var config_file := _load_config_file(slot_num)
-	config_file.set_value("Entities", str(uid.uid), content)
-	_save_config_file(config_file, slot_num)
+func _save_entity(uid: UID, content: EntitySave) -> void:
+	if Global.current_game_save == null:
+		print("ERROR: Attempting to save an entity while in the main menu. Printing stack.")
+		print_stack()
+		return
 
-func _load_config_file(slot_num) -> ConfigFile:
+	Global.current_game_save.entities[uid.uid] = content
+	save_state()
+
+# Save the current game state.
+func save_state() -> void:
+	if Global.current_game_save == null || Global.current_game_slot == -1:
+		print("ERROR: Attempting to save state while in the main menu. Printing stack.")
+		print_stack()
+		return
+
+	_save_game_save(Global.current_game_save, Global.current_game_slot)
+
+func _load_config_file(slot_num) -> Array:
 	var blank_config := ConfigFile.new()
 	var slot_path := "user://slot_" + str(slot_num)
 	
 	var load_error := blank_config.load_encrypted_pass(slot_path, Global.get_slot_password(int(slot_num)))
+	var return_error: LOAD_ERROR
 	
 	if load_error == OK:
-		print("DEBUG: Config file for save slot " + str(slot_num) + " loaded successfully")
+		if Global.verbose_debug:
+			print("DEBUG: Config file for save slot " + str(slot_num) + " loaded successfully")
+		return_error = LOAD_ERROR.OK
+	elif load_error == ERR_FILE_NOT_FOUND: return_error = LOAD_ERROR.NEEDS_INITIALIZATION
 	else:
-		print("WARNING: Load error for save slot " + str(slot_num) + ". This WILL cause errors.")
-		print("DEBUG: Trying to load data as if it was unencrypted, this may solve the problem.")
+		if Global.verbose_debug:
+			print("WARNING: Load error for save slot " + str(slot_num) + ". This MIGHT cause errors.")
+			print("DEBUG: Trying to load data as if it was unencrypted, this may solve the problem.")
 		
 		load_error = blank_config.load(slot_path)
 		
 		if load_error == OK:
-			print("DEBUG: Loading successful, ignore warning.")
+			if Global.verbose_debug:
+				print("DEBUG: Loading successful, ignore warning.")
+			return_error = LOAD_ERROR.OK
 		else:
 			print("ERROR: Loading unsuccessful, this means there is a problem with the format of the file.")
-			print("DEBUG: If the file is encrypted, you will probably have to delete it, and game data will be erased.")
+			print("ERROR: If the file is encrypted, you will probably have to delete it, and game data will be erased.")
+			return_error = LOAD_ERROR.CORRUPTED
 	
-	return blank_config
+	return [blank_config, return_error]
 
 # Loads a GameSave from memory.
 func _load_game_save(slot_num: int) -> GameSave:
-	var blank_config := _load_config_file(slot_num)
-	var game_save: GameSave = blank_config.get_value("Main", "GameSave")
+	var load_info := _load_config_file(slot_num)
+	var config: ConfigFile = load_info[0]
+	var error: LOAD_ERROR = load_info[1]
+
+	if error == LOAD_ERROR.NEEDS_INITIALIZATION:
+		if Global.verbose_debug:
+			print("DEBUG: Loaded an empty save file, initializing.")
+		var new_save := GameSave.new()
+		var new_mission_tree := MissionTreeProgress.new()
+		new_mission_tree.mission_tree = Global.mission_system.default_mission_tree.duplicate()
+		new_save.slot = slot_num
+		new_save.unlocked_mission_tree = new_mission_tree
+		_save_game_save(new_save, slot_num)
+		config = _load_config_file(slot_num)[0]
+
+	var game_save: GameSave = config.get_value("Main", "GameSave")
 	return game_save
 
 # Loads the global save from memory.
@@ -87,21 +129,27 @@ func _load_global_config() -> GlobalSave:
 	return game_save
 
 # Loads an entity from memory with a UID.
-func _load_entity(slot_num: int, uid: UID) -> EntitySave:
-	var config_file := _load_config_file(slot_num)
-	return config_file.get_value("Entities", str(uid.uid))
+func _load_entity(uid: UID) -> EntitySave:
+	return Global.current_game_save.entities[uid.uid]
+
+func start_game_remote(slot_num: int, custom_mission_id: int = -1):
+	start_game(slot_num, Global.mission_system.default_mission_tree.missions[custom_mission_id] if custom_mission_id != -1 else null)
 
 # Loads a level and then adds it to the Game container.
-func start_game(slot_num: int) -> void:
+func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	var level_data := _load_game_save(slot_num)
-		
-	if level_data.level > level_list.size():
-		print("WARNING: Level index is greater than the ammount of levels. Level won't start.")
-		return
 	
 	Global.current_game_slot = slot_num
+	Global.current_game_save = level_data
 	
-	load_level(level_list[level_data.level].file)
+	if Global.verbose_debug:
+		print("DEBUG: Game loaded successfuly, printing loaded data.")
+		level_data.debug()
+	
+	if custom_mission:
+		load_level(custom_mission.mission_filepath.file)
+	else:
+		load_level(default_level.file)
 
 func load_level(level_path: String):
 	if !ui_root_node_path:
@@ -118,15 +166,17 @@ func load_level(level_path: String):
 		print("WARNING: SaveLoadFramework contains no game container node path. Level won't start.")
 		return
 	
-	game_started.emit()
+	game_started.emit(Global.current_game_slot)
 	var level_loaded := load(level_path)
 	var instantiated = level_loaded.instantiate()
 	game_container.add_child(instantiated)
 	instantiated.owner = game_container
 
 # Close and save game and exit to menu.
-func exit_to_menu(save_slot: int, game_data: GameSave) -> void:
-	_save_game_save(game_data, save_slot)
+func exit_to_menu() -> void:
+	_save_game_save(Global.current_game_save, Global.current_game_slot)
+	Global.current_game_save = null
+	Global.current_game_slot = -1
 	
 	for child in game_container.get_children():
 		child.queue_free()

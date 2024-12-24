@@ -12,8 +12,10 @@ extends BaseHitboxComponent
 var is_attacking := false
 
 func _ready() -> void:
-	_base_hitbox_ready()
-	component_name = "AttackBoxComponent"
+	_ready_attack_box()
+
+func _ready_attack_box() -> void:
+	_base_hitbox_ready()  
 	
 	if hurtbox && !always_attacking:
 		hurtbox_collision.disabled = true
@@ -27,8 +29,7 @@ func _ready() -> void:
 		hurtbox_node.collision_layer = Global.bitmask_conversion["Player Hurtbox / Enemy Attackbox"]
 	if hitbox_type == HITBOX_TYPE.ENTITY_INTERACT:
 		hurtbox_node.collision_layer = Global.bitmask_conversion["Interaction"]
-	
-	_base_component_ready_post()
+
 
 func attack() -> void:
 	if always_attacking || !hurtbox:
