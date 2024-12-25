@@ -67,19 +67,19 @@ animations = [{
 "speed": 25.0
 }]
 
-[node name="TranquilizerGun" type="Node2D" node_paths=PackedStringArray("animation_node")]
+[node name="Pistol" type="Node2D" node_paths=PackedStringArray("animation_node")]
 script = ExtResource("1_n4wnc")
-animation_node = NodePath("TranquilizerGunSprite")
+animation_node = NodePath("PistolSprite")
 bullet_scene = ExtResource("2_3x5oy")
 
-[node name="TranquilizerGunSprite" type="AnimatedSprite2D" parent="."]
+[node name="PistolSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_inovh")
 animation = &"Flip"
 autoplay = "Shoot"
 
-[node name="BulletShootPosition" type="Node2D" parent="."]
+[node name="EmitPoint" type="Node2D" parent="."]
 position = Vector2(24, -15)
 
-[connection signal="animation_changed" from="TranquilizerGunSprite" to="." method="_on_tranquilizer_gun_sprite_animation_changed"]
-[connection signal="animation_finished" from="TranquilizerGunSprite" to="." method="_on_tranquilizer_gun_sprite_animation_finished"]
+[connection signal="animation_changed" from="PistolSprite" to="." method="_on_tranquilizer_gun_sprite_animation_changed"]
+[connection signal="animation_finished" from="PistolSprite" to="." method="_on_tranquilizer_gun_sprite_animation_finished"]

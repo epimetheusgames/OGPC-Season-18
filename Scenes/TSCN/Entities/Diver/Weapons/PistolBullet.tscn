@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://d24oi85rw114u"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/PistolProjectile.gd" id="1_0erac"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/PistolBullet.gd" id="1_hykh4"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_yd357"]
 [ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerSpecialSyncComponent.gd" id="3_b7twj"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="3_mdrr1"]
@@ -11,6 +11,9 @@ bounce = 0.37
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxw75"]
 radius = 9.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3pv1"]
+size = Vector2(4, 16)
+
 [sub_resource type="Gradient" id="Gradient_sjcmc"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(0.49, 0.1764, 0.1764, 1)
@@ -19,33 +22,25 @@ colors = PackedColorArray(0.49, 0.1764, 0.1764, 1)
 gradient = SubResource("Gradient_sjcmc")
 width = 4
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3pv1"]
-size = Vector2(4, 16)
-
-[node name="PistolProjectile" type="RigidBody2D"]
+[node name="PistolBullet" type="RigidBody2D"]
 collision_layer = 256
 collision_mask = 257
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_t1ndh")
 linear_damp = 3.0
+script = ExtResource("1_hykh4")
 
 [node name="PistolProjectile" type="Area2D" parent="."]
 z_index = 1
-script = ExtResource("1_0erac")
-
-[node name="BulletCollision" type="CollisionShape2D" parent="PistolProjectile"]
-shape = SubResource("CircleShape2D_sxw75")
-
-[node name="BulletSprite" type="Sprite2D" parent="PistolProjectile"]
-rotation = 1.5708
-scale = Vector2(4, 5)
-texture = SubResource("GradientTexture1D_ryy2x")
 
 [node name="AttackBoxComponent" type="Node" parent="PistolProjectile"]
 script = ExtResource("2_yd357")
 damage = 2.0
 knockback_velocity = 0.0
 hurtbox = NodePath("..")
+
+[node name="BulletCollision" type="CollisionShape2D" parent="PistolProjectile"]
+shape = SubResource("CircleShape2D_sxw75")
 
 [node name="EnemyDetector" type="Area2D" parent="PistolProjectile"]
 
@@ -66,5 +61,10 @@ max_buoyancy_vel = 25.0
 script = ExtResource("3_b7twj")
 var_names = Array[String](["global_position", "linear_velocity", "rotation"])
 on = NodePath("..")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(4, 5)
+texture = SubResource("GradientTexture1D_ryy2x")
 
 [connection signal="area_entered" from="PistolProjectile/EnemyDetector" to="PistolProjectile" method="_on_area_entered"]

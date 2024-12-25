@@ -4,7 +4,7 @@
 # Owned by: kaitaobenson
 
 class_name BaseBullet
-extends Node2D
+extends RigidBody2D
 
 @export var speed: float = 100.0
 @export var size: float = 100.0

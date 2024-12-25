@@ -23,7 +23,10 @@ var selected_weapon: Weapon
 
 func _ready():
 	add_weapon("speargun")
-	set_weapon("speargun")
+	add_weapon("pistol")
+	
+	set_weapon("pistol")
+	#print_tree_pretty()
 
 
 # current_weapons (setters / getters)
@@ -31,12 +34,16 @@ func add_weapon(weapon_name: String) -> void:
 	if current_weapons.has(weapon_name):
 		return
 	
-	var weapon: PackedScene = all_weapons.get(weapon_name, null)
+	var weapon: PackedScene = all_weapons.get(weapon_name)
 	if weapon == null:
 		printerr("Weapon not found")
 		return
 	
-	current_weapons[weapon_name] = weapon.instantiate()
+	var new_weapon: Weapon = weapon.instantiate()
+	new_weapon.diver = diver
+	
+	current_weapons[weapon_name] = new_weapon
+	add_child(new_weapon)
 
 func remove_weapon(weapon_name: String) -> void:
 	var result: bool = current_weapons.erase(weapon_name)
@@ -61,5 +68,5 @@ func set_weapon(weapon_name: String) -> void:
 	weapon.enabled = true
 
 func disable_all() -> void:
-	for weapon: Weapon in current_weapons:
+	for weapon: Weapon in current_weapons.values():
 		weapon.enabled = false

@@ -8,6 +8,9 @@ extends Weapon
 @export var bullet_scene: PackedScene
 
 func _process(delta: float) -> void:
+	_process_gun(delta)
+
+func _process_gun(delta: float) -> void:
 	_process_weapon(delta)
 
 func attack() -> void:
