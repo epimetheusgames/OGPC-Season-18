@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Speargun.gd" id="1_6b6mx"]
 [ext_resource type="Texture2D" uid="uid://cgiqymjjt6jkp" path="res://Assets/Art/Sprites/Speargun.png" id="2_ftc3n"]
-[ext_resource type="PackedScene" uid="uid://dkiqku8nhydo3" path="res://Scenes/TSCN/Objects/Weapons/Spear.tscn" id="2_qlup2"]
+[ext_resource type="PackedScene" uid="uid://dkiqku8nhydo3" path="res://Scenes/TSCN/Entities/Diver/Weapons/Spear.tscn" id="2_qlup2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lt8ek"]
 radius = 265.008

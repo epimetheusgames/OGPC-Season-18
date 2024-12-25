@@ -1,23 +1,13 @@
+## Semi-auto pistol (tranquilizer?)
 # Owned by carsonetb
 
-class_name TranquilizerGun
+class_name Pistol
 extends Gun
 
-var combat: DiverCombat
-var diver: Diver
-var flipped := false
-var shooting := false
-
-@export var bullet_velocity = 20
-
-
-func _ready() -> void:
-	combat = get_parent()
-	diver = combat.diver
+var flipped: bool = false
+var shooting: bool = false
 
 func _process(delta: float) -> void:
-	var mouse_position := get_global_mouse_position()
-	
 	global_position = hand1_pos
 	global_rotation = combat.diver.diver_animation.get_node("Skeleton/Torso/UpperArm2/Forearm2").global_position.angle_to_point(hand1_pos)
 	combat.move_hand_toward_mouse("right")
@@ -30,6 +20,8 @@ func _process(delta: float) -> void:
 	
 	if !$TranquilizerGunSprite.animation == "Shoot":
 		shooting = false
+
+func get_gun_position
 
 func attack() -> void:
 	if !$TranquilizerGunSprite.animation == "Shoot" && !shooting:
