@@ -329,7 +329,6 @@ color = Color(0.0117, 0.0117, 0.09, 0.807843)
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
 [node name="Jellyfish" parent="LevelContainer/Entities" instance=ExtResource("6_sqcin")]
-modulate = Color(1.3, 1.3, 1.3, 1)
 position = Vector2(462, 1027)
 
 [node name="BoidsGroup" type="Node" parent="LevelContainer/Entities" node_paths=PackedStringArray("boids_scene")]

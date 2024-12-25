@@ -62,6 +62,7 @@ on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(4, 3)
 scale = Vector2(51.6, 26.7)
 texture = ExtResource("4_y38hh")
@@ -100,6 +101,6 @@ occluder_light_mask = 2
 
 [node name="JellyFishBell" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_tvsdd")
-position = Vector2(0, -208)
+position = Vector2(7, -1.78218e-05)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("8_7y3es")
