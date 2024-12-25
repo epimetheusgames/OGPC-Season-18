@@ -358,7 +358,7 @@ func sync_packets() -> void:
 				if lobby_members.size() > 1:
 					# Loop through all members that aren't us
 					for this_member in lobby_members:
-						if this_member["steam_id"] != steam_id && (this_member["steam_id"] in handshake_completed_ids || packet_data["message"] == "handshake"):
+						if this_member["steam_id"] != steam_id:
 							Steam.sendP2PPacket(this_member["steam_id"], this_data, send_type, channel)
 			else:
 				Steam.sendP2PPacket(this_target, this_data, send_type, channel)
