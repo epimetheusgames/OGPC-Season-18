@@ -20,6 +20,7 @@ func set_shader_process(turned_on: bool):
 
 func turn_on():
 	color_rect_material.set_shader_parameter("pixel_size", pixel_size)
+	visible = true
 
 func turn_off():
-	color_rect_material.shader = null
+	visible = false

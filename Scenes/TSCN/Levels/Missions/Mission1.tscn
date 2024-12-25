@@ -32,6 +32,8 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
+vertices = PackedVector2Array(4355.66, 5600.98, 11582, -361, 11582, 11377.7, 4350.26, 5611.89, -6892.83, 10922.2, -2005.69, 5724.24, -6702.17, -361, -429.023, 698.977, 917.703, 688.539, -412.352, 701.188, 1839.83, 611, 1812.68, 2143, 2120.62, 1529.14, 1780.78, 1504.39, 1176.46, 2361.44, -341.711, 2440.75, 913.406, 700.891, 1887.39, 622.469, 1856.81, 611, 1818.12, 616.156, 1789, 620.039)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(8, 9, 7, 6, 1, 10), PackedInt32Array(1, 0, 11, 12), PackedInt32Array(13, 14, 15, 9, 16), PackedInt32Array(1, 12, 17), PackedInt32Array(8, 16, 9), PackedInt32Array(1, 17, 18), PackedInt32Array(10, 19, 20, 8), PackedInt32Array(1, 18, 10)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ytpl8"]
@@ -214,6 +216,7 @@ water_manager = NodePath("../../Waves")
 [node name="Camera2D" type="Camera2D" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="LevelContainer/Level"]
+z_index = 2
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = ExtResource("1_2ttir")
 metadata/_edit_lock_ = true
@@ -329,6 +332,7 @@ color = Color(0.0117, 0.0117, 0.09, 0.807843)
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
 [node name="Jellyfish" parent="LevelContainer/Entities" instance=ExtResource("6_sqcin")]
+z_index = 2
 position = Vector2(462, 1027)
 
 [node name="BoidsGroup" type="Node" parent="LevelContainer/Entities" node_paths=PackedStringArray("boids_scene")]
