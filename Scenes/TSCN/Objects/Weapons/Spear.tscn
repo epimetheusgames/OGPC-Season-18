@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dkiqku8nhydo3"]
 
 [ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Sprites/Spear.png" id="1_mdbjp"]
-[ext_resource type="Script" path="res://Scripts/Objects/Combat/Speargun/Spear.gd" id="1_x2dlv"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Spear.gd" id="1_x2dlv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwnx7"]
 size = Vector2(58, 4)

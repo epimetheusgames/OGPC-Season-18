@@ -1,77 +1,65 @@
 ## Diver combat system.
 # Owned by: kaitaobenson
 
-
 class_name DiverCombat
 extends Node2D
 
-@onready var diver: Diver = get_parent()
+@export var speargun: PackedScene
+@export var knife: PackedScene
+@export var pistol: PackedScene
 
-const preloaded_weapons := {
-	"Speargun": preload("res://Scenes/TSCN/Objects/Weapons/Speargun.tscn"),
-	"Knife": preload("res://Scenes/TSCN/Objects/Weapons/Knife.tscn"),
-	"TranquilizerGun": preload("res://Scenes/TSCN/Objects/Weapons/TranquilizerGun.tscn"),
+@onready var all_weapons: Dictionary = {
+	"speargun" : speargun,
+	"knife" : knife,
+	"pistol" : pistol,
 }
 
-var right_hand_weapon: Weapon
-var left_hand_weapon: Weapon
-var both_hands_weapon: Weapon
+@onready var diver: Diver = get_parent()
+
+# Loaded weapons in inventory (Optimize for switching weapons)
+var current_weapons: Dictionary
+
+var selected_weapon: Weapon
 
 func _ready():
-	add_weapon("TranquilizerGun", "right")
+	add_weapon("speargun")
+	set_weapon("speargun")
 
-func _process(_delta: float) -> void:
-	if left_hand_weapon:
-		left_hand_weapon.hand_primary = diver.diver_animation.get_hand1_position()
-		left_hand_weapon.hand_secondary = diver.diver_animation.get_hand2_position()
-	if right_hand_weapon:
-		right_hand_weapon.hand_secondary = diver.diver_animation.get_hand1_position()
-		right_hand_weapon.hand_primary = diver.diver_animation.get_hand2_position()
-	if both_hands_weapon:
-		both_hands_weapon.hand_primary = diver.diver_animation.get_hand1_position()
-		both_hands_weapon.hand_secondary = diver.diver_animation.get_hand2_position()
 
-func _physics_process(_delta: float) -> void:
-	if Global.is_multiplayer && diver.has_multiplayer_sync && !diver._is_node_owner():
+# current_weapons (setters / getters)
+func add_weapon(weapon_name: String) -> void:
+	if current_weapons.has(weapon_name):
 		return
 	
-	if Input.is_action_just_pressed("attack") && right_hand_weapon != null:
-		right_hand_weapon.attack()
-	if Input.is_action_just_pressed("secondary_attack") && left_hand_weapon != null:
-		left_hand_weapon.attack()
-
-func move_hand_toward_mouse(hand: String) -> void:
-	if Global.is_multiplayer && diver.has_multiplayer_sync && !diver._is_node_owner():
+	var weapon: PackedScene = all_weapons.get(weapon_name, null)
+	if weapon == null:
+		printerr("Weapon not found")
 		return
-		
-	if hand == "left":
-		diver.diver_animation.arm_target1.global_position = get_global_mouse_position()
-	if hand == "right":
-		diver.diver_animation.arm_target2.global_position = get_global_mouse_position()
-
-func add_weapon(weapon_name: String, hand: String) -> void:
-	var new_weapon = preloaded_weapons[weapon_name].instantiate()
-	add_child(new_weapon)
 	
-	if hand == "left":
-		left_hand_weapon = new_weapon
-	elif hand == "right":
-		right_hand_weapon = new_weapon
-	elif hand == "both":
-		both_hands_weapon = new_weapon
-		left_hand_weapon = null
-		right_hand_weapon = null
-	else:
-		print("ERROR: Invalid hand for new_weapon call. Hand was " + hand + ". Printing stack.")
-		print_stack()
+	current_weapons[weapon_name] = weapon.instantiate()
 
-func remove_weapon(hand: String) -> void:
-	if hand == "left":
-		left_hand_weapon = null
-	elif hand == "right":
-		right_hand_weapon = null
-	elif hand == "both":
-		both_hands_weapon = null
-	else:
-		print("ERROR: Invalid hand for remove_weapon call. Printing stack.")
-		print_stack()
+func remove_weapon(weapon_name: String) -> void:
+	var result: bool = current_weapons.erase(weapon_name)
+	if result == false:
+		printerr("Weapon not found")
+
+func remove_all_weapons() -> void:
+	current_weapons.clear()
+
+
+# selected_weapon (setters / getters)
+func set_weapon(weapon_name: String) -> void:
+	var weapon: Weapon = current_weapons.get(weapon_name)
+	
+	if weapon == null:
+		printerr("Weapon not found")
+		return
+	if weapon == selected_weapon:
+		return
+	
+	disable_all()
+	weapon.enabled = true
+
+func disable_all() -> void:
+	for weapon: Weapon in current_weapons:
+		weapon.enabled = false
