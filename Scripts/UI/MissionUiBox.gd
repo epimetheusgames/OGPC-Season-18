@@ -23,6 +23,7 @@ func _on_mission_button_button_up() -> void:
 		print("DEBUG: Starting game on mission " + associated_mission.title)
 	
 	Global.save_load_framework.exit_to_menu()
+	Global.godot_steam_abstraction.run_remote_function(Global.save_load_framework, "exit_to_menu", [])
 	Global.save_load_framework.start_game(0, associated_mission) 
 	Global.godot_steam_abstraction.run_remote_function(
 		Global.save_load_framework, "start_game_remote", 

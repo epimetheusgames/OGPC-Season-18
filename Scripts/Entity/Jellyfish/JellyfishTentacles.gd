@@ -40,6 +40,9 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		new_rope.point_separation = 40
 		new_rope.point_amount = round(tentacle_data.length / 40)
 		
+		new_rope.start_pos_on = true
+		new_rope.start_anchor_node = new_tentacle_anchor
+		
 		new_tentacle_anchor.add_child(new_rope)
 		ropes.append(new_rope)
 		
