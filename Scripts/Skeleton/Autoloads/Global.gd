@@ -56,3 +56,7 @@ func eval(input: String):
 	script.reload()
 	script_holder.set_script(script)
 	return script_holder.eval()
+
+# Yes this will always be there.
+func get_world_2d():
+	return KeyactionHandler.get_world_2d()

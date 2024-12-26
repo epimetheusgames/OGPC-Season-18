@@ -11,6 +11,7 @@ extends NPC
 @export var hurtbox_component: HurtboxComponent
 @export var attackbox_component: AttackBoxComponent
 @export var health_component: HealthComponent
+@export var quick_disable_everything := false
 
 var _player_detection_area: Area2D
 var _player_detection_collision_shape: CollisionShape2D
@@ -36,6 +37,13 @@ func _ready():
 	_ready_enemy()
 
 func _ready_enemy() -> void:
+	if quick_disable_everything:
+		return
+	
+	if !settings:
+		print("ERROR: Enemy at path " + str(get_path()) + " doesn't have an EnemyBehaviorSettings.")
+		return
+	
 	target_position = position
 	
 	_player_detection_area = Area2D.new()
@@ -80,6 +88,9 @@ func _process(delta: float) -> void:
 
 func _process_enemy(delta: float) -> void:
 	_npc_process(delta)
+	
+	if quick_disable_everything:
+		return
 	
 	if num_players_in_area == 0:
 		player_in_area = false

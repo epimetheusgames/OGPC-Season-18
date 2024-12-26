@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=64 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://ckq65xf2cmmwg" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="12_oa2ar"]
 [ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="15_edyr5"]
 [ext_resource type="Script" path="res://Scripts/Level/ShadowPipeline.gd" id="16_0m2co"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Shadow.gdshader" id="16_ctau1"]
@@ -32,8 +33,6 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
-vertices = PackedVector2Array(4355.66, 5600.98, 11582, -361, 11582, 11377.7, 4350.26, 5611.89, -6892.83, 10922.2, -2005.69, 5724.24, -6702.17, -361, -429.023, 698.977, 917.703, 688.539, -412.352, 701.188, 1839.83, 611, 1812.68, 2143, 2120.62, 1529.14, 1780.78, 1504.39, 1176.46, 2361.44, -341.711, 2440.75, 913.406, 700.891, 1887.39, 622.469, 1856.81, 611, 1818.12, 616.156, 1789, 620.039)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(8, 9, 7, 6, 1, 10), PackedInt32Array(1, 0, 11, 12), PackedInt32Array(13, 14, 15, 9, 16), PackedInt32Array(1, 12, 17), PackedInt32Array(8, 16, 9), PackedInt32Array(1, 17, 18), PackedInt32Array(10, 19, 20, 8), PackedInt32Array(1, 18, 10)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ytpl8"]
@@ -329,6 +328,15 @@ offset_right = 11139.0
 offset_bottom = 10843.0
 color = Color(0.0117, 0.0117, 0.09, 0.807843)
 
+[node name="Collision" type="StaticBody2D" parent="LevelContainer/Level"]
+z_index = 10
+metadata/_edit_lock_ = true
+
+[node name="Polygon" type="CollisionPolygon2D" parent="LevelContainer/Level/Collision"]
+visible = false
+modulate = Color(0.0156863, 0.6, 0.6, 1)
+polygon = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 4344, 5602, -1992, 5714, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
+
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
 [node name="Jellyfish" parent="LevelContainer/Entities" instance=ExtResource("6_sqcin")]
@@ -366,6 +374,9 @@ gravity = 20
 buoyancy_accel = 1.0
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
+
+[node name="BigfinSquid" parent="LevelContainer/Entities" instance=ExtResource("15_edyr5")]
+position = Vector2(824, 990)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="LevelContainer"]
 environment = SubResource("Environment_5ulyy")
@@ -497,6 +508,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Pixelize" type="BackBufferCopy" parent="Shaders"]
+visible = false
 rect = Rect2(0, 0, 1920, 1080)
 script = ExtResource("5_t6m55")
 
