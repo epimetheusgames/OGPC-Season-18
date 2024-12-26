@@ -15,5 +15,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if smoothing_on:
 		points = Util.smooth_line(rope.points, resolution_multiplier)
+		if rope.start_pos_on:
+			points[0] = rope.start_pos
+		if rope.end_pos_on:
+			points[-1] = rope.end_pos
 	else:
 		points = rope.points

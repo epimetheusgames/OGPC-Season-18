@@ -89,15 +89,16 @@ static func smooth_line(input: PackedVector2Array, resolution_multiplier: float)
 	# https://en.wikipedia.org/wiki/Cubic_Hermite_spline, Catmull-Rom section.
 	for i in range(1, len(input) - 1):
 		tangents.append((input[i + 1] - input[i - 1]) / 2.0)
+	tangents.append(Vector2.ZERO)
 	
-	for i in range(1, len(input) - 3):
+	for i in range(1, len(input) - 1):
 		for big_t in range(0, resolution_multiplier):
 			var t = big_t / resolution_multiplier
 			
 			# Massive polynomial, who knows what it means.
 			var pos = ((2 * t ** 3) - (3 * t ** 2) + 1) * input[i] + \
 					  ((t ** 3) - (2 * t ** 2) + t) * tangents[i - 1] + \
-					  ((-2 * t ** 3) + (3 * t ** 2)) * input[i + 1] + \
+					  ((-2 * t ** 3) + (3 * t ** 2)) * input[i + 1 - (1 if i == len(input) - 1 else 0)] + \
 					  ((t ** 3) - (t ** 2)) * tangents[i]
 			
 			output.append(pos)

@@ -13,6 +13,8 @@ extends Node2D
 @onready var head: Bone2D = $"Skeleton/Torso/Head"
 @onready var arm1: Bone2D = $"Skeleton/Torso/UpperArm1/Forearm1"
 @onready var arm2: Bone2D = $"Skeleton/Torso/UpperArm2/Forearm2"
+@onready var leg1: Bone2D = $"Skeleton/Torso/Thigh1/Calf1"
+@onready var leg2: Bone2D = $"Skeleton/Torso/Thigh2/Calf2"
 
 @onready var arm_target1: Node2D = $"ArmIkTarget1"
 @onready var arm_target2: Node2D = $"ArmIkTarget2"
