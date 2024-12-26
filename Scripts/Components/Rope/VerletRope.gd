@@ -125,8 +125,7 @@ func resolve_spikes(node1: Vector2, node2: Vector2) -> Array[Vector2]:
 	raycast_query.to = node2
 	raycast_query.collide_with_bodies = true
 	
-	# Probably should not have this in a function that runs hundreds of times per frame.
-	var world: World2D = get_node(component_container).get_world_2d()
+	var world: World2D = Global.get_world_2d()
 	var result: Dictionary = world.direct_space_state.intersect_ray(raycast_query)
 	
 	if !result:
@@ -175,7 +174,7 @@ func collide_and_translate(origin: Vector2, motion: Vector2, index: int) -> Vect
 	raycast_query.to = origin + motion
 	raycast_query.collide_with_bodies = true
 	
-	var world2d: World2D = get_node(component_container).get_world_2d()  # This line makes me depressed
+	var world2d: World2D = Global.get_world_2d()
 	var result: Dictionary = world2d.direct_space_state.intersect_ray(raycast_query)
 	
 	if not result:
