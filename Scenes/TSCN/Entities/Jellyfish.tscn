@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://dk5y5253vbhe4"]
 
-[ext_resource type="Script" uid="uid://cixlk6crp4xq5" path="res://Scripts/Entity/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
-[ext_resource type="Script" uid="uid://cmh34bsgyx1yg" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_5x2qs"]
-[ext_resource type="Script" uid="uid://c4smdn0ryci46" path="res://Scripts/Entity/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
-[ext_resource type="Script" uid="uid://bnjvarxl3565b" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
+[ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_5x2qs"]
+[ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
+[ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="4_y38hh"]
-[ext_resource type="Script" uid="uid://g620r3rick6s" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="6_gyt63"]
-[ext_resource type="Script" uid="uid://dke8ns1faaefs" path="res://Scripts/Components/Misc/HealthComponent.gd" id="7_bltm7"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="6_gyt63"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="7_bltm7"]
 
 [sub_resource type="Resource" id="Resource_8tk4o"]
 script = ExtResource("2_5x2qs")

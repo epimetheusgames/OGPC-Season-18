@@ -38,21 +38,16 @@ func attack() -> void:
 		
 		shooting = true
 		
-		if diver._is_node_owner() || !Global.is_multiplayer:
-			var velocity: Vector2 = Vector2.from_angle(global_rotation) * 10 * 60 + diver.velocity
-			var rot: float = global_rotation + PI/2
+		if !Global.is_multiplayer || diver._is_node_owner():
 			
-			spawn_bullet(emit_point.global_position, velocity, rot)
+			var bullet: BaseBullet = bullet_scene.instantiate()
+			add_child(bullet)
+			
+			bullet.global_position = emit_point.global_position
+			bullet.fire(global_rotation)
 			
 			# Wtf is this line my g
 			#Global.godot_steam_abstraction.run_remote_function(self, "spawn_bullet", [$BulletShootPosition.global_position, (Vector2.from_angle(global_rotation) * bullet_velocity * 60 + diver.velocity), global_rotation + PI / 2.0])
-
-func spawn_bullet(pos: Vector2, velocity: Vector2, rot: float) -> void:
-	var bullet = bullet_scene.instantiate()
-	diver.get_parent().add_child(bullet, true)
-	bullet.linear_velocity = velocity
-	bullet.rotation = rot
-	bullet.global_position = pos
 
 func _on_tranquilizer_gun_sprite_animation_finished() -> void:
 	if pistol_sprite.animation == "Shoot":

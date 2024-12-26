@@ -12,12 +12,6 @@ func _process(delta: float) -> void:
 	super(delta)
 	global_position = get_gun_position()
 	global_rotation = get_gun_rotation()
-	
-	if Input.is_action_just_pressed("attack"):
-		attack()  # i will remove this
-	
-	if !enabled:
-		visible = false
 
 func get_gun_position() -> Vector2:
 	return hand1_pos
@@ -27,9 +21,6 @@ func get_gun_rotation() -> float:
 	return hand1_pos.angle_to_point(mouse_pos)
 
 func attack() -> void:
-	if !enabled:
-		return
-	
 	var new_bullet: Spear = bullet_scene.instantiate()
 	
 	new_bullet.top_level = true

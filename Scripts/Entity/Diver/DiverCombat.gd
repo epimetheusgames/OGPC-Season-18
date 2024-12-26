@@ -26,7 +26,24 @@ func _ready():
 	add_weapon("pistol")
 	
 	set_weapon("pistol")
+	#set_weapon("speargun")
 	#print_tree_pretty()
+
+var a: int = 0  # I'll remove this later
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("swap"):
+		if a == 0:
+			set_weapon("pistol")
+			a = 1
+		else:
+			set_weapon("speargun")
+			a = 0
+		
+		print(selected_weapon.name)
+	
+	if Input.is_action_just_pressed("attack"):
+		selected_weapon.attack()
 
 
 # current_weapons (setters / getters)
@@ -65,8 +82,9 @@ func set_weapon(weapon_name: String) -> void:
 		return
 	
 	disable_all()
-	weapon.enabled = true
+	weapon.visible = true
+	selected_weapon = weapon
 
 func disable_all() -> void:
 	for weapon: Weapon in current_weapons.values():
-		weapon.enabled = false
+		weapon.visible = false

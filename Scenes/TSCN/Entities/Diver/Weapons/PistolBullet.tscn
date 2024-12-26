@@ -1,70 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://d24oi85rw114u"]
+[gd_scene load_steps=3 format=3 uid="uid://d24oi85rw114u"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/PistolBullet.gd" id="1_hykh4"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_yd357"]
-[ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerSpecialSyncComponent.gd" id="3_b7twj"]
-[ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="3_mdrr1"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t1ndh"]
-bounce = 0.37
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pk0f"]
+size = Vector2(14, 26)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sxw75"]
-radius = 9.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3pv1"]
-size = Vector2(4, 16)
-
-[sub_resource type="Gradient" id="Gradient_sjcmc"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.49, 0.1764, 0.1764, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ryy2x"]
-gradient = SubResource("Gradient_sjcmc")
-width = 4
-
-[node name="PistolBullet" type="RigidBody2D"]
-collision_layer = 256
-collision_mask = 257
-mass = 0.1
-physics_material_override = SubResource("PhysicsMaterial_t1ndh")
-linear_damp = 3.0
+[node name="PistolBullet2D" type="Area2D"]
 script = ExtResource("1_hykh4")
+speed = 300.0
+size = 10.0
+damage = 10.0
 
-[node name="PistolProjectile" type="Area2D" parent="."]
-z_index = 1
-
-[node name="AttackBoxComponent" type="Node" parent="PistolProjectile"]
-script = ExtResource("2_yd357")
-damage = 2.0
-knockback_velocity = 0.0
-hurtbox = NodePath("..")
-
-[node name="BulletCollision" type="CollisionShape2D" parent="PistolProjectile"]
-shape = SubResource("CircleShape2D_sxw75")
-
-[node name="EnemyDetector" type="Area2D" parent="PistolProjectile"]
-
-[node name="BulletCollision" type="CollisionShape2D" parent="PistolProjectile/EnemyDetector"]
-shape = SubResource("CircleShape2D_sxw75")
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = -13.0
+offset_right = 8.0
+offset_bottom = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_b3pv1")
-
-[node name="BuoyancyComponent" type="Node" parent="." node_paths=PackedStringArray("center_of_mass")]
-script = ExtResource("3_mdrr1")
-center_of_mass = NodePath("..")
-gravity = 32
-buoyancy_accel = 2.0
-max_buoyancy_vel = 25.0
-
-[node name="MultiplayerSpecialSyncComponent" type="Node" parent="." node_paths=PackedStringArray("on")]
-script = ExtResource("3_b7twj")
-var_names = Array[String](["global_position", "linear_velocity", "rotation"])
-on = NodePath("..")
-
-[node name="BulletSprite" type="Sprite2D" parent="."]
-rotation = 1.5708
-scale = Vector2(4, 5)
-texture = SubResource("GradientTexture1D_ryy2x")
-
-[connection signal="area_entered" from="PistolProjectile/EnemyDetector" to="PistolProjectile" method="_on_area_entered"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_6pk0f")

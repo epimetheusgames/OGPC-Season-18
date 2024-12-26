@@ -16,7 +16,6 @@ func _process(delta: float) -> void:
 		global_rotation = attach_body.global_position.angle_to_point(global_position)
 
 func _on_spearhead_area_body_entered(body: Node2D) -> void:
-	print("skib")
 	if attached or body is Spear:
 		return
 	
