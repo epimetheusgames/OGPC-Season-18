@@ -1,14 +1,14 @@
-[gd_scene load_steps=65 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=66 format=3 uid="uid://dh0cluhw5hbar"]
 
-[ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
+[ext_resource type="Script" uid="uid://ckq65xf2cmmwg" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
-[ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
-[ext_resource type="Script" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="1_awqxm"]
-[ext_resource type="Script" path="res://Scripts/Objects/Camera/ShaderManager.gd" id="1_s361y"]
-[ext_resource type="Script" path="res://Scripts/Objects/Camera/Quantize.gd" id="2_fhpdt"]
+[ext_resource type="Script" uid="uid://bqr62l1jiih" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
+[ext_resource type="Script" uid="uid://i4m51oco4iap" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="1_awqxm"]
+[ext_resource type="Script" uid="uid://shox6242gcae" path="res://Scripts/Objects/Camera/ShaderManager.gd" id="1_s361y"]
+[ext_resource type="Script" uid="uid://bdwd03rarc02" path="res://Scripts/Objects/Camera/Quantize.gd" id="2_fhpdt"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="4_0q3xc"]
-[ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
+[ext_resource type="Script" uid="uid://6gmbjc57n1dk" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="5_rc3kh"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Pixelize.gd" id="5_t6m55"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="6_sqcin"]
@@ -18,42 +18,44 @@
 [ext_resource type="PackedScene" uid="uid://cdg0gyclxvqs4" path="res://Scenes/TSCN/Demos/AutoPolygonTextureDemo.tscn" id="11_f0f4i"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="12_oa2ar"]
 [ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="15_edyr5"]
 [ext_resource type="Script" path="res://Scripts/Level/ShadowPipeline.gd" id="16_0m2co"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Shadow.gdshader" id="16_ctau1"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
+[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
-[ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
+[ext_resource type="Script" uid="uid://c1psbyqa4c16x" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="28_1g0ie"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
+[ext_resource type="Shader" uid="uid://b00fppata8v35" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ytpl8"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sqi7e"]
 load_path = "res://.godot/imported/WallTexture.png-6996c64947de4685171d9de8914e92d7.ctex"
 
-[sub_resource type="Gradient" id="Gradient_spb85"]
+[sub_resource type="Gradient" id="Gradient_aekso"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_5ndqp"]
-gradient = SubResource("Gradient_spb85")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_71gvv"]
+gradient = SubResource("Gradient_aekso")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1377u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lbrsy"]
+resource_local_to_scene = true
 shader = ExtResource("12_oa2ar")
 shader_parameter/points = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 4344, 5602, -1992, 5714, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
 shader_parameter/num_points = 14
 shader_parameter/global_position = Vector2(0, 0)
 shader_parameter/fade_width = 115
 shader_parameter/tex_scale = 103.0
-shader_parameter/in_tex = SubResource("GradientTexture1D_5ndqp")
-shader_parameter/edge_tex = SubResource("CompressedTexture2D_ytpl8")
+shader_parameter/in_tex = SubResource("GradientTexture1D_71gvv")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_sqi7e")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drxv4"]
 shader = ExtResource("11_wv41s")
@@ -91,7 +93,7 @@ shader_parameter/max_alpha = 0.8
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_j3cqg")
 
-[sub_resource type="Resource" id="Resource_bax8c"]
+[sub_resource type="Resource" id="Resource_2drf5"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 337
@@ -191,7 +193,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(2, 2)
+shader_parameter/screen_size = Vector2(1213, 657)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -226,7 +228,7 @@ script = ExtResource("1_2ttir")
 metadata/_edit_lock_ = true
 
 [node name="AutoPolygon" parent="LevelContainer/Level/NavigationRegion2D" instance=ExtResource("11_f0f4i")]
-material = SubResource("ShaderMaterial_1377u")
+material = SubResource("ShaderMaterial_lbrsy")
 position = Vector2(0, 0)
 polygon = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 4344, 5602, -1992, 5714, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
 child_of_navigation = true
@@ -338,7 +340,7 @@ color = Color(0.0117, 0.0117, 0.09, 0.807843)
 position = Vector2(1180, 1212)
 motion_mode = 1
 _has_physics = true
-uid = SubResource("Resource_bax8c")
+uid = SubResource("Resource_2drf5")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -535,8 +537,8 @@ material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1918.0
-offset_bottom = -1078.0
+offset_right = -707.0
+offset_bottom = -423.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)

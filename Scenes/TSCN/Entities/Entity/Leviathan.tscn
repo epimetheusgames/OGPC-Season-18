@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
 [ext_resource type="PackedScene" uid="uid://dwxcjl4jrkyw3" path="res://Scenes/TSCN/Entities/Entity/LeviathanNode.tscn" id="1_ljr6s"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="1_txg70"]
+[ext_resource type="Script" uid="uid://cmh34bsgyx1yg" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="1_txg70"]
 [ext_resource type="Script" path="res://Scripts/Components/Rope/RopeAttachment.gd" id="4_6mv3f"]
 
 [sub_resource type="GDScript" id="GDScript_pigha"]

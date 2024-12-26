@@ -157,7 +157,7 @@ func get_input_key_names(array: Array) -> Array:
 				return_array.append("Middle Click")
 			elif(array[0].button_index == 4):
 				return_array.append("Mousewheel up")
-			elif(array[0].butto_index == 5):
+			elif(array[0].button_index == 5):
 				return_array.append("Mousewheel down")
 		else:
 			var keycode := DisplayServer.keyboard_get_keycode_from_physical(array[0].physical_keycode)
