@@ -36,8 +36,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# quick fix
-	start_pos = start_anchor_node.global_position
-	simulate()  # Simulate Verlet integration
+	if start_anchor_node:
+		# quick fix
+		start_pos = start_anchor_node.global_position
+	if end_anchor_node:
+		end_pos = end_anchor_node.global_position
+	
+	simulate(delta)  # Simulate Verlet integration
 	
 	for i in range(iterations):
 		apply_constraints()  # Apply constraints and resolve collisions
@@ -48,13 +53,13 @@ func _process(delta: float) -> void:
 	if rope_drawer:
 		rope_drawer.points = points
 
-func simulate():
+func simulate(delta: float):
 	for i in range(point_amount):
 		var node: VerletNode = verlet_nodes[i]
 		var temp: Vector2 = node.position
 		
 		# Calculate velocity, applying damping to slow down the points
-		var velocity: Vector2 = (node.position - node.old_position) * damping + gravity * TIMESTEP * TIMESTEP
+		var velocity: Vector2 = (node.position - node.old_position) * damping + (gravity * TIMESTEP * TIMESTEP * delta * 60)
 		
 		# Iteratively resolve collisions or simply move the node if collisions are disabled
 		var resolved_position = node.position
@@ -63,7 +68,7 @@ func simulate():
 				resolved_position += collide_and_translate(resolved_position, velocity / 3)  # Divide motion for each iteration
 			else:
 				# Just move freely if collisions are disabled
-				resolved_position += velocity / 3
+				resolved_position += (velocity / 3) * delta * 60
 		
 		node.position = resolved_position
 		
@@ -110,6 +115,10 @@ func apply_constraints():
 func collide_and_translate(origin: Vector2, motion: Vector2) -> Vector2:
 	# If collisions are disabled, just move as normal
 	if not enable_collisions or motion.is_zero_approx():
+		return motion
+	
+	if !component_container:
+		print("ERROR: Verlet rope at path " + str(get_path()) + " needs a component container to do physics!")
 		return motion
 		
 	raycast_query.from = origin

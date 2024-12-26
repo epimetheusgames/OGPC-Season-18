@@ -1,0 +1,94 @@
+[gd_scene load_steps=5 format=3 uid="uid://bptkxkfwbumm5"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Enemy/BigfinSquid.gd" id="1_0jv23"]
+[ext_resource type="Script" uid="uid://cmh34bsgyx1yg" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_favrd"]
+[ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
+
+[sub_resource type="Resource" id="Resource_d65pp"]
+script = ExtResource("2_favrd")
+health = 7
+damage = 2
+base_speed = 0.8
+agressiveness = 0.7
+attack_distance = 250.0
+closest_distance = 50.0
+sensor_type = 0
+wander_type = 0
+attack_mode = 0
+wander_range = 1000.0
+view_range = 360.0
+view_distance = 500.0
+disable_period_length = 1.0
+sound_max_distance = 0.0
+
+[node name="BigfinSquid" type="CharacterBody2D"]
+position = Vector2(582, 96)
+script = ExtResource("1_0jv23")
+settings = SubResource("Resource_d65pp")
+
+[node name="Head" type="Polygon2D" parent="."]
+position = Vector2(0, -22)
+color = Color(0.2352, 0.48, 0.2352, 1)
+polygon = PackedVector2Array(-55, -22, -1, -61, 55, -20, 8, 21, 8, 45, -10, 46, -9, 20)
+metadata/_edit_lock_ = true
+
+[node name="RightFrontArm" type="Line2D" parent="."]
+points = PackedVector2Array(5, 22, 86, 24)
+width = 4.0
+default_color = Color(0.3234, 0.66, 0.3234, 1)
+metadata/_edit_lock_ = true
+
+[node name="LeftFrontArm" type="Line2D" parent="."]
+points = PackedVector2Array(-9, 22, -79, 27)
+width = 4.0
+default_color = Color(0.321569, 0.658824, 0.321569, 1)
+metadata/_edit_lock_ = true
+
+[node name="RightBackArm" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(6, 20, 37, 5)
+width = 4.0
+default_color = Color(0.2646, 0.54, 0.2646, 1)
+metadata/_edit_lock_ = true
+
+[node name="LeftBackArm" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(-9, 22, -36, 6)
+width = 4.0
+default_color = Color(0.2646, 0.54, 0.2646, 1)
+metadata/_edit_lock_ = true
+
+[node name="RightFrontArmRope" type="Node" parent="."]
+script = ExtResource("2_rptbt")
+gravity = Vector2(0, 20)
+enable_collisions = false
+point_amount = 20
+point_separation = 50.0
+component_container = NodePath("..")
+
+[node name="LeftFrontArmRope" type="Node" parent="."]
+script = ExtResource("2_rptbt")
+gravity = Vector2(0, 20)
+enable_collisions = false
+point_amount = 20
+point_separation = 50.0
+component_container = NodePath("..")
+
+[node name="RightBackArmRope" type="Node" parent="."]
+script = ExtResource("2_rptbt")
+gravity = Vector2(0, 20)
+enable_collisions = false
+point_amount = 20
+point_separation = 50.0
+component_container = NodePath("..")
+
+[node name="LeftBackArmRope" type="Node" parent="."]
+script = ExtResource("2_rptbt")
+gravity = Vector2(0, 20)
+enable_collisions = false
+point_amount = 20
+point_separation = 50.0
+component_container = NodePath("..")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+debug_enabled = true
