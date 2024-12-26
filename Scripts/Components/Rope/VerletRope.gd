@@ -116,8 +116,8 @@ func apply_constraints():
 		
 	for i in range(point_amount - 1):
 		var out := resolve_spikes(verlet_nodes[i].position, verlet_nodes[i + 1].position)
-		verlet_nodes[i].position = out[0]
-		verlet_nodes[i + 1].position = out[1]
+		verlet_nodes[i].position += (out[0] - verlet_nodes[i].position).normalized() * 2
+		verlet_nodes[i + 1].position += (out[1] - verlet_nodes[i + 1].position).normalized() * 2
 
 # Spike resolution (one node is on one side and the other is on the other side)
 func resolve_spikes(node1: Vector2, node2: Vector2) -> Array[Vector2]:
