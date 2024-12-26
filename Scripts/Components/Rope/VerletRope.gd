@@ -38,6 +38,9 @@ func _ready() -> void:
 	normals.resize(point_amount)
 
 func _process(delta: float) -> void:
+	if !is_on_screen:
+		return
+	
 	# quick fix
 	if start_anchor_node:
 		# quick fix
@@ -114,10 +117,11 @@ func apply_constraints():
 		node_1.position += final_translate_1
 		node_2.position += final_translate_2
 		
-	for i in range(point_amount - 1):
-		var out := resolve_spikes(verlet_nodes[i].position, verlet_nodes[i + 1].position)
-		verlet_nodes[i].position += (out[0] - verlet_nodes[i].position).normalized() * 2
-		verlet_nodes[i + 1].position += (out[1] - verlet_nodes[i + 1].position).normalized() * 2
+	if enable_collisions:
+		for i in range(point_amount - 1):
+			var out := resolve_spikes(verlet_nodes[i].position, verlet_nodes[i + 1].position)
+			verlet_nodes[i].position += (out[0] - verlet_nodes[i].position).normalized() * 2
+			verlet_nodes[i + 1].position += (out[1] - verlet_nodes[i + 1].position).normalized() * 2
 
 # Spike resolution (one node is on one side and the other is on the other side)
 func resolve_spikes(node1: Vector2, node2: Vector2) -> Array[Vector2]:

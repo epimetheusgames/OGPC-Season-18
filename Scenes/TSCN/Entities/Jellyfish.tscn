@@ -29,7 +29,7 @@ sound_max_distance = 0.0
 
 [sub_resource type="Resource" id="Resource_rbmc1"]
 script = ExtResource("3_5yh7k")
-color = Color(0.546871, 0.83725, 1.54018e-06, 1)
+color = Color(0.229667, 0, 0.53, 0.494118)
 length = 300.0
 thickness = 6.0
 amount = 8
@@ -60,6 +60,8 @@ tentacles = Array[ExtResource("3_5yh7k")]([SubResource("Resource_rbmc1")])
 on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+debug_enabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false
@@ -68,16 +70,18 @@ scale = Vector2(51.6, 26.7)
 texture = ExtResource("4_y38hh")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-0.499992, 132)
+position = Vector2(-0.499985, 76)
 scale = Vector2(21.85, 12.7)
 
 [node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, -56)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(4.5, -0.5)
 shape = SubResource("RectangleShape2D_qgvvg")
 
 [node name="BulletDetectionArea" type="Area2D" parent="."]
+position = Vector2(0, -56)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetectionArea"]
 position = Vector2(4, -2)
@@ -96,11 +100,12 @@ max_health = 0.0
 component_container = NodePath("..")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(0, -56)
 occluder = SubResource("OccluderPolygon2D_fvllq")
 occluder_light_mask = 2
 
 [node name="JellyFishBell" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_tvsdd")
-position = Vector2(7, -1.78218e-05)
+position = Vector2(7, -56)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("8_7y3es")
