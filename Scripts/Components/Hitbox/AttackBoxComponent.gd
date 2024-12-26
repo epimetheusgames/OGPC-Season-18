@@ -15,6 +15,7 @@ func _ready() -> void:
 	_ready_attack_box()
 
 func _ready_attack_box() -> void:
+	component_name = "AttackBoxComponent"
 	_base_hitbox_ready()  
 	
 	if hurtbox && !always_attacking:
