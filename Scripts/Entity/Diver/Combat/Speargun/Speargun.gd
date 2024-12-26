@@ -21,11 +21,27 @@ func get_gun_rotation() -> float:
 	return hand1_pos.angle_to_point(mouse_pos)
 
 func attack() -> void:
-	var new_bullet: Spear = bullet_scene.instantiate()
+	var new_spear: Spear = bullet_scene.instantiate()
+	add_child(new_spear)
 	
-	new_bullet.top_level = true
-	new_bullet.global_position = emit_point.global_position
-	new_bullet.global_rotation = global_rotation
+	new_spear.global_position = emit_point.global_position
+	new_spear.global_rotation = global_rotation
 	
-	add_child(new_bullet)
-	new_bullet.move_forwards(1000)
+	var angle: float = global_position.angle_to_point(mouse_pos)
+	new_spear.fire(angle)
+	
+	var new_rope := VerletRope.new()
+	new_rope.component_container = self.get_path()
+	new_rope.start_pos_on = true
+	new_rope.start_anchor_node = emit_point
+	new_rope.end_pos_on = true
+	new_rope.end_anchor_node = new_spear.rope_point
+	print(new_rope.end_anchor_node)
+	
+	add_child(new_rope)
+	
+	var new_rope_drawer := RopeLineDrawer.new()
+	add_child(new_rope_drawer)
+	new_rope_drawer.rope = new_rope
+	
+	print_tree_pretty()

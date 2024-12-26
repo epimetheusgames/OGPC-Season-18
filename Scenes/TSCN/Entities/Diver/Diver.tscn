@@ -86,8 +86,8 @@ polygon = PackedVector2Array(-28, -31, -12, -31, -12, -90, -28, -90)
 polygon = PackedVector2Array(13, 39, 13, -15, -21, -15, -19, 39)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wi5t0"]
-radius = 26.0
-height = 124.0
+radius = 25.0
+height = 110.0
 
 [node name="Diver" type="CharacterBody2D"]
 motion_mode = 1

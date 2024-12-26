@@ -25,9 +25,7 @@ func _ready():
 	add_weapon("speargun")
 	add_weapon("pistol")
 	
-	set_weapon("pistol")
-	#set_weapon("speargun")
-	#print_tree_pretty()
+	set_weapon("speargun")
 
 var a: int = 0  # I'll remove this later
 
