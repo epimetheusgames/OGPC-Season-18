@@ -72,6 +72,7 @@ metadata/_edit_lock_ = true
 
 [node name="RightFrontArmRope" type="Node" parent="."]
 script = ExtResource("2_rptbt")
+iterations = 1
 gravity = Vector2(0, 20)
 point_amount = 30
 point_separation = 50.0
@@ -79,6 +80,7 @@ component_container = NodePath("..")
 
 [node name="LeftFrontArmRope" type="Node" parent="."]
 script = ExtResource("2_rptbt")
+iterations = 1
 gravity = Vector2(0, 20)
 point_amount = 30
 point_separation = 50.0
@@ -86,6 +88,7 @@ component_container = NodePath("..")
 
 [node name="RightBackArmRope" type="Node" parent="."]
 script = ExtResource("2_rptbt")
+iterations = 1
 gravity = Vector2(0, 20)
 point_amount = 30
 point_separation = 50.0
@@ -93,6 +96,7 @@ component_container = NodePath("..")
 
 [node name="LeftBackArmRope" type="Node" parent="."]
 script = ExtResource("2_rptbt")
+iterations = 1
 gravity = Vector2(0, 20)
 point_amount = 30
 point_separation = 50.0
