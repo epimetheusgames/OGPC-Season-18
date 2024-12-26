@@ -46,11 +46,7 @@ func _process(delta: float) -> void:
 	var path_pos: Vector2 = $NavAgent.get_next_path_position()
 	var target_velocity := (path_pos - global_position).normalized() * settings.base_speed
 	position += target_velocity * delta * 60
-	$Head.rotation = target_velocity.angle() + PI / 2
-	$LeftFrontArm.rotation = target_velocity.angle() + PI / 2
-	$RightFrontArm.rotation = target_velocity.angle() + PI / 2
-	$LeftBackArm.rotation = target_velocity.angle() + PI / 2
-	$RightBackArm.rotation = target_velocity.angle() + PI / 2
+	rotation = Util.better_angle_lerp(rotation, target_velocity.angle() + PI / 2, 0.1, delta)
 	
 	for i in range(targets.size()):
 		targets[i].global_position = arms[i].points[1].rotated(arms[i].global_rotation) + arms[i].global_position
@@ -60,6 +56,7 @@ func _process(delta: float) -> void:
 			end_targets[i].global_position = limbs[i].global_position
 			ropes[i].end_pos_on = true
 			ropes[i].gravity = -target_velocity.normalized() * 20
+			Global.player.diver_movement.velocity += (global_position - Global.player.global_position).normalized() * 0.7 * delta * 60
 		else:
 			ropes[i].end_pos_on = false
 	

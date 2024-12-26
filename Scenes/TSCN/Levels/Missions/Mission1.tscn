@@ -328,6 +328,15 @@ offset_right = 11139.0
 offset_bottom = 10843.0
 color = Color(0.0117, 0.0117, 0.09, 0.807843)
 
+[node name="Collision" type="StaticBody2D" parent="LevelContainer/Level"]
+z_index = 10
+metadata/_edit_lock_ = true
+
+[node name="Polygon" type="CollisionPolygon2D" parent="LevelContainer/Level/Collision"]
+visible = false
+modulate = Color(0.0156863, 0.6, 0.6, 1)
+polygon = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 4344, 5602, -1992, 5714, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
+
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
 [node name="Jellyfish" parent="LevelContainer/Entities" instance=ExtResource("6_sqcin")]

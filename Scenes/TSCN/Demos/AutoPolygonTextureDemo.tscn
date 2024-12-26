@@ -16,11 +16,11 @@ polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192
 script = ExtResource("3_ut3q7")
 
 [node name="Collision" type="StaticBody2D" parent="."]
-collision_layer = 129
+z_index = 10
 
 [node name="Polygon" type="CollisionPolygon2D" parent="Collision"]
 visible = false
-modulate = Color(1, 1, 1, 0.0941176)
+modulate = Color(0.0156863, 0.6, 0.6, 1)
 polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
 
 [node name="LightOccluder" type="LightOccluder2D" parent="."]
