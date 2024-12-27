@@ -7,7 +7,7 @@ extends BaseRope
 
 const TIMESTEP: float = 0.1
 
-@export var iterations: int = 10
+@export var iterations: int = 2
 
 @export var gravity: Vector2 = Vector2(0, 100)
 @export var damping: float = 0.98  # 1 = no damping, < 1 slows movement
@@ -74,7 +74,7 @@ func simulate(delta: float):
 				resolved_position += collide_and_translate(resolved_position, velocity / 3, i)  # Divide motion for each iteration
 			else:
 				# Just move freely if collisions are disabled
-				resolved_position += (velocity / 3) * delta * 60
+				resolved_position += (velocity) * delta * 60
 		
 		node.position = resolved_position
 		

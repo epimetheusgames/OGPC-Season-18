@@ -12,7 +12,7 @@ script = ExtResource("2_favrd")
 health = 7
 damage = 2
 base_speed = 0.8
-agressiveness = 0.0
+agressiveness = 0.5
 attack_distance = 250.0
 closest_distance = 50.0
 sensor_type = 0
@@ -31,7 +31,6 @@ size = Vector2(45, 69)
 size = Vector2(113, 109.5)
 
 [node name="BigfinSquid" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "attackbox_component", "health_component")]
-position = Vector2(582, 96)
 script = ExtResource("1_0jv23")
 settings = SubResource("Resource_d65pp")
 hurtbox_component = NodePath("HurtboxComponent")
@@ -72,33 +71,29 @@ metadata/_edit_lock_ = true
 
 [node name="RightFrontArmRope" type="Node" parent="."]
 script = ExtResource("2_rptbt")
-iterations = 1
 gravity = Vector2(0, 20)
-point_amount = 30
+point_amount = 25
 point_separation = 50.0
 component_container = NodePath("..")
 
 [node name="LeftFrontArmRope" type="Node" parent="."]
 script = ExtResource("2_rptbt")
-iterations = 1
 gravity = Vector2(0, 20)
-point_amount = 30
+point_amount = 25
 point_separation = 50.0
 component_container = NodePath("..")
 
 [node name="RightBackArmRope" type="Node" parent="."]
 script = ExtResource("2_rptbt")
-iterations = 1
 gravity = Vector2(0, 20)
-point_amount = 30
+point_amount = 25
 point_separation = 50.0
 component_container = NodePath("..")
 
 [node name="LeftBackArmRope" type="Node" parent="."]
 script = ExtResource("2_rptbt")
-iterations = 1
 gravity = Vector2(0, 20)
-point_amount = 30
+point_amount = 25
 point_separation = 50.0
 component_container = NodePath("..")
 
@@ -134,3 +129,7 @@ shape = SubResource("RectangleShape2D_cfi6i")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, -28.75)
 shape = SubResource("RectangleShape2D_ey62v")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(40.5, 3.00005)
+scale = Vector2(96.35, 91.7)

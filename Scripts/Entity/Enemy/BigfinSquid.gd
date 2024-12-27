@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
 	rotation = Util.better_angle_lerp(rotation, target_velocity.angle() + PI / 2, 0.1, delta)
 	
 	for i in range(targets.size()):
+		ropes[i].is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
 		targets[i].global_position = arms[i].points[1].rotated(arms[i].global_rotation) + arms[i].global_position
 		ropes[i].gravity = -target_velocity.normalized() * 10
 		

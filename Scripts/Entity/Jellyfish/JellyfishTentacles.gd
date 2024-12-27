@@ -43,7 +43,7 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		new_rope.start_pos_on = true
 		new_rope.start_anchor_node = new_tentacle_anchor
 		
-		new_rope.iterations = 1
+		new_rope.iterations = 2
 		
 		new_tentacle_anchor.add_child(new_rope)
 		ropes.append(new_rope)
