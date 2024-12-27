@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://baqj8l6l28vpr"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Top" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 172.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Top"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Top/MarginContainer"]
+layout_mode = 2
+
+[node name="HealthVBox" type="VBoxContainer" parent="Top/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Top/MarginContainer/HBoxContainer/HealthVBox"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Top/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Top/MarginContainer/HBoxContainer/HealthVBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Top/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Health"
+
+[node name="VSeparator" type="VSeparator" parent="Top/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="OxygenVBox" type="VBoxContainer" parent="Top/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Top/MarginContainer/HBoxContainer/OxygenVBox"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Top/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Top/MarginContainer/HBoxContainer/OxygenVBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Top/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Oxygen"
+
+[node name="Bottom" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -154.0
+offset_right = 528.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Bottom"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="TeamDisplayVBox" type="VBoxContainer" parent="Bottom/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 5
+
+[node name="Player1" type="HBoxContainer" parent="Bottom/MarginContainer/TeamDisplayVBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Carson"
+
+[node name="VSeparator" type="VSeparator" parent="Bottom/MarginContainer/TeamDisplayVBox/Player1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "100%"
+
+[node name="Player2" type="HBoxContainer" parent="Bottom/MarginContainer/TeamDisplayVBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player2"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Carson"
+
+[node name="VSeparator2" type="VSeparator" parent="Bottom/MarginContainer/TeamDisplayVBox/Player2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "100%"
+
+[node name="Player3" type="HBoxContainer" parent="Bottom/MarginContainer/TeamDisplayVBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player3"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "Carson"
+
+[node name="VSeparator3" type="VSeparator" parent="Bottom/MarginContainer/TeamDisplayVBox/Player3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 30
+text = "100%"
