@@ -192,8 +192,8 @@ shader_parameter/intensity = 0.2
 shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
-shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1213, 657)
+shader = ExtResource("27_tn4is")
+shader_parameter/screen_size = Vector2(1213, 753)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -322,18 +322,19 @@ max_distance = 1e+06
 [node name="Background" type="ColorRect" parent="LevelContainer/Level"]
 z_index = -10
 material = SubResource("ShaderMaterial_dh4ys")
-offset_left = -6579.0
-offset_right = 11139.0
+offset_left = 11139.0
+offset_right = 28857.0
 offset_bottom = 10843.0
+scale = Vector2(-1, 1)
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
 
 [node name="TransBackground" type="ColorRect" parent="LevelContainer/Level"]
 z_index = 10
 material = SubResource("ShaderMaterial_exbxk")
-offset_left = -6526.0
-offset_top = 8.0
-offset_right = 11192.0
-offset_bottom = 10851.0
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+scale = Vector2(-1, 1)
 color = Color(0.0117, 0.0117, 0.09, 0.807843)
 
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
@@ -538,7 +539,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -707.0
-offset_bottom = -423.0
+offset_bottom = -327.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)

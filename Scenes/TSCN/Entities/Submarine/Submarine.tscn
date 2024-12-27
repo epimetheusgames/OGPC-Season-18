@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8b85s6osaha0"]
 
-[ext_resource type="Script" uid="uid://bgxenhahwef1n" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_xpqec"]
-[ext_resource type="Script" uid="uid://da8bu0k773rqt" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_q50ul"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_xpqec"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_q50ul"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w2u2"]
 size = Vector2(164, 242.5)
