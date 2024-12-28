@@ -24,7 +24,7 @@ var base_speed: float
 @onready var tentacles: JellyfishTentacles = $"Tentacles"
 
 func _ready() -> void:
-	_ready_enemy()
+	super()
 	base_speed = settings.base_speed
 
 func _process(delta: float) -> void:

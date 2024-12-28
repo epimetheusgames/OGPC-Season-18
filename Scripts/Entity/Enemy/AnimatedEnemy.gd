@@ -5,7 +5,7 @@ extends Enemy
 var _physics_velocity = Vector2.ZERO
 
 func _ready() -> void:
-	_enemy_ready()
+	super()
 	
 	$FishNavigation.path_changed.connect(_path_changed)
 	$FishNavigation.navigation_finished.connect(_target_reached)
