@@ -8,6 +8,7 @@ extends Node2D
 @export var spread = 0.4
 @export var target_height = 0
 @export var diver: Diver
+@export var no_height_diver := false
 
 @export var spacing := 4.0:
 	set(val):
@@ -71,7 +72,7 @@ func _process(delta: float) -> void:
 			#if i < spring_positions.size() - 1:
 				#spring_positions[i + 1].y += right_deltas[i]
 	
-	if diver.global_position.y - 1000 > spring_positions[0].y :
+	if diver.global_position.y - 1000 > spring_positions[0].y && !no_height_diver:
 		return 
 	
 	for i in range(spring_positions.size()):

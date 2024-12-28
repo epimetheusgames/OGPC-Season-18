@@ -15,6 +15,7 @@ func _on_move_right_button_button_up() -> void:
 		$MoveLeftButton.disabled = false
 		camera_state = CameraState.DOCKS
 	if camera_state == CameraState.MISSIONS:
+		$MoveLeftButton.disabled = false
 		camera_state = CameraState.SUBMARINE
 
 func _on_move_left_button_button_up() -> void:
@@ -23,6 +24,7 @@ func _on_move_left_button_button_up() -> void:
 		$MoveLeftButton.disabled = true
 		camera_state = CameraState.MISSIONS
 	if camera_state == CameraState.DOCKS:
+		$MoveRightButton.disabled = false
 		camera_state = CameraState.SUBMARINE
 
 func _process(delta: float) -> void:

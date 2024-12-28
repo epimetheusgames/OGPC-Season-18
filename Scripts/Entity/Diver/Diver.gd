@@ -15,9 +15,11 @@ var diver_state : Util.DiverState
 
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
 
+@export var no_movement := false
+
 func _ready() -> void:
 	set_state(Util.DiverState.SWIMMING)
-	if !Global.player:
+	if !Global.player || !is_instance_valid(Global.player):
 		Global.player = self
 	$BuoyancyComponent.waves = water_manager
 
