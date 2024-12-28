@@ -4,7 +4,6 @@
 class_name Entity
 extends CharacterBody2D
 
-
 var entity_type = "Entity"
 
 @export var _has_physics := false

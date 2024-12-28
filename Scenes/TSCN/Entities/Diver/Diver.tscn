@@ -445,6 +445,13 @@ position = Vector2(105, -1)
 color = Color(1, 0, 1, 1)
 polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
 
+[node name="PlayerName" type="Label" parent="Animation"]
+offset_left = -190.0
+offset_top = -122.0
+offset_right = 190.0
+offset_bottom = -99.0
+horizontal_alignment = 1
+
 [node name="Health" type="Node2D" parent="."]
 rotation = 0.000201209
 

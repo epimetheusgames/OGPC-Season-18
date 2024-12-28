@@ -1,6 +1,5 @@
 [gd_scene load_steps=66 format=3 uid="uid://dh0cluhw5hbar"]
 
-[ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="1_awqxm"]
@@ -20,11 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="12_oa2ar"]
 [ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
-[ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="15_edyr5"]
+[ext_resource type="PackedScene" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="15_edyr5"]
 [ext_resource type="Script" path="res://Scripts/Level/ShadowPipeline.gd" id="16_0m2co"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Shadow.gdshader" id="16_ctau1"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
@@ -35,6 +33,13 @@
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
+
+[sub_resource type="GDScript" id="GDScript_5py2y"]
+script/source = "extends NavigationRegion2D
+
+func _ready() -> void:
+	bake_navigation_polygon()
+"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sqi7e"]
 load_path = "res://.godot/imported/WallTexture.png-6996c64947de4685171d9de8914e92d7.ctex"
@@ -95,12 +100,12 @@ shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_j3cqg")
 
 [sub_resource type="Resource" id="Resource_ymfsj"]
 resource_local_to_scene = true
-script = ExtResource("17_j8dce")
+script = SubResource("GDScript_s7qgv")
 uid = 337
 
 [sub_resource type="Resource" id="Resource_fubrg"]
 resource_local_to_scene = true
-script = ExtResource("17_j8dce")
+script = SubResource("GDScript_s7qgv")
 uid = 1831
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
@@ -224,7 +229,7 @@ water_manager = NodePath("../../Waves")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="LevelContainer/Level"]
 z_index = 2
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
-script = ExtResource("1_2ttir")
+script = SubResource("GDScript_5py2y")
 metadata/_edit_lock_ = true
 
 [node name="AutoPolygon" parent="LevelContainer/Level/NavigationRegion2D" instance=ExtResource("11_f0f4i")]
@@ -561,7 +566,6 @@ color = Color(1, 1, 1, 0)
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
-visible = false
 
 [node name="DevPanel" parent="UI" instance=ExtResource("1_6r47m")]
 

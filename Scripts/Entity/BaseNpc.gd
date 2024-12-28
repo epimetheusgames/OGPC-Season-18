@@ -33,10 +33,7 @@ var dialog: Dictionary
 var dialog_json: JSON
 
 func _process(delta: float) -> void:
-	_npc_process(delta)
-
-func _npc_process(delta: float) -> void:
-	_entity_process(delta)
+	super(delta)
 
 func touching_bodies() -> bool:
 	var bodies = get_node(dialog_area).get_overlapping_bodies()
