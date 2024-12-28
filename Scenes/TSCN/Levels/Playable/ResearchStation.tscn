@@ -107,6 +107,7 @@ script = ExtResource("2_e3xfe")
 metadata/_edit_lock_ = true
 
 [node name="MoveRightButton" type="Button" parent="Camera2D"]
+z_index = 15
 offset_left = 820.0
 offset_top = -45.0
 offset_right = 913.0
@@ -116,6 +117,7 @@ text = ">"
 metadata/_edit_lock_ = true
 
 [node name="MoveLeftButton" type="Button" parent="Camera2D"]
+z_index = 15
 offset_left = -914.0
 offset_top = -41.0
 offset_right = -821.0
