@@ -80,7 +80,7 @@ shader_parameter/max_alpha = 0.2
 shader_parameter/height = 1.0
 shader_parameter/depth_color_tex = ExtResource("12_c52vc")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j3cqg"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yu0vj"]
 load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-327f5b874898d4dde69f55c283418e46.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_exbxk"]
@@ -91,9 +91,9 @@ shader_parameter/always_top = false
 shader_parameter/blend_alpha = true
 shader_parameter/max_alpha = 0.8
 shader_parameter/height = 3.5
-shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_j3cqg")
+shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_o61sj"]
+[sub_resource type="Resource" id="Resource_2n02r"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 337
@@ -193,7 +193,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1213, 753)
+shader_parameter/screen_size = Vector2(1185, 379)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -341,7 +341,7 @@ color = Color(0.0117, 0.0117, 0.09, 0.807843)
 position = Vector2(1180, 1212)
 motion_mode = 1
 _has_physics = true
-uid = SubResource("Resource_o61sj")
+uid = SubResource("Resource_2n02r")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -538,8 +538,8 @@ material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -707.0
-offset_bottom = -327.0
+offset_right = -735.0
+offset_bottom = -701.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
