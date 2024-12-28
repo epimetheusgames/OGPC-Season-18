@@ -18,12 +18,12 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="12_oa2ar"]
-[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="15_edyr5"]
 [ext_resource type="Script" path="res://Scripts/Level/ShadowPipeline.gd" id="16_0m2co"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Shadow.gdshader" id="16_ctau1"]
-[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" uid="uid://c1psbyqa4c16x" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
@@ -118,6 +118,14 @@ uid = 3622
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3623
+
+[sub_resource type="Resource" id="Resource_fjmam"]
+resource_local_to_scene = true
+
+[sub_resource type="Resource" id="Resource_ulf3c"]
+resource_local_to_scene = true
+script = ExtResource("17_j8dce")
+uid = 3628
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
 background_mode = 3
@@ -357,7 +365,7 @@ color = Color(0.0117, 0.0117, 0.09, 0.807843)
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_mkddd")
+uid = SubResource("Resource_fjmam")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -391,7 +399,7 @@ position = Vector2(904, 1253)
 
 [node name="Boid" parent="LevelContainer/Entities" instance=ExtResource("16_a7n5p")]
 modulate = Color(0.720003, 0.778689, 0.920294, 1)
-uid = SubResource("Resource_5e3y2")
+uid = SubResource("Resource_ulf3c")
 
 [node name="WallRaycast" parent="LevelContainer/Entities/Boid" index="1"]
 target_position = Vector2(0, 400)
