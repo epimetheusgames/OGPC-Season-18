@@ -175,6 +175,7 @@ func load_level(level_path: String):
 # Close and save game and exit to menu.
 func exit_to_menu() -> void:
 	_save_game_save(Global.current_game_save, Global.current_game_slot)
+	Global.player = null
 	Global.current_game_save = null
 	Global.current_game_slot = -1
 	
