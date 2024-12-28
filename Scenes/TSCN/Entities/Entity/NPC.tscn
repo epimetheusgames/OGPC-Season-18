@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Entity/BaseNpc.gd" id="1_3od1n"]
 [ext_resource type="Texture2D" uid="uid://csl0e2px0cwc1" path="res://addons/discord-rpc-gd/Logo_V2_No_Bg.png" id="2_5qsvp"]
-[ext_resource type="Script" path="res://Scenes/TSCN/Entities/Entity/Hitbox.gd" id="2_w4n10"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Hitbox.gd" id="2_w4n10"]
 
 [node name="NPC" type="CharacterBody2D"]
 script = ExtResource("1_3od1n")

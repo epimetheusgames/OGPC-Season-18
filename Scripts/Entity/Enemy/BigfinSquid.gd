@@ -9,7 +9,7 @@ var targets: Array[Node2D] = []
 var end_targets: Array[Node2D] = []
 
 func _ready() -> void:
-	_ready_enemy()
+	super()
 	
 	for i in range(ropes.size()):
 		var rope := ropes[i]
@@ -37,9 +37,9 @@ func _ready() -> void:
 		rope.damping = 0.95
 
 func _process(delta: float) -> void:
-	var rng := RandomNumberGenerator.new()
+	super(delta)
 	
-	_process_enemy(delta)
+	var rng := RandomNumberGenerator.new()
 	
 	$NavAgent.target_position = target_position
 	

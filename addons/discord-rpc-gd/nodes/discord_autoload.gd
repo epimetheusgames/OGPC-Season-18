@@ -10,4 +10,7 @@ func _ready() -> void:
 	pass
 
 func  _process(_delta) -> void:
-	DiscordRPC.run_callbacks()
+	# Discord RPC errors
+	pass
+	
+	#DiscordRPC.run_callbacks()

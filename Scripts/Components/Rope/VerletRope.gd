@@ -21,7 +21,7 @@ var normals: Array[Vector2]
 
 func _ready() -> void:
 	component_name = "VerletRope"
-	_ready_rope()
+	super()
 	
 	raycast_query = PhysicsRayQueryParameters2D.new()
 	

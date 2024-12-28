@@ -1,6 +1,7 @@
 ## A base class for all enemies.
-## If inheriting from this class you must call _process_enemy at the start of your 
-## process function, and call _enemy_ready at the start of your ready function.
+## Extending enemies must call super() at the top
+## of your process and ready functions
+
 # Owned by: carsonetb
 class_name Enemy
 extends NPC
@@ -33,10 +34,7 @@ enum WANDER_MODE {
 	NOT_WANDERING,
 }
 
-func _ready():
-	_ready_enemy()
-
-func _ready_enemy() -> void:
+func _ready() -> void:
 	if quick_disable_everything:
 		return
 	
@@ -84,10 +82,7 @@ func _target_reached() -> void:
 	wander_state = WANDER_MODE.WANDER_POINT_REACHED
 
 func _process(delta: float) -> void:
-	_process_enemy(delta)
-
-func _process_enemy(delta: float) -> void:
-	_npc_process(delta)
+	super(delta)
 	
 	if quick_disable_everything:
 		return

@@ -1,6 +1,5 @@
-[gd_scene load_steps=66 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=68 format=3 uid="uid://dh0cluhw5hbar"]
 
-[ext_resource type="Script" uid="uid://ckq65xf2cmmwg" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://bqr62l1jiih" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://i4m51oco4iap" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="1_awqxm"]
@@ -33,8 +32,20 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 
+[sub_resource type="Resource" id="Resource_km6pi"]
+resource_local_to_scene = true
+script = ExtResource("17_j8dce")
+uid = 3625
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
+
+[sub_resource type="GDScript" id="GDScript_5py2y"]
+script/source = "extends NavigationRegion2D
+
+func _ready() -> void:
+	bake_navigation_polygon()
+"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sqi7e"]
 load_path = "res://.godot/imported/WallTexture.png-6996c64947de4685171d9de8914e92d7.ctex"
@@ -93,15 +104,20 @@ shader_parameter/max_alpha = 0.8
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_ir0sa"]
+[sub_resource type="Resource" id="Resource_mkddd"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
-uid = 337
+uid = 3624
 
-[sub_resource type="Resource" id="Resource_fubrg"]
+[sub_resource type="Resource" id="Resource_5e3y2"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
-uid = 1831
+uid = 3622
+
+[sub_resource type="Resource" id="Resource_t3nf2"]
+resource_local_to_scene = true
+script = ExtResource("17_j8dce")
+uid = 3623
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
 background_mode = 3
@@ -193,7 +209,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1185, 379)
+shader_parameter/screen_size = Vector2(1213, 664)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -218,13 +234,14 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 [node name="Diver" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent" node_paths=PackedStringArray("water_manager") instance=ExtResource("4_0aydx")]
 position = Vector2(1012, 1089)
 water_manager = NodePath("../../Waves")
+uid = SubResource("Resource_km6pi")
 
 [node name="Camera2D" type="Camera2D" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="LevelContainer/Level"]
 z_index = 2
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
-script = ExtResource("1_2ttir")
+script = SubResource("GDScript_5py2y")
 metadata/_edit_lock_ = true
 
 [node name="AutoPolygon" parent="LevelContainer/Level/NavigationRegion2D" instance=ExtResource("11_f0f4i")]
@@ -340,8 +357,7 @@ color = Color(0.0117, 0.0117, 0.09, 0.807843)
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-_has_physics = true
-uid = SubResource("Resource_ir0sa")
+uid = SubResource("Resource_mkddd")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -375,7 +391,7 @@ position = Vector2(904, 1253)
 
 [node name="Boid" parent="LevelContainer/Entities" instance=ExtResource("16_a7n5p")]
 modulate = Color(0.720003, 0.778689, 0.920294, 1)
-uid = SubResource("Resource_fubrg")
+uid = SubResource("Resource_5e3y2")
 
 [node name="WallRaycast" parent="LevelContainer/Entities/Boid" index="1"]
 target_position = Vector2(0, 400)
@@ -398,6 +414,7 @@ component_container = NodePath("..")
 
 [node name="BigfinSquid" parent="LevelContainer/Entities" instance=ExtResource("15_edyr5")]
 position = Vector2(824, 990)
+uid = SubResource("Resource_t3nf2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="LevelContainer"]
 environment = SubResource("Environment_5ulyy")
@@ -538,8 +555,8 @@ material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -735.0
-offset_bottom = -701.0
+offset_right = -707.0
+offset_bottom = -416.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
