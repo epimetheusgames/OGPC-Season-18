@@ -4,6 +4,12 @@ class_name Util
 
 # -- General --
 
+enum DiverState{
+	SWIMMING,
+	IN_SUBMARINE,
+	DRIVING_SUBMARINE,
+}
+
 # Calls a specific function on a group of nodes over multiple frames.
 static func multiframe_function_batches_on_group(group: Array[Node], function_name: String, args: Array, batch_size: int, tree: SceneTree) -> void:
 	if group.size() % batch_size != 0:

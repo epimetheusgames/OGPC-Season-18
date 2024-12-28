@@ -28,8 +28,8 @@ config/icon="res://Assets/Art/Sprites/Misc/icon.svg"
 
 [autoload]
 
-Global="*res://Scripts/Skeleton/Autoloads/Global.gd"
 EditorGlobal="*res://Scripts/LevelEditor/EditorGlobal.gd"
+Global="*res://Scripts/Skeleton/Autoloads/Global.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 
 [debug]
@@ -108,6 +108,16 @@ interact={
 secondary_attack={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+mwUP={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":8,"position":Vector2(91, 10),"global_position":Vector2(100, 56),"factor":1.0,"button_index":4,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+mwDOWN={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
 
