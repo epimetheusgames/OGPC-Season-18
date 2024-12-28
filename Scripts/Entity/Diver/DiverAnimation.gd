@@ -24,6 +24,8 @@ extends Node2D
 
 @onready var arrow: Node2D = $"Arrow"
 
+var displayed_nametag: Label
+
 
 # Leg oscillation (did i spell that right)
 const DIST_FROM_BODY = -110
@@ -50,8 +52,20 @@ func _ready() -> void:
 	mod_stack.set_modification(0, leg_mod1)
 	mod_stack.set_modification(0, leg_mod2)
 	$Skeleton.set_modification_stack(mod_stack)
+	
+	displayed_nametag = $PlayerName.duplicate()
+	$"../../../../../UI".add_child(displayed_nametag)
+	
+	if !Global.is_multiplayer || diver._is_node_owner():
+		displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
+	else:
+		displayed_nametag.text = Steam.getFriendPersonaName(int(diver.name))
 
 func _process(delta: float) -> void:
+	# Update label position.
+	var offset_pos: Vector2 = head.global_position - get_viewport().get_camera_2d().get_screen_center_position()
+	displayed_nametag.global_position = offset_pos - displayed_nametag.size / 2 + get_viewport_rect().size / 2 - Vector2(0, 40)
+	
 	# Update the arrow rotation
 	arrow.global_rotation = diver.get_diver_movement().get_current_angle()
 	
