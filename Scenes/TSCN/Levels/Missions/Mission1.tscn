@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=61 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
@@ -28,6 +28,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
+[ext_resource type="PackedScene" uid="uid://baqj8l6l28vpr" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
@@ -495,6 +496,9 @@ color = Color(1, 1, 1, 0)
 layer = 3
 
 [node name="DevPanel" parent="UI" instance=ExtResource("1_6r47m")]
+visible = false
+
+[node name="IngameUi" parent="UI" instance=ExtResource("29_54jb5")]
 
 [editable path="LevelContainer/Level/NavigationRegion2D/AutoPolygon"]
 [editable path="LevelContainer/Level/Waves"]

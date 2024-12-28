@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://baqj8l6l28vpr"]
+[gd_scene load_steps=2 format=3 uid="uid://baqj8l6l28vpr"]
+
+[ext_resource type="Script" path="res://Scripts/UI/TeamHealthPanel.gd" id="1_0ajfg"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -70,81 +72,118 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
 text = "Oxygen"
 
-[node name="Bottom" type="PanelContainer" parent="."]
+[node name="TeamInfoPanel" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -154.0
-offset_right = 528.0
+offset_top = -135.0
+offset_right = 283.0
 grow_vertical = 0
+script = ExtResource("1_0ajfg")
 
-[node name="MarginContainer" type="MarginContainer" parent="Bottom"]
+[node name="MarginContainer" type="MarginContainer" parent="TeamInfoPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="TeamDisplayVBox" type="VBoxContainer" parent="Bottom/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="TeamInfoPanel/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 5
 
-[node name="Player1" type="HBoxContainer" parent="Bottom/MarginContainer/TeamDisplayVBox"]
-custom_minimum_size = Vector2(0, 48)
+[node name="Player1" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player1"]
-custom_minimum_size = Vector2(300, 0)
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player1"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 20
 text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
 
-[node name="VSeparator" type="VSeparator" parent="Bottom/MarginContainer/TeamDisplayVBox/Player1"]
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Player1"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player1"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player1"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 20
 text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
 
-[node name="Player2" type="HBoxContainer" parent="Bottom/MarginContainer/TeamDisplayVBox"]
-custom_minimum_size = Vector2(0, 48)
+[node name="Player2" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player2"]
-custom_minimum_size = Vector2(300, 0)
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player2"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 20
 text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
 
-[node name="VSeparator2" type="VSeparator" parent="Bottom/MarginContainer/TeamDisplayVBox/Player2"]
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Player2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-
-[node name="RichTextLabel3" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player2"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 20
 text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
 
-[node name="Player3" type="HBoxContainer" parent="Bottom/MarginContainer/TeamDisplayVBox"]
-custom_minimum_size = Vector2(0, 48)
+[node name="Player3" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player3"]
-custom_minimum_size = Vector2(300, 0)
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player3"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 20
 text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
 
-[node name="VSeparator3" type="VSeparator" parent="Bottom/MarginContainer/TeamDisplayVBox/Player3"]
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Player3"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player3"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-
-[node name="RichTextLabel4" type="RichTextLabel" parent="Bottom/MarginContainer/TeamDisplayVBox/Player3"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 20
 text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Player4" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player4"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Player4"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
