@@ -37,9 +37,9 @@ func _ready() -> void:
 		rope.damping = 0.95
 
 func _process(delta: float) -> void:
-	var rng := RandomNumberGenerator.new()
+	super(delta)
 	
-	_process_enemy(delta)
+	var rng := RandomNumberGenerator.new()
 	
 	$NavAgent.target_position = target_position
 	

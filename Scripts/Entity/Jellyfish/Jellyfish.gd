@@ -28,7 +28,8 @@ func _ready() -> void:
 	base_speed = settings.base_speed
 
 func _process(delta: float) -> void:
-	_process_enemy(delta)
+	super(delta)
+	
 	nav_agent.target_position = target_position
 
 	# Countdown boost timer (if needed for specific boost duration)

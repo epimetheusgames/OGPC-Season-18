@@ -6,8 +6,8 @@ class_name FabrikRope
 extends BaseRope
 
 func _ready() -> void:
-	_ready_rope()
 	component_name = "FabrikRope"
+	super()
 
 func _process(delta):
 	pull_toward_anchor2()

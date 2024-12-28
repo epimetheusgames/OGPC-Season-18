@@ -21,10 +21,7 @@ var end_pos_on: bool = false
 var points: Array[Vector2]
 
 func _ready() -> void:
-	_ready_rope()
-
-func _ready_rope():
-	_ready_base_component()
+	super()
 	
 	points.resize(point_amount)
 	points.fill(Vector2(0, 0))
