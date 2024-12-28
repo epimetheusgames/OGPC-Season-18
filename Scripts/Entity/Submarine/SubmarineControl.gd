@@ -18,4 +18,4 @@ func _on_control_area_area_entered(area: Area2D) -> void:
 
 func _on_control_area_area_exited(area: Area2D) -> void:
 	if area.get_parent() is Diver:
-		in_control_area = true
+		in_control_area = false
