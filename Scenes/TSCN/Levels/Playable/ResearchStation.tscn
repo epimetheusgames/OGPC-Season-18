@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="5_thj6v"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="6_dw1pj"]
 
-[sub_resource type="Resource" id="Resource_3r4yg"]
+[sub_resource type="Resource" id="Resource_mxy30"]
 resource_local_to_scene = true
 script = ExtResource("2_ewnx3")
 uid = 3625
@@ -58,7 +58,7 @@ polygon = PackedVector2Array(5655, 3000, 5756, 2773, 6112, 2766, 5936, 3159, 557
 
 [node name="Diver" parent="." instance=ExtResource("6_dw1pj")]
 position = Vector2(5866, 2933)
-uid = SubResource("Resource_4mbd0")
+uid = SubResource("Resource_mxy30")
 
 [node name="TempStationWalls" type="Polygon2D" parent="."]
 z_index = 7
