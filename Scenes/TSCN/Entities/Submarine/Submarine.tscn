@@ -1,48 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8b85s6osaha0"]
+[gd_scene load_steps=4 format=3 uid="uid://b8b85s6osaha0"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_xpqec"]
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_q50ul"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6w2u2"]
-size = Vector2(164, 242.5)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rk3f"]
-size = Vector2(440, 247)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7weh"]
-size = Vector2(446, 41)
+size = Vector2(400, 400)
 
 [node name="Submarine" type="CharacterBody2D"]
 script = ExtResource("1_xpqec")
 
-[node name="DriveArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DriveArea"]
-position = Vector2(0, -122)
-shape = SubResource("RectangleShape2D_6w2u2")
+[node name="SubmarineMovement" type="Node2D" parent="."]
+script = ExtResource("2_q50ul")
 
 [node name="SubmarineArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SubmarineArea"]
-position = Vector2(0.184021, -122.09)
 shape = SubResource("RectangleShape2D_2rk3f")
 
-[node name="SubmarineMovement" type="Node2D" parent="."]
-script = ExtResource("2_q50ul")
+[node name="Modules" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -223.0
-offset_right = 223.0
-offset_bottom = 40.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 19.5)
-shape = SubResource("RectangleShape2D_o7weh")
-
-[node name="SeatPos" type="Node2D" parent="."]
-position = Vector2(0.184021, -122.09)
-
-[connection signal="area_entered" from="DriveArea" to="." method="_on_drive_area_area_entered"]
-[connection signal="area_exited" from="DriveArea" to="." method="_on_drive_area_area_exited"]
 [connection signal="area_entered" from="SubmarineArea" to="." method="_on_submarine_area_area_entered"]
 [connection signal="area_exited" from="SubmarineArea" to="." method="_on_submarine_area_area_exited"]
