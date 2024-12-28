@@ -24,7 +24,7 @@ var buoyancy = 0
 
 func _physics_process(delta: float) -> void:
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
-		if diver.get_state() == "DRIVING_SUBMARINE":
+		if diver.get_state() == Util.DiverState.DRIVING_SUBMARINE:
 			update_target_angle(delta)
 			update_current_angle(delta * 60)
 			print(rad_to_deg(current_angle))
@@ -62,7 +62,7 @@ func update_current_angle(delta: float) -> void:
 	current_angle = lerp_angle(current_angle, target_angle, 0.05 * delta)
 
 func update_movement_velocity(delta: float):
-	velocity = velocity * 0.97
+	velocity = velocity * 0.95
 	
 	velocity += input_direction * Util.angle_to_vector(current_angle, CONST_ACCEL * delta)
 	

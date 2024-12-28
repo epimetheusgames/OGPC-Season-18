@@ -28,8 +28,8 @@ config/icon="res://Assets/Art/Sprites/Misc/icon.svg"
 
 [autoload]
 
-Global="*res://Scripts/Skeleton/Autoloads/Global.gd"
 EditorGlobal="*res://Scripts/LevelEditor/EditorGlobal.gd"
+Global="*res://Scripts/Skeleton/Autoloads/Global.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 
 [debug]

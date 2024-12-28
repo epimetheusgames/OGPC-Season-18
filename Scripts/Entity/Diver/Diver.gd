@@ -4,14 +4,8 @@
 class_name Diver
 extends Entity
 
-enum STATE_ENUM {
-	SWIMMING,
-	IN_SUBMARINE,
-	DRIVING_SUBMARINE,
-}
-
-var player_state : STATE_ENUM
-
+var diver_state : Util.DiverState
+ 
 @onready var diver_movement: DiverMovement = $"Movement"
 @onready var diver_animation: DiverAnimation = $"Animation"
 @onready var diver_combat: DiverCombat = $"Combat"
@@ -22,7 +16,7 @@ var player_state : STATE_ENUM
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
 
 func _ready() -> void:
-	set_state("SWIMMING")
+	set_state(Util.DiverState.SWIMMING)
 	if !Global.player:
 		Global.player = self
 	$BuoyancyComponent.waves = water_manager
@@ -32,9 +26,9 @@ func _physics_process(_delta: float):
 		move_and_slide()
 		return
 	
-	if get_state() != "DRIVING_SUBMARINE":
+	if get_state() != Util.DiverState.DRIVING_SUBMARINE:
 		velocity = diver_movement.get_velocity()
-	
+		
 		var target_angle: float = velocity.angle() + PI/2
 		
 		var angle_diff: float = angle_difference(rotation, target_angle)
@@ -52,18 +46,8 @@ func _physics_process(_delta: float):
 func get_diver_movement() -> DiverMovement:
 	return diver_movement
 
-func set_state(state : String):
-	if state == "SWIMMING":
-		get_node("Body").disabled = false
-		player_state = STATE_ENUM.SWIMMING
-	elif state == "IN_SUBMARINE":
-		get_node("Body").disabled = false
-		player_state = STATE_ENUM.IN_SUBMARINE
-	elif state == "DRIVING_SUBMARINE":
-		get_node("Body").disabled = true
-		player_state = STATE_ENUM.DRIVING_SUBMARINE
-	else:
-		print("ERROR: Player state " + state + " not found")
+func set_state(state : Util.DiverState):
+	diver_state = state
 
-func get_state() -> String:
-	return STATE_ENUM.keys()[player_state]
+func get_state() -> Util.DiverState:
+	return diver_state
