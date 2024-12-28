@@ -93,7 +93,7 @@ shader_parameter/max_alpha = 0.8
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_j3cqg")
 
-[sub_resource type="Resource" id="Resource_gj4ci"]
+[sub_resource type="Resource" id="Resource_o61sj"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 337
@@ -341,7 +341,7 @@ color = Color(0.0117, 0.0117, 0.09, 0.807843)
 position = Vector2(1180, 1212)
 motion_mode = 1
 _has_physics = true
-uid = SubResource("Resource_gj4ci")
+uid = SubResource("Resource_o61sj")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
