@@ -93,7 +93,7 @@ shader_parameter/max_alpha = 0.8
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_j3cqg")
 
-[sub_resource type="Resource" id="Resource_j1rx5"]
+[sub_resource type="Resource" id="Resource_ettcb"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 337
@@ -246,8 +246,8 @@ metadata/_edit_lock_ = true
 [node name="Waves" parent="LevelContainer/Level" node_paths=PackedStringArray("diver") instance=ExtResource("10_gbtle")]
 position = Vector2(-4418, -143)
 spread = 14.4
-diver = NodePath("../MultiplayerPlayerSpawnerComponent/Diver")
 spacing = 40.0
+diver = NodePath("../MultiplayerPlayerSpawnerComponent/Diver")
 
 [node name="Line2D" parent="LevelContainer/Level/Waves" index="0"]
 z_index = 3
@@ -322,25 +322,26 @@ max_distance = 1e+06
 [node name="Background" type="ColorRect" parent="LevelContainer/Level"]
 z_index = -10
 material = SubResource("ShaderMaterial_dh4ys")
-offset_left = -6579.0
-offset_right = 11139.0
+offset_left = 11139.0
+offset_right = 28857.0
 offset_bottom = 10843.0
+scale = Vector2(-1, 1)
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
 
 [node name="TransBackground" type="ColorRect" parent="LevelContainer/Level"]
 z_index = 10
 material = SubResource("ShaderMaterial_exbxk")
-offset_left = -6526.0
-offset_top = 8.0
-offset_right = 11192.0
-offset_bottom = 10851.0
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+scale = Vector2(-1, 1)
 color = Color(0.0117, 0.0117, 0.09, 0.807843)
 
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
 _has_physics = true
-uid = SubResource("Resource_j1rx5")
+uid = SubResource("Resource_ettcb")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")

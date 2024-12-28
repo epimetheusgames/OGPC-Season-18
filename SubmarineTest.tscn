@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="1_bp2s0"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_8073y"]
 
-[sub_resource type="Resource" id="Resource_aiiow"]
+[sub_resource type="Resource" id="Resource_atnpk"]
 resource_local_to_scene = true
 script = ExtResource("2_8073y")
 uid = 344
@@ -20,4 +20,4 @@ offset_bottom = 204.0
 position = Vector2(448, 334)
 motion_mode = 1
 _has_physics = true
-uid = SubResource("Resource_aiiow")
+uid = SubResource("Resource_atnpk")

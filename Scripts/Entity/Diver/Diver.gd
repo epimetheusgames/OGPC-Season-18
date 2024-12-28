@@ -34,8 +34,7 @@ func _physics_process(_delta: float):
 		var angle_diff: float = angle_difference(rotation, target_angle)
 		rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
 	
-		move_and_slide()
-	
+	move_and_slide()
 	
 	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
 		Global.godot_steam_abstraction.sync_var($Animation/ArmIkTarget1, "global_position")

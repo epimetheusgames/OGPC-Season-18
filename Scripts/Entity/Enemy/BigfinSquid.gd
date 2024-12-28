@@ -49,16 +49,16 @@ func _process(delta: float) -> void:
 	rotation = Util.better_angle_lerp(rotation, target_velocity.angle() + PI / 2, 0.1, delta)
 	
 	for i in range(targets.size()):
+		ropes[i].is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
 		targets[i].global_position = arms[i].points[1].rotated(arms[i].global_rotation) + arms[i].global_position
-		ropes[i].gravity = -target_velocity.normalized() * 20
+		ropes[i].gravity = -target_velocity.normalized() * 10
 		
 		if player_visible:
 			end_targets[i].global_position = limbs[i].global_position
 			ropes[i].end_pos_on = true
-			ropes[i].gravity = -target_velocity.normalized() * 20
 			Global.player.diver_movement.velocity += (global_position - Global.player.global_position).normalized() * 0.7 * delta * 60
 		else:
 			ropes[i].end_pos_on = false
 	
-	if position.distance_to(target_position) < 10:
+	if position.distance_to(target_position) < 50:
 		_target_reached()
