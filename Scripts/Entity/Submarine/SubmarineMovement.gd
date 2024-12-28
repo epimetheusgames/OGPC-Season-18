@@ -23,16 +23,19 @@ var velocity: Vector2 = Vector2.ZERO
 var buoyancy = 0
 
 func _physics_process(delta: float) -> void:
+	decay_velocity(delta)
+	
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
 		if diver.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+			update_movement_velocity(delta * 60)
 			update_target_angle(delta)
 			update_current_angle(delta * 60)
-			print(rad_to_deg(current_angle))
 			get_parent().rotation = current_angle
 			input_direction = get_input_direction()
-			update_movement_velocity(delta * 60)
 			update_buoyancy(delta)
-			print(str(buoyancy_component.buoyancy_accel) + "skib")
+
+func decay_velocity(delta : float):
+	velocity = velocity * 0.95 * delta * 60
 
 func get_input_direction() -> int:
 	input_direction = 0
@@ -59,11 +62,9 @@ func update_buoyancy(delta):
 	buoyancy_component.buoyancy_accel = clampf(buoyancy, MIN_BUOYANCY, MAX_BUOYANCY)
 
 func update_current_angle(delta: float) -> void:
-	current_angle = lerp_angle(current_angle, target_angle, 0.05 * delta)
+	current_angle = Util.better_angle_lerp(current_angle, target_angle, 0.005, delta)
 
 func update_movement_velocity(delta: float):
-	velocity = velocity * 0.95
-	
 	velocity += input_direction * Util.angle_to_vector(current_angle, CONST_ACCEL * delta)
 	
 	if Input.is_action_just_pressed("move"):
