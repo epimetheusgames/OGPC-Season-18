@@ -12,9 +12,8 @@ size = Vector2(120, 180)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3u10"]
 size = Vector2(400, 40)
 
-[node name="SubmarineControlModule" type="CharacterBody2D"]
+[node name="SubmarineControlModule" type="Node2D"]
 script = ExtResource("1_njwbn")
-metadata/_edit_horizontal_guides_ = [-27.0]
 
 [node name="ModuleArea" type="Area2D" parent="."]
 
@@ -26,14 +25,6 @@ shape = SubResource("RectangleShape2D_6rgtm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ControlArea"]
 position = Vector2(0, 70)
 shape = SubResource("RectangleShape2D_yxom5")
-
-[node name="Floor" type="CollisionShape2D" parent="."]
-position = Vector2(0, 180)
-shape = SubResource("RectangleShape2D_j3u10")
-
-[node name="Ceiling" type="CollisionShape2D" parent="."]
-position = Vector2(0, -180)
-shape = SubResource("RectangleShape2D_j3u10")
 
 [node name="AttachmentPoints" type="Node2D" parent="."]
 
@@ -52,6 +43,16 @@ offset_left = -200.0
 offset_top = 156.0
 offset_right = 198.0
 offset_bottom = 200.0
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="Floor" type="CollisionShape2D" parent="Collision"]
+position = Vector2(0, 180)
+shape = SubResource("RectangleShape2D_j3u10")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Collision"]
+position = Vector2(0, -180)
+shape = SubResource("RectangleShape2D_j3u10")
 
 [connection signal="area_entered" from="ControlArea" to="." method="_on_control_area_area_entered"]
 [connection signal="area_exited" from="ControlArea" to="." method="_on_control_area_area_exited"]

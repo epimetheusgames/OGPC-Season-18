@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_xpqec"]
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_q50ul"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2rk3f"]
-size = Vector2(400, 400)
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/ModuleLoader.gd" id="3_yfmig"]
 
 [node name="Submarine" type="CharacterBody2D"]
 script = ExtResource("1_xpqec")
@@ -14,10 +12,8 @@ script = ExtResource("2_q50ul")
 
 [node name="SubmarineArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubmarineArea"]
-shape = SubResource("RectangleShape2D_2rk3f")
-
 [node name="Modules" type="Node2D" parent="."]
+script = ExtResource("3_yfmig")
 
 [connection signal="area_entered" from="SubmarineArea" to="." method="_on_submarine_area_area_entered"]
 [connection signal="area_exited" from="SubmarineArea" to="." method="_on_submarine_area_area_exited"]
