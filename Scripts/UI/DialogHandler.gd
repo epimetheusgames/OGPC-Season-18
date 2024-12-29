@@ -51,7 +51,9 @@ func _process(delta:float)->void:
 				dialog_sfx_node.play()
 		
 		last_played_letterindex = int(characters_played)
-	
+	else:
+		Global.dialog_active = false
+		self.visible = false
 func get_response()->int:
 	return response
 func response_option_one()->void:
