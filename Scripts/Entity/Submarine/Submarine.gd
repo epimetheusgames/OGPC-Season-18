@@ -5,7 +5,7 @@ extends Entity
 @onready var submarine_movement = $"SubmarineMovement"
 @onready var module_container : ModuleLoader = $"Modules"
 
-var control_module = preload("res://Scenes/TSCN/Entities/Submarine/SubmarineControlModule.tscn")
+var control_module = preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn")
 
 func _ready() -> void:
 	if !Global.submarine:
@@ -13,7 +13,7 @@ func _ready() -> void:
 	 
 	var custom_sub : CustomSubmarineResource = CustomSubmarineResource.new()
 	custom_sub.modules.append(load("res://Scenes/Resource/custom_sub2.tres"))
-	#custom_sub.modules.append(load("res://Scenes/Resource/custom_sub2.tres"))
+	custom_sub.modules.append(load("res://Scenes/Resource/custom_sub.tres"))
 	module_container.load_sub(custom_sub)
 	
 

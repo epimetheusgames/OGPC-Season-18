@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://iafw4irmggag"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_rjtgo"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_vqbbq"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="2_wpbl3"]
+
+[sub_resource type="Resource" id="Resource_uu67r"]
+script = ExtResource("2_vqbbq")
+file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineUDPassageModule.tscn"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8m4ry"]
+size = Vector2(400, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xshuu"]
+size = Vector2(40, 400)
+
+[node name="SubmarineUDPassageModule" type="Node2D"]
+script = ExtResource("1_rjtgo")
+path = SubResource("Resource_uu67r")
+
+[node name="ModuleArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleArea"]
+shape = SubResource("RectangleShape2D_8m4ry")
+
+[node name="AttachmentPoints" type="Node2D" parent="."]
+
+[node name="Up" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(0, -200)
+script = ExtResource("2_wpbl3")
+direction = Vector2(0, -1)
+
+[node name="Down" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(0, 200)
+script = ExtResource("2_wpbl3")
+direction = Vector2(0, 1)
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="RightWall" type="CollisionShape2D" parent="Collision"]
+position = Vector2(180, 0)
+shape = SubResource("RectangleShape2D_xshuu")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Collision"]
+position = Vector2(-180, 0)
+shape = SubResource("RectangleShape2D_xshuu")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -200.0
+offset_top = -200.0
+offset_right = -160.0
+offset_bottom = 200.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 160.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0

@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://drodl0tjw368a"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_6k5i4"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="2_44gsa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0n6j"]
+size = Vector2(400, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybtb7"]
+custom_solver_bias = 0.5
+size = Vector2(360, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuxu8"]
+custom_solver_bias = 0.5
+size = Vector2(40, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fla32"]
+size = Vector2(40, 40)
+
+[node name="SubmarineLPassageModule" type="Node2D"]
+script = ExtResource("1_6k5i4")
+
+[node name="ModuleArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleArea"]
+shape = SubResource("RectangleShape2D_i0n6j")
+
+[node name="AttachmentPoints" type="Node2D" parent="."]
+
+[node name="Point1" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(0, -200)
+script = ExtResource("2_44gsa")
+direction = Vector2(0, -1)
+
+[node name="Point2" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(200, 0)
+script = ExtResource("2_44gsa")
+direction = Vector2(1, 0)
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="Wall1" type="CollisionShape2D" parent="Collision"]
+position = Vector2(20, 180)
+shape = SubResource("RectangleShape2D_ybtb7")
+
+[node name="Wall2" type="CollisionShape2D" parent="Collision"]
+position = Vector2(-180, 0)
+shape = SubResource("RectangleShape2D_vuxu8")
+
+[node name="Corner" type="CollisionShape2D" parent="Collision"]
+position = Vector2(180, -180)
+shape = SubResource("RectangleShape2D_fla32")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -200.0
+offset_top = -200.0
+offset_right = -160.0
+offset_bottom = 200.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = -200.0
+offset_top = 160.0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+offset_left = 160.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = -160.0

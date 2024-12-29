@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_b3qxj"]
 script = ExtResource("2_r8vpp")
-file = "res://Scenes/TSCN/Entities/Submarine/SubmarineControlModule.tscn"
+file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn"
 
 [resource]
 script = ExtResource("3_cl047")
