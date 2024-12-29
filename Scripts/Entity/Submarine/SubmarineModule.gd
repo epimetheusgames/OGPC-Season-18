@@ -4,7 +4,6 @@ class_name SubmarineModule
 @export var path : FilePathResource
 
 var attachment_points : Array[AttachmentPoint]
-var attachment_point_resources : Array[AttachmentPointResource]
 var render_attachment_points := false
 
 func _ready() -> void:

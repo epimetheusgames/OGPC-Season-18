@@ -1,3 +1,4 @@
+# Owned by carsonetb
 class_name SubmarineEditor
 extends Control
 
@@ -70,6 +71,13 @@ func _draw() -> void:
 					if point.direction == -our_point.direction && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
 						draw_line(our_point.global_position - global_position, point.global_position - global_position, Color.RED, 2)
 
+func find_assosiated_point(point: Vector2, direction: Vector2, multiplier: int = 1) -> AttachmentPoint:
+	for module in modules:
+		for real_point in module.attachment_points:
+			if real_point.global_position.distance_to(point) < 1 && real_point.direction.is_equal_approx(direction * multiplier):
+				return real_point
+	return null
+
 func _on_save_button_button_up() -> void:
 	$SaveDialog.visible = true
 
@@ -83,7 +91,25 @@ func _on_save_dialog_file_selected(path: String) -> void:
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	file.store_string("")
 	file.close()
-	print(ResourceSaver.save(sub_resource, path))
+	ResourceSaver.save(sub_resource, path)
 
 func _on_load_dialog_file_selected(path: String) -> void:
-	pass # Replace with function body.
+	var sub_resource: CustomSubmarineResource = ResourceLoader.load(path)
+	
+	# Pass 1, load module positions.
+	for module in sub_resource.modules:
+		var new_module: SubmarineModule = load(module.module_scene.file).instantiate()
+		new_module.position = module.position
+		new_module.render_attachment_points = true
+		origin.add_child(new_module)
+		modules.append(new_module)
+	
+	# Pass two, load connections.
+	for module in sub_resource.modules:
+		for attachment_resource in module.attachment_points:
+			if attachment_resource.is_attached:
+				var real_point := find_assosiated_point(attachment_resource.position + module.position + origin.global_position, attachment_resource.direction)
+				print(real_point)
+				print(real_point.position, real_point.direction * -1)
+				real_point.attached_point = find_assosiated_point(attachment_resource.position + module.position + origin.global_position, attachment_resource.direction, -1)
+				print(real_point.attached_point)
