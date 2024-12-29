@@ -22,6 +22,7 @@ var current_game_save: GameSave
 var mission_system: MissionSystem
 var verbose_debug: bool
 var super_efficient: bool
+var dialog_active: bool = false
 
 # Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {

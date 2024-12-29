@@ -20,6 +20,8 @@ var target_velocity: Vector2
 var target_rotation: float
 var base_speed: float
 
+@export var friendly: bool
+
 @onready var nav_agent: NavigationAgent2D = $"NavigationAgent2D"
 @onready var tentacles: JellyfishTentacles = $"Tentacles"
 
@@ -40,7 +42,7 @@ func _process(delta: float) -> void:
 	if current_speed > base_speed:
 		current_speed = lerp(current_speed, base_speed, BOOST_DECAY_RATE * delta)
 	
-	if position.distance_to(target_position) < 50:
+	if position.distance_to(target_position) < 50 && !friendly:
 		_target_reached()
 	
 	for rope in tentacles.ropes:
