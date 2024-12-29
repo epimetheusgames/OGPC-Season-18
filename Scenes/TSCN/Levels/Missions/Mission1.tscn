@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=69 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="4_0q3xc"]
 [ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="Script" path="res://Scripts/Objects/AutoPolygonTexture.gd" id="5_aep54"]
+[ext_resource type="Texture2D" uid="uid://b0ja5eqv1qbm8" path="res://Assets/Art/Sprites/Level/SandTexture.png" id="5_lquv8"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="5_rc3kh"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Pixelize.gd" id="5_t6m55"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="6_sqcin"]
@@ -130,6 +131,7 @@ shader_parameter/global_position = Vector2(0, 0)
 shader_parameter/fade_width = 215
 shader_parameter/tex_scale = 103.0
 shader_parameter/in_tex = SubResource("GradientTexture1D_f0nmq")
+shader_parameter/edge_tex = ExtResource("5_lquv8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drxv4"]
 shader = ExtResource("11_wv41s")
@@ -167,7 +169,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_31321"]
+[sub_resource type="Resource" id="Resource_qr3y2"]
 resource_local_to_scene = true
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
@@ -270,7 +272,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1356, 595)
+shader_parameter/screen_size = Vector2(1213, 567)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -429,7 +431,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_31321")
+uid = SubResource("Resource_qr3y2")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -620,8 +622,8 @@ material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -564.0
-offset_bottom = -485.0
+offset_right = -707.0
+offset_bottom = -513.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)

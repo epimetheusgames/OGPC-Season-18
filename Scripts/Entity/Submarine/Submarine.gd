@@ -1,4 +1,5 @@
 # Coded by Xavier
+class_name Submarine
 extends Entity
 
 @onready var diver = Global.player

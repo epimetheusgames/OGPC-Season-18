@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://54wx4qqce02a"]
+[gd_scene load_steps=2 format=3 uid="uid://54wx4qqce02a"]
+
+[ext_resource type="Script" path="res://Scripts/UI/SubmarineEditor.gd" id="1_rijmy"]
 
 [node name="SubmarineEditor" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_rijmy")
 
 [node name="SplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 0
@@ -14,21 +17,23 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 split_offset = -500
 
-[node name="Panel" type="Panel" parent="SplitContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="SplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="SplitContainer/Panel"]
+[node name="GridContainer" type="GridContainer" parent="SplitContainer/PanelContainer"]
 layout_mode = 2
-offset_left = 12.0
-offset_right = 1920.0
-offset_bottom = 1080.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="SplitContainer/Panel/GridContainer"]
+[node name="ControlModule" type="Button" parent="SplitContainer/PanelContainer/GridContainer"]
 layout_mode = 2
 text = "Control Module"
 
 [node name="SubmarineView" type="Control" parent="SplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Origin" type="Node2D" parent="SplitContainer/SubmarineView"]
+position = Vector2(670, 517)
+
+[connection signal="button_up" from="SplitContainer/PanelContainer/GridContainer/ControlModule" to="." method="_on_control_module_button_up"]
