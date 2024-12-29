@@ -59,6 +59,7 @@ polygon = PackedVector2Array(5655, 3000, 5756, 2773, 6112, 2766, 5936, 3159, 557
 [node name="Diver" parent="." instance=ExtResource("6_dw1pj")]
 position = Vector2(5866, 2933)
 uid = SubResource("Resource_mxy30")
+has_multiplayer_sync = false
 
 [node name="TempStationWalls" type="Polygon2D" parent="."]
 z_index = 7

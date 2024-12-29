@@ -40,21 +40,24 @@ func _ready() -> void:
 	var mod_stack: SkeletonModificationStack2D = $Skeleton.get_modification_stack()
 	mod_stack = mod_stack.duplicate(true)
 	var arm_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
-	var arm_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
-	var leg_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
-	var leg_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
+	var arm_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(1)
+	var leg_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(2)
+	var leg_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(3)
 	arm_mod1.target_nodepath = arm_target1.get_path()
 	arm_mod2.target_nodepath = arm_target2.get_path()
 	leg_mod1.target_nodepath = leg_target1.get_path()
 	leg_mod2.target_nodepath = leg_target2.get_path()
 	mod_stack.set_modification(0, arm_mod1)
-	mod_stack.set_modification(0, arm_mod2)
-	mod_stack.set_modification(0, leg_mod1)
-	mod_stack.set_modification(0, leg_mod2)
+	mod_stack.set_modification(1, arm_mod2)
+	mod_stack.set_modification(2, leg_mod1)
+	mod_stack.set_modification(3, leg_mod2)
 	$Skeleton.set_modification_stack(mod_stack)
 	
 	displayed_nametag = $PlayerName.duplicate()
 	$"../../../../../UI".add_child(displayed_nametag)
+	
+	if !diver.has_multiplayer_sync:
+		return
 	
 	if !Global.is_multiplayer || diver._is_node_owner():
 		displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)

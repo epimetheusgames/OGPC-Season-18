@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://54wx4qqce02a"]
+
+[node name="SubmarineEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+split_offset = -500
+
+[node name="Panel" type="Panel" parent="SplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="SplitContainer/Panel"]
+layout_mode = 2
+offset_left = 12.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="SplitContainer/Panel/GridContainer"]
+layout_mode = 2
+text = "Control Module"
+
+[node name="SubmarineView" type="Control" parent="SplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3

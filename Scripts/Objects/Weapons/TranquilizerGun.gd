@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 	global_position = hand_primary
 	global_rotation = combat.diver.diver_animation.get_node("Skeleton/Torso/UpperArm2/Forearm2").global_position.angle_to_point(hand_primary)
 	combat.move_hand_toward_mouse("right")
+	diver.diver_animation.arm_target1.global_position = global_position
 	
 	if !$TranquilizerGunSprite.animation == "Flip":
 		if (rad_to_deg(global_rotation) < -90 || rad_to_deg(global_rotation) > 90) && !flipped:
