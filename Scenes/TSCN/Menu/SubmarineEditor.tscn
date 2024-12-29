@@ -43,10 +43,23 @@ text = "Load Submarine
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+columns = 3
 
 [node name="ControlModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
 layout_mode = 2
 text = "Control Module"
+
+[node name="LPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Horizontal Module"
+
+[node name="RlPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Vertical Module"
+
+[node name="UDPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Corner Module"
 
 [node name="SubmarineView" type="Control" parent="SplitContainer"]
 layout_mode = 2
@@ -69,5 +82,8 @@ file_mode = 0
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer/LoadButton" to="." method="_on_load_button_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/ControlModule" to="." method="_on_control_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/LPassageModule" to="." method="_on_l_passage_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/RlPassageModule" to="." method="_on_rl_passage_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/UDPassageModule" to="." method="_on_ud_passage_module_button_up"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]

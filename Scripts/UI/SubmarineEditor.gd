@@ -5,19 +5,33 @@ extends Control
 @onready var origin = $"SplitContainer/SubmarineView/Origin"
 @onready var grid = $"SplitContainer/PanelContainer/VSplitContainer/GridContainer"
 
-@onready var control_module = preload("res://Scenes/TSCN/Entities/Submarine/SubmarineControlModule.tscn")
+@onready var control_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn")
+@onready var submarine_L_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineLPassageModule.tscn")
+@onready var submarine_rl_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineRlPassageModule.tscn")
+@onready var submarine_ud_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineUDPassageModule.tscn")
 
 var modules: Array[SubmarineModule] = []
 var adding_module := false
 var module_adding: SubmarineModule
 
-func _on_control_module_button_up() -> void:
+func add_module(new_module: SubmarineModule):
 	adding_module = true
-	var new_module: SubmarineModule = control_module.instantiate()
 	new_module.render_attachment_points = true
 	origin.add_child(new_module)
 	module_adding = new_module
 	modules.append(new_module)
+
+func _on_control_module_button_up() -> void:
+	add_module(control_module.instantiate())
+
+func _on_ud_passage_module_button_up() -> void:
+	add_module(submarine_L_passage_module.instantiate())
+
+func _on_l_passage_module_button_up() -> void:
+	add_module(submarine_rl_passage_module.instantiate())
+
+func _on_rl_passage_module_button_up() -> void:
+	add_module(submarine_ud_passage_module.instantiate())
 
 func _process(delta: float) -> void:
 	if adding_module:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://iafw4irmggag"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_rjtgo"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_vqbbq"]
+[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_vqbbq"]
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="2_wpbl3"]
 
 [sub_resource type="Resource" id="Resource_uu67r"]

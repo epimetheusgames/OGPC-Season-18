@@ -1,7 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://drodl0tjw368a"]
+[gd_scene load_steps=9 format=3 uid="uid://drodl0tjw368a"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_gic1t"]
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="2_1755f"]
+[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_lrnvs"]
+
+[sub_resource type="Resource" id="Resource_16y3l"]
+script = ExtResource("2_lrnvs")
+file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineLPassageModule.tscn"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0n6j"]
 size = Vector2(400, 400)
@@ -19,6 +24,7 @@ size = Vector2(40, 40)
 
 [node name="SubmarineLPassageModule" type="Node2D"]
 script = ExtResource("1_gic1t")
+path = SubResource("Resource_16y3l")
 
 [node name="ModuleArea" type="Area2D" parent="."]
 

@@ -6,8 +6,6 @@ extends Entity
 @onready var submarine_movement = $"SubmarineMovement"
 @onready var module_container : ModuleLoader = $"Modules"
 
-var control_module = preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn")
-
 func _ready() -> void:
 	if !Global.submarine:
 		Global.submarine = self

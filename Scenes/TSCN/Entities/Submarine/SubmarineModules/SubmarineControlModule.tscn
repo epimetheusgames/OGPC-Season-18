@@ -1,16 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://5ws5v2e88l3q"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineControl.gd" id="1_ofa5d"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_7buem"]
+[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_7buem"]
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="3_mliwo"]
 
 [sub_resource type="Resource" id="Resource_45qcr"]
 script = ExtResource("2_7buem")
 file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn"
-
-[sub_resource type="Resource" id="Resource_tllww"]
-script = ExtResource("2_87n1c")
-file = "res://Scenes/TSCN/Entities/Submarine/SubmarineControlModule.tscn"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rgtm"]
 size = Vector2(400, 400)
