@@ -18,6 +18,9 @@ var diver_state : Util.DiverState
 @export var no_movement := false
 
 func _ready() -> void:
+	if node_owner == 0 && !Global.godot_steam_abstraction.is_lobby_owner:
+		node_owner = Global.godot_steam_abstraction.steam_id
+	
 	set_state(Util.DiverState.SWIMMING)
 	if !Global.player || !is_instance_valid(Global.player):
 		Global.player = self

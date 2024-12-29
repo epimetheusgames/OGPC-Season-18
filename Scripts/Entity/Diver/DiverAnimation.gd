@@ -59,6 +59,9 @@ func _ready() -> void:
 	if !diver.has_multiplayer_sync:
 		return
 	
+	if diver.node_owner == 0 || diver.node_owner == Global.godot_steam_abstraction.steam_id:
+		return
+	
 	if !Global.is_multiplayer || diver._is_node_owner():
 		displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
 	else:
