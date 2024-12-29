@@ -3,7 +3,7 @@ extends Control
 
 
 @onready var origin = $"SplitContainer/SubmarineView/Origin"
-@onready var grid = $"SplitContainer/PanelContainer/GridContainer"
+@onready var grid = $"SplitContainer/PanelContainer/VSplitContainer/GridContainer"
 
 @onready var control_module = preload("res://Scenes/TSCN/Entities/Submarine/SubmarineControlModule.tscn")
 
@@ -29,7 +29,6 @@ func _process(delta: float) -> void:
 			for point in module.attachment_points:
 				for our_point in module_adding.attachment_points:
 					if point.direction == -our_point.direction && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
-						draw_line(our_point.global_position - global_position, point.global_position - global_position, Color.RED, 2)
 						valid_point = point
 						our_valid_point = our_point
 		
@@ -49,7 +48,6 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	if adding_module:
-		draw_circle(get_local_mouse_position(), 10, Color.WHITE, false, 2)
 		for module in modules:
 			if module == module_adding:
 				continue
@@ -57,3 +55,21 @@ func _draw() -> void:
 				for our_point in module_adding.attachment_points:
 					if point.direction == -our_point.direction && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
 						draw_line(our_point.global_position - global_position, point.global_position - global_position, Color.RED, 2)
+
+func _on_save_button_button_up() -> void:
+	$SaveDialog.visible = true
+
+func _on_load_button_button_up() -> void:
+	$LoadDialog.visible = true
+
+func _on_save_dialog_file_selected(path: String) -> void:
+	var sub_resource = CustomSubmarineResource.new()
+	for module in modules:
+		sub_resource.modules.append(module.create_module_resource())
+	var file = FileAccess.open(path, FileAccess.WRITE)
+	file.store_string("")
+	file.close()
+	print(ResourceSaver.save(sub_resource, path))
+
+func _on_load_dialog_file_selected(path: String) -> void:
+	pass # Replace with function body.

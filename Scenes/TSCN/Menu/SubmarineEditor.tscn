@@ -21,11 +21,30 @@ split_offset = -500
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="SplitContainer/PanelContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="SplitContainer/PanelContainer"]
+layout_mode = 2
+split_offset = -490
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SplitContainer/PanelContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SaveButton" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer"]
+layout_mode = 2
+text = "Save Submarine
+"
+
+[node name="LoadButton" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer"]
+layout_mode = 2
+text = "Load Submarine
+"
+
+[node name="GridContainer" type="GridContainer" parent="SplitContainer/PanelContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="ControlModule" type="Button" parent="SplitContainer/PanelContainer/GridContainer"]
+[node name="ControlModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
 layout_mode = 2
 text = "Control Module"
 
@@ -36,4 +55,19 @@ size_flags_horizontal = 3
 [node name="Origin" type="Node2D" parent="SplitContainer/SubmarineView"]
 position = Vector2(670, 517)
 
-[connection signal="button_up" from="SplitContainer/PanelContainer/GridContainer/ControlModule" to="." method="_on_control_module_button_up"]
+[node name="SaveDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+size = Vector2i(800, 600)
+ok_button_text = "Save"
+
+[node name="LoadDialog" type="FileDialog" parent="."]
+title = "Open a File"
+size = Vector2i(800, 600)
+ok_button_text = "Open"
+file_mode = 0
+
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer/LoadButton" to="." method="_on_load_button_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/ControlModule" to="." method="_on_control_module_button_up"]
+[connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
+[connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]

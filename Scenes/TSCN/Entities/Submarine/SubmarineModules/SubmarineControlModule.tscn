@@ -8,6 +8,10 @@
 script = ExtResource("2_7buem")
 file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn"
 
+[sub_resource type="Resource" id="Resource_tllww"]
+script = ExtResource("2_87n1c")
+file = "res://Scenes/TSCN/Entities/Submarine/SubmarineControlModule.tscn"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rgtm"]
 size = Vector2(400, 400)
 

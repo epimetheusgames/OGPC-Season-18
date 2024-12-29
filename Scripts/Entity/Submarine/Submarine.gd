@@ -12,11 +12,8 @@ func _ready() -> void:
 	if !Global.submarine:
 		Global.submarine = self
 	 
-	var custom_sub : CustomSubmarineResource = CustomSubmarineResource.new()
-	custom_sub.modules.append(load("res://Scenes/Resource/custom_sub2.tres"))
-	custom_sub.modules.append(load("res://Scenes/Resource/custom_sub.tres"))
+	var custom_sub : CustomSubmarineResource = load("res://Scenes/Resource/custom_sub_gen.tres")
 	module_container.load_sub(custom_sub)
-	
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()

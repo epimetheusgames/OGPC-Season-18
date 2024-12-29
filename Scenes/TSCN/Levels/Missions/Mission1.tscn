@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=66 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -12,14 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://b0ja5eqv1qbm8" path="res://Assets/Art/Sprites/Level/SandTexture.png" id="5_lquv8"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="5_rc3kh"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Pixelize.gd" id="5_t6m55"]
-[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="6_sqcin"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Rain.gdshader" id="8_86uvj"]
 [ext_resource type="Texture2D" uid="uid://b0wdu5xab8dbs" path="res://Assets/Art/Sprites/Misc/RainNoise.png" id="9_rw0ak"]
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="10_gbtle"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
-[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
-[ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="15_edyr5"]
+[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/Entity/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/Level/ShadowPipeline.gd" id="16_0m2co"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
@@ -177,11 +175,6 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3628
 
-[sub_resource type="Resource" id="Resource_t3nf2"]
-resource_local_to_scene = true
-script = ExtResource("17_j8dce")
-uid = 3623
-
 [sub_resource type="Environment" id="Environment_5ulyy"]
 background_mode = 3
 background_canvas_max_layer = 5
@@ -272,7 +265,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1213, 567)
+shader_parameter/screen_size = Vector2(1049, 567)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -441,10 +434,6 @@ buoyancy_accel = 0.0
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
-[node name="Jellyfish" parent="LevelContainer/Entities" instance=ExtResource("6_sqcin")]
-z_index = 2
-position = Vector2(462, 1027)
-
 [node name="BoidsGroup" type="Node" parent="LevelContainer/Entities" node_paths=PackedStringArray("boids_scene")]
 script = ExtResource("15_at1j7")
 num_boids = 200
@@ -476,10 +465,6 @@ gravity = 20
 buoyancy_accel = 1.0
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
-
-[node name="BigfinSquid" parent="LevelContainer/Entities" instance=ExtResource("15_edyr5")]
-position = Vector2(824, 990)
-uid = SubResource("Resource_t3nf2")
 
 [node name="testGuy" parent="LevelContainer/Entities" instance=ExtResource("15_p6xfd")]
 
@@ -622,7 +607,7 @@ material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -707.0
+offset_right = -871.0
 offset_bottom = -513.0
 grow_horizontal = 2
 grow_vertical = 2
