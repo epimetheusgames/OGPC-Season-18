@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Objects/AutoPolygonTexture.gd" id="3_ut3q7"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4g6wi"]
-polygon = PackedVector2Array(1855, 621, 1879, 630, 2110, 1528, 1801, 2144, 4344, 5602, -1992, 5714, -422, 710, -351.288, 2451.27, 1181.83, 2371.18, 1794, 1503, 925, 698, 1790, 630, 1820, 626, 1841, 621)
+polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
 
 [node name="Body" type="Polygon2D"]
 texture_repeat = 2

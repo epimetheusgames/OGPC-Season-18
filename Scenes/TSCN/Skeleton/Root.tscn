@@ -33,6 +33,7 @@ missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
 verbose_debug = true
+super_efficient = true
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
