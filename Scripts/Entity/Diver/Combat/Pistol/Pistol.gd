@@ -29,8 +29,7 @@ func get_gun_position() -> Vector2:
 	return hand1_pos
 
 func get_gun_rotation() -> float:
-	var forearm: Node2D = diver.diver_animation.get_node("Skeleton/Torso/UpperArm2/Forearm2")
-	return forearm.global_position.angle_to_point(hand1_pos)
+	return global_rotation
 
 func attack() -> void:
 	if !pistol_sprite.animation == "Shoot" && !shooting:

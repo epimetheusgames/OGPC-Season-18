@@ -6,6 +6,7 @@ class_name Speargun
 extends Gun
 
 @onready var emit_point: Node2D = $"EmitPoint"
+@onready var cone_of_fire: ConeOfFire = $"ConeOfFire"
 @onready var gun_sprite: Sprite2D = $"GunSprite"  # TODO: replace with animated node2D 
 
 func _process(delta: float) -> void:
@@ -27,21 +28,20 @@ func attack() -> void:
 	new_spear.global_position = emit_point.global_position
 	new_spear.global_rotation = global_rotation
 	
-	var angle: float = global_position.angle_to_point(mouse_pos)
+	var angle: float = cone_of_fire.get_shot_angle()
 	new_spear.fire(angle)
-	
+	"""
 	var new_rope := VerletRope.new()
 	new_rope.component_container = self.get_path()
 	new_rope.start_pos_on = true
 	new_rope.start_anchor_node = emit_point
 	new_rope.end_pos_on = true
 	new_rope.end_anchor_node = new_spear.rope_point
-	print(new_rope.end_anchor_node)
 	
 	add_child(new_rope)
 	
 	var new_rope_drawer := RopeLineDrawer.new()
 	add_child(new_rope_drawer)
 	new_rope_drawer.rope = new_rope
-	
-	print_tree_pretty()
+	"""
+	#print_tree_pretty()
