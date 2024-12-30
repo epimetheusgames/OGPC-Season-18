@@ -4,55 +4,66 @@
 [ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_ye34j"]
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="3_vxqed"]
 
-[sub_resource type="Resource" id="Resource_0mj08"]
+[sub_resource type="Resource" id="Resource_uu67r"]
 script = ExtResource("2_ye34j")
-file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineRlPassageModule.tscn"
+file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineUDPassageModule.tscn"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3lmp"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8m4ry"]
 size = Vector2(400, 400)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1w4d"]
-size = Vector2(400, 40)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xshuu"]
+size = Vector2(40, 400)
 
-[node name="SubmarineRLPassageModule" type="Node2D"]
+[node name="SubmarineUDPassageModule" type="Node2D"]
+rotation = 1.57085
 script = ExtResource("1_1cjq8")
-path = SubResource("Resource_0mj08")
+path = SubResource("Resource_uu67r")
 
 [node name="ModuleArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleArea"]
-shape = SubResource("RectangleShape2D_p3lmp")
+shape = SubResource("RectangleShape2D_8m4ry")
 
 [node name="AttachmentPoints" type="Node2D" parent="."]
 
-[node name="Right" type="Node2D" parent="AttachmentPoints"]
-position = Vector2(200, 0)
+[node name="Up" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(0, -200)
 script = ExtResource("3_vxqed")
 direction = Vector2(1, 0)
 
-[node name="Left" type="Node2D" parent="AttachmentPoints"]
-position = Vector2(-200, 0)
+[node name="Down" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(0, 200)
 script = ExtResource("3_vxqed")
 direction = Vector2(-1, 0)
 
 [node name="Collision" type="Node2D" parent="."]
 
-[node name="Floor" type="CollisionShape2D" parent="Collision"]
-position = Vector2(0, 180)
-shape = SubResource("RectangleShape2D_i1w4d")
+[node name="RightWall" type="CollisionShape2D" parent="Collision"]
+position = Vector2(180, 0)
+shape = SubResource("RectangleShape2D_xshuu")
 
-[node name="Ceiling" type="CollisionShape2D" parent="Collision"]
-position = Vector2(0, -180)
-shape = SubResource("RectangleShape2D_i1w4d")
+[node name="LeftWall" type="CollisionShape2D" parent="Collision"]
+position = Vector2(-180, 0)
+shape = SubResource("RectangleShape2D_xshuu")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect4" type="ColorRect" parent="."]
+z_index = -1
 offset_left = -200.0
-offset_top = 160.0
+offset_top = -200.0
 offset_right = 200.0
 offset_bottom = 200.0
+color = Color(0.223529, 0.223529, 0.223529, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 offset_left = -200.0
 offset_top = -200.0
+offset_right = -160.0
+offset_bottom = 200.0
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 160.0
+offset_top = -200.0
 offset_right = 200.0
-offset_bottom = -160.0
+offset_bottom = 200.0
+metadata/_edit_use_anchors_ = true

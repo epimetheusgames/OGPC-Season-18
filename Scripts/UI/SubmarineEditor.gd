@@ -3,13 +3,13 @@ class_name SubmarineEditor
 extends Control
 
 
-@onready var origin = $"SplitContainer/SubmarineView/Origin"
+@onready var origin = $"SplitContainer/SubmarineView/ViewContainer/Viewport/Origin"
 @onready var grid = $"SplitContainer/PanelContainer/VSplitContainer/GridContainer"
 
 @onready var control_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn")
 @onready var submarine_L_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineLPassageModule.tscn")
 @onready var submarine_rl_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineRlPassageModule.tscn")
-@onready var submarine_ud_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineUDPassageModule.tscn")
+@onready var submarine_end_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule.tscn")
 
 var modules: Array[SubmarineModule] = []
 var adding_module := false
@@ -31,8 +31,9 @@ func _on_ud_passage_module_button_up() -> void:
 func _on_l_passage_module_button_up() -> void:
 	add_module(submarine_rl_passage_module.instantiate())
 
+# Actually the end module.
 func _on_rl_passage_module_button_up() -> void:
-	add_module(submarine_ud_passage_module.instantiate())
+	add_module(submarine_end_module.instantiate())
 
 func _process(delta: float) -> void:
 	if adding_module:
@@ -47,7 +48,8 @@ func _process(delta: float) -> void:
 						valid_point = point
 						our_valid_point = our_point
 		
-		module_adding.global_position = get_global_mouse_position()
+		# Magic math.
+		module_adding.global_position = module_adding.get_global_mouse_position()
 		if Input.is_action_just_pressed("mouse_left_click"):
 			if modules.size() == 1:
 				module_adding = null
@@ -60,6 +62,10 @@ func _process(delta: float) -> void:
 				adding_module = false
 		if Input.is_action_just_pressed("rotate_peice"):
 			module_adding.rotate_module(PI / 2)
+	if Input.is_action_just_pressed("mwUP"):
+		$SplitContainer/SubmarineView/ViewContainer/Viewport/Camera2D.zoom *= 1.1
+	if Input.is_action_just_pressed("mwDOWN"):
+		$SplitContainer/SubmarineView/ViewContainer/Viewport/Camera2D.zoom *= 0.9
 	
 	queue_redraw()
 

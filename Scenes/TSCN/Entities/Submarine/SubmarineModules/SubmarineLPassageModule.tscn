@@ -57,6 +57,14 @@ shape = SubResource("RectangleShape2D_vuxu8")
 position = Vector2(180, -180)
 shape = SubResource("RectangleShape2D_fla32")
 
+[node name="ColorRect5" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 189.0
+color = Color(0.223529, 0.223529, 0.223529, 1)
+
 [node name="ColorRect2" type="ColorRect" parent="."]
 offset_left = -200.0
 offset_top = -200.0

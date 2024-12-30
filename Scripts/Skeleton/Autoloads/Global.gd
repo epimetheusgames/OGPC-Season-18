@@ -23,6 +23,7 @@ var mission_system: MissionSystem
 var verbose_debug: bool
 var super_efficient: bool
 var dialog_active: bool = false
+var current_mission_node = null
 
 # Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {

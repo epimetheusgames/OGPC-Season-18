@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://54wx4qqce02a"]
+[gd_scene load_steps=3 format=3 uid="uid://54wx4qqce02a"]
 
 [ext_resource type="Script" path="res://Scripts/UI/SubmarineEditor.gd" id="1_rijmy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mu336"]
 
 [node name="SubmarineEditor" type="Control"]
 layout_mode = 3
@@ -55,18 +57,35 @@ text = "Horizontal Module"
 
 [node name="RlPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
 layout_mode = 2
-text = "Vertical Module"
+text = "End Module"
 
 [node name="UDPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
 layout_mode = 2
 text = "Corner Module"
 
-[node name="SubmarineView" type="Control" parent="SplitContainer"]
+[node name="SubmarineView" type="PanelContainer" parent="SplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mu336")
 
-[node name="Origin" type="Node2D" parent="SplitContainer/SubmarineView"]
-position = Vector2(670, 517)
+[node name="ViewContainer" type="SubViewportContainer" parent="SplitContainer/SubmarineView"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="SubViewport" parent="SplitContainer/SubmarineView/ViewContainer"]
+disable_3d = true
+handle_input_locally = false
+msaa_2d = 3
+size = Vector2i(1454, 1080)
+render_target_update_mode = 4
+
+[node name="Origin" type="Node2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
+position = Vector2(1000, 1000)
+
+[node name="Camera2D" type="Camera2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
+position = Vector2(960, 540)
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
