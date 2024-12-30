@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 				continue
 			for point in module.attachment_points:
 				for our_point in module_adding.attachment_points:
-					if point.direction == -our_point.direction && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
+					if point.direction.is_equal_approx(-our_point.direction) && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
 						valid_point = point
 						our_valid_point = our_point
 		
@@ -58,6 +58,8 @@ func _process(delta: float) -> void:
 				our_valid_point.attached_point = valid_point
 				module_adding = null
 				adding_module = false
+		if Input.is_action_just_pressed("rotate_peice"):
+			module_adding.rotate_module(PI / 2)
 	
 	queue_redraw()
 
@@ -68,7 +70,7 @@ func _draw() -> void:
 				continue
 			for point in module.attachment_points:
 				for our_point in module_adding.attachment_points:
-					if point.direction == -our_point.direction && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
+					if point.direction.is_equal_approx(-our_point.direction) && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
 						draw_line(our_point.global_position - global_position, point.global_position - global_position, Color.RED, 2)
 
 func find_assosiated_point(point: Vector2, direction: Vector2, multiplier: int = 1) -> AttachmentPoint:
@@ -109,7 +111,4 @@ func _on_load_dialog_file_selected(path: String) -> void:
 		for attachment_resource in module.attachment_points:
 			if attachment_resource.is_attached:
 				var real_point := find_assosiated_point(attachment_resource.position + module.position + origin.global_position, attachment_resource.direction)
-				print(real_point)
-				print(real_point.position, real_point.direction * -1)
 				real_point.attached_point = find_assosiated_point(attachment_resource.position + module.position + origin.global_position, attachment_resource.direction, -1)
-				print(real_point.attached_point)
