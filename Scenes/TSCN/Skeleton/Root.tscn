@@ -1,20 +1,22 @@
-[gd_scene load_steps=20 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=22 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
-[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
 [ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
-[ext_resource type="Script" uid="uid://by5vx2ueocu6p" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="5_gpbxv"]
-[ext_resource type="Script" uid="uid://dkwpi7b8msow2" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="6_krpp0"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="5_gpbxv"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="6_krpp0"]
 [ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
 [ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="7_27r5q"]
-[ext_resource type="Script" uid="uid://cciubioihs8jn" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="7_u3v81"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="7_u3v81"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="8_1a1ie"]
 [ext_resource type="Script" path="res://Scripts/UI/DialogHandler.gd" id="8_7spfj"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/KeypressHandler.gd" id="9_rhklt"]
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
+[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Sprites/Misc/icon.svg" id="16_v8rcl"]
+[ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/PerformancePrompt.gd" id="17_0ry5s"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
@@ -33,6 +35,7 @@ missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
 verbose_debug = true
+super_efficient_auto_enable_maximum = 25
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
@@ -58,8 +61,8 @@ default_mission_tree = SubResource("Resource_1tmkv")
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1920.0
+offset_bottom = 1087.0
 
 [node name="UIGenerator" type="Node" parent="UI"]
 script = ExtResource("5_7cj4s")
@@ -258,6 +261,30 @@ disabled = true
 offset_right = 8.0
 offset_bottom = 8.0
 disabled = true
+
+[node name="PerformancePrompt" type="TextureRect" parent="Game/GameUIOverlay"]
+offset_right = 1024.0
+offset_bottom = 410.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("16_v8rcl")
+script = ExtResource("17_0ry5s")
+notif_bar_speed = 0.4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/PerformancePrompt"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 4.0
+offset_right = 888.0
+offset_bottom = 224.0
+theme_override_font_sizes/normal_font_size = 37
+text = "Your game appears to be running at a less-than-optimal Framerate, so performance mode has been automatically turned on..."
+
+[node name="NotifBar" type="ColorRect" parent="Game/GameUIOverlay/PerformancePrompt"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 368.0
+offset_right = 988.0
+offset_bottom = 408.0
 
 [node name="MousePositionGetter" type="Node2D" parent="."]
 
