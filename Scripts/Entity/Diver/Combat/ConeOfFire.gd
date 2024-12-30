@@ -17,7 +17,7 @@ const LINE_LENGTH: float = 200.0
 var spread_angle_degrees: float
 
 func _ready() -> void:
-	spread_angle_degrees = min_spread_angle
+	spread_angle_degrees = max_spread_angle
 	
 	line1.scale.x = range / LINE_LENGTH
 	line2.scale.x = range / LINE_LENGTH

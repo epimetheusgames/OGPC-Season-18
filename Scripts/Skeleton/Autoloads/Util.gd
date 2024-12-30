@@ -81,6 +81,13 @@ static func angle_to_vector(angle: float, magnitude: float) -> Vector2:
 	var y: float = magnitude * sin(angle)
 	return Vector2(x, y)
 
+# Returns angle within the range (0 - 360)
+static func normalize_angle_degrees(a: float) -> float:
+	return fmod(fmod(a, 360) + 360, 360)
+# Returns angle within the range (0 - 2PI)
+static func normalize_angle_radians(a: float) -> float:
+	return fmod(fmod(a, TAU) + TAU, TAU)
+
 static func smooth_line(input: PackedVector2Array, resolution_multiplier: float) -> PackedVector2Array:
 	var output: PackedVector2Array = []
 	var tangents: PackedVector2Array = []

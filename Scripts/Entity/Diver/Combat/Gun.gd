@@ -4,14 +4,34 @@
 class_name Gun
 extends Weapon
 
+enum GunState {
+	HOLDING,
+	AIMING,
+}
+
 @export var animation_node: AnimatedSprite2D
 @export var bullet_scene: PackedScene
 
+@export var dist_from_head: float = 100.0
+
+var flipped: bool = false
+
+var gun_state := GunState.HOLDING
+
 func _process(delta: float) -> void:
 	super(delta)
-
-func get_gun_position() -> Vector2:
-	return Vector2.ZERO  # Override
-
-func get_gun_rotation() -> float:
-	return 0.0  # Override
+	
+	var dir: Vector2 = mouse_pos - head_pos
+	global_position = head_pos + dir.normalized() * dist_from_head
+	
+	var rot: float = head_pos.angle_to_point(mouse_pos)
+	global_rotation = rot
+	
+	var deg_rot: float = Util.normalize_angle_degrees(rad_to_deg(rot))
+	flipped = deg_rot > 90 && deg_rot < 270
+	#print("rotation: " + str(deg_rot))
+	#print("flipped: " + str(flipped))
+	if flipped:
+		scale.y = -1
+	else:
+		scale.y = 1

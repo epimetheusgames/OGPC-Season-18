@@ -3,9 +3,10 @@
 
 class_name Pistol
 extends Gun
-
+"""
 @onready var pistol_sprite: AnimatedSprite2D = $"PistolSprite"
 @onready var emit_point: Node2D = $"EmitPoint"
+@onready var cone_of_fire: ConeOfFire = $"ConeOfFire"
 
 var flipped: bool = false
 var shooting: bool = false
@@ -24,12 +25,16 @@ func _process(delta: float) -> void:
 	
 	if !pistol_sprite.animation == "Shoot":
 		shooting = false
+	
+	var spread: float = get_movement_factor()
+	cone_of_fire.increase_spread(spread)
 
 func get_gun_position() -> Vector2:
 	return hand1_pos
 
 func get_gun_rotation() -> float:
-	return global_rotation
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	return hand1_pos.angle_to_point(mouse_pos)
 
 func attack() -> void:
 	if !pistol_sprite.animation == "Shoot" && !shooting:
@@ -64,3 +69,4 @@ func _on_tranquilizer_gun_sprite_animation_finished() -> void:
 		pistol_sprite.scale.y = 1
 	
 	pistol_sprite.play("Idle")
+"""

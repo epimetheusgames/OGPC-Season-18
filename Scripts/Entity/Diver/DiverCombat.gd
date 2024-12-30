@@ -28,7 +28,6 @@ func _ready():
 	set_weapon("speargun")
 
 var a: int = 0  # I'll remove this later
-
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("swap"):
 		if a == 0:
@@ -42,7 +41,19 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("attack"):
 		selected_weapon.attack()
-
+	
+	if Input.is_action_pressed("aim") && selected_weapon is Gun:
+		selected_weapon = selected_weapon as Gun
+		selected_weapon.gun_state = Gun.GunState.AIMING
+	elif selected_weapon is Gun:
+		selected_weapon.gun_state = Gun.GunState.HOLDING
+	
+	if selected_weapon.use_hand1:
+		var new_hand_pos: Vector2 = selected_weapon.get_hand1_pos()
+		diver.diver_animation.set_hand1_position(new_hand_pos)
+	if selected_weapon.use_hand2:
+		var new_hand_pos: Vector2 = selected_weapon.get_hand2_pos()
+		diver.diver_animation.set_hand2_position(new_hand_pos)
 
 # current_weapons (setters / getters)
 func add_weapon(weapon_name: String) -> void:

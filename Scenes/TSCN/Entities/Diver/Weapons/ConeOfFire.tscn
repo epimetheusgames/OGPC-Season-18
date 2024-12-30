@@ -12,7 +12,7 @@ rotation = -0.261799
 offset_top = -6.0
 offset_right = 200.0
 offset_bottom = 4.0
-color = Color(1, 1, 1, 0.52549)
+color = Color(1, 1, 1, 0.266667)
 
 [node name="Line2" type="Node2D" parent="."]
 rotation = 0.261799
@@ -21,4 +21,4 @@ rotation = 0.261799
 offset_top = -6.0
 offset_right = 200.0
 offset_bottom = 4.0
-color = Color(1, 1, 1, 0.52549)
+color = Color(1, 1, 1, 0.262745)

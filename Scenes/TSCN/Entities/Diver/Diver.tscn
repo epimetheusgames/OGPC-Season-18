@@ -427,22 +427,14 @@ position = Vector2(10, 122)
 [node name="LegIkTarget2" type="Node2D" parent="Animation"]
 position = Vector2(-9, 122)
 
-[node name="MoveArrow" type="Node2D" parent="Animation"]
+[node name="Arrow" type="Node2D" parent="Animation"]
 use_parent_material = true
 
-[node name="Polygon2D" type="Polygon2D" parent="Animation/MoveArrow"]
+[node name="Polygon2D" type="Polygon2D" parent="Animation/Arrow"]
 use_parent_material = true
 position = Vector2(105, -1)
 color = Color(1, 0, 1, 1)
 polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
-
-[node name="AimArrow" type="Node2D" parent="Animation"]
-
-[node name="Polygon2D" type="Polygon2D" parent="Animation/AimArrow"]
-position = Vector2(153, 0)
-color = Color(1, 1, 0, 1)
-offset = Vector2(-153, 2)
-polygon = PackedVector2Array(147, 5, 147, -8, 158, -8, 158, 5)
 
 [node name="Health" type="Node2D" parent="."]
 rotation = 0.000201209

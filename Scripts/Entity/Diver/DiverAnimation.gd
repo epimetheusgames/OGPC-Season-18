@@ -18,8 +18,7 @@ extends Node2D
 @onready var leg_target1: Node2D = $"LegIkTarget1"
 @onready var leg_target2: Node2D = $"LegIkTarget2"
 
-@onready var move_arrow: Node2D = $"MoveArrow"
-@onready var aim_arrow: Node2D = $"AimArrow"
+@onready var arrow: Node2D = $"Arrow"
 
 # Leg oscillation
 const DIST_FROM_BODY = -110
@@ -49,7 +48,7 @@ func _ready() -> void:
 	skeleton.set_modification_stack(mod_stack)
 
 func _process(delta: float) -> void:
-	move_arrow.global_rotation = diver.get_diver_movement().get_current_angle()
+	arrow.global_rotation = diver.get_diver_movement().get_current_angle()
 	
 	osc_speed = diver.velocity.length() / 100
 	
@@ -61,10 +60,6 @@ func _process(delta: float) -> void:
 	
 	leg_target1.global_position = animate_leg_pos(t1)
 	leg_target2.global_position = animate_leg_pos(t2)
-	
-	#aim_arrow.global_rotation = aim_arrow.global_position.angle_to_point(get_global_mouse_position())
-	arm_target2.global_position = get_global_mouse_position()
-	print(arm_target2.global_position)
 
 
 func animate_leg_pos(t: float) -> Vector2:
