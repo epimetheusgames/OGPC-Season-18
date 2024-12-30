@@ -26,10 +26,18 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	queue_redraw()
 
+func rotate_module(by: float) -> void:
+	rotation += by
+	for point in attachment_points:
+		print(point.direction)
+		point.direction = point.direction.length() * Vector2.from_angle(point.direction.angle() + by)
+		print(point.direction)
+
 func create_module_resource() -> SubmarineModuleResource:
 	var module_resource = SubmarineModuleResource.new()
 	module_resource.module_scene = path
 	module_resource.position = position
+	module_resource.rotation = rotation
 	for point in attachment_points:
 		var attachment_point_resource := AttachmentPointResource.new()
 		attachment_point_resource.position = point.position
@@ -45,4 +53,4 @@ func _draw() -> void:
 	
 	for point in attachment_points:
 		draw_circle(point.position, 10, Color.WHITE, false, 2)
-		draw_line(point.position, point.position + point.direction * 50, Color.GREEN if point.attached_point else Color.RED, 2)
+		draw_line(point.position, point.position + point.direction.rotated(-rotation) * 50, (Color.GREEN if point.attached_point else Color.RED), 2)
