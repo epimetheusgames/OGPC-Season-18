@@ -2,7 +2,6 @@
 class_name SubmarineEditor
 extends Control
 
-
 @onready var origin = $"SplitContainer/SubmarineView/ViewContainer/Viewport/Origin"
 @onready var grid = $"SplitContainer/PanelContainer/VSplitContainer/GridContainer"
 
@@ -48,7 +47,6 @@ func _process(delta: float) -> void:
 						valid_point = point
 						our_valid_point = our_point
 		
-		# Magic math.
 		module_adding.global_position = module_adding.get_global_mouse_position()
 		if Input.is_action_just_pressed("mouse_left_click"):
 			if modules.size() == 1:
@@ -86,7 +84,19 @@ func find_assosiated_point(point: Vector2, direction: Vector2, multiplier: int =
 				return real_point
 	return null
 
+# TODO: Add more stuff here.
+func do_submarine_sanity_checks() -> bool:
+	for module in modules:
+		for point in module.attachment_points:
+			if !point.attached_point:
+				return false
+	return true
+
 func _on_save_button_button_up() -> void:
+	if !do_submarine_sanity_checks():
+		print("WARNING: Invalid submarine.")
+		return
+		
 	$SaveDialog.visible = true
 
 func _on_load_button_button_up() -> void:
