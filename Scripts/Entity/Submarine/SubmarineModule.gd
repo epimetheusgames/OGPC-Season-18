@@ -13,9 +13,12 @@ func _ready() -> void:
 	
 	if get_node_or_null("Collision") && $"../.." is Submarine:
 		for child in get_node_or_null("Collision").get_children():
+			var old_pos: Vector2 = child.global_position
+			var old_rot: float = child.global_rotation
 			$"Collision".remove_child(child)
 			$"../..".add_child(child) 
-			child.position += self.position
+			child.global_position = old_pos
+			child.global_rotation = old_rot
 	
 	if get_node_or_null("ModuleArea") && $"../.." is Submarine:
 		for child in get_node_or_null("ModuleArea").get_children():
@@ -29,9 +32,7 @@ func _process(delta: float) -> void:
 func rotate_module(by: float) -> void:
 	rotation += by
 	for point in attachment_points:
-		print(point.direction)
 		point.direction = point.direction.length() * Vector2.from_angle(point.direction.angle() + by)
-		print(point.direction)
 
 func create_module_resource() -> SubmarineModuleResource:
 	var module_resource = SubmarineModuleResource.new()

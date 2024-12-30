@@ -37,6 +37,8 @@ script = ExtResource("17_j8dce")
 uid = 3625
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
+vertices = PackedVector2Array(9956.11, 8707.01, 9787, 9719.33, 9653.29, 8546.11, 10202.2, 6935.9, 9455.36, 6970.71, 9343.78, 5870.88, 28982.6, 10952.7, 28618.5, 10951.4, 28958.3, -247.891, 29398.3, -444.492, -6613.66, -271.469, 28714.4, -234.344, 28417.4, -163.023, 28351.9, -133.359, 28303, -87.8984, 28248.3, -10.4609, 28057.6, 25.5, 27985.9, 27.8672, 27956.8, 44.5078, 27921.6, 51.1484, 27871, 52.0625, 27836.8, 54.2031, 27802.7, 67.8203, -6618.58, 19.6484, 27790.2, 75.9375, 27776.6, 78.5, 27675, 94.9297, -6491, 38.7734, -6387.84, 293.281, -6446.33, 276.398, -6449.77, 272.797, -6155.75, 298.047, -5324.57, 335.047, -4539.59, 354.078, -4301.06, 369.367, -4056.37, 397.602, -3806.42, 469.172, -3564.41, 584.906, -3371.56, 701.688, -3155.66, 901.156, -2977.39, 1216.3, -2835.54, 1542.16, -1733.22, 3410.45, -2178.8, 2973.61, -2556.02, 2380.7, 27640.9, 100.43, 24169.9, 491.891, 11623, 5778.04, 11509.3, 6105.08, 11444.6, 6241.78, 11367, 6348.52, 11065, 6558.33, 10686.2, 6757.43, 9278.73, 5607.54, 11821, 5336.82, 9177.6, 5334.7, 9072.86, 5158.65, 12103.2, 5048.1, 8930.13, 5012.47, 12452.2, 4861.26, 8731, 4903.34, 27660.5, 100.711, 8509.42, 4835.9, 12829.1, 4762.57, 13234.8, 4712.5, 8270.73, 4788.17, 20102.7, 1920.28, 19156.5, 2665.34, 18126.9, 3412.82, 17043.7, 3891.26, 15330.6, 4429.82, 14286.6, 4626.76, 8019.44, 4758.3, 7698.63, 4742.06, 21132.5, 1356.7, 6700.86, 4720.03, 2708.89, 4577.1, 1326.2, 4487.32, 737.859, 4429.87, -104.312, 4275.04, -759.68, 4045.86, -1280.18, 3739.22, 22378.6, 898.906, 25854.2, 357.547, 27092.4, 189.062)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(10, 9, 8, 11), PackedInt32Array(10, 11, 12), PackedInt32Array(10, 12, 13), PackedInt32Array(10, 13, 14), PackedInt32Array(10, 14, 15, 16, 17), PackedInt32Array(10, 17, 18, 19, 20), PackedInt32Array(10, 20, 21), PackedInt32Array(10, 21, 22), PackedInt32Array(23, 10, 22, 24, 25, 26, 27), PackedInt32Array(28, 29, 30, 27, 26, 31), PackedInt32Array(32, 31, 26, 33), PackedInt32Array(34, 33, 26), PackedInt32Array(35, 34, 26), PackedInt32Array(36, 35, 26), PackedInt32Array(37, 36, 26), PackedInt32Array(38, 37, 26), PackedInt32Array(39, 38, 26), PackedInt32Array(40, 39, 26), PackedInt32Array(41, 40, 26), PackedInt32Array(42, 43, 44, 41, 26, 45, 46), PackedInt32Array(47, 48, 49, 50, 51, 52, 3, 5, 53), PackedInt32Array(54, 47, 53, 55), PackedInt32Array(54, 55, 56, 57), PackedInt32Array(57, 56, 58, 59), PackedInt32Array(59, 58, 60), PackedInt32Array(26, 61, 45), PackedInt32Array(59, 60, 62, 63), PackedInt32Array(64, 63, 62, 65, 66, 67), PackedInt32Array(67, 68, 69, 70, 71, 64), PackedInt32Array(66, 65, 72), PackedInt32Array(66, 72, 73, 74), PackedInt32Array(74, 73, 75, 76, 77, 78, 79, 80, 81, 42, 82), PackedInt32Array(46, 82, 42), PackedInt32Array(83, 46, 45, 84)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 29502, -545, 29079, 11053, -6903, 10932)])
 agent_radius = 100.0
 
@@ -167,7 +169,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_7asfx"]
+[sub_resource type="Resource" id="Resource_0fok5"]
 resource_local_to_scene = true
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
@@ -176,7 +178,6 @@ script = ExtResource("17_j8dce")
 uid = 3628
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
-background_mode = 3
 background_canvas_max_layer = 5
 glow_enabled = true
 glow_bloom = 0.5
@@ -424,7 +425,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_7asfx")
+uid = SubResource("Resource_0fok5")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
