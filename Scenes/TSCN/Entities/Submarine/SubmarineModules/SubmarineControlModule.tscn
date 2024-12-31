@@ -12,12 +12,12 @@ file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlMo
 size = Vector2(400, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxom5"]
-size = Vector2(120, 180)
+size = Vector2(120, 325)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3u10"]
 size = Vector2(400, 40)
 
-[node name="SubmarineControlModule" type="Node2D"]
+[node name="SubmarineControlModule" type="Node2D" groups=["obstacles"]]
 script = ExtResource("1_ofa5d")
 path = SubResource("Resource_45qcr")
 
@@ -29,7 +29,7 @@ shape = SubResource("RectangleShape2D_6rgtm")
 [node name="ControlArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ControlArea"]
-position = Vector2(0, 70)
+position = Vector2(0, 142.5)
 shape = SubResource("RectangleShape2D_yxom5")
 
 [node name="AttachmentPoints" type="Node2D" parent="."]
@@ -73,6 +73,10 @@ shape = SubResource("RectangleShape2D_j3u10")
 [node name="Ceiling" type="CollisionShape2D" parent="Collision"]
 position = Vector2(0, -180)
 shape = SubResource("RectangleShape2D_j3u10")
+
+[node name="NavigationObstacle" type="StaticBody2D" parent="."]
+collision_layer = 256
+collision_mask = 0
 
 [connection signal="area_entered" from="ControlArea" to="." method="_on_control_area_area_entered"]
 [connection signal="area_exited" from="ControlArea" to="." method="_on_control_area_area_exited"]

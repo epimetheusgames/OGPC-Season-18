@@ -54,6 +54,10 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg")
 
+[global_group]
+
+obstacles=""
+
 [input]
 
 left={

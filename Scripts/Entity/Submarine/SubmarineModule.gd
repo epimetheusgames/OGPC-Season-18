@@ -15,6 +15,7 @@ func _ready() -> void:
 		for child in get_node_or_null("Collision").get_children():
 			var old_pos: Vector2 = child.global_position
 			var old_rot: float = child.global_rotation
+			$NavigationObstacle.add_child(child.duplicate())
 			$"Collision".remove_child(child)
 			$"../..".add_child(child) 
 			child.global_position = old_pos
