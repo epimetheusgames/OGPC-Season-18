@@ -51,4 +51,4 @@ func _physics_process(delta: float) -> void:
 	if !center_of_mass is RigidBody2D:
 		center_of_mass.position += bouyancy_velocity * delta
 	else: # Special physics for rigidbodies.
-		(center_of_mass as RigidBody2D).apply_central_force(bouyancy_velocity / 4)
+		center_of_mass.apply_central_force(bouyancy_velocity / 4)

@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/Rope/RopeAttachment.gd" id="4_6mv3f"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="5_on45p"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="6_6n4cc"]
-[ext_resource type="Script" uid="uid://dke8ns1faaefs" path="res://Scripts/Components/Misc/HealthComponent.gd" id="7_4tmsy"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="7_4tmsy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27gx5"]
 size = Vector2(210, 202)
@@ -23,7 +23,7 @@ position = Vector2(296, 288)
 motion_mode = 1
 script = ExtResource("1_ucxug")
 LEVIATHAN_NODE = ExtResource("1_ljr6s")
-node_amount = 30
+node_amount = 60
 settings = ExtResource("3_sik31")
 hurtbox_component = NodePath("HurtboxComponent")
 attackbox_component = NodePath("AttackBoxComponent")
@@ -47,7 +47,7 @@ polygon = PackedVector2Array(50, 16, 72, 8, 50, 45, 42, 33)
 
 [node name="FabrikRope" type="Node2D" parent="."]
 script = ExtResource("1_7l8up")
-point_amount = 40
+point_amount = 60
 component_container = NodePath("..")
 
 [node name="Legs" type="Node2D" parent="."]
@@ -101,7 +101,6 @@ color = Color(1, 1, 0.27451, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="AttackBoxComponent" type="Node" parent="."]
 script = ExtResource("5_on45p")

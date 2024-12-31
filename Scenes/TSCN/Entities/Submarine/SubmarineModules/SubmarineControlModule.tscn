@@ -9,7 +9,7 @@ script = ExtResource("2_7buem")
 file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rgtm"]
-size = Vector2(400, 400)
+size = Vector2(400, 483)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxom5"]
 size = Vector2(120, 325)
@@ -24,6 +24,7 @@ path = SubResource("Resource_45qcr")
 [node name="ModuleArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleArea"]
+position = Vector2(0, 41.5)
 shape = SubResource("RectangleShape2D_6rgtm")
 
 [node name="ControlArea" type="Area2D" parent="."]
