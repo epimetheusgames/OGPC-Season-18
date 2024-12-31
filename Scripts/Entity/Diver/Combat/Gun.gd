@@ -14,9 +14,14 @@ enum GunState {
 
 @export var dist_from_head: float = 100.0
 
+@export var knockback: float = 10.0
+
 var flipped: bool = false
 
 var gun_state := GunState.HOLDING
+
+func _ready() -> void:
+	super()
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -29,8 +34,7 @@ func _process(delta: float) -> void:
 	
 	var deg_rot: float = Util.normalize_angle_degrees(rad_to_deg(rot))
 	flipped = deg_rot > 90 && deg_rot < 270
-	#print("rotation: " + str(deg_rot))
-	#print("flipped: " + str(flipped))
+	
 	if flipped:
 		scale.y = -1
 	else:

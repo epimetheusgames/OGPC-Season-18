@@ -9,7 +9,10 @@
 script = ExtResource("1_6b6mx")
 bullet_scene = ExtResource("2_qlup2")
 dist_from_head = 50.0
+knockback = 1000.0
+attack_cooldown = 3.0
 use_hand1 = true
+use_hand2 = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -7.0

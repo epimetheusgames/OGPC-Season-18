@@ -18,9 +18,13 @@ func _process(delta: float) -> void:
 	cone_of_fire.increase_spread(spread)
 	
 	if gun_state == GunState.HOLDING:
+		use_hand1 = false
 		use_hand2 = false
+		dist_from_head = 60
 	else:
+		use_hand1 = true
 		use_hand2 = true
+		dist_from_head = 50
 
 func get_hand1_pos() -> Vector2:
 	if flipped || gun_state == GunState.HOLDING:
@@ -34,7 +38,7 @@ func get_hand2_pos() -> Vector2:
 	else:
 		return hand1_point.global_position
 
-func attack() -> void:
+func perform_attack() -> void:
 	var new_spear: Spear = bullet_scene.instantiate()
 	add_child(new_spear)
 	
@@ -58,3 +62,7 @@ func attack() -> void:
 	new_rope_drawer.rope = new_rope
 	"""
 	#print_tree_pretty()
+	var force: Vector2 = Util.angle_to_vector_radians(global_rotation + PI, knockback)
+	diver.diver_movement.knockback(force)
+	print("force")
+	

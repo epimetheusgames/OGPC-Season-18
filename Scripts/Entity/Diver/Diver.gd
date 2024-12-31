@@ -34,7 +34,7 @@ func _physics_process(_delta: float):
 	
 	velocity = diver_movement.get_velocity()
 	
-	var target_angle: float = velocity.angle() + PI/2
+	var target_angle: float = diver_movement.current_angle + PI/2
 	
 	var angle_diff: float = angle_difference(rotation, target_angle)
 	rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
