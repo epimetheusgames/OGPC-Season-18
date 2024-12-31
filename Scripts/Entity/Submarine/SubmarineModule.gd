@@ -23,9 +23,11 @@ func _ready() -> void:
 	
 	if get_node_or_null("ModuleArea") && $"../.." is Submarine:
 		for child in get_node_or_null("ModuleArea").get_children():
+			var old_rot: float = child.global_rotation
 			$"ModuleArea".remove_child(child)
 			$"../../SubmarineArea".add_child(child)
 			child.position += self.position
+			child.global_rotation = old_rot
 
 func _process(delta: float) -> void:
 	queue_redraw()

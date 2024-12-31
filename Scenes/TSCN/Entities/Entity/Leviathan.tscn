@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://co2canly84hyf"]
+[gd_scene load_steps=12 format=3 uid="uid://co2canly84hyf"]
 
 [ext_resource type="Script" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
 [ext_resource type="PackedScene" uid="uid://dwxcjl4jrkyw3" path="res://Scenes/TSCN/Entities/Entity/LeviathanNode.tscn" id="1_ljr6s"]
@@ -10,18 +10,24 @@
 [ext_resource type="Script" uid="uid://dke8ns1faaefs" path="res://Scripts/Components/Misc/HealthComponent.gd" id="7_4tmsy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27gx5"]
-size = Vector2(115, 100)
+size = Vector2(210, 202)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_swi4c"]
-size = Vector2(163, 157)
+size = Vector2(151, 157)
 
-[node name="Leviathan" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6nwr"]
+size = Vector2(82, 82)
+
+[node name="Leviathan" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "attackbox_component", "health_component")]
 position = Vector2(296, 288)
 motion_mode = 1
 script = ExtResource("1_ucxug")
 LEVIATHAN_NODE = ExtResource("1_ljr6s")
 node_amount = 30
 settings = ExtResource("3_sik31")
+hurtbox_component = NodePath("HurtboxComponent")
+attackbox_component = NodePath("AttackBoxComponent")
+health_component = NodePath("HealthComponent")
 
 [node name="Head" parent="." instance=ExtResource("1_ljr6s")]
 
@@ -99,11 +105,14 @@ debug_enabled = true
 
 [node name="AttackBoxComponent" type="Node" parent="."]
 script = ExtResource("5_on45p")
+hitbox_type = 1
+knockback_velocity = 2000.0
 hurtbox = NodePath("../AttackBox")
 component_container = NodePath("..")
 
 [node name="HurtboxComponent" type="Node" parent="."]
 script = ExtResource("6_6n4cc")
+hitbox_type = 1
 attachable_health_component = NodePath("../HealthComponent")
 attack_box_to_exclude = NodePath("../AttackBoxComponent")
 hurtbox = NodePath("../Hurtbox")
@@ -118,13 +127,19 @@ component_container = NodePath("..")
 [node name="AttackBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-position = Vector2(47.5, 0)
 shape = SubResource("RectangleShape2D_27gx5")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(15.5, -0.5)
+position = Vector2(-1.5, -0.5)
 shape = SubResource("RectangleShape2D_swi4c")
+
+[node name="BulletDetectionArea" type="Area2D" parent="."]
+position = Vector2(0, -56)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetectionArea"]
+position = Vector2(1, 57)
+shape = SubResource("RectangleShape2D_l6nwr")
 
 [editable path="Head"]

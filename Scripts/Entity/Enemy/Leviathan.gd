@@ -36,6 +36,8 @@ func _ready() -> void:
 		await get_tree().create_timer(0.1).timeout
 		$Nav.target_position = target_position
 		nav_target = $Nav.get_next_path_position()
+		if !$Nav.is_target_reachable():
+			_target_reached()
 
 func _process(delta: float) -> void:
 	super(delta)
