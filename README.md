@@ -1,6 +1,6 @@
 # OGPC-Season-18
 
-Created by Epimetheus Games (creators of [EyeSore](https://github.com/epimetheusgames/EyeSore), OGPC Season 16 Best In Show, and [Project Prometheus](https://github.com/epimetheusgames/ProjectPrometheus), OGPC Season 17 Best In Show.
+Created by Epimetheus Games (creators of [EyeSore](https://github.com/epimetheusgames/EyeSore), OGPC Season 16 Best In Show, and [Project Prometheus](https://github.com/epimetheusgames/ProjectPrometheus), OGPC Season 17 Best In Show).
 
 ## Links:
 
