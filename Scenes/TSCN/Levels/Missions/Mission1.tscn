@@ -1,16 +1,14 @@
-[gd_scene load_steps=98 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=66 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://i4m51oco4iap" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="1_awqxm"]
 [ext_resource type="Script" uid="uid://shox6242gcae" path="res://Scripts/Objects/Camera/ShaderManager.gd" id="1_s361y"]
 [ext_resource type="Script" uid="uid://bdwd03rarc02" path="res://Scripts/Objects/Camera/Quantize.gd" id="2_fhpdt"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Blur.gdshader" id="3_kwb8w"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="4_0q3xc"]
 [ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="Script" path="res://Scripts/Objects/AutoPolygonTexture.gd" id="5_aep54"]
-[ext_resource type="PackedScene" uid="uid://b4grtrrn2vhnl" path="res://Scenes/TSCN/Objects/Rain.tscn" id="5_im1w7"]
 [ext_resource type="Texture2D" uid="uid://b0ja5eqv1qbm8" path="res://Assets/Art/Sprites/Level/SandTexture.png" id="5_lquv8"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="5_rc3kh"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Pixelize.gd" id="5_t6m55"]
@@ -30,6 +28,7 @@
 [ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="28_1g0ie"]
 [ext_resource type="Shader" uid="uid://b00fppata8v35" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
+[ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 
 [sub_resource type="Resource" id="Resource_km6pi"]
@@ -172,7 +171,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_2a54n"]
+[sub_resource type="Resource" id="Resource_q61pr"]
 resource_local_to_scene = true
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
@@ -181,172 +180,19 @@ script = ExtResource("17_j8dce")
 uid = 3628
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
-background_canvas_max_layer = 5
+background_mode = 3
+background_canvas_max_layer = 10
 glow_enabled = true
-glow_bloom = 0.5
-glow_hdr_threshold = 0.9
+glow_levels/1 = 0.3
+glow_levels/2 = 0.3
+glow_levels/3 = 0.4
+glow_levels/4 = 0.3
+glow_levels/5 = 0.5
+glow_levels/6 = 0.2
+glow_intensity = 1.0
+glow_blend_mode = 0
+glow_hdr_scale = 0.0
 glow_map_strength = 1.0
-
-[sub_resource type="Curve" id="Curve_mpxbk"]
-max_value = 0.3
-_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.715015, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_5r0nm"]
-curve = SubResource("Curve_mpxbk")
-
-[sub_resource type="Gradient" id="Gradient_gp333"]
-colors = PackedColorArray(1, 1, 1, 0.0784314, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yvfqy"]
-gradient = SubResource("Gradient_gp333")
-
-[sub_resource type="Curve" id="Curve_cisdg"]
-max_value = 3.0
-_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_62g5s"]
-max_value = 30.0
-_data = [Vector2(0, 14.6088), 0.0, 88.7644, 0, 0, Vector2(0.135569, 26.1353), 56.4795, 56.4795, 0, 0, Vector2(0.259475, 30), 0.0, 0.0, 0, 0, Vector2(1, 30), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Curve" id="Curve_7ivgi"]
-max_value = 3.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_iirml"]
-curve_x = SubResource("Curve_cisdg")
-curve_y = SubResource("Curve_62g5s")
-curve_z = SubResource("Curve_7ivgi")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o6m6x"]
-particle_flag_align_y = true
-emission_shape_scale = Vector3(800, 1, 1)
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-direction = Vector3(0, 1, 0)
-spread = 0.0
-initial_velocity_min = 350.0
-initial_velocity_max = 400.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_over_velocity_curve = SubResource("CurveXYZTexture_iirml")
-color_initial_ramp = SubResource("GradientTexture1D_yvfqy")
-alpha_curve = SubResource("CurveTexture_5r0nm")
-
-[sub_resource type="Curve" id="Curve_aoew8"]
-max_value = 0.3
-_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.715015, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_gmlmm"]
-curve = SubResource("Curve_aoew8")
-
-[sub_resource type="Gradient" id="Gradient_tgcb0"]
-colors = PackedColorArray(1, 1, 1, 0.0784314, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_4kaw2"]
-gradient = SubResource("Gradient_tgcb0")
-
-[sub_resource type="Curve" id="Curve_vppwf"]
-max_value = 3.0
-_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_ys5a2"]
-max_value = 30.0
-_data = [Vector2(0, 14.6088), 0.0, 88.7644, 0, 0, Vector2(0.135569, 26.1353), 56.4795, 56.4795, 0, 0, Vector2(0.259475, 30), 0.0, 0.0, 0, 0, Vector2(1, 30), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Curve" id="Curve_ljnol"]
-max_value = 3.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_wlwbu"]
-curve_x = SubResource("Curve_vppwf")
-curve_y = SubResource("Curve_ys5a2")
-curve_z = SubResource("Curve_ljnol")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ulrdw"]
-particle_flag_align_y = true
-emission_shape_scale = Vector3(1000, 1, 1)
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-direction = Vector3(0, 1, 0)
-spread = 0.0
-initial_velocity_min = 350.0
-initial_velocity_max = 400.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_over_velocity_curve = SubResource("CurveXYZTexture_wlwbu")
-color_initial_ramp = SubResource("GradientTexture1D_4kaw2")
-alpha_curve = SubResource("CurveTexture_gmlmm")
-
-[sub_resource type="Curve" id="Curve_fvvwq"]
-max_value = 0.3
-_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.715015, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_7in3e"]
-curve = SubResource("Curve_fvvwq")
-
-[sub_resource type="Gradient" id="Gradient_fslbh"]
-colors = PackedColorArray(1, 1, 1, 0.0784314, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6t75e"]
-gradient = SubResource("Gradient_fslbh")
-
-[sub_resource type="Curve" id="Curve_rr54j"]
-max_value = 3.0
-_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_bq2v1"]
-max_value = 30.0
-_data = [Vector2(0, 14.6088), 0.0, 88.7644, 0, 0, Vector2(0.135569, 26.1353), 56.4795, 56.4795, 0, 0, Vector2(0.259475, 30), 0.0, 0.0, 0, 0, Vector2(1, 30), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="Curve" id="Curve_oms4x"]
-max_value = 3.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_thh2n"]
-curve_x = SubResource("Curve_rr54j")
-curve_y = SubResource("Curve_bq2v1")
-curve_z = SubResource("Curve_oms4x")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qda08"]
-particle_flag_align_y = true
-emission_shape_scale = Vector3(1200, 1, 1)
-emission_shape = 3
-emission_box_extents = Vector3(1, 1, 1)
-direction = Vector3(0, 1, 0)
-spread = 0.0
-initial_velocity_min = 350.0
-initial_velocity_max = 400.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_over_velocity_curve = SubResource("CurveXYZTexture_thh2n")
-color_initial_ramp = SubResource("GradientTexture1D_6t75e")
-alpha_curve = SubResource("CurveTexture_7in3e")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dmxnk"]
-shader = ExtResource("3_kwb8w")
-shader_parameter/step = Vector2(1, 1)
-shader_parameter/radius = 5.0
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_dtskl"]
-viewport_path = NodePath("RainViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_yfqqw"]
-viewport_path = NodePath("RainViewport2")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_pjmae"]
-viewport_path = NodePath("RainViewport3")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_su1cl"]
 viewport_path = NodePath("ShadowPipeline/WorldContainer/World")
@@ -430,8 +276,8 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1161, 658)
-shader_parameter/pixel_size = 3
+shader_parameter/screen_size = Vector2(1203, 658)
+shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
 shader = ExtResource("28_ss3wm")
@@ -589,7 +435,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_2a54n")
+uid = SubResource("Resource_q61pr")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -633,91 +479,6 @@ component_container = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5ulyy")
-
-[node name="RainViewport" type="SubViewport" parent="."]
-transparent_bg = true
-use_hdr_2d = true
-size = Vector2i(2000, 1000)
-
-[node name="Rain" parent="RainViewport" instance=ExtResource("5_im1w7")]
-material = null
-position = Vector2(1030, 0)
-scale = Vector2(1.5, 1.5)
-amount = 70
-process_material = SubResource("ParticleProcessMaterial_o6m6x")
-lifetime = 1.4
-local_coords = true
-
-[node name="RainViewport2" type="SubViewport" parent="."]
-transparent_bg = true
-use_hdr_2d = true
-size = Vector2i(2000, 1000)
-
-[node name="Rain" parent="RainViewport2" instance=ExtResource("5_im1w7")]
-material = null
-position = Vector2(1030, 0)
-scale = Vector2(1.5, 1.5)
-amount = 70
-process_material = SubResource("ParticleProcessMaterial_ulrdw")
-lifetime = 1.4
-local_coords = true
-
-[node name="RainViewport3" type="SubViewport" parent="."]
-transparent_bg = true
-use_hdr_2d = true
-size = Vector2i(2000, 1000)
-
-[node name="Rain" parent="RainViewport3" instance=ExtResource("5_im1w7")]
-material = null
-position = Vector2(1030, 0)
-scale = Vector2(1.5, 1.5)
-amount = 70
-process_material = SubResource("ParticleProcessMaterial_qda08")
-lifetime = 1.4
-local_coords = true
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-layer = 1
-
-[node name="FGLayer1" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = 20
-motion_scale = Vector2(1.4, 1)
-motion_mirroring = Vector2(2000, 0)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/FGLayer1"]
-z_index = 20
-material = SubResource("ShaderMaterial_dmxnk")
-offset_left = -21.0
-offset_top = -979.0
-offset_right = 2006.0
-offset_bottom = 263.0
-texture = SubResource("ViewportTexture_dtskl")
-
-[node name="FGLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_mirroring = Vector2(2000, 0)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/FGLayer2"]
-visible = false
-z_index = 20
-offset_left = -21.0
-offset_top = -979.0
-offset_right = 2006.0
-offset_bottom = 263.0
-texture = SubResource("ViewportTexture_yfqqw")
-
-[node name="FGLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -5
-motion_scale = Vector2(0.8, 1)
-motion_mirroring = Vector2(2000, 0)
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/FGLayer3"]
-visible = false
-z_index = 20
-offset_left = -21.0
-offset_top = -979.0
-offset_right = 2006.0
-offset_bottom = 263.0
-texture = SubResource("ViewportTexture_pjmae")
 
 [node name="ShadowPipeline" type="Node" parent="." node_paths=PackedStringArray("level_container", "camera")]
 script = ExtResource("16_0m2co")
@@ -849,14 +610,14 @@ grow_vertical = 2
 visible = false
 rect = Rect2(0, 0, 1920, 1080)
 script = ExtResource("5_t6m55")
-pixel_size = 3
 
 [node name="ColorRect" type="ColorRect" parent="Shaders/Pixelize"]
+visible = false
 material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -759.0
+offset_right = -717.0
 offset_bottom = -422.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -886,5 +647,15 @@ offset_top = 179.0
 offset_right = 136.0
 offset_bottom = 179.0
 
+[node name="LightLine" parent="." instance=ExtResource("30_ykjed")]
+position = Vector2(860, 1002)
+
+[node name="Line" parent="LightLine" index="0"]
+points = PackedVector2Array(-3414, 1355, -3578, 731, -3825, 85, -4236, -362)
+
+[node name="Raycasts" parent="LightLine" index="1"]
+position = Vector2(-4204, -355)
+
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Entities/Boid"]
+[editable path="LightLine"]
