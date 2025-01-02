@@ -1,0 +1,2 @@
+class_name Dummy
+extends CharacterBody2D

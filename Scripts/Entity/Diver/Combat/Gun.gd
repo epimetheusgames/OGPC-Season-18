@@ -9,7 +9,6 @@ enum GunState {
 	AIMING,
 }
 
-@export var animation_node: AnimatedSprite2D
 @export var bullet_scene: PackedScene
 
 @export var dist_from_head: float = 100.0

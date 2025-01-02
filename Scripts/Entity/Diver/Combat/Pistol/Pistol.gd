@@ -3,12 +3,11 @@
 
 class_name Pistol
 extends Gun
-"""
+
 @onready var pistol_sprite: AnimatedSprite2D = $"PistolSprite"
 @onready var emit_point: Node2D = $"EmitPoint"
 @onready var cone_of_fire: ConeOfFire = $"ConeOfFire"
 
-var flipped: bool = false
 var shooting: bool = false
 
 func _process(delta: float) -> void:
@@ -69,4 +68,3 @@ func _on_tranquilizer_gun_sprite_animation_finished() -> void:
 		pistol_sprite.scale.y = 1
 	
 	pistol_sprite.play("Idle")
-"""
