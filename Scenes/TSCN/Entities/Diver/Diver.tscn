@@ -1,9 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=41 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_sa7rx"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverInventory.gd" id="3_r5rx4"]
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverCombat.gd" id="5_mjta2"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="6_dvqx5"]
@@ -26,6 +27,9 @@ height = 100.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2irf7"]
 radius = 20.0
 height = 98.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5d3kj"]
+radius = 51.0
 
 [sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_v7jax"]
 target_nodepath = NodePath("../ArmIkTarget1")
@@ -144,6 +148,17 @@ shape = SubResource("CapsuleShape2D_ghsq1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DiverDetectionArea"]
 shape = SubResource("CapsuleShape2D_2irf7")
+
+[node name="Inventory" type="Node2D" parent="."]
+script = ExtResource("3_r5rx4")
+
+[node name="ItemDetectionArea" type="Area2D" parent="Inventory"]
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/ItemDetectionArea"]
+position = Vector2(0, -64)
+shape = SubResource("CircleShape2D_5d3kj")
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("2_lxvv3")
@@ -575,3 +590,5 @@ gravity = 20
 buoyancy_accel = 1.0
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
+
+[connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]

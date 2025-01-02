@@ -1,5 +1,4 @@
 class_name DiverFlashlight
-
 extends Node2D
 
 @onready var diver: Diver = get_parent()

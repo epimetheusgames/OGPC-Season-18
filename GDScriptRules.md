@@ -240,6 +240,6 @@ var direction := Vector3(1, 2, 3) # The type is clearly inferred as Vector3.
 16  (00010000): Wall Layer 2
 32  (00100000): Player Attackbox / Enemy Hurtbox
 64  (01000000): Interaction
-128 (10000000): Shadowcaster
+128 (10000000): Item
 
 Sound should be based on a pathfind to the sound.

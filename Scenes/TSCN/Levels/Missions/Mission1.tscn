@@ -31,6 +31,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
 [ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
+[ext_resource type="PackedScene" uid="uid://dqb5sqhg7l1io" path="res://Scenes/TSCN/Objects/Items/Rock.tscn" id="31_boa6h"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 
 [sub_resource type="Curve" id="Curve_6rk86"]
@@ -210,6 +211,11 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
+<<<<<<< HEAD
+=======
+[sub_resource type="Resource" id="Resource_1jy8h"]
+resource_local_to_scene = true
+>>>>>>> ea628b5 (Items!)
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
 resource_local_to_scene = true
@@ -519,7 +525,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_wtti3")
+uid = SubResource("Resource_1jy8h")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -745,6 +751,9 @@ points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 
 [node name="Raycasts" parent="LightLine" index="1"]
 position = Vector2(-4236, -362)
+
+[node name="Rock" parent="." instance=ExtResource("31_boa6h")]
+position = Vector2(1185, 1128)
 
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Entities/Boid"]

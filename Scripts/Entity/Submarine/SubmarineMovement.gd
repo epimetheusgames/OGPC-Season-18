@@ -23,7 +23,6 @@ var velocity: Vector2 = Vector2.ZERO
 var buoyancy = 0
 
 func _physics_process(delta: float) -> void:
-	print(buoyancy)
 	decay_velocity(delta)
 	
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
