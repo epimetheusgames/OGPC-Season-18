@@ -208,7 +208,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_rddaa"]
+[sub_resource type="Resource" id="Resource_qow6m"]
 resource_local_to_scene = true
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
@@ -313,7 +313,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1203, 710)
+shader_parameter/screen_size = Vector2(1203, 453)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -379,11 +379,10 @@ texture = SubResource("ViewportTexture_gnvk0")
 script = ExtResource("4_iytd7")
 spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
-[node name="Diver" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent" node_paths=PackedStringArray("water_manager", "camera", "parallax") instance=ExtResource("4_0aydx")]
+[node name="Diver" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent" node_paths=PackedStringArray("water_manager", "camera") instance=ExtResource("4_0aydx")]
 position = Vector2(1012, 1089)
 water_manager = NodePath("../../Waves")
 camera = NodePath("Camera2D")
-parallax = NodePath("")
 uid = SubResource("Resource_km6pi")
 
 [node name="Camera2D" type="Camera2D" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver"]
@@ -476,6 +475,7 @@ uv = PackedVector2Array(0, 0, 17.34, 0, 34.68, 0, 52.02, 0, 69.36, 0, 86.7, 0, 1
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="LevelContainer/Level"]
 rotation = -0.464765
+energy = 0.0
 shadow_filter = 2
 max_distance = 1e+06
 
@@ -520,7 +520,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_rddaa")
+uid = SubResource("Resource_qow6m")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -703,7 +703,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -717.0
-offset_bottom = -370.0
+offset_bottom = -627.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
