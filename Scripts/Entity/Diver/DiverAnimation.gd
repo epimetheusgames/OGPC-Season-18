@@ -54,6 +54,9 @@ func _ready() -> void:
 	mod_stack.set_modification(3, leg_mod2)
 	
 	skeleton.set_modification_stack(mod_stack)
+	
+	displayed_nametag = $PlayerName.duplicate()
+	$"../../../../../UI".add_child(displayed_nametag)
 
 
 func _process(delta: float) -> void:
