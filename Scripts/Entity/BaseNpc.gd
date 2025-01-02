@@ -37,9 +37,6 @@ var sentence_index := 0
 var dialog: Dictionary
 var dialog_json: JSON
 
-func _process(delta: float) -> void:
-	super(delta)
-
 func touching_bodies() -> bool:
 	var bodies = get_node(dialog_area).get_overlapping_bodies()
 	#omg functional programming moment (lambdas)
@@ -85,8 +82,13 @@ func try_trigger_talking() -> void:
 	if(touching_bodies()):
 		trigger_talking()
 func trigger_talking() -> void:
-	Global.dialog_active = true
-	#index [0] is the dialogue, [1][0] [1][1] [1][2] and  etc are responses
-	Global.dialog_core.play_dialog(dialog["dialog"][npc_name][0],dialog_speed,dialog["dialog"][npc_name][1])
-
+	if(!Global.dialog_active):
+		Global.dialog_active = true
+		#index [0] is the dialogue, [1][0] [1][1] [1][2] and  etc are responses
+		Global.dialog_core.play_dialog(dialog["dialog"][npc_name][0],dialog_speed,dialog["dialog"][npc_name][1])
+	else:
+		Global.dialog_active = false
+func _process(delta) -> void:
+	super(delta)
+	Global.dialog_core.visible = Global.dialog_active
 	

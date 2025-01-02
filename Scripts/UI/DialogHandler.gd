@@ -1,5 +1,5 @@
 # code made by sequoia
-extends Node2D
+extends TextureRect
 
 signal dialog_option_chosen
 
@@ -30,12 +30,14 @@ func _ready() -> void:
 	response_buttons[1].button_down.connect(response_option_two)
 	response_buttons[2].button_down.connect(response_option_three)
 	response_buttons[3].button_down.connect(response_option_four)	
-	get_node("DialogTextLabel").size = get_node("DialogTextureBG").size*0.9
-	get_node("DialogTextLabel").position = get_node("DialogTextureBG").position
+	get_node("DialogTextLabel").size = self.size*0.9
+	get_node("DialogTextLabel").position = self.position
 	Global.dialog_core = self
 
 func _process(delta:float)->void:
+	Global.dialog_played = !Global.dialog_active
 	if(not dialog_played && dialog.length()!=0):
+		
 		if(not int(characters_played)>=dialog.length() && dialog[int(characters_played)-1]=="."):
 			characters_played += (dialog_speed_period / 60) * delta*60
 		else:
@@ -51,9 +53,6 @@ func _process(delta:float)->void:
 				dialog_sfx_node.play()
 		
 		last_played_letterindex = int(characters_played)
-	else:
-		Global.dialog_active = false
-		self.visible = false
 func get_response()->int:
 	return response
 func response_option_one()->void:

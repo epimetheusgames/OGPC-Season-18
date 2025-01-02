@@ -12,17 +12,18 @@ var KeyactionHandler: Node2D
 var current_scene_path: String
 var current_game_slot: int
 var is_multiplayer: bool
-var dialog_text_node: Node2D
+var dialog_text_node: TextureRect
 var boids_calculator_node: BoidsCalculator
 var player: Diver
 var submarine : Entity
-var dialog_core: Node2D
+var dialog_core: TextureRect
 var godot_steam_abstraction: GodotSteamAbstraction
 var current_game_save: GameSave
 var mission_system: MissionSystem
 var verbose_debug: bool
 var super_efficient: bool
 var dialog_active: bool = false
+var dialog_played: bool = true
 var current_mission_node = null
 
 # Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md

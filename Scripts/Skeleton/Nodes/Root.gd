@@ -8,7 +8,7 @@ extends Node
 @export_node_path("Node") var game_skeleton_node
 @export_node_path("Control") var ui_root_node
 @export_node_path("Node") var game_root_node
-@export_node_path("Node2D") var dialog_text_node
+@export_node_path("TextureRect") var dialog_text_node
 @export_node_path("Node2D") var KeyactionHandler
 
 func _ready():
