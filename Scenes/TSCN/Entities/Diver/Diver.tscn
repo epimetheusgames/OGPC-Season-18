@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=39 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -92,6 +92,38 @@ polygon = PackedVector2Array(-28, -31, -12, -31, -12, -90, -28, -90)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0ulgu"]
 polygon = PackedVector2Array(13, 39, 13, -15, -21, -15, -19, 39)
+
+[sub_resource type="Curve" id="Curve_deq0n"]
+_data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nguea"]
+curve = SubResource("Curve_deq0n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ye3t5"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, -98, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_min = 0.3
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_nguea")
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_0y5iv"]
+colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pvac2"]
+gradient = SubResource("Gradient_0y5iv")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wi5t0"]
 radius = 26.0
@@ -458,6 +490,16 @@ offset_top = -122.0
 offset_right = 190.0
 offset_bottom = -99.0
 horizontal_alignment = 1
+
+[node name="WaterParticles" type="GPUParticles2D" parent="Animation"]
+visible = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_ye3t5")
+texture = SubResource("GradientTexture2D_pvac2")
+lifetime = 5.0
+trail_lifetime = 2.0
+trail_sections = 2
+trail_section_subdivisions = 1
 
 [node name="Health" type="Node2D" parent="."]
 rotation = 0.000201209

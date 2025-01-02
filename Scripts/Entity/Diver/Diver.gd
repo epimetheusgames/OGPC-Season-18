@@ -10,12 +10,12 @@ var diver_state : Util.DiverState
 @onready var diver_animation: DiverAnimation = $"Animation"
 @onready var diver_combat: DiverCombat = $"Combat"
 @onready var diver_flashlight: DiverFlashlight = $"Flashlight"
-
-@export var water_manager: Node2D
-
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
 
+@export var water_manager: Node2D
 @export var no_movement := false
+@export var camera: Camera2D
+@export var parallax: ParallaxBackground
 
 func _ready() -> void:
 	if node_owner == 0 && !Global.godot_steam_abstraction.is_lobby_owner:
@@ -27,6 +27,9 @@ func _ready() -> void:
 	$BuoyancyComponent.waves = water_manager
 
 func _physics_process(_delta: float):
+	if camera && parallax:
+		parallax.scroll_base_offset.y += 100
+	
 	if Global.is_multiplayer && has_multiplayer_sync && !_is_node_owner():
 		move_and_slide()
 		return
