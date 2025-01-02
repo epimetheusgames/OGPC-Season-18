@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://20xbyodnd0y"]
 
-[ext_resource type="Script" path="res://Scripts/UI/CustomCheckbox.gd" id="1_wyatc"]
+[ext_resource type="Script" path="res://Scripts/UI/Sigma stuff/CustomCheckbox.gd" id="1_wyatc"]
 [ext_resource type="Texture2D" uid="uid://b5rp7we2rwkcp" path="res://Assets/Art/Sprites/UI/CheckBox.png" id="2_p70im"]
 [ext_resource type="Texture2D" uid="uid://wiadt8rjeimu" path="res://Assets/Art/Sprites/UI/EmptyBox.png" id="3_m31x8"]
 

@@ -62,3 +62,11 @@ func set_state(state : String):
 
 func get_state() -> String:
 	return STATE_ENUM.keys()[player_state]
+
+func get_diver_username() -> String:
+	# TODO: return their steam username
+	return self.name
+
+func get_diver_health() -> float:
+	var health_component: HealthComponent = $"Health/HealthComponent"
+	return health_component.get_health()

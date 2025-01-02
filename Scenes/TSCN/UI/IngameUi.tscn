@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://baqj8l6l28vpr"]
+[gd_scene load_steps=2 format=3 uid="uid://ce3c3hvoovs20"]
 
-[ext_resource type="Script" path="res://Scripts/UI/TeamHealthPanel.gd" id="1_0ajfg"]
+[ext_resource type="Script" path="res://Scripts/UI/Sigma stuff/TeamInfoPanel.gd" id="1_0ajfg"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,63 +10,63 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Top" type="PanelContainer" parent="."]
+[node name="HUD" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 172.0
 grow_horizontal = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Top"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Top/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer"]
 layout_mode = 2
 
-[node name="HealthVBox" type="VBoxContainer" parent="Top/MarginContainer/HBoxContainer"]
+[node name="HealthVBox" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Top/MarginContainer/HBoxContainer/HealthVBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/HealthVBox"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Top/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Top/MarginContainer/HBoxContainer/HealthVBox"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/HealthVBox"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Top/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer2"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
 text = "Health"
 
-[node name="VSeparator" type="VSeparator" parent="Top/MarginContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="HUD/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="OxygenVBox" type="VBoxContainer" parent="Top/MarginContainer/HBoxContainer"]
+[node name="OxygenVBox" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(120, 150)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Top/MarginContainer/HBoxContainer/OxygenVBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Top/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Top/MarginContainer/HBoxContainer/OxygenVBox"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Top/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer2"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 30
@@ -92,11 +92,11 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 5
 
-[node name="Player1" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+[node name="Diver1" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver1"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -104,11 +104,11 @@ text = "Carson"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Player1"]
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver1"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player1"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver1"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -116,11 +116,11 @@ text = "100%"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="Player2" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+[node name="Diver2" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver2"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -128,11 +128,11 @@ text = "Carson"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Player2"]
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver2"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player2"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver2"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -140,11 +140,11 @@ text = "100%"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="Player3" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+[node name="Diver3" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player3"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver3"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -152,11 +152,11 @@ text = "Carson"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Player3"]
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver3"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player3"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver3"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -164,11 +164,11 @@ text = "100%"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="Player4" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+[node name="Diver4" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player4"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver4"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -176,14 +176,62 @@ text = "Carson"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Player4"]
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver4"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Player4"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver4"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
 text = "100%"
 scroll_active = false
 shortcut_keys_enabled = false
+
+[node name="Weapons" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -239.0
+offset_top = -174.0
+offset_right = 239.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Weapons"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Weapons/MarginContainer"]
+layout_mode = 2
+
+[node name="Slot1" type="VBoxContainer" parent="Weapons/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Weapons/MarginContainer/HBoxContainer/Slot1"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Slot2" type="HBoxContainer" parent="Weapons/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Weapons/MarginContainer/HBoxContainer/Slot2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Slot3" type="VBoxContainer" parent="Weapons/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Weapons/MarginContainer/HBoxContainer/Slot3"]
+layout_mode = 2
+size_flags_vertical = 3
