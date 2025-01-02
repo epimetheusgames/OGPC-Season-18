@@ -54,6 +54,9 @@ func _ready() -> void:
 	mod_stack.set_modification(3, leg_mod2)
 	
 	skeleton.set_modification_stack(mod_stack)
+	
+	displayed_nametag = $PlayerName.duplicate()
+	$"../../../../../UI".add_child(displayed_nametag)
 
 
 func _process(delta: float) -> void:
@@ -62,10 +65,7 @@ func _process(delta: float) -> void:
 	mod_stack.set_modification(0, leg_mod1)
 	mod_stack.set_modification(0, leg_mod2)
 	skeleton.set_modification_stack(mod_stack)
-	"""	
-
-	displayed_nametag = $PlayerName.duplicate()
-	$"../../../../../UI".add_child(displayed_nametag)
+	"""
 	
 	if !Global.is_multiplayer || diver._is_node_owner():
 		displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
