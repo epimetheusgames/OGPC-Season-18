@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=34 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="12_u28jr"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
+[ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="15_d0rdv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -278,7 +279,7 @@ metadata/_edit_lock_ = true
 [node name="UpperArm1" type="Bone2D" parent="Animation/Skeleton/Torso"]
 use_parent_material = true
 position = Vector2(18, -55)
-rotation = 2.08284
+rotation = 1.08048
 scale = Vector2(0.999944, 0.999944)
 rest = Transform2D(0.964522, -0.264003, 0.264003, 0.964522, 18, -55)
 metadata/_edit_lock_ = true
@@ -317,7 +318,7 @@ metadata/_edit_lock_ = true
 [node name="UpperArm2" type="Bone2D" parent="Animation/Skeleton/Torso"]
 use_parent_material = true
 position = Vector2(-18, -55)
-rotation = 0.178766
+rotation = -1.19463
 rest = Transform2D(0.984064, 0.177815, -0.177815, 0.984064, -18, -55)
 metadata/_edit_lock_ = true
 metadata/_local_pose_override_enabled_ = true
@@ -325,7 +326,7 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Forearm2" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm2"]
 use_parent_material = true
 position = Vector2(-41.3307, 7.46825)
-rotation = 0.175939
+rotation = 0.187753
 scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(0.984562, 0.175033, -0.175033, 0.984562, -41.3307, 7.46825)
 auto_calculate_length_and_angle = false
@@ -351,6 +352,7 @@ metadata/_edit_lock_ = true
 [node name="Thigh1" type="Bone2D" parent="Animation/Skeleton/Torso"]
 use_parent_material = true
 position = Vector2(9, -4)
+rotation = -0.00793636
 rest = Transform2D(1, 0, 0, 1, 9, -4)
 auto_calculate_length_and_angle = false
 length = 61.67
@@ -512,3 +514,7 @@ gravity = 20
 buoyancy_accel = 1.0
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
+
+[node name="Dummy" parent="." instance=ExtResource("15_d0rdv")]
+top_level = true
+position = Vector2(315, 262)

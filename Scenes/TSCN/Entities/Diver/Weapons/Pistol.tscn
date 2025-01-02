@@ -73,6 +73,7 @@ script = ExtResource("1_n4wnc")
 bullet_scene = ExtResource("2_3x5oy")
 dist_from_head = 70.0
 knockback = 500.0
+attack_cooldown = 0.2
 use_hand1 = true
 
 [node name="ConeOfFire" parent="." instance=ExtResource("3_amfsj")]

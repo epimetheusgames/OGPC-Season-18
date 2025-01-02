@@ -40,7 +40,7 @@ func get_hand2_pos() -> Vector2:
 
 func perform_attack() -> void:
 	var new_spear: Spear = bullet_scene.instantiate()
-	add_child(new_spear)
+	add_child(new_spear, true)
 	
 	new_spear.global_position = emit_point.global_position
 	new_spear.global_rotation = global_rotation

@@ -40,7 +40,9 @@ func perform_attack() -> void:
 			add_child(bullet)
 			
 			bullet.global_position = emit_point.global_position
-			bullet.fire(global_rotation)
+			var shot_angle: float = cone_of_fire.get_shot_angle()
+			print("Shot angle: " + str(shot_angle))
+			bullet.fire(shot_angle)
 			
 			# Wtf is this line my g
 			#Global.godot_steam_abstraction.run_remote_function(self, "spawn_bullet", [$BulletShootPosition.global_position, (Vector2.from_angle(global_rotation) * bullet_velocity * 60 + diver.velocity), global_rotation + PI / 2.0])

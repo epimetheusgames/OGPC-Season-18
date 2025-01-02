@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	
 	if attached and attach_body:
 		global_position = attach_body.to_global(attach_dif)
-		global_rotation = attach_body.global_position.angle_to_point(global_position)
+		global_rotation = global_position.angle_to_point(attach_body.global_position)
 
 func fire(angle: float) -> void:
 	rotation = angle
