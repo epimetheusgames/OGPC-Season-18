@@ -12,8 +12,7 @@ var shooting: bool = false
 
 func _process(delta: float) -> void:
 	super(delta)
-	global_position = get_gun_position()
-	global_rotation = get_gun_rotation()
+	
 	#combat.move_hand_toward_mouse("right")
 	
 	if !pistol_sprite.animation == "Flip":
@@ -25,17 +24,11 @@ func _process(delta: float) -> void:
 	if !pistol_sprite.animation == "Shoot":
 		shooting = false
 	
-	var spread: float = get_movement_factor()
+	var spread: float = 0 # = get_movement_factor()
 	cone_of_fire.increase_spread(spread)
 
-func get_gun_position() -> Vector2:
-	return hand1_pos
 
-func get_gun_rotation() -> float:
-	var mouse_pos: Vector2 = get_global_mouse_position()
-	return hand1_pos.angle_to_point(mouse_pos)
-
-func attack() -> void:
+func perform_attack() -> void:
 	if !pistol_sprite.animation == "Shoot" && !shooting:
 		pistol_sprite.play("Shoot")
 		

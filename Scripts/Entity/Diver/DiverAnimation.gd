@@ -10,6 +10,11 @@ extends Node2D
 @onready var skeleton: Skeleton2D = $"Skeleton"
 @onready var mod_stack: SkeletonModificationStack2D = skeleton.get_modification_stack()
 
+@onready var arm1: Bone2D = $"Skeleton/Torso/UpperArm1/Forearm1"
+@onready var arm2: Bone2D = $"Skeleton/Torso/UpperArm2/Forearm2"
+@onready var leg1: Bone2D = $"Skeleton/Torso/Thigh1/Calf1"
+@onready var leg2: Bone2D = $"Skeleton/Torso/Thigh2/Calf2"
+
 @onready var arm_target1: Node2D = $"ArmIkTarget1"
 @onready var arm_target2: Node2D = $"ArmIkTarget2"
 
@@ -66,10 +71,10 @@ func _process(delta: float) -> void:
 		displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
 	else:
 		displayed_nametag.text = Steam.getFriendPersonaName(int(diver.name))
-
-
+	
+	var head_pos: Vector2 = get_head_position()
 	# Update label position.
-	var offset_pos: Vector2 = head.global_position - get_viewport().get_camera_2d().get_screen_center_position()
+	var offset_pos: Vector2 = head_pos - get_viewport().get_camera_2d().get_screen_center_position()
 	displayed_nametag.global_position = offset_pos - displayed_nametag.size / 2 + get_viewport_rect().size / 2 - Vector2(0, 40)
 	
 	# Update the arrow rotation

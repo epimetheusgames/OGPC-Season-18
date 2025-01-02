@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Sprites/Player/TranquilizerPistol.png" id="1_2gvrx"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/Pistol.gd" id="1_n4wnc"]
 [ext_resource type="PackedScene" uid="uid://d24oi85rw114u" path="res://Scenes/TSCN/Entities/Diver/Weapons/PistolBullet.tscn" id="2_3x5oy"]
-[ext_resource type="PackedScene" path="res://Scenes/TSCN/Entities/Diver/Weapons/ConeOfFire.tscn" id="3_amfsj"]
+[ext_resource type="PackedScene" uid="uid://cyelkkty2ihsb" path="res://Scenes/TSCN/Entities/Diver/Weapons/ConeOfFire.tscn" id="3_amfsj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6uma"]
 atlas = ExtResource("1_2gvrx")
@@ -68,15 +68,12 @@ animations = [{
 "speed": 25.0
 }]
 
-[node name="Pistol" type="Node2D" node_paths=PackedStringArray("animation_node")]
+[node name="Pistol" type="Node2D"]
 script = ExtResource("1_n4wnc")
-animation_node = NodePath("PistolSprite")
 bullet_scene = ExtResource("2_3x5oy")
 dist_from_head = 70.0
 knockback = 500.0
-attack_cooldown = null
 use_hand1 = true
-use_hand2 = null
 
 [node name="ConeOfFire" parent="." instance=ExtResource("3_amfsj")]
 position = Vector2(24, -15)

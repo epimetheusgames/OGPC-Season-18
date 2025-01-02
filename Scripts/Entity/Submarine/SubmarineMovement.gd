@@ -64,10 +64,10 @@ func update_current_angle(delta: float) -> void:
 func update_movement_velocity(delta: float):
 	velocity = velocity * 0.95
 	
-	velocity += input_direction * Util.angle_to_vector(current_angle, CONST_ACCEL * delta)
+	velocity += input_direction * Util.angle_to_vector_radians(current_angle, CONST_ACCEL * delta)
 	
 	if Input.is_action_just_pressed("move"):
-		velocity += input_direction * Util.angle_to_vector(current_angle, TAP_ACCEL * delta)
+		velocity += input_direction * Util.angle_to_vector_radians(current_angle, TAP_ACCEL * delta)
 	
 	# Clamp velocity to MAX_SPEED
 	if velocity.length() > MAX_SPEED:
