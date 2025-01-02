@@ -1,31 +1,38 @@
-# Copied by Xavier from Kai and changed a bit lool i should change this later
+# Coded by Xavier
 
 ## Submarine movement system
 class_name SubmarineMovement
 extends Node2D
 
-const CONST_ACCEL: int = 25
+const CONST_ACCEL: int = 20
 const TAP_ACCEL: int = 50
-const MAX_SPEED: int = 500
-const MAX_ROTATION: float= 90.0
-const ROTATION_RATE: float = 2.0
+const MAX_SPEED: int = 750
+const MAX_ROTATION: float = 30.0
+const ROTATION_RATE: float = 3
+const BUOYANCY_CHANGE_RATE = 20
+const MAX_BUOYANCY = 40.0
+const MIN_BUOYANCY = -40.0
 
-#@onready var diver = $"../../Diver"
+@onready var diver = Global.player
+@onready var buoyancy_component = get_parent().get_node("BuoyancyComponent")
 
 var current_angle: float = 0.0
 var target_angle: float = 0.0
 var input_direction: int = 0
 var velocity: Vector2 = Vector2.ZERO
+var buoyancy = 0
 
 func _physics_process(delta: float) -> void:
-#	if !Global.is_multiplayer || get_parent()._is_node_owner():
-#		if diver.get_state() == "DRIVING_SUBMARINE":
-	update_target_angle(delta)
-	update_current_angle(delta * 60)
-	print(rad_to_deg(current_angle))
-	get_parent().rotation = current_angle
-	input_direction = get_input_direction()
-	update_movement_velocity(delta * 60)
+	if !Global.is_multiplayer || get_parent()._is_node_owner():
+		if diver.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+			update_target_angle(delta)
+			update_current_angle(delta * 60)
+			print(rad_to_deg(current_angle))
+			get_parent().rotation = current_angle
+			input_direction = get_input_direction()
+			update_movement_velocity(delta * 60)
+			update_buoyancy(delta)
+			print(str(buoyancy_component.buoyancy_accel) + "skib")
 
 func get_input_direction() -> int:
 	input_direction = 0
@@ -38,17 +45,24 @@ func get_input_direction() -> int:
 	return input_direction
 
 func update_target_angle(delta: float) -> void:
-	if Input.is_action_pressed("up"):
+	if Input.is_action_just_pressed("mwUP"):
 		target_angle += ROTATION_RATE * delta
-	if Input.is_action_pressed("down"):
+	if Input.is_action_just_pressed("mwDOWN"):
 		target_angle -= ROTATION_RATE * delta
 	target_angle = deg_to_rad(clampf(rad_to_deg(target_angle), -MAX_ROTATION, MAX_ROTATION))
+
+func update_buoyancy(delta):
+	if Input.is_action_pressed("up"):
+		buoyancy += BUOYANCY_CHANGE_RATE * delta
+	elif Input.is_action_pressed("down"):
+		buoyancy -= BUOYANCY_CHANGE_RATE * delta
+	buoyancy_component.buoyancy_accel = clampf(buoyancy, MIN_BUOYANCY, MAX_BUOYANCY)
 
 func update_current_angle(delta: float) -> void:
 	current_angle = lerp_angle(current_angle, target_angle, 0.05 * delta)
 
 func update_movement_velocity(delta: float):
-	velocity = velocity * 0.97
+	velocity = velocity * 0.95
 	
 	velocity += input_direction * Util.angle_to_vector(current_angle, CONST_ACCEL * delta)
 	

@@ -1,0 +1,139 @@
+[gd_scene load_steps=10 format=3 uid="uid://bptkxkfwbumm5"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Enemy/BigfinSquid.gd" id="1_0jv23"]
+[ext_resource type="Script" uid="uid://cmh34bsgyx1yg" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_favrd"]
+[ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
+[ext_resource type="Script" uid="uid://dke8ns1faaefs" path="res://Scripts/Components/Misc/HealthComponent.gd" id="4_2imnk"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="5_pchce"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="6_dpvyl"]
+
+[sub_resource type="Resource" id="Resource_d65pp"]
+script = ExtResource("2_favrd")
+health = 7
+damage = 2
+base_speed = 0.8
+agressiveness = 0.5
+attack_distance = 250.0
+closest_distance = 50.0
+sensor_type = 0
+wander_type = 0
+attack_mode = 0
+wander_range = 1000.0
+view_range = 360.0
+view_distance = 650.0
+disable_period_length = 1.0
+sound_max_distance = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfi6i"]
+size = Vector2(45, 69)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey62v"]
+size = Vector2(113, 109.5)
+
+[node name="BigfinSquid" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "attackbox_component", "health_component")]
+script = ExtResource("1_0jv23")
+settings = SubResource("Resource_d65pp")
+hurtbox_component = NodePath("HurtboxComponent")
+attackbox_component = NodePath("AttackBoxComponent")
+health_component = NodePath("HealthComponent")
+
+[node name="Head" type="Polygon2D" parent="."]
+position = Vector2(0, -22)
+color = Color(0.2352, 0.48, 0.2352, 1)
+polygon = PackedVector2Array(-55, -22, -1, -61, 55, -20, 8, 21, 8, 45, -10, 46, -9, 20)
+metadata/_edit_lock_ = true
+
+[node name="RightFrontArm" type="Line2D" parent="."]
+points = PackedVector2Array(5, 22, 86, 24)
+width = 4.0
+default_color = Color(0.3234, 0.66, 0.3234, 1)
+metadata/_edit_lock_ = true
+
+[node name="LeftFrontArm" type="Line2D" parent="."]
+points = PackedVector2Array(-9, 22, -79, 27)
+width = 4.0
+default_color = Color(0.321569, 0.658824, 0.321569, 1)
+metadata/_edit_lock_ = true
+
+[node name="RightBackArm" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(6, 20, 37, 5)
+width = 4.0
+default_color = Color(0.2646, 0.54, 0.2646, 1)
+metadata/_edit_lock_ = true
+
+[node name="LeftBackArm" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(-9, 22, -36, 6)
+width = 4.0
+default_color = Color(0.2646, 0.54, 0.2646, 1)
+metadata/_edit_lock_ = true
+
+[node name="RightFrontArmRope" type="Node" parent="."]
+script = ExtResource("2_rptbt")
+iterations = 5
+gravity = Vector2(0, 20)
+point_amount = 25
+point_separation = 50.0
+component_container = NodePath("..")
+
+[node name="LeftFrontArmRope" type="Node" parent="."]
+script = ExtResource("2_rptbt")
+iterations = 5
+gravity = Vector2(0, 20)
+point_amount = 25
+point_separation = 50.0
+component_container = NodePath("..")
+
+[node name="RightBackArmRope" type="Node" parent="."]
+script = ExtResource("2_rptbt")
+iterations = 5
+gravity = Vector2(0, 20)
+point_amount = 25
+point_separation = 50.0
+component_container = NodePath("..")
+
+[node name="LeftBackArmRope" type="Node" parent="."]
+script = ExtResource("2_rptbt")
+iterations = 5
+gravity = Vector2(0, 20)
+point_amount = 25
+point_separation = 50.0
+component_container = NodePath("..")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_2imnk")
+component_container = NodePath("..")
+
+[node name="AttackBoxComponent" type="Node" parent="."]
+script = ExtResource("5_pchce")
+hitbox_type = 1
+knockback_velocity = 200.0
+hurtbox = NodePath("../AttackBox")
+component_container = NodePath("..")
+
+[node name="HurtboxComponent" type="Node" parent="."]
+script = ExtResource("6_dpvyl")
+hitbox_type = 1
+attachable_health_component = NodePath("../HealthComponent")
+attack_box_to_exclude = NodePath("../AttackBoxComponent")
+hurtbox = NodePath("../HurtBox")
+component_container = NodePath("..")
+
+[node name="AttackBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(-1, -82)
+shape = SubResource("RectangleShape2D_cfi6i")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -28.75)
+shape = SubResource("RectangleShape2D_ey62v")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(40.5, 3.00005)
+scale = Vector2(96.35, 91.7)

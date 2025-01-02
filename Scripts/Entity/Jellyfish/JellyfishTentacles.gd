@@ -34,11 +34,16 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		var new_rope := VerletRope.new()
 		new_rope.component_container = get_parent().get_path()
 		new_rope.name = "TentacleRope"
-		new_rope.enable_collisions = false
+		new_rope.enable_collisions = true
 		new_rope.damping = 0.5
 		
 		new_rope.point_separation = 40
 		new_rope.point_amount = round(tentacle_data.length / 40)
+		
+		new_rope.start_pos_on = true
+		new_rope.start_anchor_node = new_tentacle_anchor
+		
+		new_rope.iterations = 2
 		
 		new_tentacle_anchor.add_child(new_rope)
 		ropes.append(new_rope)
@@ -48,6 +53,7 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		new_line.name = "SmoothedLine"
 		new_line.rope = new_rope
 		new_line.smoothing_on = true
+		new_line.default_color = tentacle_data.color
 		
 		new_rope.add_child(new_line)
 		new_rope.rope_drawer = new_line

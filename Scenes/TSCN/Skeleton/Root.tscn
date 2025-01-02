@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
 [ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
-[ext_resource type="Script" uid="uid://ikyxxfvqr0v7" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
+[ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
 [ext_resource type="Script" uid="uid://by5vx2ueocu6p" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="5_gpbxv"]
 [ext_resource type="Script" uid="uid://dkwpi7b8msow2" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="6_krpp0"]
@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="8_1a1ie"]
 [ext_resource type="Script" uid="uid://c2ef1nf4sixh3" path="res://Scripts/UI/TextPosSet.gd" id="8_7spfj"]
 [ext_resource type="Script" uid="uid://b5in43fhhsplp" path="res://Scenes/TSCN/Skeleton/KeypressHandler.gd" id="9_rhklt"]
-[ext_resource type="Script" uid="uid://1cn4ot883p4h" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
+[ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
@@ -33,7 +33,6 @@ missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
 verbose_debug = true
-super_efficient = true
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")

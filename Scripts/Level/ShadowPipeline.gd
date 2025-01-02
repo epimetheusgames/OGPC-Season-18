@@ -10,8 +10,13 @@ var moving_occluders: Array[LightOccluder2D] = []
 @export var occluder_offset: Vector2
 @onready var disabled = Global.super_efficient
 @export var world_vieport: ViewportTexture
+@export var enable_shadows := true
 
 func _ready():
+	if !enable_shadows:
+		queue_free()
+		return
+	
 	var parent = level_container.get_parent()
 	parent.remove_child.call_deferred(level_container)
 	$WorldContainer/World.add_child.call_deferred(level_container)

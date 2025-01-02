@@ -24,11 +24,12 @@ var base_speed: float
 @onready var tentacles: JellyfishTentacles = $"Tentacles"
 
 func _ready() -> void:
-	_ready_enemy()
+	super()
 	base_speed = settings.base_speed
 
 func _process(delta: float) -> void:
-	_process_enemy(delta)
+	super(delta)
+	
 	nav_agent.target_position = target_position
 
 	# Countdown boost timer (if needed for specific boost duration)
@@ -39,8 +40,11 @@ func _process(delta: float) -> void:
 	if current_speed > base_speed:
 		current_speed = lerp(current_speed, base_speed, BOOST_DECAY_RATE * delta)
 	
-	if position.distance_to(target_position) < 10:
+	if position.distance_to(target_position) < 50:
 		_target_reached()
+	
+	for rope in tentacles.ropes:
+		rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
 
 func _physics_process(delta: float) -> void:
 	time_since_boost += delta
@@ -63,6 +67,9 @@ func boost():
 
 func update_targets():
 	var target_pos: Vector2 = nav_agent.get_next_path_position()
+	
+	if player_visible:
+		target_pos = Global.player.global_position
 	
 	target_velocity = (target_pos - global_position).normalized() * current_speed 
 	target_rotation = velocity.angle() + PI / 2

@@ -24,7 +24,6 @@ func _process(delta: float) -> void:
 
 func _base_hitbox_ready() -> void:
 	_ready_base_component()
-	component_name = "BaseHitboxComponent"
 	if hurtbox:
 		hurtbox_node = get_node(hurtbox)
 		hurtbox_collision = hurtbox_node.get_children()[0]

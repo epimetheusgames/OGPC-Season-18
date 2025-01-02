@@ -7,10 +7,12 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverCombat.gd" id="5_mjta2"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="6_dvqx5"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="7_3b7lw"]
+
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
+
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="12_u28jr"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
@@ -18,6 +20,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
 height = 100.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2irf7"]
+radius = 20.0
+height = 98.0
 
 [sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_v7jax"]
 target_nodepath = NodePath("../ArmIkTarget1")
@@ -96,6 +102,11 @@ script = ExtResource("1_1l6ma")
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ghsq1")
 
+[node name="DiverDetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DiverDetectionArea"]
+shape = SubResource("CapsuleShape2D_2irf7")
+
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("2_lxvv3")
 
@@ -112,19 +123,6 @@ script = ExtResource("3_k6pml")
 [node name="Polygons" type="Node2D" parent="Animation"]
 texture_filter = 1
 use_parent_material = true
-metadata/_edit_lock_ = true
-
-[node name="Head" type="Polygon2D" parent="Animation/Polygons"]
-z_index = 1
-use_parent_material = true
-position = Vector2(0, -71)
-offset = Vector2(-128, -33)
-texture = ExtResource("4_do014")
-skeleton = NodePath("../../Skeleton")
-polygon = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
-uv = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
-polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 1, 2)]
-bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 metadata/_edit_lock_ = true
 
 [node name="UpperArm1" type="Polygon2D" parent="Animation/Polygons"]
@@ -239,6 +237,18 @@ polygon = PackedVector2Array(94.9078, 174.952, 94.6873, 240.382, 113.098, 240.38
 uv = PackedVector2Array(94.9078, 174.952, 94.6873, 240.382, 113.098, 240.382, 112.767, 174.952)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(1, 1, 1, 1)]
+metadata/_edit_lock_ = true
+
+[node name="Head" type="Polygon2D" parent="Animation/Polygons"]
+use_parent_material = true
+position = Vector2(0, -71)
+offset = Vector2(-128, -33)
+texture = ExtResource("4_do014")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
+uv = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
+polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 1, 2)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 metadata/_edit_lock_ = true
 
 [node name="Skeleton" type="Skeleton2D" parent="Animation"]
@@ -435,6 +445,13 @@ use_parent_material = true
 position = Vector2(105, -1)
 color = Color(1, 0, 1, 1)
 polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
+
+[node name="PlayerName" type="Label" parent="Animation"]
+offset_left = -190.0
+offset_top = -122.0
+offset_right = 190.0
+offset_bottom = -99.0
+horizontal_alignment = 1
 
 [node name="Health" type="Node2D" parent="."]
 rotation = 0.000201209
