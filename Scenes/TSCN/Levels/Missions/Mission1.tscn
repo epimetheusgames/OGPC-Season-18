@@ -211,7 +211,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_0rgek"]
+[sub_resource type="Resource" id="Resource_juodw"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -524,7 +524,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_0rgek")
+uid = SubResource("Resource_juodw")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -753,8 +753,8 @@ points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 [node name="Raycasts" parent="LightLine" index="1"]
 position = Vector2(-4236, -362)
 
-[node name="Rock" parent="." instance=ExtResource("31_boa6h")]
-position = Vector2(1185, 1128)
+[node name="Rock2" parent="." instance=ExtResource("31_boa6h")]
+position = Vector2(1493, 1196)
 
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Entities/Boid"]

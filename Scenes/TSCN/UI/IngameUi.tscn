@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://71htappd3cxj"]
+[gd_scene load_steps=12 format=3 uid="uid://71htappd3cxj"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Ingame/TeamInfoPanel.gd" id="1_0ajfg"]
 [ext_resource type="Script" path="res://Scripts/UI/Ingame/PersonHUD.gd" id="1_0aoln"]
+[ext_resource type="Script" path="res://Scripts/UI/Ingame/Inventory.gd" id="3_f466a"]
 
 [sub_resource type="Gradient" id="Gradient_eq4ay"]
 offsets = PackedFloat32Array(0)
@@ -235,7 +236,7 @@ text = "100%"
 scroll_active = false
 shortcut_keys_enabled = false
 
-[node name="Weapons" type="PanelContainer" parent="."]
+[node name="Inventory" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -247,38 +248,50 @@ offset_top = -174.0
 offset_right = 239.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("3_f466a")
 
-[node name="MarginContainer" type="MarginContainer" parent="Weapons"]
+[node name="MarginContainer" type="MarginContainer" parent="Inventory"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Weapons/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/MarginContainer"]
 layout_mode = 2
 
-[node name="Slot1" type="VBoxContainer" parent="Weapons/MarginContainer/HBoxContainer"]
+[node name="Slot1" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Weapons/MarginContainer/HBoxContainer/Slot1"]
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot1"]
 layout_mode = 2
 size_flags_vertical = 3
+expand_mode = 2
 
-[node name="Slot2" type="HBoxContainer" parent="Weapons/MarginContainer/HBoxContainer"]
+[node name="Slot2" type="HBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Weapons/MarginContainer/HBoxContainer/Slot2"]
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot2"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+expand_mode = 2
 
-[node name="Slot3" type="VBoxContainer" parent="Weapons/MarginContainer/HBoxContainer"]
+[node name="Slot3" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Weapons/MarginContainer/HBoxContainer/Slot3"]
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot3"]
 layout_mode = 2
 size_flags_vertical = 3
+expand_mode = 2
+
+[node name="Slot4" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot4"]
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 2
