@@ -44,4 +44,4 @@ func attack() -> void:
 	add_child(new_rope_drawer)
 	new_rope_drawer.rope = new_rope
 	
-	print_tree_pretty()
+	#print_tree_pretty()
