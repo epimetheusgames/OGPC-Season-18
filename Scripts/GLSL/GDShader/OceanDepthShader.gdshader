@@ -13,18 +13,24 @@ void fragment() {
 		float depth = !always_top ? UV.y : 0.0;
 		COLOR.a = mix(0.8, max_alpha, clamp(depth * height, 0.0, 1.0));
 	}
+	
+	//float depth = !always_top ? UV.y : 0.0;
+	//vec4 color = texture(depth_color_tex, vec2(always_top ? (1.0 - UV.x) : UV.x, depth));
+	//color.rgb = pow(color.rgb, vec3(2.2));
+	//color *= mix(1.0, 0.0, clamp(depth * 2.0, 0.0, 1.0));
+	//
+	//COLOR = mix(water_col, shallow_water_col, (always_top ? (1.0-UV.x) : UV.x) / 2.0 + 0.4);
 }
 
 void light() {
-	vec4 light = LIGHT_COLOR * LIGHT_ENERGY;
-	
-	// Light is the sun
-	float depth = !always_top ? UV.y : 0.0;
 	if (LIGHT_IS_DIRECTIONAL) {
-		vec4 color = texture(depth_color_tex, vec2(UV.x, depth));
+		float depth = !always_top ? UV.y : 0.0;
+		vec4 color = texture(depth_color_tex, vec2(always_top ? (1.0-UV.x) : UV.x, depth));
 		color.rgb = pow(color.rgb, vec3(2.2));
-		light *= color * mix(1.0, 0.0, clamp(depth * 2.0, 0.0, 1.0));
+		color *= mix(1.0, 0.0, clamp(depth * 2.0, 0.0, 1.0));
+		LIGHT = mix(water_col, shallow_water_col, (always_top ? (1.0-UV.x) : UV.x) / 2.0 + 0.4) * color;
 	}
-	
-	LIGHT = mix(water_col, shallow_water_col, UV.x / 2.0 + 0.4) * light;
+	else {
+		LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY, LIGHT_COLOR.a);
+	}
 }
