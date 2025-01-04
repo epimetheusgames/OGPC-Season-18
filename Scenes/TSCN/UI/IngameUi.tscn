@@ -261,7 +261,10 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="Slot1" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(127, 0)
+layout_mode = 2
+
+[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot1"]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot1"]
@@ -269,17 +272,24 @@ layout_mode = 2
 size_flags_vertical = 3
 expand_mode = 2
 
-[node name="Slot2" type="HBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+[node name="Slot5" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(123, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot5"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot2"]
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot5"]
 layout_mode = 2
 size_flags_horizontal = 3
 expand_mode = 2
 
 [node name="Slot3" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(123, 0)
+layout_mode = 2
+
+[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot3"]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot3"]
@@ -288,7 +298,10 @@ size_flags_vertical = 3
 expand_mode = 2
 
 [node name="Slot4" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(123, 0)
+layout_mode = 2
+
+[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot4"]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot4"]

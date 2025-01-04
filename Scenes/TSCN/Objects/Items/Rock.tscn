@@ -10,7 +10,6 @@ radius = 67.0298
 
 [node name="BaseItem" type="Area2D" parent="."]
 script = ExtResource("1_gqxvl")
-scene = null
 icon = ExtResource("2_7pdor")
 cost = 7
 item_name = "Rock"

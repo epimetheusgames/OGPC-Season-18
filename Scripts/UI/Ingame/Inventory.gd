@@ -15,4 +15,5 @@ func _process(delta: float) -> void:
 		if i > len(slots) - 1: 
 			break
 		slots[i].get_node("TextureRect").texture = slot.item.icon
+		slots[i].get_node("Counter").text = str(slot.count)
 		i += 1
