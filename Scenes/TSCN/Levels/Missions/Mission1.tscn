@@ -1,6 +1,5 @@
-[gd_scene load_steps=74 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=75 format=3 uid="uid://dh0cluhw5hbar"]
 
-[ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="1_2ttir"]
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://i4m51oco4iap" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="1_awqxm"]
@@ -8,13 +7,11 @@
 [ext_resource type="Script" uid="uid://bdwd03rarc02" path="res://Scripts/Objects/Camera/Quantize.gd" id="2_fhpdt"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="4_0q3xc"]
-[ext_resource type="Shader" uid="uid://b00fppata8v35" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="4_5lji5"]
 [ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
+[ext_resource type="Script" path="res://Scripts/Objects/AutoPolygonTexture.gd" id="5_aep54"]
+[ext_resource type="Texture2D" uid="uid://vuyq5s7dknal" path="res://Assets/Art/Sprites/Level/SandTexture.png" id="5_lquv8"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="5_rc3kh"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/Pixelize.gd" id="5_t6m55"]
-[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="6_sqcin"]
-[ext_resource type="Script" path="res://Scripts/Objects/AutoPolygonTexture.gd" id="5_aep54"]
-[ext_resource type="Texture2D" uid="uid://b0ja5eqv1qbm8" path="res://Assets/Art/Sprites/Level/SandTexture.png" id="5_lquv8"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Rain.gdshader" id="8_86uvj"]
 [ext_resource type="Texture2D" uid="uid://b0wdu5xab8dbs" path="res://Assets/Art/Sprites/Misc/RainNoise.png" id="9_rw0ak"]
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="10_gbtle"]
@@ -29,10 +26,10 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
-[ext_resource type="PackedScene" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="28_1g0ie"]
 [ext_resource type="Shader" uid="uid://b00fppata8v35" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
+[ext_resource type="PackedScene" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
 [ext_resource type="PackedScene" uid="uid://dqb5sqhg7l1io" path="res://Scenes/TSCN/Objects/Items/Rock.tscn" id="31_boa6h"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
@@ -214,7 +211,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_mtbsi"]
+[sub_resource type="Resource" id="Resource_2jng4"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -321,7 +318,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1203, 752)
+shader_parameter/screen_size = Vector2(1203, 715)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -526,7 +523,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_mtbsi")
+uid = SubResource("Resource_2jng4")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -714,7 +711,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -717.0
-offset_bottom = -328.0
+offset_bottom = -365.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -741,10 +738,6 @@ layer = 3
 visible = false
 
 [node name="IngameUi" parent="UI" instance=ExtResource("29_54jb5")]
-offset_left = 136.0
-offset_top = 179.0
-offset_right = 136.0
-offset_bottom = 179.0
 
 [node name="LightLine" parent="." instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)

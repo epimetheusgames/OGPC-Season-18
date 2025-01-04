@@ -2,16 +2,13 @@
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_xpqec"]
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_q50ul"]
-<<<<<<< HEAD
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/ModuleLoader.gd" id="3_yfmig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6w2u2"]
 size = Vector2(164, 242.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o7weh"]
 size = Vector2(446, 41)
-=======
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/ModuleLoader.gd" id="3_yfmig"]
->>>>>>> main
 
 [node name="Submarine" type="CharacterBody2D"]
 script = ExtResource("1_xpqec")
