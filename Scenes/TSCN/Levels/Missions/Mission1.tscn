@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=75 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="28_1g0ie"]
 [ext_resource type="Shader" uid="uid://b00fppata8v35" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
+[ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
 [ext_resource type="PackedScene" uid="uid://dqb5sqhg7l1io" path="res://Scenes/TSCN/Objects/Items/Rock.tscn" id="31_boa6h"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
@@ -210,7 +211,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_umr3x"]
+[sub_resource type="Resource" id="Resource_0rgek"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -317,7 +318,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1203, 361)
+shader_parameter/screen_size = Vector2(1203, 649)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -523,7 +524,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_umr3x")
+uid = SubResource("Resource_0rgek")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -711,7 +712,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -717.0
-offset_bottom = -719.0
+offset_bottom = -431.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -740,6 +741,8 @@ offset_left = 136.0
 offset_top = 179.0
 offset_right = 136.0
 offset_bottom = 179.0
+
+[node name="IngameUI" parent="UI" instance=ExtResource("29_54jb5")]
 
 [node name="LightLine" parent="." instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)
