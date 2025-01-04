@@ -1,6 +1,7 @@
 ## A base class for all enemies.
-## If inheriting from this class you must call _process_enemy at the start of your 
-## process function, and call _enemy_ready at the start of your ready function.
+## Extending enemies must call super() at the top
+## of your process and ready functions
+
 # Owned by: carsonetb
 class_name Enemy
 extends NPC
@@ -11,6 +12,7 @@ extends NPC
 @export var hurtbox_component: HurtboxComponent
 @export var attackbox_component: AttackBoxComponent
 @export var health_component: HealthComponent
+@export var quick_disable_everything := false
 
 var _player_detection_area: Area2D
 var _player_detection_collision_shape: CollisionShape2D
@@ -32,10 +34,14 @@ enum WANDER_MODE {
 	NOT_WANDERING,
 }
 
-func _ready():
-	_ready_enemy()
-
-func _ready_enemy() -> void:
+func _ready() -> void:
+	if quick_disable_everything:
+		return
+	
+	if !settings:
+		print("ERROR: Enemy at path " + str(get_path()) + " doesn't have an EnemyBehaviorSettings.")
+		return
+	
 	target_position = position
 	
 	_player_detection_area = Area2D.new()
@@ -76,10 +82,10 @@ func _target_reached() -> void:
 	wander_state = WANDER_MODE.WANDER_POINT_REACHED
 
 func _process(delta: float) -> void:
-	_process_enemy(delta)
-
-func _process_enemy(delta: float) -> void:
-	_npc_process(delta)
+	super(delta)
+	
+	if quick_disable_everything:
+		return
 	
 	if num_players_in_area == 0:
 		player_in_area = false

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyBehaviorSettings" load_steps=2 format=3 uid="uid://c0y2clojtb743"]
+
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="1_678af"]
+
+[resource]
+script = ExtResource("1_678af")
+health = 7
+damage = 2
+base_speed = 0.8
+agressiveness = 0.5
+attack_distance = 250.0
+closest_distance = 50.0
+sensor_type = 0
+wander_type = 0
+attack_mode = 0
+wander_range = 1000.0
+view_range = 360.0
+view_distance = 650.0
+disable_period_length = 1.0
+sound_max_distance = 0.0

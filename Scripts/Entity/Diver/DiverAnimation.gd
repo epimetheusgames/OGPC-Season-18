@@ -13,6 +13,8 @@ extends Node2D
 @onready var head: Bone2D = $"Skeleton/Torso/Head"
 @onready var arm1: Bone2D = $"Skeleton/Torso/UpperArm1/Forearm1"
 @onready var arm2: Bone2D = $"Skeleton/Torso/UpperArm2/Forearm2"
+@onready var leg1: Bone2D = $"Skeleton/Torso/Thigh1/Calf1"
+@onready var leg2: Bone2D = $"Skeleton/Torso/Thigh2/Calf2"
 
 @onready var arm_target1: Node2D = $"ArmIkTarget1"
 @onready var arm_target2: Node2D = $"ArmIkTarget2"
@@ -21,6 +23,8 @@ extends Node2D
 @onready var leg_target2: Node2D = $"LegIkTarget2"
 
 @onready var arrow: Node2D = $"Arrow"
+
+var displayed_nametag: Label
 
 
 # Leg oscillation (did i spell that right)
@@ -36,20 +40,38 @@ func _ready() -> void:
 	var mod_stack: SkeletonModificationStack2D = $Skeleton.get_modification_stack()
 	mod_stack = mod_stack.duplicate(true)
 	var arm_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
-	var arm_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
-	var leg_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
-	var leg_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(0)
+	var arm_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(1)
+	var leg_mod1: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(2)
+	var leg_mod2: SkeletonModification2DTwoBoneIK = mod_stack.get_modification(3)
 	arm_mod1.target_nodepath = arm_target1.get_path()
 	arm_mod2.target_nodepath = arm_target2.get_path()
 	leg_mod1.target_nodepath = leg_target1.get_path()
 	leg_mod2.target_nodepath = leg_target2.get_path()
 	mod_stack.set_modification(0, arm_mod1)
-	mod_stack.set_modification(0, arm_mod2)
-	mod_stack.set_modification(0, leg_mod1)
-	mod_stack.set_modification(0, leg_mod2)
+	mod_stack.set_modification(1, arm_mod2)
+	mod_stack.set_modification(2, leg_mod1)
+	mod_stack.set_modification(3, leg_mod2)
 	$Skeleton.set_modification_stack(mod_stack)
+	
+	displayed_nametag = $PlayerName.duplicate()
+	$"../../../../../UI".add_child(displayed_nametag)
+	
+	if !diver.has_multiplayer_sync:
+		return
+	
+	if diver.node_owner == 0 || diver.node_owner == Global.godot_steam_abstraction.steam_id:
+		return
+	
+	if !Global.is_multiplayer || diver._is_node_owner():
+		displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
+	else:
+		displayed_nametag.text = Steam.getFriendPersonaName(int(diver.name))
 
 func _process(delta: float) -> void:
+	# Update label position.
+	var offset_pos: Vector2 = head.global_position - get_viewport().get_camera_2d().get_screen_center_position()
+	displayed_nametag.global_position = offset_pos - displayed_nametag.size / 2 + get_viewport_rect().size / 2 - Vector2(0, 40)
+	
 	# Update the arrow rotation
 	arrow.global_rotation = diver.get_diver_movement().get_current_angle()
 	

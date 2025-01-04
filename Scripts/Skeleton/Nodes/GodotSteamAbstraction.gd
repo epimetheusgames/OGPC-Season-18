@@ -287,63 +287,78 @@ func read_packet() -> void:
 		var packet_code: PackedByteArray = this_packet["data"]
 		var readable_data: Dictionary = bytes_to_var(packet_code)
 		
-		if readable_data["message"] == "handshake":
-			if Global.verbose_debug:
-				print("DEBUG: Handshake received from " + Steam.getFriendPersonaName(readable_data["from"]))
-			handshake_completed_ids.append(packet_sender)
-			handshake_received.emit(packet_sender, Steam.getFriendPersonaName(readable_data["from"]))
-		
-		elif readable_data["message"] == "remote_print":
-			print("REMOTE DEBUG: " + readable_data["content"])
-		
-		# Parse packet if it's node data.
-		elif readable_data["message"] == "sync_var":
-			var node_path: String = readable_data["node_path"]
-			var variable_name: String = readable_data["var_name"]
-			var variable_value = readable_data["var_val"]
-			if get_node_or_null(node_path):
-				get_node(node_path).set(variable_name, variable_value)
-			elif Global.verbose_debug:
-				print("ERROR: Remote set on null node. This isn't neccesarily bad but it might mean some things are out of synced and something broke.")
-				print("DEBUG: The path was " + str(node_path))
-		
-		elif readable_data["message"] == "sync_group_var":
-			var nodes_list = get_tree().get_nodes_in_group(readable_data["group"])
-			for node_index in range(nodes_list.size()):
-				nodes_list[node_index].set(readable_data["var_name"], readable_data["var_values"][node_index])
-		
-		elif readable_data["message"] == "run_function":
-			var node_path: String = readable_data["node_path"]
-			var function_name: String = readable_data["func_name"]
-			
-			var function_args = readable_data["args"]
-			if readable_data["args_as_node_paths"]:
-				for i in range(len(function_args)):
-					function_args[i] = get_node(function_args[i])
-					if !function_args[i] && Global.verbose_debug:
-						print("ERROR: Remote function call on node has an argument to a nonexistant node path.")
-						return
-			
-			if get_node_or_null(node_path):
-				get_node(node_path).callv(function_name, function_args)
-			elif Global.verbose_debug:
-				print("ERROR: Remote function call on null node. This isn't neccesarily bad but it might mean some things are out of synced and something broke.")
-		
+		parse_readable_data(readable_data, packet_sender)
+
+func parse_readable_data(readable_data: Dictionary, packet_sender: int) -> void:
+	if readable_data["message"] == "handshake":
+		if Global.verbose_debug:
+			print("DEBUG: Handshake received from " + Steam.getFriendPersonaName(readable_data["from"]))
+		handshake_completed_ids.append(packet_sender)
+		handshake_received.emit(packet_sender, Steam.getFriendPersonaName(readable_data["from"]))
+	
+	elif readable_data["message"] == "remote_print":
+		print("REMOTE DEBUG: " + readable_data["content"])
+	
+	# Loop through all packets if it's a packet group.
+	elif readable_data["message"] == "packet_group":
+		for packet in readable_data["packets"]:
+			parse_readable_data(packet, packet_sender)
+	
+	# Parse packet if it's node data.
+	elif readable_data["message"] == "sync_var":
+		var node_path: String = readable_data["node_path"]
+		var variable_name: String = readable_data["var_name"]
+		var variable_value = readable_data["var_val"]
+		if get_node_or_null(node_path):
+			get_node(node_path).set(variable_name, variable_value)
 		elif Global.verbose_debug:
-			print("ERROR: Invalid packet received. Data: " + str(readable_data))
+			print("ERROR: Remote set on null node. This isn't neccesarily bad but it might mean some things are out of synced and something broke.")
+			print("DEBUG: The path was " + str(node_path))
+	
+	elif readable_data["message"] == "sync_group_var":
+		var nodes_list = get_tree().get_nodes_in_group(readable_data["group"])
+		for node_index in range(nodes_list.size()):
+			nodes_list[node_index].set(readable_data["var_name"], readable_data["var_values"][node_index])
+	
+	elif readable_data["message"] == "run_function":
+		var node_path: String = readable_data["node_path"]
+		var function_name: String = readable_data["func_name"]
+		
+		var function_args = readable_data["args"]
+		if readable_data["args_as_node_paths"]:
+			for i in range(len(function_args)):
+				function_args[i] = get_node(function_args[i])
+				if !function_args[i] && Global.verbose_debug:
+					print("ERROR: Remote function call on node has an argument to a nonexistant node path.")
+					return
+		
+		if get_node_or_null(node_path):
+			get_node(node_path).callv(function_name, function_args)
+		elif Global.verbose_debug:
+			print("ERROR: Remote function call on null node. This isn't neccesarily bad but it might mean some things are out of synced and something broke.")
+	
+	elif Global.verbose_debug:
+		print("ERROR: Invalid packet received. Data: " + str(readable_data))
 
 func sync_packets() -> void:
 	while true:
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.05).timeout
 		
 		#if Global.verbose_debug:
 			#print("DEBUG: Sending packets. Packet queue: " + str(packets_queue))
 		
+		var packet_group: Dictionary = {
+			"message": "packet_group",
+			"packets": [],
+		}
+		var packet_group_bytes: PackedByteArray
+		var send_type: int = Steam.P2P_SEND_RELIABLE
+		var channel: int = 0
+		var num_packet_groups: int = 0
+		
 		for key in packets_queue.keys():
 			var packet_data: Dictionary = packets_queue[key]
 			var this_target: int = 0
-			var send_type: int = Steam.P2P_SEND_RELIABLE
-			var channel: int = 0
 			
 			# Create a data array to send the data through
 			var this_data: PackedByteArray
@@ -352,16 +367,52 @@ func sync_packets() -> void:
 			var compressed_data: PackedByteArray = var_to_bytes(packet_data)
 			this_data.append_array(compressed_data)
 			
+			if this_data.size() > 1400: # bytes
+				print("WARNING: Packet size greater than packet size limit. Size is " + str(this_data.size()) + ". Sending anyway.")
+			
+			# We can group the packet up if the target is everyone.
+			if this_target == 0 && lobby_members.size() > 1:
+				if packet_group_bytes.size() + this_data.size() < 1400:
+					packet_group["packets"].append(packet_data)
+					packet_group_bytes = var_to_bytes(packet_group)
+					continue
+				
+				# If the packet would be too big if we added them all up, send it.
+				elif packet_group["packets"].size() > 0:
+					num_packet_groups += 1
+					for this_member in lobby_members:
+						if this_member["steam_id"] != steam_id:
+							Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes, send_type, channel)
+					
+					# Reset the group with the current packet.
+					if this_data.size() < 1400:
+						packet_group = {
+							"message": "packet_group",
+							"packets": [packet_data]
+						}
+						packet_group_bytes = var_to_bytes(packet_group)
+						continue
+			
 			# If sending a packet to everyone
 			if this_target == 0:
 				# If there is more than one user, send packets
 				if lobby_members.size() > 1:
 					# Loop through all members that aren't us
 					for this_member in lobby_members:
-						if this_member["steam_id"] != steam_id && (this_member["steam_id"] in handshake_completed_ids || packet_data["message"] == "handshake"):
+						if this_member["steam_id"] != steam_id:
 							Steam.sendP2PPacket(this_member["steam_id"], this_data, send_type, channel)
 			else:
 				Steam.sendP2PPacket(this_target, this_data, send_type, channel)
+		
+		# Once we've looped through all the packets there's going to be a partially filled group left.
+		num_packet_groups += 1
+		if packet_group["packets"].size() > 0:
+			for this_member in lobby_members:
+				if this_member["steam_id"] != steam_id:
+					Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes, send_type, channel)
+		
+		#if Global.verbose_debug:
+			#print("DEBUG: Sent " + str(num_packet_groups) + " packet groups.")
 		
 		packets_queue = {}
 

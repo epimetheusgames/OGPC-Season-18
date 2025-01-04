@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://5ws5v2e88l3q"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineControl.gd" id="1_ofa5d"]
+[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_7buem"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="3_mliwo"]
+
+[sub_resource type="Resource" id="Resource_45qcr"]
+script = ExtResource("2_7buem")
+file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rgtm"]
+size = Vector2(400, 483)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxom5"]
+size = Vector2(120, 325)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3u10"]
+size = Vector2(400, 40)
+
+[node name="SubmarineControlModule" type="Node2D" groups=["obstacles"]]
+script = ExtResource("1_ofa5d")
+path = SubResource("Resource_45qcr")
+
+[node name="ModuleArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleArea"]
+position = Vector2(0, 41.5)
+shape = SubResource("RectangleShape2D_6rgtm")
+
+[node name="ControlArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ControlArea"]
+position = Vector2(0, 142.5)
+shape = SubResource("RectangleShape2D_yxom5")
+
+[node name="AttachmentPoints" type="Node2D" parent="."]
+
+[node name="Right" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(200, 0)
+script = ExtResource("3_mliwo")
+direction = Vector2(1, 0)
+
+[node name="Left" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(-200, 0)
+script = ExtResource("3_mliwo")
+direction = Vector2(-1, 0)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 189.0
+color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -200.0
+offset_top = 160.0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = -160.0
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="Floor" type="CollisionShape2D" parent="Collision"]
+position = Vector2(0, 180)
+shape = SubResource("RectangleShape2D_j3u10")
+
+[node name="Ceiling" type="CollisionShape2D" parent="Collision"]
+position = Vector2(0, -180)
+shape = SubResource("RectangleShape2D_j3u10")
+
+[node name="NavigationObstacle" type="StaticBody2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[connection signal="area_entered" from="ControlArea" to="." method="_on_control_area_area_entered"]
+[connection signal="area_exited" from="ControlArea" to="." method="_on_control_area_area_exited"]

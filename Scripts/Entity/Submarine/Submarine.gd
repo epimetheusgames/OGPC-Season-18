@@ -1,32 +1,28 @@
 # Coded by Xavier
+class_name Submarine
 extends Entity
 
-#@onready var diver = $"../Diver"
+@onready var diver = Global.player
 @onready var submarine_movement = $"SubmarineMovement"
+@onready var module_container : ModuleLoader = $"Modules"
 
 func _ready() -> void:
-	pass
-
+	if !Global.submarine:
+		Global.submarine = self
+	 
+	var custom_sub : CustomSubmarineResource = load("res://Scenes/Resource/custom_sub_gen.tres")
+	module_container.load_sub(custom_sub)
 
 func _physics_process(_delta: float) -> void:
-	#if Input.is_action_just_pressed("interact"):
-	#	if diver.get_state() == "IN_SUBMARINE": 
-	#		get_parent().get_node("Diver").set_state("DRIVING_SUBMARINE")
-	#		diver.position = position
-	#		diver.velocity = Vector2.ZERO
-	#	elif diver.get_state() == "DRIVING_SUBMARINE":
-	#		get_parent().get_node("Diver").set_state("IN_SUBMARINE")
-	#print(diver.get_state())
+	move_and_slide()
 	velocity = submarine_movement.get_velocity()
-	#print(position)
-	#print(velocity)
+	if diver.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+		diver.global_transform = $"Modules/SubmarineControlModule".global_transform
 
+func _on_submarine_area_area_entered(area: Area2D) -> void:
+	if area.get_parent() is Diver:
+		Global.player.set_state(Util.DiverState.IN_SUBMARINE)
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Diver:
-		Global.player.set_state("IN_SUBMARINE")
-
-
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body is Diver:
-		Global.player.set_state("SWIMMING")
+func _on_submarine_area_area_exited(area: Area2D) -> void:
+	if area.get_parent() is Diver:
+		Global.player.set_state(Util.DiverState.SWIMMING)

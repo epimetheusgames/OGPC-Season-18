@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Entity/BaseEntity.gd" id="1_y6pwu"]
 [ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_3kea4"]
-[ext_resource type="Script" uid="uid://gbfwbfdc1miu" path="res://Scripts/Components/Misc/BoidComponent.gd" id="3_2it7s"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/BoidComponent.gd" id="3_2it7s"]
 [ext_resource type="Texture2D" uid="uid://cx2ypxydjaxys" path="res://Assets/Art/Sprites/Entity/BoidsFishSprite.png" id="4_hemyd"]
 
 [sub_resource type="Resource" id="Resource_lqutn"]

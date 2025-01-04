@@ -1,8 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://dul1o4r1c8ash"]
 
 [ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Sprites/Player/TranquilizerPistol.png" id="1_2gvrx"]
+<<<<<<< HEAD:Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/Pistol.gd" id="1_n4wnc"]
 [ext_resource type="PackedScene" uid="uid://d24oi85rw114u" path="res://Scenes/TSCN/Entities/Diver/Weapons/PistolBullet.tscn" id="2_3x5oy"]
+=======
+[ext_resource type="Script" path="res://Scripts/Objects/Weapons/TranquilizerGun.gd" id="1_n4wnc"]
+>>>>>>> main:Scenes/TSCN/Objects/Weapons/TranquilizerGun.tscn
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6uma"]
 atlas = ExtResource("1_2gvrx")
