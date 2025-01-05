@@ -29,6 +29,13 @@ void fragment() {
 
 		vec2 p1 = global_position + points[i];
 		vec2 p2 = global_position + points[to_use];
+		
+		if (abs(p1.x - position.x) + abs(p1.y - position.y) > 2000.0) {
+			continue;
+		}
+		if (abs(p2.x - position.x) + abs(p2.y - position.y) > 2000.0) {
+			continue;
+		}
 
 		vec2 p = position - p1;
 		vec2 n = p2 - p1;

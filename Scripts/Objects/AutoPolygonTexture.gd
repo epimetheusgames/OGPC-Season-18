@@ -14,6 +14,7 @@ var collision_polygon: CollisionPolygon2D
 var occluder: LightOccluder2D
 
 @onready var preloaded_shader_material: Resource = preload("res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres")
+@export var no_shader := false
 
 func _ready() -> void:
 	_make_sure_nodes_instantiated()
@@ -27,19 +28,11 @@ func _ready() -> void:
 			get_parent().bake_navigation_polygon()
 	
 	if move_collision_to && !Engine.is_editor_hint():
-		var collision_pos = collision_polygon.global_position
-		remove_child(collision_polygon)
-		move_collision_to.add_child(collision_polygon)
-		collision_polygon.global_position = collision_pos
-
-func _process(delta: float) -> void:
-	if !Engine.is_editor_hint() && Global.super_efficient:
-		material = null
-		return
+		var collision_pos = collision_object.global_position
+		remove_child(collision_object)
+		move_collision_to.add_child.call_deferred(collision_object)
+		collision_object.global_position = collision_pos
 	
-	_make_sure_nodes_instantiated()
-	
-	# Update relevant polygons.
 	collision_polygon.polygon = polygon
 	occluder.occluder.polygon = polygon
 	
@@ -48,52 +41,54 @@ func _process(delta: float) -> void:
 	collision_polygon.position = Vector2.ZERO
 	collision_object.position = Vector2.ZERO
 	occluder.position = Vector2.ZERO
+
+func _process(delta: float) -> void:
+	if !Engine.is_editor_hint() && Global.super_efficient:
+		material = null
+		return
 	
-	# Update shader parameters.
-	material.set_shader_parameter("points", polygon)
-	material.set_shader_parameter("num_points", polygon.size())
-	material.set_shader_parameter("global_position", global_position)
+	_make_sure_nodes_instantiated()
+	
+	if !no_shader:
+		# Update shader parameters.
+		material.set_shader_parameter("points", polygon)
+		material.set_shader_parameter("num_points", polygon.size())
+		material.set_shader_parameter("global_position", global_position)
 
 # Check if neccesary children exist. If they don't, that means this node
 # wasn't instantiated as a scene, this script was instantiated from the 
 # add node dialog.
 func _make_sure_nodes_instantiated() -> void:
 	# Check if Collision node exists, if not instantiate it.
-	if !get_node_or_null("Collision") || !get_node_or_null("Collision/Polygon"):
-		var new_collision := StaticBody2D.new()
-		new_collision.name = "Collision"
-		new_collision.collision_mask = 129 # 10000001
+	if !collision_object || !collision_polygon:
+		collision_object = StaticBody2D.new()
+		collision_object.name = "Collision"
+		collision_object.collision_mask = 129 # 10000001
 		
-		var new_collision_polygon := CollisionPolygon2D.new()
-		new_collision_polygon.name = "Polygon"
-		new_collision_polygon.visible = false
+		collision_polygon = CollisionPolygon2D.new()
+		collision_polygon.name = "Polygon"
+		collision_polygon.visible = false
 		
-		add_child(new_collision, true)
-		new_collision.add_child(new_collision_polygon, true)
-		new_collision_polygon.owner = new_collision
+		add_child(collision_object, true)
+		collision_object.add_child(collision_polygon, true)
+		collision_polygon.owner = collision_object
 		
-		new_collision.owner = self
-		new_collision_polygon.owner = new_collision
-		
-		collision_object = new_collision
-		collision_polygon = new_collision_polygon
+		collision_object.owner = self
+		collision_polygon.owner = collision_object
 	
 	# Check if LightOccluder node exists, if not instantiate it.
-	if !get_node_or_null("LightOccluder"):
-		var new_occluder = LightOccluder2D.new()
-		new_occluder.name = "LightOccluder"
-		new_occluder.visible = false
+	if !occluder:
+		occluder = LightOccluder2D.new()
+		occluder.name = "LightOccluder"
+		occluder.visible = false
 		
 		var new_occluder_polygon = OccluderPolygon2D.new()
-		new_occluder.occluder = new_occluder_polygon
+		occluder.occluder = new_occluder_polygon
 	
-		add_child(new_occluder)
-		new_occluder.owner = self
+		add_child(occluder)
+		occluder.owner = self
 	
 	# Check if our shader material is setup. If not, instantiate a new one.
-	if !material:
+	if !material && !no_shader:
 		material = preloaded_shader_material.duplicate(true)
 	
-	occluder = $"LightOccluder"
-	collision_object = $"Collision"
-	collision_polygon = $"Collision/Polygon"

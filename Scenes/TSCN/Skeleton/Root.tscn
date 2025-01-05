@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
+[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
 [ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
@@ -35,7 +35,6 @@ missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
 [node name="Root" type="Node"]
 script = ExtResource("1_h2kyx")
 verbose_debug = true
-super_efficient = true
 super_efficient_auto_enable_maximum = 25
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
@@ -256,6 +255,7 @@ offset_right = 988.0
 offset_bottom = 408.0
 
 [node name="DialogTextureBG" type="TextureRect" parent="Game/GameUIOverlay"]
+layout_mode = 0
 offset_left = 207.0
 offset_top = 566.0
 offset_right = 765.0
@@ -277,6 +277,7 @@ offset_bottom = -683.07
 disabled = true
 
 [node name="DialogTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/DialogTextureBG"]
+layout_mode = 0
 offset_left = 37.0
 offset_top = 26.0
 offset_right = 541.0
