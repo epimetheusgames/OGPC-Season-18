@@ -23,9 +23,6 @@ func _process(delta: float) -> void:
 	
 	if !pistol_sprite.animation == "Shoot":
 		shooting = false
-	
-	var spread: float = 0 # = get_movement_factor()
-	cone_of_fire.increase_spread(spread)
 
 
 func perform_attack() -> void:
@@ -41,7 +38,6 @@ func perform_attack() -> void:
 			
 			bullet.global_position = emit_point.global_position
 			var shot_angle: float = cone_of_fire.get_shot_angle()
-			print("Shot angle: " + str(shot_angle))
 			bullet.fire(shot_angle)
 			
 			# Wtf is this line my g

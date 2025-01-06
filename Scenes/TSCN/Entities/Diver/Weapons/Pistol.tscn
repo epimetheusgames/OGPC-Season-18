@@ -79,7 +79,7 @@ use_hand1 = true
 position = Vector2(24, -15)
 range = 300.0
 min_spread_angle = 10.0
-spread_recovery_rate = 60.0
+spread_decrease_factor = 5.0
 
 [node name="PistolSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)

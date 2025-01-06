@@ -92,12 +92,12 @@ func set_weapon(weapon_name: String) -> void:
 		return
 	
 	disable_all()
-	weapon.visible = true
+	weapon.enabled = true
 	selected_weapon = weapon
 
 func disable_all() -> void:
 	for weapon: Weapon in current_weapons.values():
-		weapon.visible = false
+		weapon.enabled = false
 
 
 # Reload bar

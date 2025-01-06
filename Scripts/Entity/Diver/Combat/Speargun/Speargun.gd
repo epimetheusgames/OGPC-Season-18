@@ -14,9 +14,6 @@ extends Gun
 func _process(delta: float) -> void:
 	super(delta)
 	
-	var spread: float = 0.0
-	cone_of_fire.increase_spread(spread)
-	
 	if gun_state == GunState.HOLDING:
 		use_hand1 = false
 		use_hand2 = false

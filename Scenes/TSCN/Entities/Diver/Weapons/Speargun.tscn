@@ -11,10 +11,7 @@ bullet_scene = ExtResource("2_qlup2")
 max_bullet_amount = 1
 reload_time = 5.0
 cooldown_time = 0.0
-dist_from_head = null
 knockback = 1000.0
-use_hand1 = null
-use_hand2 = null
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -7.0

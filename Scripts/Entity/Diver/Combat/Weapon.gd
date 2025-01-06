@@ -9,6 +9,8 @@ extends Node2D
 
 var diver: Diver
 
+var enabled: bool = false
+
 var head_pos: Vector2
 var mouse_pos: Vector2
 
