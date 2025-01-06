@@ -27,5 +27,5 @@ func _ready():
 	overlay_ui.name = "overlay_ui"
 	overlay_ui.follow_viewport_enabled = true
 	self.add_child(overlay_ui)
-	for x in get_parent().get_children().size():
-		get_node("overlay_ui").add_child(get_parent().get_children()[x].duplicate())
+	for x in get_parent().get_parent().get_node("GameUIOverlay").get_children().size():
+		get_node("overlay_ui").add_child(get_parent().get_parent().get_node("GameUIOverlay").get_children()[x].duplicate())
