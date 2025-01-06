@@ -150,6 +150,10 @@ avoidance/script_name_casing=1
 avoidance/scene_name_casing=1
 avoidance/gdscript/max_call_stack=2047
 
+[navigation]
+
+3d/merge_rasterizer_cell_scale=0.001
+
 [physics]
 
 2d/default_gravity=0.0

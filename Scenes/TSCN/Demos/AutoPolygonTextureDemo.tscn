@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cdg0gyclxvqs4"]
+[gd_scene load_steps=8 format=3 uid="uid://cdg0gyclxvqs4"]
 
 [ext_resource type="Material" uid="uid://cexuq6aqq46ng" path="res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres" id="1_l5pa1"]
 [ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Sprites/Level/WallTexture.png" id="2_bqhry"]
@@ -10,6 +10,12 @@ polygon = PackedVector2Array(6943, 7862, 6956, 7865, 6972, 7860, 6975, 7846, 698
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vjc1u"]
 polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2d6r1"]
+polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_56gjb"]
+polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
+
 [node name="Body" type="Polygon2D"]
 texture_repeat = 2
 material = ExtResource("1_l5pa1")
@@ -17,7 +23,6 @@ position = Vector2(992, 334)
 texture = ExtResource("2_bqhry")
 polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
 script = ExtResource("3_ut3q7")
-no_shader = null
 
 [node name="Collision" type="StaticBody2D" parent="."]
 z_index = 10
@@ -37,3 +42,17 @@ collision_mask = 129
 [node name="@LightOccluder2D@17246" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_vjc1u")
+
+[node name="Collision3" type="StaticBody2D" parent="."]
+collision_mask = 129
+
+[node name="@LightOccluder2D@17248" type="LightOccluder2D" parent="."]
+visible = false
+occluder = SubResource("OccluderPolygon2D_2d6r1")
+
+[node name="Collision4" type="StaticBody2D" parent="."]
+collision_mask = 129
+
+[node name="@LightOccluder2D@17246" type="LightOccluder2D" parent="."]
+visible = false
+occluder = SubResource("OccluderPolygon2D_56gjb")
