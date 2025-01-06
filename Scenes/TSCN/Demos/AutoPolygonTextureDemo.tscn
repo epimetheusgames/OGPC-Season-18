@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdg0gyclxvqs4"]
+[gd_scene load_steps=9 format=3 uid="uid://cdg0gyclxvqs4"]
 
 [ext_resource type="Material" uid="uid://cexuq6aqq46ng" path="res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres" id="1_l5pa1"]
 [ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Sprites/Level/WallTexture.png" id="2_bqhry"]
@@ -14,6 +14,9 @@ polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192
 polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_56gjb"]
+polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s2tj1"]
 polygon = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
 
 [node name="Body" type="Polygon2D"]
@@ -53,6 +56,13 @@ occluder = SubResource("OccluderPolygon2D_2d6r1")
 [node name="Collision4" type="StaticBody2D" parent="."]
 collision_mask = 129
 
-[node name="@LightOccluder2D@17246" type="LightOccluder2D" parent="."]
+[node name="_LightOccluder2D_17246" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_56gjb")
+
+[node name="Collision5" type="StaticBody2D" parent="."]
+collision_mask = 129
+
+[node name="@LightOccluder2D@17249" type="LightOccluder2D" parent="."]
+visible = false
+occluder = SubResource("OccluderPolygon2D_s2tj1")

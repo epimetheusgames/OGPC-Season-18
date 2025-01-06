@@ -31,7 +31,7 @@ func _ready() -> void:
 		var collision_pos = collision_object.global_position
 		remove_child(collision_object)
 		move_collision_to.add_child.call_deferred(collision_object)
-		collision_object.global_position = collision_pos
+		collision_object.global_position = collision_pos + position
 	
 	collision_polygon.polygon = polygon
 	occluder.occluder.polygon = polygon
@@ -43,6 +43,8 @@ func _ready() -> void:
 	occluder.position = Vector2.ZERO
 
 func _process(delta: float) -> void:
+	collision_object.global_position = global_position
+	
 	if !Engine.is_editor_hint() && Global.super_efficient:
 		material = null
 		return
