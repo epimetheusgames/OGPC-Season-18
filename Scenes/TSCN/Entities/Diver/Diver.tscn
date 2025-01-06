@@ -165,6 +165,7 @@ shape = SubResource("CircleShape2D_5d3kj")
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("2_lxvv3")
+use_mouse_movement = true
 
 [node name="RightWallRaycast" type="RayCast2D" parent="Movement"]
 target_position = Vector2(48, 0)
@@ -506,7 +507,6 @@ use_parent_material = true
 [node name="Polygon2D" type="Polygon2D" parent="Animation/Arrow"]
 use_parent_material = true
 position = Vector2(105, -1)
-color = Color(1, 0, 1, 1)
 polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
 
 [node name="PlayerName" type="Label" parent="Animation"]
