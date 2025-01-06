@@ -15,6 +15,7 @@ extends Node2D
 }
 
 @onready var diver: Diver = get_parent()
+@onready var reload_bar: TextureProgressBar = $"ReloadBar"
 
 # Loaded weapons in inventory (Optimize for switching weapons)
 var current_weapons: Dictionary
@@ -97,3 +98,12 @@ func set_weapon(weapon_name: String) -> void:
 func disable_all() -> void:
 	for weapon: Weapon in current_weapons.values():
 		weapon.visible = false
+
+
+# Reload bar
+func set_reload_bar(val: float) -> void:
+	if val == 0:
+		reload_bar.visible = false
+	else:
+		reload_bar.visible = true
+		reload_bar.value = val

@@ -64,5 +64,3 @@ func perform_attack() -> void:
 	#print_tree_pretty()
 	var force: Vector2 = Util.angle_to_vector_radians(global_rotation + PI, knockback)
 	diver.diver_movement.knockback(force)
-	print("force")
-	

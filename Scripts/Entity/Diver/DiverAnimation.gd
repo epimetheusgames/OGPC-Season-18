@@ -56,7 +56,11 @@ func _ready() -> void:
 	skeleton.set_modification_stack(mod_stack)
 	
 	displayed_nametag = $PlayerName.duplicate()
-	$"../../../../../UI".add_child(displayed_nametag)
+	
+	# TODO: fix this
+	var ui = $"../../../../../UI"
+	if ui:
+		ui.add_child(displayed_nametag)
 
 
 func _process(delta: float) -> void:

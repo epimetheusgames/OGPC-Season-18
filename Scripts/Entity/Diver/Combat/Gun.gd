@@ -9,18 +9,44 @@ enum GunState {
 	AIMING,
 }
 
+
 @export var bullet_scene: PackedScene
+@export var max_bullet_amount: int = 5  # Amount of bullets per magazine / before reload
+@onready var bullets_left: int = max_bullet_amount
+
+@export var reload_time: float = 2.0  # Time it takes for reload
+var reload_timer: Timer = Timer.new()
+var reload_timer_over: bool = true
+
+@export var cooldown_time: float = 0.5  # Time inbetween shots
+var cooldown_timer: Timer = Timer.new()
+var cooldown_timer_over: bool = true
+
 
 @export var dist_from_head: float = 100.0
-
 @export var knockback: float = 10.0
 
 var flipped: bool = false
-
 var gun_state := GunState.HOLDING
 
+
 func _ready() -> void:
-	super()
+	reload_timer.one_shot = true
+	add_child(reload_timer)
+	reload_timer.connect("timeout", _on_reload_timeout)
+	
+	cooldown_timer.one_shot = true
+	add_child(cooldown_timer)
+	cooldown_timer.connect("timeout", _on_cooldown_timeout)
+
+func _on_reload_timeout() -> void:
+	print("reload timeout")
+	reload_timer_over = true
+	bullets_left = max_bullet_amount
+
+func _on_cooldown_timeout() -> void:
+	print("cooldown_timeout")
+	cooldown_timer_over = true
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -38,3 +64,22 @@ func _process(delta: float) -> void:
 		scale.y = -1
 	else:
 		scale.y = 1
+
+func _physics_process(delta: float) -> void:
+	var bar_val: float = (reload_timer.time_left) / reload_time * 100.0
+	diver.diver_combat.set_reload_bar(bar_val)
+	print("reload_timer: " + str(reload_timer.time_left))
+	print("bar val: " + str(bar_val))
+	
+
+func attack() -> void:
+	if reload_timer_over && cooldown_timer_over:
+		perform_attack()
+		bullets_left -= 1
+		
+		if bullets_left == 0:
+			reload_timer_over = false
+			reload_timer.start(reload_time)
+		
+		cooldown_timer_over = false
+		cooldown_timer.start(cooldown_time)

@@ -11,7 +11,7 @@ size = Vector2(20, 32)
 
 [node name="PistolBullet2D" type="Area2D"]
 script = ExtResource("1_hykh4")
-speed = 300.0
+speed = 1000.0
 size = 10.0
 damage = 10.0
 

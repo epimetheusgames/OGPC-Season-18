@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=35 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="12_u28jr"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
 [ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="15_d0rdv"]
+[ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
@@ -480,6 +481,12 @@ script = ExtResource("5_mjta2")
 speargun = ExtResource("8_ntafm")
 knife = ExtResource("9_hstvg")
 pistol = ExtResource("10_oh1is")
+
+[node name="ReloadBar" parent="Combat" instance=ExtResource("16_o1yih")]
+offset_left = -44.0
+offset_top = -197.0
+offset_right = 52.0
+offset_bottom = -101.0
 
 [node name="Flashlight" type="Node2D" parent="."]
 script = ExtResource("9_xqhlv")
