@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://c0nn12ilucaoj"]
 
-[ext_resource type="PackedScene" uid="uid://c38y5lkdchimf" path="res://Scenes/TSCN/UI/MissionUiBox.tscn" id="1_wmqaw"]
+[ext_resource type="PackedScene" uid="uid://chy3luehcqm2b" path="res://Scenes/TSCN/UI/MissionUiBox.tscn" id="1_wmqaw"]
 [ext_resource type="Script" path="res://Scripts/Level/ResearchStationCamera.gd" id="2_e3xfe"]
-[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_ewnx3"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_ewnx3"]
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="3_3nwiy"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="4_6wu4g"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="5_thj6v"]

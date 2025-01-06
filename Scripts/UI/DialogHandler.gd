@@ -19,13 +19,17 @@ var last_played_letterindex: int = 0
 
 var dialog_sfx_node: AudioStreamPlayer
 
+@export_node_path("Button") var response_button_one
+@export_node_path("Button") var response_button_two
+@export_node_path("Button") var response_button_three
+@export_node_path("Button") var response_button_four
 @onready var text_node = get_node("DialogTextLabel")
 
 func _ready() -> void:
-	response_buttons.append(get_node("ResponseButtonOne"))
-	response_buttons.append(get_node("ResponseButtonTwo"))
-	response_buttons.append(get_node("ResponseButtonThree"))
-	response_buttons.append(get_node("ResponseButtonFour"))
+	response_buttons.append(get_node(response_button_one))
+	response_buttons.append(get_node(response_button_two))
+	response_buttons.append(get_node(response_button_three))
+	response_buttons.append(get_node(response_button_four))
 	response_buttons[0].button_down.connect(response_option_one)
 	response_buttons[1].button_down.connect(response_option_two)
 	response_buttons[2].button_down.connect(response_option_three)

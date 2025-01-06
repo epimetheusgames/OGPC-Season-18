@@ -54,7 +54,7 @@ func _ready() -> void:
 	$Skeleton.set_modification_stack(mod_stack)
 	
 	displayed_nametag = $PlayerName.duplicate()
-	$"../../../../../UI".add_child(displayed_nametag)
+	Global.ui_root_node.add_child(displayed_nametag)
 	
 	if !diver.has_multiplayer_sync:
 		return
