@@ -4,6 +4,7 @@
 class_name HurtboxComponent
 extends BaseHitboxComponent
 
+@export var damage_ammount: float = 1.0
 @export var hitbox_type: HITBOX_TYPE
 @export var has_knockback: bool = true
 @export_node_path("HealthComponent") var attachable_health_component
@@ -37,8 +38,6 @@ func _area_entered(area: Area2D) -> void:
 	if not attachable_health_component:
 		return
 	
-	# Kinda silly
-	var damage_ammount := 1.0
 	var parent = area.get_parent()
 	if !(parent is Entity):
 		parent = parent.get_parent()
