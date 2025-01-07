@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkiqku8nhydo3"]
+
+[ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Sprites/Spear.png" id="1_mdbjp"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Spear.gd" id="1_x2dlv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwnx7"]
+size = Vector2(58, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hdpad"]
+
+[node name="Spear" type="Area2D"]
+script = ExtResource("1_x2dlv")
+speed = 400.0
+size = 10.0
+damage = 100.0
+
+[node name="ShaftCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_hwnx7")
+debug_color = Color(0.998845, 0, 0.130993, 0.42)
+
+[node name="HeadCollision" type="CollisionShape2D" parent="."]
+position = Vector2(36, 0)
+shape = SubResource("CircleShape2D_hdpad")
+debug_color = Color(0.996338, 0.0525199, 3.85046e-07, 0.42)
+
+[node name="SpearSprite" type="Sprite2D" parent="."]
+position = Vector2(-4, 3)
+texture = ExtResource("1_mdbjp")
+metadata/_edit_lock_ = true
+
+[node name="RopePoint" type="Node2D" parent="."]
+position = Vector2(-29, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

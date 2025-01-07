@@ -43,8 +43,8 @@ func touching_bodies() -> bool:
 	doo_doo = bodies
 	bodies = bodies.filter(func(node): return node is CharacterBody2D)
 	bodies.remove_at(0)
-	print("chat are the bodies finna touching the npc")
-	print(bodies)
+	#print("chat are the bodies finna touching the npc")
+	#print(bodies)
 	return bodies.size()>0
 func _option_chosen():
 	current_location+="["+str(Global.dialog_core.response)+"][0][1][0]"

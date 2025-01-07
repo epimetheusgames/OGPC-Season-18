@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dul1o4r1c8ash"]
+[gd_scene load_steps=11 format=3 uid="uid://dul1o4r1c8ash"]
 
 [ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Sprites/Player/TranquilizerPistol.png" id="1_2gvrx"]
-[ext_resource type="Script" path="res://Scripts/Objects/Weapons/TranquilizerGun.gd" id="1_n4wnc"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/Pistol.gd" id="1_n4wnc"]
+[ext_resource type="PackedScene" uid="uid://d24oi85rw114u" path="res://Scenes/TSCN/Entities/Diver/Weapons/PistolBullet.tscn" id="2_3x5oy"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/Pistol.gd" id="1_n4wnc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6uma"]
 atlas = ExtResource("1_2gvrx")
@@ -66,18 +68,19 @@ animations = [{
 "speed": 25.0
 }]
 
-[node name="TranquilizerGun" type="Node2D"]
+[node name="Pistol" type="Node2D" node_paths=PackedStringArray("animation_node")]
 script = ExtResource("1_n4wnc")
-bullet_velocity = 40
+animation_node = NodePath("PistolSprite")
+bullet_scene = ExtResource("2_3x5oy")
 
-[node name="TranquilizerGunSprite" type="AnimatedSprite2D" parent="."]
+[node name="PistolSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_inovh")
 animation = &"Flip"
 autoplay = "Shoot"
 
-[node name="BulletShootPosition" type="Node2D" parent="."]
+[node name="EmitPoint" type="Node2D" parent="."]
 position = Vector2(24, -15)
 
-[connection signal="animation_changed" from="TranquilizerGunSprite" to="." method="_on_tranquilizer_gun_sprite_animation_changed"]
-[connection signal="animation_finished" from="TranquilizerGunSprite" to="." method="_on_tranquilizer_gun_sprite_animation_finished"]
+[connection signal="animation_changed" from="PistolSprite" to="." method="_on_tranquilizer_gun_sprite_animation_changed"]
+[connection signal="animation_finished" from="PistolSprite" to="." method="_on_tranquilizer_gun_sprite_animation_finished"]

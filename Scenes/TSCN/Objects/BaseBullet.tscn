@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://kl6gljjq617"]
+[gd_scene load_steps=5 format=3 uid="uid://dqbhas7s3cgtb"]
 
 [ext_resource type="Script" path="res://Scripts/Objects/Bullet.gd" id="1_od670"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="2_07tm7"]

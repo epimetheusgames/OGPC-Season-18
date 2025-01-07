@@ -20,14 +20,13 @@ var rope_drawer: RopeLineDrawer
 var normals: Array[Vector2]
 
 func _ready() -> void:
+	super()
 	component_name = "VerletRope"
 	super()
 	
 	raycast_query = PhysicsRayQueryParameters2D.new()
 	
 	var spawn_pos: Vector2
-	if start_anchor_node:
-		spawn_pos = start_anchor_node.global_position
 	
 	verlet_nodes.resize(point_amount)
 	for i in range(point_amount):
@@ -38,6 +37,8 @@ func _ready() -> void:
 	normals.resize(point_amount)
 
 func _process(delta: float) -> void:
+	super(delta)
+	
 	if !is_on_screen:
 		return
 	
@@ -83,6 +84,8 @@ func simulate(delta: float):
 
 # Apply constraints such as anchor positions and node separation
 func apply_constraints():
+	# print("skib" + str(end_pos_on))
+	# print(end_pos)
 	# Pull toward anchors, and keep node distance constraints
 	if start_pos_on:
 		verlet_nodes[0].position = start_pos

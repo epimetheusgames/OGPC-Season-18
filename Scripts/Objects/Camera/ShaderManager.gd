@@ -8,6 +8,11 @@ extends CanvasLayer
 @onready var pixelize_shader: BackBufferCopy = $"Pixelize"
 
 func _ready() -> void:
+	$Pixelize/ColorRect.size = DisplayServer.window_get_size()
+	$Rain/ColorRect.size = DisplayServer.window_get_size()
+	$Quantize/ColorRect.size = DisplayServer.window_get_size()
+	$Vignette/ColorRect.size = DisplayServer.window_get_size()
+	
 	if Engine.is_editor_hint():
 		quantize_shader.set_shader_process(false)
 		pixelize_shader.set_shader_process(false)
