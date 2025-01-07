@@ -1,4 +1,4 @@
-class_name DeathScreen
+class_name MissionSuccessScreen
 extends Control
 
 
@@ -6,15 +6,16 @@ extends Control
 @export var vignette_shader: ColorRect
 
 func _process(delta: float) -> void:
-	if Global.player && Global.player.get_diver_health() <= 0:
+	if Global.current_mission.success_state_checker.check_success():
 		vignette_shader.material.set_shader_parameter("vignette_strength", 1.5)
 		ingame_ui.visible = false
 		get_tree().paused = true
 		visible = true
 
-func _on_restart_button_button_up() -> void:
+func _on_return_to_station_button_up() -> void:
 	get_tree().paused = false
-	Global.mission_system.restart_mission()
+	Global.save_load_framework.exit_to_menu()
+	Global.save_load_framework.start_game(Global.current_game_slot)
 
 func _on_quit_button_button_up() -> void:
 	get_tree().paused = false
