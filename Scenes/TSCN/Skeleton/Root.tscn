@@ -236,7 +236,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("16_v8rcl")
 script = ExtResource("17_0ry5s")
 notif_bar_speed = 0.4
-efficieny_thing_path_gyat = NodePath("../../..")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/PerformancePrompt"]
 layout_mode = 0
