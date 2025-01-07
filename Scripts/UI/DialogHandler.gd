@@ -23,7 +23,7 @@ var dialog_sfx_node: AudioStreamPlayer
 @export_node_path("Button") var response_button_two
 @export_node_path("Button") var response_button_three
 @export_node_path("Button") var response_button_four
-@onready var text_node = get_node("DialogTextLabel")
+@export var text_node:RichTextLabel
 
 func _ready() -> void:
 	response_buttons.append(get_node(response_button_one))
@@ -34,8 +34,8 @@ func _ready() -> void:
 	response_buttons[1].button_down.connect(response_option_two)
 	response_buttons[2].button_down.connect(response_option_three)
 	response_buttons[3].button_down.connect(response_option_four)	
-	get_node("DialogTextLabel").size = self.size*0.9
-	get_node("DialogTextLabel").position = self.position
+	get_node("VBoxContainer").get_node("DialogTextLabel").size = self.size*0.9
+	get_node("VBoxContainer").get_node("DialogTextLabel").position = self.position
 	Global.dialog_core = self
 
 func _process(delta:float)->void:

@@ -25,7 +25,7 @@ func _ready():
 		$LevelContainer/Level/TransBackground.material = null
 	var overlay_ui = CanvasLayer.new()
 	overlay_ui.name = "overlay_ui"
-	overlay_ui.follow_viewport_enabled = true
+	overlay_ui.follow_viewport_enabled = false
 	self.add_child(overlay_ui)
 	for x in get_parent().get_parent().get_node("GameUIOverlay").get_children().size():
 		get_node("overlay_ui").add_child(get_parent().get_parent().get_node("GameUIOverlay").get_children()[x].duplicate())
