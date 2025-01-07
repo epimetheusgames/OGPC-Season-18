@@ -221,10 +221,11 @@ func json_config_generator() -> String:
 # base function after smoother visuals have been ran.
 func toggle_ui():
 	get_parent().visible = !self.get_parent().visible
-	if(get_parent().visible):
-		RenderingServer.set_default_clear_color(background)
-	else:
-		RenderingServer.set_default_clear_color(default_color)
+	# Poo poo
+	#if(get_parent().visible):
+		#RenderingServer.set_default_clear_color(background)
+	#else:
+		#RenderingServer.set_default_clear_color(default_color)
 	for x in self.get_child_count():
 		self.get_children()[x].visible = false
 # Adds all nodes in the array as a child of the caller

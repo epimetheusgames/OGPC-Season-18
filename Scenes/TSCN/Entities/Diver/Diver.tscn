@@ -162,7 +162,6 @@ shape = SubResource("CircleShape2D_5d3kj")
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("2_lxvv3")
-use_mouse_movement = true
 
 [node name="RightWallRaycast" type="RayCast2D" parent="Movement"]
 target_position = Vector2(48, 0)

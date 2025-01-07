@@ -147,6 +147,7 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 		level_data.debug()
 	
 	if custom_mission:
+		Global.current_mission = custom_mission
 		load_level(custom_mission.mission_filepath.file)
 	else:
 		load_level(default_level.file)
