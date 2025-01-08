@@ -530,7 +530,7 @@ script = ExtResource("7_ju8q7")
 
 [node name="HealthComponent" type="Node" parent="Stats"]
 script = ExtResource("6_dvqx5")
-max_health = 10.0
+max_health = 50.0
 component_container = NodePath("../..")
 
 [node name="HurtboxComponent" type="Node" parent="Stats"]
