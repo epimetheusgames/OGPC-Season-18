@@ -64,18 +64,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	"""
-	mod_stack.set_modification(0, arm_mod2)
-	mod_stack.set_modification(0, leg_mod1)
-	mod_stack.set_modification(0, leg_mod2)
-	skeleton.set_modification_stack(mod_stack)
-	"""
-	
-	displayed_nametag = $PlayerName.duplicate()
-	
-	var ui: CanvasLayer = $"../../../../../UI"
-	if ui:
-		ui.add_child(displayed_nametag)
 	
 	if Global.godot_steam_abstraction:
 		if !Global.is_multiplayer || diver._is_node_owner():

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="EnemyBehaviorSettings" load_steps=2 format=3 uid="uid://bdgr4mym5uqvq"]
+
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="1_5bux1"]
+
+[resource]
+script = ExtResource("1_5bux1")
+health = 20
+damage = 5
+base_speed = 2.5
+agressiveness = 2.0
+attack_distance = 150.0
+closest_distance = 100.0
+sensor_type = 0
+wander_type = 0
+attack_mode = 0
+wander_range = 2000.0
+view_range = 360.0
+view_distance = 600.0
+disable_period_length = 1.0
+sound_max_distance = 0.0

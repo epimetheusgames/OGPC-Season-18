@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/Pistol.gd" id="1_n4wnc"]
 [ext_resource type="PackedScene" uid="uid://d24oi85rw114u" path="res://Scenes/TSCN/Entities/Diver/Weapons/PistolBullet.tscn" id="2_3x5oy"]
 [ext_resource type="PackedScene" uid="uid://cyelkkty2ihsb" path="res://Scenes/TSCN/Entities/Diver/Weapons/ConeOfFire.tscn" id="3_amfsj"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/Pistol.gd" id="1_n4wnc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6uma"]
 atlas = ExtResource("1_2gvrx")

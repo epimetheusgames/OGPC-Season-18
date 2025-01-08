@@ -21,10 +21,6 @@ var save_resource := EntitySave.new()
 var components_dictionary = {}
 
 func _process(delta: float) -> void:
-	# Create our UID automatically.
-	if Engine.is_editor_hint() && !uid:
-		uid = UID.new()
-	
 	if !Engine.is_editor_hint():
 		_entity_process(delta)
 

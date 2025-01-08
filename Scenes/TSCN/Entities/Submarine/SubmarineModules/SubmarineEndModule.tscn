@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://28qsc1ykhct4"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_0f8u0"]
+[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_emnk5"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="3_g6my4"]
+
+[sub_resource type="Resource" id="Resource_7700m"]
+script = ExtResource("2_emnk5")
+file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule.tscn"
+
+[node name="SubmarineEndModule" type="Node2D" groups=["obstacles"]]
+script = ExtResource("1_0f8u0")
+path = SubResource("Resource_7700m")
+
+[node name="ModuleArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ModuleArea"]
+polygon = PackedVector2Array(-200, 200, -144, 200, -71, 195, -8, 178, 77, 131, 132, 72, 158, 23, 158, -23, 136, -80, 93, -120, 3, -165, -87, -188, -178, -200, -200, -200)
+
+[node name="AttachmentPoints" type="Node2D" parent="."]
+
+[node name="Left" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(-200, 0)
+script = ExtResource("3_g6my4")
+direction = Vector2(-1, 0)
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
+polygon = PackedVector2Array(-200, 160, -200, 200, -144, 200, -71, 195, -8, 178, 77, 131, 132, 72, 158, 23, 158, -23, 136, -80, 93, -120, 3, -165, -87, -188, -178, -200, -200, -200, -200, -159, -176, -160, -91, -147, -6, -124, 79, -79, 110, -18, 91, 62, 8, 130, -97, 160)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+z_index = -1
+color = Color(0.224701, 0.224701, 0.224701, 1)
+polygon = PackedVector2Array(-200, 200, -144, 200, -71, 195, -8, 178, 77, 131, 132, 72, 158, 23, 158, -23, 136, -80, 93, -120, 3, -165, -87, -188, -178, -200, -200, -200)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-200, 160, -200, 200, -144, 200, -71, 195, -8, 178, 77, 131, 132, 72, 158, 23, 158, -23, 136, -80, 93, -120, 3, -165, -87, -188, -178, -200, -200, -200, -200, -159, -176, -160, -91, -147, -6, -124, 79, -79, 110, -18, 91, 62, 8, 130, -97, 160)
+
+[node name="NavigationObstacle" type="StaticBody2D" parent="."]
+collision_layer = 256
+collision_mask = 0

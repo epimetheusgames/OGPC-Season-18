@@ -1,28 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://bptkxkfwbumm5"]
+[gd_scene load_steps=11 format=3 uid="uid://bptkxkfwbumm5"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Enemy/BigfinSquid.gd" id="1_0jv23"]
-[ext_resource type="Script" uid="uid://cmh34bsgyx1yg" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_favrd"]
+[ext_resource type="Resource" uid="uid://c0y2clojtb743" path="res://Scenes/Resource/Entity/BigfinSquidSettings.tres" id="2_1wvyv"]
 [ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
+[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_55m16"]
 [ext_resource type="Script" uid="uid://dke8ns1faaefs" path="res://Scripts/Components/Misc/HealthComponent.gd" id="4_2imnk"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="5_pchce"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="6_dpvyl"]
 
-[sub_resource type="Resource" id="Resource_d65pp"]
-script = ExtResource("2_favrd")
-health = 7
-damage = 2
-base_speed = 0.8
-agressiveness = 0.5
-attack_distance = 250.0
-closest_distance = 50.0
-sensor_type = 0
-wander_type = 0
-attack_mode = 0
-wander_range = 1000.0
-view_range = 360.0
-view_distance = 650.0
-disable_period_length = 1.0
-sound_max_distance = 0.0
+[sub_resource type="Resource" id="Resource_jajkh"]
+resource_local_to_scene = true
+script = ExtResource("3_55m16")
+uid = 3626
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfi6i"]
 size = Vector2(45, 69)
@@ -32,10 +21,11 @@ size = Vector2(113, 109.5)
 
 [node name="BigfinSquid" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "attackbox_component", "health_component")]
 script = ExtResource("1_0jv23")
-settings = SubResource("Resource_d65pp")
+settings = ExtResource("2_1wvyv")
 hurtbox_component = NodePath("HurtboxComponent")
 attackbox_component = NodePath("AttackBoxComponent")
 health_component = NodePath("HealthComponent")
+uid = SubResource("Resource_jajkh")
 
 [node name="Head" type="Polygon2D" parent="."]
 position = Vector2(0, -22)

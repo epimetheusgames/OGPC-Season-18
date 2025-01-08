@@ -49,4 +49,7 @@ func get_health() -> float:
 	return _health
 
 func set_health(new_health: int) -> void:
-	_health = new_health
+	if new_health > max_health:
+		_health = max_health
+	else:
+		_health = new_health

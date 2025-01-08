@@ -12,4 +12,4 @@ script = ExtResource("1_dth6h")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 z_index = -1
-polygon = PackedVector2Array(-40, 2, -38, -32, -18, -36, 7, -43, 26, -35, 120, 4, 44, 17, 25, 38, 1, 39, -31, 35)
+polygon = PackedVector2Array(-40, 2, -30, -28, -14, -36, 7, -39, 26, -29, 35, -17, 121, 0, 35, 17, 23, 33, 1, 39, -25, 31)

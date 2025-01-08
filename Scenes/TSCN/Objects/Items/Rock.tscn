@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqb5sqhg7l1io"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_gqxvl"]
+[ext_resource type="Texture2D" uid="uid://bx3eg32mchb27" path="res://Assets/Art/Sprites/Icons/RockItem.png" id="2_7pdor"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fdd3s"]
+radius = 67.0298
+
+[node name="Rock" type="RigidBody2D"]
+
+[node name="BaseItem" type="Area2D" parent="."]
+script = ExtResource("1_gqxvl")
+icon = ExtResource("2_7pdor")
+cost = 7
+item_name = "Rock"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseItem"]
+position = Vector2(-3, -10)
+shape = SubResource("CircleShape2D_fdd3s")
+
+[node name="Tex" type="Polygon2D" parent="."]
+color = Color(0.233925, 0.233925, 0.233925, 1)
+polygon = PackedVector2Array(-8, 51, 59, 37, 62, -44, -42, -73, -80, 10)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, 51, 59, 37, 62, -44, -42, -73, -80, 10)

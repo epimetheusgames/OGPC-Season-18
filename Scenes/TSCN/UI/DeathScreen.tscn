@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://blcwv5ro6f2ce"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Ingame/DeathScreen.gd" id="1_lpyo2"]
+
+[node name="DeathScreen" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lpyo2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -253.0
+offset_top = -115.0
+offset_right = 2099.0
+offset_bottom = 1299.0
+color = Color(0.49, 0, 0, 0.321569)
+
+[node name="YouDied" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 210.0
+offset_right = 1921.0
+offset_bottom = 442.0
+theme_override_font_sizes/font_size = 72
+text = "You Died!"
+horizontal_alignment = 1
+
+[node name="FunnyText" type="Label" parent="."]
+layout_mode = 0
+offset_top = 320.0
+offset_right = 1922.0
+offset_bottom = 421.0
+theme_override_font_sizes/font_size = 25
+text = "That's sad. We'll sent a replacement as soon as we can!"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 809.0
+offset_top = 438.0
+offset_right = 1101.0
+offset_bottom = 512.0
+tooltip_text = "Tryhard"
+theme_override_font_sizes/font_size = 36
+text = "Restart Mission"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 526.0
+offset_right = 1081.0
+offset_bottom = 600.0
+tooltip_text = "Coward"
+theme_override_font_sizes/font_size = 36
+text = "Exit to Menu"
+
+[connection signal="button_up" from="RestartButton" to="." method="_on_restart_button_button_up"]
+[connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]

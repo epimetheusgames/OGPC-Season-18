@@ -1,5 +1,6 @@
 # This code was based on code from the Dunebound codebase.
 # HI SEQUOIA WHATS GOOD!
+# this code is owned by sequoia
 extends Node
 
 var keybind_config := JSON.new()
@@ -14,13 +15,13 @@ var keybind_config_data
 		reinitialize_ui()
 
 # Controls the distance between each entry in the keybind menu
-@export var keybind_entry_padding: int = 20:
+@export var keybind_entry_padding: int = 40:
 	set(val):
 		keybind_entry_padding = val
 		reinitialize_ui()
 
 # Controls the distance between each button to change a specific key
-@export var keybind_entry_element_padding: int = 10:
+@export var keybind_entry_element_padding: int = 70:
 	set(val):
 		keybind_entry_element_padding = val
 		reinitialize_ui()
@@ -30,14 +31,14 @@ var keybind_config_data
 		text_offset_y = val
 		reinitialize_ui()
 
-@export var button_offset_x: int = 0:
+#controls the distance between a button and the text describing the control that key is for
+@export var button_offset_x: int = 30:
 	set(val):
 		button_offset_x = val
 		reinitialize_ui()
 
-# code made by sequoia
 # Controls the location of the first entry
-@export var starting_location := Vector2(0,0):
+@export var starting_location := Vector2(70,0):
 	set(val):
 		starting_location = val
 		reinitialize_ui()
@@ -220,10 +221,11 @@ func json_config_generator() -> String:
 # base function after smoother visuals have been ran.
 func toggle_ui():
 	get_parent().visible = !self.get_parent().visible
-	if(get_parent().visible):
-		RenderingServer.set_default_clear_color(background)
-	else:
-		RenderingServer.set_default_clear_color(default_color)
+	# Poo poo
+	#if(get_parent().visible):
+		#RenderingServer.set_default_clear_color(background)
+	#else:
+		#RenderingServer.set_default_clear_color(default_color)
 	for x in self.get_child_count():
 		self.get_children()[x].visible = false
 # Adds all nodes in the array as a child of the caller

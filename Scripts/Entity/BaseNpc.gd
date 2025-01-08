@@ -15,6 +15,11 @@ var doo_doo
 # Dialog speed in characters per second 
 @export var dialog_speed: int
 
+# image the npc will appear as
+@export var npc_texture: CompressedTexture2D
+
+# controls whether or not the _process will run
+@export var has_dialog: bool
 # dialog and responses to pass to textposset
 var dialog_thingy
 
@@ -32,17 +37,14 @@ var sentence_index := 0
 var dialog: Dictionary
 var dialog_json: JSON
 
-func _process(delta: float) -> void:
-	super(delta)
-
 func touching_bodies() -> bool:
 	var bodies = get_node(dialog_area).get_overlapping_bodies()
 	#omg functional programming moment (lambdas)
 	doo_doo = bodies
 	bodies = bodies.filter(func(node): return node is CharacterBody2D)
 	bodies.remove_at(0)
-	print("chat are the bodies finna touching the npc")
-	print(bodies)
+	#print("chat are the bodies finna touching the npc")
+	#print(bodies)
 	return bodies.size()>0
 func _option_chosen():
 	current_location+="["+str(Global.dialog_core.response)+"][0][1][0]"
@@ -53,9 +55,13 @@ func _get_dialog():
 	dialog = dialog_json.data
 
 func _ready() -> void:
-	call_deferred("deferred_ready")
+	if(has_dialog):
+		call_deferred("deferred_ready")
+	else:
+		set_process(false)
 
 func deferred_ready():
+	get_node("Texture").texture = npc_texture
 	dialog_json = JSON.new()
 	_get_dialog()
 	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
@@ -66,7 +72,8 @@ func deferred_ready():
 	get_node("Hitbox").ready.connect(do_that_thingy)
 
 func do_that_thingy() -> void:
-	Global.KeyactionHandler.interact.connect(try_trigger_talking)
+	if(has_dialog):
+		Global.KeyactionHandler.interact.connect(try_trigger_talking)
 func die() -> void:
 	#play some skibidi death animation or something
 	
@@ -75,7 +82,13 @@ func try_trigger_talking() -> void:
 	if(touching_bodies()):
 		trigger_talking()
 func trigger_talking() -> void:
-	#index [0] is the dialogue, [1][0] [1][1] [1][2] and  etc are responses
-	Global.dialog_core.play_dialog(dialog["dialog"][npc_name][0],dialog_speed,dialog["dialog"][npc_name][1])
-
+	if(!Global.dialog_active):
+		Global.dialog_active = true
+		#index [0] is the dialogue, [1][0] [1][1] [1][2] and  etc are responses
+		Global.dialog_core.play_dialog(dialog["dialog"][npc_name][0],dialog_speed,dialog["dialog"][npc_name][1])
+	else:
+		Global.dialog_active = false
+func _process(delta) -> void:
+	super(delta)
+	Global.dialog_core.visible = Global.dialog_active
 	

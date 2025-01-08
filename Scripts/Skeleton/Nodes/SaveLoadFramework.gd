@@ -147,6 +147,7 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 		level_data.debug()
 	
 	if custom_mission:
+		Global.current_mission = custom_mission
 		load_level(custom_mission.mission_filepath.file)
 	else:
 		load_level(default_level.file)
@@ -175,6 +176,7 @@ func load_level(level_path: String):
 # Close and save game and exit to menu.
 func exit_to_menu() -> void:
 	_save_game_save(Global.current_game_save, Global.current_game_slot)
+	Global.player = null
 	Global.current_game_save = null
 	Global.current_game_slot = -1
 	

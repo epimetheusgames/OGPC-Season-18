@@ -38,7 +38,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-
+	
 	if !is_on_screen:
 		return
 	

@@ -15,6 +15,8 @@ var velocity: Vector2 = Vector2.ZERO
 @onready var diver_root: Diver = get_parent()
 @export var use_mouse_movement := false
 
+signal boosted
+
 func _physics_process(delta: float) -> void:
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
 		if get_parent().get_state() != Util.DiverState.DRIVING_SUBMARINE:
@@ -60,6 +62,7 @@ func update_movement_velocity(delta: float):
 	
 	if Input.is_action_just_pressed("move"):
 		velocity += Util.angle_to_vector_radians(current_angle, TAP_ACCEL * delta)
+		boosted.emit()
 	
 	# Clamp velocity to MAX_SPEED
 	if velocity.length() > MAX_SPEED:
