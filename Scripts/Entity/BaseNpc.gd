@@ -8,6 +8,8 @@ extends Entity
 # Dialog will be undertale-style rectangle thingies with text, and funny beeping sounds 
 
 var doo_doo
+var mission_dialog_core_set = false
+var ready_run_count = 0
 
 # Make dialog name in dialog.json this name
 @export var npc_name:String
@@ -55,22 +57,26 @@ func _get_dialog():
 	dialog = dialog_json.data
 
 func _ready() -> void:
+	ready_run_count += 1
 	if(has_dialog):
 		call_deferred("deferred_ready")
 	else:
 		set_process(false)
 
 func deferred_ready():
-	get_node("Texture").texture = npc_texture
-	dialog_json = JSON.new()
-	_get_dialog()
-	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
-	Global.dialog_text_node.dialog_option_chosen.connect(_option_chosen)
-	#doo_doo = 
-	if(get_node("Hitbox").is_node_ready()):
-		do_that_thingy()
-	get_node("Hitbox").ready.connect(do_that_thingy)
-
+	if(ready_run_count>0):
+		get_node("Texture").texture = npc_texture
+		dialog_json = JSON.new()
+		_get_dialog()
+		get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
+		if(Global.dialog_text_node!=null):
+			Global.dialog_text_node.dialog_option_chosen.connect(_option_chosen)
+			mission_dialog_core_set = true
+		#doo_doo = 
+		if(get_node("Hitbox").is_node_ready()):
+			do_that_thingy()
+		get_node("Hitbox").ready.connect(do_that_thingy)
+	
 func do_that_thingy() -> void:
 	if(has_dialog):
 		Global.KeyactionHandler.interact.connect(try_trigger_talking)
@@ -91,4 +97,7 @@ func trigger_talking() -> void:
 func _process(delta) -> void:
 	super(delta)
 	Global.dialog_core.visible = Global.dialog_active
+	# should only run a few frames before the dialog ui is loaded into the mission
+	if(!mission_dialog_core_set):
+		deferred_ready()
 	

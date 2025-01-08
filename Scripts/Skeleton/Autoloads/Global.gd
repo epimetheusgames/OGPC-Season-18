@@ -16,7 +16,7 @@ var dialog_text_node: TextureRect
 var boids_calculator_node: BoidsCalculator
 var player: Diver
 var submarine : Entity
-var dialog_core: TextureRect
+var dialog_core: TextureRect = null
 var godot_steam_abstraction: GodotSteamAbstraction
 var current_game_save: GameSave
 var mission_system: MissionSystem

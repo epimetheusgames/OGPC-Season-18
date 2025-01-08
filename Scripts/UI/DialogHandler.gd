@@ -36,7 +36,8 @@ func _ready() -> void:
 	response_buttons[3].button_down.connect(response_option_four)	
 	get_node("VBoxContainer").get_node("DialogTextLabel").size = self.size*0.9
 	get_node("VBoxContainer").get_node("DialogTextLabel").position = self.position
-	Global.dialog_core = self
+	if(!get_parent().name=="GameUIOverlay"):
+		Global.dialog_core = self
 
 func _process(delta:float)->void:
 	Global.dialog_played = !Global.dialog_active
