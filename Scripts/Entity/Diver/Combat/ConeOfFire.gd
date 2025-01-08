@@ -36,9 +36,6 @@ func _process(delta: float) -> void:
 	var rot_dif = angle_difference(global_rotation, prev_rot)
 	prev_rot = global_rotation
 	
-	if get_parent().get_parent().name == "Speargun":
-		print(pos_dif)
-		print(rot_dif)
 	spread_angle_degrees += (pos_dif * 10 + rot_dif * 30) * spread_increase_factor * delta
 	
 	spread_angle_degrees = clamp(spread_angle_degrees, min_spread_angle, max_spread_angle)
