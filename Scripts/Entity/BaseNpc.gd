@@ -69,8 +69,8 @@ func deferred_ready():
 		dialog_json = JSON.new()
 		_get_dialog()
 		get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
-		if(Global.dialog_text_node!=null):
-			Global.dialog_text_node.dialog_option_chosen.connect(_option_chosen)
+		if(Global.dialog_core!=null):
+			Global.dialog_core.dialog_option_chosen.connect(_option_chosen)
 			mission_dialog_core_set = true
 		#doo_doo = 
 		if(get_node("Hitbox").is_node_ready()):

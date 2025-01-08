@@ -12,7 +12,6 @@ var KeyactionHandler: Node2D
 var current_scene_path: String
 var current_game_slot: int
 var is_multiplayer: bool
-var dialog_text_node: TextureRect
 var boids_calculator_node: BoidsCalculator
 var player: Diver
 var submarine : Entity

@@ -19,6 +19,7 @@ var last_played_letterindex: int = 0
 
 var dialog_sfx_node: AudioStreamPlayer
 
+var shit
 @export_node_path("Button") var response_button_one
 @export_node_path("Button") var response_button_two
 @export_node_path("Button") var response_button_three
@@ -36,7 +37,11 @@ func _ready() -> void:
 	response_buttons[3].button_down.connect(response_option_four)	
 	get_node("VBoxContainer").get_node("DialogTextLabel").size = self.size*0.9
 	get_node("VBoxContainer").get_node("DialogTextLabel").position = self.position
-	if(!get_parent().name=="GameUIOverlay"):
+	shit = get_parent().name
+	print(shit)
+	shit = get_parent().name=="GameUIOverlay"
+	print(get_parent().name=="GameUIOverlay")
+	if(!(get_parent().name == "GameUIOverlay")):
 		Global.dialog_core = self
 
 func _process(delta:float)->void:
@@ -87,5 +92,5 @@ func play_dialog(dialog_input:String, dialog_speed_inp:int, options:Array):
 	dialog_played = false
 	dialog = dialog_input
 	dialog_speed = dialog_speed_inp
-	text_node.text += dialog[0]
+	text_node.text = ""
 	
