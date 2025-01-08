@@ -6,42 +6,58 @@ class_name Speargun
 extends Gun
 
 @onready var emit_point: Node2D = $"EmitPoint"
-@onready var gun_sprite: Sprite2D = $"GunSprite"  # TODO: replace with animated node2D 
+@onready var cone_of_fire: ConeOfFire = $"EmitPoint/ConeOfFire"
+
+@onready var hand1_point: Node2D = $"Hand1Point"
+@onready var hand2_point: Node2D = $"Hand2Point"
 
 func _process(delta: float) -> void:
 	super(delta)
-	global_position = get_gun_position()
-	global_rotation = get_gun_rotation()
+	
+	if gun_state == GunState.HOLDING:
+		use_hand1 = false
+		use_hand2 = false
+		dist_from_head = 60
+	else:
+		use_hand1 = true
+		use_hand2 = true
+		dist_from_head = 50
 
-func get_gun_position() -> Vector2:
-	return hand1_pos
+func get_hand1_pos() -> Vector2:
+	if flipped || gun_state == GunState.HOLDING:
+		return hand1_point.global_position
+	else:
+		return hand2_point.global_position
 
-func get_gun_rotation() -> float:
-	var mouse_pos: Vector2 = get_global_mouse_position()
-	return hand1_pos.angle_to_point(mouse_pos)
+func get_hand2_pos() -> Vector2:
+	if flipped || gun_state == GunState.HOLDING:
+		return hand2_point.global_position
+	else:
+		return hand1_point.global_position
 
-func attack() -> void:
+func perform_attack() -> void:
 	var new_spear: Spear = bullet_scene.instantiate()
-	add_child(new_spear)
+	add_child(new_spear, true)
 	
 	new_spear.global_position = emit_point.global_position
 	new_spear.global_rotation = global_rotation
 	
-	var angle: float = global_position.angle_to_point(mouse_pos)
+	var angle: float = cone_of_fire.get_shot_angle()
 	new_spear.fire(angle)
-	
+	"""
 	var new_rope := VerletRope.new()
 	new_rope.component_container = self.get_path()
 	new_rope.start_pos_on = true
 	new_rope.start_anchor_node = emit_point
 	new_rope.end_pos_on = true
 	new_rope.end_anchor_node = new_spear.rope_point
-	print(new_rope.end_anchor_node)
 	
 	add_child(new_rope)
 	
 	var new_rope_drawer := RopeLineDrawer.new()
 	add_child(new_rope_drawer)
 	new_rope_drawer.rope = new_rope
-	
+	"""
 	#print_tree_pretty()
+	var force: Vector2 = Util.angle_to_vector_radians(global_rotation + PI, knockback)
+	diver.diver_movement.knockback(force)

@@ -24,7 +24,7 @@ func _ready_health() -> void:
 func take_damage(amount: float) -> void:
 	if not _iframes_active:
 		_health -= amount
-		clampf(max_health, 0.0, max_health)
+		max_health = clampf(max_health, 0.0, max_health)
 		iframes_on(iframe_duration)
 		
 		damage_taken.emit(_health)

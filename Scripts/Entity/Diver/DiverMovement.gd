@@ -58,15 +58,18 @@ func update_movement_velocity(delta: float):
 	velocity = velocity * 0.97
 	
 	if input_vector != Vector2.ZERO: 
-		velocity += Util.angle_to_vector(current_angle, CONST_ACCEL * delta)
+		velocity += Util.angle_to_vector_radians(current_angle, CONST_ACCEL * delta)
 	
 	if Input.is_action_just_pressed("move"):
-		velocity += Util.angle_to_vector(current_angle, TAP_ACCEL * delta)
+		velocity += Util.angle_to_vector_radians(current_angle, TAP_ACCEL * delta)
 		boosted.emit()
 	
 	# Clamp velocity to MAX_SPEED
 	if velocity.length() > MAX_SPEED:
 		velocity = velocity.normalized() * MAX_SPEED
+
+func knockback(force: Vector2) -> void:
+	velocity += force
 
 func get_velocity() -> Vector2:
 	return self.velocity

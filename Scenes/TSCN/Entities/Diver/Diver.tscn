@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
+[ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="15_d0rdv"]
+[ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 
 [sub_resource type="Resource" id="Resource_175vb"]
 resource_local_to_scene = true
@@ -388,7 +390,7 @@ metadata/_local_pose_override_enabled_ = true
 use_parent_material = true
 position = Vector2(-41.3307, 7.46825)
 rotation = 0.187753
-scale = Vector2(0.999999, 0.999999)
+scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(0.984562, 0.175033, -0.175033, 0.984562, -41.3307, 7.46825)
 auto_calculate_length_and_angle = false
 length = 45.651
@@ -553,6 +555,12 @@ speargun = ExtResource("8_ntafm")
 knife = ExtResource("9_hstvg")
 pistol = ExtResource("10_oh1is")
 
+[node name="ReloadBar" parent="Combat" instance=ExtResource("16_o1yih")]
+offset_left = -13.0
+offset_top = -126.0
+offset_right = 83.0
+offset_bottom = -30.0
+scale = Vector2(0.272378, 0.272378)
 [node name="AttackBox" type="Area2D" parent="Combat"]
 rotation = 0.000201209
 collision_layer = 32

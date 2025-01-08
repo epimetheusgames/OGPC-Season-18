@@ -6,14 +6,13 @@ extends Gun
 
 @onready var pistol_sprite: AnimatedSprite2D = $"PistolSprite"
 @onready var emit_point: Node2D = $"EmitPoint"
+@onready var cone_of_fire: ConeOfFire = $"ConeOfFire"
 
-var flipped: bool = false
 var shooting: bool = false
 
 func _process(delta: float) -> void:
 	super(delta)
-	global_position = get_gun_position()
-	global_rotation = get_gun_rotation()
+	
 	#combat.move_hand_toward_mouse("right")
 	
 	if !pistol_sprite.animation == "Flip":
@@ -25,14 +24,8 @@ func _process(delta: float) -> void:
 	if !pistol_sprite.animation == "Shoot":
 		shooting = false
 
-func get_gun_position() -> Vector2:
-	return hand1_pos
 
-func get_gun_rotation() -> float:
-	var forearm: Node2D = diver.diver_animation.get_node("Skeleton/Torso/UpperArm2/Forearm2")
-	return forearm.global_position.angle_to_point(hand1_pos)
-
-func attack() -> void:
+func perform_attack() -> void:
 	if !pistol_sprite.animation == "Shoot" && !shooting:
 		pistol_sprite.play("Shoot")
 		
@@ -44,7 +37,8 @@ func attack() -> void:
 			add_child(bullet)
 			
 			bullet.global_position = emit_point.global_position
-			bullet.fire(global_rotation)
+			var shot_angle: float = cone_of_fire.get_shot_angle()
+			bullet.fire(shot_angle)
 			
 			# Wtf is this line my g
 			#Global.godot_steam_abstraction.run_remote_function(self, "spawn_bullet", [$BulletShootPosition.global_position, (Vector2.from_angle(global_rotation) * bullet_velocity * 60 + diver.velocity), global_rotation + PI / 2.0])

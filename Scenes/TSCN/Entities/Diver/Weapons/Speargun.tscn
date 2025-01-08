@@ -1,17 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3vsej6l54pdk"]
+[gd_scene load_steps=5 format=3 uid="uid://c3vsej6l54pdk"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Speargun.gd" id="1_6b6mx"]
 [ext_resource type="Texture2D" uid="uid://cgiqymjjt6jkp" path="res://Assets/Art/Sprites/Speargun.png" id="2_ftc3n"]
 [ext_resource type="PackedScene" uid="uid://dkiqku8nhydo3" path="res://Scenes/TSCN/Entities/Diver/Weapons/Spear.tscn" id="2_qlup2"]
+[ext_resource type="PackedScene" uid="uid://cyelkkty2ihsb" path="res://Scenes/TSCN/Entities/Diver/Weapons/ConeOfFire.tscn" id="3_xrh0y"]
 
 [node name="Speargun" type="Node2D"]
 script = ExtResource("1_6b6mx")
 bullet_scene = ExtResource("2_qlup2")
+max_bullet_amount = 1
+reload_time = 5.0
+cooldown_time = 0.0
+knockback = 1000.0
 
-[node name="GunSprite" type="Sprite2D" parent="."]
-position = Vector2(37, -4)
-texture = ExtResource("2_ftc3n")
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -7.0
+offset_top = -10.0
+offset_right = 8.0
+offset_bottom = 18.0
+metadata/_edit_lock_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -7.0
+offset_top = -12.0
+offset_right = 100.0
 metadata/_edit_lock_ = true
 
 [node name="EmitPoint" type="Node2D" parent="."]
-position = Vector2(67, -8)
+position = Vector2(96, -6)
+
+[node name="ConeOfFire" parent="EmitPoint" instance=ExtResource("3_xrh0y")]
+range = 500.0
+
+[node name="Hand1Point" type="Node2D" parent="."]
+position = Vector2(0, 10)
+
+[node name="Hand2Point" type="Node2D" parent="."]
+position = Vector2(42, -5)
+
+[node name="GunSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(37, -4)
+texture = ExtResource("2_ftc3n")
+metadata/_edit_lock_ = true

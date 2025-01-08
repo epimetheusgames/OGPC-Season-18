@@ -90,10 +90,23 @@ static func better_angle_lerp(a: float, b: float, decay: float, delta: float):
 	return b + (angle_difference(b, a)) * exp(-decay * delta)
 
 # Turns an angle and a magnitude to a vector.
-static func angle_to_vector(angle: float, magnitude: float) -> Vector2:
+static func angle_to_vector_degrees(angle: float, magnitude: float) -> Vector2:
+	var x: float = magnitude * cos(deg_to_rad(angle))
+	var y: float = magnitude * sin(deg_to_rad(angle))
+	return Vector2(x, y)
+
+static func angle_to_vector_radians(angle: float, magnitude: float) -> Vector2:
 	var x: float = magnitude * cos(angle)
 	var y: float = magnitude * sin(angle)
 	return Vector2(x, y)
+
+
+# Returns angle within the normal range
+static func normalize_angle_degrees(a: float) -> float:
+	return fmod(fmod(a, 360) + 360, 360)
+
+static func normalize_angle_radians(a: float) -> float:
+	return fmod(fmod(a, TAU) + TAU, TAU)
 
 static func smooth_line(input: PackedVector2Array, resolution_multiplier: float) -> PackedVector2Array:
 	var output: PackedVector2Array = []

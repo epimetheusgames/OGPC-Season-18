@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6p45ud1ea7gh"]
+
+[ext_resource type="Texture2D" uid="uid://dr3xh14crxk34" path="res://Assets/ReloadBar.png" id="1_d2bwx"]
+
+[node name="ReloadBar" type="TextureProgressBar"]
+offset_right = 96.0
+offset_bottom = 96.0
+fill_mode = 4
+texture_under = ExtResource("1_d2bwx")
+texture_progress = ExtResource("1_d2bwx")
+tint_progress = Color(1, 0, 1, 1)
