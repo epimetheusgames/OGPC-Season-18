@@ -43,8 +43,7 @@ func touching_bodies() -> bool:
 	doo_doo = bodies
 	bodies = bodies.filter(func(node): return node is CharacterBody2D)
 	bodies.remove_at(0)
-	#print("chat are the bodies finna touching the npc")
-	#print(bodies)
+	
 	return bodies.size()>0
 func _option_chosen():
 	current_location+="["+str(Global.dialog_core.response)+"][0][1][0]"
@@ -65,14 +64,15 @@ func deferred_ready():
 	dialog_json = JSON.new()
 	_get_dialog()
 	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
-	Global.dialog_text_node.dialog_option_chosen.connect(_option_chosen)
+	if Global.dialog_text_node:
+		Global.dialog_text_node.dialog_option_chosen.connect(_option_chosen)
 	#doo_doo = 
 	if(get_node("Hitbox").is_node_ready()):
 		do_that_thingy()
 	get_node("Hitbox").ready.connect(do_that_thingy)
 
 func do_that_thingy() -> void:
-	if(has_dialog):
+	if(has_dialog) && Global.KeyactionHandler:
 		Global.KeyactionHandler.interact.connect(try_trigger_talking)
 func die() -> void:
 	#play some skibidi death animation or something
@@ -90,5 +90,6 @@ func trigger_talking() -> void:
 		Global.dialog_active = false
 func _process(delta) -> void:
 	super(delta)
-	Global.dialog_core.visible = Global.dialog_active
+	if Global.dialog_core:
+		Global.dialog_core.visible = Global.dialog_active
 	

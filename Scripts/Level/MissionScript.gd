@@ -12,7 +12,8 @@ func turn_on_efficient():
 		$LevelContainer/Level/Background.material = null
 		$LevelContainer/Level/TransBackground.material = null
 func _ready():
-	Global.current_mission.success_state_checker.initialize($LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver)
+	if Global.current_mission:
+		Global.current_mission.success_state_checker.initialize($LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver)
 	
 	Global.current_mission_node = self
 	if Global.super_efficient:

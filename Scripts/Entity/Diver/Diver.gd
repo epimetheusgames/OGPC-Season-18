@@ -22,7 +22,7 @@ var diver_state : Util.DiverState
 @export var oxygen_boost_loss := 1
 
 func _ready() -> void:
-	if node_owner == 0 && !Global.godot_steam_abstraction.is_lobby_owner:
+	if Global.godot_steam_abstraction && node_owner == 0 && !Global.godot_steam_abstraction.is_lobby_owner:
 		node_owner = Global.godot_steam_abstraction.steam_id
 	
 	set_state(Util.DiverState.SWIMMING)
