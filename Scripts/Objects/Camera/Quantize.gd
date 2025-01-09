@@ -17,6 +17,9 @@ func _ready() -> void:
 		vec4_palette.append(vec4_color)
 	
 	set_shader_process(true)
+	
+	for color: Color in palette:
+		print(color)
 
 func set_shader_process(turned_on: bool):
 	if turned_on:

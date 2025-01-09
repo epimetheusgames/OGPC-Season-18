@@ -1,35 +1,22 @@
-// Quantization or posterization limits the amounts of colors on the screen
-// This is done by matching each color it's the closest match in the palette
-
 shader_type canvas_item;
+render_mode unshaded;
 
-uniform sampler2D screen_texture: hint_screen_texture, repeat_disable, filter_nearest;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest;
 
-uniform vec4[256] color_palette;
-uniform int colors_amount = 10;
-
-varying int closest_palette_index;
-
-
-float get_color_difference(vec4 c1, vec4 c2) {
-	vec3 diff = c1.rgb - c2.rgb;
-	return dot(diff, diff);
-}
+uniform float posterization_level;
 
 void fragment() {
-	vec4 screen_color = texture(screen_texture, SCREEN_UV);
+	vec4 base = texture(SCREEN_TEXTURE, SCREEN_UV);
 
-	float min_dif = 100000.0;
-	closest_palette_index = 0;
-	for (int i = 0; i < colors_amount; i++) {
-		float current_dif = get_color_difference(screen_color, color_palette[i]);
-		if (current_dif < min_dif) {
-			min_dif = current_dif;
-			closest_palette_index = i;
-		}
-	}
+	float gray = max(base.r, max(base.g, base.b));
+	float lower = floor(gray * posterization_level) / posterization_level;
+	float upper = ceil(gray * posterization_level) / posterization_level;
 
-	vec4 quantized_color = color_palette[closest_palette_index];
+	float lower_diff = gray - lower;
+	float upper_diff = upper - gray;
 
-	COLOR = quantized_color;
+	float level = (lower_diff <= upper_diff) ? lower : upper;
+	float adjustment = level / gray;
+
+	COLOR = vec4(base.rgb * adjustment, 1);
 }
