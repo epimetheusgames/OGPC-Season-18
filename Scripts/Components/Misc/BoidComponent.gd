@@ -61,6 +61,9 @@ func _ready_boid() -> void:
 	var rng := RandomNumberGenerator.new()
 	component_container_node.modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
 
+func _exit_tree() -> void:
+	Global.boids_calculator_node.remove_boid_index(index)
+
 # Update velocity using compute shader outputs from boids calculator node.
 func _process(delta: float) -> void: 
 	if !boids_calculator || boids_calculator.process_mode == Node.PROCESS_MODE_DISABLED:
