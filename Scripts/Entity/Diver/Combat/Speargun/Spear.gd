@@ -14,7 +14,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
-	if attached and attach_body:
+	if attached and is_instance_valid(attach_body):
 		global_position = attach_body.to_global(attach_dif)
 		global_rotation = global_position.angle_to_point(attach_body.global_position)
 

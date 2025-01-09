@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=44 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
-[ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="15_d0rdv"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 
 [sub_resource type="Resource" id="Resource_175vb"]
@@ -561,6 +560,7 @@ offset_top = -126.0
 offset_right = 83.0
 offset_bottom = -30.0
 scale = Vector2(0.272378, 0.272378)
+
 [node name="AttackBox" type="Area2D" parent="Combat"]
 rotation = 0.000201209
 collision_layer = 32
