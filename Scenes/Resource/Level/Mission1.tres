@@ -1,4 +1,5 @@
 [gd_resource type="Resource" script_class="Mission" load_steps=6 format=3 uid="uid://b41cmtc2q6li2"]
+
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="1_d5g2i"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="2_4hp0o"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionSuccessState.gd" id="3_gp47f"]

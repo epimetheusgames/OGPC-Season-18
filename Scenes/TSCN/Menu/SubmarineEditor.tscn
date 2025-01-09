@@ -51,17 +51,17 @@ columns = 3
 layout_mode = 2
 text = "Control Module"
 
-[node name="LPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+[node name="PassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
 layout_mode = 2
 text = "Horizontal Module"
 
-[node name="RlPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
-layout_mode = 2
-text = "End Module"
-
-[node name="UDPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+[node name="CornerPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
 layout_mode = 2
 text = "Corner Module"
+
+[node name="EndModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "End Module"
 
 [node name="SubmarineView" type="PanelContainer" parent="SplitContainer"]
 layout_mode = 2
@@ -98,11 +98,13 @@ size = Vector2i(800, 600)
 ok_button_text = "Open"
 file_mode = 0
 
+[connection signal="mouse_entered" from="SplitContainer/PanelContainer" to="." method="_on_editing_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="SplitContainer/PanelContainer" to="." method="_on_editing_panel_mouse_exited"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer/LoadButton" to="." method="_on_load_button_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/ControlModule" to="." method="_on_control_module_button_up"]
-[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/LPassageModule" to="." method="_on_l_passage_module_button_up"]
-[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/RlPassageModule" to="." method="_on_rl_passage_module_button_up"]
-[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/UDPassageModule" to="." method="_on_ud_passage_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/PassageModule" to="." method="_on_passage_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/CornerPassageModule" to="." method="_on_corner_passage_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/EndModule" to="." method="_on_end_passage_module_button_up"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]

@@ -7,6 +7,10 @@ var attachment_points : Array[AttachmentPoint]
 var render_attachment_points := false
 
 func _ready() -> void:
+	var navigation_obstacle = StaticBody2D.new()
+	navigation_obstacle.name = "NavigationObstacle"
+	add_child(navigation_obstacle, true)
+	
 	if get_node_or_null("AttachmentPoints"):
 		for child in $"AttachmentPoints".get_children():
 			attachment_points.append(child)

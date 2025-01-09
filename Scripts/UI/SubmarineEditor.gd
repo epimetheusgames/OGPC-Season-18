@@ -6,8 +6,8 @@ extends Control
 @onready var grid = $"SplitContainer/PanelContainer/VSplitContainer/GridContainer"
 
 @onready var control_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn")
-@onready var submarine_L_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineLPassageModule.tscn")
-@onready var submarine_rl_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineRlPassageModule.tscn")
+@onready var submarine_corner_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineCornerPassageModule.tscn")
+@onready var submarine_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarinePassageModule.tscn")
 @onready var submarine_end_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule.tscn")
 
 var modules: Array[SubmarineModule] = []
@@ -24,14 +24,13 @@ func add_module(new_module: SubmarineModule):
 func _on_control_module_button_up() -> void:
 	add_module(control_module.instantiate())
 
-func _on_ud_passage_module_button_up() -> void:
-	add_module(submarine_L_passage_module.instantiate())
+func _on_corner_passage_module_button_up() -> void:
+	add_module(submarine_corner_passage_module.instantiate())
 
-func _on_l_passage_module_button_up() -> void:
-	add_module(submarine_rl_passage_module.instantiate())
+func _on_passage_module_button_up() -> void:
+	add_module(submarine_passage_module.instantiate())
 
-# Actually the end module.
-func _on_rl_passage_module_button_up() -> void:
+func _on_end_passage_module_button_up() -> void:
 	add_module(submarine_end_module.instantiate())
 
 func _process(delta: float) -> void:
