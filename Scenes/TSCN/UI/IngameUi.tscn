@@ -10,8 +10,8 @@ colors = PackedColorArray(0.5, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_uj8mc"]
 gradient = SubResource("Gradient_eq4ay")
-width = 30
-height = 120
+width = 200
+height = 30
 
 [sub_resource type="Gradient" id="Gradient_e0iga"]
 offsets = PackedFloat32Array(0)
@@ -19,8 +19,8 @@ colors = PackedColorArray(0.17, 1, 0.363667, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_tl1p2"]
 gradient = SubResource("Gradient_e0iga")
-width = 30
-height = 120
+width = 200
+height = 30
 
 [sub_resource type="Gradient" id="Gradient_aq7m3"]
 offsets = PackedFloat32Array(0)
@@ -28,8 +28,8 @@ colors = PackedColorArray(0.496653, 0.496654, 0.496653, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_gr1oq"]
 gradient = SubResource("Gradient_aq7m3")
-width = 30
-height = 120
+width = 200
+height = 30
 
 [sub_resource type="Gradient" id="Gradient_221s0"]
 offsets = PackedFloat32Array(0)
@@ -37,8 +37,8 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_q3rum"]
 gradient = SubResource("Gradient_221s0")
-width = 30
-height = 120
+width = 200
+height = 30
 
 [node name="IngameUI" type="Control"]
 layout_mode = 3
@@ -52,23 +52,24 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 172.0
+offset_bottom = 40.0
 grow_horizontal = 2
 script = ExtResource("1_0aoln")
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer"]
 layout_mode = 2
 
 [node name="HealthVBox" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(120, 150)
+custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/HealthVBox"]
-custom_minimum_size = Vector2(0, 120)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="HealthProgress" type="TextureProgressBar" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer"]
@@ -76,18 +77,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 15.0
 value = 15.0
-fill_mode = 3
 texture_under = SubResource("GradientTexture2D_uj8mc")
 texture_progress = SubResource("GradientTexture2D_tl1p2")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/HealthVBox"]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-
-[node name="HealthText" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer2"]
+[node name="HealthText" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer/HealthProgress"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+offset_left = 4.0
+offset_right = 124.0
+offset_bottom = 30.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 21
 text = "Health"
 
 [node name="VSeparator" type="VSeparator" parent="HUD/MarginContainer/HBoxContainer"]
@@ -95,11 +95,11 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="OxygenVBox" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(120, 150)
+custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox"]
-custom_minimum_size = Vector2(0, 120)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="OxygenProgress" type="TextureProgressBar" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer"]
@@ -110,14 +110,14 @@ fill_mode = 3
 texture_under = SubResource("GradientTexture2D_gr1oq")
 texture_progress = SubResource("GradientTexture2D_q3rum")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox"]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-
-[node name="OxygenText" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer2"]
+[node name="OxygenText" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer/OxygenProgress"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 30
+offset_left = 3.0
+offset_right = 123.0
+offset_bottom = 30.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 21
 text = "Oxygen"
 
 [node name="TeamInfoPanel" type="PanelContainer" parent="."]
