@@ -1,28 +1,21 @@
-@tool
+# Handles post processing shaders
+
 extends CanvasLayer
 
-@export var quantize_on: bool = true
-@export var pixelize_on: bool = true
+@onready var posterize: ShaderMaterial = $"Posterize/ColorRect".material
+@onready var pixelize: ShaderMaterial = $"Pixelize/ColorRect".material
 
-@onready var quantize_shader: BackBufferCopy = $"Quantize"
-@onready var pixelize_shader: BackBufferCopy = $"Pixelize"
+var posterize_level: float = 4.0
+var pixelize_level: float = 4.0
 
 func _ready() -> void:
-	$Pixelize/ColorRect.size = DisplayServer.window_get_size()
-	$Rain/ColorRect.size = DisplayServer.window_get_size()
-	$Quantize/ColorRect.size = DisplayServer.window_get_size()
-	$Vignette/ColorRect.size = DisplayServer.window_get_size()
-	
-	if Engine.is_editor_hint():
-		quantize_shader.set_shader_process(false)
-		pixelize_shader.set_shader_process(false)
-	else:
-		if quantize_on:
-			quantize_shader.set_shader_process(true)
-		else:
-			quantize_shader.set_shader_process(false)
-		
-		if pixelize_on:
-			pixelize_shader.set_shader_process(true)
-		else:
-			pixelize_shader.set_shader_process(false)
+	posterize_level = posterize.get_shader_parameter("posterization_level")
+	pixelize_level = pixelize.get_shader_parameter("pixelization_level")
+
+func set_posterize_level(level: float):
+	posterize_level = level
+	posterize.set_shader_parameter("posterization_level", posterize_level)
+
+func set_pixelize_level(level: float):
+	pixelize_level = level
+	pixelize.set_shader_parameter("pixelization_level", pixelize_level)

@@ -1,18 +1,13 @@
-[gd_scene load_steps=67 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=53 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
-[ext_resource type="Script" path="res://Scripts/Objects/Camera/PaletteLoader.gd" id="1_awqxm"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/ShaderManager.gd" id="1_s361y"]
-[ext_resource type="Script" path="res://Scripts/Objects/Camera/Quantize.gd" id="2_fhpdt"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="4_0q3xc"]
 [ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="Script" path="res://Scripts/Objects/AutoPolygonTexture.gd" id="5_aep54"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Quantize.gdshader" id="5_rc3kh"]
-[ext_resource type="Script" path="res://Scripts/Objects/Camera/Pixelize.gd" id="5_t6m55"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Rain.gdshader" id="8_86uvj"]
-[ext_resource type="Texture2D" uid="uid://b0wdu5xab8dbs" path="res://Assets/Art/Sprites/Misc/RainNoise.png" id="9_rw0ak"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="5_rc3kh"]
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="10_gbtle"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
@@ -21,73 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
-[ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="28_1g0ie"]
+[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="24_xbggn"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
 [ext_resource type="PackedScene" uid="uid://dqb5sqhg7l1io" path="res://Scenes/TSCN/Objects/Items/Rock.tscn" id="31_boa6h"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dh4ys"]
-shader = ExtResource("11_wv41s")
-shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
-shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
-shader_parameter/always_top = false
-shader_parameter/blend_alpha = false
-shader_parameter/max_alpha = 0.2
-shader_parameter/height = 1.0
-shader_parameter/depth_color_tex = ExtResource("12_c52vc")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yu0vj"]
-load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-327f5b874898d4dde69f55c283418e46.ctex"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_exbxk"]
-shader = ExtResource("11_wv41s")
-shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
-shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
-shader_parameter/always_top = false
-shader_parameter/blend_alpha = true
-shader_parameter/max_alpha = 0.9
-shader_parameter/height = 3.5
-shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
-
-[sub_resource type="Curve" id="Curve_6rk86"]
-_data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_t3p8f"]
-curve = SubResource("Curve_6rk86")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcosd"]
-particle_flag_disable_z = true
-particle_flag_damping_as_friction = true
-emission_shape = 3
-emission_box_extents = Vector3(960, 540, 1)
-gravity = Vector3(0, -98, 0)
-damping_min = 1.0
-damping_max = 1.0
-scale_min = 0.3
-scale_max = 0.8
-scale_curve = SubResource("CurveTexture_t3p8f")
-collision_mode = 2
-collision_use_scale = true
-
-[sub_resource type="Gradient" id="Gradient_tetp1"]
-colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0nxag"]
-gradient = SubResource("Gradient_tetp1")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_gnvk0"]
-viewport_path = NodePath("ParticlesViewport")
 
 [sub_resource type="Resource" id="Resource_km6pi"]
 resource_local_to_scene = true
@@ -277,27 +213,37 @@ glow_blend_mode = 0
 glow_hdr_scale = 0.0
 glow_map_strength = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dh4ys"]
+shader = ExtResource("11_wv41s")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.2
+shader_parameter/height = 1.0
+shader_parameter/depth_color_tex = ExtResource("12_c52vc")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yu0vj"]
+load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-327f5b874898d4dde69f55c283418e46.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exbxk"]
+shader = ExtResource("11_wv41s")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = true
+shader_parameter/max_alpha = 0.9
+shader_parameter/height = 3.5
+shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yo3nw"]
 shader = ExtResource("5_rc3kh")
-shader_parameter/posterization_level = 6.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jugfr"]
-shader = ExtResource("8_86uvj")
-shader_parameter/intensity = 0.2
-shader_parameter/noise = ExtResource("9_rw0ak")
+shader_parameter/posterization_level = 5.215
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1360, 552)
-shader_parameter/pixel_size = 4
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
-shader = ExtResource("28_ss3wm")
-shader_parameter/inner_radius = 0.1
-shader_parameter/outer_radius = 1.0
-shader_parameter/vignette_strength = 1.5
-shader_parameter/dither_strength = 0.03
-shader_parameter/vignette_color = null
+shader_parameter/SCREEN_SIZE = Vector2(1920, 1080)
+shader_parameter/pixelization_level = 3.071
 
 [node name="Mission1" type="Node2D"]
 script = ExtResource("1_314ux")
@@ -307,64 +253,7 @@ position = Vector2(-1079, 1654)
 scale = Vector2(29.4625, 24.4444)
 texture = ExtResource("4_0q3xc")
 
-[node name="OceanShader" type="Node2D" parent="."]
-visible = false
-
-[node name="Background" type="ColorRect" parent="OceanShader"]
-z_index = -10
-material = SubResource("ShaderMaterial_dh4ys")
-offset_left = 11139.0
-offset_right = 28857.0
-offset_bottom = 10843.0
-scale = Vector2(-1, 1)
-color = Color(0.0117647, 0.0117647, 0.0901961, 1)
-metadata/_edit_lock_ = true
-
-[node name="TransBackground" type="ColorRect" parent="OceanShader"]
-z_index = 10
-material = SubResource("ShaderMaterial_exbxk")
-offset_left = 11139.0
-offset_right = 28857.0
-offset_bottom = 10843.0
-scale = Vector2(-1, 1)
-color = Color(0.0117, 0.0117, 0.09, 0.807843)
-metadata/_edit_lock_ = true
-
-[node name="Background2" type="ColorRect" parent="OceanShader"]
-z_index = -10
-material = SubResource("ShaderMaterial_dh4ys")
-offset_left = 11139.0
-offset_right = 28857.0
-offset_bottom = 10843.0
-color = Color(0.0117647, 0.0117647, 0.0901961, 1)
-metadata/_edit_lock_ = true
-
-[node name="TransBackground2" type="ColorRect" parent="OceanShader"]
-z_index = 10
-material = SubResource("ShaderMaterial_exbxk")
-offset_left = 11139.0
-offset_right = 28857.0
-offset_bottom = 10843.0
-color = Color(0.0117, 0.0117, 0.09, 0.807843)
-metadata/_edit_lock_ = true
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="OceanShader"]
-rotation = -0.464765
-energy = 0.0
-shadow_filter = 2
-max_distance = 1e+06
-
-[node name="ParticlesViewport" type="SubViewport" parent="."]
-transparent_bg = true
-use_hdr_2d = true
-size = Vector2i(1920, 1080)
-
-[node name="WaterParticles" type="GPUParticles2D" parent="ParticlesViewport"]
-position = Vector2(960, 540)
-process_material = SubResource("ParticleProcessMaterial_hcosd")
-texture = SubResource("GradientTexture2D_0nxag")
-lifetime = 5.0
-visibility_rect = Rect2(-960, -540, 1920, 1080)
+[node name="SubViewport" type="SubViewport" parent="."]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = 0
@@ -374,10 +263,9 @@ motion_scale = Vector2(2, 2)
 motion_mirroring = Vector2(1920, 1080)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 625.0
+offset_bottom = 619.0
 scale = Vector2(1.5, 1.5)
-texture = SubResource("ViewportTexture_gnvk0")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(1.3, 1.3)
@@ -386,17 +274,16 @@ motion_mirroring = Vector2(1920, 1080)
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer2"]
 offset_right = 40.0
 offset_bottom = 40.0
-texture = SubResource("ViewportTexture_gnvk0")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.7, 0.7)
 motion_mirroring = Vector2(1920, 1080)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer3"]
+offset_top = -2.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 38.0
 scale = Vector2(0.6, 0.6)
-texture = SubResource("ViewportTexture_gnvk0")
 
 [node name="LevelContainer" type="Node2D" parent="."]
 
@@ -734,106 +621,109 @@ position = Vector2(923, 462)
 npc_name = "test_npc"
 has_dialog = true
 
+[node name="Jellyfish" parent="LevelContainer/Entities" instance=ExtResource("24_xbggn")]
+position = Vector2(809, 2079)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5ulyy")
+
+[node name="OceanShader" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="ColorRect" parent="OceanShader"]
+z_index = -10
+material = SubResource("ShaderMaterial_dh4ys")
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+scale = Vector2(-1, 1)
+color = Color(0.0117647, 0.0117647, 0.0901961, 1)
+metadata/_edit_lock_ = true
+
+[node name="TransBackground" type="ColorRect" parent="OceanShader"]
+z_index = 10
+material = SubResource("ShaderMaterial_exbxk")
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+scale = Vector2(-1, 1)
+color = Color(0.0117, 0.0117, 0.09, 0.807843)
+metadata/_edit_lock_ = true
+
+[node name="Background2" type="ColorRect" parent="OceanShader"]
+z_index = -10
+material = SubResource("ShaderMaterial_dh4ys")
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+color = Color(0.0117647, 0.0117647, 0.0901961, 1)
+metadata/_edit_lock_ = true
+
+[node name="TransBackground2" type="ColorRect" parent="OceanShader"]
+z_index = 10
+material = SubResource("ShaderMaterial_exbxk")
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+color = Color(0.0117, 0.0117, 0.09, 0.807843)
+metadata/_edit_lock_ = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="OceanShader"]
+rotation = -0.464765
+energy = 0.0
+shadow_filter = 2
+max_distance = 1e+06
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.233925, 0.233925, 0.233925, 1)
 
 [node name="Shaders" type="CanvasLayer" parent="."]
 script = ExtResource("1_s361y")
 
-[node name="Quantize" type="BackBufferCopy" parent="Shaders"]
+[node name="Posterize" type="BackBufferCopy" parent="Shaders"]
 rect = Rect2(0, 0, 1920, 1080)
-script = ExtResource("2_fhpdt")
-shader = ExtResource("5_rc3kh")
+metadata/_edit_lock_ = true
 
-[node name="PaletteLoader" type="Node2D" parent="Shaders/Quantize"]
-script = ExtResource("1_awqxm")
-palette = ExtResource("4_0q3xc")
-
-[node name="ColorRect" type="ColorRect" parent="Shaders/Quantize"]
+[node name="ColorRect" type="ColorRect" parent="Shaders/Posterize"]
 material = SubResource("ShaderMaterial_yo3nw")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1150.0
-offset_bottom = 970.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0)
-
-[node name="Rain" type="BackBufferCopy" parent="Shaders"]
-visible = false
-rect = Rect2(0, 0, 1920, 1080)
-
-[node name="ColorRect" type="ColorRect" parent="Shaders/Rain"]
-material = SubResource("ShaderMaterial_jugfr")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1150.0
-offset_bottom = 970.0
-grow_horizontal = 2
-grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Pixelize" type="BackBufferCopy" parent="Shaders"]
-visible = false
 rect = Rect2(0, 0, 1920, 1080)
-script = ExtResource("5_t6m55")
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Shaders/Pixelize"]
 material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -560.0
-offset_bottom = -528.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0)
-
-[node name="Vignette" type="BackBufferCopy" parent="Shaders" node_paths=PackedStringArray("player")]
-visible = false
-rect = Rect2(0, 0, 1920, 1080)
-script = ExtResource("28_1g0ie")
-player = NodePath("../../LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver")
-
-[node name="ColorRect" type="ColorRect" parent="Shaders/Vignette"]
-material = SubResource("ShaderMaterial_g7l6p")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1150.0
-offset_bottom = 970.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
 visible = false
 
 [node name="DevPanel" parent="UI" instance=ExtResource("1_6r47m")]
-visible = false
-offset_left = 136.0
-offset_top = 179.0
-offset_right = 136.0
-offset_bottom = 179.0
+metadata/_edit_lock_ = true
 
 [node name="IngameUI" parent="UI" instance=ExtResource("29_54jb5")]
+visible = false
 
-[node name="DeathScreen" parent="UI" node_paths=PackedStringArray("ingame_ui", "vignette_shader") instance=ExtResource("32_kyt52")]
+[node name="DeathScreen" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("32_kyt52")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
-vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 
-[node name="MissionSuccessScreen" parent="UI" node_paths=PackedStringArray("ingame_ui", "vignette_shader") instance=ExtResource("33_aiin4")]
+[node name="MissionSuccessScreen" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("33_aiin4")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
-vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 6483.0
-offset_bottom = 5603.0
-color = Color(0.0784314, 0.2, 1, 1)
 
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Level/Items/LightLine"]

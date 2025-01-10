@@ -1,9 +1,9 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest;
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_nearest;
 
-uniform float posterization_level;
+uniform float posterization_level: hint_range(0, 20);
 
 void fragment() {
 	vec4 base = texture(SCREEN_TEXTURE, SCREEN_UV);
