@@ -32,7 +32,7 @@ var dialog_thingy
 
 # Dialog beep sound thingy 
 @export_file("*.wav") var talking_sound
-
+var shat
 var conversation_index := 0
 var sentence_index := 0
 
@@ -44,9 +44,10 @@ func touching_bodies() -> bool:
 	#omg functional programming moment (lambdas)
 	doo_doo = bodies
 	bodies = bodies.filter(func(node): return node is CharacterBody2D)
-	bodies.remove_at(0)
+	bodies.filter(func(node): return !(node.name == "Submarine") || !(node.name == self.name))
 	print("chat are the bodies finna touching the npc")
 	print(bodies)
+	shat = bodies[0]
 	return bodies.size()>0
 func _option_chosen():
 	current_location+="["+str(Global.dialog_core.response)+"][0][1][0]"
