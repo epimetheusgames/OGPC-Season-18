@@ -40,7 +40,10 @@ func _ready() -> void:
 	$ModuleArea.area_exited.connect(_area_mouse_exited)
 
 func _process(delta: float) -> void:
-	if mouse_in_area && is_editor_peice && Input.is_action_just_pressed("mouse_left_click"):
+	var editor: SubmarineEditor
+	if is_editor_peice:
+		editor = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+	if mouse_in_area && is_editor_peice && Input.is_action_just_pressed("mouse_left_click") && !editor.module_adding == self:
 		for child in get_parent().get_children():
 			if child is SubmarineModule && child != self:
 				child.selected = false
@@ -50,7 +53,7 @@ func _process(delta: float) -> void:
 		modulate = Color(1.5, 1.5, 1.5)
 		
 		if Input.is_action_just_pressed("ui_text_backspace"):
-			var editor: SubmarineEditor = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+			
 			editor.modules.remove_at(editor.modules.find(self))
 			queue_free()
 	else:
