@@ -17,6 +17,7 @@ var module_adding: SubmarineModule
 func add_module(new_module: SubmarineModule):
 	adding_module = true
 	new_module.render_attachment_points = true
+	new_module.is_editor_peice = true
 	origin.add_child(new_module)
 	module_adding = new_module
 	modules.append(new_module)
@@ -66,15 +67,15 @@ func _process(delta: float) -> void:
 	
 	queue_redraw()
 
-func _draw() -> void:
-	if adding_module:
-		for module in modules:
-			if module == module_adding:
-				continue
-			for point in module.attachment_points:
-				for our_point in module_adding.attachment_points:
-					if point.direction.is_equal_approx(-our_point.direction) && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
-						draw_line(our_point.global_position - global_position, point.global_position - global_position, Color.RED, 2)
+#func _draw() -> void:
+	#if adding_module:
+		#for module in modules:
+			#if module == module_adding:
+				#continue
+			#for point in module.attachment_points:
+				#for our_point in module_adding.attachment_points:
+					#if point.direction.is_equal_approx(-our_point.direction) && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
+						#draw_line(our_point.global_position - global_position, point.global_position - global_position, Color.RED, 2)
 
 func find_assosiated_point(point: Vector2, direction: Vector2, multiplier: int = 1) -> AttachmentPoint:
 	for module in modules:

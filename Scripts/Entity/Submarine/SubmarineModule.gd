@@ -5,6 +5,9 @@ class_name SubmarineModule
 
 var attachment_points : Array[AttachmentPoint]
 var render_attachment_points := false
+var is_editor_peice := false
+var mouse_in_area := false
+var selected := false
 
 func _ready() -> void:
 	var navigation_obstacle = StaticBody2D.new()
@@ -32,9 +35,36 @@ func _ready() -> void:
 			$"../../SubmarineArea".add_child(child)
 			child.position += self.position
 			child.global_rotation = old_rot
+	
+	$ModuleArea.area_entered.connect(_area_mouse_entered)
+	$ModuleArea.area_exited.connect(_area_mouse_exited)
 
 func _process(delta: float) -> void:
+	if mouse_in_area && is_editor_peice && Input.is_action_just_pressed("mouse_left_click"):
+		for child in get_parent().get_children():
+			if child is SubmarineModule && child != self:
+				child.selected = false
+		selected = !selected
+	
+	if selected:
+		modulate = Color(1.5, 1.5, 1.5)
+		
+		if Input.is_action_just_pressed("ui_text_backspace"):
+			var editor: SubmarineEditor = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+			editor.modules.remove_at(editor.modules.find(self))
+			queue_free()
+	else:
+		modulate = Color(1, 1, 1)
+	
 	queue_redraw()
+
+func _area_mouse_entered(area) -> void:
+	if area.name == "MouseArea":
+		mouse_in_area = true
+
+func _area_mouse_exited(area) -> void:
+	if area.name == "MouseArea":
+		mouse_in_area = false
 
 func rotate_module(by: float) -> void:
 	rotation += by

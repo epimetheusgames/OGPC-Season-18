@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://54wx4qqce02a"]
+[gd_scene load_steps=5 format=3 uid="uid://54wx4qqce02a"]
 
 [ext_resource type="Script" path="res://Scripts/UI/SubmarineEditor.gd" id="1_rijmy"]
+[ext_resource type="Script" path="res://Scripts/Objects/SubmarineEditorMouseArea.gd" id="2_kvlip"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mu336"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1kmne"]
+radius = 15.0
 
 [node name="SubmarineEditor" type="Control"]
 layout_mode = 3
@@ -78,7 +82,7 @@ stretch = true
 disable_3d = true
 handle_input_locally = false
 msaa_2d = 3
-size = Vector2i(2, 2)
+size = Vector2i(1454, 1080)
 render_target_update_mode = 4
 
 [node name="Origin" type="Node2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
@@ -86,6 +90,12 @@ position = Vector2(1000, 1000)
 
 [node name="Camera2D" type="Camera2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
 position = Vector2(960, 540)
+
+[node name="MouseArea" type="Area2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
+script = ExtResource("2_kvlip")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport/MouseArea"]
+shape = SubResource("CircleShape2D_1kmne")
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
