@@ -1,8 +1,9 @@
-[gd_scene load_steps=53 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=55 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" path="res://Scripts/Objects/Camera/ShaderManager.gd" id="1_s361y"]
+[ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="2_7j7r2"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Texture2D" uid="uid://byceycmkfqoqv" path="res://Assets/Art/moor64-8x.png" id="4_0q3xc"]
 [ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
@@ -24,6 +25,33 @@
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dh4ys"]
+shader = ExtResource("11_wv41s")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.2
+shader_parameter/height = 1.0
+shader_parameter/depth_color_tex = ExtResource("12_c52vc")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yu0vj"]
+load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-327f5b874898d4dde69f55c283418e46.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exbxk"]
+shader = ExtResource("11_wv41s")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = true
+shader_parameter/max_alpha = 0.9
+shader_parameter/height = 3.5
+shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kbpa5"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
 
 [sub_resource type="Resource" id="Resource_km6pi"]
 resource_local_to_scene = true
@@ -213,32 +241,9 @@ glow_blend_mode = 0
 glow_hdr_scale = 0.0
 glow_map_strength = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dh4ys"]
-shader = ExtResource("11_wv41s")
-shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
-shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
-shader_parameter/always_top = false
-shader_parameter/blend_alpha = false
-shader_parameter/max_alpha = 0.2
-shader_parameter/height = 1.0
-shader_parameter/depth_color_tex = ExtResource("12_c52vc")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yu0vj"]
-load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-327f5b874898d4dde69f55c283418e46.ctex"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_exbxk"]
-shader = ExtResource("11_wv41s")
-shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
-shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
-shader_parameter/always_top = false
-shader_parameter/blend_alpha = true
-shader_parameter/max_alpha = 0.9
-shader_parameter/height = 3.5
-shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yo3nw"]
 shader = ExtResource("5_rc3kh")
-shader_parameter/posterization_level = 5.215
+shader_parameter/posterization_level = 10.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
@@ -247,6 +252,66 @@ shader_parameter/pixelization_level = 3.071
 
 [node name="Mission1" type="Node2D"]
 script = ExtResource("1_314ux")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1485.0
+offset_top = -625.0
+offset_right = 3122.0
+offset_bottom = 2415.0
+color = Color(1.54018e-06, 3.85046e-07, 0.559718, 1)
+
+[node name="OceanShader" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="ColorRect" parent="OceanShader"]
+z_index = -10
+material = SubResource("ShaderMaterial_dh4ys")
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+scale = Vector2(-1, 1)
+color = Color(0.0117647, 0.0117647, 0.0901961, 1)
+metadata/_edit_lock_ = true
+
+[node name="TransBackground" type="ColorRect" parent="OceanShader"]
+z_index = 10
+material = SubResource("ShaderMaterial_exbxk")
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+scale = Vector2(-1, 1)
+color = Color(0.0117, 0.0117, 0.09, 0.807843)
+metadata/_edit_lock_ = true
+
+[node name="Background2" type="ColorRect" parent="OceanShader"]
+z_index = -10
+material = SubResource("ShaderMaterial_dh4ys")
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+color = Color(0.0117647, 0.0117647, 0.0901961, 1)
+metadata/_edit_lock_ = true
+
+[node name="TransBackground2" type="ColorRect" parent="OceanShader"]
+z_index = 10
+material = SubResource("ShaderMaterial_exbxk")
+offset_left = 11139.0
+offset_right = 28857.0
+offset_bottom = 10843.0
+color = Color(0.0117, 0.0117, 0.09, 0.807843)
+metadata/_edit_lock_ = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="OceanShader"]
+rotation = -0.464765
+energy = 0.0
+shadow_filter = 2
+max_distance = 1e+06
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+position = Vector2(385, -387)
+process_material = SubResource("ParticleProcessMaterial_kbpa5")
+texture = ExtResource("2_7j7r2")
 
 [node name="Moor64-8x" type="Sprite2D" parent="."]
 position = Vector2(-1079, 1654)
@@ -627,55 +692,7 @@ position = Vector2(809, 2079)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5ulyy")
 
-[node name="OceanShader" type="Node2D" parent="."]
-visible = false
-
-[node name="Background" type="ColorRect" parent="OceanShader"]
-z_index = -10
-material = SubResource("ShaderMaterial_dh4ys")
-offset_left = 11139.0
-offset_right = 28857.0
-offset_bottom = 10843.0
-scale = Vector2(-1, 1)
-color = Color(0.0117647, 0.0117647, 0.0901961, 1)
-metadata/_edit_lock_ = true
-
-[node name="TransBackground" type="ColorRect" parent="OceanShader"]
-z_index = 10
-material = SubResource("ShaderMaterial_exbxk")
-offset_left = 11139.0
-offset_right = 28857.0
-offset_bottom = 10843.0
-scale = Vector2(-1, 1)
-color = Color(0.0117, 0.0117, 0.09, 0.807843)
-metadata/_edit_lock_ = true
-
-[node name="Background2" type="ColorRect" parent="OceanShader"]
-z_index = -10
-material = SubResource("ShaderMaterial_dh4ys")
-offset_left = 11139.0
-offset_right = 28857.0
-offset_bottom = 10843.0
-color = Color(0.0117647, 0.0117647, 0.0901961, 1)
-metadata/_edit_lock_ = true
-
-[node name="TransBackground2" type="ColorRect" parent="OceanShader"]
-z_index = 10
-material = SubResource("ShaderMaterial_exbxk")
-offset_left = 11139.0
-offset_right = 28857.0
-offset_bottom = 10843.0
-color = Color(0.0117, 0.0117, 0.09, 0.807843)
-metadata/_edit_lock_ = true
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="OceanShader"]
-rotation = -0.464765
-energy = 0.0
-shadow_filter = 2
-max_distance = 1e+06
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.233925, 0.233925, 0.233925, 1)
 
 [node name="Shaders" type="CanvasLayer" parent="."]

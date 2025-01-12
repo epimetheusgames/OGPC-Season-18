@@ -138,16 +138,16 @@ radius = 25.0
 height = 110.0
 
 [sub_resource type="Gradient" id="Gradient_in7v8"]
-offsets = PackedFloat32Array(0, 0.545809, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.698039, 0, 0, 0, 0)
+offsets = PackedFloat32Array(0, 0.805812, 1)
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0.247059, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_iyvmc"]
 gradient = SubResource("Gradient_in7v8")
-width = 200
-height = 200
+width = 1000
+height = 1000
 fill = 1
-fill_from = Vector2(0.504, 0.513)
-fill_to = Vector2(1, 0.621795)
+fill_from = Vector2(0.5, 0.527778)
+fill_to = Vector2(0.846154, 0.865385)
 
 [node name="Diver" type="CharacterBody2D"]
 motion_mode = 1
@@ -589,20 +589,22 @@ knockback_velocity = 20.0
 hurtbox = NodePath("../AttackBox")
 component_container = NodePath("../..")
 
-[node name="BodyLight" type="PointLight2D" parent="."]
-position = Vector2(1, 0)
-texture = SubResource("GradientTexture2D_iyvmc")
-texture_scale = 1.31
-
-[node name="Flashlight" type="Node2D" parent="."]
+[node name="Light" type="Node2D" parent="."]
 script = ExtResource("9_xqhlv")
 
-[node name="Light" type="PointLight2D" parent="Flashlight"]
-position = Vector2(2, -2)
+[node name="FlashLight" type="PointLight2D" parent="Light"]
+top_level = true
+position = Vector2(-13, -507)
+scale = Vector2(1, 2)
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("10_qg316")
+
+[node name="BodyLight" type="PointLight2D" parent="Light"]
+top_level = true
+position = Vector2(1, 0)
+texture = SubResource("GradientTexture2D_iyvmc")
 metadata/_edit_lock_ = true
 
 [node name="PlayerVisualDetectionArea" type="Area2D" parent="."]
