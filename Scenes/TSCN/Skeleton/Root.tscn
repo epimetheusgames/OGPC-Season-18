@@ -64,10 +64,6 @@ anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1087.0
 
-[node name="UIGenerator" type="Node" parent="UI"]
-script = ExtResource("5_7cj4s")
-button_template_path = NodePath("../TemplateButton")
-
 [node name="TemplateButton" type="Button" parent="UI"]
 layout_mode = 0
 offset_left = -444.0
@@ -316,10 +312,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 
+[node name="UIGenerator" type="Node2D" parent="Game/GameUIOverlay" node_paths=PackedStringArray("button_template")]
+script = ExtResource("5_7cj4s")
+button_template = NodePath("../../../UI/TemplateButton")
+
 [node name="MousePositionGetter" type="Node2D" parent="."]
 
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
-[connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]
 [connection signal="button_up" from="UI/MainMenu/StartButton" to="UI/MainMenu" method="_on_start_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/MultiplayerButton" to="UI/MainMenu" method="_on_multiplayer_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/SingleplayerButton" to="UI/MainMenu" method="_on_singleplayer_button_button_up"]

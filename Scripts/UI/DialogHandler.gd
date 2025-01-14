@@ -85,10 +85,11 @@ func play_dialog(dialog_input:String, dialog_speed_inp:int, options:Array):
 	for i in range(options.size()):
 		response_buttons[i].disabled = true
 		response_buttons[i].visible = false
-	for i in range(options.size()):
-		response_buttons[i].disabled = false
-		response_buttons[i].visible = true
-		response_buttons[i].text = options[i][0]
+	if(options[0]!=null):
+		for i in range(options.size()):
+			response_buttons[i].disabled = false
+			response_buttons[i].visible = true
+			response_buttons[i].text = options[i][0]
 	dialog_played = false
 	dialog = dialog_input
 	dialog_speed = dialog_speed_inp

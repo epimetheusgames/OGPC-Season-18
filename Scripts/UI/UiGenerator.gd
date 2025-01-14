@@ -44,12 +44,11 @@ var keybind_config_data
 		reinitialize_ui()
 
 # Default template button.
-@export_node_path("Button") var button_template_path:
+@export var button_template :Button :
 	set(val):
-		button_template_path = val
+		button_template = val
 		reinitialize_ui()
 
-var button_template: Button
 var ready_called := false
 
 func _ready():
@@ -117,7 +116,6 @@ func get_keybind_file():
 
 func reinitialize_ui():
 	if ready_called:
-		button_template = get_node(button_template_path)
 		default_color = RenderingServer.get_default_clear_color()
 		
 		# Get string representing the users keybinds.json file generated from the actions set in 
@@ -277,7 +275,6 @@ func generate_ui_elements() -> void:
 				new_buttons[event_iterator].position.y = new_text.position.y
 				new_buttons[event_iterator].position.x = last_button_pos.x + keybind_entry_element_padding * event_iterator
 		else:
-			button_template = get_node(button_template_path)
 			new_buttons.append(button_template.duplicate())
 			new_buttons[0].text = keybind_config_data["keybinds"][0]["key"][0].capitalize()
 			new_buttons[0].position.y = new_text.position.y
