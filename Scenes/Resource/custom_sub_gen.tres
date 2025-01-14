@@ -1,185 +1,63 @@
-[gd_resource type="Resource" script_class="CustomSubmarineResource" load_steps=34 format=3]
+[gd_resource type="Resource" script_class="CustomSubmarineResource" load_steps=14 format=3]
 
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/SubmarineModuleResource.gd" id="1_0lnga"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/AttachmentPointResource.gd" id="2_pgixy"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_pr5pi"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/CustomSubmarineResource.gd" id="4_bt2qj"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/SubmarineModuleResource.gd" id="1_86d6d"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/AttachmentPointResource.gd" id="2_hdjdd"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_rxvrl"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/CustomSubmarineResource.gd" id="4_u5xvm"]
 
-[sub_resource type="Resource" id="Resource_o6wgb"]
-script = ExtResource("2_pgixy")
-position = Vector2(0, -200)
-direction = Vector2(0, -1)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_myr33"]
-script = ExtResource("2_pgixy")
-position = Vector2(200, 0)
-direction = Vector2(1, 0)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_16y3l"]
-script = ExtResource("3_pr5pi")
-file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineCornerPassageModule.tscn"
-
-[sub_resource type="Resource" id="Resource_387cp"]
-script = ExtResource("1_0lnga")
-module_scene = SubResource("Resource_16y3l")
-position = Vector2(-400, -685)
-rotation = 0.0
-attachment_points = Array[ExtResource("2_pgixy")]([SubResource("Resource_o6wgb"), SubResource("Resource_myr33")])
-
-[sub_resource type="Resource" id="Resource_vxdcg"]
-script = ExtResource("2_pgixy")
-position = Vector2(0, -200)
-direction = Vector2(1, 0)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_0tqgc"]
-script = ExtResource("2_pgixy")
-position = Vector2(0, 200)
-direction = Vector2(-1, 0)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_uu67r"]
-script = ExtResource("3_pr5pi")
-file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarinePassageModule.tscn"
-
-[sub_resource type="Resource" id="Resource_potbo"]
-script = ExtResource("1_0lnga")
-module_scene = SubResource("Resource_uu67r")
-position = Vector2(0, -684.989)
-rotation = 1.57085
-attachment_points = Array[ExtResource("2_pgixy")]([SubResource("Resource_vxdcg"), SubResource("Resource_0tqgc")])
-
-[sub_resource type="Resource" id="Resource_04nqx"]
-script = ExtResource("2_pgixy")
-position = Vector2(200, 0)
-direction = Vector2(-4.37114e-08, 1)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_u1dnn"]
-script = ExtResource("2_pgixy")
+[sub_resource type="Resource" id="Resource_wf44t"]
+script = ExtResource("2_hdjdd")
 position = Vector2(-200, 0)
-direction = Vector2(1.19249e-08, -1)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_45qcr"]
-script = ExtResource("3_pr5pi")
-file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn"
-
-[sub_resource type="Resource" id="Resource_sohre"]
-script = ExtResource("1_0lnga")
-module_scene = SubResource("Resource_45qcr")
-position = Vector2(-400, -1085)
-rotation = 1.5708
-attachment_points = Array[ExtResource("2_pgixy")]([SubResource("Resource_04nqx"), SubResource("Resource_u1dnn")])
-
-[sub_resource type="Resource" id="Resource_8a28k"]
-script = ExtResource("2_pgixy")
-position = Vector2(0, -200)
 direction = Vector2(1, -4.37114e-08)
 is_attached = true
 
-[sub_resource type="Resource" id="Resource_adxb8"]
-script = ExtResource("2_pgixy")
-position = Vector2(200, 0)
-direction = Vector2(-4.37114e-08, 1)
-is_attached = true
+[sub_resource type="Resource" id="Resource_7700m"]
+script = ExtResource("3_rxvrl")
+file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule.tscn"
 
-[sub_resource type="Resource" id="Resource_3uwn4"]
-script = ExtResource("1_0lnga")
-module_scene = SubResource("Resource_16y3l")
-position = Vector2(-400, -1485)
-rotation = 1.5708
-attachment_points = Array[ExtResource("2_pgixy")]([SubResource("Resource_8a28k"), SubResource("Resource_adxb8")])
+[sub_resource type="Resource" id="Resource_q225m"]
+script = ExtResource("1_86d6d")
+module_scene = SubResource("Resource_7700m")
+position = Vector2(-472, -546)
+rotation = 3.14159
+attachment_points = Array[ExtResource("2_hdjdd")]([SubResource("Resource_wf44t")])
 
-[sub_resource type="Resource" id="Resource_vb6fx"]
-script = ExtResource("2_pgixy")
+[sub_resource type="Resource" id="Resource_8em0p"]
+script = ExtResource("2_hdjdd")
 position = Vector2(200, 0)
 direction = Vector2(1, 0)
 is_attached = true
 
-[sub_resource type="Resource" id="Resource_aolet"]
-script = ExtResource("2_pgixy")
+[sub_resource type="Resource" id="Resource_v1vaw"]
+script = ExtResource("2_hdjdd")
 position = Vector2(-200, 0)
 direction = Vector2(-1, 0)
 is_attached = true
 
-[sub_resource type="Resource" id="Resource_bv3g1"]
-script = ExtResource("1_0lnga")
+[sub_resource type="Resource" id="Resource_45qcr"]
+script = ExtResource("3_rxvrl")
+file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn"
+
+[sub_resource type="Resource" id="Resource_275xf"]
+script = ExtResource("1_86d6d")
 module_scene = SubResource("Resource_45qcr")
-position = Vector2(400, -684.979)
+position = Vector2(-72, -546)
 rotation = 0.0
-attachment_points = Array[ExtResource("2_pgixy")]([SubResource("Resource_vb6fx"), SubResource("Resource_aolet")])
+attachment_points = Array[ExtResource("2_hdjdd")]([SubResource("Resource_8em0p"), SubResource("Resource_v1vaw")])
 
-[sub_resource type="Resource" id="Resource_xfkbq"]
-script = ExtResource("2_pgixy")
-position = Vector2(0, -200)
-direction = Vector2(-1, 1.50996e-07)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_rn74s"]
-script = ExtResource("2_pgixy")
-position = Vector2(200, 0)
-direction = Vector2(1.94707e-07, -1)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_w1h3h"]
-script = ExtResource("1_0lnga")
-module_scene = SubResource("Resource_16y3l")
-position = Vector2(800, -684.979)
-rotation = 4.71239
-attachment_points = Array[ExtResource("2_pgixy")]([SubResource("Resource_xfkbq"), SubResource("Resource_rn74s")])
-
-[sub_resource type="Resource" id="Resource_ix7cc"]
-script = ExtResource("2_pgixy")
-position = Vector2(0, -200)
-direction = Vector2(7.54979e-08, 1)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_jk0xf"]
-script = ExtResource("2_pgixy")
-position = Vector2(200, 0)
-direction = Vector2(-1, -8.74228e-08)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_mmgb3"]
-script = ExtResource("1_0lnga")
-module_scene = SubResource("Resource_16y3l")
-position = Vector2(0, -1485)
-rotation = 3.14159
-attachment_points = Array[ExtResource("2_pgixy")]([SubResource("Resource_ix7cc"), SubResource("Resource_jk0xf")])
-
-[sub_resource type="Resource" id="Resource_vqgi3"]
-script = ExtResource("2_pgixy")
+[sub_resource type="Resource" id="Resource_e27ro"]
+script = ExtResource("2_hdjdd")
 position = Vector2(-200, 0)
-direction = Vector2(1.19249e-08, -1)
+direction = Vector2(-1, 0)
 is_attached = true
 
-[sub_resource type="Resource" id="Resource_7700m"]
-script = ExtResource("3_pr5pi")
-file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule.tscn"
-
-[sub_resource type="Resource" id="Resource_ixvwx"]
-script = ExtResource("1_0lnga")
+[sub_resource type="Resource" id="Resource_nqih5"]
+script = ExtResource("1_86d6d")
 module_scene = SubResource("Resource_7700m")
-position = Vector2(0, -1085)
-rotation = 1.5708
-attachment_points = Array[ExtResource("2_pgixy")]([SubResource("Resource_vqgi3")])
-
-[sub_resource type="Resource" id="Resource_wjfnh"]
-script = ExtResource("2_pgixy")
-position = Vector2(-200, 0)
-direction = Vector2(7.54979e-08, 1)
-is_attached = true
-
-[sub_resource type="Resource" id="Resource_pjb5e"]
-script = ExtResource("1_0lnga")
-module_scene = SubResource("Resource_7700m")
-position = Vector2(800, -1084.98)
-rotation = 4.71239
-attachment_points = Array[ExtResource("2_pgixy")]([SubResource("Resource_wjfnh")])
+position = Vector2(328, -546)
+rotation = 0.0
+attachment_points = Array[ExtResource("2_hdjdd")]([SubResource("Resource_e27ro")])
 
 [resource]
-script = ExtResource("4_bt2qj")
-modules = Array[ExtResource("1_0lnga")]([SubResource("Resource_387cp"), SubResource("Resource_potbo"), SubResource("Resource_sohre"), SubResource("Resource_3uwn4"), SubResource("Resource_bv3g1"), SubResource("Resource_w1h3h"), SubResource("Resource_mmgb3"), SubResource("Resource_ixvwx"), SubResource("Resource_pjb5e")])
+script = ExtResource("4_u5xvm")
+modules = Array[ExtResource("1_86d6d")]([SubResource("Resource_q225m"), SubResource("Resource_275xf"), SubResource("Resource_nqih5")])

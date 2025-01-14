@@ -12,7 +12,7 @@ file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
 script = ExtResource("3_gp47f")
 success_type = 0
 item_name = "Rock"
-item_count = 1
+item_count = 2
 
 [resource]
 script = ExtResource("2_4hp0o")

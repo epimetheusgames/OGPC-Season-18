@@ -365,7 +365,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1203, 700)
+shader_parameter/screen_size = Vector2(2, 2)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -730,9 +730,6 @@ buoyancy_accel = 0.0
 
 [node name="Items" type="Node2D" parent="LevelContainer/Level"]
 
-[node name="Rock2" parent="LevelContainer/Level/Items" instance=ExtResource("31_boa6h")]
-position = Vector2(2856, 4651)
-
 [node name="LightLine" parent="LevelContainer/Level/Items" instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)
 
@@ -947,8 +944,8 @@ material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -717.0
-offset_bottom = -380.0
+offset_right = -1918.0
+offset_bottom = -1078.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -998,6 +995,9 @@ vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 
 [node name="Leviathan" parent="." instance=ExtResource("35_47o3q")]
 position = Vector2(64, 1225)
+
+[node name="Rock" parent="." instance=ExtResource("31_boa6h")]
+position = Vector2(1365, 1337)
 
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Level/Items/LightLine"]

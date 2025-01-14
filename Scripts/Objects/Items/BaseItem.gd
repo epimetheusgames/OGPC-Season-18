@@ -1,7 +1,7 @@
 class_name BaseItem
 extends Area2D
 
-@export var scene: PackedScene
+@export var scene: FilePathResource
 @export var icon: Texture2D
 @export var cost: int
 @export var item_name: String

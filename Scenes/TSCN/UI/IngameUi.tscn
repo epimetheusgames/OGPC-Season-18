@@ -272,18 +272,32 @@ layout_mode = 2
 size_flags_vertical = 3
 expand_mode = 2
 
-[node name="Slot5" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+[node name="SlotButton" type="TextureButton" parent="Inventory/MarginContainer/HBoxContainer/Slot1/TextureRect"]
+layout_mode = 2
+offset_top = -27.0
+offset_right = 127.0
+offset_bottom = 127.0
+
+[node name="Slot2" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(123, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot5"]
+[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot2"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot5"]
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot2"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 expand_mode = 2
+
+[node name="SlotButton2" type="TextureButton" parent="Inventory/MarginContainer/HBoxContainer/Slot2/TextureRect"]
+layout_mode = 2
+offset_left = 2.0
+offset_top = -27.0
+offset_right = 129.0
+offset_bottom = 127.0
 
 [node name="Slot3" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(123, 0)
@@ -297,6 +311,13 @@ layout_mode = 2
 size_flags_vertical = 3
 expand_mode = 2
 
+[node name="SlotButton3" type="TextureButton" parent="Inventory/MarginContainer/HBoxContainer/Slot3/TextureRect"]
+layout_mode = 2
+offset_left = 3.0
+offset_top = -27.0
+offset_right = 130.0
+offset_bottom = 127.0
+
 [node name="Slot4" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(123, 0)
 layout_mode = 2
@@ -308,3 +329,15 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 expand_mode = 2
+
+[node name="SlotButton4" type="TextureButton" parent="Inventory/MarginContainer/HBoxContainer/Slot4/TextureRect"]
+layout_mode = 2
+offset_left = -4.0
+offset_top = -27.0
+offset_right = 123.0
+offset_bottom = 127.0
+
+[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot1/TextureRect/SlotButton" to="Inventory" method="_on_slot_button_button_up"]
+[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot2/TextureRect/SlotButton2" to="Inventory" method="_on_slot_button_2_button_up"]
+[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot3/TextureRect/SlotButton3" to="Inventory" method="_on_slot_button_3_button_up"]
+[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot4/TextureRect/SlotButton4" to="Inventory" method="_on_slot_button_4_button_up"]
