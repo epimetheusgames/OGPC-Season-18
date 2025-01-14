@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1sxg2d10k1y7"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Ingame/PauseMenu.gd" id="1_8ck0e"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8ck0e")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+process_mode = 3
+offset_left = -253.0
+offset_top = -115.0
+offset_right = 2099.0
+offset_bottom = 1299.0
+color = Color(0, 0, 0, 0.321569)
+
+[node name="GameTitle" type="Label" parent="."]
+process_mode = 3
+offset_top = 193.0
+offset_right = 1921.0
+offset_bottom = 325.0
+theme_override_font_sizes/font_size = 96
+text = "Diving Game Title"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="."]
+process_mode = 3
+offset_left = 824.0
+offset_top = 438.0
+offset_right = 1081.0
+offset_bottom = 512.0
+theme_override_font_sizes/font_size = 36
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="."]
+process_mode = 3
+offset_left = 824.0
+offset_top = 534.0
+offset_right = 1081.0
+offset_bottom = 608.0
+theme_override_font_sizes/font_size = 36
+text = "Settings
+"
+
+[node name="QuitButton" type="Button" parent="."]
+process_mode = 3
+offset_left = 824.0
+offset_top = 630.0
+offset_right = 1081.0
+offset_bottom = 704.0
+theme_override_font_sizes/font_size = 36
+text = "Quit"
+
+[connection signal="button_up" from="ResumeButton" to="." method="_on_resume_button_button_up"]
+[connection signal="button_up" from="SettingsButton" to="." method="_on_settings_button_button_up"]
+[connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]
