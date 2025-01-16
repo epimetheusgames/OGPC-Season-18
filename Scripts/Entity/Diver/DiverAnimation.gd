@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 		if !Global.is_multiplayer || diver._is_node_owner():
 			displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
 		else:
-			displayed_nametag.text = Steam.getFriendPersonaName(int(diver.name))
+			displayed_nametag.text = Steam.getFriendPersonaName(int(str(diver.name)))
 	
 	var head_pos: Vector2 = get_head_position()
 	# Update label position.
