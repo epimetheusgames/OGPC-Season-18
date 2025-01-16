@@ -44,7 +44,7 @@ func _physics_process(_delta: float):
 		move_and_slide()
 		return
 	
-	if get_state() != Util.DiverState.DRIVING_SUBMARINE:
+	if get_state() != Util.DiverState.DRIVING_SUBMARINE && get_state() != Util.DiverState.IN_MINISUB:
 		velocity = diver_movement.get_velocity()
 		
 		var target_angle: float = velocity.angle() + PI/2

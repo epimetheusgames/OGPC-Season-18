@@ -306,7 +306,9 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="AirTank" type="Sprite2D" parent="Animation/Polygons"]
-position = Vector2(-28, -25)
+modulate = Color(0.549553, 0.549553, 0.549553, 1)
+position = Vector2(-23, -28)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_do014")
 region_enabled = true
 region_rect = Rect2(227, 32, 26, 80)
@@ -545,6 +547,7 @@ rotation = -0.000201209
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/PlayerHurtbox"]
+visible = false
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
