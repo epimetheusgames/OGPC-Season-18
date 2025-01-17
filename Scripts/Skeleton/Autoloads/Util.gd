@@ -103,6 +103,13 @@ static func angle_to_vector_radians(angle: float, magnitude: float) -> Vector2:
 	var y: float = magnitude * sin(angle)
 	return Vector2(x, y)
 
+# Randomish direction.
+static func random_direction(rng: RandomNumberGenerator) -> Vector2:
+	return Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
+
+static func random_vector(rng: RandomNumberGenerator, max_length: float, min_length: float = 0) -> Vector2:
+	return random_direction(rng) * rng.randf_range(min_length, max_length)
+
 # Returns angle within the normal range (degrees)
 static func normalize_angle_degrees(a: float) -> float:
 	return fmod(fmod(a, 360) + 360, 360)
