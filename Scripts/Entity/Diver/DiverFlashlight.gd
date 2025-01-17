@@ -6,6 +6,10 @@ extends Node2D
 @onready var flash_light: PointLight2D = $"FlashLight"
 @onready var body_light: PointLight2D = $"BodyLight"
 
+func _ready() -> void:
+	flash_light.top_level = true
+	body_light.top_level = true
+
 func _process(_delta: float) -> void:
 	if Global.is_multiplayer && diver.has_multiplayer_sync && !diver._is_node_owner():
 		return
