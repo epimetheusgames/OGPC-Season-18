@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=98 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -22,12 +22,15 @@
 [ext_resource type="Script" path="res://Scripts/Level/ShadowPipeline.gd" id="16_0m2co"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
+
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Shadow.gdshader" id="16_ctau1"]
 [ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
+[ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/BiterFish.tscn" id="20_tdtsg"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="28_1g0ie"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
@@ -276,17 +279,26 @@ uid = 3628
 [sub_resource type="Resource" id="Resource_xdqqp"]
 script = ExtResource("16_4wjdw")
 scene = ExtResource("16_cbdp8")
+group_size = 1
 probability = 5
 
 [sub_resource type="Resource" id="Resource_a077w"]
 script = ExtResource("16_4wjdw")
 scene = ExtResource("18_0qmxr")
+group_size = 1
 probability = 2
 
 [sub_resource type="Resource" id="Resource_2j7sg"]
 script = ExtResource("16_4wjdw")
 scene = ExtResource("35_47o3q")
+group_size = 1
 probability = 0
+
+[sub_resource type="Resource" id="Resource_q2flg"]
+script = ExtResource("16_4wjdw")
+scene = ExtResource("20_tdtsg")
+group_size = 7
+probability = 8
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
 background_canvas_max_layer = 10
@@ -826,7 +838,7 @@ script = ExtResource("15_gg62y")
 player_view_dist = 1500
 enemy_close_dist = 2500
 draw_spawn_positions = true
-enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg")])
+enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg"), SubResource("Resource_q2flg")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5ulyy")
