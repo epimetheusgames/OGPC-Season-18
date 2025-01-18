@@ -17,3 +17,19 @@ func _process(delta: float) -> void:
 		slots[i].get_node("TextureRect").texture = slot.item.icon
 		slots[i].get_node("Counter").text = str(slot.count)
 		i += 1
+	
+	for j in range(i, slots.size()):
+		slots[j].get_node("TextureRect").texture = null
+		slots[j].get_node("Counter").text = ""
+
+func _on_slot_button_button_up() -> void:
+	Global.player.diver_inventory.select_item(0)
+
+func _on_slot_button_2_button_up() -> void:
+	Global.player.diver_inventory.select_item(1)
+
+func _on_slot_button_3_button_up() -> void:
+	Global.player.diver_inventory.select_item(2)
+
+func _on_slot_button_4_button_up() -> void:
+	Global.player.diver_inventory.select_item(3)

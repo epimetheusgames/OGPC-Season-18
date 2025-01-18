@@ -14,16 +14,16 @@ float gaussian(float x) {
 
 void fragment() {
 	vec2 scale = TEXTURE_PIXEL_SIZE * blur_scale;
-	
+
 	float weight = 0.0;
 	float total_weight = 0.0;
 	vec4 color = vec4(0.0);
-	
+
 	for(int i=-int(SAMPLES)/2; i < int(SAMPLES)/2; ++i) {
 		weight = gaussian(float(i));
 		color.rgb += texture(screen_tex, SCREEN_UV + scale * vec2(float(i))).rgb * weight;
 		total_weight += weight;
 	}
-	
+
 	COLOR.rgb = color.rgb / total_weight;
 }

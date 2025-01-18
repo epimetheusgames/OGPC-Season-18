@@ -8,6 +8,7 @@ enum DiverState {
 	SWIMMING,
 	IN_SUBMARINE,
 	DRIVING_SUBMARINE,
+	IN_MINISUB,
 }
 
 enum MissionSuccessType {
@@ -59,12 +60,13 @@ static func find_all_children_of_type(on: Node, type: String) -> Array[Object]:
 
 # -- Physics --
 
-# Perform a raycast in the world. Uses GLOBAL positions.
+# Perform a raycast in the world. Uses global positions.
 static func do_raycast(world_2d: World2D, from: Vector2, to: Vector2) -> Dictionary:
 	var space_state := world_2d.direct_space_state
 	var raycast := PhysicsRayQueryParameters2D.create(from, to)
 	return space_state.intersect_ray(raycast)
 
+# Executes a pointcast on the world, using global positions.
 static func do_pointcast(world_2d: World2D, point: Vector2, mask: int = 0xFFFFFFFF) -> Array[Dictionary]:
 	var space_state := world_2d.direct_space_state
 	var pointcast = PhysicsPointQueryParameters2D.new()
@@ -74,13 +76,13 @@ static func do_pointcast(world_2d: World2D, point: Vector2, mask: int = 0xFFFFFF
 
 # -- Math --
 
-# Framerate independant linear interpolation. A and B can be vectors of floats
-# and the function will still work.
+# Framerate independant linear interpolation.
 static func better_lerp(a: float, b: float, decay: float, delta: float):
 	# Convert decay from 0-1 to 1-25.
 	decay = (decay * 25.0)
 	return b + (a - b) * exp(-decay * delta)
 
+# Framerate independant linear interpolation (Vector2).
 static func better_vec2_lerp(a: Vector2, b: Vector2, decay: float, delta: float):
 	return Vector2(better_lerp(a.x, b.x, decay, delta), better_lerp(a.y, b.y, decay, delta))
 
@@ -89,25 +91,34 @@ static func better_angle_lerp(a: float, b: float, decay: float, delta: float):
 	decay = (decay * 25.0)
 	return b + (angle_difference(b, a)) * exp(-decay * delta)
 
-# Turns an angle and a magnitude to a vector.
+# Turns an angle in degrees and a magnitude in pixels to a vector.
 static func angle_to_vector_degrees(angle: float, magnitude: float) -> Vector2:
 	var x: float = magnitude * cos(deg_to_rad(angle))
 	var y: float = magnitude * sin(deg_to_rad(angle))
 	return Vector2(x, y)
 
+# Turns an angle in radians and a magnitude in pixels into a vector.
 static func angle_to_vector_radians(angle: float, magnitude: float) -> Vector2:
 	var x: float = magnitude * cos(angle)
 	var y: float = magnitude * sin(angle)
 	return Vector2(x, y)
 
+# Randomish direction.
+static func random_direction(rng: RandomNumberGenerator) -> Vector2:
+	return Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
 
-# Returns angle within the normal range
+static func random_vector(rng: RandomNumberGenerator, max_length: float, min_length: float = 0) -> Vector2:
+	return random_direction(rng) * rng.randf_range(min_length, max_length)
+
+# Returns angle within the normal range (degrees)
 static func normalize_angle_degrees(a: float) -> float:
 	return fmod(fmod(a, 360) + 360, 360)
 
+# Returns angle within the normal range (radians)
 static func normalize_angle_radians(a: float) -> float:
 	return fmod(fmod(a, TAU) + TAU, TAU)
 
+# Smooths out a line.
 static func smooth_line(input: PackedVector2Array, resolution_multiplier: float) -> PackedVector2Array:
 	var output: PackedVector2Array = []
 	var tangents: PackedVector2Array = []

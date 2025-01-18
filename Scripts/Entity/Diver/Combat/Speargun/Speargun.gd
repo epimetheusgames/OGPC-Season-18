@@ -42,6 +42,8 @@ func perform_attack() -> void:
 	new_spear.global_position = emit_point.global_position
 	new_spear.global_rotation = global_rotation
 	
+	$GunAnimation.play("Shoot")
+	
 	var angle: float = cone_of_fire.get_shot_angle()
 	new_spear.fire(angle)
 	"""

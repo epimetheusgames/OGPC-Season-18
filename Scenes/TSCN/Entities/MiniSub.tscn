@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccpwr2asewfok"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/MiniSub.gd" id="1_qwrrb"]
+
+[node name="MiniSub" type="CharacterBody2D"]
+position = Vector2(98, 35)
+script = ExtResource("1_qwrrb")
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+color = Color(0.204681, 0.20468, 0.20468, 1)
+polygon = PackedVector2Array(-183, 40, -102, 68, -24, 51, -25, 22, -30, 8, -46, 2, -76, 1, -111, 1, -126, -3, -141, -20, -145, -54, -147, -98, -178, -94)
+
+[node name="Polygon2D4" type="Polygon2D" parent="."]
+color = Color(0.204681, 0.20468, 0.20468, 1)
+polygon = PackedVector2Array(44, 5, 52, -4, 29, -32, 51, -54, 47, -57, 0, -14, 3, -9, 23, -28)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.708401, 0.708401, 0.708401, 1)
+polygon = PackedVector2Array(-256, 56, -63, 93, 68, 51, 143, -49, 94, -49, 12, 29, -102, 55, -216, 16, -255, -61, -434, -59)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+color = Color(0.708401, 0.708401, 0.708401, 1)
+polygon = PackedVector2Array(93, -49, 143, -49, 59, -162, -96, -205, -249, -159, -433, -59, -255, -57, -200, -141, -96, -162, 29, -126)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-256, 56, -63, 93, 68, 51, 143, -49, 94, -49, 12, 29, -102, 55, -216, 16, -255, -61, -434, -59)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(93, -49, 143, -49, 59, -162, -96, -205, -249, -159, -433, -59, -255, -57, -200, -141, -96, -162, 29, -126)

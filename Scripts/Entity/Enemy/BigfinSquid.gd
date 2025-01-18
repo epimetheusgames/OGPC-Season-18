@@ -62,3 +62,6 @@ func _process(delta: float) -> void:
 	
 	if position.distance_to(target_position) < 50:
 		_target_reached()
+	
+	for rope in ropes:
+		rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()

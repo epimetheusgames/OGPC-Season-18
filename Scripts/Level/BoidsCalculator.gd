@@ -273,10 +273,14 @@ func remove_boid_index(id):
 	for i in range(9):
 		boids_parameters_array.remove_at(id)
 	
+	boids_node_list.remove_at(id)
+	
 	# Range params are start, stop, and step.
 	# Move all the indices backward because we just removed a node.
-	for boid_index in range(id, boids_parameters_array.size(), 1):
-		boids_node_list[boid_index].boids_index -= 1
+	for boid_index in range(id + 1, boids_node_list.size() - 1, 1):
+		# Something's broken about this system but i don't want to fix it.
+		if boids_node_list[boid_index]:
+			boids_node_list[boid_index].boids_index -= 1
 	
 	boids_parameters_array_bytes = boids_parameters_array.to_byte_array()
 

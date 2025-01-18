@@ -1,9 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3vsej6l54pdk"]
+[gd_scene load_steps=11 format=3 uid="uid://c3vsej6l54pdk"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Speargun.gd" id="1_6b6mx"]
 [ext_resource type="Texture2D" uid="uid://cgiqymjjt6jkp" path="res://Assets/Art/Sprites/Speargun.png" id="2_ftc3n"]
 [ext_resource type="PackedScene" uid="uid://dkiqku8nhydo3" path="res://Scenes/TSCN/Entities/Diver/Weapons/Spear.tscn" id="2_qlup2"]
 [ext_resource type="PackedScene" uid="uid://cyelkkty2ihsb" path="res://Scenes/TSCN/Entities/Diver/Weapons/ConeOfFire.tscn" id="3_xrh0y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bc3vn"]
+atlas = ExtResource("2_ftc3n")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwpfr"]
+atlas = ExtResource("2_ftc3n")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15luh"]
+atlas = ExtResource("2_ftc3n")
+region = Rect2(96, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l3lp"]
+atlas = ExtResource("2_ftc3n")
+region = Rect2(192, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbroa"]
+atlas = ExtResource("2_ftc3n")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f6ko3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bc3vn")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwpfr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15luh")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_0l3lp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbroa")
+}],
+"loop": false,
+"name": &"Shoot",
+"speed": 20.0
+}]
 
 [node name="Speargun" type="Node2D"]
 script = ExtResource("1_6b6mx")
@@ -13,23 +61,11 @@ reload_time = 5.0
 cooldown_time = 0.0
 knockback = 1000.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -7.0
-offset_top = -10.0
-offset_right = 8.0
-offset_bottom = 18.0
-metadata/_edit_lock_ = true
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = -7.0
-offset_top = -12.0
-offset_right = 100.0
-metadata/_edit_lock_ = true
-
 [node name="EmitPoint" type="Node2D" parent="."]
 position = Vector2(96, -6)
 
 [node name="ConeOfFire" parent="EmitPoint" instance=ExtResource("3_xrh0y")]
+position = Vector2(40, 0)
 range = 500.0
 
 [node name="Hand1Point" type="Node2D" parent="."]
@@ -38,8 +74,10 @@ position = Vector2(0, 10)
 [node name="Hand2Point" type="Node2D" parent="."]
 position = Vector2(42, -5)
 
-[node name="GunSprite" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(37, -4)
-texture = ExtResource("2_ftc3n")
-metadata/_edit_lock_ = true
+[node name="GunAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(62, -4)
+scale = Vector2(1.625, 1.625)
+sprite_frames = SubResource("SpriteFrames_f6ko3")
+animation = &"Shoot"
+frame = 3
+frame_progress = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=96 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -14,10 +14,13 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Material" uid="uid://cexuq6aqq46ng" path="res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres" id="12_bo51x"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
-[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/Entity/NPC.tscn" id="15_p6xfd"]
+
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
+
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="24_xbggn"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
@@ -27,6 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
+[ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/Entity/Leviathan.tscn" id="35_47o3q"]
+[ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dh4ys"]
 shader = ExtResource("11_wv41s")
@@ -115,6 +120,21 @@ size = Vector2(18000, 300)
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3628
+
+[sub_resource type="Resource" id="Resource_xdqqp"]
+script = ExtResource("16_4wjdw")
+scene = ExtResource("16_cbdp8")
+probability = 5
+
+[sub_resource type="Resource" id="Resource_a077w"]
+script = ExtResource("16_4wjdw")
+scene = ExtResource("18_0qmxr")
+probability = 2
+
+[sub_resource type="Resource" id="Resource_2j7sg"]
+script = ExtResource("16_4wjdw")
+scene = ExtResource("35_47o3q")
+probability = 0
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
 background_canvas_max_layer = 10
@@ -506,9 +526,6 @@ buoyancy_accel = 0.0
 
 [node name="Items" type="Node2D" parent="LevelContainer/Level"]
 
-[node name="Rock2" parent="LevelContainer/Level/Items" instance=ExtResource("31_boa6h")]
-position = Vector2(2856, 4651)
-
 [node name="LightLine" parent="LevelContainer/Level/Items" instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)
 
@@ -598,6 +615,13 @@ has_dialog = true
 [node name="Jellyfish" parent="LevelContainer/Entities" instance=ExtResource("24_xbggn")]
 position = Vector2(809, 2079)
 
+[node name="EnemySpawner" type="Node2D" parent="LevelContainer/Entities"]
+script = ExtResource("15_gg62y")
+player_view_dist = 1500
+enemy_close_dist = 2500
+draw_spawn_positions = true
+enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg")])
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5ulyy")
 
@@ -616,6 +640,7 @@ material = SubResource("ShaderMaterial_yo3nw")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
@@ -650,6 +675,17 @@ ingame_ui = NodePath("../IngameUI")
 [node name="MissionSuccessScreen" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("33_aiin4")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
+
+[node name="PauseMenu" parent="UI" node_paths=PackedStringArray("ingame_ui", "vignette_shader") instance=ExtResource("35_upo23")]
+visible = false
+ingame_ui = NodePath("../IngameUI")
+vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
+
+[node name="Leviathan" parent="." instance=ExtResource("35_47o3q")]
+position = Vector2(64, 1225)
+
+[node name="Rock" parent="." instance=ExtResource("31_boa6h")]
+position = Vector2(1365, 1337)
 
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Level/Items/LightLine"]
