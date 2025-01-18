@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_4roxr"]
 [ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
-[ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
+[ext_resource type="Script" uid="uid://bnjvarxl3565b" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="4_y38hh"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="6_gyt63"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/JellyfishColors.gdshader" id="8_2ikp3"]

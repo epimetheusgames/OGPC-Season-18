@@ -182,6 +182,10 @@ func _update_wander_point():
 		var rng := RandomNumberGenerator.new()
 		var random_direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
 		
+		if points_tested > 100:
+			print("ERROR: Something bad happened while updating the wander point.")
+			return
+		
 		if settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.RANDOM_POSITION || points_tested > 40:
 			var random_multiplier := rng.randf_range(0, settings.wander_range)
 			target_position = global_position + velocity.normalized() * settings.wander_range / 4 + random_direction * random_multiplier

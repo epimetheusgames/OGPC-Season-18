@@ -31,6 +31,6 @@ void light() {
 		LIGHT = mix(water_col, shallow_water_col, (always_top ? (1.0-UV.x) : UV.x) / 2.0 + 0.4) * color;
 	}
 	else {
-		LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY, LIGHT_COLOR.a);
+		LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY * 2.0, LIGHT_COLOR.a);
 	}
 }
