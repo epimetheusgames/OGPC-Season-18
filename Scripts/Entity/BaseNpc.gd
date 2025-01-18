@@ -32,7 +32,7 @@ var dialog_thingy
 #the current array path to the next set of responses
 @onready var current_location_responses:String = 'dialog["dialog"]["'+npc_name+'"][1]'
 #the current array path to the next response-text pair
-@onready var current_location_text:String = "'dialog["dialog"]["'+npc_name+'"][1]'"
+@onready var current_location_text:String = 'dialog["dialog"]["'+npc_name+'"][1]'
 
 # Dialog beep sound thingy 
 @export_file("*.wav") var talking_sound
@@ -55,10 +55,11 @@ func touching_bodies() -> bool:
 	shat = bodies[0]
 	return bodies.size()>0
 func _option_chosen():
-	current_location_text+="["+str(Global.dialog_core.response)+"][1][1][0]"
-	current_location += "[" + str(Global.dialog_core.response)+"][1][1]"
-	current_location_responses+= "["+str(Global.dialog_core.response)+"][1][1][1]"
-	
+	current_location_text+="["+str(Global.dialog_core.response)+"][1][0]"
+	current_location += "[" + str(Global.dialog_core.response)+"][1]"
+	current_location_responses+= "["+str(Global.dialog_core.response)+"][1][1]"
+	shat = Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;if(' + current_location + '.size() > 1): return '+current_location_responses+';if(' + current_location + '.size() == 0): return [null];')
+	print(shat)
 	Global.dialog_core.play_dialog(Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location_text+';'),dialog_speed,Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;if(' + current_location + '.size() > 1): return '+current_location_responses+';if(' + current_location + '.size() == 0): return [null];'))
 func _get_dialog():
 	dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text())

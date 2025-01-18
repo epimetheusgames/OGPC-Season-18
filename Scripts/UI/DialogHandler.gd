@@ -20,6 +20,7 @@ var last_played_letterindex: int = 0
 var dialog_sfx_node: AudioStreamPlayer
 
 var shit
+var dumb
 @export_node_path("Button") var response_button_one
 @export_node_path("Button") var response_button_two
 @export_node_path("Button") var response_button_three
@@ -81,11 +82,12 @@ func response_option_four()->void:
 	response = 3
 	dialog_played = true
 	dialog_option_chosen.emit()
-func play_dialog(dialog_input:String, dialog_speed_inp:int, options:Array):
-	for i in range(options.size()):
+func play_dialog(dialog_input:String, dialog_speed_inp:int, options):
+	dumb = dialog_input
+	for i in range(response_buttons.size()):
 		response_buttons[i].disabled = true
 		response_buttons[i].visible = false
-	if(options[0]!=null):
+	if(options!=null):
 		for i in range(options.size()):
 			response_buttons[i].disabled = false
 			response_buttons[i].visible = true
