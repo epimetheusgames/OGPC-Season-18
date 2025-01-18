@@ -1,11 +1,9 @@
 [gd_scene load_steps=15 format=4 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
-
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_4roxr"]
 [ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
-[ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
-
+[ext_resource type="Script" uid="uid://bnjvarxl3565b" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="4_y38hh"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="6_gyt63"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="7_bltm7"]
@@ -29,7 +27,6 @@ view_distance = 100.0
 disable_period_length = 1.0
 sound_max_distance = 0.0
 
-
 [sub_resource type="Resource" id="Resource_rbmc1"]
 script = ExtResource("3_5yh7k")
 color = Color(0.229667, 0, 0.53, 0.494118)
@@ -52,9 +49,7 @@ shader_parameter/out_colors = PackedColorArray(0, 0, 0.75, 0.301961, 0.25, 0, 0.
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "health_component")]
 motion_mode = 1
 script = ExtResource("1_dd7wo")
-
 settings = SubResource("Resource_0lxf2")
-
 forward_direction = Vector2(0, -1)
 hurtbox_component = NodePath("HurtboxComponent")
 health_component = NodePath("HealthComponent")
