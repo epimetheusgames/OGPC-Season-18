@@ -1,8 +1,8 @@
 class_name Dummy
 extends Entity
 
-@onready var health: HealthComponent = $"HealthComponent"
+@onready var hurtbox: Hurtbox = $"Hurtbox"
 @onready var label: Label = $"Label"
 
 func _process(delta: float) -> void:
-	label.text = "Health: " + str(health.get_health())
+	label.text = "Health: " + str(hurtbox.health)

@@ -1,5 +1,6 @@
 extends Node2D
 
+
 func turn_on_efficient():
 	if Global.super_efficient:
 		$LevelContainer/Level/Waves/Line2D.material = null
@@ -11,7 +12,11 @@ func turn_on_efficient():
 		$LevelContainer/Level/Waves/Line2D7.material = null
 		$LevelContainer/Level/Background.material = null
 		$LevelContainer/Level/TransBackground.material = null
+
+
 func _ready():
+	print_tree_pretty()
+	
 	if Global.current_mission:
 		Global.current_mission.success_state_checker.initialize($LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver)
 	

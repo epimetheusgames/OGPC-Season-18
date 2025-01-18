@@ -14,11 +14,11 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Material" uid="uid://cexuq6aqq46ng" path="res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres" id="12_bo51x"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
-[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/Entity/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
-[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/BiterFish.tscn" id="20_tdtsg"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="21_itd0x"]
@@ -32,7 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
 [ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/Entity/Leviathan.tscn" id="35_47o3q"]
-[ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
+[ext_resource type="PackedScene" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dh4ys"]
 shader = ExtResource("11_wv41s")

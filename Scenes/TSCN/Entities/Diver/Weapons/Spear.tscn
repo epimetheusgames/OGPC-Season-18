@@ -33,16 +33,12 @@ metadata/_edit_lock_ = true
 [node name="RopePoint" type="Node2D" parent="."]
 position = Vector2(-29, 0)
 
-[node name="AttackBoxComponent" type="Node" parent="."]
-script = ExtResource("3_wous6")
-damage = 0.0
-always_attacking = true
-hurtbox = NodePath("../AttackBoxArea")
-
-[node name="AttackBoxArea" type="Area2D" parent="."]
+[node name="Attackbox" type="Area2D" parent="."]
 position = Vector2(36, 0)
+script = ExtResource("3_wous6")
+attacker_type = 1
 
-[node name="HeadCollision" type="CollisionShape2D" parent="AttackBoxArea"]
+[node name="HeadCollision" type="CollisionShape2D" parent="Attackbox"]
 shape = SubResource("CircleShape2D_hdpad")
 debug_color = Color(0.996338, 0.0525199, 3.85046e-07, 0.42)
 

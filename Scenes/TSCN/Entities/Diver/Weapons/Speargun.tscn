@@ -59,6 +59,7 @@ bullet_scene = ExtResource("2_qlup2")
 max_bullet_amount = 1
 reload_time = 5.0
 cooldown_time = 0.0
+dist_from_head = -10.0
 knockback = 1000.0
 
 [node name="EmitPoint" type="Node2D" parent="."]

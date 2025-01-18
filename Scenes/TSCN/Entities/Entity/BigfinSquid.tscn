@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bptkxkfwbumm5"]
+[gd_scene load_steps=10 format=3 uid="uid://bptkxkfwbumm5"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Enemy/BigfinSquid.gd" id="1_0jv23"]
 [ext_resource type="Resource" uid="uid://c0y2clojtb743" path="res://Scenes/Resource/Entity/BigfinSquidSettings.tres" id="2_1wvyv"]
 [ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_55m16"]
-[ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="4_2imnk"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="5_pchce"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="6_dpvyl"]
 
@@ -19,12 +18,9 @@ size = Vector2(45, 69)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ey62v"]
 size = Vector2(113, 109.5)
 
-[node name="BigfinSquid" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "attackbox_component", "health_component")]
+[node name="BigfinSquid" type="CharacterBody2D"]
 script = ExtResource("1_0jv23")
 settings = ExtResource("2_1wvyv")
-hurtbox_component = NodePath("HurtboxComponent")
-attackbox_component = NodePath("AttackBoxComponent")
-health_component = NodePath("HealthComponent")
 uid = SubResource("Resource_jajkh")
 
 [node name="Head" type="Polygon2D" parent="."]
@@ -93,34 +89,19 @@ component_container = NodePath("..")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("4_2imnk")
-component_container = NodePath("..")
-
-[node name="AttackBoxComponent" type="Node" parent="."]
+[node name="Attackbox" type="Area2D" parent="."]
 script = ExtResource("5_pchce")
-hitbox_type = 1
-knockback_velocity = 200.0
-hurtbox = NodePath("../AttackBox")
-component_container = NodePath("..")
+attacker_type = 0
 
-[node name="HurtboxComponent" type="Node" parent="."]
-script = ExtResource("6_dpvyl")
-hitbox_type = 1
-attachable_health_component = NodePath("../HealthComponent")
-attack_box_to_exclude = NodePath("../AttackBoxComponent")
-hurtbox = NodePath("../HurtBox")
-component_container = NodePath("..")
-
-[node name="AttackBox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
 position = Vector2(-1, -82)
 shape = SubResource("RectangleShape2D_cfi6i")
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("6_dpvyl")
+hurt_by_player = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -28.75)
 shape = SubResource("RectangleShape2D_ey62v")
 

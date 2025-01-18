@@ -23,7 +23,7 @@ func fire(angle: float) -> void:
 	velocity = Vector2(speed, 0).rotated(angle)
 
 func _on_body_entered(body: Node2D) -> void:
-	if attached || body is Spear:
+	if attached || body is Spear || body is Diver:
 		return
 	
 	attach_body = body as Node2D

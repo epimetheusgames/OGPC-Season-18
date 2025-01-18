@@ -10,6 +10,7 @@ size = Vector2(63, 18)
 
 [node name="AttackBox" type="Area2D" parent="."]
 script = ExtResource("1_snkfq")
+attacker_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 position = Vector2(25.5, 0)

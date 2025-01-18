@@ -13,7 +13,6 @@ extends NPC
 @export var hurtbox: Hurtbox
 @export var attackbox: Attackbox
 
-@export var health_component: HealthComponent
 @export var quick_disable_everything := false
 
 var _player_detection_area: Area2D
@@ -70,9 +69,6 @@ func _ready() -> void:
 	# Initialize enemy behavior settings.
 	health = settings.health
 	
-	if health_component:
-		health_component.set_health(health)
-		health_component.damage_taken.connect(_take_damage)
 	
 	if attackbox:
 		attackbox.damage = settings.damage
