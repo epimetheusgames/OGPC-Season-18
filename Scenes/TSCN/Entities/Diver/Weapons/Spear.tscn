@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Sprites/Spear.png" id="1_mdbjp"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Spear.gd" id="1_x2dlv"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="3_wous6"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="3_wous6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwnx7"]
 size = Vector2(57, 4)

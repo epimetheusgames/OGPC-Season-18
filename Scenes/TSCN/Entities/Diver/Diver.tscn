@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=43 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverCombat.gd" id="5_mjta2"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="6_dvqx5"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="7_3b7lw"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="7_3b7lw"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="8_spc27"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="8_spc27"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
@@ -27,10 +27,6 @@ uid = 3625
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
 height = 100.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2irf7"]
-radius = 20.0
-height = 98.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d3kj"]
 radius = 51.0
@@ -156,11 +152,6 @@ uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ghsq1")
-
-[node name="DiverDetectionArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DiverDetectionArea"]
-shape = SubResource("CapsuleShape2D_2irf7")
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("3_r5rx4")
@@ -550,9 +541,6 @@ component_container = NodePath("../..")
 
 [node name="HurtboxComponent" type="Node" parent="Stats"]
 script = ExtResource("7_3b7lw")
-attachable_health_component = NodePath("../HealthComponent")
-hurtbox = NodePath("../PlayerHurtbox")
-component_container = NodePath("../..")
 
 [node name="PlayerHurtbox" type="Area2D" parent="Stats"]
 rotation = -0.000201209
@@ -588,9 +576,6 @@ debug_color = Color(0.862718, 0.286752, 0.557432, 0.42)
 
 [node name="AttackBoxComponent" type="Node" parent="Combat"]
 script = ExtResource("8_spc27")
-knockback_velocity = 20.0
-hurtbox = NodePath("../AttackBox")
-component_container = NodePath("../..")
 
 [node name="Light" type="Node2D" parent="."]
 script = ExtResource("9_xqhlv")

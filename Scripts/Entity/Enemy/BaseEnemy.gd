@@ -9,8 +9,10 @@ extends NPC
 @export var settings: EnemyBehaviorSettings
 @export var target_reached_min_dst: int = 10
 @export var forward_direction: Vector2 = Vector2(-1, 0)
-@export var hurtbox_component: HurtboxComponent
-@export var attackbox_component: AttackBoxComponent
+
+@export var hurtbox: Hurtbox
+@export var attackbox: Attackbox
+
 @export var health_component: HealthComponent
 @export var quick_disable_everything := false
 
@@ -72,8 +74,8 @@ func _ready() -> void:
 		health_component.set_health(health)
 		health_component.damage_taken.connect(_take_damage)
 	
-	if attackbox_component:
-		attackbox_component.damage = settings.damage
+	if attackbox:
+		attackbox.damage = settings.damage
 
 func _take_damage(new_health) -> void:
 	health = new_health
@@ -108,8 +110,8 @@ func _process(delta: float) -> void:
 		target_speed *= 1 + settings.agressiveness
 		
 		var dist_to_player = position.distance_to(closest_player.position)
-		if attackbox_component && dist_to_player < settings.attack_distance && !attackbox_component.is_attacking:
-			attackbox_component.attack()
+		if attackbox && dist_to_player < settings.attack_distance && !attackbox.is_attacking:
+			attackbox.attack()
 			attack()
 		
 		if dist_to_player < settings.closest_distance:

@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
 [ext_resource type="Script" uid="uid://bnjvarxl3565b" path="res://Scripts/Entity/Jellyfish/Tentacles.gd" id="3_5yh7k"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="4_y38hh"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="6_gyt63"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="6_gyt63"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="7_bltm7"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/JellyfishColors.gdshader" id="8_2ikp3"]
 [ext_resource type="Texture2D" uid="uid://dsihl1750cku6" path="res://Assets/Art/Sprites/Entity/JellyFishBell.png" id="8_7y3es"]
@@ -46,12 +46,11 @@ shader = ExtResource("8_2ikp3")
 shader_parameter/colors = PackedVector4Array(1, 1, 1, 0.25, 1, 1, 1, 0.3, 1, 1, 1, 0.35, 1, 1, 1, 0.43, 1, 1, 1, 0.57, 1, 1, 1, 0.68)
 shader_parameter/out_colors = PackedColorArray(0, 0, 0.75, 0.301961, 0.25, 0, 0.75, 0.180392, 0.375, 0, 0.75, 0.301961, 0.4625, 0, 0.75, 0.360784, 0.25, 0, 0.75, 0.301961, 0.325, 0, 0.75, 0.301961)
 
-[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "health_component")]
+[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("health_component")]
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 settings = SubResource("Resource_0lxf2")
 forward_direction = Vector2(0, -1)
-hurtbox_component = NodePath("HurtboxComponent")
 health_component = NodePath("HealthComponent")
 
 [node name="Tentacles" type="Node2D" parent="." node_paths=PackedStringArray("on_screen_notifier")]
@@ -86,10 +85,6 @@ shape = SubResource("RectangleShape2D_qgvvg")
 
 [node name="HurtboxComponent" type="Node" parent="."]
 script = ExtResource("6_gyt63")
-hitbox_type = 1
-attachable_health_component = NodePath("../HealthComponent")
-hurtbox = NodePath("../Hurtbox")
-component_container = NodePath("..")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("7_bltm7")
