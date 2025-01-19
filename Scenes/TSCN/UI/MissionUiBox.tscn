@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://chy3luehcqm2b"]
+[gd_scene load_steps=11 format=3 uid="uid://c38y5lkdchimf"]
 
 [ext_resource type="Script" path="res://Scripts/UI/MissionUiBox.gd" id="1_0up1m"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="1_xywor"]

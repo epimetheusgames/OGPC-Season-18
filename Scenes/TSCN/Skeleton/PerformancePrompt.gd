@@ -2,7 +2,8 @@ extends TextureRect
 @export var notif_bar_speed: float
 @onready var default_size: Vector2 = get_node("NotifBar").size
 @onready var notif_bar = get_node("NotifBar")
-@onready var efficieny_thing = Global.root_node
+@export_node_path("Node") var efficieny_thing_path_gyat
+@onready var efficieny_thing = get_node(efficieny_thing_path_gyat)
 
 var t = 0
 
@@ -14,12 +15,9 @@ func _process(delta: float) -> void:
 		if(notif_bar.size.x<=0):
 			self.visible = false
 		return
-	if(efficieny_thing):
-		if(Global.current_mission_node!=null&&!efficieny_thing.super_efficient):
-			if(Engine.get_frames_per_second()<=efficieny_thing.super_efficient_auto_enable_maximum):
-				efficieny_thing.super_efficient = true
-				Global.super_efficient = true
-				self.visible = true
-				notif_bar.size = default_size
-				t=0
-				Global.current_mission_node.turn_on_efficient()
+	if(Global.current_mission_node!=null&&!efficieny_thing.super_efficient):
+		if(Engine.get_frames_per_second()<=efficieny_thing.super_efficient_auto_enable_maximum):
+			efficieny_thing.super_efficient = true
+			self.visible = true
+			notif_bar.size = default_size
+			t=0
