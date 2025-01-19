@@ -12,6 +12,7 @@ func _on_start_button_button_up() -> void:
 	$StartButton.visible = false
 
 func _on_singleplayer_button_button_up() -> void:
+	self.visible = false
 	Global.save_load_framework.start_game(0) 
 
 func _on_multiplayer_button_button_up() -> void:
