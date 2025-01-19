@@ -29,3 +29,4 @@ func _ready():
 	self.add_child(overlay_ui)
 	for x in get_parent().get_parent().get_node("GameUIOverlay").get_children().size():
 		get_node("overlay_ui").add_child(get_parent().get_parent().get_node("GameUIOverlay").get_children()[x].duplicate())
+	get_parent().get_parent().get_parent().get_node("UI").get_node("MainMenu").visible = false

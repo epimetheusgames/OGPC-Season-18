@@ -313,6 +313,7 @@ size_flags_horizontal = 3
 disabled = true
 
 [node name="UIGenerator" type="Node2D" parent="Game/GameUIOverlay" node_paths=PackedStringArray("button_template")]
+visible = false
 script = ExtResource("5_7cj4s")
 button_template = NodePath("../../../UI/TemplateButton")
 
