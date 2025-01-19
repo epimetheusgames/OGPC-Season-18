@@ -8,9 +8,13 @@ extends Entity
 # Dialog will be undertale-style rectangle thingies with text, and funny beeping sounds 
 
 var doo_doo
+var mission_dialog_core_set = false
+var ready_run_count = 0
+
 
 # Make dialog name in dialog.json this name
 @export var npc_name:String
+
 
 # Dialog speed in characters per second 
 @export var dialog_speed: int
@@ -23,14 +27,16 @@ var doo_doo
 # dialog and responses to pass to textposset
 var dialog_thingy
 
-#the current array path to the next dialog
-@onready var current_location:String = 'dialog["dialog"]["'+npc_name+'"]'
+#the current array path to the next dialog text
+@onready var current_location:String = 'dialog["dialog"]["'+npc_name+'"][1]'
 #the current array path to the next set of responses
-@onready var current_location_responses:String = 'dialog["dialog"]["'+npc_name+'"]'
+@onready var current_location_responses:String = 'dialog["dialog"]["'+npc_name+'"][1]'
+#the current array path to the next response-text pair
+@onready var current_location_text:String = 'dialog["dialog"]["'+npc_name+'"][1]'
 
 # Dialog beep sound thingy 
 @export_file("*.wav") var talking_sound
-
+var shat
 var conversation_index := 0
 var sentence_index := 0
 
@@ -42,35 +48,47 @@ func touching_bodies() -> bool:
 	#omg functional programming moment (lambdas)
 	doo_doo = bodies
 	bodies = bodies.filter(func(node): return node is CharacterBody2D)
+	doo_doo = bodies[0].name
+	bodies = bodies.filter(func(node): return !(node.name == "Submarine") && !(node.name == self.name))
+	print("chat are the bodies finna touching the npc")
+	print(bodies)
+	shat = bodies[0]
+  
+  # There was a merge conflict here, this line could be cuasing problems.
 	bodies.remove_at(0)
-	
 	return bodies.size()>0
 func _option_chosen():
-	current_location+="["+str(Global.dialog_core.response)+"][0][1][0]"
-	current_location_responses+= "["+str(Global.dialog_core.response)+"][1]"
-	Global.dialog_core.play_dialog(Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location+';'),dialog_speed,Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location_responses+';'))
+	current_location_text+="["+str(Global.dialog_core.response)+"][1][0]"
+	current_location += "[" + str(Global.dialog_core.response)+"][1]"
+	current_location_responses+= "["+str(Global.dialog_core.response)+"][1][1]"
+	shat = Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;if(' + current_location + '.size() > 1): return '+current_location_responses+';if(' + current_location + '.size() == 0): return [null];')
+	print(shat)
+	Global.dialog_core.play_dialog(Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;return '+current_location_text+';'),dialog_speed,Global.eval('var dialog;var dialog_json = JSON.new();dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text());dialog = dialog_json.data;if(' + current_location + '.size() > 1): return '+current_location_responses+';if(' + current_location + '.size() == 0): return [null];'))
 func _get_dialog():
 	dialog_json.parse(FileAccess.open("res://Scenes/Resource/Level/Dialog.json", FileAccess.READ).get_as_text())
 	dialog = dialog_json.data
 
 func _ready() -> void:
+	ready_run_count += 1
 	if(has_dialog):
 		call_deferred("deferred_ready")
 	else:
 		set_process(false)
 
 func deferred_ready():
-	get_node("Texture").texture = npc_texture
-	dialog_json = JSON.new()
-	_get_dialog()
-	get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
-	if Global.dialog_text_node:
-		Global.dialog_text_node.dialog_option_chosen.connect(_option_chosen)
-	#doo_doo = 
-	if(get_node("Hitbox").is_node_ready()):
-		do_that_thingy()
-	get_node("Hitbox").ready.connect(do_that_thingy)
-
+	if(ready_run_count>0):
+		get_node("Texture").texture = npc_texture
+		dialog_json = JSON.new()
+		_get_dialog()
+		get_node("AudioHandler/TalkSound").stream = AudioStreamWAV.new()
+		if(Global.dialog_core!=null):
+			Global.dialog_core.dialog_option_chosen.connect(_option_chosen)
+			mission_dialog_core_set = true
+		#doo_doo = 
+		if(get_node("Hitbox").is_node_ready()):
+			do_that_thingy()
+		get_node("Hitbox").ready.connect(do_that_thingy)
+   
 func do_that_thingy() -> void:
 	if(has_dialog) && Global.KeyactionHandler:
 		Global.KeyactionHandler.interact.connect(try_trigger_talking)
@@ -90,6 +108,10 @@ func trigger_talking() -> void:
 		Global.dialog_active = false
 func _process(delta) -> void:
 	super(delta)
+	Global.dialog_core.visible = Global.dialog_active
+	# should only run a few frames before the dialog ui is loaded into the mission
+	if(!mission_dialog_core_set):
+		deferred_ready()
 	if Global.dialog_core:
 		Global.dialog_core.visible = Global.dialog_active
 	
