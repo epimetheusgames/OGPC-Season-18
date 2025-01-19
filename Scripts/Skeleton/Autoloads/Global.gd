@@ -24,6 +24,7 @@ var super_efficient: bool
 var dialog_active: bool = false
 var dialog_played: bool = true
 var current_mission_node = null
+var current_mission: Mission
 
 # Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {

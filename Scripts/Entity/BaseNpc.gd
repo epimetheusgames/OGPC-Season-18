@@ -53,6 +53,9 @@ func touching_bodies() -> bool:
 	print("chat are the bodies finna touching the npc")
 	print(bodies)
 	shat = bodies[0]
+  
+  # There was a merge conflict here, this line could be cuasing problems.
+	bodies.remove_at(0)
 	return bodies.size()>0
 func _option_chosen():
 	current_location_text+="["+str(Global.dialog_core.response)+"][1][0]"
@@ -85,9 +88,9 @@ func deferred_ready():
 		if(get_node("Hitbox").is_node_ready()):
 			do_that_thingy()
 		get_node("Hitbox").ready.connect(do_that_thingy)
-	
+   
 func do_that_thingy() -> void:
-	if(has_dialog):
+	if(has_dialog) && Global.KeyactionHandler:
 		Global.KeyactionHandler.interact.connect(try_trigger_talking)
 func die() -> void:
 	#play some skibidi death animation or something
@@ -109,4 +112,6 @@ func _process(delta) -> void:
 	# should only run a few frames before the dialog ui is loaded into the mission
 	if(!mission_dialog_core_set):
 		deferred_ready()
+	if Global.dialog_core:
+		Global.dialog_core.visible = Global.dialog_active
 	

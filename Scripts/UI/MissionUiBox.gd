@@ -5,6 +5,10 @@ extends Control
 @export var associated_mission: Mission
 @export var connects_to: Array[MissionUIBox]
 
+func _ready() -> void:
+	if !self in Global.mission_system.mission_tree.get_available_missions():
+		modulate = Color(0.5, 1, 0.533)
+
 func _process(delta: float) -> void:
 	if !Global.is_multiplayer_host() && Global.is_multiplayer:
 		$MissionButton.disabled = true

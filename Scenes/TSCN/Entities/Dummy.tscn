@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3kno3jft2psf"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Dummy.gd" id="1_bs356"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="2_o5jo2"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="3_lj3sf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mrvec"]
+radius = 38.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f3od3"]
+radius = 50.0
+
+[node name="Dummy" type="CharacterBody2D"]
+script = ExtResource("1_bs356")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mrvec")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0.635294, 1, 1)
+polygon = PackedVector2Array(-39, -7, -26, -29, -6, -33, 8, -37, 26, -24, 38, -7, 38, 15, 20, 34, -6, 37, -35, 24)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_o5jo2")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -43.0
+offset_top = -66.0
+offset_right = 45.0
+offset_bottom = -43.0
+text = "Health: 100"
+
+[node name="HurtboxComponent" type="Node" parent="."]
+script = ExtResource("3_lj3sf")
+hitbox_type = 1
+attachable_health_component = NodePath("../HealthComponent")
+hurtbox = NodePath("../Area2D")
+component_container = NodePath("..")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_f3od3")
+debug_color = Color(2.40654e-06, 0.648177, 0.189204, 0.42)

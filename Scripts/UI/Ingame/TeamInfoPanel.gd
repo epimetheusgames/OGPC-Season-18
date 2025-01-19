@@ -1,0 +1,56 @@
+## Displays team info, such as name and health
+## Later there can be more things displayed here
+
+class_name TeamInfoPanel
+extends PanelContainer
+
+
+@onready var container: BoxContainer = $"MarginContainer/VBox"
+
+@onready var divers: Array[Diver]
+
+var health_text_array: Array[RichTextLabel]
+
+var timer: float = 0.0
+
+func _ready() -> void:
+	
+	for child in container.get_children():
+		child.free()
+	
+	for diver: Diver in divers:
+		var diver_name: String = diver.get_diver_username()
+		var diver_health: int = round(diver.get_diver_health())
+		
+		var new_hbox := HBoxContainer.new()
+		new_hbox.custom_minimum_size = Vector2(0, 30)
+		container.add_child(new_hbox)
+		
+		var new_diver_name_text := RichTextLabel.new()
+		new_diver_name_text.text = diver_name
+		new_diver_name_text.custom_minimum_size = Vector2(160, 0)
+		new_diver_name_text.scroll_active = false
+		new_hbox.add_child(new_diver_name_text)
+		#new_diver_name_text.size = Vector2(20, 20)
+		
+		var new_separator := VSeparator.new()
+		new_separator.add_theme_constant_override("Separation", 10)
+		new_hbox.add_child(new_separator)
+		
+		var new_health_text := RichTextLabel.new()
+		
+		new_health_text.text = str(diver_health) + "%"
+		new_health_text.custom_minimum_size = Vector2(100, 0)
+		new_health_text.scroll_active = false
+		new_hbox.add_child(new_health_text)
+		
+		health_text_array.append(new_health_text)
+	
+
+func _process(delta: float) -> void:
+	for i in range(divers.size()):
+		var diver: Diver = divers[i]
+		var health_text: RichTextLabel = health_text_array[i]
+		
+		health_text.text = str(diver.get_diver_health()) + "%"
+		

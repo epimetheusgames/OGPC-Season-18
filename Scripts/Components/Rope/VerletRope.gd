@@ -20,24 +20,23 @@ var rope_drawer: RopeLineDrawer
 var normals: Array[Vector2]
 
 func _ready() -> void:
-	component_name = "VerletRope"
 	super()
+	component_name = "VerletRope"
 	
 	raycast_query = PhysicsRayQueryParameters2D.new()
 	
-	var spawn_pos: Vector2
-	if start_anchor_node:
-		spawn_pos = start_anchor_node.global_position
+	var spawn_pos: Vector2 = get_node(component_container).global_position if component_container else Vector2.ZERO
 	
 	verlet_nodes.resize(point_amount)
 	for i in range(point_amount):
 		verlet_nodes[i] = VerletNode.new()
 		verlet_nodes[i].set_up(spawn_pos) 
-		spawn_pos += Vector2(0, point_separation)
 	
 	normals.resize(point_amount)
 
 func _process(delta: float) -> void:
+	super(delta)
+	
 	if !is_on_screen:
 		return
 	

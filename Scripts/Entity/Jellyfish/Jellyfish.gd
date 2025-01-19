@@ -7,7 +7,7 @@ class_name Jellyfish
 extends Enemy
 
 const BOOST_MULTIPLIER: float = 7
-const ROTATION_SPEED: float = 2.0
+const ROTATION_SPEED: float = 0.3
 const BOOST_DECAY_RATE: float = 0.9  # Controls how fast boost fades
 const BOOST_DURATION: float = 0.2  # Boost lasts half a second
 
@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 	update_targets()
 	
 	velocity = Util.better_vec2_lerp(velocity, target_velocity, 0.1, delta)
-	global_rotation = lerp_angle(global_rotation, target_rotation, ROTATION_SPEED * delta)
+	global_rotation = Util.better_angle_lerp(global_rotation, target_rotation, ROTATION_SPEED, delta)
 	
 	global_position += velocity * delta * 60
 

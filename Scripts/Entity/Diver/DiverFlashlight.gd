@@ -15,8 +15,9 @@ func _process(_delta: float) -> void:
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	var head_pos: Vector2 = diver.diver_animation.get_head_position()
 	
-	Global.godot_steam_abstraction.run_remote_function(self, "set_light_rotation", [head_pos.angle_to_point(mouse_pos)])
-	Global.godot_steam_abstraction.run_remote_function(self, "set_light_position", [head_pos])
+	if Global.godot_steam_abstraction:
+		Global.godot_steam_abstraction.run_remote_function(self, "set_light_rotation", [head_pos.angle_to_point(mouse_pos)])
+		Global.godot_steam_abstraction.run_remote_function(self, "set_light_position", [head_pos])
 	set_light_position(head_pos)
 	set_light_rotation(head_pos.angle_to_point(mouse_pos))
 

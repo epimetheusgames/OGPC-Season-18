@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwaifexgjw8vl"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Enemy/BiterFish.gd" id="1_k5pkd"]
+[ext_resource type="Resource" uid="uid://qf8cjw5p7qeh" path="res://Scenes/Resource/Entity/BiterFishSettings.tres" id="2_8ir73"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="3_m157c"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="4_gpm7f"]
+[ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="5_16q1w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o4ek1"]
+radius = 23.0868
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xva6q"]
+radius = 152.398
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2kiya"]
+radius = 42.19
+
+[node name="BiterFish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "attackbox_component", "health_component")]
+collision_layer = 32768
+collision_mask = 32768
+script = ExtResource("1_k5pkd")
+max_group_center_dist = 400.0
+settings = ExtResource("2_8ir73")
+hurtbox_component = NodePath("HurtboxComponent")
+attackbox_component = NodePath("AttackBoxComponent")
+health_component = NodePath("HealthComponent")
+
+[node name="Placeholder" type="Polygon2D" parent="."]
+position = Vector2(-24, 0)
+color = Color(0.657768, 0.657768, 0.657768, 1)
+polygon = PackedVector2Array(-63, 1, -23, 25, 40, 10, 59, 26, 59, -19, 41, -9, -22, -32)
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-24, 0)
+shape = SubResource("CircleShape2D_o4ek1")
+
+[node name="AttackBoxComponent" type="Node" parent="."]
+script = ExtResource("3_m157c")
+hitbox_type = 1
+hurtbox = NodePath("../AttackBox")
+component_container = NodePath("..")
+
+[node name="HurtboxComponent" type="Node" parent="."]
+script = ExtResource("4_gpm7f")
+hitbox_type = 1
+attachable_health_component = NodePath("../HealthComponent")
+attack_box_to_exclude = NodePath("../AttackBoxComponent")
+hurtbox = NodePath("../HurtBox")
+component_container = NodePath("..")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("5_16q1w")
+component_container = NodePath("..")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(-24, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_xva6q")
+
+[node name="AttackBox" type="Area2D" parent="."]
+position = Vector2(-24, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(-99, -2)
+shape = SubResource("CircleShape2D_2kiya")

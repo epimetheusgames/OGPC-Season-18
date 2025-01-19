@@ -42,6 +42,9 @@ func _ready_boid() -> void:
 	
 	boids_calculator = Global.boids_calculator_node
 	
+	if !boids_calculator:
+		return
+	
 	if boids_calculator.process_mode == Node.PROCESS_MODE_DISABLED:
 		component_container_node.queue_free()
 		return
@@ -58,9 +61,12 @@ func _ready_boid() -> void:
 	var rng := RandomNumberGenerator.new()
 	component_container_node.modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
 
+func _exit_tree() -> void:
+	Global.boids_calculator_node.remove_boid_index(index)
+
 # Update velocity using compute shader outputs from boids calculator node.
 func _process(delta: float) -> void: 
-	if boids_calculator.process_mode == Node.PROCESS_MODE_DISABLED:
+	if !boids_calculator || boids_calculator.process_mode == Node.PROCESS_MODE_DISABLED:
 		return
 	
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:

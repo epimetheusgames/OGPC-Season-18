@@ -1,0 +1,343 @@
+[gd_scene load_steps=12 format=3 uid="uid://71htappd3cxj"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Ingame/TeamInfoPanel.gd" id="1_0ajfg"]
+[ext_resource type="Script" path="res://Scripts/UI/Ingame/PersonHUD.gd" id="1_0aoln"]
+[ext_resource type="Script" path="res://Scripts/UI/Ingame/Inventory.gd" id="3_f466a"]
+
+[sub_resource type="Gradient" id="Gradient_eq4ay"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.5, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uj8mc"]
+gradient = SubResource("Gradient_eq4ay")
+width = 200
+height = 30
+
+[sub_resource type="Gradient" id="Gradient_e0iga"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.17, 1, 0.363667, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tl1p2"]
+gradient = SubResource("Gradient_e0iga")
+width = 200
+height = 30
+
+[sub_resource type="Gradient" id="Gradient_aq7m3"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.496653, 0.496654, 0.496653, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gr1oq"]
+gradient = SubResource("Gradient_aq7m3")
+width = 200
+height = 30
+
+[sub_resource type="Gradient" id="Gradient_221s0"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q3rum"]
+gradient = SubResource("Gradient_221s0")
+width = 200
+height = 30
+
+[node name="IngameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUD" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("1_0aoln")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer"]
+layout_mode = 2
+
+[node name="HealthVBox" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/HealthVBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HealthProgress" type="TextureProgressBar" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 15.0
+value = 15.0
+texture_under = SubResource("GradientTexture2D_uj8mc")
+texture_progress = SubResource("GradientTexture2D_tl1p2")
+
+[node name="HealthText" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer/HealthProgress"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+offset_left = 4.0
+offset_right = 124.0
+offset_bottom = 30.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 21
+text = "Health"
+
+[node name="VSeparator" type="VSeparator" parent="HUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="OxygenVBox" type="VBoxContainer" parent="HUD/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="OxygenProgress" type="TextureProgressBar" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+fill_mode = 3
+texture_under = SubResource("GradientTexture2D_gr1oq")
+texture_progress = SubResource("GradientTexture2D_q3rum")
+
+[node name="OxygenText" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer/OxygenProgress"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+offset_left = 3.0
+offset_right = 123.0
+offset_bottom = 30.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 21
+text = "Oxygen"
+
+[node name="TeamInfoPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -135.0
+offset_right = 283.0
+grow_vertical = 0
+script = ExtResource("1_0ajfg")
+
+[node name="MarginContainer" type="MarginContainer" parent="TeamInfoPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="VBox" type="VBoxContainer" parent="TeamInfoPanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 5
+
+[node name="Diver1" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver1"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver1"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Diver2" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver2"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Diver3" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver3"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver3"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Diver4" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver4"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver4"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Inventory" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -239.0
+offset_top = -174.0
+offset_right = 239.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_f466a")
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/MarginContainer"]
+layout_mode = 2
+
+[node name="Slot1" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(127, 0)
+layout_mode = 2
+
+[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot1"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot1"]
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 2
+
+[node name="SlotButton" type="TextureButton" parent="Inventory/MarginContainer/HBoxContainer/Slot1/TextureRect"]
+layout_mode = 2
+offset_top = -27.0
+offset_right = 127.0
+offset_bottom = 127.0
+
+[node name="Slot2" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(123, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand_mode = 2
+
+[node name="SlotButton2" type="TextureButton" parent="Inventory/MarginContainer/HBoxContainer/Slot2/TextureRect"]
+layout_mode = 2
+offset_left = 2.0
+offset_top = -27.0
+offset_right = 129.0
+offset_bottom = 127.0
+
+[node name="Slot3" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(123, 0)
+layout_mode = 2
+
+[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot3"]
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 2
+
+[node name="SlotButton3" type="TextureButton" parent="Inventory/MarginContainer/HBoxContainer/Slot3/TextureRect"]
+layout_mode = 2
+offset_left = 3.0
+offset_top = -27.0
+offset_right = 130.0
+offset_bottom = 127.0
+
+[node name="Slot4" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(123, 0)
+layout_mode = 2
+
+[node name="Counter" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Slot4"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer/Slot4"]
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 2
+
+[node name="SlotButton4" type="TextureButton" parent="Inventory/MarginContainer/HBoxContainer/Slot4/TextureRect"]
+layout_mode = 2
+offset_left = -4.0
+offset_top = -27.0
+offset_right = 123.0
+offset_bottom = 127.0
+
+[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot1/TextureRect/SlotButton" to="Inventory" method="_on_slot_button_button_up"]
+[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot2/TextureRect/SlotButton2" to="Inventory" method="_on_slot_button_2_button_up"]
+[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot3/TextureRect/SlotButton3" to="Inventory" method="_on_slot_button_3_button_up"]
+[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot4/TextureRect/SlotButton4" to="Inventory" method="_on_slot_button_4_button_up"]
