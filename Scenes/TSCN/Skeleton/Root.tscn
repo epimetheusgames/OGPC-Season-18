@@ -322,10 +322,10 @@ offset_right = -304.462
 offset_bottom = -685.215
 disabled = true
 
-[node name="UIGenerator" type="Node2D" parent="Game/GameUIOverlay" node_paths=PackedStringArray("button_template")]
+[node name="UIGenerator" type="Node2D" parent="Game/GameUIOverlay"]
 visible = false
 script = ExtResource("5_7cj4s")
-button_template = NodePath("../../../UI/TemplateButton")
+button_template_path = NodePath("../../../UI/TemplateButton")
 
 [node name="MousePositionGetter" type="Node2D" parent="."]
 

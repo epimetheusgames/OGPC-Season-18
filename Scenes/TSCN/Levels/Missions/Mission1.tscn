@@ -394,7 +394,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1203, 700)
+shader_parameter/screen_size = Vector2(1203, 597)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -951,7 +951,7 @@ material = SubResource("ShaderMaterial_yo3nw")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -106.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -965,7 +965,7 @@ material = SubResource("ShaderMaterial_jugfr")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -106.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -981,7 +981,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -717.0
-offset_bottom = -380.0
+offset_bottom = -483.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -997,7 +997,7 @@ material = SubResource("ShaderMaterial_g7l6p")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -106.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)

@@ -26,7 +26,7 @@ func _ready():
 		$LevelContainer/Level/Waves/Line2D7.material = null
 		$LevelContainer/Level/Background.material = null
 		$LevelContainer/Level/TransBackground.material = null
-    
+	
 	var overlay_ui = CanvasLayer.new()
 	overlay_ui.name = "overlay_ui"
 	overlay_ui.follow_viewport_enabled = false
