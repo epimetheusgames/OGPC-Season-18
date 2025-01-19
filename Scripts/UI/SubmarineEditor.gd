@@ -6,8 +6,8 @@ extends Control
 @onready var grid = $"SplitContainer/PanelContainer/VSplitContainer/GridContainer"
 
 @onready var control_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn")
-@onready var submarine_L_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineLPassageModule.tscn")
-@onready var submarine_rl_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineRlPassageModule.tscn")
+@onready var submarine_corner_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineCornerPassageModule.tscn")
+@onready var submarine_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarinePassageModule.tscn")
 @onready var submarine_end_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule.tscn")
 
 var modules: Array[SubmarineModule] = []
@@ -17,6 +17,7 @@ var module_adding: SubmarineModule
 func add_module(new_module: SubmarineModule):
 	adding_module = true
 	new_module.render_attachment_points = true
+	new_module.is_editor_peice = true
 	origin.add_child(new_module)
 	module_adding = new_module
 	modules.append(new_module)
@@ -24,14 +25,13 @@ func add_module(new_module: SubmarineModule):
 func _on_control_module_button_up() -> void:
 	add_module(control_module.instantiate())
 
-func _on_ud_passage_module_button_up() -> void:
-	add_module(submarine_L_passage_module.instantiate())
+func _on_corner_passage_module_button_up() -> void:
+	add_module(submarine_corner_passage_module.instantiate())
 
-func _on_l_passage_module_button_up() -> void:
-	add_module(submarine_rl_passage_module.instantiate())
+func _on_passage_module_button_up() -> void:
+	add_module(submarine_passage_module.instantiate())
 
-# Actually the end module.
-func _on_rl_passage_module_button_up() -> void:
+func _on_end_passage_module_button_up() -> void:
 	add_module(submarine_end_module.instantiate())
 
 func _process(delta: float) -> void:
@@ -67,15 +67,15 @@ func _process(delta: float) -> void:
 	
 	queue_redraw()
 
-func _draw() -> void:
-	if adding_module:
-		for module in modules:
-			if module == module_adding:
-				continue
-			for point in module.attachment_points:
-				for our_point in module_adding.attachment_points:
-					if point.direction.is_equal_approx(-our_point.direction) && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
-						draw_line(our_point.global_position - global_position, point.global_position - global_position, Color.RED, 2)
+#func _draw() -> void:
+	#if adding_module:
+		#for module in modules:
+			#if module == module_adding:
+				#continue
+			#for point in module.attachment_points:
+				#for our_point in module_adding.attachment_points:
+					#if point.direction.is_equal_approx(-our_point.direction) && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
+						#draw_line(our_point.global_position - global_position, point.global_position - global_position, Color.RED, 2)
 
 func find_assosiated_point(point: Vector2, direction: Vector2, multiplier: int = 1) -> AttachmentPoint:
 	for module in modules:

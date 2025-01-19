@@ -18,6 +18,9 @@ shader = ExtResource("1_kggal")
 shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
 shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
 shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.2
+shader_parameter/height = 1.0
 shader_parameter/depth_color_tex = ExtResource("2_axbf6")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ss7kl"]
@@ -63,7 +66,7 @@ shader_parameter/edge_tex = SubResource("CompressedTexture2D_lahql")
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gpgg6"]
 polygon = PackedVector2Array(107, -307, 437, 199, -241, 181, -823, -11)
 
-[sub_resource type="Resource" id="Resource_tgjm2"]
+[sub_resource type="Resource" id="Resource_xbfoa"]
 resource_local_to_scene = true
 script = ExtResource("7_dybo6")
 uid = 29
@@ -73,6 +76,9 @@ shader = ExtResource("1_kggal")
 shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
 shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
 shader_parameter/always_top = true
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.2
+shader_parameter/height = 1.0
 shader_parameter/depth_color_tex = ExtResource("2_axbf6")
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_u17pl"]
@@ -199,7 +205,7 @@ occluder = SubResource("OccluderPolygon2D_gpgg6")
 z_index = 4
 position = Vector2(1267, -164)
 water_manager = NodePath("../Waves")
-uid = SubResource("Resource_tgjm2")
+uid = SubResource("Resource_xbfoa")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="WorldNode2D"]
 rotation = -0.464765

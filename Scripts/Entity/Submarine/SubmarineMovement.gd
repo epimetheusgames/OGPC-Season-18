@@ -1,4 +1,4 @@
-# Coded by Xavier
+# Coded by Xavier lol
 
 ## Submarine movement system
 class_name SubmarineMovement
@@ -66,10 +66,12 @@ func update_current_angle(delta: float) -> void:
 	current_angle = Util.better_angle_lerp(current_angle, target_angle, 0.005, delta)
 
 func update_movement_velocity(delta: float):
-	velocity += input_direction * Util.angle_to_vector(current_angle, CONST_ACCEL * delta)
+	velocity = velocity * 0.95
+	
+	velocity += input_direction * Util.angle_to_vector_radians(current_angle, CONST_ACCEL * delta)
 	
 	if Input.is_action_just_pressed("move"):
-		velocity += input_direction * Util.angle_to_vector(current_angle, TAP_ACCEL * delta)
+		velocity += input_direction * Util.angle_to_vector_radians(current_angle, TAP_ACCEL * delta)
 	
 	# Clamp velocity to MAX_SPEED
 	if velocity.length() > MAX_SPEED:

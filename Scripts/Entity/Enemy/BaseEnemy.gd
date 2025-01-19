@@ -71,6 +71,9 @@ func _ready() -> void:
 	if health_component:
 		health_component.set_health(health)
 		health_component.damage_taken.connect(_take_damage)
+	
+	if attackbox_component:
+		attackbox_component.damage = settings.damage
 
 func _take_damage(new_health) -> void:
 	health = new_health

@@ -10,7 +10,11 @@ func _ready() -> void:
 
 func _ready_multiplayer_player_spawner() -> void:
 	_ready_base_component()
-	Global.godot_steam_abstraction.user_joined_lobby.connect(_client_joined)
+	if Global.godot_steam_abstraction:
+		Global.godot_steam_abstraction.user_joined_lobby.connect(_client_joined)
+	
+	if !Global.godot_steam_abstraction:
+		return
 	
 	for client in Global.godot_steam_abstraction.lobby_members:
 		_client_joined(client["steam_id"], client["steam_name"])

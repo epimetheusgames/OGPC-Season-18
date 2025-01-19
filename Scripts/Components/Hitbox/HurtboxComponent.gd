@@ -4,6 +4,7 @@
 class_name HurtboxComponent
 extends BaseHitboxComponent
 
+@export var damage_ammount: float = 1.0
 @export var hitbox_type: HITBOX_TYPE
 @export var has_knockback: bool = true
 @export_node_path("HealthComponent") var attachable_health_component
@@ -37,13 +38,17 @@ func _area_entered(area: Area2D) -> void:
 	if not attachable_health_component:
 		return
 	
-	# Kinda silly
-	var damage_ammount := 1.0
+	# It's reallllly sily
+	# It's sucks royal donkry balls
 	var parent = area.get_parent()
 	if !(parent is Entity):
 		parent = parent.get_parent()
 	if !(parent is Entity):
-		print("WARNING: Hurtbox entered by area at path " + str(area.get_path()) + ", which doesn't have a parent or grandparent that is of type Entity. This will not be detected.")
+		parent = parent.get_parent()
+	if !(parent is Entity):
+		parent = parent.get_parent()
+	if !(parent is Entity):
+		print("WARNING: Hurtbox at path " + str(get_path()) + " entered by area at path " + str(area.get_path()) + ", which doesn't have a parent or grandparent or great grandparent or great great grandparent that is of type Entity. This will not be detected.")
 		return
 	
 	parent = parent as Entity
