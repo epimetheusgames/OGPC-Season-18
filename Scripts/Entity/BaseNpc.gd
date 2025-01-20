@@ -46,16 +46,11 @@ var dialog_json: JSON
 func touching_bodies() -> bool:
 	var bodies = get_node(dialog_area).get_overlapping_bodies()
 	#omg functional programming moment (lambdas)
-	doo_doo = bodies
 	bodies = bodies.filter(func(node): return node is CharacterBody2D)
-	doo_doo = bodies[0].name
 	bodies = bodies.filter(func(node): return !(node.name == "Submarine") && !(node.name == self.name))
 	print("chat are the bodies finna touching the npc")
 	print(bodies)
-	shat = bodies[0]
   
-  # There was a merge conflict here, this line could be cuasing problems.
-	bodies.remove_at(0)
 	return bodies.size()>0
 func _option_chosen():
 	current_location_text+="["+str(Global.dialog_core.response)+"][1][0]"
@@ -100,6 +95,7 @@ func try_trigger_talking() -> void:
 	if(touching_bodies()):
 		trigger_talking()
 func trigger_talking() -> void:
+	doo_doo = Global.dialog_active
 	if(!Global.dialog_active):
 		Global.dialog_active = true
 		#index [0] is the dialogue, [1][0] [1][1] [1][2] and  etc are responses

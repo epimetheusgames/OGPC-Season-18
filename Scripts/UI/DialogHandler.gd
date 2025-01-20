@@ -8,7 +8,7 @@ var dialog:String = ""
 # In characters per second 
 var dialog_speed: float = 10
 
-var response_buttons:Array[Button] = []
+var response_buttons:Array[ColorRect] = []
 var response:int = -1
 
 # In characters per second, this is so theres a lil pause between a period
@@ -21,10 +21,10 @@ var dialog_sfx_node: AudioStreamPlayer
 
 var shit
 var dumb
-@export_node_path("Button") var response_button_one
-@export_node_path("Button") var response_button_two
-@export_node_path("Button") var response_button_three
-@export_node_path("Button") var response_button_four
+@export_node_path("ColorRect") var response_button_one
+@export_node_path("ColorRect") var response_button_two
+@export_node_path("ColorRect") var response_button_three
+@export_node_path("ColorRect") var response_button_four
 @export var text_node:RichTextLabel
 
 func _ready() -> void:

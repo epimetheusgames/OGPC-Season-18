@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=23 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Sprites/Misc/icon.svg" id="16_v8rcl"]
 [ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/PerformancePrompt.gd" id="17_0ry5s"]
+[ext_resource type="PackedScene" uid="uid://bp2ach8thhbsd" path="res://Scripts/UI/FakeButton.tscn" id="17_tnv8r"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
@@ -288,29 +289,25 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ResponseButtonOne" type="Button" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ResponseButtonOne" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("17_tnv8r")]
 layout_mode = 2
 size_flags_horizontal = 3
-disabled = true
 
-[node name="ResponseButtonTwo" type="Button" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ResponseButtonTwo" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("17_tnv8r")]
 layout_mode = 2
 size_flags_horizontal = 3
-disabled = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ResponseButtonThree" type="Button" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="ResponseButtonThree" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("17_tnv8r")]
 layout_mode = 2
 size_flags_horizontal = 3
-disabled = true
 
-[node name="ResponseButtonFour" type="Button" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="ResponseButtonFour" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("17_tnv8r")]
 layout_mode = 2
 size_flags_horizontal = 3
-disabled = true
 
 [node name="UIGenerator" type="Node2D" parent="Game/GameUIOverlay" node_paths=PackedStringArray("button_template")]
 visible = false
