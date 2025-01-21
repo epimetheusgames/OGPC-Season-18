@@ -3,7 +3,7 @@ extends ColorRect
 var disabled:bool = false
 signal button_down
 @onready var textBox:RichTextLabel = get_node("text")
-@onready var currentColor:Color = get_node("text").color
+@onready var currentColor:Color = color
 var text:String
 func isHovering(size,pos):
 	return Rect2(pos, size).has_point(get_global_mouse_position())
