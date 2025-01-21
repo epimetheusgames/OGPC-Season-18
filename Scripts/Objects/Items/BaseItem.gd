@@ -5,6 +5,7 @@ extends Area2D
 @export var icon: Texture2D
 @export var cost: int
 @export var item_name: String
+var ammount: int = 1
 
 func _ready() -> void:
 	collision_layer = 128
@@ -16,4 +17,5 @@ func generate_inventory_item() -> InventoryItem:
 	item.scene = scene
 	item.icon = icon
 	item.cost = cost
+	item.count = ammount
 	return item

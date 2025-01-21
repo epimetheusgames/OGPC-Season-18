@@ -5,3 +5,4 @@ extends Resource
 @export var scene: FilePathResource
 @export var cost: int
 @export var icon: Texture
+@export var count: int

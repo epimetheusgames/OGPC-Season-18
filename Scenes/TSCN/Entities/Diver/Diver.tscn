@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=45 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverInventory.gd" id="3_r5rx4"]
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
+[ext_resource type="Script" path="res://Scripts/Public/InventoryPublic.gd" id="4_lqvql"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverCombat.gd" id="5_mjta2"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="6_dvqx5"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="7_3b7lw"]
@@ -160,6 +161,9 @@ collision_mask = 128
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/ItemDetectionArea"]
 position = Vector2(0, -64)
 shape = SubResource("CircleShape2D_5d3kj")
+
+[node name="InventoryPublic" type="Node" parent="Inventory"]
+script = ExtResource("4_lqvql")
 
 [node name="Movement" type="Node2D" parent="."]
 script = ExtResource("2_lxvv3")
