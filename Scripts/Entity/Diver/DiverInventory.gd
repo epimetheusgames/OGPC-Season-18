@@ -2,8 +2,9 @@
 class_name DiverInventory
 extends Node2D
 
-var inventory: Array[InventorySlot]
+var inventory: Array[InventoryItem]
 var hovering_item: Node2D
+@export var inventory_size := 4
 
 func _process(delta: float) -> void:
 	if hovering_item && is_instance_valid(hovering_item):
@@ -19,20 +20,22 @@ func _on_item_detection_area_area_entered(area: Area2D) -> void:
 				hoverings_child = child
 				break
 	if area is BaseItem && !area == hovering_item && !area == hoverings_child:
-		var res: InventoryItem = area.generate_inventory_item()
-		area.get_parent().queue_free()
-		for item in inventory:
-			if item.item.name == res.name:
-				item.count += 1
-				return
-		var new_slot := InventorySlot.new()
-		new_slot.item = res
-		new_slot.count = 1
-		inventory.append(new_slot)
-		if Global.verbose_debug:
-			print("DEBUG: Item collected by player. Name: " + res.name + ". Cost: " + str(res.cost))
+		__collect_item(area)
 
-func select_item(index: int) -> void:
+func __collect_item(area: BaseItem) -> void:
+	var res: InventoryItem = area.generate_inventory_item()
+	area.get_parent().queue_free()
+	for item in inventory:
+		if item.name == res.name:
+			item.count += 1
+			return
+	if inventory.size() >= inventory_size:
+		return
+	inventory.append(res)
+	if Global.verbose_debug:
+		print("DEBUG: Item collected by player. Name: " + res.name + ". Cost: " + str(res.cost))
+
+func __select_item(index: int) -> void:
 	if index >= inventory.size():
 		return
 	
@@ -40,14 +43,10 @@ func select_item(index: int) -> void:
 		hovering_item = null
 		return
 	
-	hovering_item = load(inventory[index].item.scene.file).instantiate()
+	hovering_item = load(inventory[index].scene.file).instantiate()
 	Global.player.get_parent().add_child(hovering_item)
 	
 	if inventory[index].count == 1:
 		inventory.remove_at(index)
 	else:
 		inventory[index].count -= 1
-
-class InventorySlot:
-	var item: InventoryItem
-	var count: int

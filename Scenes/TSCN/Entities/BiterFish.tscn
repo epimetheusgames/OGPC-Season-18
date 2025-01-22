@@ -15,11 +15,13 @@ radius = 152.398
 radius = 42.19
 
 [node name="BiterFish" type="CharacterBody2D"]
+
 collision_layer = 32768
 collision_mask = 32768
 script = ExtResource("1_k5pkd")
 max_group_center_dist = 400.0
 settings = ExtResource("2_8ir73")
+
 
 [node name="Placeholder" type="Polygon2D" parent="."]
 position = Vector2(-24, 0)

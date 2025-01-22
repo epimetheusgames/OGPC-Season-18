@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=23 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
-[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
 [ext_resource type="Script" path="res://Scripts/UI/UiGenerator.gd" id="5_7cj4s"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Sprites/Misc/icon.svg" id="16_v8rcl"]
 [ext_resource type="Script" path="res://Scenes/TSCN/Skeleton/PerformancePrompt.gd" id="17_0ry5s"]
+[ext_resource type="PackedScene" uid="uid://bp2ach8thhbsd" path="res://Scripts/UI/FakeButton.tscn" id="17_tnv8r"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
@@ -32,7 +33,7 @@ missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
 
-[node name="Root" type="Node"]
+[node name="Root" type="Node" node_paths=PackedStringArray("KeyactionHandler")]
 script = ExtResource("1_h2kyx")
 verbose_debug = true
 super_efficient_auto_enable_maximum = 25
@@ -63,10 +64,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1087.0
-
-[node name="UIGenerator" type="Node" parent="UI"]
-script = ExtResource("5_7cj4s")
-button_template_path = NodePath("../TemplateButton")
 
 [node name="TemplateButton" type="Button" parent="UI"]
 layout_mode = 0
@@ -217,6 +214,7 @@ offset_bottom = 766.0
 script = ExtResource("9_xe7j2")
 
 [node name="KeyActionHandler" type="Node2D" parent="Game"]
+visible = false
 script = ExtResource("9_rhklt")
 
 [node name="GameContainer" type="Node" parent="Game"]
@@ -236,7 +234,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("16_v8rcl")
 script = ExtResource("17_0ry5s")
 notif_bar_speed = 0.4
-efficieny_thing_path_gyat = NodePath("../../..")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/PerformancePrompt"]
 layout_mode = 0
@@ -254,78 +251,72 @@ offset_top = 368.0
 offset_right = 988.0
 offset_bottom = 408.0
 
-[node name="DialogTextureBG" type="TextureRect" parent="Game/GameUIOverlay"]
+[node name="DialogTextureBG" type="TextureRect" parent="Game/GameUIOverlay" node_paths=PackedStringArray("text_node")]
+visible = false
 layout_mode = 0
-offset_left = 207.0
-offset_top = 566.0
-offset_right = 765.0
-offset_bottom = 731.0
+offset_left = 677.0
+offset_top = 758.0
+offset_right = 1235.0
+offset_bottom = 923.0
 texture = SubResource("PlaceholderTexture2D_o714b")
 script = ExtResource("8_7spfj")
+response_button_one = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResponseButtonOne")
+response_button_two = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResponseButtonTwo")
+response_button_three = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/ResponseButtonThree")
+response_button_four = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/ResponseButtonFour")
+text_node = NodePath("VBoxContainer/DialogTextLabel")
 
-[node name="ResponseButtonFour" type="Button" parent="Game/GameUIOverlay/DialogTextureBG"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.88
-anchor_top = 0.758
-anchor_right = 0.88
-anchor_bottom = 0.758
-offset_left = -698.04
-offset_top = -691.07
-offset_right = -690.04
-offset_bottom = -683.07
-disabled = true
-
-[node name="DialogTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/DialogTextureBG"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG"]
 layout_mode = 0
-offset_left = 37.0
-offset_top = 26.0
-offset_right = 541.0
-offset_bottom = 80.0
+offset_left = 30.0
+offset_right = 517.0
+offset_bottom = 160.0
 
-[node name="ResponseButtonOne" type="Button" parent="Game/GameUIOverlay/DialogTextureBG"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.245
-anchor_top = 0.241
-anchor_right = 0.245
-anchor_bottom = 0.241
-offset_left = -343.71
-offset_top = -605.765
-offset_right = -335.71
-offset_bottom = -597.765
-disabled = true
+[node name="DialogTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "eeeeeeeeee"
 
-[node name="ResponseButtonTwo" type="Button" parent="Game/GameUIOverlay/DialogTextureBG"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.849
-anchor_top = 0.321
-anchor_right = 0.849
-anchor_bottom = 0.321
-offset_left = -680.742
-offset_top = -618.965
-offset_right = -672.742
-offset_bottom = -610.965
-disabled = true
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="ResponseButtonThree" type="Button" parent="Game/GameUIOverlay/DialogTextureBG"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.189
-anchor_top = 0.771
-anchor_right = 0.189
-anchor_bottom = 0.771
-offset_left = -312.462
-offset_top = -693.215
-offset_right = -304.462
-offset_bottom = -685.215
-disabled = true
+[node name="VBoxContainer" type="VBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResponseButtonOne" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("17_tnv8r")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResponseButtonTwo" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("17_tnv8r")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResponseButtonThree" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("17_tnv8r")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResponseButtonFour" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("17_tnv8r")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UIGenerator" type="Node2D" parent="Game/GameUIOverlay" node_paths=PackedStringArray("button_template")]
+visible = false
+script = ExtResource("5_7cj4s")
+button_template = NodePath("../../../UI/TemplateButton")
 
 [node name="MousePositionGetter" type="Node2D" parent="."]
 
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
-[connection signal="keybind_changed" from="UI/TemplateButton" to="UI/UIGenerator" method="_on_template_button_keybind_changed"]
 [connection signal="button_up" from="UI/MainMenu/StartButton" to="UI/MainMenu" method="_on_start_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/MultiplayerButton" to="UI/MainMenu" method="_on_multiplayer_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/SingleplayerButton" to="UI/MainMenu" method="_on_singleplayer_button_button_up"]

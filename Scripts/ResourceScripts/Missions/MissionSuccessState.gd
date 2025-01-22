@@ -15,6 +15,6 @@ func initialize(diver: Diver) -> void:
 
 func check_success() -> bool:
 	for item in diver.diver_inventory.inventory:
-		if item.item.name == item_name && item.count >= item_count:
+		if item.name == item_name && item.count >= item_count:
 			return true
 	return false

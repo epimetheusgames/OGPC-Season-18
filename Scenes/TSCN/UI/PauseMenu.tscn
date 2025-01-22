@@ -14,6 +14,7 @@ script = ExtResource("1_8ck0e")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 process_mode = 3
+layout_mode = 0
 offset_left = -253.0
 offset_top = -115.0
 offset_right = 2099.0
@@ -22,6 +23,7 @@ color = Color(0, 0, 0, 0.321569)
 
 [node name="GameTitle" type="Label" parent="."]
 process_mode = 3
+layout_mode = 0
 offset_top = 193.0
 offset_right = 1921.0
 offset_bottom = 325.0
@@ -31,6 +33,7 @@ horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="."]
 process_mode = 3
+layout_mode = 0
 offset_left = 824.0
 offset_top = 438.0
 offset_right = 1081.0
@@ -40,16 +43,19 @@ text = "Resume"
 
 [node name="SettingsButton" type="Button" parent="."]
 process_mode = 3
+layout_mode = 0
 offset_left = 824.0
 offset_top = 534.0
 offset_right = 1081.0
 offset_bottom = 608.0
 theme_override_font_sizes/font_size = 36
+action_mode = 0
 text = "Settings
 "
 
 [node name="QuitButton" type="Button" parent="."]
 process_mode = 3
+layout_mode = 0
 offset_left = 824.0
 offset_top = 630.0
 offset_right = 1081.0
@@ -58,5 +64,5 @@ theme_override_font_sizes/font_size = 36
 text = "Quit"
 
 [connection signal="button_up" from="ResumeButton" to="." method="_on_resume_button_button_up"]
-[connection signal="button_up" from="SettingsButton" to="." method="_on_settings_button_button_up"]
+[connection signal="pressed" from="SettingsButton" to="." method="_settings_open"]
 [connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]

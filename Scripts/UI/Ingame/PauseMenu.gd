@@ -21,7 +21,6 @@ func _on_resume_button_button_up() -> void:
 	ingame_ui.visible = true
 	visible = false
 	vignette_shader.material.set_shader_parameter("vignette_strength", 1)
-
-func _on_settings_button_button_up() -> void:
-	# Doesn't do anything yet, but it will open the settings menu.
-	pass
+	
+func _settings_open():
+	get_parent().get_node("Settings").visible = true

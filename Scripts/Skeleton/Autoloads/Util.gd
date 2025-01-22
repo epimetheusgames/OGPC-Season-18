@@ -17,6 +17,12 @@ enum MissionSuccessType {
 	BUILD, 
 }
 
+# -- Classes -- 
+
+class InventorySlot:
+	var item: InventoryItem
+	var count: int
+
 # -- General --
 
 # Calls a specific function on a group of nodes over multiple frames.

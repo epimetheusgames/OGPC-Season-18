@@ -1,3 +1,5 @@
+# Diver inventory UI overlay. For interacting with the inventory see the node
+# in the Diver scene.
 class_name InventoryHUD
 extends PanelContainer
 
@@ -14,7 +16,7 @@ func _process(delta: float) -> void:
 	for slot in Global.player.diver_inventory.inventory:
 		if i > len(slots) - 1: 
 			break
-		slots[i].get_node("TextureRect").texture = slot.item.icon
+		slots[i].get_node("TextureRect").texture = slot.icon
 		slots[i].get_node("Counter").text = str(slot.count)
 		i += 1
 	
@@ -23,13 +25,13 @@ func _process(delta: float) -> void:
 		slots[j].get_node("Counter").text = ""
 
 func _on_slot_button_button_up() -> void:
-	Global.player.diver_inventory.select_item(0)
+	Global.player.diver_inventory.__select_item(0)
 
 func _on_slot_button_2_button_up() -> void:
-	Global.player.diver_inventory.select_item(1)
+	Global.player.diver_inventory.__select_item(1)
 
 func _on_slot_button_3_button_up() -> void:
-	Global.player.diver_inventory.select_item(2)
+	Global.player.diver_inventory.__select_item(2)
 
 func _on_slot_button_4_button_up() -> void:
-	Global.player.diver_inventory.select_item(3)
+	Global.player.diver_inventory.__select_item(3)
