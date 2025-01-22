@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/Ingame/CustomCheckbox.gd" id="1_a6gk2"]
 [ext_resource type="Texture2D" uid="uid://cqx2208sneqm4" path="res://Assets/UI/arrow.svg" id="2_x4a0w"]
 
-[node name="Settings" type="Control"]
+[node name="Settings" type="Control" node_paths=PackedStringArray("brightnessSlider")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,12 +12,62 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_02sue")
+brightnessSlider = NodePath("HBoxContainer/VBoxContainer/VBoxContainer/brightnessSlider")
 
 [node name="background" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 1924.0
 offset_bottom = 1100.0
 color = Color(0.262932, 0.262932, 0.262932, 1)
+
+[node name="soundSubMenu" type="Control" parent="."]
+visible = false
+z_index = 8
+anchors_preset = 0
+offset_right = 2027.0
+offset_bottom = 1108.0
+
+[node name="backButton" type="TextureButton" parent="soundSubMenu"]
+z_index = 14
+z_as_relative = false
+layout_mode = 0
+offset_left = 76.0
+offset_top = 52.0
+offset_right = 289.0
+offset_bottom = 154.0
+scale = Vector2(0.5, 0.5)
+action_mode = 0
+texture_normal = ExtResource("2_x4a0w")
+
+[node name="background" type="ColorRect" parent="soundSubMenu"]
+layout_mode = 0
+offset_right = 1941.0
+offset_bottom = 1117.0
+color = Color(0.262745, 0.262745, 0.262745, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="soundSubMenu"]
+layout_mode = 0
+offset_right = 1933.0
+offset_bottom = 1111.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="soundSubMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="soundSubMenu/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(140, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 36
+text = "Overall Volume"
+fit_content = true
+scroll_active = false
+scroll_following = true
+autowrap_mode = 0
+
+[node name="masterVolumeSlider" type="HSlider" parent="soundSubMenu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -40,6 +90,7 @@ text = "Edit Keybinds"
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 46
+action_mode = 0
 text = "Sound Settings"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
@@ -80,44 +131,7 @@ scroll_active = false
 
 [node name="brightnessSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-
-[node name="soundSubMenu" type="Control" parent="."]
-visible = false
-z_index = 8
-anchors_preset = 0
-offset_right = 2027.0
-offset_bottom = 1108.0
-
-[node name="background" type="ColorRect" parent="soundSubMenu"]
-layout_mode = 0
-offset_right = 1941.0
-offset_bottom = 1117.0
-color = Color(0.262745, 0.262745, 0.262745, 1)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="soundSubMenu"]
-layout_mode = 0
-offset_right = 1933.0
-offset_bottom = 1111.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="soundSubMenu/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="soundSubMenu/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="RichTextLabel" type="RichTextLabel" parent="soundSubMenu/HBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(140, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Game Brightness"
-fit_content = true
-scroll_active = false
-
-[node name="brightnessSlider" type="HSlider" parent="soundSubMenu/HBoxContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
+min_value = -100.0
 
 [node name="backButton" type="TextureButton" parent="."]
 layout_mode = 0
@@ -128,3 +142,5 @@ offset_bottom = 154.0
 scale = Vector2(0.5, 0.5)
 action_mode = 0
 texture_normal = ExtResource("2_x4a0w")
+
+[connection signal="changed" from="soundSubMenu/HBoxContainer/VBoxContainer/masterVolumeSlider" to="." method="_master_volume_changed"]
