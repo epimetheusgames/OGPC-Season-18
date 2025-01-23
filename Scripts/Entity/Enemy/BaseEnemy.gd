@@ -78,11 +78,18 @@ func _ready() -> void:
 func _take_damage(new_health) -> void:
 	health = new_health
 	if health <= 0:
-		queue_free()
+		_die()
 
 func _target_reached() -> void:
 	reached_target = true
 	wander_state = WANDER_MODE.WANDER_POINT_REACHED
+	
+func _die() -> void:
+	if settings.drops_item:
+		var item_drop: Node2D = load(settings.drops_item.file).instantiate()
+		get_parent().add_child(item_drop)
+		item_drop.global_position = global_position
+	queue_free()
 
 func _process(delta: float) -> void:
 	super(delta)

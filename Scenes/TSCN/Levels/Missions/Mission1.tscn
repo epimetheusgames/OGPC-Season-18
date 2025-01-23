@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=102 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="10_gbtle"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
-[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/Entity/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/Level/ShadowPipeline.gd" id="16_0m2co"]
@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Shadow.gdshader" id="16_ctau1"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
+[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowBlurHorizontal.gdshader" id="17_s8nor"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/ShadowWorldBlend.gdshader" id="18_wwpem"]
@@ -35,7 +35,6 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="28_ss3wm"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
-[ext_resource type="PackedScene" uid="uid://dqb5sqhg7l1io" path="res://Scenes/TSCN/Objects/Items/Rock.tscn" id="31_boa6h"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
@@ -43,7 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
 [ext_resource type="Script" path="res://Scenes/TSCN/Levels/Missions/Brightness.gd" id="36_gx1ha"]
 [ext_resource type="Shader" path="res://Scenes/TSCN/Levels/Missions/Brightness.gdshader" id="36_vhk2q"]
-[ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scripts/UI/Settings.tscn" id="38_s5fpq"]
+[ext_resource type="PackedScene" path="res://Scripts/UI/Settings.tscn" id="38_s5fpq"]
 
 [sub_resource type="Curve" id="Curve_6rk86"]
 _data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
@@ -272,7 +271,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_i0des"]
+[sub_resource type="Resource" id="Resource_ifdnh"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -402,7 +401,7 @@ shader_parameter/noise = ExtResource("9_rw0ak")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
-shader_parameter/screen_size = Vector2(1341, 595)
+shader_parameter/screen_size = Vector2(1203, 716)
 shader_parameter/pixel_size = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g7l6p"]
@@ -757,7 +756,7 @@ max_distance = 1e+06
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_i0des")
+uid = SubResource("Resource_ifdnh")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -959,7 +958,7 @@ material = SubResource("ShaderMaterial_yo3nw")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -106.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -973,7 +972,7 @@ material = SubResource("ShaderMaterial_jugfr")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -106.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -988,8 +987,8 @@ material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -579.0
-offset_bottom = -485.0
+offset_right = -717.0
+offset_bottom = -364.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -1005,7 +1004,7 @@ material = SubResource("ShaderMaterial_g7l6p")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -106.0
+offset_bottom = 49.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
@@ -1054,9 +1053,6 @@ vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 
 [node name="Leviathan" parent="." instance=ExtResource("35_47o3q")]
 position = Vector2(64, 1225)
-
-[node name="Rock" parent="." instance=ExtResource("31_boa6h")]
-position = Vector2(1365, 1337)
 
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Level/Items/LightLine"]
