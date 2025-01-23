@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyBehaviorSettings" load_steps=4 format=3 uid="uid://bdgr4mym5uqvq"]
 
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="1_5bux1"]
-[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="1_rywr3"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="1_rywr3"]
 
 [sub_resource type="Resource" id="Resource_xaj74"]
 script = ExtResource("1_rywr3")

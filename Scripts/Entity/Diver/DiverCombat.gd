@@ -25,6 +25,7 @@ var selected_weapon: Weapon
 func _ready():
 	add_weapon("speargun")
 	add_weapon("pistol")
+	add_weapon("knife")
 	
 	set_weapon("speargun")
 
@@ -34,8 +35,11 @@ func _process(delta: float) -> void:
 		if a == 0:
 			set_weapon("pistol")
 			a = 1
-		else:
+		elif a == 1:
 			set_weapon("speargun")
+			a = 2
+		elif a == 2:
+			set_weapon("knife")
 			a = 0
 		
 		print(selected_weapon.name)
