@@ -3,6 +3,7 @@
 class_name EnemyBehaviorSettings
 extends Resource
 
+@export var drops_item: FilePathResource
 @export var health: int
 @export var damage: int
 @export var base_speed: float
