@@ -71,6 +71,7 @@ func _ready() -> void:
 		set_process(false)
 
 func deferred_ready():
+	set_process(true)
 	if(ready_run_count>0):
 		get_node("Texture").texture = npc_texture
 		dialog_json = JSON.new()
@@ -104,6 +105,9 @@ func trigger_talking() -> void:
 		Global.dialog_active = false
 func _process(delta) -> void:
 	super(delta)
+	if(!has_dialog):
+		self.process_mode = Node.PROCESS_MODE_DISABLED
+		return
 	Global.dialog_core.visible = Global.dialog_active
 	# should only run a few frames before the dialog ui is loaded into the mission
 	if(!mission_dialog_core_set):

@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Skeleton/Hitbox.gd" id="2_w4n10"]
 
 [node name="NPC" type="CharacterBody2D"]
+process_mode = 4
 script = ExtResource("1_3od1n")
 dialog_hitbox_size = 100
 dialog_area = NodePath("DialogHitbox")
