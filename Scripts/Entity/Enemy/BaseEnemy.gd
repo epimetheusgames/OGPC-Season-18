@@ -4,7 +4,7 @@
 
 # Owned by: carsonetb
 class_name Enemy
-extends NPC
+extends Entity
 
 @export var settings: EnemyBehaviorSettings
 @export var target_reached_min_dst: int = 10
@@ -69,12 +69,14 @@ func _ready() -> void:
 	# Initialize enemy behavior settings.
 	health = settings.health
 	
-	
 	if attackbox:
-		attackbox.damage = settings.damage
+		attackbox.damage_amount = settings.damage
+	
+	if hurtbox:
+		hurtbox.damage_taken.connect(_take_damage)
 
-func _take_damage(new_health) -> void:
-	health = new_health
+func _take_damage(new_health: float) -> void:
+	health -= new_health
 	if health <= 0:
 		_die()
 

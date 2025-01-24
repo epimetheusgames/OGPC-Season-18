@@ -17,13 +17,15 @@ size = Vector2(151, 157)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6nwr"]
 size = Vector2(82, 82)
 
-[node name="Leviathan" type="CharacterBody2D"]
+[node name="Leviathan" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox")]
 position = Vector2(296, 288)
 motion_mode = 1
 script = ExtResource("1_ucxug")
 LEVIATHAN_NODE = ExtResource("1_ljr6s")
 node_amount = 60
 settings = ExtResource("3_sik31")
+hurtbox = NodePath("Hurtbox")
+attackbox = NodePath("Attackbox")
 
 [node name="Head" parent="." instance=ExtResource("1_ljr6s")]
 

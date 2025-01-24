@@ -20,8 +20,6 @@ func _ready() -> void:
 
 func _on_area_entered(area: Area2D):
 	if area is Attackbox:
-		area = area as Attackbox
-		
 		if ((area.attacker_type == Attackbox.AttackerType.ENEMY && hurt_by_enemy) ||
 			(area.attacker_type == Attackbox.AttackerType.PLAYER && hurt_by_player) ||
 			(area.attacker_type == Attackbox.AttackerType.OTHER)):
@@ -31,10 +29,10 @@ func take_damage(amount: float) -> float:
 	if is_invincible:
 		return 0.0
 	health -= amount
-	emit_signal("damage_taken", amount)
+	damage_taken.emit(health)
 	if health <= 0:
 		health = 0
-		emit_signal("died")
+		died.emit()
 	return amount
 
 func heal(amount: float):

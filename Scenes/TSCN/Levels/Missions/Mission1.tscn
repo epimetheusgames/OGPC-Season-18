@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=71 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -18,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/BiterFish.tscn" id="20_tdtsg"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
+[ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="23_r7jln"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="29_g0sdt"]
@@ -256,7 +258,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_vn11p"]
+[sub_resource type="Resource" id="Resource_x3jhq"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -312,6 +314,14 @@ shader_parameter/posterization_level = 7.114
 shader = ExtResource("28_oeu54")
 shader_parameter/SCREEN_SIZE = Vector2(1920, 1080)
 shader_parameter/pixelization_level = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cr65h"]
+shader = ExtResource("23_r7jln")
+shader_parameter/inner_radius = 0.1
+shader_parameter/outer_radius = 1.0
+shader_parameter/vignette_strength = 0.6
+shader_parameter/dither_strength = 0.03
+shader_parameter/vignette_color = null
 
 [node name="Mission1" type="Node2D"]
 script = ExtResource("1_314ux")
@@ -625,7 +635,7 @@ max_distance = 1e+06
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_vn11p")
+uid = SubResource("Resource_x3jhq")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -724,6 +734,7 @@ rect = Rect2(0, 0, 1920, 1080)
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Shaders/Quantize"]
+visible = false
 material = SubResource("ShaderMaterial_alu57")
 anchors_preset = 15
 anchor_right = 1.0
@@ -736,7 +747,21 @@ rect = Rect2(0, 0, 1920, 1080)
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Shaders/Pixelize"]
+visible = false
 material = SubResource("ShaderMaterial_g5871")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Vignette" type="BackBufferCopy" parent="Shaders" node_paths=PackedStringArray("player")]
+rect = Rect2(0, 0, 1920, 1080)
+script = ExtResource("23_npnyn")
+player = NodePath("../../LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver")
+
+[node name="ColorRect" type="ColorRect" parent="Shaders/Vignette"]
+material = SubResource("ShaderMaterial_cr65h")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -759,9 +784,10 @@ offset_bottom = 179.0
 visible = false
 ingame_ui = NodePath("../IngameUI")
 
-[node name="MissionSuccessScreen" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("33_aiin4")]
+[node name="MissionSuccessScreen" parent="UI" node_paths=PackedStringArray("ingame_ui", "vignette_shader") instance=ExtResource("33_aiin4")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
+vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 
 [node name="PauseMenu" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("35_upo23")]
 visible = false

@@ -22,9 +22,9 @@ func _on_body_entered(body: Node):
 	if is_attacking && body is Hurtbox:
 		if can_damage(body):
 			var damage_dealt = body.take_damage(damage_amount)
-			emit_signal("damage_delt", damage_dealt)
+			damage_delt.emit(damage_amount)
 			if body.health <= 0:
-				emit_signal("killed")
+				killed.emit()
 
 func can_damage(hurtbox: Hurtbox) -> bool:
 	return (
