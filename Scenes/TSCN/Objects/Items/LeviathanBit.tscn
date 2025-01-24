@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7x8wspgj0vcv"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_fa8gb"]
+[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_kipx0"]
+
+[sub_resource type="Resource" id="Resource_yk3so"]
+script = ExtResource("2_kipx0")
+file = "res://Scenes/TSCN/Objects/Items/LeviathanBit.tscn"
+
+[node name="LeviathanBit" type="Node2D"]
+
+[node name="LeviathanBit" type="Area2D" parent="."]
+scale = Vector2(2, 2)
+script = ExtResource("1_fa8gb")
+scene = SubResource("Resource_yk3so")
+cost = 25
+item_name = "Leviathan Bit"
+
+[node name="Polygon2D" type="Polygon2D" parent="LeviathanBit"]
+scale = Vector2(2, 2)
+color = Color(0.769041, 0.769041, 0.769041, 1)
+polygon = PackedVector2Array(-5, 13, 5, 13, 3, 1, 4, -7, 10, -12, 16, -11, 7, -16, 1, -13, -4, -3, -6, 6)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LeviathanBit"]
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(-5, 13, 5, 13, 3, 1, 4, -7, 10, -12, 16, -11, 7, -16, 1, -13, -4, -3, -6, 6)

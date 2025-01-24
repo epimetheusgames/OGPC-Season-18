@@ -87,7 +87,7 @@ func _target_reached() -> void:
 func _die() -> void:
 	if settings.drops_item:
 		var item_drop: Node2D = load(settings.drops_item.file).instantiate()
-		get_parent().add_child(item_drop)
+		get_parent().add_child.call_deferred(item_drop)
 		item_drop.global_position = global_position
 	queue_free()
 

@@ -11,6 +11,7 @@ func turn_on_efficient():
 		$LevelContainer/Level/Waves/Line2D7.material = null
 		$LevelContainer/Level/OceanShader/Background.material = null
 		$LevelContainer/Level/OceanShader/TransBackground.material = null
+
 func _ready():
 	if Global.current_mission:
 		Global.current_mission.success_state_checker.initialize($LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver)

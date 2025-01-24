@@ -11,13 +11,13 @@ file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
 [sub_resource type="Resource" id="Resource_28fqv"]
 script = ExtResource("3_gp47f")
 success_type = 0
-item_name = "Rock"
+item_name = "Leviathan Bit"
 item_count = 1
 
 [resource]
 script = ExtResource("2_4hp0o")
 mission_filepath = SubResource("Resource_mkq3y")
 title = "First mission"
-description = "Kill a fish"
+description = "Kill the Leviathan"
 success_state_checker = SubResource("Resource_28fqv")
 unlocks = Array[ExtResource("1_d5g2i")]([])
