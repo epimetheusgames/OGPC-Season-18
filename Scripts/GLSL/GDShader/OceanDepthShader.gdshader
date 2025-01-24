@@ -13,7 +13,7 @@ void fragment() {
 		float depth = !always_top ? UV.y : 0.0;
 		COLOR.a = mix(0.8, max_alpha, clamp(depth * height, 0.0, 1.0));
 	}
-	
+
 	//float depth = !always_top ? UV.y : 0.0;
 	//vec4 color = texture(depth_color_tex, vec2(always_top ? (1.0 - UV.x) : UV.x, depth));
 	//color.rgb = pow(color.rgb, vec3(2.2));

@@ -9,9 +9,10 @@ extends NPC
 @export var settings: EnemyBehaviorSettings
 @export var target_reached_min_dst: int = 10
 @export var forward_direction: Vector2 = Vector2(-1, 0)
-@export var hurtbox_component: HurtboxComponent
-@export var attackbox_component: AttackBoxComponent
-@export var health_component: HealthComponent
+
+@export var hurtbox: Hurtbox
+@export var attackbox: Attackbox
+
 @export var quick_disable_everything := false
 
 var _player_detection_area: Area2D
@@ -68,12 +69,9 @@ func _ready() -> void:
 	# Initialize enemy behavior settings.
 	health = settings.health
 	
-	if health_component:
-		health_component.set_health(health)
-		health_component.damage_taken.connect(_take_damage)
 	
-	if attackbox_component:
-		attackbox_component.damage = settings.damage
+	if attackbox:
+		attackbox.damage = settings.damage
 
 func _take_damage(new_health) -> void:
 	health = new_health
@@ -115,8 +113,8 @@ func _process(delta: float) -> void:
 		target_speed *= 1 + settings.agressiveness
 		
 		var dist_to_player = position.distance_to(closest_player.position)
-		if attackbox_component && dist_to_player < settings.attack_distance && !attackbox_component.is_attacking:
-			attackbox_component.attack()
+		if attackbox && dist_to_player < settings.attack_distance && !attackbox.is_attacking:
+			attackbox.attack()
 			attack()
 		
 		if dist_to_player < settings.closest_distance:
@@ -190,6 +188,10 @@ func _update_wander_point():
 	while !valid_point_found:
 		var rng := RandomNumberGenerator.new()
 		var random_direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
+		
+		if points_tested > 100:
+			print("ERROR: Something bad happened while updating the wander point.")
+			return
 		
 		if settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.RANDOM_POSITION || points_tested > 40:
 			var random_multiplier := rng.randf_range(0, settings.wander_range)

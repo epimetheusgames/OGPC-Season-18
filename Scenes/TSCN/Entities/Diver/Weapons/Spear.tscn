@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Sprites/Spear.png" id="1_mdbjp"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Spear.gd" id="1_x2dlv"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="3_wous6"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="3_wous6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwnx7"]
 size = Vector2(57, 4)
@@ -33,16 +33,12 @@ metadata/_edit_lock_ = true
 [node name="RopePoint" type="Node2D" parent="."]
 position = Vector2(-29, 0)
 
-[node name="AttackBoxComponent" type="Node" parent="."]
-script = ExtResource("3_wous6")
-damage = 0.0
-always_attacking = true
-hurtbox = NodePath("../AttackBoxArea")
-
-[node name="AttackBoxArea" type="Area2D" parent="."]
+[node name="Attackbox" type="Area2D" parent="."]
 position = Vector2(36, 0)
+script = ExtResource("3_wous6")
+attacker_type = 1
 
-[node name="HeadCollision" type="CollisionShape2D" parent="AttackBoxArea"]
+[node name="HeadCollision" type="CollisionShape2D" parent="Attackbox"]
 shape = SubResource("CircleShape2D_hdpad")
 debug_color = Color(0.996338, 0.0525199, 3.85046e-07, 0.42)
 

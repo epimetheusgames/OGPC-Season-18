@@ -13,6 +13,8 @@ func turn_on_efficient():
 		$LevelContainer/Level/OceanShader/TransBackground.material = null
 
 func _ready():
+	print_tree_pretty()
+	
 	if Global.current_mission:
 		Global.current_mission.success_state_checker.initialize($LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver)
 	
@@ -27,6 +29,8 @@ func _ready():
 		$LevelContainer/Level/Waves/Line2D7.material = null
 		$LevelContainer/Level/OceanShader/Background.material = null
 		$LevelContainer/Level/OceanShader/TransBackground.material = null
+	
+	# What the acrualy skib is this code
 	var overlay_ui = CanvasLayer.new()
 	overlay_ui.name = "overlay_ui"
 	overlay_ui.follow_viewport_enabled = false 

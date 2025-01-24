@@ -1,7 +1,7 @@
 # Global autoload for variables that need to be accessed by all nodes.
 # Avoid setting values in here if you aren't a skeleton node.
 # See https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html 
-extends Node
+extends Node2D
 
 var root_node: Node
 var save_load_framework: SaveLoadFramework
@@ -60,7 +60,3 @@ func eval(input: String):
 	script.reload()
 	script_holder.set_script(script)
 	return script_holder.eval()
-
-# Yes this will always be there.
-func get_world_2d():
-	return KeyactionHandler.get_world_2d()

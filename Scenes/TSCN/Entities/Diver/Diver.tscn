@@ -2,23 +2,22 @@
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
-[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_sa7rx"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_sa7rx"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverInventory.gd" id="3_r5rx4"]
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
 [ext_resource type="Script" path="res://Scripts/Public/InventoryPublic.gd" id="4_lqvql"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverCombat.gd" id="5_mjta2"]
-[ext_resource type="Script" path="res://Scripts/Components/Misc/HealthComponent.gd" id="6_dvqx5"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/HurtboxComponent.gd" id="7_3b7lw"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="7_3b7lw"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/AttackBoxComponent.gd" id="8_spc27"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
+[ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="17_2as0u"]
 
 [sub_resource type="Resource" id="Resource_175vb"]
 resource_local_to_scene = true
@@ -28,10 +27,6 @@ uid = 3625
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
 height = 100.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2irf7"]
-radius = 20.0
-height = 98.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d3kj"]
 radius = 51.0
@@ -138,6 +133,18 @@ fill_to = Vector2(0.5, 0)
 radius = 25.0
 height = 110.0
 
+[sub_resource type="Gradient" id="Gradient_in7v8"]
+offsets = PackedFloat32Array(0, 0.425781, 0.675781, 1)
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0.423529, 1, 1, 1, 0.0745098, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iyvmc"]
+gradient = SubResource("Gradient_in7v8")
+width = 1000
+height = 1000
+fill = 1
+fill_from = Vector2(0.5, 0.527778)
+fill_to = Vector2(0.846154, 0.865385)
+
 [node name="Diver" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_1l6ma")
@@ -145,11 +152,6 @@ uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ghsq1")
-
-[node name="DiverDetectionArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DiverDetectionArea"]
-shape = SubResource("CapsuleShape2D_2irf7")
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("3_r5rx4")
@@ -519,23 +521,12 @@ trail_section_subdivisions = 1
 rotation = 0.000201209
 script = ExtResource("7_ju8q7")
 
-[node name="HealthComponent" type="Node" parent="Stats"]
-script = ExtResource("6_dvqx5")
-max_health = 50.0
-component_container = NodePath("../..")
-
-[node name="HurtboxComponent" type="Node" parent="Stats"]
+[node name="Hurtbox" type="Area2D" parent="Stats"]
 script = ExtResource("7_3b7lw")
-attachable_health_component = NodePath("../HealthComponent")
-hurtbox = NodePath("../PlayerHurtbox")
-component_container = NodePath("../..")
+hurt_by_enemy = true
 
-[node name="PlayerHurtbox" type="Area2D" parent="Stats"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/Hurtbox"]
 rotation = -0.000201209
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/PlayerHurtbox"]
-visible = false
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
@@ -552,31 +543,22 @@ offset_right = 83.0
 offset_bottom = -30.0
 scale = Vector2(0.272378, 0.272378)
 
-[node name="AttackBox" type="Area2D" parent="Combat"]
-rotation = 0.000201209
-collision_layer = 32
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Combat/AttackBox"]
-visible = false
-position = Vector2(-0.0126762, -63)
-debug_color = Color(0.862718, 0.286752, 0.557432, 0.42)
-
-[node name="AttackBoxComponent" type="Node" parent="Combat"]
-script = ExtResource("8_spc27")
-knockback_velocity = 20.0
-hurtbox = NodePath("../AttackBox")
-component_container = NodePath("../..")
-
-[node name="Flashlight" type="Node2D" parent="."]
+[node name="Light" type="Node2D" parent="."]
 script = ExtResource("9_xqhlv")
 
-[node name="Light" type="PointLight2D" parent="Flashlight"]
-position = Vector2(2, -2)
+[node name="FlashLight" type="PointLight2D" parent="Light"]
+scale = Vector2(1.5, 1.5)
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("10_qg316")
+metadata/_edit_lock_ = true
+
+[node name="BodyLight" type="PointLight2D" parent="Light"]
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_filter = 2
+texture = SubResource("GradientTexture2D_iyvmc")
 metadata/_edit_lock_ = true
 
 [node name="PlayerVisualDetectionArea" type="Area2D" parent="."]
@@ -594,5 +576,9 @@ gravity = 20
 buoyancy_accel = 1.0
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
+
+[node name="Dummy" parent="." instance=ExtResource("17_2as0u")]
+top_level = true
+position = Vector2(152, 144)
 
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
