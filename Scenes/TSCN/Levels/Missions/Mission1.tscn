@@ -8,13 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="10_gbtle"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
-[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/Entity/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="16_cbdp8"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
+[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/BiterFish.tscn" id="20_tdtsg"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
@@ -256,7 +256,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_t5vm5"]
+[sub_resource type="Resource" id="Resource_vn11p"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -311,7 +311,7 @@ shader_parameter/posterization_level = 7.114
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
 shader_parameter/SCREEN_SIZE = Vector2(1920, 1080)
-shader_parameter/pixelization_level = 6.98
+shader_parameter/pixelization_level = 4.0
 
 [node name="Mission1" type="Node2D"]
 script = ExtResource("1_314ux")
@@ -625,7 +625,7 @@ max_distance = 1e+06
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_t5vm5")
+uid = SubResource("Resource_vn11p")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
