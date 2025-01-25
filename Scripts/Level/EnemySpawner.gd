@@ -23,8 +23,9 @@ func generate_spawn_positions() -> Array[SpawnInfo]:
 	var rng := RandomNumberGenerator.new()
 	var output: Array[SpawnInfo] = []
 	var num_enemies_close := 0
-	print(len(spawned_enemies))
 	for enemy in spawned_enemies:
+		if !is_instance_valid(enemy):
+			continue
 		var pos := enemy.global_position  
 		var dist_squared := pos.distance_squared_to(Global.player.global_position)
 		if dist_squared < enemy_close_dist ** 2:
@@ -32,8 +33,7 @@ func generate_spawn_positions() -> Array[SpawnInfo]:
 	
 	if num_enemies_close >= target_enemies_close:
 		return []
-		
-	print(target_enemies_close, num_enemies_close)
+	
 	
 	for i in range(target_enemies_close - num_enemies_close):
 		var group: Array[SpawnInfo] = []
