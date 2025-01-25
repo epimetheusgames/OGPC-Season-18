@@ -116,7 +116,7 @@ func _process(delta: float) -> void:
 		
 		var dist_to_player = position.distance_to(closest_player.position)
 		if attackbox && dist_to_player < settings.attack_distance && !attackbox.is_attacking:
-			attackbox.attack()
+			attackbox.is_attacking = true
 			attack()
 		
 		if dist_to_player < settings.closest_distance:

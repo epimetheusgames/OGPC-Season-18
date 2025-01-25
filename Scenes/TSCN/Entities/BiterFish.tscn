@@ -14,21 +14,21 @@ radius = 152.398
 [sub_resource type="CircleShape2D" id="CircleShape2D_2kiya"]
 radius = 42.19
 
-[node name="BiterFish" type="CharacterBody2D"]
-
+[node name="BiterFish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox")]
 collision_layer = 32768
 collision_mask = 32768
 script = ExtResource("1_k5pkd")
 max_group_center_dist = 400.0
 settings = ExtResource("2_8ir73")
-
+hurtbox = NodePath("Hurtbox")
+attackbox = NodePath("Attackbox")
 
 [node name="Placeholder" type="Polygon2D" parent="."]
 position = Vector2(-24, 0)
 color = Color(0.657768, 0.657768, 0.657768, 1)
 polygon = PackedVector2Array(-63, 1, -23, 25, 40, 10, 59, 26, 59, -19, 41, -9, -22, -32)
 
-[node name="NavAgent" type="NavigationAgent2D" parent="."]
+[node name="Nav" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

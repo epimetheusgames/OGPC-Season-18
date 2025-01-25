@@ -2,15 +2,23 @@ extends Enemy
 class_name BiterFish
 
 var group: Array[Enemy] = []
+var nav_target: Vector2
 @export var max_group_center_dist := 900.0
+
+func _ready() -> void:
+	super()
+	
+	while true:
+		await get_tree().create_timer(0.1).timeout
+		$Nav.target_position = target_position
+		nav_target = $Nav.get_next_path_position()
+		if !$Nav.is_target_reachable():
+			_target_reached()
 
 func _process(delta: float) -> void:
 	super(delta)
 	
-	$NavAgent.target_position = target_position
-	var path_pos: Vector2 = $NavAgent.get_next_path_position()
-	
-	var target_velocity := (path_pos - global_position).normalized() * target_speed 
+	var target_velocity := (nav_target - global_position).normalized() * target_speed 
 	var target_rotation := velocity.angle() + PI 
 	
 	velocity = Util.better_vec2_lerp(velocity, target_velocity, 0.1, delta)
