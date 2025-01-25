@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp2ach8thhbsd"]
+
+[ext_resource type="Script" path="res://Scripts/UI/FakeButtonHandler.gd" id="1_fng7y"]
+
+[node name="fakeButton" type="ColorRect"]
+offset_right = 152.0
+offset_bottom = 40.0
+color = Color(0.244776, 0.244776, 0.244776, 1)
+script = ExtResource("1_fng7y")
+
+[node name="text" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 152.0
+offset_bottom = 41.0
+theme_override_font_sizes/normal_font_size = 13

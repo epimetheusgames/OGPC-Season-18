@@ -7,19 +7,19 @@
 [ext_resource type="Script" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="10_gbtle"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
-[ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
+[ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
-[ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/Entity/NPC.tscn" id="15_p6xfd"]
+[ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
-[ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
-[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="16_cbdp8"]
+[ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/NPCS/Boid.tscn" id="16_a7n5p"]
+[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
-[ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="18_0qmxr"]
-[ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/BiterFish.tscn" id="20_tdtsg"]
+[ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
+[ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/NPCS/BiterFish.tscn" id="20_tdtsg"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Vignette.gdshader" id="23_r7jln"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Vignette.gdshader" id="23_r7jln"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="29_g0sdt"]
@@ -28,7 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
-[ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/Entity/Leviathan.tscn" id="35_47o3q"]
+[ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="35_47o3q"]
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
 
 [sub_resource type="Curve" id="Curve_6rk86"]
@@ -258,7 +258,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_ub8ms"]
+[sub_resource type="Resource" id="Resource_y7j0f"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -635,7 +635,7 @@ max_distance = 1e+06
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_ub8ms")
+uid = SubResource("Resource_y7j0f")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -692,6 +692,9 @@ position = Vector2(904, 1253)
 [node name="Boid" parent="LevelContainer/Entities/Boids" instance=ExtResource("16_a7n5p")]
 modulate = Color(0.720003, 0.778689, 0.920294, 1)
 uid = SubResource("Resource_ulf3c")
+
+[node name="FishSprite" parent="LevelContainer/Entities/Boids/Boid" index="0"]
+texture = null
 
 [node name="WallRaycast" parent="LevelContainer/Entities/Boids/Boid" index="1"]
 target_position = Vector2(0, 400)
