@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dqbhas7s3cgtb"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/Bullet.gd" id="1_od670"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Bullet.gd" id="1_od670"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="2_07tm7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wxkra"]

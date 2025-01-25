@@ -64,18 +64,27 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	
 	if Global.godot_steam_abstraction:
-		if !Global.is_multiplayer || diver._is_node_owner():
-			displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
-		else:
-			displayed_nametag.text = Steam.getFriendPersonaName(int(str(diver.name)))
+		if Global.is_multiplayer:
+			if diver._is_node_owner():
+				displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
+			else:
+				displayed_nametag.text = Steam.getFriendPersonaName(int(str(diver.name)))
+		if diver._is_node_owner():
+			Global.godot_steam_abstraction.sync_var(arm_target1, "position")
+			Global.godot_steam_abstraction.sync_var(arm_target2, "position")
+			Global.godot_steam_abstraction.sync_var(leg_target1, "position")
+			Global.godot_steam_abstraction.sync_var(leg_target2, "position")
 	
 	var head_pos: Vector2 = get_head_position()
+	
 	# Update label position.
 	if get_viewport().get_camera_2d():
 		var offset_pos: Vector2 = head_pos - get_viewport().get_camera_2d().get_screen_center_position()
 		displayed_nametag.global_position = offset_pos - displayed_nametag.size / 2 + get_viewport_rect().size / 2 - Vector2(0, 40)
+	
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+		return
 	
 	# Update the arrow rotation
 	arrow.global_rotation = diver.get_diver_movement().get_current_angle()

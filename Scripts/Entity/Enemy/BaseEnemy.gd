@@ -108,6 +108,13 @@ func _process(delta: float) -> void:
 		_update_player_visible()
 	
 	target_speed = settings.base_speed
+	
+	# Sync variables so that everything's the same.
+	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
+		Global.godot_steam_abstraction.sync_var(self, "health")
+		
+		if attackbox:
+			Global.godot_steam_abstraction.sync_var(attackbox, "health")
 		
 	# If player in area calculate closest player, else wander.
 	if player_visible:
