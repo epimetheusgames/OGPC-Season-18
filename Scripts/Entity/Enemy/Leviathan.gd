@@ -50,6 +50,9 @@ func _physics_process(delta: float) -> void:
 	
 	if global_position.distance_to(target_position) < 20:
 		_target_reached()
+		
+	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
+		Global.godot_steam_abstraction.sync_var(rope, "points")
 
 func update_leviathan_nodes(delta: float) -> void:
 	rope.start_pos_on = true
@@ -65,3 +68,4 @@ func update_leviathan_nodes(delta: float) -> void:
 					0.2, delta)
 		else:
 			leviathan_nodes[i].global_rotation = rope.points[i].angle_to_point(rope.points[i - 1])
+		
