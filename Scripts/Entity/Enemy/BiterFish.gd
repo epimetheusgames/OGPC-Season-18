@@ -28,6 +28,8 @@ func _process(delta: float) -> void:
 	var average_position := global_position
 	var num = 1
 	for fish in group:
+		if !is_instance_valid(fish):
+			continue
 		if fish == self:
 			continue
 		average_position += fish.global_position
