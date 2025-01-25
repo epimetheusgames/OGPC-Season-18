@@ -6,15 +6,13 @@ extends PanelContainer
 
 
 @onready var container: BoxContainer = $"MarginContainer/VBox"
-
-@onready var divers: Array[Diver]
+@onready var divers: Array[Node] = Global.player.get_parent().get_children()
 
 var health_text_array: Array[RichTextLabel]
-
 var timer: float = 0.0
 
 func _ready() -> void:
-	
+	# Containers will be added dynamically later.
 	for child in container.get_children():
 		child.free()
 	
@@ -45,9 +43,11 @@ func _ready() -> void:
 		new_hbox.add_child(new_health_text)
 		
 		health_text_array.append(new_health_text)
-	
 
 func _process(delta: float) -> void:
+	if !Global.is_multiplayer:
+		visible = false
+	
 	for i in range(divers.size()):
 		var diver: Diver = divers[i]
 		var health_text: RichTextLabel = health_text_array[i]

@@ -10,7 +10,7 @@ func _ready() -> void:
 	if !Global.submarine:
 		Global.submarine = self
 	 
-	var custom_sub : CustomSubmarineResource = load("res://Scenes/Resource/custom_sub_gen.tres")
+	var custom_sub : CustomSubmarineResource = load("res://Scenes/Resource/TestSubmarines/custom_sub_gen.tres")
 	module_container.load_sub(custom_sub)
 
 func _physics_process(_delta: float) -> void:
