@@ -57,6 +57,7 @@ enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://add
 [global_group]
 
 obstacles=""
+light_lines=""
 
 [input]
 

@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var line: Line2D = $Line
 @export var directions: PackedVector2Array
+@export var min_point_dist: float = 300
 var old_points: PackedVector2Array
 var attachments: Array[PackedVector2Array]
 var calculating := false

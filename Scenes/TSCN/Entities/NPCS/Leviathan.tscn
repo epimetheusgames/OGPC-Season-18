@@ -99,7 +99,6 @@ color = Color(1, 1, 0.27451, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="Attackbox" type="Area2D" parent="."]
 script = ExtResource("5_on45p")

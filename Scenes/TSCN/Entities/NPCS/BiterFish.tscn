@@ -24,19 +24,18 @@ hurtbox = NodePath("Hurtbox")
 attackbox = NodePath("Attackbox")
 
 [node name="Placeholder" type="Polygon2D" parent="."]
-position = Vector2(-24, 0)
+position = Vector2(24, 0)
 color = Color(0.657768, 0.657768, 0.657768, 1)
 polygon = PackedVector2Array(-63, 1, -23, 25, 40, 10, 59, 26, 59, -19, 41, -9, -22, -32)
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-24, 0)
+position = Vector2(24, 0)
 shape = SubResource("CircleShape2D_o4ek1")
 
 [node name="Hurtbox" type="Area2D" parent="."]
-position = Vector2(-24, 0)
+position = Vector2(24, 0)
 script = ExtResource("3_manu4")
 hurt_by_player = true
 
@@ -45,7 +44,7 @@ shape = SubResource("CircleShape2D_xva6q")
 debug_color = Color(0, 0.648025, 0.193904, 0.42)
 
 [node name="Attackbox" type="Area2D" parent="."]
-position = Vector2(-24, 0)
+position = Vector2(24, 0)
 script = ExtResource("4_wno1v")
 attacker_type = 0
 
