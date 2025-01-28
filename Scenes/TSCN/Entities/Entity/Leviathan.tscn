@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Enemy/Leviathan.gd" id="1_ucxug"]
 [ext_resource type="Resource" uid="uid://bdgr4mym5uqvq" path="res://Scenes/Resource/Entity/LeviathanSettings.tres" id="3_sik31"]
 [ext_resource type="Script" path="res://Scripts/Components/Rope/RopeAttachment.gd" id="4_6mv3f"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="5_on45p"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="6_6n4cc"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/Attackbox.gd" id="5_on45p"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_6n4cc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27gx5"]
 size = Vector2(210, 202)

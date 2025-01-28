@@ -5,6 +5,7 @@
 class_name BluntTipKnife
 extends Knife
 
+
 func _process(delta: float) -> void:
 	super(delta)
 

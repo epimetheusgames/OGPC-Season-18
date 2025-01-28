@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
 [ext_resource type="Script" path="res://Scripts/Public/InventoryPublic.gd" id="4_lqvql"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverCombat.gd" id="5_mjta2"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="7_3b7lw"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/Hurtbox.gd" id="7_3b7lw"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]

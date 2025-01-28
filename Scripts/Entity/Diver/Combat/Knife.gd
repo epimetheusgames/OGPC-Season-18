@@ -1,9 +1,11 @@
 class_name Knife
 extends Weapon
 
+@export var attackbox: Attackbox
+
 @export var dist_from_head: float = 40.0
 @export var spread_angle: float = 120.0
-@export var slash_time: float = 0.1
+@export var slash_time: float = 0.05
 
 @export var cooldown_time: float = 0.25  # Time in between shots
 var cooldown_timer: Timer
@@ -19,32 +21,9 @@ func _ready() -> void:
 	add_child(cooldown_timer)
 	cooldown_timer.connect("timeout", _on_cooldown_timeout)
 	
+	attackbox.connect("damage_delt", _hit_enemy)
+	
 	slash_angle = spread_angle/2
-	
-	add_child(get_slash_area())
-
-
-func get_slash_area() -> CollisionPolygon2D:
-	var polygon := CollisionPolygon2D.new()
-	
-	var points: Array[Vector2] = []
-	
-	points.append(Vector2.ZERO)
-	
-	var spread_segments: int = 5
-	var length: float = 100.0
-	
-	var angle_increment: float = deg_to_rad(spread_angle) / spread_segments
-	var start_angle: float = -deg_to_rad(spread_angle) / 2
-	
-	for i in range(spread_segments + 1):
-		var angle = start_angle + angle_increment * i
-		var point = Util.angle_to_vector_radians(angle, length)
-		points.append(point)
-	
-	polygon.polygon = points
-	polygon.top_level = true
-	return polygon
 
 
 func _on_cooldown_timeout() -> void:
@@ -63,17 +42,25 @@ func _process(delta: float) -> void:
 	angle_to_mouse += deg_to_rad(slash_angle)
 	
 	global_position = head_pos + Util.angle_to_vector_radians(angle_to_mouse, dist_from_head)
-	
 	global_rotation = angle_to_mouse
 
 func attack() -> void:
 	if enabled && cooldown_timer_over:
+		attackbox.is_attacking = true
+		attackbox.reset()
+		
 		perform_attack()
 		animate_slash_angle()
 		
 		cooldown_timer_over = false
 		cooldown_timer.start(cooldown_time)
+		
+		
+		await get_tree().create_timer(slash_time + 0.05).timeout
+		attackbox.is_attacking = false
 
+func _hit_enemy() -> void:
+	attackbox.is_attacking = false
 
 func animate_slash_angle() -> void:
 	var new_angle

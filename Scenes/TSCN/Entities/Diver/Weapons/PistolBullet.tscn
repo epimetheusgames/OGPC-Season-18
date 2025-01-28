@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d24oi85rw114u"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/PistolBullet.gd" id="1_hykh4"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="2_d46dg"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/OneShotAttack.gd" id="2_6m2at"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pk0f"]
 size = Vector2(14, 26)
@@ -25,11 +25,12 @@ offset_bottom = 15.0
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_6pk0f")
 
-[node name="Attackbox" type="Area2D" parent="."]
-script = ExtResource("2_d46dg")
-attacker_type = 1
+[node name="OneShotAttack" type="Area2D" parent="."]
+script = ExtResource("2_6m2at")
+is_attacking = true
+damage_amount = 5.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_fdguj")
 debug_color = Color(0.967943, 0.157153, 0.22571, 0.42)
