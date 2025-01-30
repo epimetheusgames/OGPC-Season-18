@@ -16,3 +16,9 @@ scene = SubResource("Resource_ob34d")
 icon = ExtResource("4_triej")
 cost = 25
 item_name = "Light Line"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0

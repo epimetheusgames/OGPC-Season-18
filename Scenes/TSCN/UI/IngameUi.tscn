@@ -341,7 +341,7 @@ offset_right = 123.0
 offset_bottom = 127.0
 focus_mode = 0
 
-[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot1/TextureRect/SlotButton" to="Inventory" method="_on_slot_button_button_up"]
-[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot2/TextureRect/SlotButton2" to="Inventory" method="_on_slot_button_2_button_up"]
-[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot3/TextureRect/SlotButton3" to="Inventory" method="_on_slot_button_3_button_up"]
-[connection signal="button_up" from="Inventory/MarginContainer/HBoxContainer/Slot4/TextureRect/SlotButton4" to="Inventory" method="_on_slot_button_4_button_up"]
+[connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot1/TextureRect/SlotButton" to="Inventory" method="_on_slot_button_button_down"]
+[connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot2/TextureRect/SlotButton2" to="Inventory" method="_on_slot_button_2_button_down"]
+[connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot3/TextureRect/SlotButton3" to="Inventory" method="_on_slot_button_3_button_down"]
+[connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot4/TextureRect/SlotButton4" to="Inventory" method="_on_slot_button_4_button_down"]
