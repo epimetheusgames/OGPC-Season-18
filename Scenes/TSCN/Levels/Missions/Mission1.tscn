@@ -258,7 +258,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_b1ui5"]
+[sub_resource type="Resource" id="Resource_ejw24"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -635,7 +635,7 @@ max_distance = 1e+06
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_b1ui5")
+uid = SubResource("Resource_ejw24")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -647,7 +647,7 @@ buoyancy_accel = 0.0
 
 [node name="LightLine" parent="LevelContainer/Level/Items" instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)
-min_point_dist = null
+min_point_dist = 300.0
 
 [node name="Line" parent="LevelContainer/Level/Items/LightLine" index="0"]
 points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)

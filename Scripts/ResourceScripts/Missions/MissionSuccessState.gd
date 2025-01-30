@@ -19,6 +19,8 @@ func check_success() -> bool:
 		return false
 	
 	for item in diver.diver_inventory.inventory:
+		if !item:
+			continue
 		if item.name == item_name && item.count >= item_count:
 			return true
 	return false
