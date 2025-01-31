@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://718tp2nsyoer"]
+[gd_scene load_steps=4 format=3 uid="uid://dvjiyofi3dsp6"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineWeaponsModule.gd" id="1_m24gv"]
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="2_bwdr6"]

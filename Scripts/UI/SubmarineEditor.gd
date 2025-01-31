@@ -9,6 +9,8 @@ extends Control
 @onready var submarine_corner_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineCornerPassageModule.tscn")
 @onready var submarine_passage_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarinePassageModule.tscn")
 @onready var submarine_end_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule.tscn")
+@onready var submarine_door_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineDoorModule.tscn")
+@onready var submarine_weapons_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineWeaponsModule.tscn")
 
 var modules: Array[SubmarineModule] = []
 var adding_module := false
@@ -33,6 +35,12 @@ func _on_passage_module_button_up() -> void:
 
 func _on_end_passage_module_button_up() -> void:
 	add_module(submarine_end_module.instantiate())
+
+func _on_door_module_button_up() -> void:
+	add_module(submarine_door_module.instantiate())
+
+func _on_weapons_module_button_up() -> void:
+	add_module(submarine_weapons_module.instantiate())
 
 func _process(delta: float) -> void:
 	if adding_module:

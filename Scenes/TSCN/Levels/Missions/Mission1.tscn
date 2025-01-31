@@ -259,7 +259,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_2fhus"]
+[sub_resource type="Resource" id="Resource_x3u77"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -383,7 +383,7 @@ script = ExtResource("4_iytd7")
 spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent" node_paths=PackedStringArray("water_manager", "camera") instance=ExtResource("4_0aydx")]
-position = Vector2(1110, 1226)
+position = Vector2(-4892, 109)
 water_manager = NodePath("../../Waves")
 camera = NodePath("Camera2D")
 uid = SubResource("Resource_km6pi")
@@ -604,6 +604,7 @@ offset_right = 28857.0
 offset_bottom = 10843.0
 scale = Vector2(-1, 1)
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
+metadata/_edit_lock_ = true
 
 [node name="TransBackground" type="ColorRect" parent="LevelContainer/Level/OceanShader"]
 z_index = 10
@@ -613,6 +614,7 @@ offset_right = 28857.0
 offset_bottom = 10843.0
 scale = Vector2(-1, 1)
 color = Color(0.0117, 0.0117, 0.09, 0.807843)
+metadata/_edit_lock_ = true
 
 [node name="Background2" type="ColorRect" parent="LevelContainer/Level/OceanShader"]
 z_index = -10
@@ -621,6 +623,7 @@ offset_left = 11139.0
 offset_right = 28857.0
 offset_bottom = 10843.0
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
+metadata/_edit_lock_ = true
 
 [node name="TransBackground2" type="ColorRect" parent="LevelContainer/Level/OceanShader"]
 z_index = 10
@@ -629,6 +632,7 @@ offset_left = 11139.0
 offset_right = 28857.0
 offset_bottom = 10843.0
 color = Color(0.0117, 0.0117, 0.09, 0.807843)
+metadata/_edit_lock_ = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="LevelContainer/Level/OceanShader"]
 rotation = -0.464765
@@ -637,9 +641,9 @@ shadow_filter = 2
 max_distance = 1e+06
 
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
-position = Vector2(1180, 1212)
+position = Vector2(-5795, 145)
 motion_mode = 1
-uid = SubResource("Resource_2fhus")
+uid = SubResource("Resource_x3u77")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -774,6 +778,7 @@ grow_vertical = 2
 rect = Rect2(0, 0, 1920, 1080)
 script = ExtResource("23_npnyn")
 player = NodePath("../../LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver")
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Shaders/Vignette"]
 material = SubResource("ShaderMaterial_cr65h")
@@ -782,6 +787,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
@@ -794,6 +800,7 @@ offset_right = 136.0
 offset_bottom = 179.0
 
 [node name="IngameUI" parent="UI" instance=ExtResource("29_54jb5")]
+metadata/_edit_lock_ = true
 
 [node name="DeathScreen" parent="UI" node_paths=PackedStringArray("ingame_ui", "vignette_shader") instance=ExtResource("32_kyt52")]
 visible = false
@@ -814,7 +821,7 @@ vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 position = Vector2(64, 1225)
 
 [node name="Rock" parent="." instance=ExtResource("31_boa6h")]
-position = Vector2(1365, 1337)
+position = Vector2(-2781, 1826)
 
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Level/Items/LightLine"]
