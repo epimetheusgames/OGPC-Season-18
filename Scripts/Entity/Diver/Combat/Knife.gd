@@ -1,7 +1,7 @@
 class_name Knife
 extends Weapon
 
-@export var attackbox: Attackbox
+@export var attackbox: OneShotAttack
 
 @export var dist_from_head: float = 40.0
 @export var spread_angle: float = 120.0

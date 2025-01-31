@@ -39,7 +39,28 @@ func damage_hurtbox(hurtbox: Hurtbox) -> void:
 	if hurtbox.can_take_damage(self):
 		
 		hurtbox.damage(damage_amount)
+		display_number(damage_amount, hurtbox.global_position)
 		emit_signal("damage_dealt", damage_amount)
 		
 		if hurtbox.health - damage_amount <= 0:
 			emit_signal("killed")
+
+func display_number(value: int, position: Vector2) -> void:
+	var number = Label.new()
+	number.top_level = true
+	number.z_index = 50
+	number.global_position = position
+	number.text = str(value)
+	
+	number.label_settings = LabelSettings.new()
+	number.label_settings.font = load("res://Assets/Fonts/Geo-Italic.ttf")
+	number.label_settings.font_size = 80
+	number.label_settings.font_color = Color.FIREBRICK
+	
+	add_child(number)
+	
+	var tween: Tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(number, "position:y", number.position.y - 100, 0.8).set_trans(Tween.TRANS_LINEAR)
+	tween.tween_property(number, "modulate:a", 0, 0.8).set_trans(Tween.TRANS_QUAD)
+	

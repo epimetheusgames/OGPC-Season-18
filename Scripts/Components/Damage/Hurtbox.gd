@@ -39,10 +39,14 @@ func damage(damage_amount: float) -> void:
 	if is_invincible:
 		return
 	
-	health = clamp(health - damage_amount, 0, max_health)
+	var new_health = clamp(health - damage_amount, 0, max_health)
+	emit_signal("damaged", abs(health - new_health))
+	health = new_health
 	
 	if health == 0:
 		emit_signal("died")
 
 func heal(heal_amount: float) -> void:
-	health = clamp(health + heal_amount, 0, max_health)
+	var new_health = clamp(health + heal_amount, 0, max_health)
+	emit_signal("healed", abs(health - new_health))
+	health = new_health

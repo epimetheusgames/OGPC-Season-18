@@ -4,7 +4,7 @@
 
 # Owned by: carsonetb
 class_name Enemy
-extends NPC
+extends Entity
 
 @export var settings: EnemyBehaviorSettings
 @export var target_reached_min_dst: int = 10
