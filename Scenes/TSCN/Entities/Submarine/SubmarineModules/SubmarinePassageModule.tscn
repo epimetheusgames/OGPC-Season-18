@@ -14,7 +14,7 @@ size = Vector2(400, 400)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xshuu"]
 size = Vector2(40, 400)
 
-[node name="SubmarineUDPassageModule" type="Node2D"]
+[node name="SubmarinePassageModule" type="Node2D"]
 rotation = 1.57085
 script = ExtResource("1_pshir")
 path = SubResource("Resource_uu67r")

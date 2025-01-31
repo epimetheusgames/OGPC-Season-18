@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://718tp2nsyoer"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineWeaponsModule.gd" id="1_m24gv"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="2_bwdr6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ufap1"]
+size = Vector2(400, 400)
+
+[node name="WeaponsModule" type="Node2D"]
+script = ExtResource("1_m24gv")
+
+[node name="ModuleArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleArea"]
+shape = SubResource("RectangleShape2D_ufap1")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+
+[node name="AttachmentPoints" type="Node2D" parent="."]
+
+[node name="Entrance" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(-2, 199)
+script = ExtResource("2_bwdr6")
+direction = Vector2(0, -1)
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
+polygon = PackedVector2Array(-200, 200, -200, 0, -150, -75, -90, -100, 0, -110, 90, -100, 150, -75, 200, 0, 200, 200, 150, 200, 150, 0, 90, -50, 0, -55, -90, -50, -150, 0, -150, 200)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-200, 200, -200, 0, -150, -75, -90, -100, 0, -110, 90, -100, 150, -75, 200, 0, 200, 200, 150, 200, 150, 0, 90, -50, 0, -55, -90, -50, -150, 0, -150, 200)
+
+[node name="SubmarineWeaponSlot" type="Node2D" parent="."]
+position = Vector2(0, -120)
+
+[connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
+[connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]
