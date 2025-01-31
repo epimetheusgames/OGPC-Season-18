@@ -13,6 +13,7 @@ grow_vertical = 2
 script = ExtResource("1_1y8o2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = -253.0
 offset_top = -115.0
 offset_right = 2099.0
@@ -20,6 +21,7 @@ offset_bottom = 1299.0
 color = Color(0, 0.4, 0.00666666, 0.215686)
 
 [node name="YouDied" type="Label" parent="."]
+layout_mode = 0
 offset_left = 2.0
 offset_top = 210.0
 offset_right = 1921.0
@@ -29,6 +31,7 @@ text = "Mission Success!"
 horizontal_alignment = 1
 
 [node name="FunnyText" type="Label" parent="."]
+layout_mode = 0
 offset_top = 320.0
 offset_right = 1922.0
 offset_bottom = 421.0
@@ -37,6 +40,7 @@ text = "Good job. You did better than your predecessors"
 horizontal_alignment = 1
 
 [node name="ReturnToStation" type="Button" parent="."]
+layout_mode = 0
 offset_left = 712.0
 offset_top = 438.0
 offset_right = 1199.0
@@ -46,6 +50,7 @@ theme_override_font_sizes/font_size = 36
 text = "Return to Research Station"
 
 [node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
 offset_left = 824.0
 offset_top = 526.0
 offset_right = 1081.0

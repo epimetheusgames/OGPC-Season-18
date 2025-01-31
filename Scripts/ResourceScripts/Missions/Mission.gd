@@ -5,7 +5,7 @@ extends Resource
 @export var mission_filepath: FilePathResource
 @export var title: String
 @export var description: String
-@export var success_state_checker: MissionSuccessStateChecker
+@export var success_state_checker: MissionSuccessStateCheckerSequence
 
 # Path to a saved resource representing another mission.
 @export var unlocks: Array[FilePathResource]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=73 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="10_gbtle"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
+[ext_resource type="Script" path="res://Scripts/Objects/CompletionArea.gd" id="12_h6qnp"]
 [ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="15_p6xfd"]
@@ -258,10 +259,13 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_ejw24"]
+[sub_resource type="Resource" id="Resource_scw7o"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vedra"]
+size = Vector2(1308, 994)
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
 resource_local_to_scene = true
@@ -635,7 +639,7 @@ max_distance = 1e+06
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_ejw24")
+uid = SubResource("Resource_scw7o")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -676,6 +680,13 @@ color = Color(0.35, 0.189, 0.1085, 1)
 offset = Vector2(-0.7, 0)
 polygon = PackedVector2Array(4825, 1125, 6936, 1116, 6933, 1221, 6857, 1219, 6902.37, 2438.33, 6700.7, 2406.67, 6686, 1206, 6309, 1197, 6322.37, 2410, 6160.7, 2391.67, 6148, 1188, 5907, 1183, 5909.03, 2391.67, 5747.37, 2363.33, 5726, 1188, 5499, 1206, 5517.37, 2331.67, 5352.37, 2300, 5335, 1219, 5126, 1230, 5135.7, 2331.67, 4932.37, 2275, 4906, 1210, 4830, 1237)
 metadata/_edit_lock_ = true
+
+[node name="DocksArea" type="Area2D" parent="LevelContainer/Level"]
+script = ExtResource("12_h6qnp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Level/DocksArea"]
+position = Vector2(-5913, 193)
+shape = SubResource("RectangleShape2D_vedra")
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
