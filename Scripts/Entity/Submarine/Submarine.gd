@@ -10,8 +10,12 @@ func _ready() -> void:
 	if !Global.submarine:
 		Global.submarine = self
 	 
-	var custom_sub : CustomSubmarineResource = load("res://Scenes/Resource/custom_sub_gen.tres")
+	var custom_sub : CustomSubmarineResource = load("res://Scenes/Resource/TestSubmarines/custom_sub_gen.tres")
 	module_container.load_sub(custom_sub)
+	
+	if Global.godot_steam_abstraction && Global.is_multiplayer && _is_node_owner():
+		var remote_sub := module_container.construct_remote_sub(custom_sub)
+		Global.godot_steam_abstraction.run_remote_function(module_container, "load_sub_remote", [remote_sub])
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()

@@ -5,6 +5,7 @@ extends Node2D
 
 @onready var line: Line2D = $Line
 @export var directions: PackedVector2Array
+@export var min_point_dist: float = 300
 var old_points: PackedVector2Array
 var attachments: Array[PackedVector2Array]
 var calculating := false
@@ -21,24 +22,24 @@ func _draw() -> void:
 		recalculate_attachments()
 		return
 	
-	if calculating:
-		for point in line.points:
-			draw_circle(point, 6, Color(3.2, 3, 3))
-		return
-	
-	var i := 0
+	var i := -1
 	for point in line.points:
+		i += 1
+		if i >= attachments.size():
+			draw_circle(point, 6, Color(3.2, 3, 3))
+			continue
 		for attachment in attachments[i]:
 			draw_line(point, attachment, line.default_color, 4)
 		draw_circle(point, 6, Color(3.2, 3, 3))
-		i += 1
 
 func recalculate_attachments():
-	attachments = []
+	var new_attachments: Array[PackedVector2Array] = []
 	calculating = true
+	var i := -1
 	for point in line.points:
+		i += 1
 		var new: PackedVector2Array
-		attachments.append(new)
+		new_attachments.append(new)
 		$Raycasts.global_position = global_position + point
 		await get_tree().create_timer(0.5).timeout
 		for raycast in $Raycasts.get_children():
@@ -47,5 +48,6 @@ func recalculate_attachments():
 				var collider = raycast.get_collider()
 				if collider is Submarine || collider is Diver:
 					continue
-				attachments[-1].append(to_local(raycast.get_collision_point()))
+				new_attachments[-1].append(to_local(raycast.get_collision_point()))
 	calculating = false
+	attachments = new_attachments

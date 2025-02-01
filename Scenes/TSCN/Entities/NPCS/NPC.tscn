@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8ci245vh1xeo"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/BaseNpc.gd" id="1_3od1n"]
+[ext_resource type="Texture2D" uid="uid://csl0e2px0cwc1" path="res://addons/discord-rpc-gd/Logo_V2_No_Bg.png" id="2_5qsvp"]
+
+[node name="NPC" type="CharacterBody2D"]
+process_mode = 4
+script = ExtResource("1_3od1n")
+
+[node name="AudioHandler" type="Node2D" parent="."]
+
+[node name="TalkSound" type="AudioStreamPlayer" parent="AudioHandler"]
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+
+[node name="Texture" type="Sprite2D" parent="."]
+editor_description = "discord logo is just a test texture"
+texture = ExtResource("2_5qsvp")
+
+[node name="DialogHitbox" type="Area2D" parent="."]

@@ -13,6 +13,9 @@ var shooting: bool = false
 func _process(delta: float) -> void:
 	super(delta)
 	
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+		return
+	
 	#combat.move_hand_toward_mouse("right")
 	
 	if !pistol_sprite.animation == "Flip":
@@ -23,7 +26,10 @@ func _process(delta: float) -> void:
 	
 	if !pistol_sprite.animation == "Shoot":
 		shooting = false
-
+	
+	if Global.godot_steam_abstraction && !Global.is_multiplayer || diver._is_node_owner():
+		Global.godot_steam_abstraction.sync_var(self, "position")
+		Global.godot_steam_abstraction.sync_var(self, "rotation")
 
 func perform_attack() -> void:
 	if !pistol_sprite.animation == "Shoot" && !shooting:
@@ -31,8 +37,7 @@ func perform_attack() -> void:
 		
 		shooting = true
 		
-		if !Global.is_multiplayer || diver._is_node_owner():
-			
+		if Global.godot_steam_abstraction && !Global.is_multiplayer || diver._is_node_owner():
 			var bullet: BaseBullet = bullet_scene.instantiate()
 			add_child(bullet)
 			
@@ -40,8 +45,15 @@ func perform_attack() -> void:
 			var shot_angle: float = cone_of_fire.get_shot_angle()
 			bullet.fire(shot_angle)
 			
-			# Wtf is this line my g
-			#Global.godot_steam_abstraction.run_remote_function(self, "spawn_bullet", [$BulletShootPosition.global_position, (Vector2.from_angle(global_rotation) * bullet_velocity * 60 + diver.velocity), global_rotation + PI / 2.0])
+			# Maybe this doesn't work??? Shouldn't the player names be different on seperate clients?
+			Global.godot_steam_abstraction.run_remote_function(self, "spawn_bullet", [bullet.global_position, shot_angle])
+
+func spawn_bullet(pos: Vector2, shot_angle: float) -> void:
+	var bullet: BaseBullet = bullet_scene.instantiate()
+	add_child(bullet)
+	
+	bullet.global_position = pos
+	bullet.fire(shot_angle)
 
 func _on_tranquilizer_gun_sprite_animation_finished() -> void:
 	if pistol_sprite.animation == "Shoot":

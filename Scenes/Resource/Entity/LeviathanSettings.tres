@@ -5,7 +5,7 @@
 
 [sub_resource type="Resource" id="Resource_xaj74"]
 script = ExtResource("1_rywr3")
-file = "res://Scenes/TSCN/Objects/Items/Rock.tscn"
+file = "res://Scenes/TSCN/Objects/Items/LeviathanBit.tscn"
 
 [resource]
 script = ExtResource("1_5bux1")

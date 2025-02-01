@@ -1,0 +1,327 @@
+[gd_scene load_steps=23 format=3 uid="uid://cgroth3nseo6"]
+
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_e6kdq"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="3_gnnuy"]
+[ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="5_7cj4s"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="5_65j18"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="5_gpbxv"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="6_krpp0"]
+[ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="6_oply2"]
+[ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="7_27r5q"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="7_u3v81"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="8_1a1ie"]
+[ext_resource type="Script" path="res://Scripts/UI/DialogHandler.gd" id="8_7spfj"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/KeypressHandler.gd" id="9_rhklt"]
+[ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
+[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="16_v8rcl"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/PerformancePrompt.gd" id="17_0ry5s"]
+[ext_resource type="PackedScene" path="res://Scenes/TSCN/UI/FakeButton.tscn" id="17_tnv8r"]
+
+[sub_resource type="Resource" id="Resource_ur184"]
+script = ExtResource("3_e6kdq")
+file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
+
+[sub_resource type="Resource" id="Resource_wq34i"]
+script = ExtResource("3_e6kdq")
+file = "res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"
+
+[sub_resource type="Resource" id="Resource_1tmkv"]
+script = ExtResource("7_u3v81")
+missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
+
+[node name="Root" type="Node" node_paths=PackedStringArray("KeyactionHandler")]
+script = ExtResource("1_h2kyx")
+verbose_debug = true
+super_efficient_auto_enable_maximum = 25
+game_skeleton_node = NodePath("Skeleton")
+ui_root_node = NodePath("UI")
+game_root_node = NodePath("Game")
+dialog_text_node = NodePath("Game/GameUIOverlay/DialogTextureBG")
+KeyactionHandler = NodePath("Game/KeyActionHandler")
+
+[node name="Skeleton" type="Node" parent="."]
+
+[node name="GodotSteamAbstraction" type="Node" parent="Skeleton"]
+script = ExtResource("5_65j18")
+
+[node name="SaveLoadFramework" type="Node" parent="Skeleton" node_paths=PackedStringArray("game_container")]
+script = ExtResource("2_i3ogj")
+game_container = NodePath("../../Game/GameContainer")
+ui_root_node_path = NodePath("../../UI")
+level_list = Array[ExtResource("3_e6kdq")]([SubResource("Resource_ur184")])
+default_level = SubResource("Resource_wq34i")
+
+[node name="MissionSystem" type="Node" parent="Skeleton"]
+script = ExtResource("5_gpbxv")
+default_mission_tree = SubResource("Resource_1tmkv")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1087.0
+
+[node name="TemplateButton" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = -444.0
+offset_top = 26.0
+offset_right = -244.0
+offset_bottom = 68.0
+theme = ExtResource("3_gnnuy")
+text = "Stylize this button!"
+script = ExtResource("6_oply2")
+metadata/key_number = 0
+metadata/action = ""
+
+[node name="MainMenu" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("8_1a1ie")
+
+[node name="GameTitle" type="Label" parent="UI/MainMenu"]
+layout_mode = 0
+offset_top = 73.0
+offset_right = 1921.0
+offset_bottom = 205.0
+theme_override_font_sizes/font_size = 96
+text = "Diving Game Title"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 318.0
+offset_right = 1081.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Start"
+
+[node name="MultiplayerButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 688.0
+offset_top = 318.0
+offset_right = 945.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Multiplayer"
+
+[node name="SingleplayerButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Singleplayer"
+
+[node name="MultiplayerJoinButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 688.0
+offset_top = 318.0
+offset_right = 945.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Join
+"
+
+[node name="MultiplayerHostButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Host"
+
+[node name="MultiplayerJoinGameButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Join
+"
+
+[node name="MultiplayerHostGameButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 960.0
+offset_top = 318.0
+offset_right = 1217.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+text = "Host"
+
+[node name="SettingsButton" type="Button" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 414.0
+offset_right = 1081.0
+offset_bottom = 488.0
+theme_override_font_sizes/font_size = 36
+text = "Settings
+"
+
+[node name="QuitButton" type="Button" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 510.0
+offset_right = 1081.0
+offset_bottom = 584.0
+theme_override_font_sizes/font_size = 36
+text = "Quit"
+
+[node name="LobbyNameInput" type="LineEdit" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 688.0
+offset_top = 318.0
+offset_right = 945.0
+offset_bottom = 392.0
+theme_override_font_sizes/font_size = 36
+placeholder_text = "Lobby name"
+alignment = 1
+
+[node name="MultiplayerStatus" type="Label" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 595.0
+offset_right = 1080.0
+offset_bottom = 618.0
+horizontal_alignment = 1
+
+[node name="Members" type="RichTextLabel" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 623.0
+offset_right = 1081.0
+offset_bottom = 766.0
+
+[node name="Game" type="Node" parent="."]
+
+[node name="BoidsCalculator" type="Node" parent="Game"]
+script = ExtResource("9_xe7j2")
+
+[node name="KeyActionHandler" type="Node2D" parent="Game"]
+visible = false
+script = ExtResource("9_rhklt")
+
+[node name="GameContainer" type="Node" parent="Game"]
+
+[node name="GameUIOverlay" type="Control" parent="Game"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PerformancePrompt" type="TextureRect" parent="Game/GameUIOverlay"]
+visible = false
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 410.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("16_v8rcl")
+script = ExtResource("17_0ry5s")
+notif_bar_speed = 0.4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/PerformancePrompt"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 4.0
+offset_right = 888.0
+offset_bottom = 224.0
+theme_override_font_sizes/normal_font_size = 37
+text = "Your game appears to be running at a less-than-optimal Framerate, so performance mode has been automatically turned on..."
+
+[node name="NotifBar" type="ColorRect" parent="Game/GameUIOverlay/PerformancePrompt"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 368.0
+offset_right = 988.0
+offset_bottom = 408.0
+
+[node name="DialogTextureBG" type="TextureRect" parent="Game/GameUIOverlay" node_paths=PackedStringArray("text_node")]
+visible = false
+layout_mode = 0
+offset_left = 677.0
+offset_top = 758.0
+offset_right = 1235.0
+offset_bottom = 923.0
+texture = SubResource("PlaceholderTexture2D_o714b")
+script = ExtResource("8_7spfj")
+response_button_one = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResponseButtonOne")
+response_button_two = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResponseButtonTwo")
+response_button_three = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/ResponseButtonThree")
+response_button_four = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/ResponseButtonFour")
+text_node = NodePath("VBoxContainer/DialogTextLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG"]
+layout_mode = 0
+offset_left = 30.0
+offset_right = 517.0
+offset_bottom = 160.0
+
+[node name="DialogTextLabel" type="RichTextLabel" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "eeeeeeeeee"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResponseButtonOne" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("17_tnv8r")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResponseButtonTwo" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("17_tnv8r")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResponseButtonThree" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("17_tnv8r")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResponseButtonFour" parent="Game/GameUIOverlay/DialogTextureBG/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("17_tnv8r")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UIGenerator" type="Node2D" parent="Game/GameUIOverlay" node_paths=PackedStringArray("button_template")]
+visible = false
+script = ExtResource("5_7cj4s")
+button_template = NodePath("../../../UI/TemplateButton")
+
+[node name="MousePositionGetter" type="Node2D" parent="."]
+
+[connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
+[connection signal="button_up" from="UI/MainMenu/StartButton" to="UI/MainMenu" method="_on_start_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerButton" to="UI/MainMenu" method="_on_multiplayer_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/SingleplayerButton" to="UI/MainMenu" method="_on_singleplayer_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerJoinButton" to="UI/MainMenu" method="_on_multiplayer_join_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerHostButton" to="UI/MainMenu" method="_on_multiplayer_host_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerJoinGameButton" to="UI/MainMenu" method="_on_multiplayer_join_game_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/MultiplayerHostGameButton" to="UI/MainMenu" method="_on_multiplayer_host_game_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/QuitButton" to="UI/MainMenu" method="_on_quit_button_button_up"]

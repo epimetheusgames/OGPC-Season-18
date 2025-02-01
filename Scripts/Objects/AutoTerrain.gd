@@ -13,7 +13,7 @@ var collision_polygon: CollisionPolygon2D
 
 var occluder: LightOccluder2D
 
-@onready var preloaded_texture: Texture2D = load("res://Assets/Art/Sprites/Level/WallTexture.png")
+@onready var preloaded_texture: Texture2D = load("res://Assets/Art/Level/WallTexture.png")
 @onready var preloaded_shader_material: Resource = preload("res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres")
 
 func _ready() -> void:

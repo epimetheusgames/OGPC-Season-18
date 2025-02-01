@@ -1,23 +1,49 @@
-[gd_resource type="Resource" script_class="Mission" load_steps=6 format=3 uid="uid://b41cmtc2q6li2"]
+[gd_resource type="Resource" script_class="Mission" load_steps=10 format=3 uid="uid://b41cmtc2q6li2"]
 
-[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="1_d5g2i"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="1_d5g2i"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="2_4hp0o"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionSuccessStateSequence.gd" id="3_8d2n5"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionSuccessState.gd" id="3_gp47f"]
 
 [sub_resource type="Resource" id="Resource_mkq3y"]
 script = ExtResource("1_d5g2i")
 file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
 
-[sub_resource type="Resource" id="Resource_28fqv"]
+[sub_resource type="Resource" id="Resource_wrh2p"]
 script = ExtResource("3_gp47f")
+description = "Acquire Leviathan Bit"
+success_type = 0
+item_name = "Leviathan Bit"
+item_count = 1
+completion_area_name = ""
+something = ""
+
+[sub_resource type="Resource" id="Resource_2eygg"]
+script = ExtResource("3_gp47f")
+description = "Get a rock"
 success_type = 0
 item_name = "Rock"
 item_count = 1
+completion_area_name = ""
+something = ""
+
+[sub_resource type="Resource" id="Resource_02qkb"]
+script = ExtResource("3_gp47f")
+description = "Back to the docks"
+success_type = 1
+item_name = ""
+item_count = 0
+completion_area_name = "DocksArea"
+something = ""
+
+[sub_resource type="Resource" id="Resource_dft4t"]
+script = ExtResource("3_8d2n5")
+sequence = Array[ExtResource("3_gp47f")]([SubResource("Resource_wrh2p"), SubResource("Resource_2eygg"), SubResource("Resource_02qkb")])
 
 [resource]
 script = ExtResource("2_4hp0o")
 mission_filepath = SubResource("Resource_mkq3y")
 title = "First mission"
-description = "Kill a fish"
-success_state_checker = SubResource("Resource_28fqv")
+description = "Kill the Leviathan"
+success_state_checker = SubResource("Resource_dft4t")
 unlocks = Array[ExtResource("1_d5g2i")]([])

@@ -19,7 +19,7 @@ signal boosted
 
 func _physics_process(delta: float) -> void:
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
-		if get_parent().get_state() != Util.DiverState.DRIVING_SUBMARINE:
+		if get_parent().get_state() != Util.DiverState.DRIVING_SUBMARINE && get_parent().get_state() != Util.DiverState.OPERATING_MODULE:
 			input_vector = get_input_vector()
 			
 			update_current_angle(delta * 60)

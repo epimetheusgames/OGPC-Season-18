@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://cexuq6aqq46ng"]
 
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="1_4c6am"]
-[ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Sprites/Level/WallTexture.png" id="2_vbjyk"]
+[ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Level/WallTexture.png" id="2_vbjyk"]
 
 [sub_resource type="Gradient" id="Gradient_2s48v"]
 offsets = PackedFloat32Array(0)

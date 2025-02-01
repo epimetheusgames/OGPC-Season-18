@@ -1,0 +1,158 @@
+[gd_scene load_steps=19 format=3 uid="uid://cqxetysm85e1y"]
+
+[ext_resource type="Script" path="res://Scripts/Entity/NPC/AnimatedEnemy.gd" id="1_teovo"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_eew6s"]
+[ext_resource type="Texture2D" uid="uid://dgi5korrp8ou" path="res://Assets/Art/Entity/PlaceholderEnemyFishSpritesheet.png" id="2_xp6fr"]
+[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_j1siw"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="4_p5whe"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="5_cg6aa"]
+
+[sub_resource type="Resource" id="Resource_sd441"]
+script = ExtResource("2_eew6s")
+health = 5
+damage = 0
+base_speed = 0.0
+agressiveness = 1.0
+attack_distance = 100.0
+closest_distance = 85.0
+sensor_type = 0
+wander_type = 0
+attack_mode = 0
+wander_range = 800.0
+view_range = 230.0
+view_distance = 70.0
+disable_period_length = 10.0
+sound_max_distance = 0.0
+
+[sub_resource type="Resource" id="Resource_mkt0s"]
+resource_local_to_scene = true
+script = ExtResource("3_j1siw")
+uid = 1726
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_joiil"]
+radius = 4.0
+height = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7umgp"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18rfv"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2xx6"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1hae"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4eev"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3j5h7"]
+atlas = ExtResource("2_xp6fr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vceji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7umgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18rfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2xx6")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_b1hae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4eev")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3j5h7")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d8n50"]
+radius = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpu2o"]
+radius = 6.08276
+
+[node name="FishEnemy" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_teovo")
+settings = SubResource("Resource_sd441")
+uid = SubResource("Resource_mkt0s")
+
+[node name="FishNavigation" type="NavigationAgent2D" parent="."]
+target_desired_distance = 20.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 30.0
+max_neighbors = 5
+max_speed = 10.0
+debug_enabled = true
+
+[node name="FishCollison" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_joiil")
+
+[node name="FishAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 0)
+sprite_frames = SubResource("SpriteFrames_vceji")
+animation = &"Attack"
+autoplay = "Idle"
+frame_progress = 0.596816
+
+[node name="HealthComponent" type="Node" parent="."]
+
+[node name="AttackBoxComponent" type="Node" parent="."]
+script = ExtResource("4_p5whe")
+
+[node name="HurtboxComponent" type="Node" parent="."]
+script = ExtResource("5_cg6aa")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(2, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_d8n50")
+
+[node name="AttackBox" type="Area2D" parent="."]
+position = Vector2(2, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(-5, -1)
+shape = SubResource("CircleShape2D_lpu2o")
+
+[node name="PathfindUpdateTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-7, 1, -7, 0, -6, 0, -6, -1, -5, -1, -5, -3, -4, -3, -4, -4, -3, -4, -3, -5, -1, -5, -1, -6, 6, -6, 6, -5, 9, -5, 9, -4, 10, -4, 10, -3, 12, -3, 12, -2, 13, -2, 13, -1, 14, -1, 14, -3, 15, -3, 15, -4, 16, -4, 16, -5, 17, -5, 17, -6, 18, -6, 18, 5, 16, 5, 16, 4, 15, 4, 15, 3, 14, 3, 14, 2, 12, 2, 12, 3, 11, 3, 11, 4, 10, 4, 10, 5, 8, 5, 8, 6, 7, 6, 7, 7, 1, 7, 1, 6, -1, 6, -1, 5, -3, 5, -3, 4, -5, 4, -5, 2, -6, 2, -6, 1)
+
+[node name="ShadowComponent" type="Node2D" parent="."]
+
+[connection signal="velocity_computed" from="FishNavigation" to="." method="_on_fish_navigation_velocity_computed"]
+[connection signal="timeout" from="PathfindUpdateTimer" to="." method="_on_pathfind_update_timer_timeout"]

@@ -16,7 +16,7 @@ var boids_rotations := []
 # Local network sync is a lot more efficient.
 @export var boid_local_network_sync_batch_size = 500
 
-@onready var boids_scene := preload("res://Scenes/TSCN/Entities/Entity/Boid.tscn")
+@onready var boids_scene := preload("res://Scenes/TSCN/Entities/NPCS/Boid.tscn")
 
 var bins = Vector2.ZERO
 var num_bins = 0

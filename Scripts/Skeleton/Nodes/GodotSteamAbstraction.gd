@@ -369,6 +369,8 @@ func sync_packets() -> void:
 			
 			if this_data.size() > 1400: # bytes
 				print("WARNING: Packet size greater than packet size limit. Size is " + str(this_data.size()) + ". Sending anyway.")
+				if Global.verbose_debug:
+					print("DEBUG: Packet data is " + str(packet_data) + ".")
 			
 			# We can group the packet up if the target is everyone.
 			if this_target == 0 && lobby_members.size() > 1:

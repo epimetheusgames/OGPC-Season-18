@@ -1,20 +1,23 @@
-[gd_scene load_steps=47 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=52 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_sa7rx"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverInventory.gd" id="3_r5rx4"]
-[ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Sprites/Player/PlayerSkin.png" id="4_do014"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/InventoryItem.gd" id="4_7u6dt"]
+[ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Player/PlayerSkin.png" id="4_do014"]
 [ext_resource type="Script" path="res://Scripts/Public/InventoryPublic.gd" id="4_lqvql"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverCombat.gd" id="5_mjta2"]
+[ext_resource type="Texture2D" uid="uid://kbno8w3pbkse" path="res://Assets/Art/Icons/LightLineIcon.png" id="5_v3mw5"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="6_3bvk2"]
 [ext_resource type="Script" path="res://Scripts/Components/Damage/Hurtbox.gd" id="7_3b7lw"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
-[ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Sprites/Player/FlashLightPlaceholder.png" id="10_qg316"]
+[ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 [ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="17_2as0u"]
@@ -28,6 +31,18 @@ uid = 3625
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 20.0
 height = 100.0
+
+[sub_resource type="Resource" id="Resource_og7y3"]
+script = ExtResource("6_3bvk2")
+file = "res://Scenes/TSCN/Objects/Items/LightLineItem.tscn"
+
+[sub_resource type="Resource" id="Resource_k67wg"]
+script = ExtResource("4_7u6dt")
+name = "Light Line"
+scene = SubResource("Resource_og7y3")
+cost = 25
+icon = ExtResource("5_v3mw5")
+count = 5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d3kj"]
 radius = 51.0
@@ -159,6 +174,7 @@ shape = SubResource("CapsuleShape2D_ghsq1")
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("3_r5rx4")
+inventory = Array[ExtResource("4_7u6dt")]([SubResource("Resource_k67wg")])
 
 [node name="ItemDetectionArea" type="Area2D" parent="Inventory"]
 collision_layer = 0
@@ -534,6 +550,14 @@ rotation = -0.000201209
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
+[node name="GeneralDetectionBox" type="Area2D" parent="Stats"]
+rotation = -0.000201209
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/GeneralDetectionBox"]
+rotation = -0.000201209
+shape = SubResource("CapsuleShape2D_wi5t0")
+debug_color = Color(0, 0.649449, 0.143183, 0.42)
+
 [node name="Combat" type="Node2D" parent="."]
 script = ExtResource("5_mjta2")
 speargun = ExtResource("8_ntafm")
@@ -597,3 +621,5 @@ attacker_type = 1
 shape = SubResource("CircleShape2D_eqicb")
 
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
+[connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Stats" method="_on_general_detection_box_area_entered"]
+[connection signal="area_exited" from="Stats/GeneralDetectionBox" to="Stats" method="_on_general_detection_box_area_exited"]

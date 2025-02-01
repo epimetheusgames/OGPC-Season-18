@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl1opu8pulskf"]
+
+[ext_resource type="Script" path="res://Scripts/UI/SubmarineEditor.gd" id="1_sg7o5"]
+[ext_resource type="Script" path="res://Scripts/Objects/SubmarineEditorMouseArea.gd" id="2_nr508"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mu336"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1kmne"]
+radius = 15.0
+
+[node name="SubmarineEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sg7o5")
+
+[node name="SplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+split_offset = -500
+
+[node name="PanelContainer" type="PanelContainer" parent="SplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSplitContainer" type="VSplitContainer" parent="SplitContainer/PanelContainer"]
+layout_mode = 2
+split_offset = -490
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SplitContainer/PanelContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SaveButton" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer"]
+layout_mode = 2
+text = "Save Submarine
+"
+
+[node name="LoadButton" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer"]
+layout_mode = 2
+text = "Load Submarine
+"
+
+[node name="GridContainer" type="GridContainer" parent="SplitContainer/PanelContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="ControlModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Control Module"
+
+[node name="PassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Horizontal Module"
+
+[node name="CornerPassageModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Corner Module"
+
+[node name="EndModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "End Module"
+
+[node name="SubmarineView" type="PanelContainer" parent="SplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mu336")
+
+[node name="ViewContainer" type="SubViewportContainer" parent="SplitContainer/SubmarineView"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="Viewport" type="SubViewport" parent="SplitContainer/SubmarineView/ViewContainer"]
+disable_3d = true
+handle_input_locally = false
+msaa_2d = 3
+size = Vector2i(1454, 1080)
+render_target_update_mode = 4
+
+[node name="Origin" type="Node2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
+position = Vector2(1000, 1000)
+
+[node name="Camera2D" type="Camera2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
+position = Vector2(960, 540)
+
+[node name="MouseArea" type="Area2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
+script = ExtResource("2_nr508")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport/MouseArea"]
+shape = SubResource("CircleShape2D_1kmne")
+
+[node name="SaveDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+size = Vector2i(800, 600)
+ok_button_text = "Save"
+
+[node name="LoadDialog" type="FileDialog" parent="."]
+title = "Open a File"
+size = Vector2i(800, 600)
+ok_button_text = "Open"
+file_mode = 0
+
+[connection signal="mouse_entered" from="SplitContainer/PanelContainer" to="." method="_on_editing_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="SplitContainer/PanelContainer" to="." method="_on_editing_panel_mouse_exited"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/HBoxContainer/LoadButton" to="." method="_on_load_button_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/ControlModule" to="." method="_on_control_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/PassageModule" to="." method="_on_passage_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/CornerPassageModule" to="." method="_on_corner_passage_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/EndModule" to="." method="_on_end_passage_module_button_up"]
+[connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
+[connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]

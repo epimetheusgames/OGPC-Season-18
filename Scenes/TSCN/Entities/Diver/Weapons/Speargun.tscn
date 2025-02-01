@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://c3vsej6l54pdk"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Speargun.gd" id="1_6b6mx"]
-[ext_resource type="Texture2D" uid="uid://cgiqymjjt6jkp" path="res://Assets/Art/Sprites/Speargun.png" id="2_ftc3n"]
+[ext_resource type="Texture2D" uid="uid://cgiqymjjt6jkp" path="res://Assets/Art/Speargun.png" id="2_ftc3n"]
 [ext_resource type="PackedScene" uid="uid://dkiqku8nhydo3" path="res://Scenes/TSCN/Entities/Diver/Weapons/Spear.tscn" id="2_qlup2"]
 [ext_resource type="PackedScene" uid="uid://cyelkkty2ihsb" path="res://Scenes/TSCN/Entities/Diver/Weapons/ConeOfFire.tscn" id="3_xrh0y"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=73 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -7,17 +7,20 @@
 [ext_resource type="Script" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="10_gbtle"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
-[ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Sprites/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
-[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
+[ext_resource type="Script" path="res://Scripts/Objects/CompletionArea.gd" id="12_h6qnp"]
+[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
-[ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/Entity/NPC.tscn" id="15_p6xfd"]
+[ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
-[ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/Entity/Boid.tscn" id="16_a7n5p"]
-[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/Jellyfish.tscn" id="16_cbdp8"]
+[ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/NPCS/Boid.tscn" id="16_a7n5p"]
+[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
-[ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/Entity/BigfinSquid.tscn" id="18_0qmxr"]
-[ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/BiterFish.tscn" id="20_tdtsg"]
+[ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
+[ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/NPCS/BiterFish.tscn" id="20_tdtsg"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
+[ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Vignette.gdshader" id="23_r7jln"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="29_g0sdt"]
@@ -26,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
-[ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/Entity/Leviathan.tscn" id="35_47o3q"]
+[ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="35_47o3q"]
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
 
 [sub_resource type="Curve" id="Curve_6rk86"]
@@ -256,10 +259,13 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_vmwrx"]
+[sub_resource type="Resource" id="Resource_wxd7d"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vedra"]
+size = Vector2(1308, 994)
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
 resource_local_to_scene = true
@@ -311,7 +317,15 @@ shader_parameter/posterization_level = 7.114
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
 shader = ExtResource("28_oeu54")
 shader_parameter/SCREEN_SIZE = Vector2(1920, 1080)
-shader_parameter/pixelization_level = 6.98
+shader_parameter/pixelization_level = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cr65h"]
+shader = ExtResource("23_r7jln")
+shader_parameter/inner_radius = 0.1
+shader_parameter/outer_radius = 1.0
+shader_parameter/vignette_strength = 0.6
+shader_parameter/dither_strength = 0.03
+shader_parameter/vignette_color = null
 
 [node name="Mission1" type="Node2D"]
 script = ExtResource("1_314ux")
@@ -369,7 +383,7 @@ script = ExtResource("4_iytd7")
 spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent" node_paths=PackedStringArray("water_manager", "camera") instance=ExtResource("4_0aydx")]
-position = Vector2(1110, 1226)
+position = Vector2(-4892, 109)
 water_manager = NodePath("../../Waves")
 camera = NodePath("Camera2D")
 uid = SubResource("Resource_km6pi")
@@ -590,6 +604,7 @@ offset_right = 28857.0
 offset_bottom = 10843.0
 scale = Vector2(-1, 1)
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
+metadata/_edit_lock_ = true
 
 [node name="TransBackground" type="ColorRect" parent="LevelContainer/Level/OceanShader"]
 z_index = 10
@@ -599,6 +614,7 @@ offset_right = 28857.0
 offset_bottom = 10843.0
 scale = Vector2(-1, 1)
 color = Color(0.0117, 0.0117, 0.09, 0.807843)
+metadata/_edit_lock_ = true
 
 [node name="Background2" type="ColorRect" parent="LevelContainer/Level/OceanShader"]
 z_index = -10
@@ -607,6 +623,7 @@ offset_left = 11139.0
 offset_right = 28857.0
 offset_bottom = 10843.0
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
+metadata/_edit_lock_ = true
 
 [node name="TransBackground2" type="ColorRect" parent="LevelContainer/Level/OceanShader"]
 z_index = 10
@@ -615,6 +632,7 @@ offset_left = 11139.0
 offset_right = 28857.0
 offset_bottom = 10843.0
 color = Color(0.0117, 0.0117, 0.09, 0.807843)
+metadata/_edit_lock_ = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="LevelContainer/Level/OceanShader"]
 rotation = -0.464765
@@ -623,9 +641,9 @@ shadow_filter = 2
 max_distance = 1e+06
 
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
-position = Vector2(1180, 1212)
+position = Vector2(-5795, 145)
 motion_mode = 1
-uid = SubResource("Resource_vmwrx")
+uid = SubResource("Resource_wxd7d")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -637,12 +655,13 @@ buoyancy_accel = 0.0
 
 [node name="LightLine" parent="LevelContainer/Level/Items" instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)
+min_point_dist = 300.0
 
 [node name="Line" parent="LevelContainer/Level/Items/LightLine" index="0"]
 points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 
 [node name="Raycasts" parent="LevelContainer/Level/Items/LightLine" index="1"]
-position = Vector2(-3825, 85)
+position = Vector2(-4236, -362)
 
 [node name="ResearchStation" type="Node2D" parent="LevelContainer/Level"]
 position = Vector2(-9442, -922)
@@ -666,6 +685,13 @@ offset = Vector2(-0.7, 0)
 polygon = PackedVector2Array(4825, 1125, 6936, 1116, 6933, 1221, 6857, 1219, 6902.37, 2438.33, 6700.7, 2406.67, 6686, 1206, 6309, 1197, 6322.37, 2410, 6160.7, 2391.67, 6148, 1188, 5907, 1183, 5909.03, 2391.67, 5747.37, 2363.33, 5726, 1188, 5499, 1206, 5517.37, 2331.67, 5352.37, 2300, 5335, 1219, 5126, 1230, 5135.7, 2331.67, 4932.37, 2275, 4906, 1210, 4830, 1237)
 metadata/_edit_lock_ = true
 
+[node name="DocksArea" type="Area2D" parent="LevelContainer/Level"]
+script = ExtResource("12_h6qnp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Level/DocksArea"]
+position = Vector2(-5913, 193)
+shape = SubResource("RectangleShape2D_vedra")
+
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
 [node name="Boids" type="Node2D" parent="LevelContainer/Entities"]
@@ -682,6 +708,9 @@ position = Vector2(904, 1253)
 [node name="Boid" parent="LevelContainer/Entities/Boids" instance=ExtResource("16_a7n5p")]
 modulate = Color(0.720003, 0.778689, 0.920294, 1)
 uid = SubResource("Resource_ulf3c")
+
+[node name="FishSprite" parent="LevelContainer/Entities/Boids/Boid" index="0"]
+texture = null
 
 [node name="WallRaycast" parent="LevelContainer/Entities/Boids/Boid" index="1"]
 target_position = Vector2(0, 400)
@@ -724,6 +753,7 @@ rect = Rect2(0, 0, 1920, 1080)
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Shaders/Quantize"]
+visible = false
 material = SubResource("ShaderMaterial_alu57")
 anchors_preset = 15
 anchor_right = 1.0
@@ -736,12 +766,28 @@ rect = Rect2(0, 0, 1920, 1080)
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Shaders/Pixelize"]
+visible = false
 material = SubResource("ShaderMaterial_g5871")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Vignette" type="BackBufferCopy" parent="Shaders" node_paths=PackedStringArray("player")]
+rect = Rect2(0, 0, 1920, 1080)
+script = ExtResource("23_npnyn")
+player = NodePath("../../LevelContainer/Level/MultiplayerPlayerSpawnerComponent/Diver")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Shaders/Vignette"]
+material = SubResource("ShaderMaterial_cr65h")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
@@ -754,24 +800,28 @@ offset_right = 136.0
 offset_bottom = 179.0
 
 [node name="IngameUI" parent="UI" instance=ExtResource("29_54jb5")]
+metadata/_edit_lock_ = true
 
 [node name="DeathScreen" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("32_kyt52")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
+vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 
 [node name="MissionSuccessScreen" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("33_aiin4")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
+vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 
 [node name="PauseMenu" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("35_upo23")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
+vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 
 [node name="Leviathan" parent="." instance=ExtResource("35_47o3q")]
 position = Vector2(64, 1225)
 
 [node name="Rock" parent="." instance=ExtResource("31_boa6h")]
-position = Vector2(1365, 1337)
+position = Vector2(-2781, 1826)
 
 [editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Level/Items/LightLine"]

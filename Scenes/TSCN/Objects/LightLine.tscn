@@ -2,18 +2,20 @@
 
 [ext_resource type="Script" path="res://Scripts/Objects/LightLine.gd" id="1_5da3p"]
 
-[node name="LightLine" type="Node2D"]
+[node name="LightLine" type="Node2D" groups=["light_lines"]]
 z_index = -2
 script = ExtResource("1_5da3p")
 directions = PackedVector2Array(-1, 0, 1, 0, 0, -1, 0, 1)
+min_point_dist = 600.0
 
 [node name="Line" type="Line2D" parent="."]
 z_index = -1
-points = PackedVector2Array(-14, 10, 256, 28, 563, -156, 397, -297)
+points = PackedVector2Array(-13, 28, 256, 28, 563, -156, 397, -297)
 width = 6.0
 default_color = Color(0.224701, 0.224701, 0.224701, 1)
 
 [node name="Raycasts" type="Node2D" parent="."]
+position = Vector2(397, -297)
 
 [node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
 target_position = Vector2(1, 361)
