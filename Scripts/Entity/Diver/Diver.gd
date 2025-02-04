@@ -73,6 +73,9 @@ func get_state() -> Util.DiverState:
 	return diver_state
 
 func get_diver_username() -> String:
+	if !Global.godot_steam_abstraction:
+		return "UNNAMED (RUN FULL GAME)"
+	
 	if _is_node_owner():
 		return Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
 	else:
