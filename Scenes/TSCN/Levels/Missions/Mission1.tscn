@@ -15,7 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/NPCS/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
-[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/NPCS/BiterFish.tscn" id="20_tdtsg"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
@@ -259,7 +259,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_x3u77"]
+[sub_resource type="Resource" id="Resource_np8tg"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -604,7 +604,6 @@ offset_right = 28857.0
 offset_bottom = 10843.0
 scale = Vector2(-1, 1)
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
-metadata/_edit_lock_ = true
 
 [node name="TransBackground" type="ColorRect" parent="LevelContainer/Level/OceanShader"]
 z_index = 10
@@ -613,8 +612,7 @@ offset_left = 11139.0
 offset_right = 28857.0
 offset_bottom = 10843.0
 scale = Vector2(-1, 1)
-color = Color(0.0117, 0.0117, 0.09, 0.807843)
-metadata/_edit_lock_ = true
+color = Color(0.0117, 0.0117, 0.09, 1)
 
 [node name="Background2" type="ColorRect" parent="LevelContainer/Level/OceanShader"]
 z_index = -10
@@ -623,7 +621,6 @@ offset_left = 11139.0
 offset_right = 28857.0
 offset_bottom = 10843.0
 color = Color(0.0117647, 0.0117647, 0.0901961, 1)
-metadata/_edit_lock_ = true
 
 [node name="TransBackground2" type="ColorRect" parent="LevelContainer/Level/OceanShader"]
 z_index = 10
@@ -631,8 +628,7 @@ material = SubResource("ShaderMaterial_exbxk")
 offset_left = 11139.0
 offset_right = 28857.0
 offset_bottom = 10843.0
-color = Color(0.0117, 0.0117, 0.09, 0.807843)
-metadata/_edit_lock_ = true
+color = Color(0.0117, 0.0117, 0.09, 1)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="LevelContainer/Level/OceanShader"]
 rotation = -0.464765
@@ -643,7 +639,7 @@ max_distance = 1e+06
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(-5795, 145)
 motion_mode = 1
-uid = SubResource("Resource_x3u77")
+uid = SubResource("Resource_np8tg")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")

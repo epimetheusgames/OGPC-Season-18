@@ -1,4 +1,4 @@
-# Owned by carsonetb
+# Owned by carsonetb and Xavier J
 class_name SubmarineEditor
 extends Control
 
@@ -38,23 +38,28 @@ func add_module(new_module: SubmarineModule):
 	modules.append(new_module)
 
 func _on_control_module_button_up() -> void:
-	add_module(control_module.instantiate())
+	if !adding_module:
+		add_module(control_module.instantiate())
 
 func _on_corner_passage_module_button_up() -> void:
-	add_module(submarine_corner_passage_module.instantiate())
+	if !adding_module:
+		add_module(submarine_corner_passage_module.instantiate())
 
 func _on_passage_module_button_up() -> void:
-	add_module(submarine_passage_module.instantiate())
+	if !adding_module:
+		add_module(submarine_passage_module.instantiate())
 
 func _on_end_passage_module_button_up() -> void:
-	add_module(submarine_end_module.instantiate())
+	if !adding_module:
+		add_module(submarine_end_module.instantiate())
 
 func _on_door_module_button_up() -> void:
-	add_module(submarine_door_module.instantiate())
+	if !adding_module:
+		add_module(submarine_door_module.instantiate())
 
 func _on_weapons_module_button_up() -> void:
-	add_module(submarine_weapons_module.instantiate())
-	print(module_adding.attachment_points)
+	if !adding_module:
+		add_module(submarine_weapons_module.instantiate())
 
 func _process(delta: float) -> void:
 	if adding_module:
