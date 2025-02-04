@@ -9,5 +9,5 @@ void fragment() {
 			COLOR = out_colors[i];
 		}
 	}
-	
+
 }

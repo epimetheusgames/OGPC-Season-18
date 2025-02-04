@@ -13,6 +13,7 @@ closest_distance = 100.0
 sensor_type = 0
 wander_type = 0
 attack_mode = 0
+player_shines_light = true
 wander_range = 1500.0
 view_range = 270.0
 view_distance = 400.0

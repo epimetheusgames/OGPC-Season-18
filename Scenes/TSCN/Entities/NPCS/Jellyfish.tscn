@@ -28,11 +28,13 @@ shader = ExtResource("8_2ikp3")
 shader_parameter/colors = PackedVector4Array(1, 1, 1, 0.25, 1, 1, 1, 0.3, 1, 1, 1, 0.35, 1, 1, 1, 0.43, 1, 1, 1, 0.57, 1, 1, 1, 0.68)
 shader_parameter/out_colors = PackedColorArray(0, 0, 0.75, 0.301961, 0.25, 0, 0.75, 0.180392, 0.375, 0, 0.75, 0.301961, 0.4625, 0, 0.75, 0.360784, 0.25, 0, 0.75, 0.301961, 0.325, 0, 0.75, 0.301961)
 
-[node name="Jellyfish" type="CharacterBody2D"]
+[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "light_detector")]
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 settings = ExtResource("2_fvfwy")
 forward_direction = Vector2(0, -1)
+hurtbox = NodePath("Hurtbox")
+light_detector = NodePath("LightDetector")
 
 [node name="Tentacles" type="Node2D" parent="." node_paths=PackedStringArray("on_screen_notifier")]
 script = ExtResource("2_7lbwn")
@@ -64,6 +66,13 @@ shape = SubResource("RectangleShape2D_qgvvg")
 position = Vector2(0, -56)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetectionArea"]
+position = Vector2(4, -2)
+shape = SubResource("RectangleShape2D_qgvvg")
+
+[node name="LightDetector" type="Area2D" parent="."]
+position = Vector2(0, -56)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightDetector"]
 position = Vector2(4, -2)
 shape = SubResource("RectangleShape2D_qgvvg")
 

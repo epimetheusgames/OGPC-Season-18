@@ -77,8 +77,5 @@ func boost():
 func update_targets():
 	var target_pos: Vector2 = nav_agent.get_next_path_position()
 	
-	if player_visible:
-		target_pos = Global.player.global_position
-	
 	target_velocity = (target_pos - global_position).normalized() * current_speed 
 	target_rotation = velocity.angle() + PI / 2
