@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1oaylh32r500"]
+[gd_scene load_steps=3 format=3 uid="uid://c1oaylh32r500"]
 
 [ext_resource type="Script" path="res://Scripts/UI/SettingsMenu.gd" id="1_3dd0e"]
 [ext_resource type="Texture2D" uid="uid://cqx2208sneqm4" path="res://Assets/Art/UI/arrow.svg" id="2_l4xm8"]
-[ext_resource type="Script" path="res://Scripts/UI/Ingame/CustomCheckbox.gd" id="3_10ite"]
 
-[node name="Settings" type="Control" node_paths=PackedStringArray("brightnessSlider")]
+[node name="Settings" type="Control" node_paths=PackedStringArray("brightnessSlider", "performanceButton", "soundSlider")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,61 +13,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3dd0e")
 brightnessSlider = NodePath("HBoxContainer/VBoxContainer/VBoxContainer/brightnessSlider")
+performanceButton = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/Button")
+soundSlider = NodePath("soundSubMenu/HBoxContainer/VBoxContainer/masterVolumeSlider")
 
 [node name="background" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 1924.0
 offset_bottom = 1100.0
 color = Color(0.262932, 0.262932, 0.262932, 1)
-
-[node name="soundSubMenu" type="Control" parent="."]
-visible = false
-z_index = 8
-anchors_preset = 0
-offset_right = 2027.0
-offset_bottom = 1108.0
-
-[node name="backButton" type="TextureButton" parent="soundSubMenu"]
-z_index = 14
-z_as_relative = false
-layout_mode = 0
-offset_left = 76.0
-offset_top = 52.0
-offset_right = 289.0
-offset_bottom = 154.0
-scale = Vector2(0.5, 0.5)
-action_mode = 0
-texture_normal = ExtResource("2_l4xm8")
-
-[node name="background" type="ColorRect" parent="soundSubMenu"]
-layout_mode = 0
-offset_right = 1941.0
-offset_bottom = 1117.0
-color = Color(0.262745, 0.262745, 0.262745, 1)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="soundSubMenu"]
-layout_mode = 0
-offset_right = 1933.0
-offset_bottom = 1111.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="soundSubMenu/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="soundSubMenu/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(140, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 36
-text = "Overall Volume"
-fit_content = true
-scroll_active = false
-scroll_following = true
-autowrap_mode = 0
-
-[node name="masterVolumeSlider" type="HSlider" parent="soundSubMenu/HBoxContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -99,13 +52,6 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="modeCheckbox" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-script = ExtResource("3_10ite")
-
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(10, 40)
 layout_mode = 2
@@ -116,6 +62,10 @@ text = "Efficiency Mode"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Turn On"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -131,9 +81,58 @@ scroll_active = false
 
 [node name="brightnessSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-min_value = -100.0
+value = 100.0
 
 [node name="backButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 52.0
+offset_right = 289.0
+offset_bottom = 154.0
+scale = Vector2(0.5, 0.5)
+action_mode = 0
+texture_normal = ExtResource("2_l4xm8")
+
+[node name="soundSubMenu" type="Control" parent="."]
+visible = false
+z_index = 8
+anchors_preset = 0
+offset_right = 2027.0
+offset_bottom = 1108.0
+
+[node name="background" type="ColorRect" parent="soundSubMenu"]
+layout_mode = 0
+offset_right = 1941.0
+offset_bottom = 1117.0
+color = Color(0.262745, 0.262745, 0.262745, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="soundSubMenu"]
+layout_mode = 0
+offset_right = 1933.0
+offset_bottom = 1111.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="soundSubMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="soundSubMenu/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(140, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 36
+text = "Overall Volume"
+fit_content = true
+scroll_active = false
+scroll_following = true
+autowrap_mode = 0
+
+[node name="masterVolumeSlider" type="HSlider" parent="soundSubMenu/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="backButton" type="TextureButton" parent="soundSubMenu"]
+z_index = 14
+z_as_relative = false
 layout_mode = 0
 offset_left = 76.0
 offset_top = 52.0

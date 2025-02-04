@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=72 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -23,6 +23,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="29_g0sdt"]
+[ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="30_ec8ks"]
 [ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
 [ext_resource type="PackedScene" uid="uid://dqb5sqhg7l1io" path="res://Scenes/TSCN/Objects/Items/Rock.tscn" id="31_boa6h"]
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
@@ -258,7 +259,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_x85x3"]
+[sub_resource type="Resource" id="Resource_c8ssm"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -635,7 +636,7 @@ max_distance = 1e+06
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(1180, 1212)
 motion_mode = 1
-uid = SubResource("Resource_x85x3")
+uid = SubResource("Resource_c8ssm")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")
@@ -798,6 +799,10 @@ vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 visible = false
 ingame_ui = NodePath("../IngameUI")
 vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
+
+[node name="Settings" parent="UI" instance=ExtResource("30_ec8ks")]
+process_mode = 2
+visible = false
 
 [node name="Leviathan" parent="." instance=ExtResource("35_47o3q")]
 position = Vector2(64, 1225)
