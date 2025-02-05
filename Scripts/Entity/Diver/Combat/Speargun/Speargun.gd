@@ -71,4 +71,5 @@ func perform_attack() -> void:
 	var force: Vector2 = Util.angle_to_vector_radians(global_rotation + PI, knockback)
 	diver.diver_movement.knockback(force)
 	
-	Global.godot_steam_abstraction.run_remote_function(self, "spawn_bullet", [])
+	if Global.godot_steam_abstraction:
+		Global.godot_steam_abstraction.run_remote_function(self, "spawn_bullet", [])

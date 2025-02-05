@@ -78,4 +78,8 @@ func update_targets():
 	var target_pos: Vector2 = nav_agent.get_next_path_position()
 	
 	target_velocity = (target_pos - global_position).normalized() * current_speed 
-	target_rotation = velocity.angle() + PI / 2
+	if position.distance_squared_to(target_pos) > 20 ** 2:
+		target_rotation = velocity.angle() + PI / 2
+	else:
+		# Set gravity to move towards player here (i forgor)
+		pass

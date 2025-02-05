@@ -203,12 +203,15 @@ func _update_target_position():
 	
 	if player_visible:
 		if settings.attack_mode == EnemyBehaviorSettings.ATTACK_MODE.ATTACK:
-			target_position = closest_player.position
+			if global_position.distance_squared_to(closest_player.global_position) > 800 ** 2:
+				target_position = closest_player.position + -Util.angle_to_vector_radians(closest_player.global_rotation - PI / 2.0, 800)
+			else:
+				target_position = closest_player.position
 		elif settings.attack_mode == EnemyBehaviorSettings.ATTACK_MODE.RUN:
 			target_position = position - (closest_player.position - position)
 	
-	if light_visible && settings.player_shines_light:
-		target_position = position - (closest_player.position - position)
+	if light_visible && settings.player_shines_light && global_position.distance_squared_to(closest_player.global_position) > 200 ** 2:
+		target_position = closest_player.position + -Util.angle_to_vector_radians(closest_player.global_rotation, 700)
 
 func _update_wander_point():
 	var valid_point_found := false
