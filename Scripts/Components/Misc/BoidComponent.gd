@@ -62,6 +62,8 @@ func _ready_boid() -> void:
 	component_container_node.modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
 
 func _exit_tree() -> void:
+	if !Global.boids_calculator_node:
+		return
 	Global.boids_calculator_node.remove_boid_index(index)
 
 # Update velocity using compute shader outputs from boids calculator node.

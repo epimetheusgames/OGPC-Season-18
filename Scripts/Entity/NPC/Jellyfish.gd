@@ -25,14 +25,21 @@ var base_speed: float
 @onready var nav_agent: NavigationAgent2D = $"NavigationAgent2D"
 @onready var tentacles: JellyfishTentacles = $"Tentacles"
 
+var nav_target: Vector2
+
 func _ready() -> void:
 	super()
 	base_speed = settings.base_speed
+	
+	while true:
+		await get_tree().create_timer(0.1).timeout
+		nav_agent.target_position = target_position
+		nav_target = nav_agent.get_next_path_position()
+		if !nav_agent.is_target_reachable():
+			_target_reached()
 
 func _process(delta: float) -> void:
 	super(delta)
-	
-	nav_agent.target_position = target_position
 
 	# Countdown boost timer (if needed for specific boost duration)
 	if boost_timer > 0:
