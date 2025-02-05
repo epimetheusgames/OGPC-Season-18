@@ -28,8 +28,8 @@ script = ExtResource("2_sa7rx")
 uid = 3625
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
-radius = 20.0
-height = 100.0
+radius = 24.0
+height = 138.0
 
 [sub_resource type="Resource" id="Resource_og7y3"]
 script = ExtResource("6_3bvk2")
@@ -166,6 +166,7 @@ script = ExtResource("1_1l6ma")
 uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_ghsq1")
 
 [node name="Inventory" type="Node2D" parent="."]
@@ -173,6 +174,7 @@ script = ExtResource("3_r5rx4")
 inventory = Array[ExtResource("4_7u6dt")]([SubResource("Resource_k67wg")])
 
 [node name="ItemDetectionArea" type="Area2D" parent="Inventory"]
+visible = false
 collision_layer = 0
 collision_mask = 128
 
@@ -571,12 +573,22 @@ scale = Vector2(0.272378, 0.272378)
 script = ExtResource("9_xqhlv")
 
 [node name="FlashLight" type="PointLight2D" parent="Light"]
+position = Vector2(0, -70)
 scale = Vector2(1.5, 1.5)
+energy = 11.04
 range_item_cull_mask = 3
 shadow_enabled = true
-shadow_filter = 2
+shadow_filter = 1
+shadow_filter_smooth = 3.1
 texture = ExtResource("10_qg316")
-metadata/_edit_lock_ = true
+
+[node name="FlashLightSoft" type="PointLight2D" parent="Light/FlashLight"]
+color = Color(0.730913, 0.730913, 0.730913, 1)
+energy = 1.02
+range_item_cull_mask = 3
+shadow_filter = 1
+shadow_filter_smooth = 3.1
+texture = ExtResource("10_qg316")
 
 [node name="BodyLight" type="PointLight2D" parent="Light"]
 range_item_cull_mask = 3
@@ -604,6 +616,14 @@ component_container = NodePath("..")
 [node name="Dummy" parent="." instance=ExtResource("17_2as0u")]
 top_level = true
 position = Vector2(152, 144)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -762.0
+offset_top = -1111.0
+offset_right = 958.0
+offset_bottom = 73.0
+color = Color(0.219608, 0, 0.219608, 1)
 
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
 [connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Stats" method="_on_general_detection_box_area_entered"]
