@@ -1,4 +1,5 @@
 # Coded by Xavier
+class_name SubmarineWeaponsModule
 extends SubmarineModule
 
 @export var attached_weapon : SubmarineWeapon 
