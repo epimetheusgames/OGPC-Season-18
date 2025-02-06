@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bjiu73mgjpxwn"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_ctc4o"]
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="2_psqug"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="2_psqug"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb61h"]
 size = Vector2(400, 400)

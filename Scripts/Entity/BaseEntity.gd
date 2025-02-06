@@ -60,6 +60,9 @@ func add_component(component_type: String, component: BaseComponent) -> void:
 # -- Multiplayer --
 
 func _is_node_owner() -> bool:
+	if !Global.godot_steam_abstraction:
+		return true
+	
 	if node_owner == 0:
 		return Global.godot_steam_abstraction.is_lobby_owner
 	else:

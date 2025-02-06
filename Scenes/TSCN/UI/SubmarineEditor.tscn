@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl1opu8pulskf"]
+[gd_scene load_steps=6 format=3 uid="uid://54wx4qqce02a"]
 
-[ext_resource type="Script" path="res://Scripts/UI/SubmarineEditor.gd" id="1_sg7o5"]
-[ext_resource type="Script" path="res://Scripts/Objects/SubmarineEditorMouseArea.gd" id="2_nr508"]
+[ext_resource type="Script" path="res://Scripts/UI/SubmarineEditor.gd" id="1_rijmy"]
+[ext_resource type="Script" path="res://Scripts/Objects/SubmarineEditorMouseArea.gd" id="2_kvlip"]
+[ext_resource type="Script" path="res://Scenes/TSCN/UI/Gridlines.gd" id="3_8hxfn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mu336"]
 
@@ -96,6 +97,9 @@ script = ExtResource("2_nr508")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport/MouseArea"]
 shape = SubResource("CircleShape2D_1kmne")
+
+[node name="Gridlines" type="Node2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
+script = ExtResource("3_8hxfn")
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
