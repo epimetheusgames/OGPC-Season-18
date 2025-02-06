@@ -44,9 +44,6 @@ func _process(delta: float) -> void:
 		
 		print(selected_weapon.name)
 	
-	if !selected_weapon:
-		return
-	
 	if Input.is_action_just_pressed("attack"):
 		selected_weapon.attack()
 	
@@ -70,7 +67,7 @@ func add_weapon(weapon_name: String) -> void:
 	
 	var weapon: PackedScene = all_weapons.get(weapon_name)
 	if weapon == null:
-		print("ERROR: Weapon not found")
+		printerr("Weapon not found")
 		return
 	
 	var new_weapon: Weapon = weapon.instantiate()

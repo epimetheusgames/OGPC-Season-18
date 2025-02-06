@@ -26,6 +26,9 @@ func _ready() -> void:
 	
 	line1.scale.x = range / LINE_LENGTH
 	line2.scale.x = range / LINE_LENGTH
+	
+	line1.modulate.a = 0.01
+	line2.modulate.a = 0.01
 
 
 func _process(delta: float) -> void:

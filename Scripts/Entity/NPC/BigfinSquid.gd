@@ -1,10 +1,10 @@
 class_name BigfinSquid
 extends Enemy
 
-@onready var anim: DiverAnimation = Global.player.diver_animation
+#@onready var anim: DiverAnimation = Global.player.diver_animation
 @onready var arms: Array[Line2D] = [$RightFrontArm, $LeftFrontArm, $RightBackArm, $LeftBackArm]
 @onready var ropes: Array[VerletRope] = [$RightFrontArmRope, $LeftFrontArmRope, $RightBackArmRope, $LeftBackArmRope]
-@onready var limbs: Array[Node2D] = [anim.arm1, anim.arm2, anim.leg1, anim.leg2]
+#@onready var limbs: Array[Node2D] = [anim.arm1, anim.arm2, anim.leg1, anim.leg2]
 var targets: Array[Node2D] = []
 var end_targets: Array[Node2D] = []
 
@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 		ropes[i].gravity = -target_velocity.normalized() * 10
 		
 		if player_visible:
-			end_targets[i].global_position = limbs[i].global_position
+			#end_targets[i].global_position = limbs[i].global_position
 			ropes[i].end_pos_on = true
 			Global.player.diver_movement.velocity += (global_position - Global.player.global_position).normalized() * 0.7 * delta * 60
 		else:

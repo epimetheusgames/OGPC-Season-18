@@ -73,7 +73,7 @@ func _ready() -> void:
 		attackbox.damage_amount = settings.damage
 	
 	if hurtbox:
-		hurtbox.damage_taken.connect(_take_damage)
+		hurtbox.damaged.connect(_take_damage)
 
 func _take_damage(new_health: float) -> void:
 	health -= new_health

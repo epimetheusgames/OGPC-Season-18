@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://lpn4il7bs88n"]
+[gd_scene load_steps=4 format=3 uid="uid://ds6s8wm553wb5"]
 
 [ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="1_bp2s0"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_8073y"]

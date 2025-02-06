@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bn07gfpt0o7wj" path="res://Scenes/Resource/Entity/JellyfishSettings.tres" id="2_fvfwy"]
 [ext_resource type="Script" path="res://Scripts/Entity/NPC/Jellyfish/Tentacles.gd" id="3_5yh7k"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="4_y38hh"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="6_gyt63"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_gyt63"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/JellyfishColors.gdshader" id="8_2ikp3"]
 [ext_resource type="Texture2D" uid="uid://dsihl1750cku6" path="res://Assets/Art/Entity/JellyFishBell.png" id="8_7y3es"]
 

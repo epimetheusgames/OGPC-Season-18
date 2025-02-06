@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://dkiqku8nhydo3"]
 
-[ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Sprites/Spear.png" id="1_mdbjp"]
+[ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Spear.png" id="1_mdbjp"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Spear.gd" id="1_x2dlv"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="3_wous6"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/OneShotAttack.gd" id="3_xotjw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwnx7"]
-size = Vector2(57, 4)
+size = Vector2(74, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hdpad"]
 
@@ -16,14 +16,9 @@ size = 10.0
 damage = 100.0
 
 [node name="ShaftCollision" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, 0)
+position = Vector2(7, 0)
 shape = SubResource("RectangleShape2D_hwnx7")
 debug_color = Color(0, 0.606153, 0.663843, 0.42)
-
-[node name="HeadCollision" type="CollisionShape2D" parent="."]
-position = Vector2(36, 0)
-shape = SubResource("CircleShape2D_hdpad")
-debug_color = Color(5.19812e-06, 0.607842, 0.652347, 0.42)
 
 [node name="SpearSprite" type="Sprite2D" parent="."]
 position = Vector2(-4, 3)
@@ -33,13 +28,15 @@ metadata/_edit_lock_ = true
 [node name="RopePoint" type="Node2D" parent="."]
 position = Vector2(-29, 0)
 
-[node name="Attackbox" type="Area2D" parent="."]
-position = Vector2(36, 0)
-script = ExtResource("3_wous6")
+[node name="OneShotAttack" type="Area2D" parent="."]
+script = ExtResource("3_xotjw")
+is_attacking = true
 attacker_type = 1
+damage_amount = 50.0
 
-[node name="HeadCollision" type="CollisionShape2D" parent="Attackbox"]
+[node name="HeadCollision" type="CollisionShape2D" parent="OneShotAttack"]
+position = Vector2(36, 0)
 shape = SubResource("CircleShape2D_hdpad")
-debug_color = Color(0.996338, 0.0525199, 3.85046e-07, 0.42)
+debug_color = Color(5.19812e-06, 0.607842, 0.652347, 0.42)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
