@@ -18,9 +18,12 @@ size = Vector2(45, 69)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ey62v"]
 size = Vector2(113, 109.5)
 
-[node name="BigfinSquid" type="CharacterBody2D"]
+[node name="BigfinSquid" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "light_detector")]
 script = ExtResource("1_0jv23")
 settings = ExtResource("2_1wvyv")
+hurtbox = NodePath("Hurtbox")
+attackbox = NodePath("Attackbox")
+light_detector = NodePath("LightDetectionArea")
 uid = SubResource("Resource_jajkh")
 
 [node name="Head" type="Polygon2D" parent="."]
@@ -104,6 +107,8 @@ hurt_by_player = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -28.75)
 shape = SubResource("RectangleShape2D_ey62v")
+
+[node name="LightDetectionArea" type="Area2D" parent="."]
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(40.5, 3.00005)

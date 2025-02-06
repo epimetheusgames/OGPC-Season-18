@@ -85,7 +85,7 @@ func update_targets():
 			tentacles.ropes[i].gravity = -target_velocity.normalized() * 10
 			
 			if player_visible:
-				tentacles.end_targets[i].global_position = Global.player.global_position
+				tentacles.end_targets[i].global_position = Global.player.diver_animation.get_head_position()
 				tentacles.ropes[i].end_pos_on = true
 			else:
 				tentacles.ropes[i].end_pos_on = false

@@ -584,7 +584,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light/FlashLight/LightArea"]
-polygon = PackedVector2Array(1, -2, 193, -365, 71, -437, -88, -444, -188, -364)
+polygon = PackedVector2Array(1, -2, 361, -643, 126, -681, -93, -682, -315, -617)
 
 [node name="BodyLight" type="PointLight2D" parent="Light"]
 range_item_cull_mask = 3
