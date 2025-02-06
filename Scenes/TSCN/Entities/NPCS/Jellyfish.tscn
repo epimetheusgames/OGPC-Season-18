@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=15 format=4 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/NPC/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" path="res://Scripts/Entity/NPC/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Entity/NPC/Jellyfish/Tentacles.gd" id="3_5yh7k"]
 [ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="4_y38hh"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="6_gyt63"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="7_i60sr"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/JellyfishColors.gdshader" id="8_2ikp3"]
 [ext_resource type="Texture2D" uid="uid://dsihl1750cku6" path="res://Assets/Art/Entity/JellyFishBell.png" id="8_7y3es"]
 
@@ -20,6 +21,9 @@ bottom_width = 140.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgvvg"]
 size = Vector2(286, 108)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1lc1p"]
+radius = 26.0192
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fvllq"]
 polygon = PackedVector2Array(-139, -57, 148, -56, 147, 54, -139, 53)
 
@@ -28,12 +32,13 @@ shader = ExtResource("8_2ikp3")
 shader_parameter/colors = PackedVector4Array(1, 1, 1, 0.25, 1, 1, 1, 0.3, 1, 1, 1, 0.35, 1, 1, 1, 0.43, 1, 1, 1, 0.57, 1, 1, 1, 0.68)
 shader_parameter/out_colors = PackedColorArray(0, 0, 0.75, 0.301961, 0.25, 0, 0.75, 0.180392, 0.375, 0, 0.75, 0.301961, 0.4625, 0, 0.75, 0.360784, 0.25, 0, 0.75, 0.301961, 0.325, 0, 0.75, 0.301961)
 
-[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "light_detector")]
+[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "light_detector")]
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 settings = ExtResource("2_fvfwy")
 forward_direction = Vector2(0, -1)
 hurtbox = NodePath("Hurtbox")
+attackbox = NodePath("Attackbox")
 light_detector = NodePath("LightDetector")
 
 [node name="Tentacles" type="Node2D" parent="." node_paths=PackedStringArray("on_screen_notifier")]
@@ -61,6 +66,14 @@ hurt_by_player = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(4.5, -0.5)
 shape = SubResource("RectangleShape2D_qgvvg")
+
+[node name="Attackbox" type="Area2D" parent="."]
+script = ExtResource("7_i60sr")
+attacker_type = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
+position = Vector2(8, -120)
+shape = SubResource("CircleShape2D_1lc1p")
 
 [node name="BulletDetectionArea" type="Area2D" parent="."]
 position = Vector2(0, -56)

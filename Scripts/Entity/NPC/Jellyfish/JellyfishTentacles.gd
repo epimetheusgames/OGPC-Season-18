@@ -13,6 +13,8 @@ var is_on_screen := false
 var ropes: Array[VerletRope] = []
 @export var on_screen_notifier: VisibleOnScreenNotifier2D
 
+var end_targets: Array[Node2D]
+
 func _ready() -> void:
 	for tentacle in tentacles: 
 		add_tentacle(tentacle)
@@ -23,7 +25,13 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		var new_tentacle_anchor := Node2D.new()
 		new_tentacle_anchor.name = "Anchor"
 		
+		var new_end_anchor := Node2D.new()
+		new_end_anchor.name = "EndAnchor"
+		
 		add_child(new_tentacle_anchor, true)
+		add_child(new_end_anchor, true)
+		
+		end_targets.append(new_end_anchor)
 		
 		# ROPE
 		var spacing = tentacle_data.bottom_width / (tentacle_data.amount - 1)
@@ -42,6 +50,7 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		
 		new_rope.start_pos_on = true
 		new_rope.start_anchor_node = new_tentacle_anchor
+		new_rope.end_anchor_node = new_end_anchor
 		
 		new_rope.iterations = 2
 		

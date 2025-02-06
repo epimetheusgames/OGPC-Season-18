@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Entity/NPC/BigfinSquid.gd" id="1_0jv23"]
 [ext_resource type="Resource" uid="uid://c0y2clojtb743" path="res://Scenes/Resource/Entity/BigfinSquidSettings.tres" id="2_1wvyv"]
 [ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
-[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_55m16"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_55m16"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="5_pchce"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="6_dpvyl"]
 

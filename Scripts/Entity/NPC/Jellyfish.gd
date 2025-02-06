@@ -81,5 +81,11 @@ func update_targets():
 	if position.distance_squared_to(target_pos) > 20 ** 2:
 		target_rotation = velocity.angle() + PI / 2
 	else:
-		# Set gravity to move towards player here (i forgor)
-		pass
+		for i in range(tentacles.ropes.size()):
+			tentacles.ropes[i].gravity = -target_velocity.normalized() * 10
+			
+			if player_visible:
+				tentacles.end_targets[i].global_position = Global.player.global_position
+				tentacles.ropes[i].end_pos_on = true
+			else:
+				tentacles.ropes[i].end_pos_on = false
