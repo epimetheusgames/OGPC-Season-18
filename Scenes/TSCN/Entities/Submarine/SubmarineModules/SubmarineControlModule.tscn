@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineControl.gd" id="1_ofa5d"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_7buem"]
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="3_mliwo"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="3_mliwo"]
 
-[sub_resource type="Resource" id="Resource_45qcr"]
+[sub_resource type="Resource" id="Resource_384ja"]
 script = ExtResource("2_7buem")
 file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlModule.tscn"
 
@@ -19,7 +19,7 @@ size = Vector2(400, 40)
 
 [node name="SubmarineControlModule" type="Node2D" groups=["obstacles"]]
 script = ExtResource("1_ofa5d")
-path = SubResource("Resource_45qcr")
+path = SubResource("Resource_384ja")
 
 [node name="ModuleArea" type="Area2D" parent="."]
 

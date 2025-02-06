@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_pshir"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_4kpln"]
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttatchmentPoint.gd" id="3_jyisj"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="3_jyisj"]
 
 [sub_resource type="Resource" id="Resource_uu67r"]
 script = ExtResource("2_4kpln")

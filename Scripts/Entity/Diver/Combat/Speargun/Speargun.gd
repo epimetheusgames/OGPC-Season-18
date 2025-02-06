@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 		use_hand2 = true
 		dist_from_head = 50
 	
-	if Global.godot_steam_abstraction && !Global.is_multiplayer || diver._is_node_owner():
+	if Global.godot_steam_abstraction && (!Global.is_multiplayer || diver._is_node_owner()):
 		Global.godot_steam_abstraction.sync_var(self, "position")
 		Global.godot_steam_abstraction.sync_var(self, "rotation")
 

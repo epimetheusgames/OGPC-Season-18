@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://54wx4qqce02a"]
+[gd_scene load_steps=6 format=3 uid="uid://54wx4qqce02a"]
 
 [ext_resource type="Script" path="res://Scripts/UI/SubmarineEditor.gd" id="1_rijmy"]
 [ext_resource type="Script" path="res://Scripts/Objects/SubmarineEditorMouseArea.gd" id="2_kvlip"]
+[ext_resource type="Script" path="res://Scenes/TSCN/UI/Gridlines.gd" id="3_8hxfn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mu336"]
 
@@ -67,6 +68,14 @@ text = "Corner Module"
 layout_mode = 2
 text = "End Module"
 
+[node name="DoorModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Door Module"
+
+[node name="WeaponsModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Weapons Module"
+
 [node name="SubmarineView" type="PanelContainer" parent="SplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -82,7 +91,7 @@ stretch = true
 disable_3d = true
 handle_input_locally = false
 msaa_2d = 3
-size = Vector2i(2, 2)
+size = Vector2i(1454, 1080)
 render_target_update_mode = 4
 
 [node name="Origin" type="Node2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
@@ -96,6 +105,9 @@ script = ExtResource("2_kvlip")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport/MouseArea"]
 shape = SubResource("CircleShape2D_1kmne")
+
+[node name="Gridlines" type="Node2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
+script = ExtResource("3_8hxfn")
 
 [node name="SaveDialog" type="FileDialog" parent="."]
 auto_translate_mode = 1
@@ -116,5 +128,7 @@ file_mode = 0
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/PassageModule" to="." method="_on_passage_module_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/CornerPassageModule" to="." method="_on_corner_passage_module_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/EndModule" to="." method="_on_end_passage_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/DoorModule" to="." method="_on_door_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/WeaponsModule" to="." method="_on_weapons_module_button_up"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]

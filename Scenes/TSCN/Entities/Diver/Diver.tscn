@@ -546,6 +546,14 @@ rotation = -0.000201209
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
+[node name="GeneralDetectionBox" type="Area2D" parent="Stats"]
+rotation = -0.000201209
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/GeneralDetectionBox"]
+rotation = -0.000201209
+shape = SubResource("CapsuleShape2D_wi5t0")
+debug_color = Color(0, 0.649449, 0.143183, 0.42)
+
 [node name="Combat" type="Node2D" parent="."]
 script = ExtResource("5_mjta2")
 speargun = ExtResource("8_ntafm")
@@ -598,3 +606,5 @@ top_level = true
 position = Vector2(152, 144)
 
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
+[connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Stats" method="_on_general_detection_box_area_entered"]
+[connection signal="area_exited" from="Stats/GeneralDetectionBox" to="Stats" method="_on_general_detection_box_area_exited"]
