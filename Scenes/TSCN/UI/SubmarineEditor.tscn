@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_rijmy")
+script = ExtResource("1_sg7o5")
 
 [node name="SplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 0
@@ -68,14 +68,6 @@ text = "Corner Module"
 layout_mode = 2
 text = "End Module"
 
-[node name="DoorModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
-layout_mode = 2
-text = "Door Module"
-
-[node name="WeaponsModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
-layout_mode = 2
-text = "Weapons Module"
-
 [node name="SubmarineView" type="PanelContainer" parent="SplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -101,7 +93,7 @@ position = Vector2(1000, 1000)
 position = Vector2(960, 540)
 
 [node name="MouseArea" type="Area2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
-script = ExtResource("2_kvlip")
+script = ExtResource("2_nr508")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport/MouseArea"]
 shape = SubResource("CircleShape2D_1kmne")
@@ -128,7 +120,5 @@ file_mode = 0
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/PassageModule" to="." method="_on_passage_module_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/CornerPassageModule" to="." method="_on_corner_passage_module_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/EndModule" to="." method="_on_end_passage_module_button_up"]
-[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/DoorModule" to="." method="_on_door_module_button_up"]
-[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/WeaponsModule" to="." method="_on_weapons_module_button_up"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]

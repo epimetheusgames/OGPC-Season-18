@@ -33,10 +33,11 @@ missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
 
-[node name="Root" type="Node" node_paths=PackedStringArray("KeyactionHandler")]
+[node name="Root" type="Node" node_paths=PackedStringArray("brightness_modulate", "KeyactionHandler")]
 script = ExtResource("1_h2kyx")
 verbose_debug = true
 super_efficient_auto_enable_maximum = 25
+brightness_modulate = NodePath("Game/GameContainer/BrightnessModulate")
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
@@ -218,6 +219,8 @@ visible = false
 script = ExtResource("9_rhklt")
 
 [node name="GameContainer" type="Node" parent="Game"]
+
+[node name="BrightnessModulate" type="CanvasModulate" parent="Game/GameContainer"]
 
 [node name="GameUIOverlay" type="Control" parent="Game"]
 layout_mode = 3

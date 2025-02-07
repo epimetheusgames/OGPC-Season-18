@@ -1,20 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://os6ytsadrm1v"]
+[gd_scene load_steps=5 format=3 uid="uid://os6ytsadrm1v"]
 
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="1_snkfq"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/BluntTipKnife/BluntTipKnife.gd" id="1_tafim"]
 [ext_resource type="Texture2D" uid="uid://6kfea377ayda" path="res://Assets/Art/Sprites/Player/Knife.png" id="2_7cqu0"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/OneShotAttack.gd" id="3_ycq3r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6xgf"]
-size = Vector2(63, 18)
+size = Vector2(119, 21)
 
-[node name="Knife" type="Node2D"]
-
-[node name="AttackBox" type="Area2D" parent="."]
-script = ExtResource("1_snkfq")
-attacker_type = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-position = Vector2(25.5, 0)
-shape = SubResource("RectangleShape2D_f6xgf")
+[node name="Knife" type="Node2D" node_paths=PackedStringArray("attackbox")]
+script = ExtResource("1_tafim")
+attackbox = NodePath("OneShotAttack")
 
 [node name="Hand1" type="Node2D" parent="."]
 position = Vector2(18, 0)
@@ -23,3 +18,11 @@ position = Vector2(18, 0)
 position = Vector2(24, 0)
 rotation = -1.5708
 texture = ExtResource("2_7cqu0")
+
+[node name="OneShotAttack" type="Area2D" parent="."]
+script = ExtResource("3_ycq3r")
+damage_amount = 30.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_f6xgf")
