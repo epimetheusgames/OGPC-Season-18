@@ -122,8 +122,7 @@ func _process(delta: float) -> void:
 		target_speed *= 1 + settings.agressiveness
 		
 		var dist_to_player = position.distance_to(closest_player.position)
-		if attackbox && dist_to_player < settings.attack_distance && !attackbox.is_attacking:
-			attackbox.is_attacking = true
+		if attackbox && dist_to_player < settings.attack_distance:
 			attack()
 		
 		if dist_to_player < settings.closest_distance:

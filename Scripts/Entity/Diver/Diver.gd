@@ -79,7 +79,7 @@ func get_diver_username() -> String:
 	if _is_node_owner():
 		return Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
 	else:
-		return Steam.getFriendPersonaName(int(name))
+		return Steam.getFriendPersonaName(int(str(name)))
 
 
 # TODO: Fix this

@@ -223,7 +223,7 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dn3vl"]
 polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 7993, 6031, 7981, 6030, 7969, 6033, 7925, 6050, 7919, 6051, 7910, 6047, 7894, 6042, 7895, 6039, 7900, 6035, 7900, 6032, 7898, 6030, 7894, 6029, 7886, 6030, 7873, 6032, 7852, 6035, 7835, 6035, 7807, 6032, 7787, 6029, 7763, 6020, 7729, 6011, 7671, 6012, 7571, 6020, 7668, 6209, 7699, 6171, 7705, 6164, 7721, 6155, 7739, 6148, 7760, 6130, 7781, 6101, 7790, 6095, 7806, 6118, 7824, 6133, 7851, 6140, 7881, 6141, 7909, 6136, 7931, 6129, 7950, 6120, 7966, 6110, 7974, 6104, 7985, 6101, 8021, 6095, 8113, 6068, 8146, 6061)
 
-[sub_resource type="Resource" id="Resource_udakr"]
+[sub_resource type="Resource" id="Resource_75i7h"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -518,7 +518,7 @@ occluder = SubResource("OccluderPolygon2D_dn3vl")
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(-5795, 145)
 motion_mode = 1
-uid = SubResource("Resource_udakr")
+uid = SubResource("Resource_75i7h")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")

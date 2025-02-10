@@ -337,7 +337,7 @@ func check_for_voice() -> void:
 			print("Voice message has data: %s / %s" % [voice_data['result'], voice_data['written']])
 
 			# Here we can pass this voice data off on the network
-			send_raw_data(voice_data['buffer'])
+			#send_raw_data(voice_data['buffer'])
 
 			# If loopback is enable, play it back at this point
 			if has_loopback:
