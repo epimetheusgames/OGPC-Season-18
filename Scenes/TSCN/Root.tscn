@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=25 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
@@ -18,6 +18,10 @@
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="16_v8rcl"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/PerformancePrompt.gd" id="17_0ry5s"]
 [ext_resource type="PackedScene" path="res://Scenes/TSCN/UI/FakeButton.tscn" id="17_tnv8r"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_v8psd"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_bpaox"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
@@ -46,8 +50,16 @@ KeyactionHandler = NodePath("Game/KeyActionHandler")
 
 [node name="Skeleton" type="Node" parent="."]
 
-[node name="GodotSteamAbstraction" type="Node" parent="Skeleton"]
+[node name="GodotSteamAbstraction" type="Node" parent="Skeleton" node_paths=PackedStringArray("local_player", "networked_player")]
 script = ExtResource("5_65j18")
+local_player = NodePath("LocalPlayer")
+networked_player = NodePath("NetworkedPlayer")
+
+[node name="LocalPlayer" type="AudioStreamPlayer" parent="Skeleton/GodotSteamAbstraction"]
+stream = SubResource("AudioStreamGenerator_v8psd")
+
+[node name="NetworkedPlayer" type="AudioStreamPlayer" parent="Skeleton/GodotSteamAbstraction"]
+stream = SubResource("AudioStreamGenerator_bpaox")
 
 [node name="SaveLoadFramework" type="Node" parent="Skeleton" node_paths=PackedStringArray("game_container")]
 script = ExtResource("2_i3ogj")

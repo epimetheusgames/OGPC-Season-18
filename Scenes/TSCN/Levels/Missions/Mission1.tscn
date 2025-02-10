@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=71 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -8,7 +8,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Script" path="res://Scripts/Objects/CompletionArea.gd" id="12_h6qnp"]
-[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
@@ -223,7 +223,7 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dn3vl"]
 polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 7993, 6031, 7981, 6030, 7969, 6033, 7925, 6050, 7919, 6051, 7910, 6047, 7894, 6042, 7895, 6039, 7900, 6035, 7900, 6032, 7898, 6030, 7894, 6029, 7886, 6030, 7873, 6032, 7852, 6035, 7835, 6035, 7807, 6032, 7787, 6029, 7763, 6020, 7729, 6011, 7671, 6012, 7571, 6020, 7668, 6209, 7699, 6171, 7705, 6164, 7721, 6155, 7739, 6148, 7760, 6130, 7781, 6101, 7790, 6095, 7806, 6118, 7824, 6133, 7851, 6140, 7881, 6141, 7909, 6136, 7931, 6129, 7950, 6120, 7966, 6110, 7974, 6104, 7985, 6101, 8021, 6095, 8113, 6068, 8146, 6061)
 
-[sub_resource type="Resource" id="Resource_tw0mw"]
+[sub_resource type="Resource" id="Resource_udakr"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -362,9 +362,9 @@ scale = Vector2(0.6, 0.6)
 texture = SubResource("ViewportTexture_gnvk0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -5.0
-offset_right = 10254.0
-offset_bottom = 7530.0
+offset_left = -9231.0
+offset_right = 29940.0
+offset_bottom = 10472.0
 color = Color(1.44392e-07, 0, 0.163983, 1)
 
 [node name="LevelContainer" type="Node2D" parent="."]
@@ -518,7 +518,7 @@ occluder = SubResource("OccluderPolygon2D_dn3vl")
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(-5795, 145)
 motion_mode = 1
-uid = SubResource("Resource_tw0mw")
+uid = SubResource("Resource_udakr")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -695,6 +695,7 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="Pixelize" type="BackBufferCopy" parent="Shaders"]
+visible = false
 rect = Rect2(0, 0, 1920, 1080)
 metadata/_edit_lock_ = true
 
