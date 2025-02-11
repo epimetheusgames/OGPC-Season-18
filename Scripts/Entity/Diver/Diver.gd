@@ -81,11 +81,8 @@ func get_diver_username() -> String:
 	else:
 		return Steam.getFriendPersonaName(int(str(name)))
 
-
-# TODO: Fix this
 func get_diver_health() -> float:
-	return 100
-	#return diver_stats.get_health()
+	return diver_stats.get_health()
 
 func get_diver_max_health() -> float:
 	
