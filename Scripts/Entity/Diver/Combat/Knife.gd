@@ -50,6 +50,7 @@ func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction:
 		Global.godot_steam_abstraction.sync_var(self, "global_position")
 		Global.godot_steam_abstraction.sync_var(self, "global_rotation")
+		Global.godot_steam_abstraction.sync_var(self, "visible")
 
 func attack() -> void:
 	if enabled && cooldown_timer_over:
