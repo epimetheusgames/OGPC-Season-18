@@ -20,7 +20,7 @@ modulate_color = Color(0.364706, 0.482353, 0.611765, 1)
 
 [resource]
 default_font = ExtResource("1_m6urh")
-Button/colors/font_color = Color(0.905554, 0.848156, 0.966796, 1)
+Button/colors/font_color = Color(0.755837, 0.936244, 0.96582, 1)
 Button/styles/disabled = null
 Button/styles/focus = SubResource("StyleBoxEmpty_wp3mr")
 Button/styles/hover = SubResource("StyleBoxTexture_v4x6t")

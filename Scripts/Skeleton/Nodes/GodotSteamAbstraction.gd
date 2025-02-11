@@ -26,7 +26,7 @@ var packets_queue: Dictionary = {}
 
 # VC
 var current_sample_rate: int = 48000
-var has_loopback: bool = true
+var has_loopback: bool = false
 var local_playback: AudioStreamGeneratorPlayback = null
 var local_voice_buffer: PackedByteArray = PackedByteArray()
 var network_playback: AudioStreamGeneratorPlayback = null
