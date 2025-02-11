@@ -179,6 +179,7 @@ offset_left = 688.0
 offset_top = 318.0
 offset_right = 945.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Multiplayer"
 
@@ -189,6 +190,7 @@ offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Singleplayer"
 
@@ -199,6 +201,7 @@ offset_left = 688.0
 offset_top = 318.0
 offset_right = 945.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Join
 "
@@ -210,6 +213,7 @@ offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Host"
 
@@ -220,6 +224,7 @@ offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Join
 "
@@ -231,6 +236,7 @@ offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Host"
 
