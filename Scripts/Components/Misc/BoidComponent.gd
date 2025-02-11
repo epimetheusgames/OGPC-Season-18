@@ -33,6 +33,9 @@ func _ready_boid() -> void:
 	
 	_ready_base_component()
 	
+	var rng = RandomNumberGenerator.new()
+	component_container_node.scale *= rng.randf_range(0.8, 1.3)
+	
 	if !component_container:
 		return
 	
@@ -58,7 +61,6 @@ func _ready_boid() -> void:
 	raycast = get_node(raycast_path)
 	get_parent().velocity = (raycast.target_position - raycast.position).normalized()
 	
-	var rng := RandomNumberGenerator.new()
 	component_container_node.modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
 
 func _exit_tree() -> void:
@@ -69,6 +71,7 @@ func _exit_tree() -> void:
 # Update velocity using compute shader outputs from boids calculator node.
 func _process(delta: float) -> void: 
 	if !boids_calculator || boids_calculator.process_mode == Node.PROCESS_MODE_DISABLED:
+		boids_calculator = Global.boids_calculator_node
 		return
 	
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
