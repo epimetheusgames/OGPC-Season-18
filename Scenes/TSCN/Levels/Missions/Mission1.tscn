@@ -36,7 +36,7 @@
 _data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_t3p8f"]
+[sub_resource type="CurveTexture" id="CurveTexture_pq4a2"]
 curve = SubResource("Curve_6rk86")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcosd"]
@@ -49,15 +49,15 @@ damping_min = 1.0
 damping_max = 1.0
 scale_min = 0.3
 scale_max = 0.8
-scale_curve = SubResource("CurveTexture_t3p8f")
+scale_curve = SubResource("CurveTexture_pq4a2")
 collision_mode = 2
 collision_use_scale = true
 
-[sub_resource type="Gradient" id="Gradient_tetp1"]
+[sub_resource type="Gradient" id="Gradient_dsxlw"]
 colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_0nxag"]
-gradient = SubResource("Gradient_tetp1")
+gradient = SubResource("Gradient_dsxlw")
 width = 32
 height = 32
 fill = 1

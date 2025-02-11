@@ -1,3 +1,29 @@
-[gd_resource type="Theme" format=3 uid="uid://b8bvv1n5midlh"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://b8bvv1n5midlh"]
+
+[ext_resource type="FontFile" uid="uid://cpd6so11fvr58" path="res://Assets/Fonts/Hubot_Sans/static/HubotSans-Medium.ttf" id="1_m6urh"]
+[ext_resource type="Texture2D" uid="uid://fy46oy1fxdpl" path="res://Assets/Art/UI/ButtonBackgroundPressed.png" id="1_m8gqa"]
+[ext_resource type="Texture2D" uid="uid://c83y37sr3kdli" path="res://Assets/Art/UI/ButtonBackground.png" id="2_rarbs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wp3mr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v4x6t"]
+texture = ExtResource("2_rarbs")
+modulate_color = Color(0.364706, 0.482353, 0.611765, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h6gso"]
+texture = ExtResource("2_rarbs")
+modulate_color = Color(0.363177, 0.482872, 0.609811, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uyagf"]
+texture = ExtResource("1_m8gqa")
+modulate_color = Color(0.364706, 0.482353, 0.611765, 1)
 
 [resource]
+default_font = ExtResource("1_m6urh")
+Button/colors/font_color = Color(0.905554, 0.848156, 0.966796, 1)
+Button/styles/disabled = null
+Button/styles/focus = SubResource("StyleBoxEmpty_wp3mr")
+Button/styles/hover = SubResource("StyleBoxTexture_v4x6t")
+Button/styles/hover_pressed = null
+Button/styles/normal = SubResource("StyleBoxTexture_h6gso")
+Button/styles/pressed = SubResource("StyleBoxTexture_uyagf")
