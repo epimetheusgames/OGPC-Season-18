@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/InventoryItem.gd" id="4_7u6dt"]
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Player/PlayerSkin.png" id="4_do014"]
 [ext_resource type="Script" path="res://Scripts/Public/InventoryPublic.gd" id="4_lqvql"]
-[ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverCombat.gd" id="5_mjta2"]
 [ext_resource type="Texture2D" uid="uid://kbno8w3pbkse" path="res://Assets/Art/Icons/LightLineIcon.png" id="5_v3mw5"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="6_3bvk2"]
 [ext_resource type="Script" path="res://Scripts/Components/Damage/Hurtbox.gd" id="7_3b7lw"]
@@ -19,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 [ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="17_2as0u"]
 
@@ -557,7 +557,7 @@ shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
 [node name="Combat" type="Node2D" parent="."]
-script = ExtResource("5_mjta2")
+script = ExtResource("13_uoshl")
 speargun = ExtResource("8_ntafm")
 knife = ExtResource("9_hstvg")
 pistol = ExtResource("10_oh1is")

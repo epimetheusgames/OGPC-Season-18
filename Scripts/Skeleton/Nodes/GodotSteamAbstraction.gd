@@ -320,7 +320,7 @@ func read_packet() -> void:
 		
 		var packet_sender: int = this_packet["remote_steam_id"]
 		var packet_code: PackedByteArray = this_packet["data"]
-		var readable_data: Dictionary = bytes_to_var(packet_code)
+		var readable_data: Dictionary = bytes_to_var(packet_code.decompress_dynamic(-1, FileAccess.COMPRESSION_GZIP))
 		
 		parse_readable_data(readable_data, packet_sender)
 
@@ -439,7 +439,7 @@ func send_raw_data(data: PackedByteArray):
 		# Loop through all members that aren't us
 		for this_member in lobby_members:
 			if this_member["steam_id"] != steam_id:
-				Steam.sendP2PPacket(this_member["steam_id"], data, send_type, 0)
+				Steam.sendP2PPacket(this_member["steam_id"], data.compress(FileAccess.COMPRESSION_GZIP), send_type, 0)
 
 func sync_packets() -> void:
 	while true:
@@ -468,14 +468,12 @@ func sync_packets() -> void:
 			var compressed_data: PackedByteArray = var_to_bytes(packet_data)
 			this_data.append_array(compressed_data)
 			
-			if this_data.size() > 1400: # bytes
+			if this_data.size() > 3000: # bytes
 				print("WARNING: Packet size greater than packet size limit. Size is " + str(this_data.size()) + ". Sending anyway.")
-				if Global.verbose_debug:
-					print("DEBUG: Packet data is " + str(packet_data) + ".")
 			
 			# We can group the packet up if the target is everyone.
 			if this_target == 0 && lobby_members.size() > 1:
-				if packet_group_bytes.size() + this_data.size() < 1400:
+				if packet_group_bytes.size() + this_data.size() < 3000:
 					packet_group["packets"].append(packet_data)
 					packet_group_bytes = var_to_bytes(packet_group)
 					continue
@@ -485,10 +483,10 @@ func sync_packets() -> void:
 					num_packet_groups += 1
 					for this_member in lobby_members:
 						if this_member["steam_id"] != steam_id:
-							Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes, send_type, channel)
+							Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes.compress(FileAccess.COMPRESSION_GZIP), send_type, channel)
 					
 					# Reset the group with the current packet.
-					if this_data.size() < 1400:
+					if this_data.size() < 3000:
 						packet_group = {
 							"message": "packet_group",
 							"packets": [packet_data]
@@ -503,16 +501,16 @@ func sync_packets() -> void:
 					# Loop through all members that aren't us
 					for this_member in lobby_members:
 						if this_member["steam_id"] != steam_id:
-							Steam.sendP2PPacket(this_member["steam_id"], this_data, send_type, channel)
+							Steam.sendP2PPacket(this_member["steam_id"], this_data.compress(FileAccess.COMPRESSION_GZIP), send_type, channel)
 			else:
-				Steam.sendP2PPacket(this_target, this_data, send_type, channel)
+				Steam.sendP2PPacket(this_target, this_data.compress(FileAccess.COMPRESSION_GZIP), send_type, channel)
 		
 		# Once we've looped through all the packets there's going to be a partially filled group left.
 		num_packet_groups += 1
 		if packet_group["packets"].size() > 0:
 			for this_member in lobby_members:
 				if this_member["steam_id"] != steam_id:
-					Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes, send_type, channel)
+					Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes.compress(FileAccess.COMPRESSION_GZIP), send_type, channel)
 		
 		#if Global.verbose_debug:
 			#print("DEBUG: Sent " + str(num_packet_groups) + " packet groups.")

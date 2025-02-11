@@ -50,6 +50,9 @@ func _on_cooldown_timeout() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+		return
+	
 	if !enabled:
 		visible = false
 		return
@@ -72,6 +75,13 @@ func _process(delta: float) -> void:
 		scale.y = -1
 	else:
 		scale.y = 1
+	
+	if Global.godot_steam_abstraction && Global.is_multiplayer:
+		Global.godot_steam_abstraction.run_remote_function(diver.diver_combat, "set_reload_bar", [bar_val])
+		Global.godot_steam_abstraction.sync_var(self, "global_position")
+		Global.godot_steam_abstraction.sync_var(self, "global_rotation")
+		Global.godot_steam_abstraction.sync_var(self, "scale")
+		Global.godot_steam_abstraction.sync_var(self, "visible")
 
 func attack() -> void:
 	if reload_timer_over && cooldown_timer_over:

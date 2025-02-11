@@ -42,8 +42,21 @@ func get_hand2_pos() -> Vector2:
 	else:
 		return hand1_point.global_position
 
-func perform_attack() -> void:
+func perform_attack(remote=false, spearname="") -> void:
+	if !remote:
+		if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+			print("WARNING: Tried to perform attack but is not the owner of this diver. Check your logic. Printing stack.")
+			print_stack()
+			return
+		
+		var rng = RandomNumberGenerator.new()
+		spearname = str(rng.randi())
+		
+		if Global.godot_steam_abstraction:
+			Global.godot_steam_abstraction.run_remote_function(self, "perform_attack", [true, spearname])
+	
 	var new_spear: Spear = bullet_scene.instantiate()
+	new_spear.name = spearname
 	add_child(new_spear, true)
 	
 	new_spear.global_position = emit_point.global_position

@@ -32,6 +32,9 @@ func _on_cooldown_timeout() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+		return
+	
 	if !enabled:
 		visible = false
 		return
@@ -43,6 +46,10 @@ func _process(delta: float) -> void:
 	
 	global_position = head_pos + Util.angle_to_vector_radians(angle_to_mouse, dist_from_head)
 	global_rotation = angle_to_mouse
+	
+	if Global.godot_steam_abstraction:
+		Global.godot_steam_abstraction.sync_var(self, "global_position")
+		Global.godot_steam_abstraction.sync_var(self, "global_rotation")
 
 func attack() -> void:
 	if enabled && cooldown_timer_over:

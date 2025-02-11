@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=34 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
@@ -15,6 +15,9 @@
 [ext_resource type="Script" path="res://Scripts/UI/DialogHandler.gd" id="8_7spfj"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/KeypressHandler.gd" id="9_rhklt"]
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
+[ext_resource type="FontFile" uid="uid://b8shwbf3tge0e" path="res://Assets/Fonts/Michroma/Michroma-Regular.ttf" id="12_xloqi"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="13_156qs"]
+[ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="14_fifhd"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="16_v8rcl"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/PerformancePrompt.gd" id="17_0ry5s"]
 [ext_resource type="PackedScene" path="res://Scenes/TSCN/UI/FakeButton.tscn" id="17_tnv8r"]
@@ -34,6 +37,48 @@ file = "res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"
 [sub_resource type="Resource" id="Resource_1tmkv"]
 script = ExtResource("7_u3v81")
 missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_necqq"]
+shader = ExtResource("13_156qs")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.2
+shader_parameter/height = 1.0
+shader_parameter/depth_color_tex = ExtResource("14_fifhd")
+
+[sub_resource type="Curve" id="Curve_edu0q"]
+_data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t3p8f"]
+curve = SubResource("Curve_edu0q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gsc64"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, -98, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_min = 0.3
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_t3p8f")
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_tetp1"]
+colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g72pb"]
+gradient = SubResource("Gradient_tetp1")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
 
@@ -78,6 +123,16 @@ anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1087.0
 
+[node name="ColorRect" type="ColorRect" parent="UI"]
+z_index = -10
+material = SubResource("ShaderMaterial_necqq")
+layout_mode = 0
+offset_left = -678.0
+offset_top = -114.0
+offset_right = 3058.0
+offset_bottom = 3936.0
+color = Color(0.012, 0.012, 0.09, 1)
+
 [node name="TemplateButton" type="Button" parent="UI"]
 layout_mode = 0
 offset_left = -444.0
@@ -101,6 +156,8 @@ layout_mode = 0
 offset_top = 73.0
 offset_right = 1921.0
 offset_bottom = 205.0
+theme = ExtResource("3_gnnuy")
+theme_override_fonts/font = ExtResource("12_xloqi")
 theme_override_font_sizes/font_size = 96
 text = "Diving Game Title"
 horizontal_alignment = 1
@@ -111,6 +168,7 @@ offset_left = 824.0
 offset_top = 318.0
 offset_right = 1081.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Start"
 
@@ -121,6 +179,7 @@ offset_left = 688.0
 offset_top = 318.0
 offset_right = 945.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Multiplayer"
 
@@ -131,6 +190,7 @@ offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Singleplayer"
 
@@ -141,6 +201,7 @@ offset_left = 688.0
 offset_top = 318.0
 offset_right = 945.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Join
 "
@@ -152,6 +213,7 @@ offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Host"
 
@@ -162,6 +224,7 @@ offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Join
 "
@@ -173,6 +236,7 @@ offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Host"
 
@@ -182,6 +246,7 @@ offset_left = 824.0
 offset_top = 414.0
 offset_right = 1081.0
 offset_bottom = 488.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Settings
 "
@@ -192,6 +257,7 @@ offset_left = 824.0
 offset_top = 510.0
 offset_right = 1081.0
 offset_bottom = 584.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Quit"
 
@@ -220,6 +286,16 @@ offset_left = 825.0
 offset_top = 623.0
 offset_right = 1081.0
 offset_bottom = 766.0
+
+[node name="WaterParticles" type="GPUParticles2D" parent="UI"]
+position = Vector2(960, 540)
+process_material = SubResource("ParticleProcessMaterial_gsc64")
+texture = SubResource("GradientTexture2D_g72pb")
+lifetime = 5.0
+visibility_rect = Rect2(-960, -540, 1920, 1080)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="UI"]
+energy = 0.0
 
 [node name="Game" type="Node" parent="."]
 
