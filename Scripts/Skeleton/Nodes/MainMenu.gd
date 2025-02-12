@@ -12,7 +12,11 @@ func _on_start_button_button_up() -> void:
 	$StartButton.visible = false
 
 func _on_singleplayer_button_button_up() -> void:
-	self.visible = false
+	for child in $"../BoidsGroup".get_children():
+		child.queue_free()
+	$"../StaticBody2D/CollisionPolygon2D".disabled = true
+	$"../StaticBody2D/CollisionPolygon2D2".disabled = true
+	Global.ui_root_node.visible = false
 	Global.save_load_framework.start_game(0) 
 
 func _on_multiplayer_button_button_up() -> void:
@@ -49,6 +53,11 @@ func _on_multiplayer_host_game_button_button_up() -> void:
 	else:
 		if Global.verbose_debug:
 			print("DEBUG: Starting multiplayer game.")
+		for child in $"../BoidsGroup".get_children():
+			child.queue_free()
+		$"../StaticBody2D/CollisionPolygon2D".disabled = true
+		$"../StaticBody2D/CollisionPolygon2D2".disabled = true
+		Global.ui_root_node.visible = false
 		Global.save_load_framework.start_game(0) 
 		Global.godot_steam_abstraction.run_remote_function(Global.save_load_framework, "start_game_remote", [0])
 

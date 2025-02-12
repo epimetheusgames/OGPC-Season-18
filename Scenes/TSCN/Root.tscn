@@ -132,8 +132,9 @@ default_mission_tree = SubResource("Resource_1tmkv")
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+offset_top = -48.0
 offset_right = 1920.0
-offset_bottom = 1087.0
+offset_bottom = 1039.0
 
 [node name="BoidsGroup" type="Node" parent="UI" node_paths=PackedStringArray("boids_scene")]
 script = ExtResource("9_dmakk")
@@ -175,16 +176,17 @@ metadata/action = ""
 
 [node name="MainMenu" type="Control" parent="UI"]
 anchors_preset = 0
+offset_top = 184.0
 offset_right = 1920.0
-offset_bottom = 1080.0
+offset_bottom = 1264.0
 script = ExtResource("8_1a1ie")
 
 [node name="GameTitle" type="Label" parent="UI/MainMenu"]
 modulate = Color(1, 1, 1, 0.207843)
 layout_mode = 0
-offset_top = 73.0
+offset_top = 25.0
 offset_right = 1921.0
-offset_bottom = 205.0
+offset_bottom = 162.0
 theme = ExtResource("3_gnnuy")
 theme_override_fonts/font = ExtResource("12_xloqi")
 theme_override_font_sizes/font_size = 96
