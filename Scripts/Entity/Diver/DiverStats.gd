@@ -1,11 +1,11 @@
 class_name DiverStats
 extends Node2D
 
-var health: float
+var health: float = 100
 var oxygen_percentage: float = 100
 var oxygen_loss: float
 var completion_areas_entered: Array[CompletionArea]
-var diver: Diver = get_parent()
+@onready var diver: Diver = get_parent()
 
 func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
