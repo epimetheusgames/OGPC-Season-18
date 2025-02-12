@@ -353,9 +353,8 @@ protected_dist = 40.0
 avoid_factor = 0.1
 matching_factor = 0.03
 turn_factor = 3.5
-max_speed = 4.0
-min_speed = 4.0
-boid_colors = Array[Color]([Color(0.92, 1, 1, 1), Color(1, 0.89, 1, 1), Color(0.69984, 0.72, 0.6984, 1)])
+min_speed = 2.0
+boid_colors = Array[Color]([Color(1, 1, 1, 1)])
 
 [node name="Node2D" type="Node2D" parent="UI"]
 position = Vector2(-1057, 497)
