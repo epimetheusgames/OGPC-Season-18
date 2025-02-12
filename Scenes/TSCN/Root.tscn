@@ -137,7 +137,7 @@ offset_bottom = 1087.0
 
 [node name="BoidsGroup" type="Node" parent="UI" node_paths=PackedStringArray("boids_scene")]
 script = ExtResource("9_dmakk")
-num_boids = 100
+num_boids = 120
 spawn_position_node_path = NodePath("../Node2D")
 boids_scene = NodePath("../Boid")
 spawn_variation = 100.0
@@ -349,25 +349,25 @@ target_position = Vector2(0, 200)
 
 [node name="BoidComponent" parent="UI/Boid" index="2"]
 view_dist = 200.0
-protected_dist = 60.0
-avoid_factor = 0.7
+protected_dist = 40.0
+avoid_factor = 0.1
 matching_factor = 0.03
 turn_factor = 3.5
 min_speed = 2.0
 boid_colors = Array[Color]([Color(1, 1, 1, 1)])
 
 [node name="Node2D" type="Node2D" parent="UI"]
-position = Vector2(904, -1048)
+position = Vector2(-1057, 497)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="UI"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/StaticBody2D"]
 position = Vector2(-400, -216)
 scale = Vector2(1.4, 1.4)
-polygon = PackedVector2Array(88, 1035, 214, 1069, 1582, 1057, 1739, 1030, 1833, 986, 1877, 886, 1915, 722, 1911.32, 560.154, 1691.43, 507.857, 1908.94, 455.29, 1905, 282, 1878, 157, 1828, 76, 1731, 49, 1606, 20, 1071.43, 22.8571, 1029.29, -749.286, 835, -736.429, 808.117, 19.5269, 213, 12, 122, 18, 54, 52, 12, 111, 34.2769, 427.547, 258.571, 472.143, 42.4624, 533.945, 85, 1030, 31, 903, -71, -40, 630.714, -787.857, 1142.14, -850.714, 2001, -23, 1980, 1192, 51, 1137)
+polygon = PackedVector2Array(88, 1035, 157.857, 1259.29, 878.336, 1274.59, 980.714, 1007.86, 1094.32, 1279.17, 1738.57, 1292.86, 1856.43, 1206.43, 1942.86, 1057.14, 2002.86, 913.571, 2007.86, 725.714, 1911.32, 560.154, 1691.43, 507.857, 1908.94, 455.29, 1979.29, 346.429, 1967.14, 55.7143, 1892.86, -50, 1767.86, -107.857, 1590, -165.714, 1110.5, -166.474, 980.714, 77.1429, 859.681, -166.871, 237.143, -167.857, 95, -96.4286, -44.2857, 56.4286, -227.143, 245, -587.143, 400, -625.714, 600.714, -2.85715, 812.143, 85, 1030, -997.857, 1137.14, -913.571, 347.857, -71, -40, 648.571, -790.714, 1110.71, -717.143, 2337.14, -16.4286, 2130.71, 1475.71, -140, 1504.29)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="UI/StaticBody2D"]
-polygon = PackedVector2Array(347, 155, 455, 225, 1462, 229, 1607, 161, 1437, 70, 448, 67)
+polygon = PackedVector2Array(-836, 506, -497, 371, -80, 485, -533, 671)
 
 [node name="Game" type="Node" parent="."]
 

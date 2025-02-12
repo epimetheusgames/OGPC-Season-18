@@ -1,10 +1,11 @@
 class_name DiverStats
 extends Node2D
 
-var health: float
+var health: float = 100
 var oxygen_percentage: float = 100
 var oxygen_loss: float
 var completion_areas_entered: Array[CompletionArea]
+@onready var diver: Diver = get_parent()
 
 func _process(delta: float) -> void:
 	oxygen_percentage -= oxygen_loss * delta * 60
