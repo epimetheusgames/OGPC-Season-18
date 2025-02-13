@@ -2,11 +2,21 @@ class_name MainMenu
 extends Control
 
 
+func _ready():
+	Steam.lobby_match_list.connect(_lobby_list_updated)
+
+func _lobby_list_updated(lobbies: Array):
+	var lobby_text := ""
+	for lobby in Global.godot_steam_abstraction.lobbies_list:
+		if lobby[2] == "DivingGameLobby":
+			lobby_text += "Lobby name: " + lobby[1] + " | Members: " + lobby[3]
+	if !Global.is_multiplayer:
+		$Members.text = lobby_text
+
 func _on_quit_button_button_up() -> void:
 	get_tree().quit()
 
 func _on_start_button_button_up() -> void:
-	# Peak oop
 	$MultiplayerButton.visible = true
 	$SingleplayerButton.visible = true
 	$StartButton.visible = false
