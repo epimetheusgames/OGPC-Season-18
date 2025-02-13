@@ -223,6 +223,7 @@ func _on_lobby_created(connect_info: int, this_lobby_id: int) -> void:
 func _on_lobby_match_list(these_lobbies: Array) -> void:
 	if Global.verbose_debug:
 		print("DEBUG: Lobby list fetched, printing below.")
+	lobbies_list = []
 	for this_lobby in these_lobbies:
 		var lobby_name: String = Steam.getLobbyData(this_lobby, "name")
 		var lobby_mode: String = Steam.getLobbyData(this_lobby, "mode")

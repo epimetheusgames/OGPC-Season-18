@@ -4,12 +4,16 @@ extends Control
 
 func _ready():
 	Steam.lobby_match_list.connect(_lobby_list_updated)
+	
+	while true:
+		await get_tree().create_timer(1).timeout
+		Global.godot_steam_abstraction.get_lobby_list()
 
 func _lobby_list_updated(lobbies: Array):
-	var lobby_text := ""
+	var lobby_text := "Available lobbies:\n"
 	for lobby in Global.godot_steam_abstraction.lobbies_list:
 		if lobby[2] == "DivingGameLobby":
-			lobby_text += "Lobby name: " + lobby[1] + " | Members: " + lobby[3]
+			lobby_text += "Lobby name: " + lobby[1] + " | Members: " + str(lobby[3])
 	if !Global.is_multiplayer:
 		$Members.text = lobby_text
 
@@ -78,10 +82,11 @@ func _on_multiplayer_join_game_button_button_up() -> void:
 
 func _process(delta: float) -> void:
 	var members = Global.godot_steam_abstraction.lobby_members
-	var text := ""
-	for member in members:
-		text += member["steam_name"] + "\n"
-	$Members.text = text
+	if Global.is_multiplayer:
+		var text := "Members of lobby:\n"
+		for member in members:
+			text += member["steam_name"] + "\n"
+		$Members.text = text
 
 # Should be remotely called.
 func set_multiplayer_status(status: String):
