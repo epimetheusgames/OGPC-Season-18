@@ -24,6 +24,18 @@ var new_lobby_name: String
 var new_lobby_mode: String
 var packets_queue: Dictionary = {}
 
+# VC
+var current_sample_rate: int = 48000
+var has_loopback: bool = false
+var local_playback: AudioStreamGeneratorPlayback = null
+var local_voice_buffer: PackedByteArray = PackedByteArray()
+var network_playback: AudioStreamGeneratorPlayback = null
+var network_voice_buffer: PackedByteArray = PackedByteArray()
+var packet_read_limit: int = 5
+
+@export var local_player: AudioStreamPlayer
+@export var networked_player: AudioStreamPlayer
+
 signal lobby_joined
 signal user_joined_lobby(user_id, user_name)
 signal handshake_received(user_id, user_name)
@@ -64,7 +76,24 @@ func _ready() -> void:
 	# Check for command line arguments
 	check_command_line()
 	
+	# Fetch lobby list, calls a signal.
+	get_lobby_list()
+	
+	# Start up packet sender
 	sync_packets()
+	
+	# Voice chat
+	if local_player:
+		local_player.stream.mix_rate = current_sample_rate
+		local_player.play()
+		local_playback = local_player.get_stream_playback()
+	
+	if networked_player:
+		networked_player.stream.mix_rate = current_sample_rate
+		networked_player.play()
+		network_playback = networked_player.get_stream_playback()
+	
+	record_voice(true)
 	
 	#if "host" in OS.get_cmdline_args():
 		#create_lobby("TEST", "GodotSteam TEST")
@@ -79,13 +108,22 @@ func _ready() -> void:
 				#join_lobby(lobby[0])
 				#lobby_joined.emit()
 
+func record_voice(is_recording: bool) -> void:
+	# If talking, suppress all other audio or voice comms from the Steam UI
+	Steam.setInGameVoiceSpeaking(steam_id, is_recording)
+
+	if is_recording:
+		Steam.startVoiceRecording()
+	else:
+		Steam.stopVoiceRecording()
+
 func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 	
+	check_for_voice()
+	
 	if lobby_id > 0:
 		read_all_packets()
-
-## START GODOTSTEAM CODE
 
 func ext_join_lobby(lobby_index: int):
 	join_lobby(lobbies_list[lobby_index][0])
@@ -183,12 +221,17 @@ func _on_lobby_created(connect_info: int, this_lobby_id: int) -> void:
 			print("DEBUG: Allowing Steam to relay backup: %s" % set_relay)
 
 func _on_lobby_match_list(these_lobbies: Array) -> void:
+	if Global.verbose_debug:
+		print("DEBUG: Lobby list fetched, printing below.")
+	lobbies_list = []
 	for this_lobby in these_lobbies:
 		var lobby_name: String = Steam.getLobbyData(this_lobby, "name")
 		var lobby_mode: String = Steam.getLobbyData(this_lobby, "mode")
 		var lobby_num_members: int = Steam.getNumLobbyMembers(this_lobby)
 		var formatted_lobby_data := [this_lobby, lobby_name, lobby_mode, lobby_num_members]
 		lobbies_list.append(formatted_lobby_data)
+		if Global.verbose_debug && lobby_mode == "DivingGameLobby":
+			print("DEBUG: Name: " + lobby_name)
 
 func read_all_packets(read_count: int = 0):
 	if read_count >= PACKET_READ_LIMIT:
@@ -285,9 +328,65 @@ func read_packet() -> void:
 		
 		var packet_sender: int = this_packet["remote_steam_id"]
 		var packet_code: PackedByteArray = this_packet["data"]
-		var readable_data: Dictionary = bytes_to_var(packet_code)
+		var readable_data: Dictionary = bytes_to_var(packet_code.decompress_dynamic(-1, FileAccess.COMPRESSION_GZIP))
 		
 		parse_readable_data(readable_data, packet_sender)
+
+func check_for_voice() -> void:
+	var available_voice: Dictionary = Steam.getAvailableVoice()
+
+	# Seems there is voice data
+	if available_voice['result'] == Steam.VOICE_RESULT_OK and available_voice['buffer'] > 0:
+		# Valve's getVoice uses 1024 but GodotSteam's is set at 8192?
+		# Our sizes might be way off; internal GodotSteam notes that Valve suggests 8kb
+		# However, this is not mentioned in the header nor the SpaceWar example but -is- in Valve's docs which are usually wrong
+		var voice_data: Dictionary = Steam.getVoice()
+		if voice_data['result'] == Steam.VOICE_RESULT_OK and voice_data['written']:
+			print("Voice message has data: %s / %s" % [voice_data['result'], voice_data['written']])
+
+			# Here we can pass this voice data off on the network
+			#send_raw_data(voice_data['buffer'])
+
+			# If loopback is enable, play it back at this point
+			if has_loopback:
+				print("Loopback on")
+				process_voice_data(voice_data, "local")
+
+func get_sample_rate() -> void:
+	current_sample_rate = Steam.getVoiceOptimalSampleRate()
+	print("Current sample rate: %s" % current_sample_rate)
+	local_player.stream.mix_rate = current_sample_rate
+	networked_player.stream.mix_rate = current_sample_rate
+	print("Current sample rate: %s" % current_sample_rate)
+
+func process_voice_data(voice_data: Dictionary, voice_source: String) -> void:
+	# Our sample rate function above without toggling
+	get_sample_rate()
+
+	var decompressed_voice: Dictionary = Steam.decompressVoice(voice_data['buffer'], Steam.getVoiceOptimalSampleRate())
+	if decompressed_voice['result'] == Steam.VOICE_RESULT_OK and decompressed_voice['size'] > 0:
+		print("Decompressed voice: %s" % decompressed_voice['size'])
+
+		if voice_source == "local":
+			local_voice_buffer = decompressed_voice['uncompressed']
+			local_voice_buffer.resize(decompressed_voice['size'])
+
+			# We now iterate through the local_voice_buffer and push the samples to the audio generator
+			for i: int in range(0, mini(local_playback.get_frames_available() * 2, local_voice_buffer.size()), 2):
+				# Steam's audio data is represented as 16-bit single channel PCM audio, so we need to convert it to amplitudes
+				# Combine the low and high bits to get full 16-bit value
+				var raw_value: int = local_voice_buffer[0] | (local_voice_buffer[1] << 8)
+				# Make it a 16-bit signed integer
+				raw_value = (raw_value + 32768) & 0xffff
+				# Convert the 16-bit integer to a float on from -1 to 1
+				var amplitude: float = float(raw_value - 32768) / 32768.0
+
+				# push_frame() takes a Vector2. The x represents the left channel and the y represents the right channel
+				local_playback.push_frame(Vector2(amplitude, amplitude))
+
+				# Delete the used samples
+				local_voice_buffer.remove_at(0)
+				local_voice_buffer.remove_at(0)
 
 func parse_readable_data(readable_data: Dictionary, packet_sender: int) -> void:
 	if readable_data["message"] == "handshake":
@@ -340,6 +439,16 @@ func parse_readable_data(readable_data: Dictionary, packet_sender: int) -> void:
 	elif Global.verbose_debug:
 		print("ERROR: Invalid packet received. Data: " + str(readable_data))
 
+func send_raw_data(data: PackedByteArray):
+	var send_type: int = Steam.P2P_SEND_RELIABLE
+	
+	# If sending a packet to everyone
+	if lobby_members.size() > 1:
+		# Loop through all members that aren't us
+		for this_member in lobby_members:
+			if this_member["steam_id"] != steam_id:
+				Steam.sendP2PPacket(this_member["steam_id"], data.compress(FileAccess.COMPRESSION_GZIP), send_type, 0)
+
 func sync_packets() -> void:
 	while true:
 		await get_tree().create_timer(0.05).timeout
@@ -367,14 +476,12 @@ func sync_packets() -> void:
 			var compressed_data: PackedByteArray = var_to_bytes(packet_data)
 			this_data.append_array(compressed_data)
 			
-			if this_data.size() > 1400: # bytes
+			if this_data.size() > 3000: # bytes
 				print("WARNING: Packet size greater than packet size limit. Size is " + str(this_data.size()) + ". Sending anyway.")
-				if Global.verbose_debug:
-					print("DEBUG: Packet data is " + str(packet_data) + ".")
 			
 			# We can group the packet up if the target is everyone.
 			if this_target == 0 && lobby_members.size() > 1:
-				if packet_group_bytes.size() + this_data.size() < 1400:
+				if packet_group_bytes.size() + this_data.size() < 3000:
 					packet_group["packets"].append(packet_data)
 					packet_group_bytes = var_to_bytes(packet_group)
 					continue
@@ -384,10 +491,10 @@ func sync_packets() -> void:
 					num_packet_groups += 1
 					for this_member in lobby_members:
 						if this_member["steam_id"] != steam_id:
-							Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes, send_type, channel)
+							Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes.compress(FileAccess.COMPRESSION_GZIP), send_type, channel)
 					
 					# Reset the group with the current packet.
-					if this_data.size() < 1400:
+					if this_data.size() < 3000:
 						packet_group = {
 							"message": "packet_group",
 							"packets": [packet_data]
@@ -402,16 +509,16 @@ func sync_packets() -> void:
 					# Loop through all members that aren't us
 					for this_member in lobby_members:
 						if this_member["steam_id"] != steam_id:
-							Steam.sendP2PPacket(this_member["steam_id"], this_data, send_type, channel)
+							Steam.sendP2PPacket(this_member["steam_id"], this_data.compress(FileAccess.COMPRESSION_GZIP), send_type, channel)
 			else:
-				Steam.sendP2PPacket(this_target, this_data, send_type, channel)
+				Steam.sendP2PPacket(this_target, this_data.compress(FileAccess.COMPRESSION_GZIP), send_type, channel)
 		
 		# Once we've looped through all the packets there's going to be a partially filled group left.
 		num_packet_groups += 1
 		if packet_group["packets"].size() > 0:
 			for this_member in lobby_members:
 				if this_member["steam_id"] != steam_id:
-					Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes, send_type, channel)
+					Steam.sendP2PPacket(this_member["steam_id"], packet_group_bytes.compress(FileAccess.COMPRESSION_GZIP), send_type, channel)
 		
 		#if Global.verbose_debug:
 			#print("DEBUG: Sent " + str(num_packet_groups) + " packet groups.")

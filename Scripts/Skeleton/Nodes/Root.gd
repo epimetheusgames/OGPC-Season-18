@@ -5,6 +5,7 @@ extends Node
 @export var super_efficient := false
 #controls the maximum fps to trigger the enabling of super efficient mode
 @export var super_efficient_auto_enable_maximum:int
+@export var brightness_modulate:CanvasModulate
 @export_node_path("Node") var game_skeleton_node
 @export_node_path("Control") var ui_root_node
 @export_node_path("Node") var game_root_node

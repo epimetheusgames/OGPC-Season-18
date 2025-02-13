@@ -3,6 +3,7 @@
 # See https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html 
 extends Node2D
 
+var spedass_percentage
 var root_node: Node
 var save_load_framework: SaveLoadFramework
 var game_skeleton_node: Node
@@ -60,3 +61,8 @@ func eval(input: String):
 	script.reload()
 	script_holder.set_script(script)
 	return script_holder.eval()
+func set_brightness(percentage:int):
+	spedass_percentage = percentage/100
+	root_node.brightness_modulate.color.r = 255*spedass_percentage
+	root_node.brightness_modulate.color.b = 255*spedass_percentage
+	root_node.brightness_modulate.color.g = 255*spedass_percentage

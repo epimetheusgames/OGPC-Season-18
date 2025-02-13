@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ci1hceptj3hwn"]
+[gd_scene load_steps=3 format=3 uid="uid://ci1hceptj3hwn"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Ingame/MissionSuccessScreen.gd" id="1_1y8o2"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="2_ly8ke"]
 
 [node name="MissionSuccessScreen" type="Control"]
 process_mode = 3
@@ -26,6 +27,7 @@ offset_left = 2.0
 offset_top = 210.0
 offset_right = 1921.0
 offset_bottom = 442.0
+theme = ExtResource("2_ly8ke")
 theme_override_font_sizes/font_size = 72
 text = "Mission Success!"
 horizontal_alignment = 1
@@ -35,6 +37,7 @@ layout_mode = 0
 offset_top = 320.0
 offset_right = 1922.0
 offset_bottom = 421.0
+theme = ExtResource("2_ly8ke")
 theme_override_font_sizes/font_size = 25
 text = "Good job. You did better than your predecessors"
 horizontal_alignment = 1
@@ -46,6 +49,7 @@ offset_top = 438.0
 offset_right = 1199.0
 offset_bottom = 512.0
 tooltip_text = "Tryhard"
+theme = ExtResource("2_ly8ke")
 theme_override_font_sizes/font_size = 36
 text = "Return to Research Station"
 
@@ -56,6 +60,7 @@ offset_top = 526.0
 offset_right = 1081.0
 offset_bottom = 600.0
 tooltip_text = "Coward"
+theme = ExtResource("2_ly8ke")
 theme_override_font_sizes/font_size = 36
 text = "Exit to Menu"
 

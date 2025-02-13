@@ -61,12 +61,10 @@ func _ready() -> void:
 	semaphore = Semaphore.new()
 	exit_thread = false
 	
-	await Global.save_load_framework.game_started
-	
 	thread = Thread.new()
 	thread.start(_boids_compute)
 	
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(0.1).timeout
 	
 	if Global.godot_steam_abstraction.is_lobby_owner:
 		sync_at_integrals()

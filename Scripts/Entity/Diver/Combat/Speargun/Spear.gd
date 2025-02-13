@@ -3,6 +3,8 @@ extends BaseBullet
 
 @onready var rope_point: Node2D = $"RopePoint"
 
+@onready var attackbox: Attackbox
+
 var attach_dif: Vector2 = Vector2.ZERO
 
 var attach_body: Node2D = null

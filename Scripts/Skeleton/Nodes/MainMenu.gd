@@ -2,17 +2,35 @@ class_name MainMenu
 extends Control
 
 
+func _ready():
+	Steam.lobby_match_list.connect(_lobby_list_updated)
+	
+	while true:
+		await get_tree().create_timer(1).timeout
+		Global.godot_steam_abstraction.get_lobby_list()
+
+func _lobby_list_updated(lobbies: Array):
+	var lobby_text := "Available lobbies:\n"
+	for lobby in Global.godot_steam_abstraction.lobbies_list:
+		if lobby[2] == "DivingGameLobby":
+			lobby_text += "Lobby name: " + lobby[1] + " | Members: " + str(lobby[3])
+	if !Global.is_multiplayer:
+		$Members.text = lobby_text
+
 func _on_quit_button_button_up() -> void:
 	get_tree().quit()
 
 func _on_start_button_button_up() -> void:
-	# Peak oop
 	$MultiplayerButton.visible = true
 	$SingleplayerButton.visible = true
 	$StartButton.visible = false
 
 func _on_singleplayer_button_button_up() -> void:
-	self.visible = false
+	for child in $"../BoidsGroup".get_children():
+		child.queue_free()
+	$"../StaticBody2D/CollisionPolygon2D".disabled = true
+	$"../StaticBody2D/CollisionPolygon2D2".disabled = true
+	Global.ui_root_node.visible = false
 	Global.save_load_framework.start_game(0) 
 
 func _on_multiplayer_button_button_up() -> void:
@@ -35,7 +53,7 @@ func _on_multiplayer_join_button_button_up() -> void:
 
 func _on_multiplayer_host_game_button_button_up() -> void:
 	if $MultiplayerHostGameButton.text == "Host":
-		Global.godot_steam_abstraction.create_lobby($LobbyNameInput.text, "GameLobby")
+		Global.godot_steam_abstraction.create_lobby($LobbyNameInput.text, "DivingGameLobby")
 		$MultiplayerHostGameButton.disabled = true
 		while true:
 			await Global.godot_steam_abstraction.handshake_received
@@ -49,6 +67,11 @@ func _on_multiplayer_host_game_button_button_up() -> void:
 	else:
 		if Global.verbose_debug:
 			print("DEBUG: Starting multiplayer game.")
+		for child in $"../BoidsGroup".get_children():
+			child.queue_free()
+		$"../StaticBody2D/CollisionPolygon2D".disabled = true
+		$"../StaticBody2D/CollisionPolygon2D2".disabled = true
+		Global.ui_root_node.visible = false
 		Global.save_load_framework.start_game(0) 
 		Global.godot_steam_abstraction.run_remote_function(Global.save_load_framework, "start_game_remote", [0])
 
@@ -59,10 +82,11 @@ func _on_multiplayer_join_game_button_button_up() -> void:
 
 func _process(delta: float) -> void:
 	var members = Global.godot_steam_abstraction.lobby_members
-	var text := ""
-	for member in members:
-		text += member["steam_name"] + "\n"
-	$Members.text = text
+	if Global.is_multiplayer:
+		var text := "Members of lobby:\n"
+		for member in members:
+			text += member["steam_name"] + "\n"
+		$Members.text = text
 
 # Should be remotely called.
 func set_multiplayer_status(status: String):

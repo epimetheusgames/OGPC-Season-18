@@ -33,6 +33,9 @@ func _ready_boid() -> void:
 	
 	_ready_base_component()
 	
+	var rng = RandomNumberGenerator.new()
+	component_container_node.scale *= rng.randf_range(0.8, 1.3)
+	
 	if !component_container:
 		return
 	
@@ -58,7 +61,6 @@ func _ready_boid() -> void:
 	raycast = get_node(raycast_path)
 	get_parent().velocity = (raycast.target_position - raycast.position).normalized()
 	
-	var rng := RandomNumberGenerator.new()
 	component_container_node.modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
 
 func _exit_tree() -> void:
@@ -69,11 +71,16 @@ func _exit_tree() -> void:
 # Update velocity using compute shader outputs from boids calculator node.
 func _process(delta: float) -> void: 
 	if !boids_calculator || boids_calculator.process_mode == Node.PROCESS_MODE_DISABLED:
+		boids_calculator = Global.boids_calculator_node
 		return
 	
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
 		var output = boids_calculator.get_shader_output()
-		component_container_node.velocity = Vector2(output[boids_index * 3], output[boids_index * 3 + 1])
+		component_container_node.velocity = Util.better_vec2_lerp(
+			component_container_node.velocity,
+			Vector2(output[boids_index * 3], output[boids_index * 3 + 1]), 
+			0.8, delta
+		)
 		component_container_node.position += component_container_node.velocity
 		
 	get_parent().rotation = Util.better_angle_lerp(get_parent().rotation, atan2(get_parent().velocity.normalized().y, get_parent().velocity.normalized().x) + PI / 2.0 + PI, 0.1, delta)

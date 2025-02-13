@@ -133,6 +133,9 @@ func _load_entity(uid: UID) -> EntitySave:
 	return Global.current_game_save.entities[uid.uid]
 
 func start_game_remote(slot_num: int, custom_mission_id: int = -1):
+	Global.ui_root_node.visible = false
+	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = true
+	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = true
 	start_game(slot_num, Global.mission_system.default_mission_tree.missions[custom_mission_id] if custom_mission_id != -1 else null)
 
 # Loads a level and then adds it to the Game container.
@@ -141,6 +144,8 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	
 	Global.current_game_slot = slot_num
 	Global.current_game_save = level_data
+	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = true
+	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = true
 	
 	if Global.verbose_debug:
 		print("DEBUG: Game loaded successfuly, printing loaded data.")
@@ -183,6 +188,10 @@ func exit_to_menu() -> void:
 	Global.player = null
 	Global.current_game_save = null
 	Global.current_game_slot = -1
+	Global.ui_root_node.visible = true
+	Global.ui_root_node.get_node("MainMenu").visible = true # ???
+	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = false
+	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = false
 	
 	for child in game_container.get_children():
 		child.queue_free()
