@@ -31,18 +31,12 @@ func _process(delta: float) -> void:
 		Global.godot_steam_abstraction.sync_var(self, "position")
 		Global.godot_steam_abstraction.sync_var(self, "rotation")
 
-func perform_attack(remote=false, spearname="") -> void:
+func perform_attack(remote=false, node_name="") -> void:
+	super(remote, node_name)
+	
 	if !remote:
-		if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
-			print("WARNING: Tried to perform attack but is not the owner of this diver. Check your logic. Printing stack.")
-			print_stack()
-			return
-		
 		var rng = RandomNumberGenerator.new()
-		spearname = str(rng.randi())
-		
-		if Global.godot_steam_abstraction:
-			Global.godot_steam_abstraction.run_remote_function(self, "perform_attack", [true, spearname])
+		node_name = str(rng.randi())
 	
 	if !pistol_sprite.animation == "Shoot" && !shooting:
 		pistol_sprite.play("Shoot")
@@ -50,7 +44,7 @@ func perform_attack(remote=false, spearname="") -> void:
 		shooting = true
 		
 		var bullet: BaseBullet = bullet_scene.instantiate()
-		bullet.name = spearname
+		bullet.name = node_name
 		add_child(bullet, true)
 		
 		bullet.global_position = emit_point.global_position
