@@ -27,5 +27,12 @@ func get_hand2_pos() -> Vector2:
 func attack() -> void:
 	pass  # Override
 
-func perform_attack() -> void:
-	pass  # Override
+func perform_attack(remote=false, node_name="") -> void:
+	if !remote:
+		if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+			print("WARNING: Tried to perform attack but is not the owner of this diver. Check your logic. Printing stack.")
+			print_stack()
+			return
+		
+		if Global.godot_steam_abstraction:
+			Global.godot_steam_abstraction.run_remote_function(self, "perform_attack", [true, node_name])

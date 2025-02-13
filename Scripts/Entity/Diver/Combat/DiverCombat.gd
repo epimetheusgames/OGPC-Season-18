@@ -31,18 +31,31 @@ func _ready():
 
 var a: int = 0  # I'll remove this later
 func _process(delta: float) -> void:
+	for weapon in get_children():
+		if weapon is Weapon && weapon.visible && !weapon == selected_weapon:
+			weapon.visible = false
+	
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+		return
+	
 	if Input.is_action_just_pressed("swap"):
 		if a == 0:
 			set_weapon("pistol")
+			Global.godot_steam_abstraction.run_remote_function(self, "set_weapon", ["pistol"])
 			a = 1
 		elif a == 1:
 			set_weapon("speargun")
+			Global.godot_steam_abstraction.run_remote_function(self, "set_weapon", ["speargun"])
 			a = 2
 		elif a == 2:
 			set_weapon("knife")
+			Global.godot_steam_abstraction.run_remote_function(self, "set_weapon", ["knife"])
 			a = 0
 		
 		print(selected_weapon.name)
+	
+	if !selected_weapon:
+		return
 	
 	if Input.is_action_just_pressed("attack"):
 		selected_weapon.attack()
@@ -67,7 +80,7 @@ func add_weapon(weapon_name: String) -> void:
 	
 	var weapon: PackedScene = all_weapons.get(weapon_name)
 	if weapon == null:
-		printerr("Weapon not found")
+		print("ERROR: Weapon not found")
 		return
 	
 	var new_weapon: Weapon = weapon.instantiate()
@@ -83,7 +96,6 @@ func remove_weapon(weapon_name: String) -> void:
 
 func remove_all_weapons() -> void:
 	current_weapons.clear()
-
 
 # selected_weapon (setters / getters)
 func set_weapon(weapon_name: String) -> void:
