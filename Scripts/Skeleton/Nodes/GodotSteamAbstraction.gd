@@ -76,8 +76,13 @@ func _ready() -> void:
 	# Check for command line arguments
 	check_command_line()
 	
+	# Fetch lobby list, calls a signal.
+	get_lobby_list()
+	
+	# Start up packet sender
 	sync_packets()
 	
+	# Voice chat
 	if local_player:
 		local_player.stream.mix_rate = current_sample_rate
 		local_player.play()
@@ -119,8 +124,6 @@ func _process(_delta: float) -> void:
 	
 	if lobby_id > 0:
 		read_all_packets()
-
-## START GODOTSTEAM CODE
 
 func ext_join_lobby(lobby_index: int):
 	join_lobby(lobbies_list[lobby_index][0])
@@ -218,12 +221,16 @@ func _on_lobby_created(connect_info: int, this_lobby_id: int) -> void:
 			print("DEBUG: Allowing Steam to relay backup: %s" % set_relay)
 
 func _on_lobby_match_list(these_lobbies: Array) -> void:
+	if Global.verbose_debug:
+		print("DEBUG: Lobby list fetched, printing below.")
 	for this_lobby in these_lobbies:
 		var lobby_name: String = Steam.getLobbyData(this_lobby, "name")
 		var lobby_mode: String = Steam.getLobbyData(this_lobby, "mode")
 		var lobby_num_members: int = Steam.getNumLobbyMembers(this_lobby)
 		var formatted_lobby_data := [this_lobby, lobby_name, lobby_mode, lobby_num_members]
 		lobbies_list.append(formatted_lobby_data)
+		if Global.verbose_debug && lobby_mode == "DivingGameLobby":
+			print("DEBUG: Name: " + lobby_name)
 
 func read_all_packets(read_count: int = 0):
 	if read_count >= PACKET_READ_LIMIT:

@@ -39,7 +39,7 @@ func _on_multiplayer_join_button_button_up() -> void:
 
 func _on_multiplayer_host_game_button_button_up() -> void:
 	if $MultiplayerHostGameButton.text == "Host":
-		Global.godot_steam_abstraction.create_lobby($LobbyNameInput.text, "GameLobby")
+		Global.godot_steam_abstraction.create_lobby($LobbyNameInput.text, "DivingGameLobby")
 		$MultiplayerHostGameButton.disabled = true
 		while true:
 			await Global.godot_steam_abstraction.handshake_received
