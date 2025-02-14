@@ -2,15 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Spear.png" id="1_mdbjp"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Spear.gd" id="1_x2dlv"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage/OneShotAttack.gd" id="3_xotjw"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/Attackbox.gd" id="3_dr42o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwnx7"]
 size = Vector2(74, 4)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hdpad"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_2tr2w"]
 
-[node name="Spear" type="Area2D"]
+[node name="Spear" type="Area2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_x2dlv")
+attackbox = NodePath("Attackbox")
 speed = 1000.0
 size = 10.0
 damage = 100.0
@@ -28,15 +29,12 @@ metadata/_edit_lock_ = true
 [node name="RopePoint" type="Node2D" parent="."]
 position = Vector2(-29, 0)
 
-[node name="OneShotAttack" type="Area2D" parent="."]
-script = ExtResource("3_xotjw")
-is_attacking = true
+[node name="Attackbox" type="Area2D" parent="."]
+script = ExtResource("3_dr42o")
 attacker_type = 1
-damage_amount = 50.0
 
-[node name="HeadCollision" type="CollisionShape2D" parent="OneShotAttack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
 position = Vector2(36, 0)
-shape = SubResource("CircleShape2D_hdpad")
-debug_color = Color(5.19812e-06, 0.607842, 0.652347, 0.42)
+shape = SubResource("CircleShape2D_2tr2w")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

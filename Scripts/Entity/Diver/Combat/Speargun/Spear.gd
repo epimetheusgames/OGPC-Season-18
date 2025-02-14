@@ -3,8 +3,6 @@ extends BaseBullet
 
 @onready var rope_point: Node2D = $"RopePoint"
 
-@onready var attackbox: Attackbox
-
 var attach_dif: Vector2 = Vector2.ZERO
 
 var attach_body: Node2D = null
@@ -23,6 +21,7 @@ func _physics_process(delta: float) -> void:
 func fire(angle: float) -> void:
 	rotation = angle
 	velocity = Vector2(speed, 0).rotated(angle)
+	attackbox.is_attacking = true
 
 func _on_body_entered(body: Node2D) -> void:
 	if attached || body is Spear || body is Diver:

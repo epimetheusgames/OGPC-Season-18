@@ -67,11 +67,13 @@ func _process(delta: float) -> void:
 		return
 	
 	var remove_indices: Array[int] = []
+	var i := -1
 	for enemy in spawned_enemies:
+		i += 1
 		if !is_instance_valid(enemy):
-			remove_indices.append(spawned_enemies.find(enemy))
+			remove_indices.append(i)
 	
-	for i in remove_indices:
+	for j in remove_indices:
 		spawned_enemies.remove_at(i)
 	
 	var spawn_positions := generate_spawn_positions()

@@ -7,7 +7,8 @@ extends Control
 
 func _process(delta: float) -> void:
 	if Global.player && Global.player.get_diver_health() <= 0:
-		vignette_shader.material.set_shader_parameter("vignette_strength", 1.5)
+		if vignette_shader:
+			vignette_shader.material.set_shader_parameter("vignette_strength", 1.5)
 		ingame_ui.visible = false
 		get_tree().paused = true
 		visible = true
