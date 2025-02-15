@@ -9,6 +9,7 @@ var in_interaction_area : bool = false
 var is_being_operated : bool = false
 
 func _ready() -> void:
+	super()
 	if attached_weapon != null:
 		attached_weapon = attached_weapon.instantiate()
 		$"SubmarineWeaponSlot".add_child(attached_weapon)

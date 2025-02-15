@@ -9,7 +9,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Script" path="res://Scripts/Objects/CompletionArea.gd" id="12_h6qnp"]
-[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
@@ -259,7 +259,7 @@ shader_parameter/max_alpha = 0.9
 shader_parameter/height = 3.5
 shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 
-[sub_resource type="Resource" id="Resource_np8tg"]
+[sub_resource type="Resource" id="Resource_ojy21"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -637,9 +637,9 @@ shadow_filter = 2
 max_distance = 1e+06
 
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
-position = Vector2(-5795, 145)
+position = Vector2(-4839, 130)
 motion_mode = 1
-uid = SubResource("Resource_np8tg")
+uid = SubResource("Resource_ojy21")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass", "waves")]
 script = ExtResource("21_pr3qq")

@@ -62,6 +62,8 @@ func _on_weapons_module_button_up() -> void:
 		add_module(submarine_weapons_module.instantiate())
 
 func _process(delta: float) -> void:
+	for i in modules:
+		print(i.position)
 	if adding_module:
 		var valid_point: AttachmentPoint = null
 		var our_valid_point: AttachmentPoint = null

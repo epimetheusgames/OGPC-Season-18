@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5ws5v2e88l3q"]
+[gd_scene load_steps=9 format=3 uid="uid://5ws5v2e88l3q"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineControl.gd" id="1_ofa5d"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_7buem"]
@@ -13,6 +13,8 @@ size = Vector2(400, 483)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxom5"]
 size = Vector2(120, 325)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_n8qe6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3u10"]
 size = Vector2(400, 40)
@@ -67,11 +69,14 @@ offset_bottom = -160.0
 
 [node name="Collision" type="Node2D" parent="."]
 
-[node name="Floor" type="CollisionShape2D" parent="Collision"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Collision"]
+physics_material_override = SubResource("PhysicsMaterial_n8qe6")
+
+[node name="Floor" type="CollisionShape2D" parent="Collision/StaticBody2D"]
 position = Vector2(0, 180)
 shape = SubResource("RectangleShape2D_j3u10")
 
-[node name="Ceiling" type="CollisionShape2D" parent="Collision"]
+[node name="Ceiling" type="CollisionShape2D" parent="Collision/StaticBody2D"]
 position = Vector2(0, -180)
 shape = SubResource("RectangleShape2D_j3u10")
 
