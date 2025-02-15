@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=39 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_h2kyx"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="2_i3ogj"]
@@ -13,11 +13,22 @@
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="7_u3v81"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="8_1a1ie"]
 [ext_resource type="Script" path="res://Scripts/UI/DialogHandler.gd" id="8_7spfj"]
+[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="9_dmakk"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/KeypressHandler.gd" id="9_rhklt"]
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="9_xe7j2"]
+[ext_resource type="FontFile" uid="uid://b8shwbf3tge0e" path="res://Assets/Fonts/Michroma/Michroma-Regular.ttf" id="12_xloqi"]
+[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="13_156qs"]
+[ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="14_fifhd"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="16_v8rcl"]
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/PerformancePrompt.gd" id="17_0ry5s"]
 [ext_resource type="PackedScene" path="res://Scenes/TSCN/UI/FakeButton.tscn" id="17_tnv8r"]
+[ext_resource type="Texture2D" uid="uid://cx2ypxydjaxys" path="res://Assets/Art/Entity/BoidsFishSprite.png" id="18_pexs6"]
+[ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/NPCS/Boid.tscn" id="23_04qpl"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="24_52mtl"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_v8psd"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_bpaox"]
 
 [sub_resource type="Resource" id="Resource_ur184"]
 script = ExtResource("3_e6kdq")
@@ -31,22 +42,81 @@ file = "res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"
 script = ExtResource("7_u3v81")
 missions = Array[ExtResource("6_krpp0")]([ExtResource("7_27r5q")])
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_necqq"]
+shader = ExtResource("13_156qs")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.2
+shader_parameter/height = 1.0
+shader_parameter/depth_color_tex = ExtResource("14_fifhd")
+
+[sub_resource type="Curve" id="Curve_edu0q"]
+_data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t3p8f"]
+curve = SubResource("Curve_edu0q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gsc64"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 540, 1)
+gravity = Vector3(0, -98, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_min = 0.3
+scale_max = 0.8
+scale_curve = SubResource("CurveTexture_t3p8f")
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Gradient" id="Gradient_tetp1"]
+colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g72pb"]
+gradient = SubResource("Gradient_tetp1")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Resource" id="Resource_wiowl"]
+resource_local_to_scene = true
+script = ExtResource("24_52mtl")
+uid = 1501
+
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o714b"]
 
-[node name="Root" type="Node" node_paths=PackedStringArray("KeyactionHandler")]
+[node name="Root" type="Node" node_paths=PackedStringArray("brightness_modulate", "KeyactionHandler")]
 script = ExtResource("1_h2kyx")
 verbose_debug = true
 super_efficient_auto_enable_maximum = 25
+brightness_modulate = NodePath("Game/GameContainer/BrightnessModulate")
 game_skeleton_node = NodePath("Skeleton")
 ui_root_node = NodePath("UI")
 game_root_node = NodePath("Game")
 dialog_text_node = NodePath("Game/GameUIOverlay/DialogTextureBG")
 KeyactionHandler = NodePath("Game/KeyActionHandler")
 
+[node name="BoidsCalculator" type="Node" parent="."]
+script = ExtResource("9_xe7j2")
+
 [node name="Skeleton" type="Node" parent="."]
 
-[node name="GodotSteamAbstraction" type="Node" parent="Skeleton"]
+[node name="GodotSteamAbstraction" type="Node" parent="Skeleton" node_paths=PackedStringArray("local_player", "networked_player")]
 script = ExtResource("5_65j18")
+local_player = NodePath("LocalPlayer")
+networked_player = NodePath("NetworkedPlayer")
+
+[node name="LocalPlayer" type="AudioStreamPlayer" parent="Skeleton/GodotSteamAbstraction"]
+stream = SubResource("AudioStreamGenerator_v8psd")
+
+[node name="NetworkedPlayer" type="AudioStreamPlayer" parent="Skeleton/GodotSteamAbstraction"]
+stream = SubResource("AudioStreamGenerator_bpaox")
 
 [node name="SaveLoadFramework" type="Node" parent="Skeleton" node_paths=PackedStringArray("game_container")]
 script = ExtResource("2_i3ogj")
@@ -62,8 +132,35 @@ default_mission_tree = SubResource("Resource_1tmkv")
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
+offset_top = -48.0
 offset_right = 1920.0
-offset_bottom = 1087.0
+offset_bottom = 1039.0
+
+[node name="BoidsGroup" type="Node" parent="UI" node_paths=PackedStringArray("boids_scene")]
+script = ExtResource("9_dmakk")
+num_boids = 120
+spawn_position_node_path = NodePath("../Node2D")
+boids_scene = NodePath("../Boid")
+spawn_variation = 100.0
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+z_index = -10
+material = SubResource("ShaderMaterial_necqq")
+layout_mode = 0
+offset_left = -678.0
+offset_top = -114.0
+offset_right = 3058.0
+offset_bottom = 3936.0
+color = Color(0.012, 0.012, 0.09, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_necqq")
+layout_mode = 0
+offset_left = -678.0
+offset_top = -114.0
+offset_right = 3058.0
+offset_bottom = 3936.0
+color = Color(0.012, 0.012, 0.09, 0.693)
 
 [node name="TemplateButton" type="Button" parent="UI"]
 layout_mode = 0
@@ -79,106 +176,128 @@ metadata/action = ""
 
 [node name="MainMenu" type="Control" parent="UI"]
 anchors_preset = 0
+offset_top = 184.0
 offset_right = 1920.0
-offset_bottom = 1080.0
+offset_bottom = 1264.0
 script = ExtResource("8_1a1ie")
 
 [node name="GameTitle" type="Label" parent="UI/MainMenu"]
+modulate = Color(1, 1, 1, 0.207843)
 layout_mode = 0
-offset_top = 73.0
+offset_top = 25.0
 offset_right = 1921.0
-offset_bottom = 205.0
+offset_bottom = 162.0
+theme = ExtResource("3_gnnuy")
+theme_override_fonts/font = ExtResource("12_xloqi")
 theme_override_font_sizes/font_size = 96
 text = "Diving Game Title"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="UI/MainMenu"]
+modulate = Color(1, 1, 1, 0.552941)
 layout_mode = 0
 offset_left = 824.0
 offset_top = 318.0
 offset_right = 1081.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Start"
 
 [node name="MultiplayerButton" type="Button" parent="UI/MainMenu"]
 visible = false
+modulate = Color(1, 1, 1, 0.552941)
 layout_mode = 0
 offset_left = 688.0
 offset_top = 318.0
 offset_right = 945.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Multiplayer"
 
 [node name="SingleplayerButton" type="Button" parent="UI/MainMenu"]
 visible = false
+modulate = Color(1, 1, 1, 0.552941)
 layout_mode = 0
 offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Singleplayer"
 
 [node name="MultiplayerJoinButton" type="Button" parent="UI/MainMenu"]
 visible = false
+modulate = Color(1, 1, 1, 0.552941)
 layout_mode = 0
 offset_left = 688.0
 offset_top = 318.0
 offset_right = 945.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Join
 "
 
 [node name="MultiplayerHostButton" type="Button" parent="UI/MainMenu"]
 visible = false
+modulate = Color(1, 1, 1, 0.552941)
 layout_mode = 0
 offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Host"
 
 [node name="MultiplayerJoinGameButton" type="Button" parent="UI/MainMenu"]
 visible = false
+modulate = Color(1, 1, 1, 0.552941)
 layout_mode = 0
 offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Join
 "
 
 [node name="MultiplayerHostGameButton" type="Button" parent="UI/MainMenu"]
 visible = false
+modulate = Color(1, 1, 1, 0.552941)
 layout_mode = 0
 offset_left = 960.0
 offset_top = 318.0
 offset_right = 1217.0
 offset_bottom = 392.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Host"
 
 [node name="SettingsButton" type="Button" parent="UI/MainMenu"]
+modulate = Color(1, 1, 1, 0.552941)
 layout_mode = 0
 offset_left = 824.0
 offset_top = 414.0
 offset_right = 1081.0
 offset_bottom = 488.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Settings
 "
 
 [node name="QuitButton" type="Button" parent="UI/MainMenu"]
+modulate = Color(1, 1, 1, 0.552941)
 layout_mode = 0
 offset_left = 824.0
 offset_top = 510.0
 offset_right = 1081.0
 offset_bottom = 584.0
+theme = ExtResource("3_gnnuy")
 theme_override_font_sizes/font_size = 36
 text = "Quit"
 
@@ -208,16 +327,59 @@ offset_top = 623.0
 offset_right = 1081.0
 offset_bottom = 766.0
 
-[node name="Game" type="Node" parent="."]
+[node name="WaterParticles" type="GPUParticles2D" parent="UI"]
+position = Vector2(960, 540)
+process_material = SubResource("ParticleProcessMaterial_gsc64")
+texture = SubResource("GradientTexture2D_g72pb")
+lifetime = 5.0
+visibility_rect = Rect2(-960, -540, 1920, 1080)
 
-[node name="BoidsCalculator" type="Node" parent="Game"]
-script = ExtResource("9_xe7j2")
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="UI"]
+energy = 0.0
+
+[node name="Boid" parent="UI" instance=ExtResource("23_04qpl")]
+modulate = Color(0.704, 0.771, 0.885, 0.536)
+z_index = -1
+position = Vector2(617, 382)
+uid = SubResource("Resource_wiowl")
+
+[node name="FishSprite" parent="UI/Boid" index="0"]
+texture = ExtResource("18_pexs6")
+
+[node name="WallRaycast" parent="UI/Boid" index="1"]
+target_position = Vector2(0, 200)
+
+[node name="BoidComponent" parent="UI/Boid" index="2"]
+view_dist = 200.0
+protected_dist = 40.0
+avoid_factor = 0.1
+matching_factor = 0.03
+turn_factor = 3.5
+min_speed = 2.0
+boid_colors = Array[Color]([Color(1, 1, 1, 1)])
+
+[node name="Node2D" type="Node2D" parent="UI"]
+position = Vector2(-1057, 497)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="UI"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/StaticBody2D"]
+position = Vector2(-400, -216)
+scale = Vector2(1.4, 1.4)
+polygon = PackedVector2Array(88, 1035, 157.857, 1259.29, 878.336, 1274.59, 980.714, 1007.86, 1094.32, 1279.17, 1738.57, 1292.86, 1856.43, 1206.43, 1942.86, 1057.14, 2002.86, 913.571, 2007.86, 725.714, 1911.32, 560.154, 1691.43, 507.857, 1908.94, 455.29, 1979.29, 346.429, 1967.14, 55.7143, 1892.86, -50, 1767.86, -107.857, 1590, -165.714, 1110.5, -166.474, 980.714, 77.1429, 859.681, -166.871, 237.143, -167.857, 95, -96.4286, -44.2857, 56.4286, -227.143, 245, -587.143, 400, -625.714, 600.714, -2.85715, 812.143, 85, 1030, -997.857, 1137.14, -913.571, 347.857, -71, -40, 648.571, -790.714, 1110.71, -717.143, 2337.14, -16.4286, 2130.71, 1475.71, -140, 1504.29)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="UI/StaticBody2D"]
+polygon = PackedVector2Array(-836, 506, -497, 371, -80, 485, -533, 671)
+
+[node name="Game" type="Node" parent="."]
 
 [node name="KeyActionHandler" type="Node2D" parent="Game"]
 visible = false
 script = ExtResource("9_rhklt")
 
 [node name="GameContainer" type="Node" parent="Game"]
+
+[node name="BrightnessModulate" type="CanvasModulate" parent="Game/GameContainer"]
 
 [node name="GameUIOverlay" type="Control" parent="Game"]
 layout_mode = 3
@@ -325,3 +487,5 @@ button_template = NodePath("../../../UI/TemplateButton")
 [connection signal="button_up" from="UI/MainMenu/MultiplayerJoinGameButton" to="UI/MainMenu" method="_on_multiplayer_join_game_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/MultiplayerHostGameButton" to="UI/MainMenu" method="_on_multiplayer_host_game_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/QuitButton" to="UI/MainMenu" method="_on_quit_button_button_up"]
+
+[editable path="UI/Boid"]

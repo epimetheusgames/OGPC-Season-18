@@ -8,10 +8,9 @@
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/InventoryItem.gd" id="4_7u6dt"]
 [ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Player/PlayerSkin.png" id="4_do014"]
 [ext_resource type="Script" path="res://Scripts/Public/InventoryPublic.gd" id="4_lqvql"]
-[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="5_mjta2"]
 [ext_resource type="Texture2D" uid="uid://kbno8w3pbkse" path="res://Assets/Art/Icons/LightLineIcon.png" id="5_v3mw5"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="6_3bvk2"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="7_3b7lw"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/Hurtbox.gd" id="7_3b7lw"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
@@ -19,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
+[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 [ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="17_2as0u"]
 
@@ -28,8 +28,8 @@ script = ExtResource("2_sa7rx")
 uid = 3625
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
-radius = 20.0
-height = 100.0
+radius = 24.0
+height = 138.0
 
 [sub_resource type="Resource" id="Resource_og7y3"]
 script = ExtResource("6_3bvk2")
@@ -166,6 +166,7 @@ script = ExtResource("1_1l6ma")
 uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, -19)
 shape = SubResource("CapsuleShape2D_ghsq1")
 
 [node name="Inventory" type="Node2D" parent="."]
@@ -173,6 +174,7 @@ script = ExtResource("3_r5rx4")
 inventory = Array[ExtResource("4_7u6dt")]([SubResource("Resource_k67wg")])
 
 [node name="ItemDetectionArea" type="Area2D" parent="Inventory"]
+visible = false
 collision_layer = 0
 collision_mask = 128
 
@@ -555,7 +557,7 @@ shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
 [node name="Combat" type="Node2D" parent="."]
-script = ExtResource("5_mjta2")
+script = ExtResource("13_uoshl")
 speargun = ExtResource("8_ntafm")
 knife = ExtResource("9_hstvg")
 pistol = ExtResource("10_oh1is")
@@ -571,12 +573,22 @@ scale = Vector2(0.272378, 0.272378)
 script = ExtResource("9_xqhlv")
 
 [node name="FlashLight" type="PointLight2D" parent="Light"]
+position = Vector2(0, -70)
 scale = Vector2(1.5, 1.5)
+energy = 11.04
 range_item_cull_mask = 3
 shadow_enabled = true
-shadow_filter = 2
+shadow_filter = 1
+shadow_filter_smooth = 3.1
 texture = ExtResource("10_qg316")
-metadata/_edit_lock_ = true
+
+[node name="FlashLightSoft" type="PointLight2D" parent="Light/FlashLight"]
+color = Color(0.730913, 0.730913, 0.730913, 1)
+energy = 1.02
+range_item_cull_mask = 3
+shadow_filter = 1
+shadow_filter_smooth = 3.1
+texture = ExtResource("10_qg316")
 
 [node name="BodyLight" type="PointLight2D" parent="Light"]
 range_item_cull_mask = 3
@@ -600,6 +612,10 @@ gravity = 20
 buoyancy_accel = 1.0
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
+
+[node name="Dummy2" parent="." instance=ExtResource("17_2as0u")]
+top_level = true
+position = Vector2(246, 144)
 
 [node name="Dummy" parent="." instance=ExtResource("17_2as0u")]
 top_level = true

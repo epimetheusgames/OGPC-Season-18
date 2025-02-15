@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/Entity/NPC/BigfinSquid.gd" id="1_0jv23"]
 [ext_resource type="Resource" uid="uid://c0y2clojtb743" path="res://Scenes/Resource/Entity/BigfinSquidSettings.tres" id="2_1wvyv"]
 [ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
-[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_55m16"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="5_pchce"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="6_dpvyl"]
+[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_55m16"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="5_mc2mg"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_dpvyl"]
 
 [sub_resource type="Resource" id="Resource_jajkh"]
 resource_local_to_scene = true
@@ -45,14 +45,14 @@ metadata/_edit_lock_ = true
 z_index = -1
 points = PackedVector2Array(6, 20, 37, 5)
 width = 4.0
-default_color = Color(0.2646, 0.54, 0.2646, 1)
+default_color = Color(0.487598, 0.924542, 0.486052, 1)
 metadata/_edit_lock_ = true
 
 [node name="LeftBackArm" type="Line2D" parent="."]
 z_index = -1
 points = PackedVector2Array(-9, 22, -36, 6)
 width = 4.0
-default_color = Color(0.2646, 0.54, 0.2646, 1)
+default_color = Color(0.487598, 0.924542, 0.486052, 1)
 metadata/_edit_lock_ = true
 
 [node name="RightFrontArmRope" type="Node" parent="."]
@@ -89,12 +89,13 @@ component_container = NodePath("..")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 
-[node name="Attackbox" type="Area2D" parent="."]
-script = ExtResource("5_pchce")
+[node name="ContinuousAttack" type="Area2D" parent="."]
+script = ExtResource("5_mc2mg")
 attacker_type = 0
+damage_amount = 10.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
-position = Vector2(-1, -82)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousAttack"]
+position = Vector2(1, -83)
 shape = SubResource("RectangleShape2D_cfi6i")
 
 [node name="Hurtbox" type="Area2D" parent="."]

@@ -1,16 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://d24oi85rw114u"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/PistolBullet.gd" id="1_hykh4"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="2_d46dg"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage/Attackbox.gd" id="2_gvdbw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pk0f"]
 size = Vector2(14, 26)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdguj"]
-size = Vector2(20, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bauh"]
+size = Vector2(34, 67)
 
-[node name="PistolBullet2D" type="Area2D"]
+[node name="PistolBullet2D" type="Area2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_hykh4")
+attackbox = NodePath("Attackbox")
 speed = 1000.0
 size = 10.0
 damage = 10.0
@@ -26,13 +27,12 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_6pk0f")
 
 [node name="Attackbox" type="Area2D" parent="."]
-script = ExtResource("2_d46dg")
+script = ExtResource("2_gvdbw")
 attacker_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_fdguj")
-debug_color = Color(0.967943, 0.157153, 0.22571, 0.42)
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_4bauh")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -42,8 +42,15 @@ func get_hand2_pos() -> Vector2:
 	else:
 		return hand1_point.global_position
 
-func perform_attack() -> void:
+func perform_attack(remote=false, node_name="") -> void:
+	super(remote, node_name)
+	
+	if !remote:
+		var rng = RandomNumberGenerator.new()
+		node_name = str(rng.randi())
+	
 	var new_spear: Spear = bullet_scene.instantiate()
+	new_spear.name = node_name
 	add_child(new_spear, true)
 	
 	new_spear.global_position = emit_point.global_position

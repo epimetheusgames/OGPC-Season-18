@@ -71,14 +71,6 @@ func _ready() -> void:
 	
 	if attackbox:
 		attackbox.damage_amount = settings.damage
-	
-	if hurtbox:
-		hurtbox.damage_taken.connect(_take_damage)
-
-func _take_damage(new_health: float) -> void:
-	health -= new_health
-	if health <= 0:
-		_die()
 
 func _target_reached() -> void:
 	reached_target = true
@@ -107,6 +99,12 @@ func _process(delta: float) -> void:
 		_update_closest_player()
 		_update_player_visible()
 	
+	if hurtbox:
+		health = hurtbox.health
+	
+	if health <= 0:
+		_die()
+	
 	target_speed = settings.base_speed
 	
 	# Sync variables so that everything's the same.
@@ -122,8 +120,7 @@ func _process(delta: float) -> void:
 		target_speed *= 1 + settings.agressiveness
 		
 		var dist_to_player = position.distance_to(closest_player.position)
-		if attackbox && dist_to_player < settings.attack_distance && !attackbox.is_attacking:
-			attackbox.is_attacking = true
+		if attackbox && dist_to_player < settings.attack_distance:
 			attack()
 		
 		if dist_to_player < settings.closest_distance:
