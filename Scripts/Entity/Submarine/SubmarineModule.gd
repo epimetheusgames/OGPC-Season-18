@@ -12,6 +12,8 @@ var selected := false
 func _ready() -> void:
 	var navigation_obstacle = StaticBody2D.new()
 	navigation_obstacle.name = "NavigationObstacle"
+	navigation_obstacle.collision_layer = 10000
+	navigation_obstacle.collision_mask = 0
 	add_child(navigation_obstacle, true)
 	
 	if get_node_or_null("AttachmentPoints"):
@@ -74,16 +76,17 @@ func rotate_module(by: float) -> void:
 	for point in attachment_points:
 		point.direction = point.direction.length() * Vector2.from_angle(point.direction.angle() + by)
 
-func create_module_resource() -> SubmarineModuleResource:
+func create_module_resource(grid_position : Vector2i) -> SubmarineModuleResource:
 	var module_resource = SubmarineModuleResource.new()
 	module_resource.module_scene = path
 	module_resource.position = position
 	module_resource.rotation = rotation
+	module_resource.grid_position = grid_position
 	for point in attachment_points:
 		var attachment_point_resource := AttachmentPointResource.new()
 		attachment_point_resource.position = point.position
 		attachment_point_resource.direction = point.direction
-		attachment_point_resource.is_attached = point.attached_point != null
+		attachment_point_resource.is_attached = point.is_attached
 		module_resource.attachment_points.append(attachment_point_resource)
 	
 	return module_resource
@@ -94,4 +97,4 @@ func _draw() -> void:
 	
 	for point in attachment_points:
 		draw_circle(point.position, 10, Color.WHITE, false, 2)
-		draw_line(point.position, point.position + point.direction.rotated(-rotation) * 50, (Color.GREEN if point.attached_point else Color.RED), 2)
+		draw_line(point.position, point.position + point.direction.rotated(-rotation) * 50, (Color.GREEN if point.is_attached else Color.RED), 2)

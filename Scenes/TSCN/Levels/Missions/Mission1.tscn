@@ -8,7 +8,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Script" path="res://Scripts/Objects/CompletionArea.gd" id="12_h6qnp"]
-[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
@@ -223,7 +223,7 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dn3vl"]
 polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 7993, 6031, 7981, 6030, 7969, 6033, 7925, 6050, 7919, 6051, 7910, 6047, 7894, 6042, 7895, 6039, 7900, 6035, 7900, 6032, 7898, 6030, 7894, 6029, 7886, 6030, 7873, 6032, 7852, 6035, 7835, 6035, 7807, 6032, 7787, 6029, 7763, 6020, 7729, 6011, 7671, 6012, 7571, 6020, 7668, 6209, 7699, 6171, 7705, 6164, 7721, 6155, 7739, 6148, 7760, 6130, 7781, 6101, 7790, 6095, 7806, 6118, 7824, 6133, 7851, 6140, 7881, 6141, 7909, 6136, 7931, 6129, 7950, 6120, 7966, 6110, 7974, 6104, 7985, 6101, 8021, 6095, 8113, 6068, 8146, 6061)
 
-[sub_resource type="Resource" id="Resource_ym2hb"]
+[sub_resource type="Resource" id="Resource_lyhfb"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -376,7 +376,7 @@ script = ExtResource("4_iytd7")
 spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent" node_paths=PackedStringArray("camera") instance=ExtResource("4_0aydx")]
-position = Vector2(2202, 1133)
+position = Vector2(-4469, -703)
 camera = NodePath("Camera2D")
 uid = SubResource("Resource_km6pi")
 
@@ -516,9 +516,9 @@ visible = false
 occluder = SubResource("OccluderPolygon2D_dn3vl")
 
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
-position = Vector2(-4839, 130)
+position = Vector2(-1801, 914)
 motion_mode = 1
-uid = SubResource("Resource_ym2hb")
+uid = SubResource("Resource_lyhfb")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -682,6 +682,7 @@ max_distance = 1e+06
 [node name="Shaders" type="CanvasLayer" parent="."]
 
 [node name="Quantize" type="BackBufferCopy" parent="Shaders"]
+visible = false
 rect = Rect2(0, 0, 1920, 1080)
 metadata/_edit_lock_ = true
 

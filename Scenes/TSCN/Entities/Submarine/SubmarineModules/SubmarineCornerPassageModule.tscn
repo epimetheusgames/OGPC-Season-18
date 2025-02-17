@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://drodl0tjw368a"]
+[gd_scene load_steps=7 format=3 uid="uid://drodl0tjw368a"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_0tb48"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_cubes"]
@@ -11,16 +11,8 @@ file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineCornerPas
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0n6j"]
 size = Vector2(400, 400)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybtb7"]
-custom_solver_bias = 0.5
-size = Vector2(360, 40)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuxu8"]
-custom_solver_bias = 0.5
-size = Vector2(40, 400)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fla32"]
-size = Vector2(40, 40)
+size = Vector2(38, 38)
 
 [node name="SubmarineLPassageModule" type="Node2D"]
 script = ExtResource("1_0tb48")
@@ -31,31 +23,16 @@ path = SubResource("Resource_ljnya")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleArea"]
 shape = SubResource("RectangleShape2D_i0n6j")
 
-[node name="AttachmentPoints" type="Node2D" parent="."]
-
-[node name="Point1" type="Node2D" parent="AttachmentPoints"]
-position = Vector2(0, -200)
-script = ExtResource("3_quck6")
-direction = Vector2(0, -1)
-
-[node name="Point2" type="Node2D" parent="AttachmentPoints"]
-position = Vector2(200, 0)
-script = ExtResource("3_quck6")
-direction = Vector2(1, 0)
-
 [node name="Collision" type="Node2D" parent="."]
 
-[node name="Wall1" type="CollisionShape2D" parent="Collision"]
-position = Vector2(20, 180)
-shape = SubResource("RectangleShape2D_ybtb7")
-
-[node name="Wall2" type="CollisionShape2D" parent="Collision"]
-position = Vector2(-180, 0)
-shape = SubResource("RectangleShape2D_vuxu8")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
+polygon = PackedVector2Array(-199, 199, 199, 199, 199, 161, -161, 161, -161, -199, -199, -199)
+disabled = true
 
 [node name="Corner" type="CollisionShape2D" parent="Collision"]
 position = Vector2(180, -180)
 shape = SubResource("RectangleShape2D_fla32")
+disabled = true
 
 [node name="ColorRect5" type="ColorRect" parent="."]
 z_index = -1
@@ -82,3 +59,15 @@ offset_left = 160.0
 offset_top = -200.0
 offset_right = 200.0
 offset_bottom = -160.0
+
+[node name="AttachmentPoints" type="Node2D" parent="."]
+
+[node name="Point1" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(0, -200)
+script = ExtResource("3_quck6")
+direction = Vector2(0, -1)
+
+[node name="Point2" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(200, 0)
+script = ExtResource("3_quck6")
+direction = Vector2(1, 0)

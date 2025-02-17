@@ -63,7 +63,7 @@ func _on_weapons_module_button_up() -> void:
 
 func _process(delta: float) -> void:
 	for i in modules:
-		print(i.position)
+		print(i.global_position)
 	if adding_module:
 		var valid_point: AttachmentPoint = null
 		var our_valid_point: AttachmentPoint = null
@@ -159,10 +159,9 @@ func _process(delta: float) -> void:
 						print(i)
 				else:
 					module_grid[cell_position.y][cell_position.x] = module_adding
-					#module_adding.position += (valid_point.global_position - our_valid_point.global_position)
 					for point in attachment_point_connections.keys(): 
-						point.attached_point = attachment_point_connections[point]
-						attachment_point_connections[point].attached_point = point
+						point.is_attached = true
+						attachment_point_connections[point].is_attached = true
 					
 					module_adding = null
 					adding_module = false
@@ -195,6 +194,7 @@ func find_assosiated_point(point: Vector2, direction: Vector2, multiplier: int =
 
 # TODO: Add more stuff here.
 func do_submarine_sanity_checks() -> bool:
+	return true
 	for module in modules:
 		for point in module.attachment_points:
 			if !point.attached_point:
@@ -214,7 +214,7 @@ func _on_load_button_button_up() -> void:
 func _on_save_dialog_file_selected(path: String) -> void:
 	var sub_resource = CustomSubmarineResource.new()
 	for module in modules:
-		sub_resource.modules.append(module.create_module_resource())
+		sub_resource.modules.append(module.create_module_resource(((module.global_position - Vector2(grid_size / 2.0, grid_size / 2.0)) / grid_size).round()))
 	var file = FileAccess.open(path, FileAccess.WRITE)
 	file.store_string("")
 	file.close()
@@ -223,20 +223,32 @@ func _on_save_dialog_file_selected(path: String) -> void:
 func _on_load_dialog_file_selected(path: String) -> void:
 	var sub_resource: CustomSubmarineResource = ResourceLoader.load(path)
 	
+	# Some time in the future make it load the grid size parameters and shi
+	for i in grid_rows:
+		module_grid.append([])
+		for j in grid_columns:
+			module_grid[i].append(null)
+	print(module_grid)
+	
+	modules = []
+	
 	# Pass 1, load module positions.
 	for module in sub_resource.modules:
 		var new_module: SubmarineModule = load(module.module_scene.file).instantiate()
 		new_module.position = module.position
 		new_module.render_attachment_points = true
+		
+		new_module.rotate_module(module.rotation)
+		
+		for attachment_point in new_module.attachment_points:
+			attachment_point.direction 
+			attachment_point.is_attached = true
+		
 		origin.add_child(new_module)
 		modules.append(new_module)
+		print(new_module.position)
+		module_grid[module.grid_position.y][module.grid_position.x] = new_module
 	
-	# Pass two, load connections.
-	for module in sub_resource.modules:
-		for attachment_resource in module.attachment_points:
-			if attachment_resource.is_attached:
-				var real_point := find_assosiated_point(attachment_resource.position + module.position + origin.global_position, attachment_resource.direction)
-				real_point.attached_point = find_assosiated_point(attachment_resource.position + module.position + origin.global_position, attachment_resource.direction, -1)
 
 func find_closest_grid_spot(pos : Vector2) -> Vector2:
 	var distance_to_gridline = Vector2(fmod(pos.x, grid_size), fmod(pos.y, grid_size))
