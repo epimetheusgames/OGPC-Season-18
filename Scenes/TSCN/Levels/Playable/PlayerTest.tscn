@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cr5scuilsl4p4"]
 
-[ext_resource type="Script" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="1_21nbo"]
+[ext_resource type="Script" uid="uid://clu3v28e7dlkn" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="1_21nbo"]
 [ext_resource type="PackedScene" uid="uid://cqxetysm85e1y" path="res://Scenes/TSCN/Entities/NPCS/FishEnemy.tscn" id="2_nrsxp"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_o14wi"]
+[ext_resource type="Script" uid="uid://biua551xeovug" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_o14wi"]
 
 [sub_resource type="Resource" id="Resource_3purp"]
 resource_local_to_scene = true

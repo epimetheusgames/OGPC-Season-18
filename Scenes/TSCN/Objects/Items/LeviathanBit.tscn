@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7x8wspgj0vcv"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_fa8gb"]
-[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_kipx0"]
+[ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_fa8gb"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_kipx0"]
 
 [sub_resource type="Resource" id="Resource_yk3so"]
 script = ExtResource("2_kipx0")

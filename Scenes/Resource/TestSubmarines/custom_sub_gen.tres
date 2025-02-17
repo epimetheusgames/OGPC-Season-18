@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="CustomSubmarineResource" load_steps=14 format=3]
+[gd_resource type="Resource" script_class="CustomSubmarineResource" load_steps=14 format=3 uid="uid://b6dlt05dl5vrk"]
 
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/SubmarineModuleResource.gd" id="1_m4fgh"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/AttachmentPointResource.gd" id="2_oyi5h"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_u1n7w"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/CustomSubmarineResource.gd" id="4_vccmu"]
+[ext_resource type="Script" uid="uid://dcc0itq3m16n5" path="res://Scripts/ResourceScripts/SubmarineResources/SubmarineModuleResource.gd" id="1_m4fgh"]
+[ext_resource type="Script" uid="uid://dsigpwn6bjrea" path="res://Scripts/ResourceScripts/SubmarineResources/AttachmentPointResource.gd" id="2_oyi5h"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_u1n7w"]
+[ext_resource type="Script" uid="uid://g7cwaqrf7pgt" path="res://Scripts/ResourceScripts/SubmarineResources/CustomSubmarineResource.gd" id="4_vccmu"]
 
 [sub_resource type="Resource" id="Resource_bh55n"]
 script = ExtResource("2_oyi5h")

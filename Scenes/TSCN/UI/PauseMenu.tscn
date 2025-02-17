@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1sxg2d10k1y7"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Ingame/PauseMenu.gd" id="1_8ck0e"]
+[ext_resource type="Script" uid="uid://00pyyfylldd7" path="res://Scripts/UI/Ingame/PauseMenu.gd" id="1_8ck0e"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="2_i4y1n"]
 
 [node name="PauseMenu" type="Control"]

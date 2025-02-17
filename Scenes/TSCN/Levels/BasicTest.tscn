@@ -3,10 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="8_c2621"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="9_e8pxy"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="9_iixsi"]
-[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="10_8w3sv"]
-[ext_resource type="Script" path="res://Scripts/Demos/AutoNavigationMeshGen.gd" id="11_brcpe"]
+[ext_resource type="Script" uid="uid://biua551xeovug" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="10_8w3sv"]
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="12_uymu5"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="13_22uc1"]
+[ext_resource type="Shader" uid="uid://xnv6qtiub73y" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="13_22uc1"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="14_so7g2"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="15_wbsvv"]
 
@@ -20,6 +19,9 @@ vertices = PackedVector2Array(520.438, 657.188, 552.367, 538, 1171.31, 225.5, 16
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(5, 8, 9, 10), PackedInt32Array(10, 9, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 18, 15, 14), PackedInt32Array(2, 1, 19), PackedInt32Array(20, 17, 14), PackedInt32Array(20, 14, 21), PackedInt32Array(22, 20, 21), PackedInt32Array(23, 22, 21, 24, 25, 3), PackedInt32Array(3, 25, 4), PackedInt32Array(26, 0, 4), PackedInt32Array(27, 26, 4), PackedInt32Array(27, 4, 12, 28), PackedInt32Array(29, 28, 12), PackedInt32Array(30, 29, 12), PackedInt32Array(31, 30, 12, 11), PackedInt32Array(2, 19, 32, 33), PackedInt32Array(34, 31, 11), PackedInt32Array(33, 32, 35), PackedInt32Array(13, 16, 33), PackedInt32Array(35, 34, 11), PackedInt32Array(7, 6, 13), PackedInt32Array(11, 7, 13, 33), PackedInt32Array(35, 11, 33)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 11592, -371, 11592, 11388, -6903, 10932)])
 
+[sub_resource type="Resource" id="Resource_7uilc"]
+metadata/__load_path__ = "res://Scripts/Demos/AutoNavigationMeshGen.gd"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_57j0e"]
 radius = 228.02
 
@@ -27,11 +29,11 @@ radius = 228.02
 shader = ExtResource("13_22uc1")
 shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
 shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/depth_color_tex = ExtResource("14_so7g2")
 shader_parameter/always_top = true
 shader_parameter/blend_alpha = false
 shader_parameter/max_alpha = 0.2
 shader_parameter/height = 1.0
-shader_parameter/depth_color_tex = ExtResource("14_so7g2")
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ibnrn"]
 size = Vector2(18000, 300)
@@ -40,11 +42,11 @@ size = Vector2(18000, 300)
 shader = ExtResource("13_22uc1")
 shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
 shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/depth_color_tex = ExtResource("14_so7g2")
 shader_parameter/always_top = false
 shader_parameter/blend_alpha = false
 shader_parameter/max_alpha = 0.2
 shader_parameter/height = 1.0
-shader_parameter/depth_color_tex = ExtResource("14_so7g2")
 
 [node name="Mission1" type="Node2D"]
 
@@ -69,7 +71,7 @@ uid = SubResource("Resource_8wr54")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="LevelContainer/Level"]
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
-script = ExtResource("11_brcpe")
+script = SubResource("Resource_7uilc")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Level/NavigationRegion2D"]

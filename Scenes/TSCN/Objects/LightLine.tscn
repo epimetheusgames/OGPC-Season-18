@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://emt5tsgm8dft"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/LightLine.gd" id="1_5da3p"]
+[ext_resource type="Script" uid="uid://1w6b5rs3d1b0" path="res://Scripts/Objects/LightLine.gd" id="1_5da3p"]
 
 [node name="LightLine" type="Node2D" groups=["light_lines"]]
 z_index = -2

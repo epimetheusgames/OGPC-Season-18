@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://co2canly84hyf"]
 
-[ext_resource type="Script" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
+[ext_resource type="Script" uid="uid://baedw6bviawtd" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
 [ext_resource type="PackedScene" uid="uid://dwxcjl4jrkyw3" path="res://Scenes/TSCN/Entities/NPCS/LeviathanNode.tscn" id="1_ljr6s"]
-[ext_resource type="Script" path="res://Scripts/Entity/NPC/Leviathan.gd" id="1_ucxug"]
+[ext_resource type="Script" uid="uid://bmq6c6h4ure25" path="res://Scripts/Entity/NPC/Leviathan.gd" id="1_ucxug"]
 [ext_resource type="Resource" uid="uid://bdgr4mym5uqvq" path="res://Scenes/Resource/Entity/LeviathanSettings.tres" id="3_sik31"]
-[ext_resource type="Script" path="res://Scripts/Components/Rope/RopeAttachment.gd" id="4_6mv3f"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage/Attackbox.gd" id="5_on45p"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_6n4cc"]
+[ext_resource type="Script" uid="uid://ck16solkwfpgw" path="res://Scripts/Components/Rope/RopeAttachment.gd" id="4_6mv3f"]
+[ext_resource type="Script" uid="uid://bkq44kouw51sq" path="res://Scripts/Components/Damage/Attackbox.gd" id="5_on45p"]
+[ext_resource type="Script" uid="uid://7m5gms3hhs3x" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_6n4cc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27gx5"]
 size = Vector2(210, 202)
