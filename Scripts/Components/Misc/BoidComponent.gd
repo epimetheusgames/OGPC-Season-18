@@ -23,6 +23,7 @@ var raycast: RayCast2D
 @export var follow_position: Node2D
 @onready var component_container_node = get_node(component_container)
 @export var boid_colors: Array[Color]
+@onready var parent = get_parent()
 
 func _ready():
 	_ready_boid()
@@ -76,11 +77,8 @@ func _process(delta: float) -> void:
 	
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
 		var output = boids_calculator.get_shader_output()
-		component_container_node.velocity = Util.better_vec2_lerp(
-			component_container_node.velocity,
-			Vector2(output[boids_index * 3], output[boids_index * 3 + 1]), 
-			0.8, delta
-		)
+		component_container_node.velocity = Vector2(output[boids_index * 3], output[boids_index * 3 + 1])
 		component_container_node.position += component_container_node.velocity
-		
-	get_parent().rotation = Util.better_angle_lerp(get_parent().rotation, atan2(get_parent().velocity.normalized().y, get_parent().velocity.normalized().x) + PI / 2.0 + PI, 0.1, delta)
+	
+	var pvn = parent.velocity.normalized()
+	parent.rotation = atan2(pvn.y, pvn.x) + PI / 2.0 + PI
