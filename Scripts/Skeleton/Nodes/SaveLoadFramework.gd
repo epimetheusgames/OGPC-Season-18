@@ -145,7 +145,8 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	Global.current_game_slot = slot_num
 	Global.current_game_save = level_data
 	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = true
-	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = true
+	# dude what is this stupid shit
+	#Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = true
 	
 	if Global.verbose_debug:
 		print("DEBUG: Game loaded successfuly, printing loaded data.")
@@ -189,9 +190,11 @@ func exit_to_menu() -> void:
 	Global.current_game_save = null
 	Global.current_game_slot = -1
 	Global.ui_root_node.visible = true
+	# tf do you mean "???", its a function to open the menu 
 	Global.ui_root_node.get_node("MainMenu").visible = true # ???
 	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = false
-	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = false
+	# CARSON ACTUALLY WHAT IS THIS WHY IS THERE TWO
+	#Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = false
 	
 	for child in game_container.get_children():
 		child.queue_free()

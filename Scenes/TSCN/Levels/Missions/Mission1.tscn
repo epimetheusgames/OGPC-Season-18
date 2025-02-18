@@ -8,7 +8,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Script" path="res://Scripts/Objects/CompletionArea.gd" id="12_h6qnp"]
-[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
@@ -572,7 +572,6 @@ shape = SubResource("RectangleShape2D_vedra")
 
 [node name="BoidsGroup" type="Node" parent="LevelContainer/Entities/Boids" node_paths=PackedStringArray("boids_scene")]
 script = ExtResource("15_at1j7")
-num_boids = 200
 spawn_position_node_path = NodePath("../BoidsSpawnPos")
 boids_scene = NodePath("../Boid")
 

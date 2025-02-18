@@ -22,7 +22,7 @@ universal_fade/patterns_directory="res://addons/UniversalFade/Patterns"
 [application]
 
 config/name="OGPC Season 18"
-run/main_scene="res://Scenes/TSCN/Root.tscn"
+run/main_scene="res://Scenes/TSCN/Entities/Root.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/Art/Sprites/Misc/icon.svg"
 
@@ -172,6 +172,7 @@ avoidance/gdscript/max_call_stack=2047
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality.mobile=3
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
