@@ -8,6 +8,7 @@ var render_attachment_points := false
 var is_editor_peice := false
 var mouse_in_area := false
 var selected := false
+var grid_position : Vector2i
 
 func _ready() -> void:
 	var navigation_obstacle = StaticBody2D.new()
@@ -55,8 +56,8 @@ func _process(delta: float) -> void:
 		modulate = Color(1.5, 1.5, 1.5)
 		
 		if Input.is_action_just_pressed("ui_text_backspace"):
-			
 			editor.modules.remove_at(editor.modules.find(self))
+			editor.module_grid[grid_position.y][grid_position.x] = null
 			queue_free()
 	else:
 		modulate = Color(1, 1, 1)
@@ -76,7 +77,7 @@ func rotate_module(by: float) -> void:
 	for point in attachment_points:
 		point.direction = point.direction.length() * Vector2.from_angle(point.direction.angle() + by)
 
-func create_module_resource(grid_position : Vector2i) -> SubmarineModuleResource:
+func create_module_resource() -> SubmarineModuleResource:
 	var module_resource = SubmarineModuleResource.new()
 	module_resource.module_scene = path
 	module_resource.position = position
