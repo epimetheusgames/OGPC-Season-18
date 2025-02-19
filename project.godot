@@ -22,7 +22,7 @@ universal_fade/patterns_directory="res://addons/UniversalFade/Patterns"
 [application]
 
 config/name="OGPC Season 18"
-run/main_scene="res://Scenes/TSCN/Entities/Root.tscn"
+run/main_scene="res://Scenes/TSCN/Root.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Assets/Art/Sprites/Misc/icon.svg"
 

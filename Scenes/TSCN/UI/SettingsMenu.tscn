@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1oaylh32r500"]
+[gd_scene load_steps=4 format=3 uid="uid://c1oaylh32r500"]
 
 [ext_resource type="Script" path="res://Scripts/UI/SettingsMenu.gd" id="1_3dd0e"]
 [ext_resource type="Texture2D" uid="uid://cqx2208sneqm4" path="res://Assets/Art/UI/arrow.svg" id="2_l4xm8"]
+[ext_resource type="Script" path="res://Scenes/TSCN/UI/sliderIsStupid.gd" id="2_s8p8c"]
 
 [node name="Settings" type="Control" node_paths=PackedStringArray("brightnessSlider", "performanceButton", "soundSlider")]
 process_mode = 3
@@ -80,8 +81,9 @@ fit_content = true
 scroll_active = false
 
 [node name="brightnessSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
 layout_mode = 2
-value = 100.0
+script = ExtResource("2_s8p8c")
 
 [node name="backButton" type="TextureButton" parent="."]
 layout_mode = 0
@@ -129,6 +131,7 @@ autowrap_mode = 0
 
 [node name="masterVolumeSlider" type="HSlider" parent="soundSubMenu/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+script = ExtResource("2_s8p8c")
 
 [node name="backButton" type="TextureButton" parent="soundSubMenu"]
 z_index = 14

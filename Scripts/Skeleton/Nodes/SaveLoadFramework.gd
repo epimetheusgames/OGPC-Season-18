@@ -197,7 +197,9 @@ func exit_to_menu() -> void:
 	#Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = false
 	
 	for child in game_container.get_children():
-		child.queue_free()
+		# BrightnessModulate my goat
+		if(child.name!="BrightnessModulate"):
+			child.queue_free()
 	
 	if !ui_root_node_path:
 		print("WARNING: SaveLoadFramework contains no UI root node, no menu to exit to.")
