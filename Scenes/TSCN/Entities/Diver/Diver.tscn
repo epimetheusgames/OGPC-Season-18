@@ -20,7 +20,6 @@
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
 [ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
-[ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="17_2as0u"]
 
 [sub_resource type="Resource" id="Resource_175vb"]
 resource_local_to_scene = true
@@ -29,7 +28,11 @@ uid = 3625
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 24.0
-height = 138.0
+height = 158.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_auddj"]
+radius = 24.0
+height = 186.0
 
 [sub_resource type="Resource" id="Resource_og7y3"]
 script = ExtResource("6_3bvk2")
@@ -166,8 +169,13 @@ script = ExtResource("1_1l6ma")
 uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2(0, -19)
+position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_ghsq1")
+
+[node name="LargeBody" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+shape = SubResource("CapsuleShape2D_auddj")
+disabled = true
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("3_r5rx4")
@@ -613,14 +621,8 @@ buoyancy_accel = 1.0
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
 
-[node name="Dummy2" parent="." instance=ExtResource("17_2as0u")]
-top_level = true
-position = Vector2(246, 144)
-
-[node name="Dummy" parent="." instance=ExtResource("17_2as0u")]
-top_level = true
-position = Vector2(152, 144)
-
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
+[connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Movement" method="_on_general_detection_box_area_entered"]
 [connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Stats" method="_on_general_detection_box_area_entered"]
+[connection signal="area_exited" from="Stats/GeneralDetectionBox" to="Movement" method="_on_general_detection_box_area_exited"]
 [connection signal="area_exited" from="Stats/GeneralDetectionBox" to="Stats" method="_on_general_detection_box_area_exited"]

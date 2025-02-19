@@ -11,19 +11,25 @@ const MAX_SPEED: int = 700
 var current_angle: float = 0
 var input_vector: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
+var is_in_gravity_area := false
 
-@onready var diver_root: Diver = get_parent()
+@onready var diver: Diver = get_parent()
 @export var use_mouse_movement := false
+@export var gravity := 1.0
 
 signal boosted
 
 func _physics_process(delta: float) -> void:
-	if !Global.is_multiplayer || get_parent()._is_node_owner():
-		if get_parent().get_state() != Util.DiverState.DRIVING_SUBMARINE && get_parent().get_state() != Util.DiverState.OPERATING_MODULE:
-			input_vector = get_input_vector()
-			
-			update_current_angle(delta * 60)
-			update_movement_velocity(delta * 60)
+	if (Global.is_multiplayer && !diver._is_node_owner()) || diver.get_state() == Util.DiverState.DRIVING_SUBMARINE || diver.get_state() == Util.DiverState.OPERATING_MODULE:
+		return
+	
+	if diver.get_state() == Util.DiverState.IN_GRAVITY_AREA:
+		input_vector = get_walking_input_vector()
+	else:
+		input_vector = get_input_vector()
+	
+	update_current_angle(delta * 60)
+	update_movement_velocity(delta * 60)
 
 func get_input_vector() -> Vector2:
 	if use_mouse_movement:
@@ -44,12 +50,26 @@ func get_wasd_input_vector() -> Vector2:
 	
 	return input_vector.normalized()
 
+func get_walking_input_vector() -> Vector2:
+	input_vector = Vector2.ZERO
+	
+	if Input.is_action_pressed("right"):
+		input_vector += Vector2.RIGHT
+	if Input.is_action_pressed("left"):
+		input_vector += Vector2.LEFT
+	
+	return input_vector
+
 # This is mostly a workaround for now until the bug with getting the mouse 
-# position inside a viewport gets fixed (https://github.com/godotengine/godot/issues/99912)
+# position inside a viewport gets fixed
 func get_mouse_input_vector() -> Vector2:
 	return (Vector2(DisplayServer.mouse_get_position()) - Vector2(960, 540)).normalized()
 
 func update_current_angle(delta: float) -> void:
+	if is_in_gravity_area:
+		current_angle = Vector2.UP.angle()
+		return
+	
 	if input_vector != Vector2.ZERO:
 		var input_angle = input_vector.angle()
 		current_angle = lerp_angle(current_angle, input_angle, 0.1 * delta)
@@ -57,7 +77,16 @@ func update_current_angle(delta: float) -> void:
 func update_movement_velocity(delta: float):
 	velocity = velocity * 0.97
 	
-	if input_vector != Vector2.ZERO: 
+	if is_in_gravity_area:
+		diver.rotation = 0
+		velocity.y += gravity * delta * 60
+		
+		if input_vector.length_squared() > 0:
+			velocity += input_vector * 4 * delta * 60
+		else:
+			velocity.x = 0
+	
+	elif input_vector != Vector2.ZERO: 
 		velocity += Util.angle_to_vector_radians(current_angle, CONST_ACCEL * delta)
 	
 	if Input.is_action_just_pressed("move"):
@@ -76,3 +105,13 @@ func get_velocity() -> Vector2:
 
 func get_current_angle() -> float:
 	return self.current_angle
+
+func _on_general_detection_box_area_entered(area: Area2D) -> void:
+	if area.is_in_group("gravity_areas"):
+		diver.set_state(Util.DiverState.IN_GRAVITY_AREA)
+		is_in_gravity_area = true
+
+func _on_general_detection_box_area_exited(area: Area2D) -> void:
+	if area.is_in_group("gravity_areas"):
+		diver.set_state(Util.DiverState.SWIMMING)
+		is_in_gravity_area = false

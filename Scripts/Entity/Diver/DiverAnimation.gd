@@ -64,17 +64,11 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if Global.godot_steam_abstraction:
-		if Global.is_multiplayer:
-			if diver._is_node_owner():
-				displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
-			else:
-				displayed_nametag.text = Steam.getFriendPersonaName(int(str(diver.name)))
+	if Global.godot_steam_abstraction && Global.is_multiplayer:
 		if diver._is_node_owner():
-			Global.godot_steam_abstraction.sync_var(arm_target1, "position")
-			Global.godot_steam_abstraction.sync_var(arm_target2, "position")
-			Global.godot_steam_abstraction.sync_var(leg_target1, "position")
-			Global.godot_steam_abstraction.sync_var(leg_target2, "position")
+			displayed_nametag.text = Steam.getFriendPersonaName(Global.godot_steam_abstraction.steam_id)
+		else:
+			displayed_nametag.text = Steam.getFriendPersonaName(int(str(diver.name)))
 	
 	var head_pos: Vector2 = get_head_position()
 	
@@ -86,26 +80,29 @@ func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
 		return
 	
+	_sync_multiplayer()
+	
 	# Update the arrow rotation
 	arrow.global_rotation = diver.get_diver_movement().get_current_angle()
 	
 	# Legs
-	leg_target1.global_position = animate_leg(1, delta)
-	leg_target2.global_position = animate_leg(2, delta)
+	if diver.get_state() != Util.DiverState.IN_GRAVITY_AREA:
+		leg_target1.global_position = _animate_leg(1, delta)
+		leg_target2.global_position = _animate_leg(2, delta)
 	
 	# Arms
 	if !hand1_weapon_control:
-		arm_target1.position = animate_arm(1, delta)
+		arm_target1.position = _animate_arm(1, delta)
 	else:
 		hand1_weapon_control = false
 	
 	if !hand2_weapon_control:
-		arm_target2.position = animate_arm(2, delta)
+		arm_target2.position = _animate_arm(2, delta)
 	else:
 		hand2_weapon_control = false
 
 # leg 1 or 2
-func animate_leg(leg: int, delta: float) -> Vector2:
+func _animate_leg(leg: int, delta: float) -> Vector2:
 	const DIST_FROM_BODY = -110
 	const MIN_LEG_DIST = -25
 	const MAX_LEG_DIST = 25
@@ -131,12 +128,19 @@ func animate_leg(leg: int, delta: float) -> Vector2:
 	
 	return diver_pos + leg_offset + body_offset
 
-func animate_arm(arm: int, delta: float) -> Vector2:
+func _animate_arm(arm: int, delta: float) -> Vector2:
 	if arm == 1:
 		return Vector2(38, 44)
 	elif arm == 2:
 		return Vector2(-38, 44)
 	return Vector2.ZERO
+
+func _sync_multiplayer() -> void:
+	if Global.godot_steam_abstraction && Global.is_multiplayer:
+		Global.godot_steam_abstraction.sync_var(arm_target1, "position")
+		Global.godot_steam_abstraction.sync_var(arm_target2, "position")
+		Global.godot_steam_abstraction.sync_var(leg_target1, "position")
+		Global.godot_steam_abstraction.sync_var(leg_target2, "position")
 
 # Body part setters / getters
 
@@ -146,7 +150,6 @@ func get_head_position() -> Vector2:
 	var pos: Vector2 = head.global_position
 	var rot: float = head.get_bone_angle() + head.get_global_rotation()
 	return pos + Util.angle_to_vector_radians(rot, head.get_length())
-
 
 func get_hand1_position() -> Vector2:
 	var arm1: Bone2D = $"Skeleton/Torso/UpperArm1/Forearm1"

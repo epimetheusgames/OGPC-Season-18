@@ -35,6 +35,11 @@ func _process(delta: float) -> void:
 		if weapon is Weapon && weapon.visible && !weapon == selected_weapon:
 			weapon.visible = false
 	
+	if diver.get_state() == Util.DiverState.IN_GRAVITY_AREA:
+		visible = false
+	else:
+		visible = true
+	
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
 		return
 	

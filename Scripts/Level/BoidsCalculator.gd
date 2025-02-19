@@ -277,7 +277,7 @@ func remove_boid_index(id):
 	# Move all the indices backward because we just removed a node.
 	for boid_index in range(id + 1, boids_node_list.size() - 1, 1):
 		# Something's broken about this system but i don't want to fix it.
-		if boids_node_list[boid_index]:
+		if boids_node_list[boid_index] && is_instance_valid(boids_node_list[boid_index]):
 			boids_node_list[boid_index].boids_index -= 1
 	
 	boids_parameters_array_bytes = boids_parameters_array.to_byte_array()
