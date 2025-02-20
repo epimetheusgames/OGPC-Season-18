@@ -62,7 +62,12 @@ func eval(input: String):
 	script_holder.set_script(script)
 	return script_holder.eval()
 func set_brightness(percentage:int):
-	spedass_percentage = percentage/100
-	root_node.brightness_modulate.color.r = 255*spedass_percentage
-	root_node.brightness_modulate.color.b = 255*spedass_percentage
-	root_node.brightness_modulate.color.g = 255*spedass_percentage
+	# me when type is "previously freed"
+	if(is_instance_valid(root_node) && is_instance_valid(root_node.brightness_modulate)):
+		if(percentage!=0):
+			spedass_percentage = percentage/100
+		else:
+			spedass_percentage = percentage/100
+		root_node.brightness_modulate.color.r = 255*spedass_percentage
+		root_node.brightness_modulate.color.b = 255*spedass_percentage
+		root_node.brightness_modulate.color.g = 255*spedass_percentage
