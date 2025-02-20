@@ -222,7 +222,7 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dn3vl"]
 polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 7993, 6031, 7981, 6030, 7969, 6033, 7925, 6050, 7919, 6051, 7910, 6047, 7894, 6042, 7895, 6039, 7900, 6035, 7900, 6032, 7898, 6030, 7894, 6029, 7886, 6030, 7873, 6032, 7852, 6035, 7835, 6035, 7807, 6032, 7787, 6029, 7763, 6020, 7729, 6011, 7671, 6012, 7571, 6020, 7668, 6209, 7699, 6171, 7705, 6164, 7721, 6155, 7739, 6148, 7760, 6130, 7781, 6101, 7790, 6095, 7806, 6118, 7824, 6133, 7851, 6140, 7881, 6141, 7909, 6136, 7931, 6129, 7950, 6120, 7966, 6110, 7974, 6104, 7985, 6101, 8021, 6095, 8113, 6068, 8146, 6061)
 
-[sub_resource type="Resource" id="Resource_o0438"]
+[sub_resource type="Resource" id="Resource_gr6wh"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 158
@@ -372,7 +372,7 @@ script = ExtResource("4_iytd7")
 spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent" node_paths=PackedStringArray("camera") instance=ExtResource("4_0aydx")]
-position = Vector2(-3481, 2527)
+position = Vector2(-3492, 2657)
 camera = NodePath("Camera2D")
 uid = SubResource("Resource_km6pi")
 
@@ -514,7 +514,7 @@ occluder = SubResource("OccluderPolygon2D_dn3vl")
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_o0438")
+uid = SubResource("Resource_gr6wh")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Level/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -534,11 +534,13 @@ points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 position = Vector2(-4236, -362)
 
 [node name="ResearchStation" type="Node2D" parent="LevelContainer/Level"]
+metadata/_edit_lock_ = true
 
 [node name="Wall" type="Polygon2D" parent="LevelContainer/Level/ResearchStation"]
 z_index = 2
 color = Color(0.854385, 0.854385, 0.854385, 1)
 polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819, -2678, 2742, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2676, 2757, -2678, 2743)
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Level/ResearchStation/Wall"]
 
@@ -549,8 +551,10 @@ polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426,
 [node name="Background" type="Polygon2D" parent="LevelContainer/Level/ResearchStation"]
 color = Color(0.334727, 0.334727, 0.334727, 1)
 polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
+metadata/_edit_lock_ = true
 
 [node name="GravityArea" type="Area2D" parent="LevelContainer/Level/ResearchStation" groups=["gravity_areas"]]
+metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Level/ResearchStation/GravityArea"]
 visible = false
