@@ -75,7 +75,7 @@ func _ready() -> void:
 		attackbox.damage_amount = settings.damage
 	
 	if hurtbox:
-		hurtbox.damage_taken.connect(_take_damage)
+		hurtbox.damaged.connect(_take_damage)
 	
 	if settings.player_shines_light:
 		if !light_detector:
