@@ -1,7 +1,7 @@
 class_name Knife
 extends Weapon
 
-@export var attackbox: OneShotAttack
+@export var attackbox: Attackbox
 
 @export var dist_from_head: float = 40.0
 @export var spread_angle: float = 120.0
@@ -55,14 +55,12 @@ func _process(delta: float) -> void:
 func attack() -> void:
 	if enabled && cooldown_timer_over:
 		attackbox.is_attacking = true
-		attackbox.reset()
 		
 		perform_attack()
 		animate_slash_angle()
 		
 		cooldown_timer_over = false
 		cooldown_timer.start(cooldown_time)
-		
 		
 		await get_tree().create_timer(slash_time + 0.05).timeout
 		attackbox.is_attacking = false

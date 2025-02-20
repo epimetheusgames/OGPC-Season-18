@@ -8,10 +8,13 @@ var render_attachment_points := false
 var is_editor_peice := false
 var mouse_in_area := false
 var selected := false
+var grid_position : Vector2i
 
 func _ready() -> void:
 	var navigation_obstacle = StaticBody2D.new()
 	navigation_obstacle.name = "NavigationObstacle"
+	navigation_obstacle.collision_layer = 10000
+	navigation_obstacle.collision_mask = 0
 	add_child(navigation_obstacle, true)
 	
 	if get_node_or_null("AttachmentPoints"):
@@ -53,8 +56,8 @@ func _process(delta: float) -> void:
 		modulate = Color(1.5, 1.5, 1.5)
 		
 		if Input.is_action_just_pressed("ui_text_backspace"):
-			
 			editor.modules.remove_at(editor.modules.find(self))
+			editor.module_grid[grid_position.y][grid_position.x] = null
 			queue_free()
 	else:
 		modulate = Color(1, 1, 1)
@@ -79,11 +82,12 @@ func create_module_resource() -> SubmarineModuleResource:
 	module_resource.module_scene = path
 	module_resource.position = position
 	module_resource.rotation = rotation
+	module_resource.grid_position = grid_position
 	for point in attachment_points:
 		var attachment_point_resource := AttachmentPointResource.new()
 		attachment_point_resource.position = point.position
 		attachment_point_resource.direction = point.direction
-		attachment_point_resource.is_attached = point.attached_point != null
+		attachment_point_resource.is_attached = point.is_attached
 		module_resource.attachment_points.append(attachment_point_resource)
 	
 	return module_resource
@@ -94,4 +98,4 @@ func _draw() -> void:
 	
 	for point in attachment_points:
 		draw_circle(point.position, 10, Color.WHITE, false, 2)
-		draw_line(point.position, point.position + point.direction.rotated(-rotation) * 50, (Color.GREEN if point.attached_point else Color.RED), 2)
+		draw_line(point.position, point.position + point.direction.rotated(-rotation) * 50, (Color.GREEN if point.is_attached else Color.RED), 2)

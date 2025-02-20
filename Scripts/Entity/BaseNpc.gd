@@ -93,6 +93,7 @@ func die() -> void:
 	
 	self.queue_free()
 func try_trigger_talking() -> void:
+	return
 	if(touching_bodies()):
 		trigger_talking()
 func trigger_talking() -> void:

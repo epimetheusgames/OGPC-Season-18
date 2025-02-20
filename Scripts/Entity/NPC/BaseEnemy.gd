@@ -125,6 +125,12 @@ func _process(delta: float) -> void:
 		_update_closest_player()
 		_update_player_visible()
 	
+	if hurtbox:
+		health = hurtbox.health
+	
+	if health <= 0:
+		_die()
+	
 	target_speed = settings.base_speed
 	
 	# Sync variables so that everything's the same.

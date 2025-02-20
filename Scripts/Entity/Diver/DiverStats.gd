@@ -5,6 +5,7 @@ var health: float = 100
 var oxygen_percentage: float = 100
 var oxygen_loss: float
 var completion_areas_entered: Array[CompletionArea]
+@onready var hurtbox: Hurtbox = $Hurtbox
 @onready var diver: Diver = get_parent()
 
 func _process(delta: float) -> void:
@@ -12,6 +13,7 @@ func _process(delta: float) -> void:
 		return
 	
 	oxygen_percentage -= oxygen_loss * delta * 60
+	health = hurtbox.health
 	
 	if Global.godot_steam_abstraction:
 		Global.godot_steam_abstraction.sync_var(self, "health")

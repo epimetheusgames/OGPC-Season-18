@@ -35,9 +35,12 @@ func can_take_damage(attackbox: Attackbox) -> bool:
 		(attackbox.attacker_type == Attackbox.AttackerType.OTHER)
 		) && (!is_invincible)
 
-func damage(damage_amount: float) -> void:
+func damage(damage_amount: float, by: Attackbox) -> void:
 	if is_invincible:
 		return
+	
+	if Global.verbose_debug:
+		print("DEBUG: Hurtbox at path " + str(get_path()) + " was damaged. Ammount: " + str(damage_amount))
 	
 	var new_health = clamp(health - damage_amount, 0, max_health)
 	emit_signal("damaged", abs(health - new_health))

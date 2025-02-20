@@ -131,9 +131,6 @@ func ext_join_lobby(lobby_index: int):
 
 func get_lobby_list() -> void:
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
-	
-	if Global.verbose_debug:
-		print("DEBUG: Requesting lobby list.")
 	Steam.requestLobbyList()
 
 func check_command_line() -> void:
@@ -221,8 +218,6 @@ func _on_lobby_created(connect_info: int, this_lobby_id: int) -> void:
 			print("DEBUG: Allowing Steam to relay backup: %s" % set_relay)
 
 func _on_lobby_match_list(these_lobbies: Array) -> void:
-	if Global.verbose_debug:
-		print("DEBUG: Lobby list fetched, printing below.")
 	lobbies_list = []
 	for this_lobby in these_lobbies:
 		var lobby_name: String = Steam.getLobbyData(this_lobby, "name")
@@ -342,8 +337,6 @@ func check_for_voice() -> void:
 		# However, this is not mentioned in the header nor the SpaceWar example but -is- in Valve's docs which are usually wrong
 		var voice_data: Dictionary = Steam.getVoice()
 		if voice_data['result'] == Steam.VOICE_RESULT_OK and voice_data['written']:
-			print("Voice message has data: %s / %s" % [voice_data['result'], voice_data['written']])
-
 			# Here we can pass this voice data off on the network
 			#send_raw_data(voice_data['buffer'])
 

@@ -8,7 +8,7 @@
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Script" path="res://Scripts/Objects/CompletionArea.gd" id="12_h6qnp"]
-[ext_resource type="Script" uid="uid://65shals1260q" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
+[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="15_p6xfd"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
@@ -289,13 +289,13 @@ probability = 2
 script = ExtResource("16_4wjdw")
 scene = ExtResource("35_47o3q")
 group_size = 1
-probability = 0
+probability = 2
 
 [sub_resource type="Resource" id="Resource_q2flg"]
 script = ExtResource("16_4wjdw")
 scene = ExtResource("20_tdtsg")
 group_size = 7
-probability = 8
+probability = 6
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
 background_canvas_max_layer = 10
@@ -413,7 +413,7 @@ script = ExtResource("4_iytd7")
 spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Level/MultiplayerPlayerSpawnerComponent" node_paths=PackedStringArray("camera") instance=ExtResource("4_0aydx")]
-position = Vector2(2202, 1133)
+position = Vector2(-4469, -703)
 camera = NodePath("Camera2D")
 uid = SubResource("Resource_km6pi")
 
@@ -553,7 +553,7 @@ visible = false
 occluder = SubResource("OccluderPolygon2D_dn3vl")
 
 [node name="Submarine" parent="LevelContainer/Level" instance=ExtResource("32_6lnpa")]
-position = Vector2(-5795, 145)
+position = Vector2(-1801, 914)
 motion_mode = 1
 uid = SubResource("Resource_a22it")
 
@@ -609,7 +609,6 @@ shape = SubResource("RectangleShape2D_vedra")
 
 [node name="BoidsGroup" type="Node" parent="LevelContainer/Entities/Boids" node_paths=PackedStringArray("boids_scene")]
 script = ExtResource("15_at1j7")
-num_boids = 200
 spawn_position_node_path = NodePath("../BoidsSpawnPos")
 boids_scene = NodePath("../Boid")
 
@@ -719,6 +718,7 @@ max_distance = 1e+06
 [node name="Shaders" type="CanvasLayer" parent="."]
 
 [node name="Quantize" type="BackBufferCopy" parent="Shaders"]
+visible = false
 rect = Rect2(0, 0, 1920, 1080)
 metadata/_edit_lock_ = true
 
@@ -781,7 +781,6 @@ metadata/_edit_lock_ = true
 [node name="DeathScreen" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("32_kyt52")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
-vignette_shader = NodePath("../../Shaders/Vignette/ColorRect")
 
 [node name="MissionSuccessScreen" parent="UI" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("33_aiin4")]
 visible = false

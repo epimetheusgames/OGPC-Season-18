@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1sxg2d10k1y7"]
+[gd_scene load_steps=2 format=3 uid="uid://c1sxg2d10k1y7"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Ingame/PauseMenu.gd" id="1_8ck0e"]
-[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="2_i4y1n"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -28,9 +27,8 @@ layout_mode = 0
 offset_top = 193.0
 offset_right = 1921.0
 offset_bottom = 325.0
-theme = ExtResource("2_i4y1n")
 theme_override_font_sizes/font_size = 96
-text = "Game Paused"
+text = "Diving Game Title"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="."]
@@ -40,7 +38,6 @@ offset_left = 824.0
 offset_top = 438.0
 offset_right = 1081.0
 offset_bottom = 512.0
-theme = ExtResource("2_i4y1n")
 theme_override_font_sizes/font_size = 36
 text = "Resume"
 
@@ -51,7 +48,6 @@ offset_left = 824.0
 offset_top = 534.0
 offset_right = 1081.0
 offset_bottom = 608.0
-theme = ExtResource("2_i4y1n")
 theme_override_font_sizes/font_size = 36
 action_mode = 0
 text = "Settings
@@ -64,7 +60,6 @@ offset_left = 824.0
 offset_top = 630.0
 offset_right = 1081.0
 offset_bottom = 704.0
-theme = ExtResource("2_i4y1n")
 theme_override_font_sizes/font_size = 36
 text = "Quit"
 

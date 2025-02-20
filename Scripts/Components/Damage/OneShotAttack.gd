@@ -5,21 +5,9 @@
 class_name OneShotAttack
 extends Attackbox
 
-@export var is_attacking: bool = false
-
-var damaged_hurtboxes: Array[Hurtbox] = []
-
 func _ready() -> void:
 	super()
-	connect("hurtbox_hit", _on_hurtbox_hit)
 
-func _on_hurtbox_hit(hurtbox: Hurtbox) -> void:
-	if is_attacking:
-		if damaged_hurtboxes.has(hurtbox):
-			return
-		
-		damage_hurtbox(hurtbox)
-		damaged_hurtboxes.append(hurtbox)
-
-func reset() -> void:
-	damaged_hurtboxes.clear()
+func _process(delta: float) -> void:
+	if enabled:
+		enabled = false

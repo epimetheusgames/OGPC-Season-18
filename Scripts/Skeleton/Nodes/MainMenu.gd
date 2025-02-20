@@ -29,7 +29,8 @@ func _on_singleplayer_button_button_up() -> void:
 	for child in $"../BoidsGroup".get_children():
 		child.queue_free()
 	$"../StaticBody2D/CollisionPolygon2D".disabled = true
-	$"../StaticBody2D/CollisionPolygon2D2".disabled = true
+	# Carsons code is straight doo doo
+	#$"../StaticBody2D/CollisionPolygon2D2".disabled = true
 	Global.ui_root_node.visible = false
 	Global.save_load_framework.start_game(0) 
 

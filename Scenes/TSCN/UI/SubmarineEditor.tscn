@@ -16,7 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_sg7o5")
+script = ExtResource("1_rijmy")
 
 [node name="SplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 0
@@ -93,7 +93,7 @@ position = Vector2(1000, 1000)
 position = Vector2(960, 540)
 
 [node name="MouseArea" type="Area2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport"]
-script = ExtResource("2_nr508")
+script = ExtResource("2_kvlip")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SplitContainer/SubmarineView/ViewContainer/Viewport/MouseArea"]
 shape = SubResource("CircleShape2D_1kmne")

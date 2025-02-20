@@ -7,6 +7,7 @@ func _physics_process(delta: float) -> void:
 func fire(angle: float) -> void:
 	rotation = angle + PI/2
 	velocity = Util.angle_to_vector_radians(angle, speed)
+	attackbox.is_attacking = true
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Diver:

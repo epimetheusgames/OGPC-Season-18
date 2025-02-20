@@ -22,28 +22,35 @@ signal damage_dealt(hurtbox: Hurtbox, damage_amount: float)
 # Signals when a hurtbox damaged reaches 0 health
 signal killed()
 
+var is_attacking := false
+
 func _ready() -> void:
 	var collision: CollisionShape2D = get_child(0)
 	collision.debug_color = Color.RED
 	collision.debug_color.a = 0.3
 
 func _process(delta: float) -> void:
+	if !is_attacking:
+		return
+	
 	var areas: Array[Area2D] = get_overlapping_areas()
 	
 	for area in areas:
 		if area is Hurtbox:
 			var hurtbox: Hurtbox = area
-			emit_signal("hurtbox_hit", hurtbox)
+			damage_hurtbox(hurtbox)
+			hurtbox_hit.emit(hurtbox)
 
 func damage_hurtbox(hurtbox: Hurtbox) -> void:
 	if hurtbox.can_take_damage(self):
-		
-		hurtbox.damage(damage_amount)
+		if Global.verbose_debug:
+			print("DEBUG: Attackbox at path " + str(get_path()) + " damages the hurtbox below.")
+		hurtbox.damage(damage_amount, self)
 		display_number(damage_amount, hurtbox.global_position)
-		emit_signal("damage_dealt", damage_amount)
+		damage_dealt.emit(hurtbox, damage_amount)
 		
 		if hurtbox.health - damage_amount <= 0:
-			emit_signal("killed")
+			killed.emit()
 
 func display_number(value: int, position: Vector2) -> void:
 	var number = Label.new()

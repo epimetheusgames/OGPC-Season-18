@@ -49,14 +49,14 @@ metadata/_edit_lock_ = true
 z_index = -1
 points = PackedVector2Array(6, 20, 37, 5)
 width = 4.0
-default_color = Color(0.2646, 0.54, 0.2646, 1)
+default_color = Color(0.487598, 0.924542, 0.486052, 1)
 metadata/_edit_lock_ = true
 
 [node name="LeftBackArm" type="Line2D" parent="."]
 z_index = -1
 points = PackedVector2Array(-9, 22, -36, 6)
 width = 4.0
-default_color = Color(0.2646, 0.54, 0.2646, 1)
+default_color = Color(0.487598, 0.924542, 0.486052, 1)
 metadata/_edit_lock_ = true
 
 [node name="RightFrontArmRope" type="Node" parent="."]
