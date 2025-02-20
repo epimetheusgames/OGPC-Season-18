@@ -12,6 +12,7 @@ extends Entity
 
 @export var hurtbox: Hurtbox
 @export var attackbox: Attackbox
+@export var light_detector: Area2D
 
 @export var quick_disable_everything := false
 
@@ -21,6 +22,7 @@ var closest_player: Diver
 var player_in_area := false
 var player_visible := false
 var reached_target := false
+var light_visible := false
 var wander_state := WANDER_MODE.NOT_WANDERING
 var num_players_in_area = 0
 var players_list = []
@@ -71,6 +73,30 @@ func _ready() -> void:
 	
 	if attackbox:
 		attackbox.damage_amount = settings.damage
+	
+	if hurtbox:
+		hurtbox.damage_taken.connect(_take_damage)
+	
+	if settings.player_shines_light:
+		if !light_detector:
+			print("ERROR: Enemy at path " + str(get_path()) + " has no light detector.")
+			return
+		
+		light_detector.collision_layer = 0
+		light_detector.collision_mask = Global.bitmask_conversion["Light"]
+		light_detector.area_entered.connect(_light_entered)
+		light_detector.area_exited.connect(_light_exited)
+
+func _light_entered(area: Area2D):
+	light_visible = true
+
+func _light_exited(area: Area2D):
+	light_visible = false
+
+func _take_damage(new_health: float) -> void:
+	health -= new_health
+	if health <= 0:
+		_die()
 
 func _target_reached() -> void:
 	reached_target = true
@@ -182,9 +208,15 @@ func _update_target_position():
 	
 	if player_visible:
 		if settings.attack_mode == EnemyBehaviorSettings.ATTACK_MODE.ATTACK:
-			target_position = closest_player.position
+			if global_position.distance_squared_to(closest_player.global_position) > 800 ** 2:
+				target_position = closest_player.position + -Util.angle_to_vector_radians(closest_player.global_rotation - PI / 2.0, 800)
+			else:
+				target_position = closest_player.position
 		elif settings.attack_mode == EnemyBehaviorSettings.ATTACK_MODE.RUN:
 			target_position = position - (closest_player.position - position)
+	
+	if light_visible && settings.player_shines_light && global_position.distance_squared_to(closest_player.global_position) > 200 ** 2:
+		target_position = closest_player.position + -Util.angle_to_vector_radians(closest_player.global_rotation, 700)
 
 func _update_wander_point():
 	var valid_point_found := false
