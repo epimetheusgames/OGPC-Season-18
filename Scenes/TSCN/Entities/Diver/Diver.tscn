@@ -590,6 +590,14 @@ shadow_filter = 1
 shadow_filter_smooth = 3.1
 texture = ExtResource("10_qg316")
 
+[node name="LightArea" type="Area2D" parent="Light/FlashLight"]
+scale = Vector2(0.666667, 0.666667)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light/FlashLight/LightArea"]
+polygon = PackedVector2Array(1, -2, 361, -643, 126, -681, -93, -682, -315, -617)
+
 [node name="BodyLight" type="PointLight2D" parent="Light"]
 range_item_cull_mask = 3
 shadow_enabled = true

@@ -14,6 +14,9 @@ extends Resource
 @export var wander_type: WANDER_TYPE
 @export var attack_mode: ATTACK_MODE
 
+@export_group("Run states")
+@export var player_shines_light: bool
+
 @export_group("Random Wander Settings")
 @export var wander_range: float
 

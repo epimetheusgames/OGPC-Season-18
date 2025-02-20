@@ -14,7 +14,7 @@ radius = 55.0364
 [sub_resource type="CircleShape2D" id="CircleShape2D_2kiya"]
 radius = 42.19
 
-[node name="BiterFish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox")]
+[node name="BiterFish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "light_detector")]
 collision_layer = 32768
 collision_mask = 32768
 script = ExtResource("1_k5pkd")
@@ -22,6 +22,7 @@ max_group_center_dist = 400.0
 settings = ExtResource("2_8ir73")
 hurtbox = NodePath("Hurtbox")
 attackbox = NodePath("Attackbox")
+light_detector = NodePath("LightDetector")
 
 [node name="Placeholder" type="Polygon2D" parent="."]
 position = Vector2(24, 0)
@@ -29,6 +30,7 @@ color = Color(0.657768, 0.657768, 0.657768, 1)
 polygon = PackedVector2Array(-63, 1, -23, 25, 40, 10, 59, 26, 59, -19, 41, -9, -22, -32)
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(24, 0)
@@ -50,5 +52,13 @@ attacker_type = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
 position = Vector2(-99, -2)
+shape = SubResource("CircleShape2D_2kiya")
+debug_color = Color(0.989994, 0, 0.283792, 0.42)
+
+[node name="LightDetector" type="Area2D" parent="."]
+position = Vector2(24, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightDetector"]
+position = Vector2(-3, -2)
 shape = SubResource("CircleShape2D_2kiya")
 debug_color = Color(0.989994, 0, 0.283792, 0.42)
