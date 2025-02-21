@@ -795,9 +795,5 @@ position = Vector2(64, 1225)
 [node name="Rock" parent="." instance=ExtResource("31_boa6h")]
 position = Vector2(-2781, 1826)
 
-[node name="Jellyfish" parent="." instance=ExtResource("16_cbdp8")]
-position = Vector2(-4401, 169)
-
-[editable path="LevelContainer/Level/Waves"]
 [editable path="LevelContainer/Level/Items/LightLine"]
 [editable path="LevelContainer/Entities/Boids/Boid"]
