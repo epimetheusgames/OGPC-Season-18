@@ -9,7 +9,7 @@ var diver_state : Util.DiverState
 @onready var diver_movement: DiverMovement = $"Movement"
 @onready var diver_animation: DiverAnimation = $"Animation"
 @onready var diver_combat: DiverCombat = $"Combat"
-@onready var diver_flashlight: DiverFlashlight = $"Flashlight"
+@onready var diver_flashlight: DiverFlashlight = $"Light"
 @onready var diver_inventory: DiverInventory = $"Inventory"
 @onready var diver_stats: DiverStats = $"Stats"
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
@@ -37,6 +37,13 @@ func _ready() -> void:
 func _physics_process(_delta: float):
 	diver_stats.oxygen_loss = oxygen_loss
 	
+	if get_state() == Util.DiverState.IN_GRAVITY_AREA:
+		$Body.disabled = true
+		$LargeBody.disabled = false
+	else:
+		$Body.disabled = false
+		$LargeBody.disabled = true
+	
 	if camera && parallax:
 		parallax.scroll_base_offset.y += 100
 	
@@ -44,21 +51,31 @@ func _physics_process(_delta: float):
 		move_and_slide()
 		return
 	
-	if get_state() != Util.DiverState.DRIVING_SUBMARINE && get_state() != Util.DiverState.IN_MINISUB:
-		velocity = diver_movement.get_velocity()
-		
-		var target_angle: float = velocity.angle() + PI/2
-		
-		var angle_diff: float = angle_difference(rotation, target_angle)
-		rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
-	
+	_update_vel_rot()
 	move_and_slide()
 	
+	_sync_multiplayer()
+
+func _sync_multiplayer() -> void:
 	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
 		Global.godot_steam_abstraction.sync_var($Animation/ArmIkTarget1, "global_position")
 		Global.godot_steam_abstraction.sync_var($Animation/ArmIkTarget2, "global_position")
 		Global.godot_steam_abstraction.sync_var($Animation/LegIkTarget1, "global_position")
 		Global.godot_steam_abstraction.sync_var($Animation/LegIkTarget2, "global_position")
+
+func _update_vel_rot() -> void:
+	if get_state() == Util.DiverState.DRIVING_SUBMARINE:
+		return
+		
+	velocity = diver_movement.get_velocity()
+	
+	if get_state() == Util.DiverState.IN_GRAVITY_AREA:
+		return
+	
+	var target_angle: float = velocity.angle() + PI/2
+	
+	var angle_diff: float = angle_difference(rotation, target_angle)
+	rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
 
 func _boost() -> void:
 	diver_stats.oxygen_percentage -= oxygen_boost_loss

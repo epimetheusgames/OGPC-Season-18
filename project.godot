@@ -58,6 +58,7 @@ enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://add
 
 light_lines=""
 completion_areas=""
+gravity_areas=""
 
 [input]
 

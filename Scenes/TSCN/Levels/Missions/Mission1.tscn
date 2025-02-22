@@ -195,7 +195,43 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dn3vl"]
 polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 7993, 6031, 7981, 6030, 7969, 6033, 7925, 6050, 7919, 6051, 7910, 6047, 7894, 6042, 7895, 6039, 7900, 6035, 7900, 6032, 7898, 6030, 7894, 6029, 7886, 6030, 7873, 6032, 7852, 6035, 7835, 6035, 7807, 6032, 7787, 6029, 7763, 6020, 7729, 6011, 7671, 6012, 7571, 6020, 7668, 6209, 7699, 6171, 7705, 6164, 7721, 6155, 7739, 6148, 7760, 6130, 7781, 6101, 7790, 6095, 7806, 6118, 7824, 6133, 7851, 6140, 7881, 6141, 7909, 6136, 7931, 6129, 7950, 6120, 7966, 6110, 7974, 6104, 7985, 6101, 8021, 6095, 8113, 6068, 8146, 6061)
 
-[sub_resource type="Resource" id="Resource_up8wf"]
+[sub_resource type="Resource" id="Resource_gr6wh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drxv4"]
+shader = ExtResource("11_wv41s")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/always_top = true
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.2
+shader_parameter/height = 1.0
+shader_parameter/depth_color_tex = ExtResource("12_c52vc")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ibnrn"]
+size = Vector2(18000, 300)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dh4ys"]
+shader = ExtResource("11_wv41s")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.2
+shader_parameter/height = 1.0
+shader_parameter/depth_color_tex = ExtResource("12_c52vc")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yu0vj"]
+load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-327f5b874898d4dde69f55c283418e46.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exbxk"]
+shader = ExtResource("11_wv41s")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = true
+shader_parameter/max_alpha = 0.9
+shader_parameter/height = 3.5
+shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_yu0vj")
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -490,7 +526,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("32_6lnpa")]
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_3b7mc")
+uid = SubResource("Resource_gr6wh")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
