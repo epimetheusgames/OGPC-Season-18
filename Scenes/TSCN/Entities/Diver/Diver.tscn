@@ -362,7 +362,6 @@ position = Vector2(18, -55)
 rotation = 1.08048
 scale = Vector2(0.999944, 0.999944)
 rest = Transform2D(0.964522, -0.264003, 0.264003, 0.964522, 18, -55)
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
 use_parent_material = true
@@ -374,7 +373,6 @@ rest = Transform2D(1.06785, -0.185714, 0.171539, 0.986349, 40.2459, 12.0526)
 auto_calculate_length_and_angle = false
 length = 43.402
 bone_angle = 25.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm1/Forearm1"]
 position = Vector2(17.8001, 8.27792)
@@ -398,7 +396,6 @@ use_parent_material = true
 position = Vector2(-18, -55)
 rotation = -1.19463
 rest = Transform2D(0.984064, 0.177815, -0.177815, 0.984064, -18, -55)
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Forearm2" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm2"]
 use_parent_material = true
@@ -409,7 +406,6 @@ rest = Transform2D(0.984562, 0.175033, -0.175033, 0.984562, -41.3307, 7.46825)
 auto_calculate_length_and_angle = false
 length = 45.651
 bone_angle = 159.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm2/Forearm2"]
 position = Vector2(-20.7467, 7.335)
@@ -433,7 +429,6 @@ rest = Transform2D(1, 0, 0, 1, 9, -4)
 auto_calculate_length_and_angle = false
 length = 61.67
 bone_angle = 90.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Calf1" type="Bone2D" parent="Animation/Skeleton/Torso/Thigh1"]
 use_parent_material = true
@@ -443,7 +438,6 @@ rest = Transform2D(0.996554, 0, 0, 1, 2, 56)
 auto_calculate_length_and_angle = false
 length = 57.824
 bone_angle = 90.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/Thigh1/Calf1"]
 position = Vector2(-1.69385, 30.0053)
@@ -468,7 +462,6 @@ rest = Transform2D(1, 0, 0, 1, -9, -4)
 auto_calculate_length_and_angle = false
 length = 58.705
 bone_angle = 90.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Calf2" type="Bone2D" parent="Animation/Skeleton/Torso/Thigh2"]
 use_parent_material = true
@@ -477,7 +470,6 @@ rest = Transform2D(1, 0, 0, 1, -2, 57)
 auto_calculate_length_and_angle = false
 length = 59.378
 bone_angle = 90.0
-metadata/_local_pose_override_enabled_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/Thigh2/Calf2"]
 position = Vector2(1, 28)

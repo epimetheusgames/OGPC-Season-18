@@ -17,9 +17,11 @@ var occluder: LightOccluder2D
 @onready var preloaded_shader_material: Resource = preload("res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres")
 
 func _ready() -> void:
-	texture = preloaded_texture
+	if !texture:
+		texture = preloaded_texture
 	texture_repeat = TEXTURE_REPEAT_ENABLED
-	material = preloaded_shader_material
+	if !material:
+		material = preloaded_shader_material.duplicate(true)
 	
 	if shader:
 		material.set_shader_parameter("points", polygon)
