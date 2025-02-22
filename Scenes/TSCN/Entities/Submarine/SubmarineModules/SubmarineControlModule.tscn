@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5ws5v2e88l3q"]
+[gd_scene load_steps=9 format=3 uid="uid://5ws5v2e88l3q"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineControl.gd" id="1_ofa5d"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_7buem"]
@@ -16,6 +16,9 @@ size = Vector2(120, 325)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3u10"]
 size = Vector2(400, 40)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q4cbb"]
+polygon = PackedVector2Array(-200, 200, 200, 200, 200, 160, -200, 160)
 
 [node name="SubmarineControlModule" type="Node2D"]
 script = ExtResource("1_ofa5d")
@@ -78,6 +81,13 @@ shape = SubResource("RectangleShape2D_j3u10")
 [node name="NavigationObstacle" type="StaticBody2D" parent="."]
 collision_layer = 256
 collision_mask = 0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_q4cbb")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+position = Vector2(0, -360)
+occluder = SubResource("OccluderPolygon2D_q4cbb")
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]

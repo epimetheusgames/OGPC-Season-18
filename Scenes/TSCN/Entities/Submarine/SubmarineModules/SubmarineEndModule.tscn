@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://28qsc1ykhct4"]
+[gd_scene load_steps=6 format=3 uid="uid://28qsc1ykhct4"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_0f8u0"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_emnk5"]
@@ -7,6 +7,9 @@
 [sub_resource type="Resource" id="Resource_7700m"]
 script = ExtResource("2_emnk5")
 file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule.tscn"
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ga8wv"]
+polygon = PackedVector2Array(-200, 160, -200, 200, -144, 200, -71, 195, -8, 178, 77, 131, 132, 72, 158, 23, 158, -23, 136, -80, 93, -120, 3, -165, -87, -188, -178, -200, -200, -200, -200, -159, -176, -160, -91, -147, -6, -124, 79, -79, 110, -18, 91, 62, 8, 130, -97, 160)
 
 [node name="SubmarineEndModule" type="Node2D" groups=["obstacles"]]
 script = ExtResource("1_0f8u0")
@@ -40,3 +43,6 @@ polygon = PackedVector2Array(-200, 160, -200, 200, -144, 200, -71, 195, -8, 178,
 [node name="NavigationObstacle" type="StaticBody2D" parent="."]
 collision_layer = 256
 collision_mask = 0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ga8wv")
