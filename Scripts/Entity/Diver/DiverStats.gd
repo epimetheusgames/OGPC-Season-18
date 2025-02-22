@@ -13,6 +13,9 @@ func _process(delta: float) -> void:
 		return
 	
 	oxygen_percentage -= oxygen_loss * delta * 60
+	if diver.get_state() == Util.DiverState.IN_GRAVITY_AREA:
+		oxygen_percentage = 100
+	
 	health = hurtbox.health
 	
 	if Global.godot_steam_abstraction:

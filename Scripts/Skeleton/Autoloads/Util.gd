@@ -9,7 +9,7 @@ enum DiverState {
 	IN_SUBMARINE,
 	DRIVING_SUBMARINE,
 	OPERATING_MODULE,
-	IN_MINISUB,
+	IN_GRAVITY_AREA,
 }
 
 enum MissionSuccessType {
