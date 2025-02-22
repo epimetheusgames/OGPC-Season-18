@@ -377,6 +377,7 @@ script = ExtResource("20_kh2s0")
 [node name="GameContainer" type="Node" parent="Game"]
 
 [node name="BrightnessModulate" type="CanvasModulate" parent="Game/GameContainer"]
+visible = false
 
 [node name="GameUIOverlay" type="Control" parent="Game"]
 layout_mode = 3

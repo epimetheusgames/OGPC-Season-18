@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvjiyofi3dsp6"]
+[gd_scene load_steps=7 format=3 uid="uid://dvjiyofi3dsp6"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineWeaponsModule.gd" id="1_m24gv"]
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="2_bwdr6"]
@@ -10,6 +10,9 @@ file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineWeaponsMo
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ufap1"]
 size = Vector2(400, 400)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_n4ur8"]
+polygon = PackedVector2Array(-200, 200, -200, 0, -150, -75, -90, -100, 0, -110, 90, -100, 150, -75, 200, 0, 200, 200, 150, 200, 150, 0, 90, -50, 0, -55, -90, -50, -150, 0, -150, 200)
 
 [node name="SubmarineWeaponsModule" type="Node2D"]
 script = ExtResource("1_m24gv")
@@ -41,6 +44,9 @@ polygon = PackedVector2Array(-200, 200, -200, 0, -150, -75, -90, -100, 0, -110, 
 
 [node name="SubmarineWeaponSlot" type="Node2D" parent="."]
 position = Vector2(0, -120)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_n4ur8")
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_interaction_area_area_exited"]

@@ -51,7 +51,9 @@ func get_slot_password(slot_num: int) -> String:
 	return result_string
 
 func is_multiplayer_host() -> bool:
-	return godot_steam_abstraction.is_lobby_owner
+	if godot_steam_abstraction:
+		return godot_steam_abstraction.is_lobby_owner
+	return false
 
 # Run code from a string
 func eval(input: String):

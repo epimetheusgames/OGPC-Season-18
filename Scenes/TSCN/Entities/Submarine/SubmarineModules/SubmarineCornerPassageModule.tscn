@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://drodl0tjw368a"]
+[gd_scene load_steps=9 format=3 uid="uid://drodl0tjw368a"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_0tb48"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_cubes"]
@@ -13,6 +13,12 @@ size = Vector2(400, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fla32"]
 size = Vector2(38, 38)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gj3c6"]
+polygon = PackedVector2Array(-200, -200, -200, 200, 200, 200, 200, 160, -160, 160, -160, -200)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jikvw"]
+polygon = PackedVector2Array(160, -200, 160, -160, 200, -160, 200, -200)
 
 [node name="SubmarineLPassageModule" type="Node2D"]
 script = ExtResource("1_0tb48")
@@ -71,3 +77,9 @@ direction = Vector2(0, -1)
 position = Vector2(200, 0)
 script = ExtResource("3_quck6")
 direction = Vector2(1, 0)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_gj3c6")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_jikvw")

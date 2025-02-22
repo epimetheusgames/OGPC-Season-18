@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjiu73mgjpxwn"]
+[gd_scene load_steps=9 format=3 uid="uid://bjiu73mgjpxwn"]
 
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_ctc4o"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_7s88p"]
@@ -16,6 +16,9 @@ size = Vector2(400, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pdcce"]
 size = Vector2(40, 120)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5tn0d"]
+polygon = PackedVector2Array(-200, 200, 200, 200, 200, 160, -200, 160)
 
 [node name="SubmarineDoorModule" type="Node2D"]
 script = ExtResource("1_ctc4o")
@@ -68,3 +71,10 @@ offset_top = 160.0
 offset_right = 200.0
 offset_bottom = 200.0
 metadata/_edit_use_anchors_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_5tn0d")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+position = Vector2(0, -360)
+occluder = SubResource("OccluderPolygon2D_5tn0d")
