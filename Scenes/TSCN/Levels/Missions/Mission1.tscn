@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=68 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
+[ext_resource type="PackedScene" uid="uid://b6t738u42lqcn" path="res://Scenes/TSCN/Objects/Items/PooItem.tscn" id="19_ngv05"]
 [ext_resource type="PackedScene" uid="uid://dwaifexgjw8vl" path="res://Scenes/TSCN/Entities/NPCS/BiterFish.tscn" id="20_tdtsg"]
 [ext_resource type="Script" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Script" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
@@ -625,6 +626,9 @@ rotation = -0.464765
 energy = 0.0
 shadow_filter = 2
 max_distance = 1e+06
+
+[node name="PooItem" parent="LevelContainer" instance=ExtResource("19_ngv05")]
+position = Vector2(-2389, 2574)
 
 [node name="ParallaxLayer" type="ParallaxBackground" parent="."]
 layer = 0

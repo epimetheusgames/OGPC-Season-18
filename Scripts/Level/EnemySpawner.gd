@@ -79,7 +79,8 @@ func _process(delta: float) -> void:
 	var spawn_positions := generate_spawn_positions()
 	if len(spawn_positions) > 0:
 		spawn_from_positions(spawn_positions)
-		Global.godot_steam_abstraction.run_remote_function(self, "remote_spawn", [convert_to_remote(spawn_positions)])
+		if Global.godot_steam_abstraction:
+			Global.godot_steam_abstraction.run_remote_function(self, "remote_spawn", [convert_to_remote(spawn_positions)])
 	
 	queue_redraw()
 	
