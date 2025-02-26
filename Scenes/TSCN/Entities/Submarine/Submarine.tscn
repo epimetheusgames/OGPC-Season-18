@@ -5,6 +5,8 @@
 [ext_resource type="Script" path="res://Scripts/Entity/Submarine/ModuleLoader.gd" id="3_yfmig"]
 
 [node name="Submarine" type="CharacterBody2D"]
+z_index = 20
+collision_mask = 2
 script = ExtResource("1_xpqec")
 
 [node name="SubmarineMovement" type="Node2D" parent="."]

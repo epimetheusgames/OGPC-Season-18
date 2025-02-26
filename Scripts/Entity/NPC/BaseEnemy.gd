@@ -189,9 +189,16 @@ func _update_closest_player():
 		closest_player = players_list[closest_ind]
 
 func _update_player_visible():
+	# If player is in submarine, impossible to see them.
+	var state := Global.player.get_state()
+	if state == Util.DiverState.IN_SUBMARINE || state == Util.DiverState.DRIVING_SUBMARINE:
+		player_visible = false
+		return
+	
 	var space_state := get_world_2d().direct_space_state
 	var raycast := PhysicsRayQueryParameters2D.create(global_position, closest_player.global_position)
 	var result := space_state.intersect_ray(raycast)
+	
 	if result:
 		if result["collider"] == closest_player:
 			player_visible = true
@@ -201,7 +208,7 @@ func _update_player_visible():
 				await get_tree().create_timer(settings.disable_period_length).timeout
 			player_visible = false
 	else:
-		print("WARNING: Raycast to player got no results???")
+		print("WARNING: Raycast to player got no result, an enemy is at the same position as the player. This isn't good.")
 
 func _update_target_position():
 	wander_state = WANDER_MODE.NOT_WANDERING

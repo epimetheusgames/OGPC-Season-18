@@ -43,6 +43,8 @@ func _ready() -> void:
 		add_child(occluder)
 		occluder.occluder = OccluderPolygon2D.new()
 		occluder.occluder.polygon = get_smaller_polygon(polygon, 0)
+		
+	collision_body.collision_layer = 3
 
 func get_smaller_polygon(points: PackedVector2Array, shrink_distance: float) -> PackedVector2Array:
 	if points.size() == 0:

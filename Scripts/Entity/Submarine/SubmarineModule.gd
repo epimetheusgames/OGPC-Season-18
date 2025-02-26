@@ -43,6 +43,13 @@ func _ready() -> void:
 	$ModuleArea.area_exited.connect(_area_mouse_exited)
 
 func _process(delta: float) -> void:
+	if Global.player.get_state() == Util.DiverState.IN_SUBMARINE:
+		for child in $NavigationObstacle.get_children():
+			child.disabled = true
+	else:
+		for child in $NavigationObstacle.get_children():
+			child.disabled = false
+	
 	var editor: SubmarineEditor
 	if is_editor_peice:
 		editor = get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()

@@ -93,8 +93,6 @@ uid = 1501
 
 [node name="Root" type="Node" node_paths=PackedStringArray("brightness_modulate", "KeyactionHandler")]
 script = ExtResource("1_thbo5")
-verbose_debug = true
-super_efficient = true
 super_efficient_auto_enable_maximum = 25
 brightness_modulate = NodePath("Game/GameContainer/BrightnessModulate")
 game_skeleton_node = NodePath("Skeleton")

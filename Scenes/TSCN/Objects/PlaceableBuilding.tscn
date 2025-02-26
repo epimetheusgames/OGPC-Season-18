@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs6xsivghesmh"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/PlaceableBuilding.gd" id="1_hfllt"]
+
+[node name="PlaceableBuilding" type="Node2D"]
+script = ExtResource("1_hfllt")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, 1)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(1, 0)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, -1)
+
+[node name="RayCast2D4" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-1, 0)
+
+[node name="RayCast2D5" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-1, 1)
+
+[node name="RayCast2D6" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(1, 1)
+
+[node name="RayCast2D7" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(1, -1)
+
+[node name="RayCast2D8" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-1, -1)
+
+[node name="RayCast2D9" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(0, 1)
+
+[node name="RayCast2D10" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(1, 0)
+
+[node name="RayCast2D11" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(0, -1)
+
+[node name="RayCast2D12" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(-1, 0)
+
+[node name="RayCast2D13" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(-1, 1)
+
+[node name="RayCast2D14" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(1, 1)
+
+[node name="RayCast2D15" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(1, -1)
+
+[node name="RayCast2D16" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(-1, -1)

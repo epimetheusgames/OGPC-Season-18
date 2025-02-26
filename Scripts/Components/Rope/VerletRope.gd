@@ -184,7 +184,7 @@ func collide_and_translate(origin: Vector2, motion: Vector2, index: int) -> Vect
 		# No collision detected, move as normal
 		return motion
 	
-	if result["collider"] is Diver:
+	if result["collider"] is Diver || result["collider"] is Submarine:
 		return motion
 	
 	# Collision detected: calculate how much we can move up to the collision point
