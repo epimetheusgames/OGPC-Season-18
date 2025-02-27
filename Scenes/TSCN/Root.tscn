@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=40 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="7_vxmb5"]
 [ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="8_py4au"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="9_y8obd"]
+[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
 [ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_luehf"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_yjmxm"]
@@ -127,6 +128,10 @@ default_level = SubResource("Resource_wq34i")
 [node name="MissionSystem" type="Node" parent="Skeleton"]
 script = ExtResource("6_pmicg")
 default_mission_tree = SubResource("Resource_1tmkv")
+
+[node name="GameTimeSystem" type="Node" parent="Skeleton"]
+script = ExtResource("10_5yeas")
+seconds_per_ten_minutes = 15
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

@@ -20,6 +20,7 @@ var dialog_core: TextureRect = null
 var godot_steam_abstraction: GodotSteamAbstraction
 var current_game_save: GameSave
 var mission_system: MissionSystem
+var game_time_system: GameTimeSystem
 var verbose_debug: bool
 var super_efficient: bool
 var dialog_active: bool = false

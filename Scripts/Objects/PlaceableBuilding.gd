@@ -54,8 +54,8 @@ func _process(delta: float) -> void:
 		
 		var placement_info := _check_raycasts()
 		if placement_info:
-			building_sprite.position = to_local(placement_info[0]) - placement_info[1] * offset
-			building_sprite.rotation = placement_info[1].angle() + deg_to_rad(90)
+			building_sprite.position = Util.better_vec2_lerp(building_sprite.position, to_local(placement_info[0]) - offset.rotated(placement_info[1].angle() - PI / 2.0), 0.9, delta)
+			building_sprite.rotation = Util.better_angle_lerp(building_sprite.rotation, placement_info[1].angle() + deg_to_rad(90), 0.2, delta)
 			if Input.is_action_just_pressed("mouse_left_click"):
 				placed = true
 				_sync_multiplayer()
@@ -74,6 +74,10 @@ func _process(delta: float) -> void:
 func _check_raycasts() -> Array[Vector2]:
 	var closest_info: Array[Vector2] = []
 	for raycast: RayCast2D in raycasts.get_children():
+		var point_intersecting := Util.do_pointcast(get_world_2d(), raycast.global_position)
+		if point_intersecting && !point_intersecting[0]["collider"] is Entity:
+			continue
+		
 		var collider := raycast.get_collider()
 		if (!raycast.is_colliding() || \
 				(closest_info && closest_info[0].distance_squared_to(raycast.global_position) < \
