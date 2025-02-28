@@ -5,6 +5,7 @@ extends Node2D
 const transparency_when_not_placed := 0.5
 const raycast_length_mul = 0.5
 
+@export var scene: FilePathResource
 @export var building_sprite: Sprite2D
 @export var building_collision: StaticBody2D
 @export var base_position: Node2D
@@ -19,14 +20,33 @@ var placed_by: Diver
 func _ready() -> void:
 	if !building_sprite:
 		print("ERROR: Placeable building has no sprite. Path: " + str(get_path()))
-		return
+		
+		for child in get_children():
+			if child is Sprite2D:
+				print("DEBUG: Found sprite as child, using.")
+				building_sprite = child
 	
 	if !building_collision:
 		print("ERROR: Placeable building has no collision. Path: " + str(get_path()))
-		return
+		
+		for child in get_children():
+			if child is StaticBody2D:
+				print("DEBUG: Found static body as child, using.")
+				building_collision = child
+		
+		# This is likely to happen.
+		for child in building_sprite.get_children():
+			if child is StaticBody2D:
+				print("DEBUG: Found static body as child of sprite, using.")
+				building_collision = child
 	
 	if !base_position:
 		print("ERROR: Placeable building has no base position. Path: " + str(get_path()))
+		
+		for child in get_children():
+			if child is Node2D && child.name != "Raycasts":
+				print("DEBUG: Found position (not raycasts) as child, using.")
+				base_position = child
 	
 	# Make sure sprites and collisions are a child of this.
 	if !building_sprite.find_parent(name):
@@ -40,6 +60,8 @@ func _ready() -> void:
 	
 	for child: RayCast2D in raycasts.get_children():
 		child.target_position = child.target_position.normalized() * size.length() * raycast_length_mul
+	
+	Global.save_load_framework.save_nodes.connect(_save_self)
 
 func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !placed_by._is_node_owner():
@@ -95,3 +117,17 @@ func _sync_multiplayer() -> void:
 		Global.godot_steam_abstraction.sync_var(building_sprite, "modulate")
 		Global.godot_steam_abstraction.sync_var(building_collision, "collision_layer")
 		Global.godot_steam_abstraction.sync_var(self, "placed")
+
+func _save_self() -> void:
+	Global.current_game_save.node_saves.append(
+		NodeSaver.create(
+			Global.current_mission_node, 
+			self, 
+			scene, 
+			[
+				"position", 
+				"rotation", 
+				"placed",
+			],
+		)
+	)

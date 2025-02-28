@@ -17,6 +17,7 @@ extends Node
 @export var default_level: FilePathResource
 
 signal game_started(slot_num: int)
+signal save_nodes
 
 enum LOAD_ERROR {
 	OK,
@@ -65,7 +66,11 @@ func save_state() -> void:
 		print("ERROR: Attempting to save state while in the main menu. Printing stack.")
 		print_stack()
 		return
-
+	
+	# Otherwise it's research station.
+	if Global.current_mission_node is MissionRoot:
+		Global.current_game_save.node_saves = []
+		save_nodes.emit()
 	_save_game_save(Global.current_game_save, Global.current_game_slot)
 
 func _load_config_file(slot_num) -> Array:
@@ -145,8 +150,6 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	Global.current_game_slot = slot_num
 	Global.current_game_save = level_data
 	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = true
-	# dude what is this stupid shit
-	#Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = true
 	
 	if Global.verbose_debug:
 		print("DEBUG: Game loaded successfuly, printing loaded data.")
@@ -154,11 +157,11 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	
 	if custom_mission:
 		Global.current_mission = custom_mission
-		load_level(custom_mission.mission_filepath.file)
+		load_level(custom_mission.mission_filepath.file, level_data)
 	else:
 		load_level(default_level.file)
 
-func load_level(level_path: String):
+func load_level(level_path: String, save: GameSave = null):
 	if !ui_root_node_path:
 		print("WARNING: SaveLoadFramework contains no UI root node path. UI actions won't run.")
 	else:
@@ -176,8 +179,15 @@ func load_level(level_path: String):
 	game_started.emit(Global.current_game_slot)
 	var level_loaded := load(level_path)
 	var instantiated = level_loaded.instantiate()
+	
 	game_container.add_child(instantiated)
-	instantiated.owner = game_container
+	Global.current_mission_node = instantiated
+	
+	if !save:
+		return
+	
+	for saver in save.node_saves:
+		saver.load_node(instantiated)
 
 # Close and save game and exit to menu.
 func exit_to_menu() -> void:
@@ -185,7 +195,7 @@ func exit_to_menu() -> void:
 		print("DEBUG: Exit to menu called, printing stack.")
 		print_stack()
 	
-	_save_game_save(Global.current_game_save, Global.current_game_slot)
+	save_state()
 	Global.player = null
 	Global.current_game_save = null
 	Global.current_game_slot = -1

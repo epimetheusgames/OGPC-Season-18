@@ -201,7 +201,7 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_daaqc"]
+[sub_resource type="Resource" id="Resource_02ovs"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -485,7 +485,7 @@ metadata/_edit_lock_ = true
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("32_6lnpa")]
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_daaqc")
+uid = SubResource("Resource_02ovs")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")

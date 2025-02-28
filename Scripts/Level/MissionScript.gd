@@ -1,3 +1,4 @@
+class_name MissionRoot
 extends Node2D
 
 var line_one_material
@@ -6,6 +7,7 @@ var line_three_material
 var line_four_material
 var line_five_material
 var line_six_material
+
 func turn_on_efficient():
 	if Global.super_efficient:
 		$LevelContainer/Level/Waves/Line2D.material = null
