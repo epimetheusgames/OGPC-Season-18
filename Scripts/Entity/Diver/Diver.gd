@@ -4,7 +4,7 @@
 class_name Diver
 extends Entity
 
-var diver_state : Util.DiverState
+var diver_state: Util.DiverState
  
 @onready var diver_movement: DiverMovement = $"Movement"
 @onready var diver_animation: DiverAnimation = $"Animation"
@@ -14,6 +14,7 @@ var diver_state : Util.DiverState
 @onready var diver_stats: DiverStats = $"Stats"
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
 
+@export var diver_scene: FilePathResource
 @export var water_manager: Node2D
 @export var camera: Camera2D
 @export var parallax: ParallaxBackground
@@ -21,18 +22,24 @@ var diver_state : Util.DiverState
 @export var oxygen_loss := 0.01
 @export var oxygen_boost_loss := 1
 
+# --- OVERRIDES ---
+
 func _ready() -> void:
 	if Global.godot_steam_abstraction && node_owner == 0 && !Global.godot_steam_abstraction.is_lobby_owner:
 		node_owner = Global.godot_steam_abstraction.steam_id
 	
 	set_state(Util.DiverState.SWIMMING)
 	
-	if !Global.player || !is_instance_valid(Global.player):
+	# When instantiated this is probably going to be the default player.
+	if !Global.is_multiplayer || _is_node_owner():
 		Global.player = self
 	
 	$BuoyancyComponent.waves = water_manager
 	
 	diver_movement.boosted.connect(_boost)
+	
+	if Global.save_load_framework:
+		Global.save_load_framework.save_nodes.connect(_save)
 
 func _physics_process(_delta: float):
 	diver_stats.oxygen_loss = oxygen_loss
@@ -61,12 +68,42 @@ func _physics_process(_delta: float):
 	
 	_sync_multiplayer()
 
+# --- HELPERS ---
+
 func _sync_multiplayer() -> void:
 	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
 		Global.godot_steam_abstraction.sync_var($Animation/ArmIkTarget1, "global_position")
 		Global.godot_steam_abstraction.sync_var($Animation/ArmIkTarget2, "global_position")
 		Global.godot_steam_abstraction.sync_var($Animation/LegIkTarget1, "global_position")
 		Global.godot_steam_abstraction.sync_var($Animation/LegIkTarget2, "global_position")
+
+func _save() -> void:
+	Global.current_game_save.node_saves.append(
+		NodeSaver.create(
+			Global.current_mission_node, 
+			self, 
+			[
+				"position",
+				"rotation",
+				"velocity",
+				"diver_state",
+			],
+			{
+				get_path_to(diver_movement): [
+					"velocity",
+					"current_angle",
+					"is_in_gravity_area",
+				],
+				get_path_to(diver_stats): [
+					"health",
+					"oxygen_percentage",
+				],
+				get_path_to(diver_combat): [
+					"selected_weapon",
+				],
+			}
+		)
+	)
 
 func _update_vel_rot() -> void:
 	if get_state() == Util.DiverState.DRIVING_SUBMARINE:
@@ -85,14 +122,13 @@ func _update_vel_rot() -> void:
 func _boost() -> void:
 	diver_stats.oxygen_percentage -= oxygen_boost_loss
 
-func get_diver_movement() -> DiverMovement:
-	return diver_movement
-
-func set_state(state : Util.DiverState):
-	diver_state = state
+# --- SETTERS AND GETTERS --- 
 
 func get_state() -> Util.DiverState:
 	return diver_state
+
+func set_state(state : Util.DiverState):
+	diver_state = state
 
 func get_diver_username() -> String:
 	if !Global.godot_steam_abstraction:
@@ -107,9 +143,7 @@ func get_diver_health() -> float:
 	return diver_stats.get_health()
 
 func get_diver_max_health() -> float:
-	
-	return 100
-	#return diver_stats.get_max_health()
+	return diver_stats.get_max_health()
 
 func get_oxygen() -> float:
 	return diver_stats.oxygen_percentage

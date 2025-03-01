@@ -2,42 +2,82 @@ class_name NodeSaver
 extends Resource
 
 var variable_properties: Dictionary
+var child_properties: Dictionary
 var packed_scene: PackedScene
 var instantiate_path: String
 var parent_path: String
+var node_name: String
 
-static func create(mission: MissionRoot, node: Node, scene: FilePathResource, properties: Array[String]):
+static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary = {}, scene_override: FilePathResource = null):
 	var ret := NodeSaver.new()
-	ret.save_node(mission, node, scene, properties)
+	ret.save_node(mission, node, properties, _child_properties)
 	return ret
 
 func load_node(mission: MissionRoot) -> void:
+	if Global.verbose_debug:
+		print("DEBUG: Loading node at path " + instantiate_path + " relative to mission root.")
+
 	var replace := mission.get_node_or_null(instantiate_path)
 	if replace:
 		replace.queue_free()
+	elif Global.verbose_debug:
+		print("DEBUG: No node to replace at path " + instantiate_path + " relative to mission root.")
 	
 	var add_to := mission.get_node_or_null(parent_path)
 	if !add_to:
 		print("ERROR: Failed to load an object at path " + instantiate_path + " relative to mission root.")
 	
 	var to_add: Node = packed_scene.instantiate()
-	for variable in variable_properties.keys():
+	for variable: String in variable_properties.keys():
 		to_add.set(variable, variable_properties[variable])
+	
+	for path in child_properties.keys():
+		var child_variables: Dictionary = child_properties[path]
+		var node_to_set:= add_to.get_node_or_null(path)
+		if !node_to_set:
+			print("ERROR: Failed to get a child at path " + str(path) + " relative to a node that is being loaded. Will not be able to set properties to this child.")
+			continue
+		for variable: String in child_variables.keys():
+			node_to_set.set(variable, child_variables[variable])
 	
 	add_to.add_child(to_add, true)
 
-func save_node(mission: MissionRoot, node: Node, scene: FilePathResource, properties: Array[String]) -> void:
-	for a in node.get_children():
-		a.owner = node
-		for b in a.get_children():
-			b.owner = node
-			for c in b.get_children():
-				c.owner = node
+	# Wait a bit, make sure the node we replaced is fully deleted.
+	await add_to.get_tree().create_timer(0.2, false).timeout
+
+	# Ensure node name stays constant, sometimes Godot can put a number after it.
+	to_add.name = node_name
+
+# Child properties is path (String): variable names (Array[String]).
+func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary = {}, scene_override: FilePathResource = null) -> void:
+	if Global.verbose_debug:
+		print("DEBUG: Saving node at path " + str(mission.get_path_to(node)) + " relative to mission root.")
+
+	_recursively_set_owners(node, node)
 	
+	node_name = node.name
 	instantiate_path = mission.get_path_to(node)
 	parent_path = mission.get_path_to(node.get_parent())
-	packed_scene = PackedScene.new()
-	packed_scene.pack(node)
+
+	if !scene_override:
+		packed_scene = PackedScene.new()
+		packed_scene.pack(node)
+	else:
+		packed_scene = load(scene_override.file)
 	
 	for variable in properties:
 		variable_properties[variable] = node.get(variable)
+	
+	for path in children_properties.keys():
+		var node_to_use := node.get_node(path)
+		var variables_to_save: Array = children_properties[path]
+		var child_property_list := {}
+		for variable in variables_to_save:
+			child_property_list[variable] = node_to_use.get(variable)
+		child_properties[path] = child_property_list
+
+func _recursively_set_owners(set_owner_to: Node, recurse_on: Node) -> void:
+	for child in recurse_on.get_children():
+		child.owner = set_owner_to
+		_recursively_set_owners(set_owner_to, child)
+	

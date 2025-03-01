@@ -14,7 +14,7 @@ extends Gun
 func _process(delta: float) -> void:
 	super(delta)
 	
-	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !Global.player._is_node_owner():
 		return
 	
 	if gun_state == GunState.HOLDING:
@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 		use_hand2 = true
 		dist_from_head = 50
 	
-	if Global.godot_steam_abstraction && (!Global.is_multiplayer || diver._is_node_owner()):
+	if Global.godot_steam_abstraction && (!Global.is_multiplayer || Global.player._is_node_owner()):
 		Global.godot_steam_abstraction.sync_var(self, "position")
 		Global.godot_steam_abstraction.sync_var(self, "rotation")
 
@@ -76,7 +76,7 @@ func perform_attack(remote=false, node_name="") -> void:
 	"""
 	#print_tree_pretty()
 	var force: Vector2 = Util.angle_to_vector_radians(global_rotation + PI, knockback)
-	diver.diver_movement.knockback(force)
+	Global.player.diver_movement.knockback(force)
 	
 	if Global.godot_steam_abstraction:
 		Global.godot_steam_abstraction.run_remote_function(self, "spawn_bullet", [])

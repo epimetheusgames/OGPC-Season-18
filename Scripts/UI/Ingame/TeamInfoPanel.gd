@@ -44,13 +44,22 @@ func _ready() -> void:
 		
 		health_text_array.append(new_health_text)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !Global.is_multiplayer:
 		visible = false
 	
+	var to_remove: Array[int] 
+	
 	for i in range(divers.size()):
+		if !is_instance_valid(divers[i]):
+			to_remove.append(i)
+			continue
+
 		var diver: Diver = divers[i]
 		var health_text: RichTextLabel = health_text_array[i]
 		
 		health_text.text = str(diver.get_diver_health()) + "%"
+
+	for index in to_remove:
+		divers.remove_at(index)
 		

@@ -2,7 +2,6 @@
 class_name Submarine
 extends Entity
 
-@onready var diver = Global.player
 @onready var submarine_movement = $"SubmarineMovement"
 @onready var module_container : ModuleLoader = $"Modules"
 
@@ -20,11 +19,11 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	velocity = submarine_movement.get_velocity()
-	if diver.get_state() == Util.DiverState.DRIVING_SUBMARINE:
-		diver.global_transform = $"Modules/SubmarineControlModule".global_transform
+	if Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+		Global.player.global_transform = $"Modules/SubmarineControlModule".global_transform
 		
 	# TODO: Instead of disabled, make them collide with only the player.
-	if diver.get_state() == Util.DiverState.IN_SUBMARINE || diver.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+	if Global.player.get_state() == Util.DiverState.IN_SUBMARINE || Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
 		for child in get_children():
 			if child is CollisionShape2D:
 				child.disabled = true

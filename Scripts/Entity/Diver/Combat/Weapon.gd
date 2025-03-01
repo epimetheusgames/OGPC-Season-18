@@ -7,15 +7,13 @@ extends Node2D
 @export var use_hand1: bool = false
 @export var use_hand2: bool = false
 
-var diver: Diver
-
 var enabled: bool = false
 
 var head_pos: Vector2
 var mouse_pos: Vector2
 
-func _process(delta: float) -> void:
-	head_pos = diver.diver_animation.get_head_position()
+func _process(_delta: float) -> void:
+	head_pos = Global.player.diver_animation.get_head_position()
 	mouse_pos = get_global_mouse_position()
 
 func get_hand1_pos() -> Vector2:
@@ -29,7 +27,7 @@ func attack() -> void:
 
 func perform_attack(remote=false, node_name="") -> void:
 	if !remote:
-		if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+		if Global.godot_steam_abstraction && Global.is_multiplayer && !Global.player._is_node_owner():
 			print("WARNING: Tried to perform attack but is not the owner of this diver. Check your logic. Printing stack.")
 			print_stack()
 			return

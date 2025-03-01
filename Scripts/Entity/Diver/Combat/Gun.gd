@@ -50,7 +50,7 @@ func _on_cooldown_timeout() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
-	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !Global.player._is_node_owner():
 		return
 	
 	if !enabled:
@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 	visible = true
 	
 	var bar_val: float = (reload_timer.time_left) / reload_time * 100.0
-	diver.diver_combat.set_reload_bar(bar_val)
+	Global.player.diver_combat.set_reload_bar(bar_val)
 	
 	var dir: Vector2 = mouse_pos - head_pos
 	global_position = head_pos + dir.normalized() * dist_from_head
@@ -77,7 +77,7 @@ func _process(delta: float) -> void:
 		scale.y = 1
 	
 	if Global.godot_steam_abstraction && Global.is_multiplayer:
-		Global.godot_steam_abstraction.run_remote_function(diver.diver_combat, "set_reload_bar", [bar_val])
+		Global.godot_steam_abstraction.run_remote_function(Global.player.diver_combat, "set_reload_bar", [bar_val])
 		Global.godot_steam_abstraction.sync_var(self, "global_position")
 		Global.godot_steam_abstraction.sync_var(self, "global_rotation")
 		Global.godot_steam_abstraction.sync_var(self, "scale")

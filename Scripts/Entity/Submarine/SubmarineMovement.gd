@@ -13,7 +13,6 @@ const BUOYANCY_CHANGE_RATE = 1
 const MAX_BUOYANCY = 70.0
 const MIN_BUOYANCY = -70.0
 
-@onready var diver = Global.player
 @onready var buoyancy_component = get_parent().get_node("BuoyancyComponent")
 
 var current_angle: float = 0.0
@@ -26,7 +25,7 @@ func _physics_process(delta: float) -> void:
 	decay_velocity(delta)
 	
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
-		if diver.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+		if Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
 			update_movement_velocity(delta * 60)
 			update_target_angle(delta)
 			update_current_angle(delta * 60)

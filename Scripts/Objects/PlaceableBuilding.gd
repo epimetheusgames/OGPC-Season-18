@@ -123,7 +123,6 @@ func _save_self() -> void:
 		NodeSaver.create(
 			Global.current_mission_node, 
 			self, 
-			scene, 
 			[
 				"position", 
 				"rotation", 

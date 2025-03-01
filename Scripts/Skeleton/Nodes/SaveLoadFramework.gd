@@ -182,7 +182,7 @@ func load_level(level_path: String, save: GameSave = null):
 	
 	game_container.add_child(instantiated)
 	Global.current_mission_node = instantiated
-	
+
 	if !save:
 		return
 	
@@ -196,7 +196,6 @@ func exit_to_menu() -> void:
 		print_stack()
 	
 	save_state()
-	Global.player = null
 	Global.current_game_save = null
 	Global.current_game_slot = -1
 	Global.ui_root_node.visible = true

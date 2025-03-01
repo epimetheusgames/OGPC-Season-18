@@ -89,7 +89,6 @@ func add_weapon(weapon_name: String) -> void:
 		return
 	
 	var new_weapon: Weapon = weapon.instantiate()
-	new_weapon.diver = diver
 	
 	current_weapons[weapon_name] = new_weapon
 	add_child(new_weapon)

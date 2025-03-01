@@ -9,5 +9,5 @@ func _ready() -> void:
 	super()
 
 func _process(delta: float) -> void:
-	if enabled:
-		enabled = false
+	if is_attacking:
+		is_attacking = false

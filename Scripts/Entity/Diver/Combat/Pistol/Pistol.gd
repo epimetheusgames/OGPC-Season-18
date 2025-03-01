@@ -13,7 +13,7 @@ var shooting: bool = false
 func _process(delta: float) -> void:
 	super(delta)
 	
-	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !Global.player._is_node_owner():
 		return
 	
 	#combat.move_hand_toward_mouse("right")
@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	if !pistol_sprite.animation == "Shoot":
 		shooting = false
 	
-	if Global.godot_steam_abstraction && (!Global.is_multiplayer || diver._is_node_owner()):
+	if Global.godot_steam_abstraction && (!Global.is_multiplayer || Global.player._is_node_owner()):
 		Global.godot_steam_abstraction.sync_var(self, "position")
 		Global.godot_steam_abstraction.sync_var(self, "rotation")
 

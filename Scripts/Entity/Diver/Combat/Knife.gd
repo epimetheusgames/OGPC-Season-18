@@ -32,7 +32,7 @@ func _on_cooldown_timeout() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
-	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !Global.player._is_node_owner():
 		return
 	
 	if !enabled:

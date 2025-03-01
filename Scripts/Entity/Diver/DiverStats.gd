@@ -1,6 +1,7 @@
 class_name DiverStats
 extends Node2D
 
+var max_health: float = health
 var health: float = 100
 var oxygen_percentage: float = 100
 var oxygen_loss: float
@@ -32,3 +33,6 @@ func _on_general_detection_box_area_exited(area: Area2D) -> void:
 
 func get_health() -> float:
 	return health
+
+func get_max_health() -> float:
+	return max_health

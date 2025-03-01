@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 	_sync_multiplayer()
 	
 	# Update the arrow rotation
-	arrow.global_rotation = diver.get_diver_movement().get_current_angle()
+	arrow.global_rotation = diver.diver_movement.get_current_angle()
 	
 	# Legs
 	if diver.get_state() != Util.DiverState.IN_GRAVITY_AREA:
