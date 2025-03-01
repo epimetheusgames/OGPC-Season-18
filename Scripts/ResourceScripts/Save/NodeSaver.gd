@@ -7,10 +7,11 @@ var packed_scene: PackedScene
 var instantiate_path: String
 var parent_path: String
 var node_name: String
+var scene_override_path: FilePathResource
 
 static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary = {}, scene_override: FilePathResource = null):
 	var ret := NodeSaver.new()
-	ret.save_node(mission, node, properties, _child_properties)
+	ret.save_node(mission, node, properties, _child_properties, scene_override)
 	return ret
 
 func load_node(mission: MissionRoot) -> void:
@@ -27,7 +28,12 @@ func load_node(mission: MissionRoot) -> void:
 	if !add_to:
 		print("ERROR: Failed to load an object at path " + instantiate_path + " relative to mission root.")
 	
-	var to_add: Node = packed_scene.instantiate()
+	var to_add: Node
+	if !packed_scene:
+		to_add = load(scene_override_path.file).instantiate()
+	else:
+		to_add = packed_scene.instantiate()
+
 	for variable: String in variable_properties.keys():
 		to_add.set(variable, variable_properties[variable])
 	
@@ -63,7 +69,8 @@ func save_node(mission: MissionRoot, node: Node, properties: Array[String], chil
 		packed_scene = PackedScene.new()
 		packed_scene.pack(node)
 	else:
-		packed_scene = load(scene_override.file)
+		scene_override_path = scene_override
+		packed_scene = null
 	
 	for variable in properties:
 		variable_properties[variable] = node.get(variable)

@@ -7,9 +7,8 @@
         {
             "name": "GDScript: Launch Project",
             "type": "godot",
-            "request": "launch",
-            "port": 6007,
-            "debugServer": 6006,
+            "request": "launch",    
+            "project": "${workspaceFolder}",
             "additional_options": "--position 1000, 3000"
         }
     ]

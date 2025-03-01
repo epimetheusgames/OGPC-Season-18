@@ -1,20 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://c0nn12ilucaoj"]
+[gd_scene load_steps=14 format=3 uid="uid://c0nn12ilucaoj"]
 
 [ext_resource type="PackedScene" uid="uid://chy3luehcqm2b" path="res://Scenes/TSCN/UI/MissionUiBox.tscn" id="1_wmqaw"]
 [ext_resource type="Script" path="res://Scripts/Level/ResearchStationCamera.gd" id="2_e3xfe"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_ewnx3"]
 [ext_resource type="PackedScene" uid="uid://bnnnd28v60chd" path="res://Scenes/TSCN/Objects/Waves.tscn" id="3_3nwiy"]
 [ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="4_6wu4g"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="5_thj6v"]
-[ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="6_dw1pj"]
 [ext_resource type="Texture2D" uid="uid://bumrrftvhwmy0" path="res://Assets/Art/Misc/ResearchStationLeftRoom.png" id="8_d4l3m"]
 [ext_resource type="Texture2D" uid="uid://c464qop8nquax" path="res://Assets/Art/Misc/ResearchStationHallway.png" id="9_65861"]
 [ext_resource type="Texture2D" uid="uid://nurn5d348emh" path="res://Assets/Art/Misc/ResearchStationRightRoom.png" id="10_7lt0g"]
-
-[sub_resource type="Resource" id="Resource_mxy30"]
-resource_local_to_scene = true
-script = ExtResource("2_ewnx3")
-uid = 3625
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhoms"]
 shader = ExtResource("4_6wu4g")
@@ -59,11 +52,6 @@ scale = Vector2(0.5, 0.5)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(5655, 3000, 5756, 2773, 6112, 2766, 5936, 3159, 5575, 3116, 5963, 3282, 6285, 2717, 5782, 2685)
-
-[node name="Diver" parent="." instance=ExtResource("6_dw1pj")]
-position = Vector2(4808, 2933)
-uid = SubResource("Resource_mxy30")
-has_multiplayer_sync = false
 
 [node name="Filler" type="Polygon2D" parent="."]
 z_index = 7
@@ -166,7 +154,7 @@ metadata/_edit_lock_ = true
 [node name="Waves" parent="." node_paths=PackedStringArray("diver") instance=ExtResource("3_3nwiy")]
 position = Vector2(6991, 1206)
 spread = 14.4
-diver = NodePath("../Diver")
+diver = NodePath("")
 no_height_diver = true
 spacing = 40.0
 

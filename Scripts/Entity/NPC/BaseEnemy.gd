@@ -87,10 +87,10 @@ func _ready() -> void:
 		light_detector.area_entered.connect(_light_entered)
 		light_detector.area_exited.connect(_light_exited)
 
-func _light_entered(area: Area2D):
+func _light_entered(_area: Area2D):
 	light_visible = true
 
-func _light_exited(area: Area2D):
+func _light_exited(_area: Area2D):
 	light_visible = false
 
 func _take_damage(new_health: float) -> void:

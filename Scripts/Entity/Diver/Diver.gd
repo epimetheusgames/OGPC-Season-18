@@ -40,6 +40,11 @@ func _ready() -> void:
 	
 	if Global.save_load_framework:
 		Global.save_load_framework.save_nodes.connect(_save)
+	
+	if !(Global.is_multiplayer && Global.godot_steam_abstraction && !_is_node_owner()):
+		camera.enabled = true
+	else:
+		camera.enabled = false
 
 func _physics_process(_delta: float):
 	diver_stats.oxygen_loss = oxygen_loss
@@ -101,7 +106,8 @@ func _save() -> void:
 				get_path_to(diver_combat): [
 					"selected_weapon",
 				],
-			}
+			},
+			diver_scene,
 		)
 	)
 

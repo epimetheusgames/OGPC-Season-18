@@ -43,6 +43,9 @@ func _ready():
 		spring_velocities.append(0)
 
 func _process(delta: float) -> void:
+	# Until someone decides to fix this
+	return
+
 	time += delta
 	
 	#for i in range(spring_positions.size()):
