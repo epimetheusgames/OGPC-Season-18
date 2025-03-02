@@ -14,10 +14,10 @@ extends Resource
 var unlocks_indices: Array[int]
 
 func debug() -> void:
-	print("DEBUG: Mission: Filepath: " + mission_filepath.file)
-	print("DEBUG: Mission: Title: " + title)
-	print("DEBUG: Mission: Description: " + description)
+	Global.print_debug("DEBUG: Mission: Filepath: " + mission_filepath.file)
+	Global.print_debug("DEBUG: Mission: Title: " + title)
+	Global.print_debug("DEBUG: Mission: Description: " + description)
 	for file in unlocks:
-		print("DEBUG: Mission: Unlocks: " + file.file)
+		Global.print_debug("DEBUG: Mission: Unlocks: " + file.file)
 	for i in unlocks_indices:
-		print("DEBUG: Missions: Unlocks (Indicies): " + str(i))
+		Global.print_debug("DEBUG: Missions: Unlocks (Indicies): " + str(i))

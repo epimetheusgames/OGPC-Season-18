@@ -13,6 +13,7 @@ var diver_state: Util.DiverState
 @onready var diver_inventory: DiverInventory = $"Inventory"
 @onready var diver_stats: DiverStats = $"Stats"
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
+@onready var saveable_timer := get_tree().create_timer(0.5)
 
 @export var diver_scene: FilePathResource
 @export var water_manager: Node2D

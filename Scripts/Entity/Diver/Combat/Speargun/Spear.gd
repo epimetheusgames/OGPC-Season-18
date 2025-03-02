@@ -34,5 +34,4 @@ func _on_body_entered(body: Node2D) -> void:
 		attach_dif = attach_body.to_local(global_position)
 		velocity = Vector2.ZERO
 		
-		if Global.verbose_debug:
-			print("DEBUG: Spear weapon attached to: ", attach_body.name)
+		Global.print_debug("DEBUG: Spear weapon attached to: " + attach_body.name)

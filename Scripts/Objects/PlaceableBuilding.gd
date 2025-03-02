@@ -19,33 +19,33 @@ var placed_by: Diver
 
 func _ready() -> void:
 	if !building_sprite:
-		print("ERROR: Placeable building has no sprite. Path: " + str(get_path()))
+		Global.print_error("Placeable building has no sprite. Path: " + str(get_path()))
 		
 		for child in get_children():
 			if child is Sprite2D:
-				print("DEBUG: Found sprite as child, using.")
+				Global.print_debug("DEBUG: Found sprite as child, using.")
 				building_sprite = child
 	
 	if !building_collision:
-		print("ERROR: Placeable building has no collision. Path: " + str(get_path()))
+		Global.print_error("Placeable building has no collision. Path: " + str(get_path()))
 		
 		for child in get_children():
 			if child is StaticBody2D:
-				print("DEBUG: Found static body as child, using.")
+				Global.print_debug("DEBUG: Found static body as child, using.")
 				building_collision = child
 		
 		# This is likely to happen.
 		for child in building_sprite.get_children():
 			if child is StaticBody2D:
-				print("DEBUG: Found static body as child of sprite, using.")
+				Global.print_debug("DEBUG: Found static body as child of sprite, using.")
 				building_collision = child
 	
 	if !base_position:
-		print("ERROR: Placeable building has no base position. Path: " + str(get_path()))
+		Global.print_error("Placeable building has no base position. Path: " + str(get_path()))
 		
 		for child in get_children():
 			if child is Node2D && child.name != "Raycasts":
-				print("DEBUG: Found position (not raycasts) as child, using.")
+				Global.print_debug("DEBUG: Found position (not raycasts) as child, using.")
 				base_position = child
 	
 	# Make sure sprites and collisions are a child of this.

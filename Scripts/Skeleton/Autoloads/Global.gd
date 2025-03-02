@@ -27,6 +27,8 @@ var dialog_active: bool = false
 var dialog_played: bool = true
 var current_mission_node = null
 var current_mission: Mission
+var chat: MinimalChat
+var chat_text: String
 
 # Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {
@@ -38,6 +40,43 @@ var bitmask_conversion = {
 	"Player Attackbox / Enemy Hurtbox": 32,
 	"Interaction": 64,
 }
+
+func print_debug(message: String):
+	message = message.replace("DEBUG: ", "")
+	if verbose_debug:
+		print("DEBUG: " + message)
+		if chat:
+			chat.push_debug(message)
+			chat_text = chat.text.text
+		else:
+			chat_text += "\nDEBUG: " + message
+
+func print_error(message: String, error_type := Util.ErrorType.ERROR):
+	var chat_pretext: String = ""
+	var sender: String = ""
+	var sender_color: String = ""
+	if error_type == Util.ErrorType.WARNING:
+		chat_pretext = "WARNING: "
+		sender = "SystemWarning"
+		sender_color = "yellow"
+	elif error_type == Util.ErrorType.ERROR:
+		chat_pretext = "ERROR: "
+		sender = "SystemError"
+		sender_color = "red"
+	elif error_type == Util.ErrorType.CRITICAL_ERROR:
+		chat_pretext = "CRITICAL ERROR: "
+		sender = "SystemFatal"
+		sender_color = "MIDI_MESSAGE_CONTROL_CHANGE"
+	
+	print(chat_pretext + message)
+
+	if !verbose_debug:
+		return
+	if chat:
+		chat.push_chat(sender, message, sender_color, "antiquewhite ")
+		chat_text = chat.text.text
+	else:
+		chat_text += "\nERROR: " + message
 
 func get_slot_password(slot_num: int) -> String:
 	var result_string = ""
@@ -64,6 +103,7 @@ func eval(input: String):
 	script.reload()
 	script_holder.set_script(script)
 	return script_holder.eval()
+
 func set_brightness(percentage:int):
 	# me when type is "previously freed"
 	if(is_instance_valid(root_node) && is_instance_valid(root_node.brightness_modulate)):

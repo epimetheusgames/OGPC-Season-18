@@ -10,8 +10,7 @@ func initialize(diver: Diver) -> void:
 
 func check_success() -> bool:
 	if sequence[index].check_success():
-		if Global.verbose_debug:
-			print("DEBUG: Mission sub-state completed. Description: " + sequence[index].description)
+		Global.print_debug("DEBUG: Mission sub-state completed. Description: " + sequence[index].description)
 		index += 1
 		if index >= sequence.size():
 			index -= 1

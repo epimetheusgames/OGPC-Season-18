@@ -6,6 +6,6 @@ class_name GameSave
 @export var node_saves: Array[NodeSaver]
 
 func debug() -> void:
-	print("DEBUG: GameSave: Slot: " + str(slot))
-	print("DEBUG: GameSave: unlocked_mission_tree debug:")
+	Global.print_debug("DEBUG: GameSave: Slot: " + str(slot))
+	Global.print_debug("DEBUG: GameSave: Unlocked Mission Tree:")
 	unlocked_mission_tree.debug()

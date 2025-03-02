@@ -26,7 +26,7 @@ func _load_global_config() -> GlobalSave:
 	var game_save: GlobalSave = blank_config.get_value("Main", "GlobalSave")
 	
 	if !game_save:
-		print("ERROR: Couldn't load GameSave for whatever reason. Should be an error in the errors tab.")
+		Global.print_error("Couldn't load GameSave for whatever reason. Should be an error in the errors tab.")
 		return null
 	
 	return game_save
@@ -39,7 +39,7 @@ func refresh_uid() -> void:
 	var game_save: GlobalSave = _load_global_config()
 	
 	if !game_save:
-		print("ERROR: Can't update UID because game save couldn't load.")
+		Global.print_error("Can't update UID because game save couldn't load.")
 		return
 	
 	if game_load_error != OK:

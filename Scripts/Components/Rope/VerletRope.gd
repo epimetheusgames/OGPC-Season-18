@@ -170,7 +170,7 @@ func collide_and_translate(origin: Vector2, motion: Vector2, index: int) -> Vect
 		return motion
 	
 	if !component_container:
-		print("ERROR: Verlet rope at path " + str(get_path()) + " needs a component container to do physics!")
+		Global.print_error("Verlet rope at path " + str(get_path()) + " needs a component container to do physics!")
 		return motion
 		
 	raycast_query.from = origin

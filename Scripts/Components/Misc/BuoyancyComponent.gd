@@ -25,8 +25,8 @@ func _ready_buoyancy() -> void:
 	
 	if waves:
 		polygon = waves.get_node("Line2D")
-	else:
-		print("ERROR: Buoyancy component at path " + str(get_path()) + " has no waves.")
+	# else:
+	# 	print("ERROR: Buoyancy component at path " + str(get_path()) + " has no waves.")
 
 func _physics_process(delta: float) -> void:
 	if !waves:
@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	if !polygon:
 		polygon = waves.get_node("Line2D")
 	
-	var current_water_height := polygon.polygon[int(polygon.polygon.size() / 2)].y + polygon.global_position.y
+	var current_water_height := polygon.polygon[int(polygon.polygon.size() / 2.0)].y + polygon.global_position.y
 	
 	if center_of_mass.global_position.y < current_water_height:
 		is_in_air = true

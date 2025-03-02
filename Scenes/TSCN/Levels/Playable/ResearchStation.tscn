@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0nn12ilucaoj"]
+[gd_scene load_steps=15 format=3 uid="uid://c0nn12ilucaoj"]
 
 [ext_resource type="PackedScene" uid="uid://chy3luehcqm2b" path="res://Scenes/TSCN/UI/MissionUiBox.tscn" id="1_wmqaw"]
 [ext_resource type="Script" path="res://Scripts/Level/ResearchStationCamera.gd" id="2_e3xfe"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="5_thj6v"]
 [ext_resource type="Texture2D" uid="uid://bumrrftvhwmy0" path="res://Assets/Art/Misc/ResearchStationLeftRoom.png" id="8_d4l3m"]
 [ext_resource type="Texture2D" uid="uid://c464qop8nquax" path="res://Assets/Art/Misc/ResearchStationHallway.png" id="9_65861"]
+[ext_resource type="Script" path="res://Scripts/UI/Ingame/MinimalChat.gd" id="9_fb75n"]
 [ext_resource type="Texture2D" uid="uid://nurn5d348emh" path="res://Assets/Art/Misc/ResearchStationRightRoom.png" id="10_7lt0g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhoms"]
@@ -264,6 +265,19 @@ texture = ExtResource("9_65861")
 z_index = 80
 position = Vector2(3638, 540)
 texture = ExtResource("10_7lt0g")
+
+[node name="MinimalChat" type="PanelContainer" parent="." node_paths=PackedStringArray("text")]
+offset_left = 1134.0
+offset_top = 190.0
+offset_right = 1648.0
+offset_bottom = 472.0
+script = ExtResource("9_fb75n")
+text = NodePath("RichTextLabel")
+set_default_onready = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MinimalChat"]
+layout_mode = 2
+bbcode_enabled = true
 
 [connection signal="button_up" from="Camera2D/MoveRightButton" to="Camera2D" method="_on_move_right_button_button_up"]
 [connection signal="button_up" from="Camera2D/MoveLeftButton" to="Camera2D" method="_on_move_left_button_button_up"]

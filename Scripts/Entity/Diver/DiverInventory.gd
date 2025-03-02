@@ -48,8 +48,7 @@ func __collect_item(area: BaseItem) -> void:
 	if inventory.size() >= inventory_size:
 		return
 	inventory.append(res)
-	if Global.verbose_debug:
-		print("DEBUG: Item collected by player. Name: " + res.name + ". Cost: " + str(res.cost))
+	Global.print_debug("DEBUG: Item collected by player. Name: " + res.name + ". Cost: " + str(res.cost))
 
 func __select_item(index: int) -> void:
 	if index >= inventory.size():

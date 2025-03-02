@@ -20,7 +20,7 @@ func _ready_multiplayer_player_spawner() -> void:
 		_client_joined(client["steam_id"], client["steam_name"])
 
 func _client_joined(client_id: int, client_name: String):
-	print("DEBUG: Spawning player with client id " + str(client_id))
+	Global.print_debug("DEBUG: Client joined with id " + str(client_id) + " and name " + client_name)
 	
 	if get_node_or_null(str(client_id)):
 		print("WARNING: Player spawner component trying to spawn new player but player already exists.")

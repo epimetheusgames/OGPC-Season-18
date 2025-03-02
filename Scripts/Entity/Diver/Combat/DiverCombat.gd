@@ -85,7 +85,7 @@ func add_weapon(weapon_name: String) -> void:
 	
 	var weapon: PackedScene = all_weapons.get(weapon_name)
 	if weapon == null:
-		print("ERROR: Weapon not found")
+		Global.print_error("Weapon not found")
 		return
 	
 	var new_weapon: Weapon = weapon.instantiate()

@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://71htappd3cxj"]
+[gd_scene load_steps=16 format=3 uid="uid://71htappd3cxj"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Ingame/TeamInfoPanel.gd" id="1_0ajfg"]
 [ext_resource type="Script" path="res://Scripts/UI/Ingame/PersonHUD.gd" id="1_0aoln"]
 [ext_resource type="Script" path="res://Scripts/UI/Ingame/Inventory.gd" id="3_f466a"]
+[ext_resource type="Script" path="res://Scripts/UI/Ingame/ChatPanel.gd" id="4_d8efl"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="5_6galc"]
 
 [sub_resource type="Gradient" id="Gradient_eq4ay"]
 offsets = PackedFloat32Array(0)
@@ -39,6 +41,10 @@ colors = PackedColorArray(1, 1, 1, 1)
 gradient = SubResource("Gradient_221s0")
 width = 200
 height = 30
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l72ri"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jrftq"]
 
 [node name="IngameUI" type="Control"]
 modulate = Color(1, 1, 1, 0.72549)
@@ -127,123 +133,6 @@ layout_mode = 2
 size_flags_horizontal = 10
 text = "00:00"
 horizontal_alignment = 2
-
-[node name="TeamInfoPanel" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -135.0
-offset_right = 283.0
-grow_vertical = 0
-script = ExtResource("1_0ajfg")
-
-[node name="MarginContainer" type="MarginContainer" parent="TeamInfoPanel"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-
-[node name="VBox" type="VBoxContainer" parent="TeamInfoPanel/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_constants/separation = 5
-
-[node name="Diver1" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver1"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-text = "Carson"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver1"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver1"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-text = "100%"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="Diver2" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver2"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-text = "Carson"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver2"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver2"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-text = "100%"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="Diver3" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver3"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-text = "Carson"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver3"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver3"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-text = "100%"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="Diver4" type="HBoxContainer" parent="TeamInfoPanel/MarginContainer/VBox"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver4"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-text = "Carson"
-scroll_active = false
-shortcut_keys_enabled = false
-
-[node name="VSeparator" type="VSeparator" parent="TeamInfoPanel/MarginContainer/VBox/Diver4"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="TeamInfoPanel/MarginContainer/VBox/Diver4"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 20
-text = "100%"
-scroll_active = false
-shortcut_keys_enabled = false
 
 [node name="Inventory" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -350,7 +239,168 @@ offset_right = 123.0
 offset_bottom = 127.0
 focus_mode = 0
 
+[node name="StatsAndChatDraggable" type="HSplitContainer" parent="."]
+layout_mode = 0
+offset_right = 605.0
+offset_bottom = 1080.0
+
+[node name="StatsAndChat" type="VBoxContainer" parent="StatsAndChatDraggable"]
+layout_mode = 2
+
+[node name="ChatPanelDraggable" type="VSplitContainer" parent="StatsAndChatDraggable/StatsAndChat"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BlankPanel" type="PanelContainer" parent="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_styles/panel = SubResource("StyleBoxEmpty_l72ri")
+
+[node name="ChatPanel" type="PanelContainer" parent="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_d8efl")
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable/ChatPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable/ChatPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable/ChatPanel/MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_6galc")
+theme_override_font_sizes/normal_font_size = 0
+bbcode_enabled = true
+
+[node name="LineEdit" type="LineEdit" parent="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable/ChatPanel/MarginContainer/VBox"]
+layout_mode = 2
+theme = ExtResource("5_6galc")
+placeholder_text = "Chat message or command"
+
+[node name="TeamInfoPanel" type="PanelContainer" parent="StatsAndChatDraggable/StatsAndChat"]
+layout_mode = 2
+script = ExtResource("1_0ajfg")
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="VBox" type="VBoxContainer" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 5
+
+[node name="Diver1" type="HBoxContainer" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver1"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="VSeparator" type="VSeparator" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver1"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver1"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Diver2" type="HBoxContainer" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver2"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="VSeparator" type="VSeparator" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Diver3" type="HBoxContainer" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver3"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="VSeparator" type="VSeparator" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver3"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="Diver4" type="HBoxContainer" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver4"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "Carson"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="VSeparator" type="VSeparator" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver4"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="StatsAndChatDraggable/StatsAndChat/TeamInfoPanel/MarginContainer/VBox/Diver4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="PanelContainer" type="PanelContainer" parent="StatsAndChatDraggable"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jrftq")
+
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot1/TextureRect/SlotButton" to="Inventory" method="_on_slot_button_button_down"]
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot2/TextureRect/SlotButton2" to="Inventory" method="_on_slot_button_2_button_down"]
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot3/TextureRect/SlotButton3" to="Inventory" method="_on_slot_button_3_button_down"]
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot4/TextureRect/SlotButton4" to="Inventory" method="_on_slot_button_4_button_down"]
+[connection signal="text_submitted" from="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable/ChatPanel/MarginContainer/VBox/LineEdit" to="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable/ChatPanel" method="_on_line_edit_text_submitted"]
