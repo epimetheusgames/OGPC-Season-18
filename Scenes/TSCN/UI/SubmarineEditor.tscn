@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://54wx4qqce02a"]
 
-[ext_resource type="Script" path="res://Scripts/UI/SubmarineEditor.gd" id="1_rijmy"]
-[ext_resource type="Script" path="res://Scripts/Objects/SubmarineEditorMouseArea.gd" id="2_kvlip"]
-[ext_resource type="Script" path="res://Scenes/TSCN/UI/Gridlines.gd" id="3_8hxfn"]
+[ext_resource type="Script" uid="uid://duv87y0y6t0p0" path="res://Scripts/UI/SubmarineEditor.gd" id="1_rijmy"]
+[ext_resource type="Script" uid="uid://v2vmvtgdpiqw" path="res://Scripts/Objects/SubmarineEditorMouseArea.gd" id="2_kvlip"]
+[ext_resource type="Script" uid="uid://c4kym6vy0onv0" path="res://Scenes/TSCN/UI/Gridlines.gd" id="3_8hxfn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mu336"]
 

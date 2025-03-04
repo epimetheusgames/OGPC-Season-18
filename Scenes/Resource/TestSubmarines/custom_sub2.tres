@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="SubmarineModuleResource" load_steps=5 format=3 uid="uid://cdolb6ragy1a4"]
 
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/AttachmentPointResource.gd" id="1_eom5a"]
-[ext_resource type="Script" uid="uid://b187fkkt3dcri" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_r8vpp"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/SubmarineModuleResource.gd" id="3_cl047"]
+[ext_resource type="Script" uid="uid://dsigpwn6bjrea" path="res://Scripts/ResourceScripts/SubmarineResources/AttachmentPointResource.gd" id="1_eom5a"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_r8vpp"]
+[ext_resource type="Script" uid="uid://36wx8lo8sh8d" path="res://Scripts/ResourceScripts/SubmarineResources/SubmarineModuleResource.gd" id="3_cl047"]
 
 [sub_resource type="Resource" id="Resource_b3qxj"]
 script = ExtResource("2_r8vpp")
@@ -12,4 +12,6 @@ file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlMo
 script = ExtResource("3_cl047")
 module_scene = SubResource("Resource_b3qxj")
 position = Vector2(0, 0)
+rotation = 0.0
 attachment_points = Array[ExtResource("1_eom5a")]([null])
+grid_position = Vector2i(0, 0)

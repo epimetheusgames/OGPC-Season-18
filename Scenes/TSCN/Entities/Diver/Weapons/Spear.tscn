@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dkiqku8nhydo3"]
 
 [ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Spear.png" id="1_mdbjp"]
-[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Speargun/Spear.gd" id="1_x2dlv"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage/Attackbox.gd" id="3_dr42o"]
+[ext_resource type="Script" uid="uid://d1cyo4wvnktl6" path="res://Scripts/Entity/Diver/Combat/Speargun/Spear.gd" id="1_x2dlv"]
+[ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="3_dr42o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwnx7"]
 size = Vector2(74, 4)

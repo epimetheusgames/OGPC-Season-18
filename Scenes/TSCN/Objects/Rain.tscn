@@ -4,7 +4,7 @@
 blend_mode = 1
 
 [sub_resource type="Curve" id="Curve_8v1ix"]
-max_value = 0.3
+_limits = [0.0, 0.3, 0.0, 1.0]
 _data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.715015, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -18,17 +18,17 @@ colors = PackedColorArray(1, 1, 1, 0.0784314, 1, 1, 1, 1)
 gradient = SubResource("Gradient_mm6op")
 
 [sub_resource type="Curve" id="Curve_vfdc7"]
-max_value = 3.0
+_limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_cig5e"]
-max_value = 30.0
+_limits = [0.0, 30.0, 0.0, 1.0]
 _data = [Vector2(0, 14.6088), 0.0, 88.7644, 0, 0, Vector2(0.135569, 26.1353), 56.4795, 56.4795, 0, 0, Vector2(0.259475, 30), 0.0, 0.0, 0, 0, Vector2(1, 30), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="Curve" id="Curve_lb71p"]
-max_value = 3.0
+_limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 

@@ -1,11 +1,9 @@
 [gd_scene load_steps=19 format=3 uid="uid://cqxetysm85e1y"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/NPC/AnimatedEnemy.gd" id="1_teovo"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_eew6s"]
+[ext_resource type="Script" uid="uid://bff341yenirvw" path="res://Scripts/Entity/NPC/AnimatedEnemy.gd" id="1_teovo"]
+[ext_resource type="Script" uid="uid://db27s6qa2s6m8" path="res://Scripts/ResourceScripts/EntityBehavior/EnemyBehaviorSettings.gd" id="2_eew6s"]
 [ext_resource type="Texture2D" uid="uid://dgi5korrp8ou" path="res://Assets/Art/Entity/PlaceholderEnemyFishSpritesheet.png" id="2_xp6fr"]
-[ext_resource type="Script" uid="uid://co76y8m5fsk3f" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_j1siw"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Attackbox.gd" id="4_p5whe"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox/Hurtbox.gd" id="5_cg6aa"]
+[ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_j1siw"]
 
 [sub_resource type="Resource" id="Resource_sd441"]
 script = ExtResource("2_eew6s")
@@ -18,6 +16,7 @@ closest_distance = 85.0
 sensor_type = 0
 wander_type = 0
 attack_mode = 0
+player_shines_light = false
 wander_range = 800.0
 view_range = 230.0
 view_distance = 70.0
@@ -88,6 +87,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Resource" id="Resource_wtrrq"]
+metadata/__load_path__ = "res://Scripts/Components/Hitbox/Attackbox.gd"
+
+[sub_resource type="Resource" id="Resource_ijfmb"]
+metadata/__load_path__ = "res://Scripts/Components/Hitbox/Hurtbox.gd"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_d8n50"]
 radius = 12.0
 
@@ -125,10 +130,10 @@ frame_progress = 0.596816
 [node name="HealthComponent" type="Node" parent="."]
 
 [node name="AttackBoxComponent" type="Node" parent="."]
-script = ExtResource("4_p5whe")
+script = SubResource("Resource_wtrrq")
 
 [node name="HurtboxComponent" type="Node" parent="."]
-script = ExtResource("5_cg6aa")
+script = SubResource("Resource_ijfmb")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 position = Vector2(2, 0)

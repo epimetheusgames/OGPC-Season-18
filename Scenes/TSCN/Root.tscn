@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://clgd0ups3ekte" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="7_vxmb5"]
 [ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="8_py4au"]
 [ext_resource type="Script" uid="uid://duycl57xwmfpr" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="9_y8obd"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
+[ext_resource type="Script" uid="uid://6ub1ahbtrw5b" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
 [ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_luehf"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_yjmxm"]

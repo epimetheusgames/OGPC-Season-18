@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://bptkxkfwbumm5"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/NPC/BigfinSquid.gd" id="1_0jv23"]
+[ext_resource type="Script" uid="uid://bvtfj5a6g53tw" path="res://Scripts/Entity/NPC/BigfinSquid.gd" id="1_0jv23"]
 [ext_resource type="Resource" uid="uid://c0y2clojtb743" path="res://Scenes/Resource/Entity/BigfinSquidSettings.tres" id="2_1wvyv"]
-[ext_resource type="Script" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_55m16"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="5_mc2mg"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_dpvyl"]
+[ext_resource type="Script" uid="uid://cxt7y067vc2qg" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
+[ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="3_55m16"]
+[ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="5_mc2mg"]
+[ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_dpvyl"]
 
 [sub_resource type="Resource" id="Resource_jajkh"]
 resource_local_to_scene = true

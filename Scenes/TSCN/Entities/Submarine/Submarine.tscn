@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8b85s6osaha0"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_xpqec"]
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_q50ul"]
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/ModuleLoader.gd" id="3_yfmig"]
+[ext_resource type="Script" uid="uid://0js7gtnvp1vm" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_xpqec"]
+[ext_resource type="Script" uid="uid://bpcsoat0wk1ci" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_q50ul"]
+[ext_resource type="Script" uid="uid://dyv8k2wr56rpb" path="res://Scripts/Entity/Submarine/ModuleLoader.gd" id="3_yfmig"]
 
 [node name="Submarine" type="CharacterBody2D"]
 z_index = 20

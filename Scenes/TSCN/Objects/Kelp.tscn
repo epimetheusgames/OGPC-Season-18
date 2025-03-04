@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://esk8xgt7uas0"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/Kelp.gd" id="1_u4jo0"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_li8ph"]
+[ext_resource type="Script" uid="uid://dvuwdwemc2knf" path="res://Scripts/Objects/Kelp.gd" id="1_u4jo0"]
+[ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_li8ph"]
 
 [sub_resource type="Resource" id="Resource_xdeey"]
 resource_local_to_scene = true

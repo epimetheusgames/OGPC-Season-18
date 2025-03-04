@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d24oi85rw114u"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/Diver/Combat/Pistol/PistolBullet.gd" id="1_hykh4"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage/Attackbox.gd" id="2_gvdbw"]
+[ext_resource type="Script" uid="uid://cyvf25qnqef7g" path="res://Scripts/Entity/Diver/Combat/Pistol/PistolBullet.gd" id="1_hykh4"]
+[ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="2_gvdbw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pk0f"]
 size = Vector2(14, 26)
