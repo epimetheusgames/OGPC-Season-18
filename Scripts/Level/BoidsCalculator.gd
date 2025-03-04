@@ -9,7 +9,7 @@ var boids_rotations := []
 
 @export var view_dist = 50
 @export var protected_dist = 10
-@export var num_boids = 1000
+@export var num_boids = 3000
 @export var bin_size = 32
 @export var boid_gd_sync_batch_size = 50
 
@@ -46,15 +46,8 @@ func _ready() -> void:
 		self.process_mode = Node.PROCESS_MODE_DISABLED
 		return
 	
-	rd = RenderingServer.create_local_rendering_device()
-	
-	var shader_file := load("res://Scripts/GLSL/Compute/compute_boids.glsl")
-	var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
-	boid_shader = rd.shader_create_from_spirv(shader_spirv)
-	boids_pipeline = rd.compute_pipeline_create(boid_shader)
-	
-	boids_parameters_array.resize(2000 * 8)
-	boids_node_list.resize(2000)
+	boids_parameters_array.resize(3000 * 8)
+	boids_node_list.resize(3000)
 	
 	# Setup up threading
 	mutex = Mutex.new()
@@ -91,6 +84,13 @@ func _process(delta: float) -> void:
 
 # Runs the GPU compute shader every frame! 
 func _boids_compute() -> void:
+	rd = RenderingServer.create_local_rendering_device()
+	
+	var shader_file := load("res://Scripts/GLSL/Compute/compute_boids.glsl")
+	var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
+	boid_shader = rd.shader_create_from_spirv(shader_spirv)
+	boids_pipeline = rd.compute_pipeline_create(boid_shader)
+	
 	# Magic^TM delay fixes everything...
 	# EDIT: I realized that we return if the number of boids is zero.
 	OS.delay_msec(300)
@@ -137,14 +137,12 @@ func _boids_compute() -> void:
 		
 		# TODO: This is probably unsafe, create a seperate array of raycasts to set later.
 		# EDIT: I haven't seen any errors, that's not to say there aren't any.
-		mutex.lock()
 		var raycast_data := PackedFloat32Array()
 		for boid in boids_list:
 			var boid_component = boid.get_component("BoidComponent")
 			raycast_data.append(1 if boid_component.raycast.get_collider() else 0)
 			raycast_data.append(boid_component.raycast.get_collision_normal().x)
 			raycast_data.append(boid_component.raycast.get_collision_normal().y)
-		mutex.unlock()
 		
 		var raycast_data_bytes = raycast_data.to_byte_array()
 		
@@ -277,10 +275,11 @@ func remove_boid_index(id):
 	# Move all the indices backward because we just removed a node.
 	for boid_index in range(id + 1, boids_node_list.size() - 1, 1):
 		# Something's broken about this system but i don't want to fix it.
-		if boids_node_list[boid_index] && is_instance_valid(boids_node_list[boid_index]):
+		if boids_node_list[boid_index]:
 			boids_node_list[boid_index].boids_index -= 1
 	
 	boids_parameters_array_bytes = boids_parameters_array.to_byte_array()
+	boids_index_counter -= 1
 
 func _run_compute_shader(pipeline, uniform_set):
 	# Create compute pipeline
