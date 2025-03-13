@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi6i18nskixdt"]
+
+[ext_resource type="Script" uid="uid://beofwn0pgkcaq" path="res://Scripts/Entity/NPC/ActualNPCs/CivillianFollower.gd" id="1_o7vjs"]
+[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="2_l6860"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5cylf"]
+radius = 35.0
+height = 218.0
+
+[node name="CivillianFollower" type="CharacterBody2D" node_paths=PackedStringArray("navigation")]
+script = ExtResource("1_o7vjs")
+navigation = NodePath("Nav")
+start_of_chain = null
+use_offset_position = null
+swim_speed = null
+follow_distance = null
+_has_physics = null
+has_multiplayer_sync = null
+sync_by_increment = null
+sync_increment = null
+metadata/_custom_type_script = "uid://beofwn0pgkcaq"
+
+[node name="Nav" type="NavigationAgent2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5cylf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -0.500002)
+scale = Vector2(0.5625, 1.57031)
+texture = ExtResource("2_l6860")

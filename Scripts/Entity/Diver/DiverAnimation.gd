@@ -5,9 +5,13 @@
 class_name DiverAnimation
 extends Node2D
 
+# Diver root.
 @onready var diver: Diver = get_parent()
 
+# Diver IK skeleton root.
 @onready var skeleton: Skeleton2D = $"Skeleton"
+
+# Diver modification stack. What does this do?
 @onready var mod_stack: SkeletonModificationStack2D = skeleton.get_modification_stack()
 
 @onready var arm1: Bone2D = $"Skeleton/Torso/UpperArm1/Forearm1"
@@ -21,6 +25,8 @@ extends Node2D
 @onready var leg_target1: Node2D = $"LegIkTarget1"
 @onready var leg_target2: Node2D = $"LegIkTarget2"
 
+# Arrow that points in the direction the keyboard is pointing, but it's invisible
+# now.
 @onready var arrow: Node2D = $"Arrow"
 
 var displayed_nametag: Label
@@ -28,15 +34,12 @@ var displayed_nametag: Label
 # Leg oscillation
 var leg_osc_counter1: float = 0
 var leg_osc_counter2: float = 0
+
+# Speed that the legs oscilate (units?)
 var osc_speed: float = 2.0
 
 var hand1_weapon_control: bool = false
 var hand2_weapon_control: bool = false
-
-# Hey, the names of these varialbes are kinda bad
-# Since the nodes are arms and legs
-# But the targets should actually be feet/hand
-# But I'm not going to fix that lol
 
 func _ready() -> void:
 	mod_stack = mod_stack.duplicate(true)
@@ -61,7 +64,6 @@ func _ready() -> void:
 	var ui = $"../../../../../UI"
 	if ui:
 		ui.add_child(displayed_nametag)
-
 
 func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction && Global.is_multiplayer:
@@ -101,7 +103,7 @@ func _process(delta: float) -> void:
 	else:
 		hand2_weapon_control = false
 
-# leg 1 or 2
+# Animates one of the legs (leg = 1 or leg = 2) with the delta time.
 func _animate_leg(leg: int, delta: float) -> Vector2:
 	const DIST_FROM_BODY = -110
 	const MIN_LEG_DIST = -25
@@ -135,6 +137,7 @@ func _animate_arm(arm: int, delta: float) -> Vector2:
 		return Vector2(-38, 44)
 	return Vector2.ZERO
 
+# Syncs arm and leg IK targets in multiplayer.
 func _sync_multiplayer() -> void:
 	if Global.godot_steam_abstraction && Global.is_multiplayer:
 		Global.godot_steam_abstraction.sync_var(arm_target1, "position")
@@ -151,6 +154,7 @@ func get_head_position() -> Vector2:
 	var rot: float = head.get_bone_angle() + head.get_global_rotation()
 	return pos + Util.angle_to_vector_radians(rot, head.get_length())
 
+# Get the END of the hand bone.
 func get_hand1_position() -> Vector2:
 	var arm1: Bone2D = $"Skeleton/Torso/UpperArm1/Forearm1"
 	
@@ -158,11 +162,12 @@ func get_hand1_position() -> Vector2:
 	var rot: float = arm1.get_bone_angle() + arm1.get_global_rotation()
 	return pos + Util.angle_to_vector_radians(rot, arm1.get_length())
 
+# Sets the target position for the hand.
 func set_hand1_position(pos: Vector2) -> void:
 	arm_target1.global_position = pos
 	hand1_weapon_control = true
 
-
+# Get the END of the hand bone.
 func get_hand2_position() -> Vector2:
 	var arm2: Bone2D = $"Skeleton/Torso/UpperArm2/Forearm2"
 	
@@ -170,6 +175,7 @@ func get_hand2_position() -> Vector2:
 	var rot: float = arm2.get_bone_angle() + arm2.get_global_rotation()
 	return pos + Util.angle_to_vector_radians(rot, arm2.get_length())
 
+# Sets the target position for the hand.
 func set_hand2_position(pos: Vector2) -> void:
 	arm_target2.global_position = pos
 	hand2_weapon_control = true

@@ -1,32 +1,33 @@
+
 [gd_scene load_steps=41 format=3 uid="uid://cgroth3nseo6"]
 
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
-[ext_resource type="Script" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="3_c684j"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="4_l11nu"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="5_jvequ"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="6_pmicg"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="7_vxmb5"]
+[ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
+[ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
+[ext_resource type="Script" uid="uid://cwb2yuidg1nv5" path="res://Scripts/Skeleton/Nodes/GodotSteamAbstraction.gd" id="3_c684j"]
+[ext_resource type="Script" uid="uid://eh80g6ou7x2q" path="res://Scripts/Skeleton/Nodes/SaveLoadFramework.gd" id="4_l11nu"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="5_jvequ"]
+[ext_resource type="Script" uid="uid://cwga2scp61606" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="6_pmicg"]
+[ext_resource type="Script" uid="uid://clgd0ups3ekte" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="7_vxmb5"]
 [ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="8_py4au"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="9_y8obd"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
-[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
-[ext_resource type="Shader" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_luehf"]
+[ext_resource type="Script" uid="uid://duycl57xwmfpr" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="9_y8obd"]
+[ext_resource type="Script" uid="uid://6ub1ahbtrw5b" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
+[ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
+[ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_luehf"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_yjmxm"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="13_wogkx"]
-[ext_resource type="Script" path="res://Scripts/UI/KeybindButtonHandler.gd" id="14_qt6oy"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="15_5virq"]
+[ext_resource type="Script" uid="uid://cr8brelxptd70" path="res://Scripts/UI/KeybindButtonHandler.gd" id="14_qt6oy"]
+[ext_resource type="Script" uid="uid://6t41dstdgs6k" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="15_5virq"]
 [ext_resource type="FontFile" uid="uid://b8shwbf3tge0e" path="res://Assets/Fonts/Michroma/Michroma-Regular.ttf" id="16_nfklf"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/NPCS/Boid.tscn" id="17_g72ff"]
 [ext_resource type="Script" path="res://Scripts/UI/Ingame/MinimalChat.gd" id="18_al4tj"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="18_vsi4y"]
 [ext_resource type="Texture2D" uid="uid://cx2ypxydjaxys" path="res://Assets/Art/Entity/BoidsFishSprite.png" id="19_eucuf"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/KeypressHandler.gd" id="20_kh2s0"]
+[ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="18_vsi4y"]
+[ext_resource type="Script" uid="uid://dku55y4bp1fny" path="res://Scripts/Skeleton/Nodes/KeypressHandler.gd" id="20_kh2s0"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="21_stqyc"]
-[ext_resource type="Script" path="res://Scripts/Skeleton/Nodes/PerformancePrompt.gd" id="22_3oc7k"]
-[ext_resource type="Script" path="res://Scripts/UI/DialogHandler.gd" id="23_1chc7"]
+[ext_resource type="Script" uid="uid://d4bbjhr8uciri" path="res://Scripts/Skeleton/Nodes/PerformancePrompt.gd" id="22_3oc7k"]
+[ext_resource type="Script" uid="uid://k5m6873n63pf" path="res://Scripts/UI/DialogHandler.gd" id="23_1chc7"]
 [ext_resource type="PackedScene" uid="uid://bp2ach8thhbsd" path="res://Scenes/TSCN/UI/FakeButton.tscn" id="24_wosnj"]
-[ext_resource type="Script" path="res://Scripts/UI/UIGenerator.gd" id="25_w4o83"]
+[ext_resource type="Script" uid="uid://d0u6amg8og288" path="res://Scripts/UI/UiGenerator.gd" id="25_w4o83"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_v8psd"]
 
@@ -48,11 +49,22 @@ missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_py4au")])
 shader = ExtResource("11_luehf")
 shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
 shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/depth_color_tex = ExtResource("12_yjmxm")
 shader_parameter/always_top = false
 shader_parameter/blend_alpha = false
 shader_parameter/max_alpha = 0.2
 shader_parameter/height = 1.0
-shader_parameter/depth_color_tex = ExtResource("12_yjmxm")
+
+[sub_resource type="Gradient" id="Gradient_tetp1"]
+colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g72pb"]
+gradient = SubResource("Gradient_tetp1")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="Curve" id="Curve_edu0q"]
 _data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
@@ -74,17 +86,6 @@ scale_max = 0.8
 scale_curve = SubResource("CurveTexture_t3p8f")
 collision_mode = 2
 collision_use_scale = true
-
-[sub_resource type="Gradient" id="Gradient_tetp1"]
-colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_g72pb"]
-gradient = SubResource("Gradient_tetp1")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
 
 [sub_resource type="Resource" id="Resource_wiowl"]
 resource_local_to_scene = true
@@ -194,7 +195,7 @@ offset_bottom = 205.0
 theme = ExtResource("13_wogkx")
 theme_override_fonts/font = ExtResource("16_nfklf")
 theme_override_font_sizes/font_size = 96
-text = "Diving Game Title"
+text = "Subsurface Tension"
 horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="UI/MainMenu"]
@@ -346,10 +347,10 @@ bbcode_enabled = true
 
 [node name="WaterParticles" type="GPUParticles2D" parent="UI"]
 position = Vector2(960, 540)
-process_material = SubResource("ParticleProcessMaterial_gsc64")
 texture = SubResource("GradientTexture2D_g72pb")
 lifetime = 5.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_gsc64")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="UI"]
 energy = 0.0
@@ -359,9 +360,6 @@ modulate = Color(0.704, 0.771, 0.885, 0.536)
 z_index = -1
 position = Vector2(617, 382)
 uid = SubResource("Resource_wiowl")
-
-[node name="FishSprite" parent="UI/Boid" index="0"]
-texture = ExtResource("19_eucuf")
 
 [node name="WallRaycast" parent="UI/Boid" index="1"]
 target_position = Vector2(0, 200)

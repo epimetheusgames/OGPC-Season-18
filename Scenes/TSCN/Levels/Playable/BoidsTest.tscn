@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqpvulrr1arv2"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/BoidsGroup.gd" id="1_i5nl1"]
+[ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="1_i5nl1"]
 
 [node name="BoidsTest" type="Node2D"]
 

@@ -4,23 +4,50 @@
 class_name Diver
 extends Entity
 
+# General state of the diver. In the future substates should be implemented.
 var diver_state: Util.DiverState
  
+# Node that handles movement.
 @onready var diver_movement: DiverMovement = $"Movement"
+
+# Node that handles skeletal animations.
 @onready var diver_animation: DiverAnimation = $"Animation"
+
+# Node that handles combat and combat animations.
 @onready var diver_combat: DiverCombat = $"Combat"
+
+# Handles the flashlight, shouldn't be a node probably.
 @onready var diver_flashlight: DiverFlashlight = $"Light"
+
+# Handles diver's inventory "backend".
 @onready var diver_inventory: DiverInventory = $"Inventory"
+
+# Handles health, oxygen, etc.
 @onready var diver_stats: DiverStats = $"Stats"
+
+# The polygon attached to the waves (the probably don't exist because Kai is mean)
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
 @onready var saveable_timer := get_tree().create_timer(0.5)
 
+# FilePath of the diver.
 @export var diver_scene: FilePathResource
+
+# Waves root.
 @export var water_manager: Node2D
+
+# The camera.
 @export var camera: Camera2D
+
+# Bubbles paralax.
 @export var parallax: ParallaxBackground
+
+# Turns on and off diver movement. I'm not sure if this is really used.
 @export var no_movement := false
+
+# The amount of oxygen percentage lost every frame.
 @export var oxygen_loss := 0.01
+
+# The amount of oxygen percentage lost when the player boosts.
 @export var oxygen_boost_loss := 1
 
 # --- OVERRIDES ---
@@ -76,6 +103,7 @@ func _physics_process(_delta: float):
 
 # --- HELPERS ---
 
+# Syncs limb IK targets in multiplayer.
 func _sync_multiplayer() -> void:
 	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
 		Global.godot_steam_abstraction.sync_var($Animation/ArmIkTarget1, "global_position")
@@ -83,6 +111,7 @@ func _sync_multiplayer() -> void:
 		Global.godot_steam_abstraction.sync_var($Animation/LegIkTarget1, "global_position")
 		Global.godot_steam_abstraction.sync_var($Animation/LegIkTarget2, "global_position")
 
+# Saves the player, should be attached to a signal.
 func _save() -> void:
 	Global.current_game_save.node_saves.append(
 		NodeSaver.create(
@@ -112,6 +141,7 @@ func _save() -> void:
 		)
 	)
 
+# Update player velocity and rotation.
 func _update_vel_rot() -> void:
 	if get_state() == Util.DiverState.DRIVING_SUBMARINE:
 		return
@@ -126,17 +156,21 @@ func _update_vel_rot() -> void:
 	var angle_diff: float = angle_difference(rotation, target_angle)
 	rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
 
+# Updates oxygen, should be attached to a signal.
 func _boost() -> void:
 	diver_stats.oxygen_percentage -= oxygen_boost_loss
 
 # --- SETTERS AND GETTERS --- 
 
+# Gets general diver state.
 func get_state() -> Util.DiverState:
 	return diver_state
 
+# Sets general diver state.
 func set_state(state : Util.DiverState):
 	diver_state = state
 
+# Gets the diver username if the game is in multiplayer mode.
 func get_diver_username() -> String:
 	if !Global.godot_steam_abstraction:
 		return "UNNAMED (RUN FULL GAME)"

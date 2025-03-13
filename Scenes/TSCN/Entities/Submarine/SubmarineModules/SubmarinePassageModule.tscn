@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://dx6wjy3w8o5ky"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_pshir"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_4kpln"]
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="3_jyisj"]
+[ext_resource type="Script" uid="uid://bmskoe21i84vc" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_pshir"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_4kpln"]
+[ext_resource type="Script" uid="uid://cywews2kwsymx" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="3_jyisj"]
 [ext_resource type="Texture2D" uid="uid://bjuvfvy3v16lg" path="res://Assets/Art/Entity/Submarine/SubmarineHallway.png" id="4_qkc3h"]
 [ext_resource type="Texture2D" uid="uid://b786wma73oclt" path="res://Assets/Art/Entity/Submarine/SubmarineHallwayExterior.png" id="5_6c6y4"]
 

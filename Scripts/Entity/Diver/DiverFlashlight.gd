@@ -43,6 +43,7 @@ func _process(_delta: float) -> void:
 
 func set_flash_light_pos(pos: Vector2) -> void:
 	flash_light.global_position = pos
+
 func set_flash_light_rot(rot: float) -> void:
 	flash_light.global_rotation = rot
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://co07maqfriti4"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/BaseEntity.gd" id="1_y6pwu"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_3kea4"]
-[ext_resource type="Script" path="res://Scripts/Components/Misc/BoidComponent.gd" id="3_2it7s"]
-[ext_resource type="Texture2D" uid="uid://cx2ypxydjaxys" path="res://Assets/Art/Sprites/Entity/BoidsFishSprite.png" id="4_hemyd"]
+[ext_resource type="Script" uid="uid://c57nj5wsqdiab" path="res://Scripts/Entity/BaseEntity.gd" id="1_y6pwu"]
+[ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_3kea4"]
+[ext_resource type="Script" uid="uid://cbqiu7uypt2d8" path="res://Scripts/Components/Misc/BoidComponent.gd" id="3_2it7s"]
+[ext_resource type="Texture2D" uid="uid://cx2ypxydjaxys" path="res://Assets/Art/Entity/BoidsFishSprite.png" id="4_hemyd"]
 
 [sub_resource type="Resource" id="Resource_lqutn"]
 resource_local_to_scene = true

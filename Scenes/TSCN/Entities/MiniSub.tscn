@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ccpwr2asewfok"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/MiniSub.gd" id="1_qwrrb"]
+[ext_resource type="Script" uid="uid://cjjjlhi3d1gmj" path="res://Scripts/Entity/Submarine/MiniSub.gd" id="1_qwrrb"]
 
 [node name="MiniSub" type="CharacterBody2D"]
 position = Vector2(98, 35)

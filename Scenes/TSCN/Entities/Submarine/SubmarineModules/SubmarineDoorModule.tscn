@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://bjiu73mgjpxwn"]
 
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_ctc4o"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_7s88p"]
-[ext_resource type="Script" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="2_psqug"]
+[ext_resource type="Script" uid="uid://bmskoe21i84vc" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_ctc4o"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_7s88p"]
+[ext_resource type="Script" uid="uid://cywews2kwsymx" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="2_psqug"]
 
 [sub_resource type="Resource" id="Resource_f1mur"]
 script = ExtResource("2_7s88p")

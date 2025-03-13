@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://ritdw7h4f83y"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/Items/LightLineItem.gd" id="1_6yiws"]
+[ext_resource type="Script" uid="uid://cq2syhwvnys5k" path="res://Scripts/Objects/Items/LightLineItem.gd" id="1_6yiws"]
 [ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="2_bd15o"]
-[ext_resource type="Script" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_4blsg"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="3_4blsg"]
 [ext_resource type="Texture2D" uid="uid://kbno8w3pbkse" path="res://Assets/Art/Icons/LightLineIcon.png" id="4_triej"]
 
 [sub_resource type="Resource" id="Resource_ob34d"]
