@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=52 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://nn7jp07uetnh" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dl6v2p1fxvitc" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
+[ext_resource type="Script" uid="uid://beofwn0pgkcaq" path="res://Scripts/Entity/NPC/ActualNPCs/CivillianFollower.gd" id="9_soyuq"]
 [ext_resource type="Script" uid="uid://dau0csslipmpi" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Player/FlashLightPlaceholder.png" id="10_qg316"]
@@ -207,6 +208,12 @@ target_position = Vector2(48, 0)
 
 [node name="LeftWallRaycast" type="RayCast2D" parent="Movement"]
 target_position = Vector2(-48, 0)
+
+[node name="CivillianFollower" type="CharacterBody2D" parent="Movement"]
+script = ExtResource("9_soyuq")
+start_of_chain = true
+use_offset_position = false
+metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
 [node name="Animation" type="Node2D" parent="."]
 use_parent_material = true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://chy3luehcqm2b"]
 
-[ext_resource type="Script" uid="uid://dek63qm1l0ga8" path="res://Scripts/UI/MissionUIBox.gd" id="1_0up1m"]
+[ext_resource type="Script" uid="uid://cijalln1cyevt" path="res://Scripts/UI/MissionUiBox.gd" id="1_0up1m"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="1_xywor"]
 [ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="2_olbpw"]
 
