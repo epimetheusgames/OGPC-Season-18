@@ -15,18 +15,17 @@ static func create(mission: MissionRoot, node: Node, properties: Array[String], 
 	return ret
 
 func load_node(mission: MissionRoot) -> void:
-	if Global.verbose_debug:
-		print("DEBUG: Loading node at path " + instantiate_path + " relative to mission root.")
+	Global.print_debug("DEBUG: Loading node at path " + str(instantiate_path) + " relative to mission root.")
 
 	var replace := mission.get_node_or_null(instantiate_path)
 	if replace:
 		replace.queue_free()
-	elif Global.verbose_debug:
-		print("DEBUG: No node to replace at path " + instantiate_path + " relative to mission root.")
+	else:
+		Global.print_debug("DEBUG: No node to replace at path " + instantiate_path + " relative to mission root.")
 	
 	var add_to := mission.get_node_or_null(parent_path)
 	if !add_to:
-		print("ERROR: Failed to load an object at path " + instantiate_path + " relative to mission root.")
+		Global.print_error("Failed to load an object at path " + instantiate_path + " relative to mission root")
 	
 	var to_add: Node
 	if !packed_scene:
@@ -41,7 +40,7 @@ func load_node(mission: MissionRoot) -> void:
 		var child_variables: Dictionary = child_properties[path]
 		var node_to_set:= add_to.get_node_or_null(path)
 		if !node_to_set:
-			print("ERROR: Failed to get a child at path " + str(path) + " relative to a node that is being loaded. Will not be able to set properties to this child.")
+			Global.print_error("Failed to get a child at path " + str(path) + " relative to a node that is being loaded. Will not be able to set properties to this child.")
 			continue
 		for variable: String in child_variables.keys():
 			node_to_set.set(variable, child_variables[variable])
@@ -56,8 +55,7 @@ func load_node(mission: MissionRoot) -> void:
 
 # Child properties is path (String): variable names (Array[String]).
 func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary = {}, scene_override: FilePathResource = null) -> void:
-	if Global.verbose_debug:
-		print("DEBUG: Saving node at path " + str(mission.get_path_to(node)) + " relative to mission root.")
+	Global.print_debug("DEBUG: Saving node at path " + str(mission.get_path_to(node)) + " relative to mission root.")
 
 	_recursively_set_owners(node, node)
 	

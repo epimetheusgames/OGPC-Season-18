@@ -29,7 +29,7 @@ func _ready() -> void:
 	collision.debug_color = Color.RED
 	collision.debug_color.a = 0.3
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !is_attacking:
 		return
 	
@@ -43,20 +43,19 @@ func _process(delta: float) -> void:
 
 func damage_hurtbox(hurtbox: Hurtbox) -> void:
 	if hurtbox.can_take_damage(self):
-		if Global.verbose_debug:
-			print("DEBUG: Attackbox at path " + str(get_path()) + " damages the hurtbox below.")
+		Global.print_debug("DEBUG: Attackbox at path " + str(get_path()) + " damages the hurtbox below.")
 		hurtbox.damage(damage_amount, self)
-		display_number(damage_amount, hurtbox.global_position)
+		display_number(int(damage_amount), hurtbox.global_position)
 		damage_dealt.emit(hurtbox, damage_amount)
 		
 		if hurtbox.health - damage_amount <= 0:
 			killed.emit()
 
-func display_number(value: int, position: Vector2) -> void:
+func display_number(value: int, _position: Vector2) -> void:
 	var number = Label.new()
 	number.top_level = true
 	number.z_index = 50
-	number.global_position = position
+	number.global_position = _position
 	number.text = str(value)
 	
 	number.label_settings = LabelSettings.new()

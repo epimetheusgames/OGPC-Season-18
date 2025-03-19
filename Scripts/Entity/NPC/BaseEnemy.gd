@@ -27,7 +27,7 @@ var wander_state := WANDER_MODE.NOT_WANDERING
 var num_players_in_area = 0
 var players_list = []
 
-var health: int
+var health: float
 var target_position: Vector2
 var target_speed: float
 
@@ -42,7 +42,7 @@ func _ready() -> void:
 		return
 	
 	if !settings:
-		print("ERROR: Enemy at path " + str(get_path()) + " doesn't have an EnemyBehaviorSettings.")
+		Global.print_error("ERROR: Enemy at path " + str(get_path()) + " doesn't have an EnemyBehaviorSettings.")
 		return
 	
 	target_position = position
@@ -79,7 +79,7 @@ func _ready() -> void:
 	
 	if settings.player_shines_light:
 		if !light_detector:
-			print("ERROR: Enemy at path " + str(get_path()) + " has no light detector.")
+			Global.print_error("ERROR: Enemy at path " + str(get_path()) + " has no light detector.")
 			return
 		
 		light_detector.collision_layer = 0
@@ -235,7 +235,7 @@ func _update_wander_point():
 		var random_direction := Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
 		
 		if points_tested > 100:
-			print("ERROR: Something bad happened while updating the wander point.")
+			Global.print_error("Something bad happened while updating the wander point.")
 			return
 		
 		if settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.RANDOM_POSITION || points_tested > 40:

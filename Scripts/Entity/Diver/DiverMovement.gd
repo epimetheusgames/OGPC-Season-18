@@ -12,6 +12,7 @@ var current_angle: float = 0
 var input_vector: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 var is_in_gravity_area := false
+var spawned_in_research_station := false
 
 @onready var diver: Diver = get_parent()
 @export var use_mouse_movement := false
@@ -110,6 +111,11 @@ func _on_general_detection_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("gravity_areas"):
 		diver.set_state(Util.DiverState.IN_GRAVITY_AREA)
 		is_in_gravity_area = true
+	if area.is_in_group("research_station_area") && Global.godot_steam_abstraction && diver.saveable_timer.time_left <= 0:
+		if spawned_in_research_station:
+			Global.save_load_framework.save_state()
+		else:
+			spawned_in_research_station = true
 
 func _on_general_detection_box_area_exited(area: Area2D) -> void:
 	if area.is_in_group("gravity_areas"):

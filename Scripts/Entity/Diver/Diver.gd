@@ -27,6 +27,7 @@ var diver_state: Util.DiverState
 
 # The polygon attached to the waves (the probably don't exist because Kai is mean)
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
+@onready var saveable_timer := get_tree().create_timer(0.5)
 
 # FilePath of the diver.
 @export var diver_scene: FilePathResource

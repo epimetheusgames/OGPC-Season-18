@@ -18,6 +18,12 @@ enum MissionSuccessType {
 	BUILD, 
 }
 
+enum ErrorType {
+	WARNING,
+	ERROR,
+	CRITICAL_ERROR,
+}
+
 # -- Classes -- 
 
 class InventorySlot:
@@ -29,7 +35,7 @@ class InventorySlot:
 # Calls a specific function on a group of nodes over multiple frames.
 static func multiframe_function_batches_on_group(group: Array[Node], function_name: String, args: Array, batch_size: int, tree: SceneTree) -> void:
 	if group.size() % batch_size != 0:
-		print("ERROR: Trying to call function batches with a group size not divisible by batch size. The last few objects will not have their functions called. Printing stack trace.")
+		Global.print_error("Trying to call function batches with a group size not divisible by batch size. The last few objects will not have their functions called. Printing stack trace (in console).")
 		print_stack()
 	
 	for i in range(int(group.size() / float(batch_size))):

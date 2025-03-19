@@ -41,8 +41,7 @@ func _ready() -> void:
 	
 	print(RenderingServer.get_video_adapter_api_version())
 	if RenderingServer.get_video_adapter_api_version().begins_with("3") || RenderingServer.get_video_adapter_api_version().begins_with("4"):
-		print("ERROR: Compatibility (OpenGL) renderer does not support compute shaders. Boids will not run.")
-		#boids wont exist so the silly boids dont need  to try to create skibidi
+		Global.print_error("ERROR: Compatibility (OpenGL) renderer does not support compute shaders. Boids will not run.")
 		self.process_mode = Node.PROCESS_MODE_DISABLED
 		return
 	

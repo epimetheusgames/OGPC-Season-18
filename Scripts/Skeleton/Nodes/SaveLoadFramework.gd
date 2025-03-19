@@ -53,7 +53,7 @@ func _save_global_config(content: GlobalSave) -> void:
 # Save an entity state to its slot.
 func _save_entity(uid: UID, content: EntitySave) -> void:
 	if Global.current_game_save == null:
-		print("ERROR: Attempting to save an entity while in the main menu. Printing stack.")
+		Global.print_error("Attempting to save an entity while in the main menu. Printing stack (in console).")
 		print_stack()
 		return
 
@@ -63,7 +63,7 @@ func _save_entity(uid: UID, content: EntitySave) -> void:
 # Save the current game state.
 func save_state() -> void:
 	if Global.current_game_save == null || Global.current_game_slot == -1:
-		print("ERROR: Attempting to save state while in the main menu. Printing stack.")
+		Global.print_error("Attempting to save state while in the main menu. Printing stack (in console).")
 		print_stack()
 		return
 	
@@ -81,24 +81,21 @@ func _load_config_file(slot_num) -> Array:
 	var return_error: LOAD_ERROR
 	
 	if load_error == OK:
-		if Global.verbose_debug:
-			print("DEBUG: Config file for save slot " + str(slot_num) + " loaded successfully")
+		Global.print_debug("Config file for slot " + str(slot_num) + " loaded successfully.")
 		return_error = LOAD_ERROR.OK
 	elif load_error == ERR_FILE_NOT_FOUND: return_error = LOAD_ERROR.NEEDS_INITIALIZATION
 	else:
-		if Global.verbose_debug:
-			print("WARNING: Load error for save slot " + str(slot_num) + ". This MIGHT cause errors.")
-			print("DEBUG: Trying to load data as if it was unencrypted, this may solve the problem.")
+		Global.print_debug("Load error for save slot " + str(slot_num) + ". This MIGHT cause errors.")
+		Global.print_debug("Trying to load data as if it was unencrypted, this may solve the problem.")
 		
 		load_error = blank_config.load(slot_path)
 		
 		if load_error == OK:
-			if Global.verbose_debug:
-				print("DEBUG: Loading successful, ignore warning.")
+			Global.print_debug("Loading successful, ignore warning.")
 			return_error = LOAD_ERROR.OK
 		else:
-			print("ERROR: Loading unsuccessful, this means there is a problem with the format of the file.")
-			print("ERROR: If the file is encrypted, you will probably have to delete it, and game data will be erased.")
+			Global.print_error("Loading unsuccessful, this means there is a problem with the format of the file.")
+			Global.print_error("If the file is encrypted, you will probably have to delete it, and game data will be erased.")
 			return_error = LOAD_ERROR.CORRUPTED
 	
 	return [blank_config, return_error]
@@ -110,8 +107,7 @@ func _load_game_save(slot_num: int) -> GameSave:
 	var error: LOAD_ERROR = load_info[1]
 
 	if error == LOAD_ERROR.NEEDS_INITIALIZATION:
-		if Global.verbose_debug:
-			print("DEBUG: Loaded an empty save file, initializing.")
+		Global.print_debug("Loading a save file that needs initialization.")
 		var new_save := GameSave.new()
 		var new_mission_tree := MissionTreeProgress.new()
 		new_mission_tree.mission_tree = Global.mission_system.default_mission_tree.duplicate()
@@ -151,9 +147,8 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	Global.current_game_save = level_data
 	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = true
 	
-	if Global.verbose_debug:
-		print("DEBUG: Game loaded successfuly, printing loaded data.")
-		level_data.debug()
+	Global.print_debug("Game loaded successfuly, printing loaded data.")
+	level_data.debug()
 	
 	if custom_mission:
 		Global.current_mission = custom_mission
@@ -191,11 +186,14 @@ func load_level(level_path: String, save: GameSave = null):
 
 # Close and save game and exit to menu.
 func exit_to_menu() -> void:
+	# Doesn't need to be put in the ingame debug chat.
 	if Global.verbose_debug:
 		print("DEBUG: Exit to menu called, printing stack.")
 		print_stack()
 	
-	save_state()
+	# Don't save state, because that will be done when the player goes to the research station.
+	# In the future there should be a popup warning the player about this.
+	# save_state()
 	Global.current_game_save = null
 	Global.current_game_slot = -1
 	Global.ui_root_node.visible = true

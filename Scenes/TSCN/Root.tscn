@@ -1,4 +1,5 @@
-[gd_scene load_steps=39 format=3 uid="uid://cgroth3nseo6"]
+
+[gd_scene load_steps=41 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -18,6 +19,8 @@
 [ext_resource type="Script" uid="uid://6t41dstdgs6k" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="15_5virq"]
 [ext_resource type="FontFile" uid="uid://b8shwbf3tge0e" path="res://Assets/Fonts/Michroma/Michroma-Regular.ttf" id="16_nfklf"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/NPCS/Boid.tscn" id="17_g72ff"]
+[ext_resource type="Script" path="res://Scripts/UI/Ingame/MinimalChat.gd" id="18_al4tj"]
+[ext_resource type="Texture2D" uid="uid://cx2ypxydjaxys" path="res://Assets/Art/Entity/BoidsFishSprite.png" id="19_eucuf"]
 [ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="18_vsi4y"]
 [ext_resource type="Script" uid="uid://dku55y4bp1fny" path="res://Scripts/Skeleton/Nodes/KeypressHandler.gd" id="20_kh2s0"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="21_stqyc"]
@@ -328,6 +331,19 @@ offset_left = 825.0
 offset_top = 623.0
 offset_right = 1081.0
 offset_bottom = 766.0
+
+[node name="MinimalChat" type="PanelContainer" parent="UI/MainMenu" node_paths=PackedStringArray("text")]
+layout_mode = 0
+offset_left = 1102.0
+offset_top = 318.0
+offset_right = 1446.0
+offset_bottom = 584.0
+script = ExtResource("18_al4tj")
+text = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/MainMenu/MinimalChat"]
+layout_mode = 2
+bbcode_enabled = true
 
 [node name="WaterParticles" type="GPUParticles2D" parent="UI"]
 position = Vector2(960, 540)

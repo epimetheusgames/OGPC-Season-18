@@ -199,7 +199,7 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_obv2f"]
+[sub_resource type="Resource" id="Resource_7ys8u"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -477,7 +477,7 @@ uid = SubResource("Resource_vfal8")
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("32_6lnpa")]
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_obv2f")
+uid = SubResource("Resource_7ys8u")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -534,12 +534,21 @@ color = Color(0.334727, 0.334727, 0.334727, 1)
 polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
 metadata/_edit_lock_ = true
 
-[node name="GravityArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["gravity_areas"]]
+[node name="GravityArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["gravity_areas", "research_station_area"]]
 metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/GravityArea"]
 visible = false
 polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
+
+[node name="ResearchStatoinArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["research_station_area"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/ResearchStatoinArea"]
+visible = false
+polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2772, 2780, -2830, 2457)
+
+[node name="ResearchStationPosition" type="Node2D" parent="LevelContainer/ResearchStation"]
+position = Vector2(-3197, 2602)
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
@@ -641,25 +650,30 @@ layer = 0
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxLayer"]
 motion_scale = Vector2(2, 2)
 motion_mirroring = Vector2(1920, 1080)
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxLayer/ParallaxLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(1.5, 1.5)
 texture = SubResource("ViewportTexture_gnvk0")
+metadata/_edit_use_anchors_ = true
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxLayer"]
 motion_scale = Vector2(1.3, 1.3)
 motion_mirroring = Vector2(1920, 1080)
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxLayer/ParallaxLayer2"]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("ViewportTexture_gnvk0")
+metadata/_edit_use_anchors_ = true
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxLayer"]
 motion_scale = Vector2(0.7, 0.7)
 motion_mirroring = Vector2(1920, 1080)
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxLayer/ParallaxLayer3"]
 offset_right = 40.0
@@ -729,6 +743,11 @@ offset_bottom = 179.0
 [node name="IngameUI" parent="UILayer" instance=ExtResource("29_54jb5")]
 metadata/_edit_lock_ = true
 
+[node name="ChatPanel" parent="UILayer/IngameUI/StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable" index="1" node_paths=PackedStringArray("teleport_places", "enemy_root")]
+teleport_place_names = Array[String](["research-station", "submarine"])
+teleport_places = [NodePath("../../../../../../LevelContainer/ResearchStation/ResearchStationPosition"), NodePath("../../../../../../LevelContainer/Player/Submarine")]
+enemy_root = NodePath("../../../../../../LevelContainer/Entities/EnemySpawner")
+
 [node name="DeathScreen" parent="UILayer" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("32_kyt52")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
@@ -760,3 +779,4 @@ process_material = SubResource("ParticleProcessMaterial_hcosd")
 
 [editable path="LevelContainer/Items/LightLine"]
 [editable path="LevelContainer/Entities/Boids/Boid"]
+[editable path="UILayer/IngameUI"]

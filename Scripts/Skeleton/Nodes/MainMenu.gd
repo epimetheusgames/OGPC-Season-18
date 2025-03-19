@@ -3,6 +3,7 @@ extends Control
 
 
 func _ready():
+	Global.chat = $MinimalChat
 	Steam.lobby_match_list.connect(_lobby_list_updated)
 	
 	while true:
@@ -58,7 +59,6 @@ func _on_multiplayer_host_game_button_button_up() -> void:
 		$MultiplayerHostGameButton.disabled = true
 		while true:
 			await Global.godot_steam_abstraction.handshake_received
-			print("DEBUG: Detected that someone joined the lobby.")
 			set_multiplayer_status("Ready to start game.")
 			Global.godot_steam_abstraction.run_remote_function(self, "set_multiplayer_status", ["Waiting for host to start the game."])
 			
@@ -66,8 +66,7 @@ func _on_multiplayer_host_game_button_button_up() -> void:
 			$MultiplayerHostGameButton.disabled = false
 			$MultiplayerHostGameButton.text = "Start"
 	else:
-		if Global.verbose_debug:
-			print("DEBUG: Starting multiplayer game.")
+		Global.print_debug("Starting game.")
 		for child in $"../BoidsGroup".get_children():
 			child.queue_free()
 		$"../StaticBody2D/CollisionPolygon2D".disabled = true
@@ -88,6 +87,9 @@ func _process(delta: float) -> void:
 		for member in members:
 			text += member["steam_name"] + "\n"
 		$Members.text = text
+	
+	if !Global.current_mission_node:
+		Global.chat = $MinimalChat
 
 # Should be remotely called.
 func set_multiplayer_status(status: String):

@@ -9,7 +9,7 @@ func _process(delta: float) -> void:
 		return
 	
 	if !on:
-		print("ERROR: MultiplayerSpecialSyncComponent at path " + str(get_path()) + " doesn't have a node to set to it can't sync variables.")
+		Global.print_error("MultiplayerSpecialSyncComponent at path " + str(get_path()) + " doesn't have a node to set to it can't sync variables.")
 		return
 	
 	if !Global.godot_steam_abstraction.is_lobby_owner:
