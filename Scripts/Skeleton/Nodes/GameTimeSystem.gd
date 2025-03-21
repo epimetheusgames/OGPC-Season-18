@@ -30,6 +30,14 @@ func get_time() -> Array[int]:
 	return [_hours, _minutes]
 
 func set_time(hours: int, minutes: int = 0):
+	Global.print_debug("Game time overriden, stack printing in terminal.")
+	if Global.verbose_debug:
+		print_stack()
+
+	# We had to loop past midnight to get here (or day set to midnight).
+	if hours < _hours || (hours == _hours && minutes < _minutes) || (hours == 0 && minutes == 0):
+		day_ended.emit()
+
 	_hours = hours
 	_minutes = minutes
 	time_changed.emit(hours, minutes)

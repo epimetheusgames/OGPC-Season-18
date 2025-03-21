@@ -16,4 +16,4 @@ func _process(delta: float) -> void:
 	oxygen_progress.value = Global.player.get_oxygen()
 
 func _time_changed(hour: int, minute: int):
-	time.text = Global.game_time_system.format_time(hour, minute)
+	time.text = "Current Time: " + Global.game_time_system.format_time(hour, minute)

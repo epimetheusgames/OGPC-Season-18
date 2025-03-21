@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bi6i18nskixdt"]
+[gd_scene load_steps=5 format=3 uid="uid://bi6i18nskixdt"]
 
 [ext_resource type="Script" uid="uid://beofwn0pgkcaq" path="res://Scripts/Entity/NPC/ActualNPCs/CivillianFollower.gd" id="1_o7vjs"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="2_l6860"]
@@ -7,17 +7,15 @@
 radius = 35.0
 height = 218.0
 
-[node name="CivillianFollower" type="CharacterBody2D" node_paths=PackedStringArray("navigation")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_l6860"]
+radius = 403.045
+
+[node name="CivillianFollower" type="CharacterBody2D" node_paths=PackedStringArray("navigation", "detection_area")]
 script = ExtResource("1_o7vjs")
 navigation = NodePath("Nav")
-start_of_chain = null
-use_offset_position = null
-swim_speed = null
-follow_distance = null
-_has_physics = null
-has_multiplayer_sync = null
-sync_by_increment = null
-sync_increment = null
+detection_area = NodePath("CivillianArea")
+swim_speed = 1.5
+follow_distance = 200.0
 metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
@@ -29,3 +27,8 @@ shape = SubResource("CapsuleShape2D_5cylf")
 position = Vector2(1, -0.500002)
 scale = Vector2(0.5625, 1.57031)
 texture = ExtResource("2_l6860")
+
+[node name="CivillianArea" type="Area2D" parent="." groups=["civillian_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CivillianArea"]
+shape = SubResource("CircleShape2D_l6860")

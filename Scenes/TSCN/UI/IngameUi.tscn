@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://71htappd3cxj"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Ingame/ChatPanel.gd" id="4_d8efl"]
-[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="5_6galc"]
 [ext_resource type="Script" uid="uid://1xmo13kpmgen" path="res://Scripts/UI/Ingame/TeamInfoPanel.gd" id="1_0ajfg"]
 [ext_resource type="Script" uid="uid://cdry0a2rsou8n" path="res://Scripts/UI/Ingame/PersonHUD.gd" id="1_0aoln"]
 [ext_resource type="Script" uid="uid://bkx0xsu4kft4l" path="res://Scripts/UI/Ingame/Inventory.gd" id="3_f466a"]
+[ext_resource type="Script" uid="uid://b1to7rj6srtxg" path="res://Scripts/UI/Ingame/ChatPanel.gd" id="4_d8efl"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="5_6galc"]
 
 [sub_resource type="Gradient" id="Gradient_eq4ay"]
 offsets = PackedFloat32Array(0)

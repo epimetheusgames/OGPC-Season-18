@@ -1,7 +1,8 @@
-[gd_scene load_steps=68 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=69 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
+[ext_resource type="Texture2D" uid="uid://vuyq5s7dknal" path="res://Assets/Art/Level/SandTexture.png" id="3_kali0"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
@@ -9,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="9_o2tjs"]
 [ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
+[ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="12_kali0"]
+[ext_resource type="PackedScene" uid="uid://bi6i18nskixdt" path="res://Scenes/TSCN/Entities/NPCS/CivillianFollower.tscn" id="13_gnr5v"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
@@ -16,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
-[ext_resource type="PackedScene" uid="uid://b6t738u42lqcn" path="res://Scenes/TSCN/Objects/Items/PooItem.tscn" id="19_ngv05"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Script" uid="uid://2vvi3dga7td1" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
 [ext_resource type="Shader" uid="uid://cdyuhcdqlxumk" path="res://Scripts/GLSL/GDShader/Screen/Vignette.gdshader" id="23_r7jln"]
@@ -158,8 +160,6 @@ shader_parameter/edge_tex = SubResource("CompressedTexture2D_oshqg")
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5pa5j"]
 polygon = PackedVector2Array(8679, 5002, 9047, 5336, 9183, 5637, 9286.61, 6298.09, 8888, 6329, 8869, 6327, 8847, 6312, 8834, 6291, 8820, 6264, 8688, 5939, 8231.47, 5846.22, 8266, 5487, 8095, 5352, 7072, 5422, 7022, 5386, 6755, 5675, 6228, 5724, 5714, 5477, 4839, 5811, 4630, 6507, 4876, 7120, 5517, 7946, 6255, 7475, 5572, 6810, 5558, 6018, 6249, 5825, 6855, 5758, 7022, 5503, 7028, 5942, 7488, 6159, 7612.65, 6184.18, 7557, 6341, 7685, 6352, 7714.44, 6204.74, 7790, 6220, 7934, 6207, 8196, 6152, 8455, 6117, 8526, 5994, 8644, 6003, 8753, 6310, 8808.8, 6366.02, 8688, 6527, 8667, 6913, 8626, 7196, 8361, 7416, 7604, 7379, 7513, 7500, 7912.02, 7502.64, 7882, 7922, 7133, 7864, 7113, 8001, 7790, 8116, 7818, 8116, 7830, 8101, 7844, 8091, 7859, 8087, 7883, 8092, 7883, 8102, 7864, 8108, 7849, 8120, 7845, 8129, 7855, 8138, 7868, 8141, 7860, 8154, 7859, 8162, 7860, 8176, 7861, 8200, 7860, 8225, 7820, 8313, 7741, 8437, 7712, 8461, 7699, 8498, 7707, 8500, 7729, 8478, 7791, 8469, 7801, 8461, 7810, 8452, 7843.91, 8384.17, 7848, 8379, 7860, 8376, 7865, 8373, 7873, 8362, 7928, 8213, 7940, 8208, 7953, 8211, 8043, 8249, 8134, 8701, 8421, 8713, 8435, 8711, 8447, 8708, 8458, 8712, 8467, 8720, 8511, 8739, 8562, 8741, 8593, 8727, 8611, 8695, 8602, 8659, 8580, 8643, 8547, 8634, 8516, 8639, 8481, 8646, 8448, 8645, 8431, 8649, 8239, 8578, 8135, 8272, 8219, 8109, 8153, 7950, 8036, 7916, 8041.99, 7503.5, 8421, 7506, 8481, 7464, 8690, 7754, 8762, 7706, 8549, 7410, 8660, 7323, 8769, 6993, 8743, 6853, 8768, 6595, 8887, 6398, 9293.39, 6364.91, 9356, 6982, 9554, 8558, 9696, 9804, 9711, 9852, 9736, 9890, 9785, 9927, 9841, 9887, 9873.57, 9808.01, 10055, 8722, 10293, 7009, 10727, 6849, 11117, 6644, 11438, 6421, 11531, 6293, 11602, 6143, 11716, 5815, 11905, 5394, 12164, 5129, 12489, 4955, 12848, 4861, 13245, 4812, 14300, 4726, 15355, 4527, 17079, 3985, 18177, 3500, 19217, 2745, 20158, 2004, 21174, 1448, 22407, 995, 24185, 591, 25865, 457, 27107, 288, 27648.2, 200.549, 27679, 201, 27701.8, 191.89, 27794, 177, 27828.2, 170.554, 27849, 157, 27859, 153, 27875, 152, 27931.9, 150.985, 27991.8, 139.679, 28014, 127, 28068.6, 125.203, 28287, 84, 28309, 75, 28323.9, 55.8398, 28378.7, -21.7406, 28408, -49, 28450, -68, 28729, -135, 28852, -605, 28508, 11298, 6989, 10098, 3474, 8020, 3964, 5535)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_by2hv"]
-
 [sub_resource type="Gradient" id="Gradient_l7jee"]
 offsets = PackedFloat32Array(0.0192308)
 colors = PackedColorArray(0.663023, 0.427097, 0.199698, 1)
@@ -177,7 +177,7 @@ shader_parameter/fade_width = 215
 shader_parameter/tex_scale = 103.0
 shader_parameter/color_multiplier = 1.0
 shader_parameter/in_tex = SubResource("GradientTexture1D_dhgix")
-shader_parameter/edge_tex = SubResource("CompressedTexture2D_by2hv")
+shader_parameter/edge_tex = ExtResource("3_kali0")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lcoem"]
 polygon = PackedVector2Array(-6566, -385, -6543, 320, -6500, 365, -6403, 393, -6159, 398, -5328, 435, -4544, 454, -4310, 469, -4076, 496, -3842, 563, -3612, 673, -3432, 782, -3235, 964, -3067, 1261, -2929, 1578, -2647, 2424, -2257, 3037, -1798, 3487, -1335, 3823, -802, 4137, -130, 4372, 724, 4529, 1318, 4587, 2704, 4677, 6698, 4820, 7695, 4842, 8011, 4858, 8255, 4887, 8485, 4933, 8692, 4996, 8869, 5093, 8993, 5220, 9087, 5378, 9183, 5637, 9164.54, 5629.71, 9143.79, 5621.52, 9117.06, 5610.97, 9099.5, 5604.04, 9080.47, 5596.53, 9060.71, 5588.73, 9033.99, 5578.18, 9007.12, 5567.57, 8987.65, 5559.89, 8965.45, 5551.12, 8941.02, 5541.48, 8918.52, 5532.6, 8894.7, 5523.2, 8880.32, 5517.52, 8883, 5513, 8867, 5507, 8131, 5099, 5174, 5401, 3962.85, 5982.79, 3761.88, 8075.19, 6759.56, 9876.11, 11676, 10320, 10611, 11196, -7048, 11272, -6700, 368)
@@ -199,7 +199,7 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_7ys8u"]
+[sub_resource type="Resource" id="Resource_jw53c"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -477,7 +477,7 @@ uid = SubResource("Resource_vfal8")
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("32_6lnpa")]
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_7ys8u")
+uid = SubResource("Resource_jw53c")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -549,6 +549,11 @@ polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494,
 
 [node name="ResearchStationPosition" type="Node2D" parent="LevelContainer/ResearchStation"]
 position = Vector2(-3197, 2602)
+
+[node name="FollowerSpawner" type="Node2D" parent="LevelContainer/ResearchStation"]
+position = Vector2(-3931, 2621)
+script = ExtResource("12_kali0")
+follower = ExtResource("13_gnr5v")
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
@@ -640,9 +645,6 @@ rotation = -0.464765
 energy = 0.0
 shadow_filter = 2
 max_distance = 1e+06
-
-[node name="PooItem" parent="LevelContainer" instance=ExtResource("19_ngv05")]
-position = Vector2(-2389, 2574)
 
 [node name="ParallaxLayer" type="ParallaxBackground" parent="."]
 layer = 0

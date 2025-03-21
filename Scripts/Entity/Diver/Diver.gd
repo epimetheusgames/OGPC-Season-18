@@ -50,6 +50,9 @@ var diver_state: Util.DiverState
 # The amount of oxygen percentage lost when the player boosts.
 @export var oxygen_boost_loss := 1
 
+# Player follower
+@export var follower: CivillianFollower
+
 # --- OVERRIDES ---
 
 func _ready() -> void:

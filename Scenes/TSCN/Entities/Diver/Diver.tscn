@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://dl6v2p1fxvitc" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
-[ext_resource type="Script" uid="uid://beofwn0pgkcaq" path="res://Scripts/Entity/NPC/ActualNPCs/CivillianFollower.gd" id="9_soyuq"]
+[ext_resource type="Script" uid="uid://cfcc8wf5m0kgj" path="res://Scripts/Entity/NPC/ActualNPCs/PlayerFollowerDummy.gd" id="9_soyuq"]
 [ext_resource type="Script" uid="uid://dau0csslipmpi" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Player/FlashLightPlaceholder.png" id="10_qg316"]
@@ -168,11 +168,12 @@ fill = 1
 fill_from = Vector2(0.5, 0.527778)
 fill_to = Vector2(0.846154, 0.865385)
 
-[node name="Diver" type="CharacterBody2D" node_paths=PackedStringArray("camera")]
+[node name="Diver" type="CharacterBody2D" node_paths=PackedStringArray("camera", "follower")]
 motion_mode = 1
 script = ExtResource("1_1l6ma")
 diver_scene = SubResource("Resource_fmqh5")
 camera = NodePath("Camera")
+follower = NodePath("Movement/CivillianFollower")
 uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
@@ -213,6 +214,7 @@ target_position = Vector2(-48, 0)
 script = ExtResource("9_soyuq")
 start_of_chain = true
 use_offset_position = false
+follow_distance = 200.0
 metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
 [node name="Animation" type="Node2D" parent="."]
@@ -569,7 +571,7 @@ rotation = -0.000201209
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
 
-[node name="GeneralDetectionBox" type="Area2D" parent="Stats"]
+[node name="GeneralDetectionBox" type="Area2D" parent="Stats" groups=["player_area"]]
 rotation = -0.000201209
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/GeneralDetectionBox"]
@@ -626,12 +628,11 @@ shadow_filter = 2
 texture = SubResource("GradientTexture2D_iyvmc")
 metadata/_edit_lock_ = true
 
-[node name="PlayerVisualDetectionArea" type="Area2D" parent="."]
+[node name="PlayerVisualDetectionArea" type="Area2D" parent="." groups=["player_area"]]
 collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisualDetectionArea"]
-visible = false
 shape = SubResource("CapsuleShape2D_wi5t0")
 
 [node name="BuoyancyComponent" type="Node" parent="." node_paths=PackedStringArray("center_of_mass")]

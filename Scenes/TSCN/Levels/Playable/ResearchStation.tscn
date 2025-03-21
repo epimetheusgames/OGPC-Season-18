@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="5_thj6v"]
 [ext_resource type="Texture2D" uid="uid://bumrrftvhwmy0" path="res://Assets/Art/Misc/ResearchStationLeftRoom.png" id="8_d4l3m"]
 [ext_resource type="Texture2D" uid="uid://c464qop8nquax" path="res://Assets/Art/Misc/ResearchStationHallway.png" id="9_65861"]
-[ext_resource type="Script" path="res://Scripts/UI/Ingame/MinimalChat.gd" id="9_fb75n"]
+[ext_resource type="Script" uid="uid://s4npen7ydnt2" path="res://Scripts/UI/Ingame/MinimalChat.gd" id="9_fb75n"]
 [ext_resource type="Texture2D" uid="uid://nurn5d348emh" path="res://Assets/Art/Misc/ResearchStationRightRoom.png" id="10_7lt0g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhoms"]

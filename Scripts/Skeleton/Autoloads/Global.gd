@@ -52,6 +52,9 @@ func print_debug(message: String):
 			chat_text += "\nDEBUG: " + message
 
 func print_error(message: String, error_type := Util.ErrorType.ERROR):
+	if chat is ChatPanel:
+		chat.typing_command_override = true
+	
 	var chat_pretext: String = ""
 	var sender: String = ""
 	var sender_color: String = ""
@@ -66,7 +69,7 @@ func print_error(message: String, error_type := Util.ErrorType.ERROR):
 	elif error_type == Util.ErrorType.CRITICAL_ERROR:
 		chat_pretext = "CRITICAL ERROR: "
 		sender = "SystemFatal"
-		sender_color = "MIDI_MESSAGE_CONTROL_CHANGE"
+		sender_color = "red"
 	
 	print(chat_pretext + message)
 

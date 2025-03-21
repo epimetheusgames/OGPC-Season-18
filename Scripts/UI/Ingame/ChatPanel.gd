@@ -88,4 +88,3 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 				push_error("ERROR: Command " + command[0] + " not found.")
 	else:
 		push_chat(Global.player.name, new_text, "white", "white")
-

@@ -9,6 +9,9 @@ const raycast_length_mul = 0.5
 @export var building_sprite: Sprite2D
 @export var building_collision: StaticBody2D
 @export var base_position: Node2D
+@export var detection_area: Area2D
+@export var max_occupants: int
+@export var current_occupants: int
 
 @onready var raycasts: Node2D = $Raycasts
 
@@ -117,6 +120,8 @@ func _sync_multiplayer() -> void:
 		Global.godot_steam_abstraction.sync_var(building_sprite, "modulate")
 		Global.godot_steam_abstraction.sync_var(building_collision, "collision_layer")
 		Global.godot_steam_abstraction.sync_var(self, "placed")
+		Global.godot_steam_abstraction.sync_var(self, "max_occupants")
+		Global.godot_steam_abstraction.sync_var(self, "current_occupants")
 
 func _save_self() -> void:
 	Global.current_game_save.node_saves.append(
@@ -127,6 +132,8 @@ func _save_self() -> void:
 				"position", 
 				"rotation", 
 				"placed",
+				"max_occupants",
+				"current_occupants"
 			],
 		)
 	)
