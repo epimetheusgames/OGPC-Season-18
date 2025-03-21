@@ -189,6 +189,10 @@ func _update_closest_player():
 		closest_player = players_list[closest_ind]
 
 func _update_player_visible():
+	if Global.player.global_position.distance_squared_to(Global.research_station.position_node.global_position) < 1000 ^ 2:
+		player_visible = false
+		return 
+	
 	# If player is in submarine, impossible to see them.
 	var state := Global.player.get_state()
 	if state == Util.DiverState.IN_SUBMARINE || state == Util.DiverState.DRIVING_SUBMARINE:
@@ -208,7 +212,7 @@ func _update_player_visible():
 				await get_tree().create_timer(settings.disable_period_length).timeout
 			player_visible = false
 	else:
-		print("WARNING: Raycast to player got no result, an enemy is at the same position as the player. This isn't good.")
+		Global.print_error("Raycast to player got no result, an enemy is at the same position as the player. This isn't good.", Util.ErrorType.WARNING)
 
 func _update_target_position():
 	wander_state = WANDER_MODE.NOT_WANDERING
@@ -241,6 +245,9 @@ func _update_wander_point():
 		if settings.wander_type == EnemyBehaviorSettings.WANDER_TYPE.RANDOM_POSITION || points_tested > 40:
 			var random_multiplier := rng.randf_range(0, settings.wander_range)
 			target_position = global_position + velocity.normalized() * settings.wander_range / 4 + random_direction * random_multiplier
+			
+			if target_position.distance_squared_to(Global.research_station.position_node.global_position) < 1000 ^ 2:
+				continue
 			
 			var pointcast = PhysicsPointQueryParameters2D.new()
 			pointcast.position = target_position

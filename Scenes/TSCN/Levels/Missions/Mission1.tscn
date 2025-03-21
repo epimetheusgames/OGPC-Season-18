@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=70 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="9_o2tjs"]
 [ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_wv41s"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
+[ext_resource type="Script" uid="uid://bthrd0wdm5ufn" path="res://Scripts/Level/ResearchStation.gd" id="12_jw53c"]
 [ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="12_kali0"]
 [ext_resource type="PackedScene" uid="uid://bi6i18nskixdt" path="res://Scenes/TSCN/Entities/NPCS/CivillianFollower.tscn" id="13_gnr5v"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
@@ -199,7 +200,7 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_jw53c"]
+[sub_resource type="Resource" id="Resource_3svaj"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -477,7 +478,7 @@ uid = SubResource("Resource_vfal8")
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("32_6lnpa")]
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_jw53c")
+uid = SubResource("Resource_3svaj")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -514,7 +515,11 @@ points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 [node name="Raycasts" parent="LevelContainer/Items/LightLine" index="1"]
 position = Vector2(-4236, -362)
 
-[node name="ResearchStation" type="Node2D" parent="LevelContainer"]
+[node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node")]
+script = ExtResource("12_jw53c")
+position_node = NodePath("ResearchStationPosition")
+follower_spawn_node = NodePath("FollowerSpawnPosition")
+follower = ExtResource("13_gnr5v")
 metadata/_edit_lock_ = true
 
 [node name="Wall" type="Polygon2D" parent="LevelContainer/ResearchStation"]
@@ -550,10 +555,9 @@ polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494,
 [node name="ResearchStationPosition" type="Node2D" parent="LevelContainer/ResearchStation"]
 position = Vector2(-3197, 2602)
 
-[node name="FollowerSpawner" type="Node2D" parent="LevelContainer/ResearchStation"]
+[node name="FollowerSpawnPosition" type="Node2D" parent="LevelContainer/ResearchStation"]
 position = Vector2(-3931, 2621)
 script = ExtResource("12_kali0")
-follower = ExtResource("13_gnr5v")
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 

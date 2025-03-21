@@ -4,53 +4,53 @@
 class_name Diver
 extends Entity
 
-# General state of the diver. In the future substates should be implemented.
+## General state of the diver. In the future substates should be implemented.
 var diver_state: Util.DiverState
  
-# Node that handles movement.
+## Node that handles movement.
 @onready var diver_movement: DiverMovement = $"Movement"
 
-# Node that handles skeletal animations.
+## Node that handles skeletal animations.
 @onready var diver_animation: DiverAnimation = $"Animation"
 
-# Node that handles combat and combat animations.
+## Node that handles combat and combat animations.
 @onready var diver_combat: DiverCombat = $"Combat"
 
-# Handles the flashlight, shouldn't be a node probably.
+## Handles the flashlight, shouldn't be a node probably.
 @onready var diver_flashlight: DiverFlashlight = $"Light"
 
-# Handles diver's inventory "backend".
+## Handles diver's inventory "backend".
 @onready var diver_inventory: DiverInventory = $"Inventory"
 
-# Handles health, oxygen, etc.
+## Handles health, oxygen, etc.
 @onready var diver_stats: DiverStats = $"Stats"
 
-# The polygon attached to the waves (the probably don't exist because Kai is mean)
+## The polygon attached to the waves (the probably don't exist because Kai is mean)
 @onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
 @onready var saveable_timer := get_tree().create_timer(0.5)
 
-# FilePath of the diver.
+## FilePath of the diver.
 @export var diver_scene: FilePathResource
 
-# Waves root.
+## Waves root.
 @export var water_manager: Node2D
 
-# The camera.
+## The camera.
 @export var camera: Camera2D
 
-# Bubbles paralax.
+## Bubbles paralax.
 @export var parallax: ParallaxBackground
 
-# Turns on and off diver movement. I'm not sure if this is really used.
+## Turns on and off diver movement. I'm not sure if this is really used.
 @export var no_movement := false
 
-# The amount of oxygen percentage lost every frame.
+## The amount of oxygen percentage lost every frame.
 @export var oxygen_loss := 0.01
 
-# The amount of oxygen percentage lost when the player boosts.
+## The amount of oxygen percentage lost when the player boosts.
 @export var oxygen_boost_loss := 1
 
-# Player follower
+## Player follower
 @export var follower: CivillianFollower
 
 # --- OVERRIDES ---

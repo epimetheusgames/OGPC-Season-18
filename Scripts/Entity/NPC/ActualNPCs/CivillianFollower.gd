@@ -31,9 +31,15 @@ func _ready() -> void:
 		target_path_position = navigation.get_next_path_position()
 
 func _process(delta: float) -> void:
+	if !following:
+		return
+		
+	if global_position.distance_squared_to(navigation.target_position) < 5 ^ 2:
+		return
+	
 	global_position += (target_path_position - global_position).normalized() * swim_speed * delta * 60
 
-# Gets position the following civillian should navigate to, in global coordinates.
+## Gets position the following civillian should navigate to, in global coordinates.
 func get_follow_position() -> Vector2:
 	return global_position
 

@@ -3,34 +3,83 @@
 # See https://docs.godotengine.org/en/stable/tutorials/scripting/singletons_autoload.html 
 extends Node2D
 
-var spedass_percentage
+## Root node of the whole game
 var root_node: Node
+
+## Save load framework node, constant.
 var save_load_framework: SaveLoadFramework
+
+## Node that contains skeleton nodes like SaveLoadFramework, GodotSteamAbstraction,
+## MissionSystem, and GameTimeSystem.
 var game_skeleton_node: Node
+
+## Main menu UI root node.
 var ui_root_node: Control
+
+## Game container root node, constant.
 var game_root_node: Node
 var KeyactionHandler: Node2D
+
+## Path to the current mission scene.
 var current_scene_path: String
+
+## Current loaded game slot if the game is running.
 var current_game_slot: int
+
+## If we are currently in a multiplayer game or lobby.
 var is_multiplayer: bool
+
+## Boids calculator node, constant.
 var boids_calculator_node: BoidsCalculator
+
+## The current diver in the mission scene.
 var player: Diver
+
+## The current submarine in the mission scene.
 var submarine : Entity
 var dialog_core: TextureRect = null
+
+## Handles networking, constant.
 var godot_steam_abstraction: GodotSteamAbstraction
+
+## Current game save resource, modify when saving things.
 var current_game_save: GameSave
+
+## Mission system node, constant.
 var mission_system: MissionSystem
+
+## Time node, constant.
 var game_time_system: GameTimeSystem
+
+## Whether to print debug in the ingame console and in the terminal.
 var verbose_debug: bool
+
+## Mostly depracated but changes some settings to make graphics worse and have
+## better performance on lower end devices.
 var super_efficient: bool
+
+## Whether dialog is being played right now.
 var dialog_active: bool = false
+
+## Idk what this is.
 var dialog_played: bool = true
+
+## The node of the current mission.
 var current_mission_node = null
+
+## The resource this mission uses.
 var current_mission: Mission
+
+## The currently active debug console.
 var chat: MinimalChat
+
+## Text printed to debug console, so it can be synced up.
 var chat_text: String
 
-# Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
+## Current research station node.
+var research_station: ResearchStation
+
+## Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {
 	"General Collision": 1,
 	"Player Hurtbox / Enemy Attackbox": 2,
@@ -41,16 +90,22 @@ var bitmask_conversion = {
 	"Interaction": 64,
 }
 
+## Overrides a default function which is great, prints to the ingame chat 
+## if verbose debug is on, and also prints to the console.
 func print_debug(message: String):
+	if !verbose_debug:
+		return
+	
 	message = message.replace("DEBUG: ", "")
-	if verbose_debug:
-		print("DEBUG: " + message)
-		if chat:
-			chat.push_debug(message)
-			chat_text = chat.text.text
-		else:
-			chat_text += "\nDEBUG: " + message
+	print("DEBUG: " + message)
+	if chat:
+		chat.push_debug(message)
+		chat_text = chat.text.text
+	else:
+		chat_text += "\nDEBUG: " + message
 
+## Prints an error the the console allways, but only to the ingame console
+## if verbsoe debug is on.
 func print_error(message: String, error_type := Util.ErrorType.ERROR):
 	if chat is ChatPanel:
 		chat.typing_command_override = true
@@ -75,12 +130,14 @@ func print_error(message: String, error_type := Util.ErrorType.ERROR):
 
 	if !verbose_debug:
 		return
+	
 	if chat:
 		chat.push_chat(sender, message, sender_color, "antiquewhite ")
 		chat_text = chat.text.text
 	else:
 		chat_text += "\nERROR: " + message
 
+## Gets the slot encryption password.
 func get_slot_password(slot_num: int) -> String:
 	var result_string = ""
 	
@@ -93,27 +150,8 @@ func get_slot_password(slot_num: int) -> String:
 	
 	return result_string
 
+## If multiplayer check if this instance is the lobby owner.
 func is_multiplayer_host() -> bool:
 	if godot_steam_abstraction:
 		return godot_steam_abstraction.is_lobby_owner
 	return false
-
-# Run code from a string
-func eval(input: String):
-	var script_holder = RefCounted.new()
-	var script = GDScript.new()
-	script.set_source_code("func eval():" + input)
-	script.reload()
-	script_holder.set_script(script)
-	return script_holder.eval()
-
-func set_brightness(percentage:int):
-	# me when type is "previously freed"
-	if(is_instance_valid(root_node) && is_instance_valid(root_node.brightness_modulate)):
-		if(percentage!=0):
-			spedass_percentage = percentage/100
-		else:
-			spedass_percentage = percentage/100
-		root_node.brightness_modulate.color.r = 255*spedass_percentage
-		root_node.brightness_modulate.color.b = 255*spedass_percentage
-		root_node.brightness_modulate.color.g = 255*spedass_percentage

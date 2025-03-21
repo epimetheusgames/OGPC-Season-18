@@ -4,6 +4,7 @@ class_name Util
 
 # -- Enums --
 
+## Higher level diver state.
 enum DiverState {
 	SWIMMING,
 	IN_SUBMARINE,
@@ -12,12 +13,14 @@ enum DiverState {
 	IN_GRAVITY_AREA,
 }
 
+## The success type this msision requires (used in a chain)
 enum MissionSuccessType {
 	ACQUIRE_ITEM, 
 	DISCOVER_AREA,
 	BUILD, 
 }
 
+## Type of error used for debug colors.
 enum ErrorType {
 	WARNING,
 	ERROR,
@@ -26,13 +29,14 @@ enum ErrorType {
 
 # -- Classes -- 
 
+## A slot in the player's inventory.
 class InventorySlot:
 	var item: InventoryItem
 	var count: int
 
 # -- General --
 
-# Calls a specific function on a group of nodes over multiple frames.
+## Calls a specific function on a group of nodes over multiple frames.
 static func multiframe_function_batches_on_group(group: Array[Node], function_name: String, args: Array, batch_size: int, tree: SceneTree) -> void:
 	if group.size() % batch_size != 0:
 		Global.print_error("Trying to call function batches with a group size not divisible by batch size. The last few objects will not have their functions called. Printing stack trace (in console).")
@@ -45,7 +49,7 @@ static func multiframe_function_batches_on_group(group: Array[Node], function_na
 		# Essentially wait a frame.
 		await tree.create_timer(0.001).timeout
 
-# Returns a new object of the same type if the variable is null.
+## Returns a new object of the same type if the variable is null.
 static func safeguard_null(variable: Object, variable_class_name: String) -> Object:
 	if variable == null:
 		# Attempt to instantiate the object by the class name
@@ -59,7 +63,7 @@ static func safeguard_null(variable: Object, variable_class_name: String) -> Obj
 	
 	return variable
 
-# https://www.youtube.com/watch?v=Bf7vDBBOBUA
+## https://www.youtube.com/watch?v=Bf7vDBBOBUA
 static func find_all_children_of_type(on: Node, type: String) -> Array[Object]:
 	var output: Array[Object] = []
 	
@@ -73,13 +77,13 @@ static func find_all_children_of_type(on: Node, type: String) -> Array[Object]:
 
 # -- Physics --
 
-# Perform a raycast in the world. Uses global positions.
+## Perform a raycast in the world. Uses global positions.
 static func do_raycast(world_2d: World2D, from: Vector2, to: Vector2) -> Dictionary:
 	var space_state := world_2d.direct_space_state
 	var raycast := PhysicsRayQueryParameters2D.create(from, to)
 	return space_state.intersect_ray(raycast)
 
-# Executes a pointcast on the world, using global positions.
+## Executes a pointcast on the world, using global positions.
 static func do_pointcast(world_2d: World2D, point: Vector2, mask: int = 0xFFFFFFFF) -> Array[Dictionary]:
 	var space_state := world_2d.direct_space_state
 	var pointcast = PhysicsPointQueryParameters2D.new()
@@ -89,49 +93,50 @@ static func do_pointcast(world_2d: World2D, point: Vector2, mask: int = 0xFFFFFF
 
 # -- Math --
 
-# Framerate independant linear interpolation.
+## Framerate independant linear interpolation.
 static func better_lerp(a: float, b: float, decay: float, delta: float):
 	# Convert decay from 0-1 to 1-25.
 	decay = (decay * 25.0)
 	return b + (a - b) * exp(-decay * delta)
 
-# Framerate independant linear interpolation (Vector2).
+## Framerate independant linear interpolation (Vector2).
 static func better_vec2_lerp(a: Vector2, b: Vector2, decay: float, delta: float):
 	return Vector2(better_lerp(a.x, b.x, decay, delta), better_lerp(a.y, b.y, decay, delta))
 
-# Framerate independant linear interpolation for angles.
+## Framerate independant linear interpolation for angles.
 static func better_angle_lerp(a: float, b: float, decay: float, delta: float):
 	decay = (decay * 25.0)
 	return b + (angle_difference(b, a)) * exp(-decay * delta)
 
-# Turns an angle in degrees and a magnitude in pixels to a vector.
+## Turns an angle in degrees and a magnitude in pixels to a vector.
 static func angle_to_vector_degrees(angle: float, magnitude: float) -> Vector2:
 	var x: float = magnitude * cos(deg_to_rad(angle))
 	var y: float = magnitude * sin(deg_to_rad(angle))
 	return Vector2(x, y)
 
-# Turns an angle in radians and a magnitude in pixels into a vector.
+## Turns an angle in radians and a magnitude in pixels into a vector.
 static func angle_to_vector_radians(angle: float, magnitude: float) -> Vector2:
 	var x: float = magnitude * cos(angle)
 	var y: float = magnitude * sin(angle)
 	return Vector2(x, y)
 
-# Randomish direction.
+## Randomish direction.
 static func random_direction(rng: RandomNumberGenerator) -> Vector2:
 	return Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
 
+## Randomish directin plus a random magnitude.
 static func random_vector(rng: RandomNumberGenerator, max_length: float, min_length: float = 0) -> Vector2:
 	return random_direction(rng) * rng.randf_range(min_length, max_length)
 
-# Returns angle within the normal range (degrees)
+## Returns angle within the normal range (degrees)
 static func normalize_angle_degrees(a: float) -> float:
 	return fmod(fmod(a, 360) + 360, 360)
 
-# Returns angle within the normal range (radians)
+## Returns angle within the normal range (radians)
 static func normalize_angle_radians(a: float) -> float:
 	return fmod(fmod(a, TAU) + TAU, TAU)
 
-# Smooths out a line.
+## Smooths out a line.
 static func smooth_line(input: PackedVector2Array, resolution_multiplier: float) -> PackedVector2Array:
 	var output: PackedVector2Array = []
 	var tangents: PackedVector2Array = []
@@ -155,3 +160,12 @@ static func smooth_line(input: PackedVector2Array, resolution_multiplier: float)
 			output.append(pos)
 	
 	return output
+
+## Run code from a string
+static func eval(input: String) -> void:
+	var script_holder = RefCounted.new()
+	var script = GDScript.new()
+	script.set_source_code("func eval():" + input)
+	script.reload()
+	script_holder.set_script(script)
+	return script_holder.eval()
