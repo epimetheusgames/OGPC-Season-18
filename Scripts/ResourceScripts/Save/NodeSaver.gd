@@ -2,26 +2,39 @@ class_name NodeSaver
 extends Resource
 
 var variable_properties: Dictionary
-var child_properties: Dictionary
+var child_properties: Dictionary[String, Dictionary]
 var packed_scene: PackedScene
 var instantiate_path: String
 var parent_path: String
 var node_name: String
 var scene_override_path: FilePathResource
 
-static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary = {}, scene_override: FilePathResource = null):
+static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary[String, Array] = {}, scene_override: FilePathResource = null):
 	var ret := NodeSaver.new()
 	ret.save_node(mission, node, properties, _child_properties, scene_override)
 	return ret
 
-func load_node(mission: MissionRoot) -> void:
-	Global.print_debug("DEBUG: Loading node at path " + str(instantiate_path) + " relative to mission root.")
+## Recursively, ind new nodes in the original that could've been added be the developer,
+## then insert those into the loaded one.
+func compare_node_trees(from: Node, to: Node, root: Node = null) -> Array[NodePath]:
+	if !root:
+		root = to
 
-	var replace := mission.get_node_or_null(instantiate_path)
-	if replace:
-		replace.queue_free()
-	else:
-		Global.print_debug("DEBUG: No node to replace at path " + instantiate_path + " relative to mission root.")
+	var ret: Array[NodePath] = []
+	for child in to.get_children():
+		print(child.name)
+		var test_node := from.get_node_or_null(to.get_path_to(child))
+		if test_node:
+			print(to.get_path_to(child))
+			ret += compare_node_trees(test_node, child, root)
+		else:
+			print("else")
+			ret.append(root.get_path_to(child))
+	
+	return ret
+
+func load_node(mission: MissionRoot) -> void:
+	Global.print_debug("Loading node at path " + str(instantiate_path) + " relative to mission root.")
 	
 	var add_to := mission.get_node_or_null(parent_path)
 	if !add_to:
@@ -32,6 +45,20 @@ func load_node(mission: MissionRoot) -> void:
 		to_add = load(scene_override_path.file).instantiate()
 	else:
 		to_add = packed_scene.instantiate()
+
+	var replace := mission.get_node_or_null(instantiate_path)
+	if replace:
+		var differing_nodes: Array[NodePath] = compare_node_trees(to_add, replace)
+		print(differing_nodes)
+		for path in differing_nodes:
+			var node := replace.get_node(path)
+			var node_parent_path := replace.get_path_to(node.get_parent())
+			node.get_parent().remove_child(node)
+			to_add.get_node(node_parent_path).add_child(node)
+
+		replace.queue_free()
+	else:
+		Global.print_debug("No node to replace at path " + instantiate_path + " relative to mission root.")
 
 	for variable: String in variable_properties.keys():
 		to_add.set(variable, variable_properties[variable])
@@ -54,7 +81,7 @@ func load_node(mission: MissionRoot) -> void:
 	to_add.name = node_name
 
 # Child properties is path (String): variable names (Array[String]).
-func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary = {}, scene_override: FilePathResource = null) -> void:
+func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary[String, Array] = {}, scene_override: FilePathResource = null) -> void:
 	Global.print_debug("DEBUG: Saving node at path " + str(mission.get_path_to(node)) + " relative to mission root.")
 
 	_recursively_set_owners(node, node)

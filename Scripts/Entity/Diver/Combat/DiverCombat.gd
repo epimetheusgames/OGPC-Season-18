@@ -8,7 +8,7 @@ extends Node2D
 @export var knife: PackedScene
 @export var pistol: PackedScene
 
-@onready var all_weapons: Dictionary = {
+@onready var all_weapons: Dictionary[String, PackedScene] = {
 	"speargun" : speargun,
 	"knife" : knife,
 	"pistol" : pistol,

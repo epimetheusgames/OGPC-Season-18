@@ -22,7 +22,7 @@ var is_lobby_owner := false
 var handshake_completed_ids: Array[int] = []
 var new_lobby_name: String
 var new_lobby_mode: String
-var packets_queue: Dictionary = {}
+var packets_queue: Dictionary[String, Dictionary] = {}
 
 # VC
 var current_sample_rate: int = 48000

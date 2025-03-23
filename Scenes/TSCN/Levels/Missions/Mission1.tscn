@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=74 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -213,6 +213,9 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bdf5b"]
+polygon = PackedVector2Array(-128, -87, -127, -107, -117, -120, -100, -127, 101, -127, 114, -120, 126, -105, 126, 108, 121, 115, 110, 124, 98, 128, 72, 128, -96, 128, -110, 125, -121, 117, -125, 107, -126, 92)
+
 [sub_resource type="Resource" id="Resource_ulf3c"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
@@ -222,13 +225,13 @@ uid = 3628
 script = ExtResource("16_4wjdw")
 scene = ExtResource("16_cbdp8")
 group_size = 1
-probability = 5
+probability = 10
 
 [sub_resource type="Resource" id="Resource_a077w"]
 script = ExtResource("16_4wjdw")
 scene = ExtResource("18_0qmxr")
 group_size = 1
-probability = 2
+probability = 4
 
 [sub_resource type="Resource" id="Resource_2j7sg"]
 script = ExtResource("16_4wjdw")
@@ -524,7 +527,10 @@ position = Vector2(0, 120)
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Items/PlaceableBuilding"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Items/PlaceableBuilding/StaticBody2D"]
-polygon = PackedVector2Array(-106, 105, 108, 105, 100, -97, -106, -105)
+polygon = PackedVector2Array(-106, 105, 108, 105, 107, -105, -106, -105)
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="LevelContainer/Items/PlaceableBuilding"]
+occluder = SubResource("OccluderPolygon2D_bdf5b")
 
 [node name="LightLine" parent="LevelContainer/Items" instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)
@@ -536,7 +542,7 @@ points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 [node name="Raycasts" parent="LevelContainer/Items/LightLine" index="1"]
 position = Vector2(-4236, -362)
 
-[node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node", "black_background", "research_station_area", "gravity_area", "exterior_polygon")]
+[node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node", "black_background", "research_station_area", "gravity_area", "exterior_polygon", "parallax_bubbles")]
 script = ExtResource("12_jw53c")
 position_node = NodePath("ResearchStationPosition")
 follower_spawn_node = NodePath("FollowerSpawnPosition")
@@ -544,6 +550,7 @@ black_background = NodePath("ColorRect")
 research_station_area = NodePath("ResearchStationArea")
 gravity_area = NodePath("GravityArea")
 exterior_polygon = NodePath("Exterior")
+parallax_bubbles = NodePath("../../ParallaxLayer")
 follower = ExtResource("13_gnr5v")
 metadata/_edit_lock_ = true
 
@@ -566,6 +573,7 @@ polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494,
 metadata/_edit_lock_ = true
 
 [node name="Exterior" type="Polygon2D" parent="LevelContainer/ResearchStation"]
+visible = false
 z_index = 45
 color = Color(0.233925, 0.233925, 0.233925, 1)
 polygon = PackedVector2Array(-4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819)
@@ -582,6 +590,7 @@ polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494,
 z_index = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/ResearchStationArea"]
+visible = false
 polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2856, 2778, -2915, 2451)
 
 [node name="ResearchStationPosition" type="Node2D" parent="LevelContainer/ResearchStation"]
@@ -594,11 +603,12 @@ position = Vector2(-3931, 2621)
 script = ExtResource("12_kali0")
 
 [node name="ColorRect" type="ColorRect" parent="LevelContainer/ResearchStation"]
+visible = false
 z_index = 6
-offset_left = -5152.0
-offset_top = 1503.0
-offset_right = -1937.0
-offset_bottom = 3465.0
+offset_left = -5463.0
+offset_top = 1296.0
+offset_right = -1271.0
+offset_bottom = 3961.0
 color = Color(0, 0, 0, 1)
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]

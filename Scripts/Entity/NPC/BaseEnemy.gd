@@ -233,6 +233,7 @@ func _update_closest_player():
 
 ## Updates the local player visible variable (via raycast).
 func _update_player_visible():
+	print("hi")
 	if closest_player.global_position.distance_squared_to(Global.research_station.position_node.global_position) < 1000 ^ 2:
 		print("hi")
 		player_visible = false
@@ -257,7 +258,7 @@ func _update_player_visible():
 				await get_tree().create_timer(settings.disable_period_length).timeout
 			player_visible = false
 	else:
-		Global.print_error("Raycast to player got no result, an enemy is at the same position as the player. This isn't good.", Util.ErrorType.WARNING)
+		print("WARNING: Raycast to player got no result, an enemy is at the same position as the player. This isn't good.")
 
 ## High level, updates target position, whether attacking or wandering.
 func _update_target_position():

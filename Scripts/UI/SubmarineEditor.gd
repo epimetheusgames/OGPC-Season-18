@@ -75,8 +75,7 @@ func _process(delta: float) -> void:
 		#print(module_grid)
 		
 		if Input.is_action_just_pressed("mouse_left_click"):
-			var attachment_point_connections : Dictionary = {
-			}
+			var attachment_point_connections : Dictionary = {}
 			
 			var grid_space_is_valid : bool = true
 			# Checks for if grid space is valid
