@@ -20,11 +20,11 @@ var node_owner = 0
 var save_resource := EntitySave.new()
 var components_dictionary = {}
 
-func _process(delta: float) -> void:
-	if !Engine.is_editor_hint():
-		_entity_process(delta)
+func _ready() -> void:
+	if Global.save_load_framework:
+		Global.save_load_framework.save_nodes.connect(_on_save_nodes)
 
-func _entity_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 		
@@ -54,11 +54,14 @@ func get_component(component_type: String) -> Node:
 	
 	return null
 
+## Add a component node to the dictionary.
 func add_component(component_type: String, component: BaseComponent) -> void:
 	components_dictionary[component_type] = component
 
 # -- Multiplayer --
 
+## Finds if this node should be operated by this instance or via
+## remote commands.
 func _is_node_owner() -> bool:
 	if !Global.godot_steam_abstraction:
 		return true
@@ -70,9 +73,19 @@ func _is_node_owner() -> bool:
 
 # -- Save Load --
 
-func save_self() -> void:
-	Global.save_load_framework._save_entity(uid, save_resource)
-	
+## Catches save nodes signal, calls save_self and adds it to the 
+## node saves list. This is not the function that should be
+## overriden (see save_self).
+func _on_save_nodes() -> void:
+	var node_saver := save_self()
+	Global.current_game_save.node_saves.append(node_saver)
+
+## Overridable by children, should call super and add to that 
+## NodeSaver.
+func save_self() -> NodeSaver:
+	return NodeSaver.create(Global.current_mission_node, self, ["position", "velocity", "rotation"])
+
+## DEPRECATED
 func load_self() -> void:
 	save_resource = Global.save_load_framework._load_entity(uid)
 

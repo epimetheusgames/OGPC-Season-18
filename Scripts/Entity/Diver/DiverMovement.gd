@@ -61,19 +61,19 @@ func get_walking_input_vector() -> Vector2:
 	
 	return input_vector
 
-# This is mostly a workaround for now until the bug with getting the mouse 
-# position inside a viewport gets fixed
+## This is mostly a workaround for now until the bug with getting the mouse 
+## position inside a viewport gets fixed
 func get_mouse_input_vector() -> Vector2:
 	return (Vector2(DisplayServer.mouse_get_position()) - Vector2(960, 540)).normalized()
 
 func update_current_angle(delta: float) -> void:
 	if is_in_gravity_area:
-		current_angle = Vector2.UP.angle()
+		current_angle = Util.better_angle_lerp(current_angle, Vector2.UP.angle(), 0.4, delta)
 		return
 	
 	if input_vector != Vector2.ZERO:
 		var input_angle = input_vector.angle()
-		current_angle = lerp_angle(current_angle, input_angle, 0.1 * delta)
+		current_angle = Util.better_angle_lerp(current_angle, input_angle, 0.1, delta)
 
 func update_movement_velocity(delta: float):
 	velocity = velocity * 0.97

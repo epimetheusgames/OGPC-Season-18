@@ -37,7 +37,11 @@ func _process(delta: float) -> void:
 	if global_position.distance_squared_to(navigation.target_position) < 5 ^ 2:
 		return
 	
-	global_position += (target_path_position - global_position).normalized() * swim_speed * delta * 60
+	velocity = (target_path_position - global_position).normalized() * swim_speed * delta * 60
+
+	move_and_slide()
+
+	position += velocity * delta * 60
 
 ## Gets position the following civillian should navigate to, in global coordinates.
 func get_follow_position() -> Vector2:

@@ -79,6 +79,9 @@ var chat_text: String
 ## Current research station node.
 var research_station: ResearchStation
 
+## Ingame canvas modulate used for lighting (time of day)
+var canvas_modulate: CanvasModulate
+
 ## Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {
 	"General Collision": 1,

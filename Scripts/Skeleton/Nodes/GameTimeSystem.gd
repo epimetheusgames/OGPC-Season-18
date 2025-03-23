@@ -25,6 +25,11 @@ func _ready() -> void:
 			day_ended.emit()
 		time_changed.emit(_hours, _minutes)
 
+		if !Global.canvas_modulate:
+			return
+		
+		
+
 # Returns hours, minutes.
 func get_time() -> Array[int]:
 	return [_hours, _minutes]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=70 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=73 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
+[ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="2_3svaj"]
 [ext_resource type="Texture2D" uid="uid://vuyq5s7dknal" path="res://Assets/Art/Level/SandTexture.png" id="3_kali0"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
@@ -176,7 +177,7 @@ shader_parameter/num_points = 59
 shader_parameter/global_position = Vector2(0, 0)
 shader_parameter/fade_width = 215
 shader_parameter/tex_scale = 103.0
-shader_parameter/color_multiplier = 1.0
+shader_parameter/color_multiplier = 0.4
 shader_parameter/in_tex = SubResource("GradientTexture1D_dhgix")
 shader_parameter/edge_tex = ExtResource("3_kali0")
 
@@ -194,6 +195,13 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dn3vl"]
 polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 7993, 6031, 7981, 6030, 7969, 6033, 7925, 6050, 7919, 6051, 7910, 6047, 7894, 6042, 7895, 6039, 7900, 6035, 7900, 6032, 7898, 6030, 7894, 6029, 7886, 6030, 7873, 6032, 7852, 6035, 7835, 6035, 7807, 6032, 7787, 6029, 7763, 6020, 7729, 6011, 7671, 6012, 7571, 6020, 7668, 6209, 7699, 6171, 7705, 6164, 7721, 6155, 7739, 6148, 7760, 6130, 7781, 6101, 7790, 6095, 7806, 6118, 7824, 6133, 7851, 6140, 7881, 6141, 7909, 6136, 7931, 6129, 7950, 6120, 7966, 6110, 7974, 6104, 7985, 6101, 8021, 6095, 8113, 6068, 8146, 6061)
+
+[sub_resource type="Gradient" id="Gradient_3svaj"]
+offsets = PackedFloat32Array(0, 0.0482456, 0.125786, 0.171296, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.576221, 0, 0, 0, 0.788128, 0, 0, 0, 0.865563, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bdf5b"]
+gradient = SubResource("Gradient_3svaj")
 
 [sub_resource type="Resource" id="Resource_vfal8"]
 resource_local_to_scene = true
@@ -311,18 +319,18 @@ script = ExtResource("1_314ux")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5ulyy")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.286683, 0.286684, 0.286683, 1)
-
 [node name="LevelContainer" type="Node2D" parent="."]
 
 [node name="Environment" type="Node2D" parent="LevelContainer"]
 
 [node name="ColorRect" type="ColorRect" parent="LevelContainer/Environment"]
-offset_left = -9231.0
-offset_right = 29940.0
-offset_bottom = 10472.0
-color = Color(1.44392e-07, 0, 0.163983, 1)
+material = ExtResource("2_3svaj")
+offset_left = 29595.0
+offset_top = 30.0
+offset_right = 65802.0
+offset_bottom = 10502.0
+scale = Vector2(-1, 1)
+color = Color(0.0516436, 0.0516593, 0.216342, 1)
 
 [node name="Collisions" type="NavigationRegion2D" parent="LevelContainer/Environment" groups=["obstacles"]]
 z_index = 2
@@ -465,6 +473,17 @@ position = Vector2(188, 0)
 polygon = PackedVector2Array(2933, 1326, 2437, 848, 4226, 910)
 script = ExtResource("5_aep54")
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="LevelContainer/Environment"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="LevelContainer/Environment"]
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelContainer/Environment"]
+z_index = 75
+position = Vector2(11340.1, 5471.28)
+rotation = 1.5708
+scale = Vector2(42.2364, 35943.5)
+texture = SubResource("GradientTexture1D_bdf5b")
+
 [node name="Player" type="Node2D" parent="LevelContainer"]
 
 [node name="MultiplayerPlayerSpawnerComponent" type="Node" parent="LevelContainer/Player"]
@@ -472,10 +491,12 @@ script = ExtResource("4_iytd7")
 spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
+z_index = 20
 position = Vector2(-3492, 2657)
 uid = SubResource("Resource_vfal8")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("32_6lnpa")]
+z_index = 5
 position = Vector2(-1897, 2580)
 motion_mode = 1
 uid = SubResource("Resource_3svaj")
@@ -515,17 +536,21 @@ points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 [node name="Raycasts" parent="LevelContainer/Items/LightLine" index="1"]
 position = Vector2(-4236, -362)
 
-[node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node")]
+[node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node", "black_background", "research_station_area", "gravity_area", "exterior_polygon")]
 script = ExtResource("12_jw53c")
 position_node = NodePath("ResearchStationPosition")
 follower_spawn_node = NodePath("FollowerSpawnPosition")
+black_background = NodePath("ColorRect")
+research_station_area = NodePath("ResearchStationArea")
+gravity_area = NodePath("GravityArea")
+exterior_polygon = NodePath("Exterior")
 follower = ExtResource("13_gnr5v")
 metadata/_edit_lock_ = true
 
 [node name="Wall" type="Polygon2D" parent="LevelContainer/ResearchStation"]
-z_index = 2
+z_index = 8
 color = Color(0.854385, 0.854385, 0.854385, 1)
-polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819, -2678, 2742, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2676, 2757, -2678, 2743)
+polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819, -2678, 2744, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2676, 2757, -2678, 2743)
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/ResearchStation/Wall"]
@@ -535,29 +560,46 @@ visible = false
 polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2676, 2757)
 
 [node name="Background" type="Polygon2D" parent="LevelContainer/ResearchStation"]
+z_index = 7
 color = Color(0.334727, 0.334727, 0.334727, 1)
 polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
 metadata/_edit_lock_ = true
 
+[node name="Exterior" type="Polygon2D" parent="LevelContainer/ResearchStation"]
+z_index = 45
+color = Color(0.233925, 0.233925, 0.233925, 1)
+polygon = PackedVector2Array(-4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819)
+
 [node name="GravityArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["gravity_areas", "research_station_area"]]
+z_index = 7
 metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/GravityArea"]
 visible = false
 polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
 
-[node name="ResearchStatoinArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["research_station_area"]]
+[node name="ResearchStationArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["research_station_area"]]
+z_index = 7
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/ResearchStatoinArea"]
-visible = false
-polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2772, 2780, -2830, 2457)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/ResearchStationArea"]
+polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2856, 2778, -2915, 2451)
 
 [node name="ResearchStationPosition" type="Node2D" parent="LevelContainer/ResearchStation"]
+z_index = 7
 position = Vector2(-3197, 2602)
 
 [node name="FollowerSpawnPosition" type="Node2D" parent="LevelContainer/ResearchStation"]
+z_index = 7
 position = Vector2(-3931, 2621)
 script = ExtResource("12_kali0")
+
+[node name="ColorRect" type="ColorRect" parent="LevelContainer/ResearchStation"]
+z_index = 6
+offset_left = -5152.0
+offset_top = 1503.0
+offset_right = -1937.0
+offset_bottom = 3465.0
+color = Color(0, 0, 0, 1)
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 

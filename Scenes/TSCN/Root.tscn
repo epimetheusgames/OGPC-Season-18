@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=38 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -11,8 +11,7 @@
 [ext_resource type="Script" uid="uid://duycl57xwmfpr" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="9_y8obd"]
 [ext_resource type="Script" uid="uid://6ub1ahbtrw5b" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
-[ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="11_luehf"]
-[ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_yjmxm"]
+[ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="12_o2nyu"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="13_wogkx"]
 [ext_resource type="Script" uid="uid://cr8brelxptd70" path="res://Scripts/UI/KeybindButtonHandler.gd" id="14_qt6oy"]
 [ext_resource type="Script" uid="uid://6t41dstdgs6k" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="15_5virq"]
@@ -42,16 +41,6 @@ file = "res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"
 [sub_resource type="Resource" id="Resource_1tmkv"]
 script = ExtResource("9_y8obd")
 missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_py4au")])
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_necqq"]
-shader = ExtResource("11_luehf")
-shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
-shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
-shader_parameter/depth_color_tex = ExtResource("12_yjmxm")
-shader_parameter/always_top = false
-shader_parameter/blend_alpha = false
-shader_parameter/max_alpha = 0.2
-shader_parameter/height = 1.0
 
 [sub_resource type="Gradient" id="Gradient_tetp1"]
 colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
@@ -149,7 +138,7 @@ spawn_variation = 300.0
 
 [node name="ColorRect" type="ColorRect" parent="UI"]
 z_index = -10
-material = SubResource("ShaderMaterial_necqq")
+material = ExtResource("12_o2nyu")
 layout_mode = 0
 offset_left = -678.0
 offset_top = -114.0
@@ -158,7 +147,7 @@ offset_bottom = 3936.0
 color = Color(0.012, 0.012, 0.09, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="UI"]
-material = SubResource("ShaderMaterial_necqq")
+material = ExtResource("12_o2nyu")
 layout_mode = 0
 offset_left = -678.0
 offset_top = -114.0
@@ -351,7 +340,6 @@ visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_gsc64")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="UI"]
-energy = 0.0
 
 [node name="Boid" parent="UI" instance=ExtResource("17_g72ff")]
 modulate = Color(0.704, 0.771, 0.885, 0.536)

@@ -6,31 +6,67 @@
 class_name Enemy
 extends Entity
 
+## Settings object that determines the enemy's behavior.
 @export var settings: EnemyBehaviorSettings
+
+## The distance considered "reached" for a navigation target.
 @export var target_reached_min_dst: int = 10
+
+## The direction the enemy is facing when initialised (local)
 @export var forward_direction: Vector2 = Vector2(-1, 0)
 
+## Enemy hurtbox area.
 @export var hurtbox: Hurtbox
+
+## Enemy attackbox area.
 @export var attackbox: Attackbox
+
+## Area to detect light, optional.
 @export var light_detector: Area2D
 
+## Debug variable to disable all enemy behavior.
 @export var quick_disable_everything := false
 
+## The detection area for the player, fetched on ready.
 var _player_detection_area: Area2D
+
+## The collision shape attached to the player detection area.
 var _player_detection_collision_shape: CollisionShape2D
+
+## Set via update_closest_player, the closest player by distance to the enemy.
 var closest_player: Diver
+
+## If the player is in the detection area, regardless of visibility.
 var player_in_area := false
+
+## If the player is in the area, and visible via a raycast.
 var player_visible := false
+
+## If the enemy has reached its target navigation position.
 var reached_target := false
+
+## If a light is visible.
 var light_visible := false
+
+## High level state.
 var wander_state := WANDER_MODE.NOT_WANDERING
+
+## The number of players in the detection area, regardless of visibility.
 var num_players_in_area = 0
+
+## List of active players in the lobby.
 var players_list = []
 
+## Current health of the enemy.
 var health: float
+
+## Navigation target pos.
 var target_position: Vector2
+
+## Default speed of the enemy, set by enemy_behavior_settings.
 var target_speed: float
 
+## High level state enum.
 enum WANDER_MODE {
 	WANDER_POINT_REACHED,
 	WANDERING_TO_POINT,
@@ -87,28 +123,6 @@ func _ready() -> void:
 		light_detector.area_entered.connect(_light_entered)
 		light_detector.area_exited.connect(_light_exited)
 
-func _light_entered(_area: Area2D):
-	light_visible = true
-
-func _light_exited(_area: Area2D):
-	light_visible = false
-
-func _take_damage(new_health: float) -> void:
-	health -= new_health
-	if health <= 0:
-		_die()
-
-func _target_reached() -> void:
-	reached_target = true
-	wander_state = WANDER_MODE.WANDER_POINT_REACHED
-	
-func _die() -> void:
-	if settings.drops_item:
-		var item_drop: Node2D = load(settings.drops_item.file).instantiate()
-		get_parent().add_child.call_deferred(item_drop)
-		item_drop.global_position = global_position
-	queue_free()
-
 func _process(delta: float) -> void:
 	super(delta)
 	
@@ -158,10 +172,38 @@ func _process(delta: float) -> void:
 		
 		_update_wander_point()
 
+## Signal, enemy detected light.
+func _light_entered(_area: Area2D):
+	light_visible = true
+
+## Signal, enemy cannot see light anymore.
+func _light_exited(_area: Area2D):
+	light_visible = false
+
+## Signal, takes damage.
+func _take_damage(new_health: float) -> void:
+	health -= new_health
+	if health <= 0:
+		_die()
+
+## Signal, navigation target reached.
+func _target_reached() -> void:
+	reached_target = true
+	wander_state = WANDER_MODE.WANDER_POINT_REACHED
+
+## Kills enemy (with queue_free)
+func _die() -> void:
+	if settings.drops_item:
+		var item_drop: Node2D = load(settings.drops_item.file).instantiate()
+		get_parent().add_child.call_deferred(item_drop)
+		item_drop.global_position = global_position
+	queue_free()
+
 # Overridable by children.
 func attack() -> void:
 	pass
 
+## Generates circular view polygon based on arguments.
 func _generate_view_polygon(angle: float, radius: float) -> PackedVector2Array:
 	var output := PackedVector2Array([Vector2(0, 0)])
 	var start := int(rad_to_deg(forward_direction.normalized().angle()))
@@ -171,6 +213,7 @@ func _generate_view_polygon(angle: float, radius: float) -> PackedVector2Array:
 	
 	return output
 
+## Updates the local closest player variable.
 func _update_closest_player():
 	# If there is one player
 	if num_players_in_area == 1:
@@ -188,13 +231,15 @@ func _update_closest_player():
 		
 		closest_player = players_list[closest_ind]
 
+## Updates the local player visible variable (via raycast).
 func _update_player_visible():
-	if Global.player.global_position.distance_squared_to(Global.research_station.position_node.global_position) < 1000 ^ 2:
+	if closest_player.global_position.distance_squared_to(Global.research_station.position_node.global_position) < 1000 ^ 2:
+		print("hi")
 		player_visible = false
 		return 
 	
 	# If player is in submarine, impossible to see them.
-	var state := Global.player.get_state()
+	var state := closest_player.get_state()
 	if state == Util.DiverState.IN_SUBMARINE || state == Util.DiverState.DRIVING_SUBMARINE:
 		player_visible = false
 		return
@@ -214,6 +259,7 @@ func _update_player_visible():
 	else:
 		Global.print_error("Raycast to player got no result, an enemy is at the same position as the player. This isn't good.", Util.ErrorType.WARNING)
 
+## High level, updates target position, whether attacking or wandering.
 func _update_target_position():
 	wander_state = WANDER_MODE.NOT_WANDERING
 	
@@ -229,6 +275,7 @@ func _update_target_position():
 	if light_visible && settings.player_shines_light && global_position.distance_squared_to(closest_player.global_position) > 200 ** 2:
 		target_position = closest_player.position + -Util.angle_to_vector_radians(closest_player.global_rotation, 700)
 
+## If wandering, finds a valid point to wander to.
 func _update_wander_point():
 	var valid_point_found := false
 	var space_state := get_world_2d().direct_space_state
