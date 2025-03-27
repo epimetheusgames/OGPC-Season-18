@@ -12,7 +12,7 @@ func _ready():
 
 func _lobby_list_updated(lobbies: Array):
 	var lobby_text := "Available lobbies:\n"
-	for lobby in Global.godot_steam_abstraction.lobbies_list:
+	for lobby in lobbies:
 		if lobby[2] == "DivingGameLobby":
 			lobby_text += "Lobby name: " + lobby[1] + " | Members: " + str(lobby[3])
 	if !Global.is_multiplayer:
@@ -80,7 +80,7 @@ func _on_multiplayer_join_game_button_button_up() -> void:
 	set_multiplayer_status("Waiting for host connection.")
 	$MultiplayerJoinGameButton.disabled = true
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var members = Global.godot_steam_abstraction.lobby_members
 	if Global.is_multiplayer:
 		var text := "Members of lobby:\n"

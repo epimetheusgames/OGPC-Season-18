@@ -5,8 +5,9 @@ signal button_down
 @onready var textBox:RichTextLabel = get_node("text")
 @onready var currentColor:Color = color
 var text:String
-func isHovering(size,pos):
-	return Rect2(pos, size).has_point(get_global_mouse_position())
+
+func isHovering(asize,pos):
+	return Rect2(pos, asize).has_point(get_global_mouse_position())
 	
 func _input(event):
 	if ((event is InputEventMouseButton and event.button_index==1) or event is InputEventMouseMotion):
@@ -14,7 +15,7 @@ func _input(event):
 		if(isHovering(self.size,self.global_position)):
 			if(hasPressed and !disabled):
 				button_down.emit()
-func _process(delta):
+func _process(_delta):
 	#if(isHovering())
 	textBox.text = text
 

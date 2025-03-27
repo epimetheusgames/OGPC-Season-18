@@ -5,7 +5,7 @@ extends Control
 @export var ingame_ui: Control
 @export var vignette_shader: ColorRect
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Global.player && Global.player.get_diver_health() <= 0:
 		if vignette_shader:
 			vignette_shader.material.set_shader_parameter("vignette_strength", 1.5)

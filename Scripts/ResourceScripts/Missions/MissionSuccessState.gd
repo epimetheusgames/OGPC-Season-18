@@ -13,8 +13,8 @@ extends Resource
 
 var diver: Diver
 
-func initialize(diver: Diver) -> void:
-	self.diver = diver
+func initialize(_diver: Diver) -> void:
+	self.diver = _diver
 
 func check_success() -> bool:
 	if !diver:

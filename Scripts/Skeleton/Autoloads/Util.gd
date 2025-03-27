@@ -162,7 +162,7 @@ static func smooth_line(input: PackedVector2Array, resolution_multiplier: float)
 	return output
 
 ## Run code from a string
-static func eval(input: String) -> void:
+static func eval(input: String):
 	var script_holder = RefCounted.new()
 	var script = GDScript.new()
 	script.set_source_code("func eval():" + input)

@@ -10,6 +10,7 @@ extends Entity
 @export var follow_distance: float
 
 var target_path_position: Vector2
+var going_to_building := false
 
 func _ready() -> void:
 	if !detection_area:
@@ -37,6 +38,10 @@ func _process(delta: float) -> void:
 	if global_position.distance_squared_to(navigation.target_position) < 5 ^ 2:
 		return
 	
+	if going_to_building && global_position.distance_squared_to(following.global_position) < follow_distance ** 2:
+		var building: PlaceableBuilding = following.get_parent()
+		building.current_occupants += 1
+	
 	velocity = (target_path_position - global_position).normalized() * swim_speed * delta * 60
 
 	move_and_slide()
@@ -48,6 +53,19 @@ func get_follow_position() -> Vector2:
 	return global_position
 
 func _area_entered(area: Area2D) -> void:
+	if area.is_in_group("building_area"):
+		var building: PlaceableBuilding = area.get_parent()
+		if !building.player_follower_dummy:
+			Global.print_error("Follower at path " + str(get_path()) + " cannot follow a building without a player follower dummy.")
+			return
+		
+		following = building.player_follower_dummy
+		going_to_building = true
+		return
+
+	if following:
+		return
+
 	if area.is_in_group("civillian_area"):
 		following = area.get_parent()
 	if area.is_in_group("player_area"):

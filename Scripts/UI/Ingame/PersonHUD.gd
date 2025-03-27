@@ -9,11 +9,23 @@ extends PanelContainer
 func _ready() -> void:
 	if Global.game_time_system:
 		Global.game_time_system.time_changed.connect(_time_changed)
+	
+	if Global.save_load_framework:
+		Global.save_load_framework.save_nodes.connect(_saving_game)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	health_progress.max_value = Global.player.get_diver_max_health()
 	health_progress.value = Global.player.get_diver_health()
 	oxygen_progress.value = Global.player.get_oxygen()
+
+func _saving_game() -> void:
+	$MarginContainer/HBoxContainer/SavingText.visible = true
+	$MarginContainer/HBoxContainer/Seperator.visible = true
+
+	await get_tree().create_timer(2).timeout
+
+	$MarginContainer/HBoxContainer/SavingText.visible = false
+	$MarginContainer/HBoxContainer/Seperator.visible = false
 
 func _time_changed(hour: int, minute: int):
 	time.text = "Current Time: " + Global.game_time_system.format_time(hour, minute)

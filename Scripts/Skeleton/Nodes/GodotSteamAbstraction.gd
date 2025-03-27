@@ -145,7 +145,7 @@ func create_lobby(lobby_name: String, lobby_mode: String) -> void:
 		new_lobby_mode = lobby_mode
 		Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, lobby_members_max)
 
-func join_lobby_by_name(name: String):
+func join_lobby_by_name(lobby_name: String):
 	get_lobby_list()
 	await Steam.lobby_match_list
 	
@@ -153,7 +153,7 @@ func join_lobby_by_name(name: String):
 	
 	for lobby in lobbies_list:
 		Global.print_debug("Found lobby with data: " + str(lobby))
-		if lobby[1] == name:
+		if lobby[1] == lobby_name:
 			join_lobby(lobby[0])
 			lobby_joined.emit()
 			return
@@ -176,9 +176,10 @@ func leave_lobby() -> void:
 		
 		lobby_members.clear()
 
-# Write this later, it's when accepting a notification from steam.
+# Steam wants to join a lobby.
 func _on_lobby_join_requested(this_lobby_id: int, friend_id: int) -> void:
-	pass
+	Global.print_debug("Steam friend " + str(Steam.getFriendPersonaName(friend_id)) + " is requesting to join lobby " + str(this_lobby_id))
+	join_lobby(this_lobby_id)
 
 func _on_lobby_joined(this_lobby_id: int, _permissions: int, _locked: bool, response: int) -> void:
 	# If joining was successful
@@ -238,11 +239,11 @@ func _on_session_request(remote_id: int) -> void:
 func _on_session_connect_fail(failed_steam_id: int, session_error: int) -> void:
 	Global.print_error("Steam connect failed for target %s, the error code is %s, go figure out what it means for yourself." % [failed_steam_id, session_error])
 
-func _on_persona_change(this_steam_id: int, _flag: int) -> void:
+func _on_persona_change(_this_steam_id: int, _flag: int) -> void:
 	if lobby_id > 0:
 		get_lobby_members()
 
-func _on_lobby_chat_update(this_lobby_id: int, change_id: int, making_change_id: int, chat_state: int) -> void:
+func _on_lobby_chat_update(_this_lobby_id: int, change_id: int, _making_change_id: int, chat_state: int) -> void:
 	var changer_name: String = Steam.getFriendPersonaName(change_id)
 	
 	if chat_state == Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
@@ -439,7 +440,7 @@ func sync_packets() -> void:
 		var packet_group_bytes: PackedByteArray
 		var send_type: int = Steam.P2P_SEND_RELIABLE
 		var channel: int = 0
-		var num_packet_groups: int = 0
+		var num_packet_groups := 0
 		
 		for key in packets_queue.keys():
 			var packet_data: Dictionary = packets_queue[key]
