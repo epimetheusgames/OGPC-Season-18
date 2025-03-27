@@ -22,4 +22,3 @@ func _process(delta: float) -> void:
 				self.visible = true
 				notif_bar.size = default_size
 				t=0
-				Global.current_mission_node.turn_on_efficient()

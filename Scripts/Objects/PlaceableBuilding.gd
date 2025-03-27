@@ -135,5 +135,12 @@ func _save_self() -> void:
 				"max_occupants",
 				"current_occupants"
 			],
+			{
+				get_path_to(building_sprite): [
+					"position", 
+					"rotation", 
+					"modulate",
+				],
+			}
 		)
 	)

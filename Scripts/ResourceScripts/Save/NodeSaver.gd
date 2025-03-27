@@ -9,7 +9,7 @@ var parent_path: String
 var node_name: String
 var scene_override_path: FilePathResource
 
-static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary[String, Array] = {}, scene_override: FilePathResource = null):
+static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary[NodePath, Array] = {}, scene_override: FilePathResource = null):
 	var ret := NodeSaver.new()
 	ret.save_node(mission, node, properties, _child_properties, scene_override)
 	return ret
@@ -81,7 +81,7 @@ func load_node(mission: MissionRoot) -> void:
 	to_add.name = node_name
 
 # Child properties is path (String): variable names (Array[String]).
-func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary[String, Array] = {}, scene_override: FilePathResource = null) -> void:
+func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary[NodePath, Array] = {}, scene_override: FilePathResource = null) -> void:
 	Global.print_debug("DEBUG: Saving node at path " + str(mission.get_path_to(node)) + " relative to mission root.")
 
 	_recursively_set_owners(node, node)
@@ -106,7 +106,7 @@ func save_node(mission: MissionRoot, node: Node, properties: Array[String], chil
 		var child_property_list := {}
 		for variable in variables_to_save:
 			child_property_list[variable] = node_to_use.get(variable)
-		child_properties[path] = child_property_list
+		child_properties[str(path)] = child_property_list
 
 func _recursively_set_owners(set_owner_to: Node, recurse_on: Node) -> void:
 	for child in recurse_on.get_children():

@@ -521,6 +521,10 @@ base_position = NodePath("Node2D")
 scale = Vector2(2, 2)
 texture = ExtResource("9_o2tjs")
 
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="LevelContainer/Items/PlaceableBuilding/Sprite2D"]
+scale = Vector2(0.5, 0.5)
+occluder = SubResource("OccluderPolygon2D_bdf5b")
+
 [node name="Node2D" type="Node2D" parent="LevelContainer/Items/PlaceableBuilding"]
 position = Vector2(0, 120)
 
@@ -528,9 +532,6 @@ position = Vector2(0, 120)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Items/PlaceableBuilding/StaticBody2D"]
 polygon = PackedVector2Array(-106, 105, 108, 105, 107, -105, -106, -105)
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="LevelContainer/Items/PlaceableBuilding"]
-occluder = SubResource("OccluderPolygon2D_bdf5b")
 
 [node name="LightLine" parent="LevelContainer/Items" instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)
@@ -578,7 +579,7 @@ z_index = 45
 color = Color(0.233925, 0.233925, 0.233925, 1)
 polygon = PackedVector2Array(-4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819)
 
-[node name="GravityArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["gravity_areas", "research_station_area"]]
+[node name="GravityArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["gravity_areas"]]
 z_index = 7
 metadata/_edit_lock_ = true
 

@@ -8,8 +8,7 @@
             "name": "GDScript: Launch Project",
             "type": "godot",
             "request": "launch",    
-            "project": "${workspaceFolder}",
-            "additional_options": "--position 1000, 3000"
+            "project": "${workspaceFolder}"
         }
     ]
 }
