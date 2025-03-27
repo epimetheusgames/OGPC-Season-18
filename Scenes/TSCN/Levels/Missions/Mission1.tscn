@@ -610,7 +610,7 @@ offset_left = -5463.0
 offset_top = 1296.0
 offset_right = -1271.0
 offset_bottom = 3961.0
-color = Color(0, 0, 0, 1)
+color = Color(0.0943156, 0.129072, 0.171545, 1)
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
@@ -814,7 +814,6 @@ ingame_ui = NodePath("../IngameUI")
 [node name="MissionSuccessScreen" parent="UILayer" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("33_aiin4")]
 visible = false
 ingame_ui = NodePath("../IngameUI")
-vignette_shader = NodePath("../../ShadersLayer/Vignette/ColorRect")
 
 [node name="PauseMenu" parent="UILayer" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("35_upo23")]
 visible = false

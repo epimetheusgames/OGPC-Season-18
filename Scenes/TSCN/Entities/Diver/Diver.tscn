@@ -172,9 +172,9 @@ fill_to = Vector2(0.846154, 0.865385)
 motion_mode = 1
 script = ExtResource("1_1l6ma")
 diver_scene = SubResource("Resource_fmqh5")
+uid = SubResource("Resource_175vb")
 camera = NodePath("Camera")
 follower = NodePath("Movement/CivillianFollower")
-uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)

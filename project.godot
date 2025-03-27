@@ -30,6 +30,7 @@ config/icon="res://Assets/Art/Sprites/Misc/icon.svg"
 
 Global="*res://Scripts/Skeleton/Autoloads/Global.gd"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
 
 [debug]
 
@@ -52,7 +53,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/pISSStreamGodot/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/discord-rpc-gd/plugin.cfg", "res://addons/pISSStreamGodot/plugin.cfg")
 
 [global_group]
 

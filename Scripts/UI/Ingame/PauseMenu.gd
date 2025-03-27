@@ -14,8 +14,7 @@ func _process(delta: float) -> void:
 		visible = true
 
 func _on_quit_button_button_up() -> void:
-	get_tree().paused = false
-	Global.save_load_framework.exit_to_menu()
+	$AreYouSurePanel.visible = true
 
 func _on_resume_button_button_up() -> void:
 	get_tree().paused = false
@@ -26,3 +25,10 @@ func _on_resume_button_button_up() -> void:
 	
 func _settings_open():
 	get_parent().get_node("Settings").visible = true
+
+func _on_exit_button_button_up() -> void:
+	get_tree().paused = false
+	Global.save_load_framework.exit_to_menu()
+
+func _on_no_button_button_up() -> void:
+	$AreYouSurePanel.visible = false

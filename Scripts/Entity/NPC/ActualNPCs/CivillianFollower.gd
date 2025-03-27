@@ -53,10 +53,16 @@ func get_follow_position() -> Vector2:
 	return global_position
 
 func _area_entered(area: Area2D) -> void:
+	if going_to_building:
+		return
+
 	if area.is_in_group("building_area"):
 		var building: PlaceableBuilding = area.get_parent()
+
 		if !building.player_follower_dummy:
 			Global.print_error("Follower at path " + str(get_path()) + " cannot follow a building without a player follower dummy.")
+			return
+		if building.current_occupants >= building.max_occupants:
 			return
 		
 		following = building.player_follower_dummy

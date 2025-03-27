@@ -10,9 +10,9 @@ func _ready():
 		await get_tree().create_timer(1).timeout
 		Global.godot_steam_abstraction.get_lobby_list()
 
-func _lobby_list_updated(lobbies: Array):
+func _lobby_list_updated(_lobbies: Array):
 	var lobby_text := "Available lobbies:\n"
-	for lobby in lobbies:
+	for lobby in Global.godot_steam_abstraction.lobbies_list:
 		if lobby[2] == "DivingGameLobby":
 			lobby_text += "Lobby name: " + lobby[1] + " | Members: " + str(lobby[3])
 	if !Global.is_multiplayer:

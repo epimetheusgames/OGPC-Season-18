@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1sxg2d10k1y7"]
+[gd_scene load_steps=4 format=3 uid="uid://c1sxg2d10k1y7"]
 
 [ext_resource type="Script" uid="uid://cg1g510r87jfd" path="res://Scripts/UI/Ingame/PauseMenu.gd" id="1_8ck0e"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="2_whtnb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6hf8t"]
+bg_color = Color(0.15231, 0.198689, 0.257851, 0.964706)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.1276, 0.16918, 0.22, 0.423529)
+shadow_size = 2
+shadow_offset = Vector2(0, 5)
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -15,11 +26,11 @@ script = ExtResource("1_8ck0e")
 [node name="ColorRect" type="ColorRect" parent="."]
 process_mode = 3
 layout_mode = 0
-offset_left = -253.0
-offset_top = -115.0
-offset_right = 2099.0
-offset_bottom = 1299.0
-color = Color(0, 0, 0, 0.321569)
+offset_left = -213.0
+offset_top = -98.0
+offset_right = 2139.0
+offset_bottom = 1316.0
+color = Color(0.1534, 0.20137, 0.26, 0.505882)
 
 [node name="GameTitle" type="Label" parent="."]
 process_mode = 3
@@ -27,8 +38,9 @@ layout_mode = 0
 offset_top = 193.0
 offset_right = 1921.0
 offset_bottom = 325.0
+theme = ExtResource("2_whtnb")
 theme_override_font_sizes/font_size = 96
-text = "Diving Game Title"
+text = "Game Paused"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="."]
@@ -38,6 +50,7 @@ offset_left = 824.0
 offset_top = 438.0
 offset_right = 1081.0
 offset_bottom = 512.0
+theme = ExtResource("2_whtnb")
 theme_override_font_sizes/font_size = 36
 text = "Resume"
 
@@ -48,6 +61,7 @@ offset_left = 824.0
 offset_top = 534.0
 offset_right = 1081.0
 offset_bottom = 608.0
+theme = ExtResource("2_whtnb")
 theme_override_font_sizes/font_size = 36
 action_mode = 0
 text = "Settings
@@ -60,9 +74,76 @@ offset_left = 824.0
 offset_top = 630.0
 offset_right = 1081.0
 offset_bottom = 704.0
+theme = ExtResource("2_whtnb")
 theme_override_font_sizes/font_size = 36
 text = "Quit"
+
+[node name="AreYouSurePanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 607.0
+offset_top = 475.0
+offset_right = 1302.0
+offset_bottom = 709.0
+theme = ExtResource("2_whtnb")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6hf8t")
+
+[node name="MarginContainer" type="MarginContainer" parent="AreYouSurePanel"]
+layout_mode = 2
+theme = ExtResource("2_whtnb")
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AreYouSurePanel/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_whtnb")
+
+[node name="MarginContainer" type="MarginContainer" parent="AreYouSurePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_whtnb")
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="AreYouSurePanel/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_whtnb")
+theme_override_font_sizes/font_size = 20
+text = "Are you sure you want to quit? Progress is only saved at the Research Station"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="AreYouSurePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_whtnb")
+
+[node name="MarginContainer2" type="MarginContainer" parent="AreYouSurePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_whtnb")
+theme_override_constants/margin_top = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AreYouSurePanel/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("2_whtnb")
+
+[node name="ExitButton" type="Button" parent="AreYouSurePanel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_whtnb")
+theme_override_font_sizes/font_size = 24
+text = "Yes, Quit"
+
+[node name="NoButton" type="Button" parent="AreYouSurePanel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_whtnb")
+theme_override_font_sizes/font_size = 24
+text = "No, Go Back"
 
 [connection signal="button_up" from="ResumeButton" to="." method="_on_resume_button_button_up"]
 [connection signal="pressed" from="SettingsButton" to="." method="_settings_open"]
 [connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]
+[connection signal="button_up" from="AreYouSurePanel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/ExitButton" to="." method="_on_exit_button_button_up"]
+[connection signal="button_up" from="AreYouSurePanel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/NoButton" to="." method="_on_no_button_button_up"]

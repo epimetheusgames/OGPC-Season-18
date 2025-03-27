@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=14 format=4 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/NPC/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/NPC/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
 [ext_resource type="Resource" uid="uid://bn07gfpt0o7wj" path="res://Scenes/Resource/Entity/JellyfishSettings.tres" id="2_fvfwy"]
 [ext_resource type="Script" uid="uid://cmyaowe8fevss" path="res://Scripts/Entity/NPC/Jellyfish/Tentacles.gd" id="3_5yh7k"]
-[ext_resource type="Texture2D" uid="uid://cwpcvx4q0j1m" path="res://Assets/Art/WhiteBlock.png" id="4_y38hh"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_gyt63"]
 [ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="7_i60sr"]
 [ext_resource type="Shader" uid="uid://dog5ar7m8hypg" path="res://Scripts/GLSL/GDShader/JellyfishColors.gdshader" id="8_2ikp3"]
@@ -33,6 +32,7 @@ shader_parameter/colors = PackedVector4Array(1, 1, 1, 0.25, 1, 1, 1, 0.3, 1, 1, 
 shader_parameter/out_colors = PackedColorArray(0, 0, 0.75, 0.301961, 0.25, 0, 0.75, 0.180392, 0.375, 0, 0.75, 0.301961, 0.4625, 0, 0.75, 0.360784, 0.25, 0, 0.75, 0.301961, 0.325, 0, 0.75, 0.301961)
 
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "light_detector")]
+collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 settings = ExtResource("2_fvfwy")
@@ -47,12 +47,6 @@ tentacles = Array[ExtResource("3_5yh7k")]([SubResource("Resource_rbmc1")])
 on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(4, 3)
-scale = Vector2(51.6, 26.7)
-texture = ExtResource("4_y38hh")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-0.499985, 76)
@@ -99,3 +93,7 @@ material = SubResource("ShaderMaterial_tvsdd")
 position = Vector2(7, -56)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("8_7y3es")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-120, -15, -122, -31, -107, -56, -78, -77, -31, -98, 6, -101, 45, -98, 83, -85, 108, -70, 125, -54, 134, -39, 139, -23, 133, -7, 125, -1, -112, -1)

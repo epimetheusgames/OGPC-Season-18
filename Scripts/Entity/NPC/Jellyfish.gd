@@ -68,6 +68,8 @@ func _physics_process(delta: float) -> void:
 	
 	global_position += velocity * delta * 60
 
+	move_and_slide()
+
 func boost():
 	current_speed = target_speed * BOOST_MULTIPLIER
 	boost_timer = BOOST_DURATION
@@ -78,14 +80,11 @@ func update_targets():
 	var target_pos: Vector2 = nav_agent.get_next_path_position()
 	
 	target_velocity = (target_pos - global_position).normalized() * current_speed 
-	if position.distance_squared_to(target_pos) > 20 ** 2:
+	if global_position.distance_squared_to(target_pos) > 200 ** 2:
 		target_rotation = velocity.angle() + PI / 2
-	else:
+
 		for i in range(tentacles.ropes.size()):
 			tentacles.ropes[i].gravity = -target_velocity.normalized() * 10
-			
-			if player_visible:
-				tentacles.end_targets[i].global_position = Global.player.diver_animation.get_head_position()
-				tentacles.ropes[i].end_pos_on = true
-			else:
-				tentacles.ropes[i].end_pos_on = false
+	else:
+		for i in range(tentacles.ropes.size()):
+			tentacles.ropes[i].gravity = target_velocity.normalized() * 10

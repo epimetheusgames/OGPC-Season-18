@@ -15,6 +15,7 @@ radius = 500.157
 script = ExtResource("1_hfllt")
 scene = SubResource("Resource_xgfk5")
 player_follower_dummy = NodePath("PlayerFollowerDummy")
+max_occupants = 3
 
 [node name="Raycasts" type="Node2D" parent="."]
 
