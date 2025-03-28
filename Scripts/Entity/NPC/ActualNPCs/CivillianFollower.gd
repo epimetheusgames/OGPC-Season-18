@@ -41,6 +41,7 @@ func _process(delta: float) -> void:
 	if going_to_building && global_position.distance_squared_to(following.global_position) < follow_distance ** 2:
 		var building: PlaceableBuilding = following.get_parent()
 		building.current_occupants += 1
+		queue_free()
 	
 	velocity = (target_path_position - global_position).normalized() * swim_speed * delta * 60
 

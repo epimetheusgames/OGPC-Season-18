@@ -7,8 +7,9 @@ extends BaseRope
 
 const TIMESTEP: float = 0.1
 
-@export var iterations: int = 2
+@onready var rng := RandomNumberGenerator.new()
 
+@export var iterations: int = 2
 @export var gravity: Vector2 = Vector2(0, 100)
 @export var damping: float = 0.98  # 1 = no damping, < 1 slows movement
 @export var enable_collisions: bool = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=39 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://duycl57xwmfpr" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="9_y8obd"]
 [ext_resource type="Script" uid="uid://6ub1ahbtrw5b" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
+[ext_resource type="Script" uid="uid://ctyabps1pdr5y" path="res://Scripts/Skeleton/Nodes/DiscordRpc.gd" id="11_bhkpb"]
 [ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="12_o2nyu"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="13_wogkx"]
 [ext_resource type="Script" uid="uid://cr8brelxptd70" path="res://Scripts/UI/KeybindButtonHandler.gd" id="14_qt6oy"]
@@ -122,6 +123,9 @@ default_mission_tree = SubResource("Resource_1tmkv")
 [node name="GameTimeSystem" type="Node" parent="Skeleton"]
 script = ExtResource("10_5yeas")
 seconds_per_ten_minutes = 15
+
+[node name="DiscordRPC" type="Node" parent="Skeleton"]
+script = ExtResource("11_bhkpb")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3

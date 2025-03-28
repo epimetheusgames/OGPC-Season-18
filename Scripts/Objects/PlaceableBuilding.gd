@@ -10,7 +10,7 @@ const raycast_length_mul = 0.5
 @export var building_collision: StaticBody2D
 @export var base_position: Node2D
 @export var detection_area: Area2D
-@export var player_follower_dummy: PlayerFollowerDummy
+@export var player_follower_dummy: AnyFollowerDummy
 @export var max_occupants: int
 @export var current_occupants: int
 

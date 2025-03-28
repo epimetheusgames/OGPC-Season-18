@@ -233,9 +233,7 @@ func _update_closest_player():
 
 ## Updates the local player visible variable (via raycast).
 func _update_player_visible():
-	print("hi")
 	if closest_player.global_position.distance_squared_to(Global.research_station.position_node.global_position) < 1000 ^ 2:
-		print("hi")
 		player_visible = false
 		return 
 	

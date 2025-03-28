@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crayjmaukyqsy" path="res://Scripts/Objects/PlaceableBuilding.gd" id="1_hfllt"]
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_0erx1"]
-[ext_resource type="Script" uid="uid://cfcc8wf5m0kgj" path="res://Scripts/Entity/NPC/ActualNPCs/PlayerFollowerDummy.gd" id="3_sok0k"]
+[ext_resource type="Script" uid="uid://ct4d1cr2873gf" path="res://Scripts/Entity/NPC/ActualNPCs/AnyFollowerDummy.gd" id="3_sok0k"]
 
 [sub_resource type="Resource" id="Resource_xgfk5"]
 script = ExtResource("2_0erx1")
@@ -14,7 +14,7 @@ radius = 500.157
 [node name="PlaceableBuilding" type="Node2D" node_paths=PackedStringArray("player_follower_dummy")]
 script = ExtResource("1_hfllt")
 scene = SubResource("Resource_xgfk5")
-player_follower_dummy = NodePath("PlayerFollowerDummy")
+player_follower_dummy = NodePath("AnyFollowerDummy")
 max_occupants = 3
 
 [node name="Raycasts" type="Node2D" parent="."]
@@ -80,6 +80,7 @@ target_position = Vector2(-1, -1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingArea"]
 shape = SubResource("CircleShape2D_j551m")
 
-[node name="PlayerFollowerDummy" type="CharacterBody2D" parent="."]
+[node name="AnyFollowerDummy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("follows")]
 script = ExtResource("3_sok0k")
-metadata/_custom_type_script = "uid://cfcc8wf5m0kgj"
+follows = NodePath("..")
+metadata/_custom_type_script = "uid://ct4d1cr2873gf"

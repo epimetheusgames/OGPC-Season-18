@@ -11,6 +11,7 @@ height = 218.0
 radius = 403.045
 
 [node name="CivillianFollower" type="CharacterBody2D" node_paths=PackedStringArray("navigation", "detection_area")]
+collision_layer = 0
 script = ExtResource("1_o7vjs")
 navigation = NodePath("Nav")
 detection_area = NodePath("CivillianArea")
@@ -19,6 +20,7 @@ follow_distance = 200.0
 metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5cylf")
