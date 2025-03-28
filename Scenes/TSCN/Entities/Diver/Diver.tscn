@@ -172,9 +172,9 @@ fill_to = Vector2(0.846154, 0.865385)
 motion_mode = 1
 script = ExtResource("1_1l6ma")
 diver_scene = SubResource("Resource_fmqh5")
-uid = SubResource("Resource_175vb")
 camera = NodePath("Camera")
 follower = NodePath("Movement/CivillianFollower")
+uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
@@ -647,6 +647,8 @@ component_container = NodePath("..")
 
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
 [connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Movement" method="_on_general_detection_box_area_entered"]
+[connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Animation" method="_on_general_detection_box_area_entered"]
 [connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Stats" method="_on_general_detection_box_area_entered"]
 [connection signal="area_exited" from="Stats/GeneralDetectionBox" to="Movement" method="_on_general_detection_box_area_exited"]
+[connection signal="area_exited" from="Stats/GeneralDetectionBox" to="Animation" method="_on_general_detection_box_area_exited"]
 [connection signal="area_exited" from="Stats/GeneralDetectionBox" to="Stats" method="_on_general_detection_box_area_exited"]

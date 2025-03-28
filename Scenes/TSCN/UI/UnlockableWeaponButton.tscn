@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://btrwpowo3m5xg"]
+
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="1_nwpfd"]
+[ext_resource type="Script" uid="uid://dsmcsbqgk66h2" path="res://Scripts/UI/Ingame/UnlockableWeaponButton.gd" id="2_d85qo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d85qo"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_d85qo"]
+size = Vector2(100, 100)
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 271.0
+offset_bottom = 210.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d85qo")
+script = ExtResource("2_d85qo")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="UnlockableWeaponButton" type="Button" parent="MarginContainer2"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_nwpfd")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = SubResource("PlaceholderTexture2D_d85qo")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_nwpfd")
+theme_override_font_sizes/font_size = 25
+text = "Weapon name here"
+horizontal_alignment = 1
+vertical_alignment = 1

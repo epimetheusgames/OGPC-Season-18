@@ -64,9 +64,9 @@ func load_node(mission: MissionRoot) -> void:
 	
 	for path in child_properties.keys():
 		var child_variables: Dictionary = child_properties[path]
-		var node_to_set:= add_to.get_node_or_null(path)
+		var node_to_set:= to_add.get_node_or_null(path)
 		if !node_to_set:
-			Global.print_error("Failed to get a child at path " + str(path) + " relative to a node that is being loaded. Will not be able to set properties to this child.")
+			Global.print_error("Failed to get a child at path " + str(path) + " relative to " + to_add.name + ". Will not be able to set properties to this child.")
 			continue
 		for variable: String in child_variables.keys():
 			node_to_set.set(variable, child_variables[variable])

@@ -1,0 +1,105 @@
+[gd_scene load_steps=9 format=3 uid="uid://bp7br2o4yntou"]
+
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="1_fnds5"]
+[ext_resource type="Script" uid="uid://b6wg1chfejpyv" path="res://Scripts/UI/Ingame/UnlockTerminal.gd" id="1_uqbbo"]
+[ext_resource type="Script" uid="uid://dmqhnwjlxysck" path="res://Scripts/ResourceScripts/Misc/WeaponIcon.gd" id="2_1re2d"]
+[ext_resource type="PackedScene" uid="uid://btrwpowo3m5xg" path="res://Scenes/TSCN/UI/UnlockableWeaponButton.tscn" id="3_fm50s"]
+
+[sub_resource type="Resource" id="Resource_fm50s"]
+script = ExtResource("2_1re2d")
+name = "speargun"
+metadata/_custom_type_script = "uid://dmqhnwjlxysck"
+
+[sub_resource type="Resource" id="Resource_rasfv"]
+script = ExtResource("2_1re2d")
+name = "knife"
+metadata/_custom_type_script = "uid://dmqhnwjlxysck"
+
+[sub_resource type="Resource" id="Resource_l73cy"]
+script = ExtResource("2_1re2d")
+name = "pistol"
+metadata/_custom_type_script = "uid://dmqhnwjlxysck"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fm50s"]
+radius = 210.288
+
+[node name="UnlockTerminal" type="Node2D" node_paths=PackedStringArray("buttons", "primary_button", "secondary_button")]
+script = ExtResource("1_uqbbo")
+icons = Array[ExtResource("2_1re2d")]([SubResource("Resource_fm50s"), SubResource("Resource_rasfv"), SubResource("Resource_l73cy")])
+buttons = [NodePath("SubViewportContainer/SubViewport/VBoxContainer/GridContainer/Pistol"), NodePath("SubViewportContainer/SubViewport/VBoxContainer/GridContainer/Knife"), NodePath("SubViewportContainer/SubViewport/VBoxContainer/GridContainer/Speargun")]
+primary_button = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/PrimaryButton")
+secondary_button = NodePath("SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/SecondaryButton")
+
+[node name="UnlockTerminalArea" type="Area2D" parent="." groups=["unlock_terminal_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockTerminalArea"]
+shape = SubResource("CircleShape2D_fm50s")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.581033, 0.581033, 0.581033, 1)
+polygon = PackedVector2Array(-119, 146, 121, 146, 119, -20, 97, -82, 45, -132, -1, -162, -62, -132, -99, -81, -122, -17)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+color = Color(0.303233, 0.303233, 0.303233, 1)
+polygon = PackedVector2Array(-90, 22, 92, 22, 91, -80, -87, -82)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = -85.0
+offset_top = -79.0
+offset_right = 89.0
+offset_bottom = 21.0
+scale = Vector2(0.166667, 0.166667)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1044, 600)
+render_target_update_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewportContainer/SubViewport"]
+offset_right = 1038.0
+offset_bottom = 594.0
+
+[node name="GridContainer" type="GridContainer" parent="SubViewportContainer/SubViewport/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
+[node name="Pistol" parent="SubViewportContainer/SubViewport/VBoxContainer/GridContainer" instance=ExtResource("3_fm50s")]
+layout_mode = 2
+weapon_name = "Pistol"
+
+[node name="Knife" parent="SubViewportContainer/SubViewport/VBoxContainer/GridContainer" instance=ExtResource("3_fm50s")]
+layout_mode = 2
+weapon_name = "Knife"
+
+[node name="Speargun" parent="SubViewportContainer/SubViewport/VBoxContainer/GridContainer" instance=ExtResource("3_fm50s")]
+layout_mode = 2
+weapon_name = "Speargun"
+
+[node name="HSeparator" type="HSeparator" parent="SubViewportContainer/SubViewport/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PrimaryButton" type="Button" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_fnds5")
+theme_override_font_sizes/font_size = 50
+text = "Primary Weapon"
+
+[node name="VSeparator" type="VSeparator" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="SecondaryButton" type="Button" parent="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_fnds5")
+theme_override_font_sizes/font_size = 50
+text = "Second Weapon"
+
+[connection signal="button_up" from="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/PrimaryButton" to="." method="_on_primary_button_button_up"]
+[connection signal="button_up" from="SubViewportContainer/SubViewport/VBoxContainer/HBoxContainer/SecondaryButton" to="." method="_on_secondary_button_button_up"]

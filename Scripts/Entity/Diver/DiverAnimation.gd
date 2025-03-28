@@ -1,45 +1,42 @@
 ## Diver procedural animation system.
 ## It uses the built-in skeleton2d.
-# Owned by: kaitaobenson
-
+## Owned by: kaitaobenson
 class_name DiverAnimation
 extends Node2D
 
-# Diver root.
+## Diver root.
 @onready var diver: Diver = get_parent()
 
-# Diver IK skeleton root.
+## Diver IK skeleton root.
 @onready var skeleton: Skeleton2D = $"Skeleton"
 
-# Diver modification stack. What does this do?
+## Diver modification stack. What does this do?
 @onready var mod_stack: SkeletonModificationStack2D = skeleton.get_modification_stack()
-
 @onready var arm1: Bone2D = $"Skeleton/Torso/UpperArm1/Forearm1"
 @onready var arm2: Bone2D = $"Skeleton/Torso/UpperArm2/Forearm2"
 @onready var leg1: Bone2D = $"Skeleton/Torso/Thigh1/Calf1"
 @onready var leg2: Bone2D = $"Skeleton/Torso/Thigh2/Calf2"
-
 @onready var arm_target1: Node2D = $"ArmIkTarget1"
 @onready var arm_target2: Node2D = $"ArmIkTarget2"
-
 @onready var leg_target1: Node2D = $"LegIkTarget1"
 @onready var leg_target2: Node2D = $"LegIkTarget2"
 
-# Arrow that points in the direction the keyboard is pointing, but it's invisible
-# now.
+## Arrow that points in the direction the keyboard is pointing, but it's invisible
+## now.
 @onready var arrow: Node2D = $"Arrow"
 
 var displayed_nametag: Label
 
-# Leg oscillation
+## Leg oscillation
 var leg_osc_counter1: float = 0
 var leg_osc_counter2: float = 0
 
-# Speed that the legs oscilate (units?)
+## Speed that the legs oscilate (units?)
 var osc_speed: float = 2.0
-
 var hand1_weapon_control: bool = false
 var hand2_weapon_control: bool = false
+
+var in_unlock_terminal_area := false
 
 func _ready() -> void:
 	mod_stack = mod_stack.duplicate(true)
@@ -103,7 +100,7 @@ func _process(delta: float) -> void:
 	else:
 		hand2_weapon_control = false
 
-# Animates one of the legs (leg = 1 or leg = 2) with the delta time.
+## Animates one of the legs (leg = 1 or leg = 2) with the delta time.
 func _animate_leg(leg: int, delta: float) -> Vector2:
 	const DIST_FROM_BODY = -110
 	const MIN_LEG_DIST = -25
@@ -130,14 +127,14 @@ func _animate_leg(leg: int, delta: float) -> Vector2:
 	
 	return diver_pos + leg_offset + body_offset
 
-func _animate_arm(arm: int, delta: float) -> Vector2:
+func _animate_arm(arm: int, _delta: float) -> Vector2:
 	if arm == 1:
 		return Vector2(38, 44)
 	elif arm == 2:
 		return Vector2(-38, 44)
 	return Vector2.ZERO
 
-# Syncs arm and leg IK targets in multiplayer.
+## Syncs arm and leg IK targets in multiplayer.
 func _sync_multiplayer() -> void:
 	if Global.godot_steam_abstraction && Global.is_multiplayer:
 		Global.godot_steam_abstraction.sync_var(arm_target1, "position")
@@ -145,7 +142,7 @@ func _sync_multiplayer() -> void:
 		Global.godot_steam_abstraction.sync_var(leg_target1, "position")
 		Global.godot_steam_abstraction.sync_var(leg_target2, "position")
 
-# Body part setters / getters
+# --- Body part setters / getters ---
 
 func get_head_position() -> Vector2:
 	var head: Bone2D = $"Skeleton/Torso/Head"
@@ -154,7 +151,7 @@ func get_head_position() -> Vector2:
 	var rot: float = head.get_bone_angle() + head.get_global_rotation()
 	return pos + Util.angle_to_vector_radians(rot, head.get_length())
 
-# Get the END of the hand bone.
+## Get the END of the hand bone.
 func get_hand1_position() -> Vector2:
 	var arm1: Bone2D = $"Skeleton/Torso/UpperArm1/Forearm1"
 	
@@ -162,12 +159,12 @@ func get_hand1_position() -> Vector2:
 	var rot: float = arm1.get_bone_angle() + arm1.get_global_rotation()
 	return pos + Util.angle_to_vector_radians(rot, arm1.get_length())
 
-# Sets the target position for the hand.
+## Sets the target position for the hand.
 func set_hand1_position(pos: Vector2) -> void:
 	arm_target1.global_position = pos
 	hand1_weapon_control = true
 
-# Get the END of the hand bone.
+## Get the END of the hand bone.
 func get_hand2_position() -> Vector2:
 	var arm2: Bone2D = $"Skeleton/Torso/UpperArm2/Forearm2"
 	
@@ -175,7 +172,15 @@ func get_hand2_position() -> Vector2:
 	var rot: float = arm2.get_bone_angle() + arm2.get_global_rotation()
 	return pos + Util.angle_to_vector_radians(rot, arm2.get_length())
 
-# Sets the target position for the hand.
+## Sets the target position for the hand.
 func set_hand2_position(pos: Vector2) -> void:
 	arm_target2.global_position = pos
 	hand2_weapon_control = true
+
+func _on_general_detection_box_area_entered(area: Area2D) -> void:
+	if area.is_in_group("unlock_terminal_area"):
+		in_unlock_terminal_area = true
+
+func _on_general_detection_box_area_exited(area: Area2D) -> void:
+	if area.is_in_group("unlock_terminal_area"):
+		in_unlock_terminal_area = false

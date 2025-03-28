@@ -13,24 +13,28 @@ extends Node2D
 	"knife" : knife,
 	"pistol" : pistol,
 }
-
 @onready var diver: Diver = get_parent()
 @onready var reload_bar: TextureProgressBar = $"ReloadBar"
 
 # Loaded weapons in inventory (Optimize for switching weapons)
 var current_weapons: Dictionary
-
 var selected_weapon: Weapon
+var unlocked_weapons: PlayerUnlockedWeapons
 
 func _ready():
-	add_weapon("speargun")
-	add_weapon("pistol")
-	add_weapon("knife")
-	
-	set_weapon("speargun")
+	if !unlocked_weapons:
+		unlocked_weapons = PlayerUnlockedWeapons.new()
+
+	if unlocked_weapons.has_speargun:
+		add_weapon("speargun")
+	if unlocked_weapons.has_pistol:
+		add_weapon("pistol")
+	if unlocked_weapons.has_knife:
+		add_weapon("knife")
+		set_weapon("knife")
 
 var a: int = 0  # I'll remove this later
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for weapon in get_children():
 		if weapon is Weapon && weapon.visible && !weapon == selected_weapon:
 			weapon.visible = false
@@ -41,6 +45,9 @@ func _process(delta: float) -> void:
 		visible = true
 	
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
+		return
+	
+	if diver.diver_movement.is_in_gravity_area:
 		return
 	
 	if Input.is_action_just_pressed("swap"):
@@ -118,7 +125,6 @@ func set_weapon(weapon_name: String) -> void:
 func disable_all() -> void:
 	for weapon: Weapon in current_weapons.values():
 		weapon.enabled = false
-
 
 # Reload bar
 func set_reload_bar(val: float) -> void:

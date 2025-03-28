@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=75 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="12_c52vc"]
 [ext_resource type="Script" uid="uid://bthrd0wdm5ufn" path="res://Scripts/Level/ResearchStation.gd" id="12_jw53c"]
 [ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="12_kali0"]
+[ext_resource type="PackedScene" uid="uid://bp7br2o4yntou" path="res://Scenes/TSCN/UI/UnlockTerminal.tscn" id="13_bdf5b"]
 [ext_resource type="PackedScene" uid="uid://bi6i18nskixdt" path="res://Scenes/TSCN/Entities/NPCS/CivillianFollower.tscn" id="13_gnr5v"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
@@ -208,7 +209,7 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_3svaj"]
+[sub_resource type="Resource" id="Resource_bdf5b"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -502,7 +503,7 @@ uid = SubResource("Resource_vfal8")
 z_index = 5
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_3svaj")
+uid = SubResource("Resource_bdf5b")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -542,6 +543,10 @@ points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 
 [node name="Raycasts" parent="LevelContainer/Items/LightLine" index="1"]
 position = Vector2(-4236, -362)
+
+[node name="UnlockTerminal" parent="LevelContainer/Items" instance=ExtResource("13_bdf5b")]
+z_index = 8
+position = Vector2(-4081, 2642)
 
 [node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node", "black_background", "research_station_area", "gravity_area", "exterior_polygon", "parallax_bubbles")]
 script = ExtResource("12_jw53c")

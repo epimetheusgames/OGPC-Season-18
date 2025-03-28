@@ -20,6 +20,9 @@ func _ready() -> void:
 	if !detection_area.is_in_group("civillian_area"):
 		Global.print_error("Follower at path " + str(get_path()) + " isn't in the right group.", Util.ErrorType.WARNING)
 	
+	if Global.save_load_framework:
+		Global.save_load_framework.save_nodes.connect(_on_save_nodes)
+	
 	detection_area.area_entered.connect(_area_entered)
 	
 	while true:
@@ -30,6 +33,9 @@ func _ready() -> void:
 		
 		navigation.target_position = following.get_follow_position()
 		target_path_position = navigation.get_next_path_position()
+
+func _on_save_nodes() -> void:
+	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self, ["position", "rotation", "velocity", "going_to_building"]))
 
 func _process(delta: float) -> void:
 	if !following:
