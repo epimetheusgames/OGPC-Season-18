@@ -72,17 +72,11 @@ func _is_node_owner() -> bool:
 
 # -- Save Load --
 
-## Catches save nodes signal, calls save_self and adds it to the 
-## node saves list. This is not the function that should be
-## overriden (see save_self).
+## Saves itself.
+## Godot is dumb so inheritors have to make a whole seperate function
+## Believe me I tried.
 func _on_save_nodes() -> void:
-	var node_saver := save_self()
-	Global.current_game_save.node_saves.append(node_saver)
-
-## Overridable by children, should call super and add to that 
-## NodeSaver.
-func save_self() -> NodeSaver:
-	return NodeSaver.create(Global.current_mission_node, self, ["position", "velocity", "rotation"])
+	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self, ["position", "velocity", "rotation"]))
 
 ## DEPRECATED
 func load_self() -> void:

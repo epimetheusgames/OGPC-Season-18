@@ -9,6 +9,7 @@ var parent_path: String
 var node_name: String
 var scene_override_path: FilePathResource
 
+## Static function to create a NodeSaver.
 static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary[NodePath, Array] = {}, scene_override: FilePathResource = null):
 	var ret := NodeSaver.new()
 	ret.save_node(mission, node, properties, _child_properties, scene_override)
@@ -22,17 +23,15 @@ func compare_node_trees(from: Node, to: Node, root: Node = null) -> Array[NodePa
 
 	var ret: Array[NodePath] = []
 	for child in to.get_children():
-		print(child.name)
 		var test_node := from.get_node_or_null(to.get_path_to(child))
 		if test_node:
-			print(to.get_path_to(child))
 			ret += compare_node_trees(test_node, child, root)
 		else:
-			print("else")
 			ret.append(root.get_path_to(child))
 	
 	return ret
 
+## Load the node into the mission after being saved.
 func load_node(mission: MissionRoot) -> void:
 	Global.print_debug("Loading node at path " + str(instantiate_path) + " relative to mission root.")
 	
@@ -80,7 +79,8 @@ func load_node(mission: MissionRoot) -> void:
 	# Ensure node name stays constant, sometimes Godot can put a number after it.
 	to_add.name = node_name
 
-# Child properties is path (String): variable names (Array[String]).
+## Packs a node into this NodeSaver. Static function for this is create
+## Child properties is path (String): variable names (Array[String]).
 func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary[NodePath, Array] = {}, scene_override: FilePathResource = null) -> void:
 	Global.print_debug("DEBUG: Saving node at path " + str(mission.get_path_to(node)) + " relative to mission root.")
 
@@ -108,6 +108,14 @@ func save_node(mission: MissionRoot, node: Node, properties: Array[String], chil
 			child_property_list[variable] = node_to_use.get(variable)
 		child_properties[str(path)] = child_property_list
 
+func add_properties(node: Node, properties: Array[String]) -> void:
+	for property in properties:
+		if node.has_method("get") and node.has_method(property):
+			variable_properties[property] = node.get(property)
+		else:
+			Global.print_error("Node does not have property " + property + " to save.")
+
+## Set all owners to this node for packing.
 func _recursively_set_owners(set_owner_to: Node, recurse_on: Node) -> void:
 	for child in recurse_on.get_children():
 		child.owner = set_owner_to

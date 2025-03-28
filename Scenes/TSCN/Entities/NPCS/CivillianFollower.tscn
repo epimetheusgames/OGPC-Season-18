@@ -16,7 +16,7 @@ script = ExtResource("1_o7vjs")
 navigation = NodePath("Nav")
 detection_area = NodePath("CivillianArea")
 swim_speed = 1.8
-follow_distance = 200.0
+follow_distance = 300.0
 metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
