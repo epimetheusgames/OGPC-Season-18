@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp8fcfs56tdru"
-path="res://.godot/imported/SemiAutoPistolFlip.png-4717139cc3ed9ee8a5b62989753fc65c.ctex"
+uid="uid://bfoc8j7in635n"
+path="res://.godot/imported/FlashLightPlaceholder.png-8768dcf31df5378411ec11e41928ad65.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Player/SemiAutoPistolFlip.png"
-dest_files=["res://.godot/imported/SemiAutoPistolFlip.png-4717139cc3ed9ee8a5b62989753fc65c.ctex"]
+source_file="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png"
+dest_files=["res://.godot/imported/FlashLightPlaceholder.png-8768dcf31df5378411ec11e41928ad65.ctex"]
 
 [params]
 

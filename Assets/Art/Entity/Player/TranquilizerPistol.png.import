@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5rb3ffgkimtn"
-path="res://.godot/imported/TranquilizerPistol.png-a06c3b0dfeb5cfbf86ab479c2d1fc084.ctex"
+path="res://.godot/imported/TranquilizerPistol.png-71ad7763cfc7bddf6eda772ba2529d0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Player/TranquilizerPistol.png"
-dest_files=["res://.godot/imported/TranquilizerPistol.png-a06c3b0dfeb5cfbf86ab479c2d1fc084.ctex"]
+source_file="res://Assets/Art/Entity/Player/TranquilizerPistol.png"
+dest_files=["res://.godot/imported/TranquilizerPistol.png-71ad7763cfc7bddf6eda772ba2529d0f.ctex"]
 
 [params]
 

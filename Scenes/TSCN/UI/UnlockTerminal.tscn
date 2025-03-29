@@ -49,6 +49,7 @@ offset_top = -79.0
 offset_right = 89.0
 offset_bottom = 21.0
 scale = Vector2(0.166667, 0.166667)
+mouse_target = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
