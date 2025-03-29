@@ -9,6 +9,7 @@ extends Node2D
 @export var exterior_polygon: Polygon2D
 @export var parallax_bubbles: ParallaxBackground
 @export var follower: PackedScene
+@export var unlock_terminal: UnlockTerminal
 
 var player_in_area := false
 

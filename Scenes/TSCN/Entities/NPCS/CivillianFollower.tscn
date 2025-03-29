@@ -20,7 +20,6 @@ follow_distance = 300.0
 metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5cylf")

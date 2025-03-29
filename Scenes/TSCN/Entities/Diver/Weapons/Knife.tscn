@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://os6ytsadrm1v"]
 
 [ext_resource type="Script" uid="uid://bqn8vxsjcu0mn" path="res://Scripts/Entity/Diver/Combat/BluntTipKnife/BluntTipKnife.gd" id="1_tafim"]
-[ext_resource type="Texture2D" uid="uid://6kfea377ayda" path="res://Assets/Art/Player/Knife.png" id="2_7cqu0"]
+[ext_resource type="Texture2D" uid="uid://6kfea377ayda" path="res://Assets/Art/Entity/Player/Knife.png" id="2_7cqu0"]
 [ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="3_y24ks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7cwcf"]

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cqnwbqciaog6v" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
 [ext_resource type="Script" uid="uid://1laqql4gx1r2" path="res://Scripts/Entity/Diver/DiverInventory.gd" id="3_r5rx4"]
 [ext_resource type="Script" uid="uid://cdrx7funwnj4w" path="res://Scripts/ResourceScripts/Misc/InventoryItem.gd" id="4_7u6dt"]
-[ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Player/PlayerSkin.png" id="4_do014"]
+[ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Entity/Player/PlayerSkin.png" id="4_do014"]
 [ext_resource type="Script" uid="uid://dtbbn6le46dor" path="res://Scripts/Public/InventoryPublic.gd" id="4_lqvql"]
 [ext_resource type="Texture2D" uid="uid://kbno8w3pbkse" path="res://Assets/Art/Icons/LightLineIcon.png" id="5_v3mw5"]
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="6_3bvk2"]
@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://cfcc8wf5m0kgj" path="res://Scripts/Entity/NPC/ActualNPCs/PlayerFollowerDummy.gd" id="9_soyuq"]
 [ext_resource type="Script" uid="uid://dau0csslipmpi" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
-[ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Player/FlashLightPlaceholder.png" id="10_qg316"]
+[ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
@@ -260,7 +260,7 @@ offset = Vector2(-88, -55)
 texture = ExtResource("4_do014")
 skeleton = NodePath("../../Skeleton")
 polygon = PackedVector2Array(79.3924, 31.5152, 79.2307, 80.2438, 96.4576, 80.5269, 96.1745, 30.7873)
-uv = PackedVector2Array(79.3924, 31.5152, 79.2307, 80.2438, 96.4576, 80.5269, 96.1745, 30.7873)
+uv = PackedVector2Array(79.3925, 31.5152, 79.2307, 80.2438, 96.4576, 80.5269, 96.1745, 30.7873)
 polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 
@@ -586,6 +586,7 @@ knife = ExtResource("9_hstvg")
 pistol = ExtResource("10_oh1is")
 
 [node name="ReloadBar" parent="Combat" instance=ExtResource("16_o1yih")]
+visible = false
 offset_left = -13.0
 offset_top = -126.0
 offset_right = 83.0

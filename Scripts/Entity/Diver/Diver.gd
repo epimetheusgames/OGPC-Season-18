@@ -90,7 +90,7 @@ func _physics_process(_delta: float):
 	if get_state() == Util.DiverState.IN_SUBMARINE || get_state() == Util.DiverState.DRIVING_SUBMARINE:
 		z_index = 21
 	else:
-		z_index = 0
+		z_index = 20
 	
 	if camera && parallax:
 		parallax.scroll_base_offset.y += 100
