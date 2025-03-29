@@ -43,12 +43,13 @@ func _ready() -> void:
 	$ModuleArea.area_exited.connect(_area_mouse_exited)
 
 func _process(delta: float) -> void:
-	if Global.player.get_state() == Util.DiverState.IN_SUBMARINE:
-		for child in $NavigationObstacle.get_children():
-			child.disabled = true
-	else:
-		for child in $NavigationObstacle.get_children():
-			child.disabled = false
+	if !is_editor_peice:
+		if Global.player.get_state() == Util.DiverState.IN_SUBMARINE:
+			for child in $NavigationObstacle.get_children():
+				child.disabled = true
+		else:
+			for child in $NavigationObstacle.get_children():
+				child.disabled = false
 	
 	var editor: SubmarineEditor
 	if is_editor_peice:
@@ -65,6 +66,9 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_text_backspace"):
 			editor.modules.remove_at(editor.modules.find(self))
 			editor.module_grid[grid_position.y][grid_position.x] = null
+			if self is SubmarineControlModule:
+				editor.has_control_module = false
+				editor.control_module_position = Vector2()
 			queue_free()
 	else:
 		modulate = Color(1, 1, 1)

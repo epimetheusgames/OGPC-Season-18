@@ -14,9 +14,9 @@ func _physics_process(delta: float) -> void:
 			Global.player.set_state(Util.DiverState.IN_SUBMARINE)
 
 func _on_interaction_area_area_entered(area: Area2D) -> void:
-	if area.get_parent().get_parent() is Diver:
+	if area.is_in_group("player_area"):
 		in_interaction_area = true
 
 func _on_interaction_area_area_exited(area: Area2D) -> void:
-	if area.get_parent().get_parent() is Diver:
+	if area.is_in_group("player_area"):
 		in_interaction_area = false

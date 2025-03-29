@@ -16,6 +16,9 @@ extends Control
 @export var grid_rows : int = 4
 @export var grid_size : int = 400
 
+var has_control_module := false
+var control_module_position : Vector2
+
 var modules: Array[SubmarineModule] = []
 var adding_module := false
 var module_adding: SubmarineModule
@@ -38,32 +41,30 @@ func add_module(new_module: SubmarineModule):
 	modules.append(new_module)
 
 func _on_control_module_button_up() -> void:
-	if !adding_module:
+	if !adding_module && !has_control_module:
 		add_module(control_module.instantiate())
 
 func _on_corner_passage_module_button_up() -> void:
-	if !adding_module:
+	if !adding_module && has_control_module:
 		add_module(submarine_corner_passage_module.instantiate())
 
 func _on_passage_module_button_up() -> void:
-	if !adding_module:
+	if !adding_module && has_control_module:
 		add_module(submarine_passage_module.instantiate())
 
 func _on_end_passage_module_button_up() -> void:
-	if !adding_module:
+	if !adding_module && has_control_module:
 		add_module(submarine_end_module.instantiate())
 
 func _on_door_module_button_up() -> void:
-	if !adding_module:
+	if !adding_module && has_control_module:
 		add_module(submarine_door_module.instantiate())
 
 func _on_weapons_module_button_up() -> void:
-	if !adding_module:
+	if !adding_module && has_control_module:
 		add_module(submarine_weapons_module.instantiate())
 
 func _process(delta: float) -> void:
-	for i in modules:
-		print(i.global_position)
 	if adding_module:
 		var valid_point: AttachmentPoint = null
 		var our_valid_point: AttachmentPoint = null
@@ -82,10 +83,10 @@ func _process(delta: float) -> void:
 			# TODO this should be where points to be attached should be marked, or at least code copied from here
 			if !is_cell_valid(cell_position):
 				grid_space_is_valid = false
-				print("Cell isn't valid")
+				Global.print_error("Cell isn't valid.")
 			elif module_grid[cell_position.y][cell_position.x] != null:
 				grid_space_is_valid = false
-				print("Grid space is in use")
+				Global.print_error("Grid space is occupied.")
 			else:
 				var directions : Array[Vector2] = [
 					Vector2(1,0),
@@ -95,7 +96,6 @@ func _process(delta: float) -> void:
 				]
 				
 				var module_will_attach : bool = false
-				print("new mod")
 				for point in module_adding.attachment_points:
 					var adjacent_cell_pos : Vector2i = (cell_position + point.direction).round()
 					if is_cell_valid(adjacent_cell_pos):
@@ -118,18 +118,17 @@ func _process(delta: float) -> void:
 							
 							if !available_point:
 								grid_space_is_valid = false
-								print("Attachment point doesn't have a attachment point in the adjacent module to attach to")
+								Global.print_error("Attachment point doesn't have an attachment point in its adjacent module to attach to")
 								break
 						
 					else:
 						grid_space_is_valid = false
-						print("Attachment point points out of bounds")
+						Global.print_error("Attachment point out of bounds")
 						break
 				
-				print(module_will_attach)
 				if !module_will_attach && modules.size() != 1:
 					grid_space_is_valid = false
-					print("Module can't attach to anything in the position")
+					Global.print_error("Module can't attach to anything in its position")
 				
 				# Iterates through all the directions that do not have an attachment point
 				if modules.size() != 1:
@@ -144,12 +143,15 @@ func _process(delta: float) -> void:
 								for point in adjacent_cell.attachment_points:
 									if point.direction.is_equal_approx(-direction):
 										grid_space_is_valid = false
-										print("Adjacent cell has attachment point that wouldn't be attached")
+										Global.print_error("Adjacent cell has attachment point that wouldn't be attached")
 										break
 						else:
 							continue
 			
 			if grid_space_is_valid:
+				if module_adding is SubmarineControlModule:
+					has_control_module = true
+					control_module_position = module_adding.position
 				if modules.size() == 1:
 					module_grid[cell_position.y][cell_position.x] = module_adding
 					module_adding.grid_position = Vector2i(cell_position.x, cell_position.y)
@@ -212,7 +214,7 @@ func do_submarine_sanity_checks() -> bool:
 
 func _on_save_button_button_up() -> void:
 	if !do_submarine_sanity_checks():
-		print("WARNING: Invalid submarine.")
+		Global.print_error("Invalid submarine.")
 		return
 		
 	$SaveDialog.visible = true
@@ -222,6 +224,8 @@ func _on_load_button_button_up() -> void:
 
 func _on_save_dialog_file_selected(path: String) -> void:
 	var sub_resource = CustomSubmarineResource.new()
+	var has_control_module := false
+	sub_resource.control_module_position = control_module_position
 	for module in modules:
 		sub_resource.modules.append(module.create_module_resource())
 	var file = FileAccess.open(path, FileAccess.WRITE)
@@ -232,31 +236,30 @@ func _on_save_dialog_file_selected(path: String) -> void:
 func _on_load_dialog_file_selected(path: String) -> void:
 	var sub_resource: CustomSubmarineResource = ResourceLoader.load(path)
 	
+	has_control_module = true
+	control_module_position = sub_resource.control_module_position
+	
 	# Some time in the future make it load the grid size parameters and shi
 	for i in grid_rows:
 		module_grid.append([])
 		for j in grid_columns:
 			module_grid[i].append(null)
-	print(module_grid)
 	
 	modules = []
 	
-	# Pass 1, load module positions.
 	for module in sub_resource.modules:
 		var new_module: SubmarineModule = load(module.module_scene.file).instantiate()
 		new_module.position = module.position
 		new_module.grid_position = module.grid_position
 		new_module.render_attachment_points = true
-		
-		new_module.rotate_module(module.rotation)
-		
-		for attachment_point in new_module.attachment_points:
-			attachment_point.direction
-			attachment_point.is_attached = true
+		new_module.is_editor_peice = true
 		
 		origin.add_child(new_module)
+		for i in range(len(module.attachment_points)):
+			new_module.attachment_points[i].is_attached = true
+		new_module.rotate_module(module.rotation)
+		
 		modules.append(new_module)
-		print(new_module.position)
 		module_grid[module.grid_position.y][module.grid_position.x] = new_module
 
 func find_closest_grid_spot(pos : Vector2) -> Vector2:
