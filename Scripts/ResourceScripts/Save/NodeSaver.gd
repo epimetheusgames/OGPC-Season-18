@@ -48,7 +48,6 @@ func load_node(mission: MissionRoot) -> void:
 	var replace := mission.get_node_or_null(instantiate_path)
 	if replace:
 		var differing_nodes: Array[NodePath] = compare_node_trees(to_add, replace)
-		print(differing_nodes)
 		for path in differing_nodes:
 			var node := replace.get_node(path)
 			var node_parent_path := replace.get_path_to(node.get_parent())

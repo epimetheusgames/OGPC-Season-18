@@ -63,8 +63,6 @@ func _process(_delta: float) -> void:
 			set_weapon("knife")
 			Global.godot_steam_abstraction.run_remote_function(self, "set_weapon", ["knife"])
 			a = 0
-		
-		print(selected_weapon.name)
 	
 	if !selected_weapon:
 		return

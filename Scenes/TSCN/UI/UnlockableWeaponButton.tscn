@@ -23,7 +23,6 @@ theme_override_constants/margin_bottom = 10
 
 [node name="UnlockableWeaponButton" type="Button" parent="MarginContainer2"]
 layout_mode = 2
-mouse_default_cursor_shape = 2
 theme = ExtResource("1_nwpfd")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer2"]
