@@ -25,7 +25,7 @@
 [ext_resource type="Script" uid="uid://d4bbjhr8uciri" path="res://Scripts/Skeleton/Nodes/PerformancePrompt.gd" id="22_3oc7k"]
 [ext_resource type="Script" uid="uid://k5m6873n63pf" path="res://Scripts/UI/DialogHandler.gd" id="23_1chc7"]
 [ext_resource type="PackedScene" uid="uid://bp2ach8thhbsd" path="res://Scenes/TSCN/UI/FakeButton.tscn" id="24_wosnj"]
-[ext_resource type="Script" uid="uid://d0u6amg8og288" path="res://Scripts/UI/UiGenerator.gd" id="25_w4o83"]
+[ext_resource type="Script" uid="uid://vgwo167iebah" path="res://Scripts/UI/UiGenerator.gd" id="25_w4o83"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_v8psd"]
 
@@ -135,7 +135,7 @@ offset_bottom = 1087.0
 
 [node name="BoidsGroup" type="Node" parent="UI" node_paths=PackedStringArray("boids_scene")]
 script = ExtResource("10_n133v")
-num_boids = 80
+num_boids = 2100
 spawn_position_node_path = NodePath("../Node2D")
 boids_scene = NodePath("../Boid")
 spawn_variation = 300.0
@@ -348,7 +348,7 @@ process_material = SubResource("ParticleProcessMaterial_gsc64")
 [node name="Boid" parent="UI" instance=ExtResource("17_g72ff")]
 modulate = Color(0.704, 0.771, 0.885, 0.536)
 z_index = -1
-position = Vector2(617, 382)
+position = Vector2(-1103, 414)
 uid = SubResource("Resource_wiowl")
 
 [node name="WallRaycast" parent="UI/Boid" index="1"]
@@ -356,23 +356,26 @@ target_position = Vector2(0, 200)
 
 [node name="BoidComponent" parent="UI/Boid" index="2"]
 view_dist = 200.0
-protected_dist = 30.0
-avoid_factor = 0.7
-matching_factor = 0.03
+protected_dist = 20.0
+avoid_factor = 1.0
 turn_factor = 3.5
 max_speed = 4.0
 min_speed = 4.0
 boid_colors = Array[Color]([Color(0.92, 1, 1, 1), Color(1, 0.89, 1, 1), Color(0.69984, 0.72, 0.6984, 1)])
 
 [node name="Node2D" type="Node2D" parent="UI"]
-position = Vector2(272, 384)
+position = Vector2(-1104, 400)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="UI"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/StaticBody2D"]
-position = Vector2(-400, -216)
-scale = Vector2(1.4, 1.4)
-polygon = PackedVector2Array(88, 1035, 214, 1069, 1582, 1057, 1739, 1030, 1833, 986, 1877, 886, 1915, 722, 1911.32, 560.154, 1691.43, 507.857, 1908.94, 455.29, 1905, 282, 1878, 157, 1828, 76, 1731, 49, 1606, 20, 213, 12, 122, 18, 54, 52, 12, 111, 34.2769, 427.547, 258.571, 472.143, 42.4624, 533.945, 85, 1030, 31, 903, -71, -40, 2001, -23, 1980, 1192, 51, 1137)
+position = Vector2(-1086, -586)
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(88, 1035, 214, 1069, 1582, 1057, 1739, 1030, 1833, 986, 1877, 886, 1915, 722, 1911.32, 560.154, 1688.5, 502.5, 1908.94, 455.29, 1905, 282, 1878, 157, 1828, 76, 1731, 49, 1606, 20, 213, 12, 122, 18, 54, 52, 12, 111, 42.1429, 310.714, -663.571, 222.857, -692.143, 597.143, -362.143, 594.286, 40.7143, 642.143, 85, 1030, 31, 903, -983.571, 933.571, -1129.29, 250, -71, -40, 2001, -23, 1980, 1192, 51, 1137)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="UI/StaticBody2D"]
+position = Vector2(-242, -58)
+polygon = PackedVector2Array(-47, 440, -206, 192, -605, 449, -139, 689)
 
 [node name="Game" type="Node" parent="."]
 
