@@ -34,7 +34,10 @@ func _ready_boid() -> void:
 	_ready_base_component()
 	
 	var rng = RandomNumberGenerator.new()
+	var multi := rng.randf_range(1, 2)
 	component_container_node.scale *= rng.randf_range(0.8, 1.3)
+	min_speed *= multi
+	matching_factor *= multi
 	
 	if !component_container:
 		return

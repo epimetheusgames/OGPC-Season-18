@@ -301,6 +301,7 @@ environment = SubResource("Environment_5ulyy")
 [node name="Environment" type="Node2D" parent="LevelContainer"]
 
 [node name="ColorRect" type="ColorRect" parent="LevelContainer/Environment"]
+z_index = -10
 material = ExtResource("2_3svaj")
 offset_left = 29595.0
 offset_top = 30.0
@@ -515,7 +516,7 @@ min_point_dist = 300.0
 points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 
 [node name="Raycasts" parent="LevelContainer/Items/LightLine" index="1"]
-position = Vector2(-3578, 731)
+position = Vector2(-4236, -362)
 
 [node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node", "black_background", "research_station_area", "gravity_area", "exterior_polygon", "parallax_bubbles", "unlock_terminal")]
 script = ExtResource("12_jw53c")

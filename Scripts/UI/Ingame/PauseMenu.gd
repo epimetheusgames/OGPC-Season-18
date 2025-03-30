@@ -7,11 +7,15 @@ extends Control
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("esc"):
-		if vignette_shader:
-			vignette_shader.material.set_shader_parameter("vignette_strength", 1.5)
-		ingame_ui.visible = false
-		get_tree().paused = true
-		visible = true
+		if !visible:
+			if vignette_shader:
+				vignette_shader.material.set_shader_parameter("vignette_strength", 1.5)
+			ingame_ui.visible = false
+			get_parent().visible = true
+			get_tree().paused = true
+			visible = true
+		else:
+			_on_resume_button_button_up()
 
 func _on_quit_button_button_up() -> void:
 	$AreYouSurePanel.visible = true

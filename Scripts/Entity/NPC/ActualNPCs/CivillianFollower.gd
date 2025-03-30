@@ -14,7 +14,7 @@ var going_to_building := false
 
 func _ready() -> void:
 	if !detection_area:
-		Global.print_error("Follower at path " + str(get_path()) + " has no detection_area.")
+		Global.print_error("Follower at path " + str(get_path()) + " has no detection_area. Searching for one.")
 		return
 	
 	if !detection_area.is_in_group("civillian_area"):
@@ -35,10 +35,12 @@ func _ready() -> void:
 		target_path_position = navigation.get_next_path_position()
 
 func _on_save_nodes() -> void:
-	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self, ["position", "rotation", "velocity", "going_to_building"]))
+	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self, ["position", "rotation", "velocity"]))
 
 func _process(delta: float) -> void:
 	if !following:
+		if going_to_building:
+			going_to_building = false
 		return
 		
 	if global_position.distance_squared_to(navigation.target_position) < 5 ^ 2:

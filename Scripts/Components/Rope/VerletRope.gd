@@ -6,6 +6,7 @@ class_name VerletRope
 extends BaseRope
 
 const TIMESTEP: float = 0.1
+const BREAK_DISTANCE := 200.0
 
 @onready var rng := RandomNumberGenerator.new()
 
@@ -95,6 +96,9 @@ func apply_constraints():
 		
 		var direction: Vector2 = node_2.position - node_1.position
 		var distance: float = direction.length()
+
+		if distance > BREAK_DISTANCE:
+			rope_drawer.visible = false
 		
 		if distance == 0:
 			continue
