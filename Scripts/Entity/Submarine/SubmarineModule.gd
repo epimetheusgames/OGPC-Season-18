@@ -15,6 +15,7 @@ func _ready() -> void:
 	navigation_obstacle.name = "NavigationObstacle"
 	navigation_obstacle.collision_layer = 10000
 	navigation_obstacle.collision_mask = 0
+	navigation_obstacle.add_to_group("obstacles")
 	add_child(navigation_obstacle, true)
 	
 	if get_node_or_null("AttachmentPoints"):

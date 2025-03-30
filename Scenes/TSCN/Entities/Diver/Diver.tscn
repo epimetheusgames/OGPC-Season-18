@@ -177,10 +177,12 @@ follower = NodePath("Movement/CivillianFollower")
 uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_ghsq1")
 
 [node name="LargeBody" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 13)
 shape = SubResource("CapsuleShape2D_auddj")
 disabled = true
@@ -567,6 +569,7 @@ script = ExtResource("7_3b7lw")
 hurt_by_enemy = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/Hurtbox"]
+visible = false
 rotation = -0.000201209
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
@@ -575,6 +578,7 @@ debug_color = Color(0, 0.649449, 0.143183, 0.42)
 rotation = -0.000201209
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/GeneralDetectionBox"]
+visible = false
 rotation = -0.000201209
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
@@ -620,6 +624,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light/FlashLight/LightArea"]
+visible = false
 polygon = PackedVector2Array(1, -2, 361, -643, 126, -681, -93, -682, -315, -617)
 
 [node name="BodyLight" type="PointLight2D" parent="Light"]
@@ -634,6 +639,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisualDetectionArea"]
+visible = false
 shape = SubResource("CapsuleShape2D_wi5t0")
 
 [node name="BuoyancyComponent" type="Node" parent="." node_paths=PackedStringArray("center_of_mass")]

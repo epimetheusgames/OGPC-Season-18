@@ -48,7 +48,7 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="MarginContainer2/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_nwpfd")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 40
 text = "Weapon name here"
 horizontal_alignment = 1
 vertical_alignment = 1

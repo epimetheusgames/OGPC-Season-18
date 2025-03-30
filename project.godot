@@ -65,6 +65,7 @@ civillian_area=""
 player_area=""
 building_area=""
 unlock_terminal_area=""
+obstacles=""
 
 [input]
 

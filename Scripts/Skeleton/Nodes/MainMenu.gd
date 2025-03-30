@@ -19,12 +19,34 @@ func _lobby_list_updated(_lobbies: Array):
 		$Members.text = lobby_text
 
 func _on_quit_button_button_up() -> void:
-	get_tree().quit()
+	if $StartButton.visible:
+		get_tree().quit()
+	elif $MultiplayerHostGameButton.visible:
+		$MultiplayerHostGameButton.visible = false
+		$LobbyNameInput.visible = false
+		$MultiplayerHostButton.visible = true
+		$MultiplayerJoinButton.visible = true
+	elif $MultiplayerJoinGameButton.visible:
+		$MultiplayerJoinGameButton.visible = false
+		$LobbyNameInput.visible = false
+		$MultiplayerHostButton.visible = true
+		$MultiplayerJoinButton.visible = true
+	elif $MultiplayerHostButton.visible:
+		$MultiplayerHostButton.visible = false
+		$MultiplayerJoinButton.visible = false
+		$MultiplayerButton.visible = true
+		$SingleplayerButton.visible = true
+	elif $MultiplayerButton.visible:
+		$MultiplayerButton.visible = false
+		$SingleplayerButton.visible = false
+		$StartButton.visible = true
+		$QuitButton.text = "Quit"
 
 func _on_start_button_button_up() -> void:
 	$MultiplayerButton.visible = true
 	$SingleplayerButton.visible = true
 	$StartButton.visible = false
+	$QuitButton.text = "Back"
 
 func _on_singleplayer_button_button_up() -> void:
 	for child in $"../BoidsGroup".get_children():
