@@ -40,40 +40,48 @@ func add_module(new_module: SubmarineModule):
 	module_adding = new_module
 	modules.append(new_module)
 
+func module_adding_checks(require_control_module := true) -> bool:
+	if !has_control_module && require_control_module:
+		return false
+
+	if adding_module:
+		module_adding.queue_free()
+		module_adding = null
+		adding_module = false
+	
+	return true
+
 func _on_control_module_button_up() -> void:
-	if !adding_module && !has_control_module:
+	if module_adding_checks(false):
 		add_module(control_module.instantiate())
 
 func _on_corner_passage_module_button_up() -> void:
-	if !adding_module && has_control_module:
+	if module_adding_checks():
 		add_module(submarine_corner_passage_module.instantiate())
 
 func _on_passage_module_button_up() -> void:
-	if !adding_module && has_control_module:
+	if module_adding_checks():
 		add_module(submarine_passage_module.instantiate())
 
 func _on_end_passage_module_button_up() -> void:
-	if !adding_module && has_control_module:
+	if module_adding_checks():
 		add_module(submarine_end_module.instantiate())
 
 func _on_door_module_button_up() -> void:
-	if !adding_module && has_control_module:
+	if module_adding_checks():
 		add_module(submarine_door_module.instantiate())
 
 func _on_weapons_module_button_up() -> void:
-	if !adding_module && has_control_module:
+	if module_adding_checks():
 		add_module(submarine_weapons_module.instantiate())
 
 func _process(delta: float) -> void:
 	if adding_module:
 		var valid_point: AttachmentPoint = null
 		var our_valid_point: AttachmentPoint = null
-		#
 		
 		module_adding.global_position = find_closest_grid_spot(module_adding.get_global_mouse_position())
 		var cell_position = (module_adding.global_position - Vector2(.5 * grid_size, .5 * grid_size)) / grid_size
-		
-		#print(module_grid)
 		
 		if Input.is_action_just_pressed("mouse_left_click"):
 			var attachment_point_connections : Dictionary = {}
@@ -171,6 +179,15 @@ func _process(delta: float) -> void:
 			
 		if Input.is_action_just_pressed("rotate_peice"):
 			module_adding.rotate_module(PI / 2)
+
+		if Input.is_action_just_pressed("mouse_right_click"):
+			if module_adding is SubmarineControlModule:
+				has_control_module = false
+
+			module_adding.queue_free()
+			module_adding = null
+			adding_module = false
+
 	if Input.is_action_just_pressed("mwUP"):
 		$SplitContainer/SubmarineView/ViewContainer/Viewport/Camera2D.zoom *= 1.1
 	if Input.is_action_just_pressed("mwDOWN"):
