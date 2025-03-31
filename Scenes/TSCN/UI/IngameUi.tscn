@@ -84,8 +84,7 @@ layout_mode = 2
 [node name="HealthProgress" type="TextureProgressBar" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-max_value = 15.0
-value = 15.0
+value = 100.0
 texture_under = SubResource("GradientTexture2D_uj8mc")
 texture_progress = SubResource("GradientTexture2D_tl1p2")
 

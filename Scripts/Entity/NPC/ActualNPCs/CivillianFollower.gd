@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 		building.current_occupants += 1
 		queue_free()
 	
-	velocity = (target_path_position - global_position).normalized() * swim_speed * delta * 60
+	velocity = (target_path_position - global_position).normalized() * swim_speed
 
 	move_and_slide()
 

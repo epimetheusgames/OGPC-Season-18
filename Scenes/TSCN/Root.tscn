@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=34 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -25,7 +25,7 @@
 [ext_resource type="Script" uid="uid://d4bbjhr8uciri" path="res://Scripts/Skeleton/Nodes/PerformancePrompt.gd" id="22_3oc7k"]
 [ext_resource type="Script" uid="uid://k5m6873n63pf" path="res://Scripts/UI/DialogHandler.gd" id="23_1chc7"]
 [ext_resource type="PackedScene" uid="uid://bp2ach8thhbsd" path="res://Scenes/TSCN/UI/FakeButton.tscn" id="24_wosnj"]
-[ext_resource type="Script" uid="uid://vgwo167iebah" path="res://Scripts/UI/UIGenerator.gd" id="25_w4o83"]
+[ext_resource type="Script" uid="uid://d0u6amg8og288" path="res://Scripts/UI/UiGenerator.gd" id="25_w4o83"]
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_v8psd"]
 
@@ -42,38 +42,6 @@ file = "res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"
 [sub_resource type="Resource" id="Resource_1tmkv"]
 script = ExtResource("9_y8obd")
 missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_py4au")])
-
-[sub_resource type="Gradient" id="Gradient_tetp1"]
-colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_g72pb"]
-gradient = SubResource("Gradient_tetp1")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-
-[sub_resource type="Curve" id="Curve_edu0q"]
-_data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_t3p8f"]
-curve = SubResource("Curve_edu0q")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gsc64"]
-particle_flag_disable_z = true
-particle_flag_damping_as_friction = true
-emission_shape = 3
-emission_box_extents = Vector3(960, 540, 1)
-gravity = Vector3(0, -98, 0)
-damping_min = 1.0
-damping_max = 1.0
-scale_min = 0.3
-scale_max = 0.8
-scale_curve = SubResource("CurveTexture_t3p8f")
-collision_mode = 2
-collision_use_scale = true
 
 [sub_resource type="Resource" id="Resource_wiowl"]
 resource_local_to_scene = true
@@ -335,15 +303,6 @@ text = NodePath("RichTextLabel")
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/MainMenu/MinimalChat"]
 layout_mode = 2
 bbcode_enabled = true
-
-[node name="WaterParticles" type="GPUParticles2D" parent="UI"]
-position = Vector2(960, 540)
-texture = SubResource("GradientTexture2D_g72pb")
-lifetime = 5.0
-visibility_rect = Rect2(-960, -540, 1920, 1080)
-process_material = SubResource("ParticleProcessMaterial_gsc64")
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="UI"]
 
 [node name="Boid" parent="UI" instance=ExtResource("17_g72ff")]
 modulate = Color(0.704, 0.771, 0.885, 0.536)

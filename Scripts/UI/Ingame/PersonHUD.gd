@@ -14,7 +14,6 @@ func _ready() -> void:
 		Global.save_load_framework.save_nodes.connect(_saving_game)
 
 func _process(_delta: float) -> void:
-	health_progress.max_value = Global.player.get_diver_max_health()
 	health_progress.value = Global.player.get_diver_health()
 	oxygen_progress.value = Global.player.get_oxygen()
 

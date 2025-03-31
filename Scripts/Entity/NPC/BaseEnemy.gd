@@ -201,7 +201,9 @@ func _die() -> void:
 
 # Overridable by children.
 func attack() -> void:
-	pass
+	attackbox.is_attacking = true
+	await get_tree().create_timer(0.1).timeout
+	attackbox.is_attacking = false
 
 ## Generates circular view polygon based on arguments.
 func _generate_view_polygon(angle: float, radius: float) -> PackedVector2Array:

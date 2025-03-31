@@ -569,7 +569,6 @@ script = ExtResource("7_3b7lw")
 hurt_by_enemy = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/Hurtbox"]
-visible = false
 rotation = -0.000201209
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
