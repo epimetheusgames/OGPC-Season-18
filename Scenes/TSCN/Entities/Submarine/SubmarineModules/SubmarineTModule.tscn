@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://ljbdcb8qetwy"]
+
+[ext_resource type="Script" uid="uid://bmskoe21i84vc" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_4f4gm"]
+[ext_resource type="Script" uid="uid://cywews2kwsymx" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="2_hrry7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egheg"]
+size = Vector2(400, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prr85"]
+size = Vector2(120, 40)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_irrhp"]
+polygon = PackedVector2Array(-200, 200, 200, 200, 200, 160, -200, 160)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uay8t"]
+polygon = PackedVector2Array(-200, -200, -80, -200, -80, -160, -200, -160)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s25th"]
+polygon = PackedVector2Array(200, -200, 80, -200, 80, -160, 200, -160)
+
+[node name="SubmarineTModule" type="Node2D"]
+script = ExtResource("1_4f4gm")
+metadata/_custom_type_script = "uid://bmskoe21i84vc"
+
+[node name="ModuleArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModuleArea"]
+shape = SubResource("RectangleShape2D_egheg")
+
+[node name="AttachmentPoints" type="Node2D" parent="."]
+
+[node name="Up" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(0, -200)
+script = ExtResource("2_hrry7")
+direction = Vector2(0, -1)
+
+[node name="Right" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(200, 0)
+script = ExtResource("2_hrry7")
+direction = Vector2(1, 0)
+
+[node name="AttachmentPoint" type="Node2D" parent="AttachmentPoints"]
+position = Vector2(-200, 0)
+script = ExtResource("2_hrry7")
+direction = Vector2(-1, 0)
+metadata/_custom_type_script = "uid://cywews2kwsymx"
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="Floor" type="CollisionShape2D" parent="Collision"]
+position = Vector2(0, 180)
+shape = SubResource("RectangleShape2D_prr85")
+
+[node name="RightCiel" type="CollisionShape2D" parent="Collision"]
+position = Vector2(140, -180)
+shape = SubResource("RectangleShape2D_prr85")
+
+[node name="LeftCiel" type="CollisionShape2D" parent="Collision"]
+position = Vector2(-140, -180)
+shape = SubResource("RectangleShape2D_prr85")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = -200.0
+offset_top = -200.0
+offset_right = -80.0
+offset_bottom = -160.0
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+offset_left = 80.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = -160.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = -200.0
+offset_top = 160.0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_irrhp")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_uay8t")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_s25th")

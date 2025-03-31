@@ -12,7 +12,7 @@ file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineWeaponsMo
 size = Vector2(400, 400)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_n4ur8"]
-polygon = PackedVector2Array(-200, 200, -200, 0, -150, -75, -90, -100, 0, -110, 90, -100, 150, -75, 200, 0, 200, 200, 150, 200, 150, 0, 90, -50, 0, -55, -90, -50, -150, 0, -150, 200)
+polygon = PackedVector2Array(-180, 200, -180, 60, -130, -15, -90, -40, 0, -50, 90, -40, 130, -15, 180, 60, 180, 200, 130, 200, 130, 60, 70, 10, 0, 5, -70, 10, -130, 60, -130, 200)
 
 [node name="SubmarineWeaponsModule" type="Node2D"]
 script = ExtResource("1_m24gv")
@@ -37,13 +37,13 @@ direction = Vector2(0, 1)
 [node name="Collision" type="Node2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
-polygon = PackedVector2Array(-200, 200, -200, 0, -150, -75, -90, -100, 0, -110, 90, -100, 150, -75, 200, 0, 200, 200, 150, 200, 150, 0, 90, -50, 0, -55, -90, -50, -150, 0, -150, 200)
+polygon = PackedVector2Array(-180, 200, -180, 60, -130, -15, -90, -40, 0, -50, 90, -40, 130, -15, 180, 60, 180, 200, 130, 200, 130, 60, 70, 10, 0, 5, -70, 10, -130, 60, -130, 200)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-200, 200, -200, 0, -150, -75, -90, -100, 0, -110, 90, -100, 150, -75, 200, 0, 200, 200, 150, 200, 150, 0, 90, -50, 0, -55, -90, -50, -150, 0, -150, 200)
+polygon = PackedVector2Array(-180, 200, -180, 60, -130, -15, -90, -40, 0, -50, 90, -40, 130, -15, 180, 60, 180, 200, 130, 200, 130, 60, 70, 10, 0, 5, -70, 10, -130, 60, -130, 200)
 
 [node name="SubmarineWeaponSlot" type="Node2D" parent="."]
-position = Vector2(0, -120)
+position = Vector2(0, -60)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_n4ur8")

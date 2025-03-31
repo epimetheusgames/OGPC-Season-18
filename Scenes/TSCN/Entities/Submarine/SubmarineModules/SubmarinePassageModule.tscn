@@ -43,11 +43,11 @@ direction = Vector2(-1, 0)
 
 [node name="Collision" type="Node2D" parent="."]
 
-[node name="RightWall" type="CollisionShape2D" parent="Collision"]
+[node name="Floor" type="CollisionShape2D" parent="Collision"]
 position = Vector2(180, 0)
 shape = SubResource("RectangleShape2D_xshuu")
 
-[node name="LeftWall" type="CollisionShape2D" parent="Collision"]
+[node name="Cieling" type="CollisionShape2D" parent="Collision"]
 position = Vector2(-180, 0)
 shape = SubResource("RectangleShape2D_xshuu")
 
