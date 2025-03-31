@@ -3,6 +3,8 @@ class_name BoidComponent
 extends BaseComponent
 
 
+@onready var component_container_node: Entity = get_node(component_container)
+
 @export var view_dist: float = 50
 @export var protected_dist: float = 10
 @export var avoid_factor: float = 0.01
@@ -12,17 +14,17 @@ extends BaseComponent
 @export var max_speed: float = 50
 @export var min_speed: float = 1.5
 @export var max_accel: float = 100
+@export var follow_position: Node2D
+@export var boid_colors: Array[Color]
 
 var boid_initialized := false
 var boids_calculator: BoidsCalculator
 var boids_index: int
 var index: int
 var raycast: RayCast2D
-
-@export_node_path("RayCast2D") var raycast_path
-@export var follow_position: Node2D
-@onready var component_container_node = get_node(component_container)
-@export var boid_colors: Array[Color]
+var raycast_params: PhysicsRayQueryParameters2D
+var has_collision: bool
+var latest_normal: Vector2
 
 func _ready():
 	_ready_boid()
@@ -32,6 +34,8 @@ func _ready_boid() -> void:
 	name = "BoidComponent"
 	
 	_ready_base_component()
+
+	raycast_params = PhysicsRayQueryParameters2D.new()
 	
 	var rng = RandomNumberGenerator.new()
 	var multi := rng.randf_range(1, 2)
@@ -61,10 +65,21 @@ func _ready_boid() -> void:
 											max_speed, min_speed, max_accel)
 	
 	get_parent().add_to_group("Boids")
-	raycast = get_node(raycast_path)
-	get_parent().velocity = (raycast.target_position - raycast.position).normalized()
+	get_parent().velocity = Vector2.DOWN
 	
 	component_container_node.modulate = boid_colors[rng.randi_range(0, len(boid_colors) - 1)]
+
+	while true:
+		await get_tree().create_timer(rng.randf_range(0.08, 0.3)).timeout
+
+		raycast_params.from = component_container_node.global_position
+		raycast_params.to = component_container_node.global_position + component_container_node.velocity.normalized() * 200
+		var output := component_container_node.get_world_2d().direct_space_state.intersect_ray(raycast_params)
+		if output:
+			has_collision = true
+			latest_normal = output["normal"]
+		else:
+			has_collision = false
 
 func _exit_tree() -> void:
 	if !Global.boids_calculator_node:
@@ -72,18 +87,14 @@ func _exit_tree() -> void:
 	Global.boids_calculator_node.remove_boid_index(index)
 
 # Update velocity using compute shader outputs from boids calculator node.
-func _process(delta: float) -> void: 
+func _process(_delta: float) -> void: 
 	if !boids_calculator || boids_calculator.process_mode == Node.PROCESS_MODE_DISABLED:
 		boids_calculator = Global.boids_calculator_node
 		return
 	
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
-		var output = boids_calculator.get_shader_output()
-		component_container_node.velocity = Util.better_vec2_lerp(
-			component_container_node.velocity,
-			Vector2(output[boids_index * 3], output[boids_index * 3 + 1]), 
-			0.8, delta
-		)
+		var output := boids_calculator.get_shader_output()
+		component_container_node.velocity = Vector2(output[boids_index * 3], output[boids_index * 3 + 1])
 		component_container_node.position += component_container_node.velocity
 		
-	get_parent().rotation = Util.better_angle_lerp(get_parent().rotation, atan2(get_parent().velocity.normalized().y, get_parent().velocity.normalized().x) + PI / 2.0 + PI, 0.1, delta)
+		get_parent().rotation = output[boids_index * 3 + 2];

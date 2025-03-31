@@ -49,12 +49,10 @@ layout(binding = 6) restrict buffer BoidsRotations {
 } 
 rotations;
 
-float angle_difference(float from, float to) {
-    return mod(abs(from - to) + 3.1415, 2 * 3.1415) - 3.1415;
-}
+float angle_difference(float src, float dst) { return mod(dst - src + 3.1415, 2 * 3.1415) - 3.1415; }
 
 float better_angle_lerp(float a, float b, float decay, float delta) {
-    decay = (decay * 25.0);
+    decay = decay * 25.0;
     return b + (angle_difference(b, a)) * exp(-decay * delta);
 }
 
@@ -134,7 +132,7 @@ void main() {
 		total_velocity = (total_velocity / speed) * min_speed; 
 	}
 
-    outputs.data[id * 3 + 0] = total_velocity.x;
-    outputs.data[id * 3 + 1] = total_velocity.y;
-    outputs.data[id * 3 + 2] = rotations.data[id];
+    outputs.data[id * 3 + 0] = mix(current_boid_velocity.x, total_velocity.x, 0.4);
+    outputs.data[id * 3 + 1] = mix(current_boid_velocity.y, total_velocity.y, 0.4); 
+    outputs.data[id * 3 + 2] = atan(normalize(current_boid_velocity).y, normalize(current_boid_velocity).x) - 3.1415 / 2.0;
 }

@@ -139,9 +139,9 @@ func _boids_compute() -> void:
 		var raycast_data := PackedFloat32Array()
 		for boid in boids_list:
 			var boid_component = boid.get_component("BoidComponent")
-			raycast_data.append(1 if boid_component.raycast.get_collider() else 0)
-			raycast_data.append(boid_component.raycast.get_collision_normal().x)
-			raycast_data.append(boid_component.raycast.get_collision_normal().y)
+			raycast_data.append(1 if boid_component.has_collision else 0)
+			raycast_data.append(boid_component.latest_normal.x)
+			raycast_data.append(boid_component.latest_normal.y)
 		
 		var raycast_data_bytes = raycast_data.to_byte_array()
 		
@@ -227,7 +227,7 @@ func _boids_compute() -> void:
 		shader_output = compute_output_bytes.to_float32_array()
 		mutex.unlock()
 
-func get_shader_output():
+func get_shader_output() -> PackedFloat32Array:
 	mutex.lock()
 	var ret = shader_output
 	mutex.unlock()
