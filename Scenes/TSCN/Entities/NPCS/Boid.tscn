@@ -23,12 +23,8 @@ sync_increment = 1.0
 rotation = -1.5708
 texture = ExtResource("4_hemyd")
 
-[node name="WallRaycast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 1000)
-
 [node name="BoidComponent" type="Node" parent="."]
 script = ExtResource("3_2it7s")
 max_speed = 3.0
-raycast_path = NodePath("../WallRaycast")
 boid_colors = Array[Color]([Color(1, 1, 1, 1), Color(1, 1, 1, 1)])
 component_container = NodePath("..")

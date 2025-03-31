@@ -135,7 +135,7 @@ offset_bottom = 1087.0
 
 [node name="BoidsGroup" type="Node" parent="UI" node_paths=PackedStringArray("boids_scene")]
 script = ExtResource("10_n133v")
-num_boids = 1500
+num_boids = 2500
 spawn_position_node_path = NodePath("../Node2D")
 boids_scene = NodePath("../Boid")
 spawn_variation = 300.0
@@ -351,10 +351,7 @@ z_index = -1
 position = Vector2(-1103, 414)
 uid = SubResource("Resource_wiowl")
 
-[node name="WallRaycast" parent="UI/Boid" index="1"]
-target_position = Vector2(0, 200)
-
-[node name="BoidComponent" parent="UI/Boid" index="2"]
+[node name="BoidComponent" parent="UI/Boid" index="1"]
 view_dist = 200.0
 protected_dist = 20.0
 avoid_factor = 1.0
