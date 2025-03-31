@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://drodl0tjw368a"]
+[gd_scene load_steps=10 format=3 uid="uid://drodl0tjw368a"]
 
 [ext_resource type="Script" uid="uid://bmskoe21i84vc" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_0tb48"]
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_cubes"]
@@ -7,6 +7,10 @@
 [sub_resource type="Resource" id="Resource_ljnya"]
 script = ExtResource("2_cubes")
 file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineCornerPassageModule.tscn"
+
+[sub_resource type="Environment" id="Environment_pvgmk"]
+glow_enabled = true
+glow_intensity = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0n6j"]
 size = Vector2(342, 343)
@@ -23,6 +27,9 @@ polygon = PackedVector2Array(160, -200, 160, -160, 200, -160, 200, -200)
 [node name="SubmarineLPassageModule" type="Node2D"]
 script = ExtResource("1_0tb48")
 path = SubResource("Resource_ljnya")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pvgmk")
 
 [node name="ModuleArea" type="Area2D" parent="."]
 
@@ -104,4 +111,5 @@ occluder = SubResource("OccluderPolygon2D_gj3c6")
 occluder = SubResource("OccluderPolygon2D_jikvw")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+modulate = Color(100, 100, 100, 1)
 polygon = PackedVector2Array(199.999, 199.001, 30.9991, 199, -32.0009, 194, -104.001, 176, -142.001, 144.999, -172, 87.9992, -192, 30.9991, -200, -26.0009, -198.999, -200.001, -160.999, -200.001, -160, -23.0007, -153, 25.9993, -133, 71.9994, -112, 112, -78.0006, 139, -33.0007, 155, 30.9993, 160, 199.999, 161.001)

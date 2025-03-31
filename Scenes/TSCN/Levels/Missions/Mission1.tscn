@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
+background_mode = 3
 background_canvas_max_layer = 10
 glow_enabled = true
 glow_levels/1 = 0.3
@@ -43,10 +44,7 @@ glow_levels/3 = 0.4
 glow_levels/4 = 0.3
 glow_levels/5 = 0.5
 glow_levels/6 = 0.2
-glow_intensity = 1.0
 glow_blend_mode = 0
-glow_hdr_scale = 0.0
-glow_map_strength = 1.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 29502, -545, 29079, 11053, -6903, 10932)])
@@ -611,10 +609,7 @@ uid = SubResource("Resource_ulf3c")
 [node name="FishSprite" parent="LevelContainer/Entities/Boids/Boid" index="0"]
 texture = null
 
-[node name="WallRaycast" parent="LevelContainer/Entities/Boids/Boid" index="1"]
-target_position = Vector2(0, 400)
-
-[node name="BoidComponent" parent="LevelContainer/Entities/Boids/Boid" index="2"]
+[node name="BoidComponent" parent="LevelContainer/Entities/Boids/Boid" index="1"]
 view_dist = 250.0
 protected_dist = 20.0
 avoid_factor = 0.7

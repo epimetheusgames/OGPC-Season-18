@@ -94,7 +94,8 @@ func _process(_delta: float) -> void:
 	
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
 		var output := boids_calculator.get_shader_output()
-		component_container_node.velocity = Vector2(output[boids_index * 3], output[boids_index * 3 + 1])
+		component_container_node.velocity.x = output[boids_index * 3]
+		component_container_node.velocity.y = output[boids_index * 3 + 1]
 		component_container_node.position += component_container_node.velocity
 		
 		get_parent().rotation = output[boids_index * 3 + 2];
