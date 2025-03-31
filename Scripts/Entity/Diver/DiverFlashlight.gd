@@ -20,8 +20,10 @@ func _process(_delta: float) -> void:
 	
 	if diver.get_state() == Util.DiverState.IN_GRAVITY_AREA:
 		flash_light.visible = false
+		body_light.visible = false
 	else:
 		flash_light.visible = true
+		body_light.visible = false
 	
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	var diver_pos: Vector2 = diver.global_position
