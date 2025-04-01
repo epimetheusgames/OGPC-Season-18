@@ -21,16 +21,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = submarine_movement.get_velocity()
 	if Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
 		Global.player.global_transform = $"Modules/SubmarineControlModule".global_transform
-		
-	# TODO: Instead of disabled, make them collide with only the player.
-	if Global.player.get_state() == Util.DiverState.IN_SUBMARINE || Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
-		for child in get_children():
-			if child is CollisionShape2D:
-				child.disabled = true
-	else:
-		for child in get_children():
-			if child is CollisionShape2D:
-				child.disabled = false
+	
 
 func _on_submarine_area_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Diver:

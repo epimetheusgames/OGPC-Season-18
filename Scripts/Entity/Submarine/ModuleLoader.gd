@@ -1,8 +1,12 @@
 extends Node2D
 class_name ModuleLoader
 
+# Used for area offsetting and stuff
+var control_module_position : Vector2
+
 func load_sub(custom_sub : CustomSubmarineResource) -> void:
-	position -= custom_sub.control_module_position
+	control_module_position = custom_sub.control_module_position
+	position -= control_module_position
 	for module in custom_sub.modules:
 		var module_scene : SubmarineModule = load(module.module_scene.file).instantiate()
 		module_scene.position = module.position
