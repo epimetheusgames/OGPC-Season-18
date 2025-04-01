@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CustomSubmarineResource" load_steps=21 format=3]
+[gd_resource type="Resource" script_class="CustomSubmarineResource" load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/SubmarineModuleResource.gd" id="1_53d26"]
 [ext_resource type="Script" path="res://Scripts/ResourceScripts/SubmarineResources/AttachmentPointResource.gd" id="2_4la7s"]
@@ -24,10 +24,10 @@ file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineControlMo
 [sub_resource type="Resource" id="Resource_cs7qs"]
 script = ExtResource("1_53d26")
 module_scene = SubResource("Resource_384ja")
-position = Vector2(0, -400)
+position = Vector2(-400, -400)
 rotation = 0.0
 attachment_points = Array[ExtResource("2_4la7s")]([SubResource("Resource_o6dxt"), SubResource("Resource_tt5ly")])
-grid_position = Vector2i(2, 1)
+grid_position = Vector2i(1, 1)
 
 [sub_resource type="Resource" id="Resource_vxokl"]
 script = ExtResource("2_4la7s")
@@ -47,17 +47,23 @@ position = Vector2(-200, 0)
 direction = Vector2(-1, 0)
 is_attached = true
 
+[sub_resource type="Resource" id="Resource_egheg"]
+script = ExtResource("3_331su")
+file = "uid://ljbdcb8qetwy"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
 [sub_resource type="Resource" id="Resource_iuvf2"]
 script = ExtResource("1_53d26")
-position = Vector2(-400, -400)
+module_scene = SubResource("Resource_egheg")
+position = Vector2(0, -400)
 rotation = 0.0
 attachment_points = Array[ExtResource("2_4la7s")]([SubResource("Resource_vxokl"), SubResource("Resource_tv7ij"), SubResource("Resource_7gmmj")])
-grid_position = Vector2i(1, 1)
+grid_position = Vector2i(2, 1)
 
 [sub_resource type="Resource" id="Resource_3latb"]
 script = ExtResource("2_4la7s")
 position = Vector2(-200, 0)
-direction = Vector2(1, -4.37114e-08)
+direction = Vector2(-1, 0)
 is_attached = true
 
 [sub_resource type="Resource" id="Resource_7700m"]
@@ -67,24 +73,24 @@ file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule
 [sub_resource type="Resource" id="Resource_ch3qb"]
 script = ExtResource("1_53d26")
 module_scene = SubResource("Resource_7700m")
-position = Vector2(-800, -400)
-rotation = 3.14159
+position = Vector2(400, -400)
+rotation = 0.0
 attachment_points = Array[ExtResource("2_4la7s")]([SubResource("Resource_3latb")])
-grid_position = Vector2i(0, 1)
+grid_position = Vector2i(3, 1)
 
 [sub_resource type="Resource" id="Resource_yy77x"]
 script = ExtResource("2_4la7s")
 position = Vector2(-200, 0)
-direction = Vector2(-1, 0)
+direction = Vector2(1, -4.37114e-08)
 is_attached = true
 
 [sub_resource type="Resource" id="Resource_cs75a"]
 script = ExtResource("1_53d26")
 module_scene = SubResource("Resource_7700m")
-position = Vector2(400, -400)
-rotation = 0.0
+position = Vector2(-800, -400)
+rotation = 3.14159
 attachment_points = Array[ExtResource("2_4la7s")]([SubResource("Resource_yy77x")])
-grid_position = Vector2i(3, 1)
+grid_position = Vector2i(0, 1)
 
 [sub_resource type="Resource" id="Resource_q0kp0"]
 script = ExtResource("2_4la7s")
@@ -99,12 +105,12 @@ file = "res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineDoorModul
 [sub_resource type="Resource" id="Resource_kl31b"]
 script = ExtResource("1_53d26")
 module_scene = SubResource("Resource_f1mur")
-position = Vector2(-400, -800)
+position = Vector2(0, -800)
 rotation = 0.0
 attachment_points = Array[ExtResource("2_4la7s")]([SubResource("Resource_q0kp0")])
-grid_position = Vector2i(1, 0)
+grid_position = Vector2i(2, 0)
 
 [resource]
 script = ExtResource("4_m05hu")
 modules = Array[ExtResource("1_53d26")]([SubResource("Resource_cs7qs"), SubResource("Resource_iuvf2"), SubResource("Resource_ch3qb"), SubResource("Resource_cs75a"), SubResource("Resource_kl31b")])
-control_module_position = Vector2(0, -400)
+control_module_position = Vector2(-400, -400)
