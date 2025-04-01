@@ -12,6 +12,7 @@ var health: float = max_health
 
 @export var is_invincible: bool = false
 
+signal damaged_by(by: Attackbox)
 
 # Signals when the hurtbox takes damage
 signal damaged(damage_amount: float)
@@ -33,7 +34,7 @@ func can_take_damage(attackbox: Attackbox) -> bool:
 		(attackbox.attacker_type == Attackbox.AttackerType.ENEMY && hurt_by_enemy) ||
 		(attackbox.attacker_type == Attackbox.AttackerType.PLAYER && hurt_by_player) ||
 		(attackbox.attacker_type == Attackbox.AttackerType.OTHER)
-		) && (!is_invincible)
+	) && (!is_invincible)
 
 func damage(damage_amount: float, _by: Attackbox) -> void:
 	if is_invincible:
