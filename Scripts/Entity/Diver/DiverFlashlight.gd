@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	query_params.exclude = [(diver.get_rid())]
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if Global.is_multiplayer && diver.has_multiplayer_sync && !diver._is_node_owner():
 		return
 	
@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 	var head_pos: Vector2 = diver.diver_animation.get_head_position()
 	
 	var fl_pos: Vector2 = head_pos
-	var fl_rot: float = head_pos.angle_to_point(mouse_pos) + PI/2
+	var fl_rot: float = Util.better_angle_lerp(flash_light.global_rotation, head_pos.angle_to_point(mouse_pos) + PI/2, 0.3, delta)
 	
 	if Global.godot_steam_abstraction:
 		Global.godot_steam_abstraction.run_remote_function(self, "set_flash_light_pos", [fl_pos])

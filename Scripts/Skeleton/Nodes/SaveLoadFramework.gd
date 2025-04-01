@@ -146,6 +146,7 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	Global.current_game_slot = slot_num
 	Global.current_game_save = level_data
 	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = true
+	Global.ui_root_node.visible = false
 	
 	Global.print_debug("Game loaded successfuly, printing loaded data.")
 	level_data.debug()
