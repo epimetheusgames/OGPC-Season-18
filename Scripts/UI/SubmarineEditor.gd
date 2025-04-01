@@ -44,6 +44,9 @@ func add_module(new_module: SubmarineModule):
 func module_adding_checks(require_control_module := true) -> bool:
 	if !has_control_module && require_control_module:
 		return false
+	
+	if has_control_module && !require_control_module:
+		return false
 
 	if adding_module:
 		module_adding.queue_free()
