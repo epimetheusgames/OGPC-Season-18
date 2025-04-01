@@ -625,7 +625,6 @@ texture_scale = 0.8
 metadata/_edit_lock_ = true
 
 [node name="FlashLightSoft" type="PointLight2D" parent="Light/FlashLight"]
-position = Vector2(9.33333, 2.66667)
 color = Color(0.237539, 0.237539, 0.237539, 1)
 energy = 1.02
 range_item_cull_mask = 3

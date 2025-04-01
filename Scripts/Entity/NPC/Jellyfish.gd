@@ -1,8 +1,6 @@
 ## Jellyfish flap around in the water,
 ## and they also have cool tentacles that you can customize
-
 # Owned by: kaitaobenson
-
 class_name Jellyfish
 extends Enemy
 
@@ -80,9 +78,8 @@ func update_targets():
 	var target_pos: Vector2 = nav_agent.get_next_path_position()
 	
 	target_velocity = (target_pos - global_position).normalized() * current_speed 
+	target_rotation = velocity.angle() + PI / 2
 	if global_position.distance_squared_to(target_pos) > 200 ** 2:
-		target_rotation = velocity.angle() + PI / 2
-
 		for i in range(tentacles.ropes.size()):
 			tentacles.ropes[i].gravity = -target_velocity.normalized() * 10
 	else:
