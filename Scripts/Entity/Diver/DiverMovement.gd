@@ -17,6 +17,7 @@ var spawned_in_research_station := false
 @onready var diver: Diver = get_parent()
 @export var use_mouse_movement := false
 @export var gravity := 1.0
+@export var knockback_velocity := 200.0
 
 signal boosted
 
@@ -98,8 +99,8 @@ func update_movement_velocity(delta: float):
 	if velocity.length() > MAX_SPEED:
 		velocity = velocity.normalized() * MAX_SPEED
 
-func knockback(force: Vector2) -> void:
-	velocity += force
+func knockback(direction: Vector2) -> void:
+	velocity += direction * knockback_velocity
 
 func get_velocity() -> Vector2:
 	return self.velocity

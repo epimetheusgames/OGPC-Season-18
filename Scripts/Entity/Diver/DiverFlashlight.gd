@@ -33,9 +33,10 @@ func _process(_delta: float) -> void:
 	var fl_rot: float = head_pos.angle_to_point(mouse_pos) + PI/2
 	
 	if Global.godot_steam_abstraction:
+		Global.godot_steam_abstraction.sync_var(flash_light, "visible")
+		Global.godot_steam_abstraction.sync_var(body_light, "visible")
 		Global.godot_steam_abstraction.run_remote_function(self, "set_flash_light_pos", [fl_pos])
 		Global.godot_steam_abstraction.run_remote_function(self, "set_flash_light_rot", [fl_rot])
-		
 		Global.godot_steam_abstraction.run_remote_function(self, "set_body_light_pos", [diver_pos])
 	
 	set_flash_light_pos(fl_pos)

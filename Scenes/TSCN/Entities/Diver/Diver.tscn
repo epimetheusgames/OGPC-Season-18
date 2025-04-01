@@ -567,6 +567,7 @@ script = ExtResource("7_ju8q7")
 [node name="Hurtbox" type="Area2D" parent="Stats"]
 script = ExtResource("7_3b7lw")
 hurt_by_enemy = true
+definetely_a_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/Hurtbox"]
 rotation = -0.000201209

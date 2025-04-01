@@ -37,7 +37,7 @@ func _ready() -> void:
 func _on_save_nodes() -> void:
 	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self, ["position", "rotation", "velocity"]))
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if !following:
 		if going_to_building:
 			going_to_building = false

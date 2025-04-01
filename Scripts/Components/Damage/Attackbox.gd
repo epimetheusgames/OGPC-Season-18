@@ -40,6 +40,8 @@ func _process(_delta: float) -> void:
 			var hurtbox: Hurtbox = area
 			damage_hurtbox(hurtbox)
 			hurtbox_hit.emit(hurtbox)
+	
+	is_attacking = false
 
 func damage_hurtbox(hurtbox: Hurtbox) -> void:
 	if hurtbox.can_take_damage(self):

@@ -33,6 +33,8 @@ var is_multiplayer: bool
 var boids_calculator_node: BoidsCalculator
 
 ## The current diver in the mission scene.
+## NEVER use this in a multiplayer context, it will be overriden everytime a 
+## new player joins. Instead if you are an entity use closest_player.
 var player: Diver
 
 ## The current submarine in the mission scene.

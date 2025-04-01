@@ -32,7 +32,8 @@ shader_parameter/colors = PackedVector4Array(1, 1, 1, 0.25, 1, 1, 1, 0.3, 1, 1, 
 shader_parameter/out_colors = PackedColorArray(0, 0, 0.75, 0.301961, 0.25, 0, 0.75, 0.180392, 0.375, 0, 0.75, 0.301961, 0.4625, 0, 0.75, 0.360784, 0.25, 0, 0.75, 0.301961, 0.325, 0, 0.75, 0.301961)
 
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "light_detector")]
-collision_layer = 0
+collision_layer = 128
+collision_mask = 129
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 settings = ExtResource("2_fvfwy")
