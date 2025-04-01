@@ -19,10 +19,6 @@ var node_owner = 0
 var save_resource := EntitySave.new()
 var components_dictionary = {}
 
-func _ready() -> void:
-	if Global.save_load_framework:
-		Global.save_load_framework.save_nodes.connect(_on_save_nodes)
-
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
@@ -69,14 +65,6 @@ func _is_node_owner() -> bool:
 		return Global.godot_steam_abstraction.is_lobby_owner
 	else:
 		return Global.godot_steam_abstraction.steam_id == node_owner
-
-# -- Save Load --
-
-## Saves itself.
-## Godot is dumb so inheritors have to make a whole seperate function
-## Believe me I tried.
-func _on_save_nodes() -> void:
-	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self, ["position", "velocity", "rotation"]))
 
 ## DEPRECATED
 func load_self() -> void:
