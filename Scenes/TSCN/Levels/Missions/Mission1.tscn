@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=73 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -11,8 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
-[ext_resource type="PackedScene" uid="uid://cs6xsivghesmh" path="res://Scenes/TSCN/Objects/PlaceableBuilding.tscn" id="8_dv5as"]
-[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="9_o2tjs"]
 [ext_resource type="Texture2D" uid="uid://u8val5ultomx" path="res://Assets/Art/Level/Skybox.png" id="12_3svaj"]
 [ext_resource type="Script" uid="uid://bthrd0wdm5ufn" path="res://Scripts/Level/ResearchStation.gd" id="12_jw53c"]
 [ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="12_kali0"]
@@ -219,13 +217,10 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_081ql"]
+[sub_resource type="Resource" id="Resource_8qye6"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bdf5b"]
-polygon = PackedVector2Array(-128, -87, -127, -107, -117, -120, -100, -127, 101, -127, 114, -120, 126, -105, 126, 108, 121, 115, 110, 124, 98, 128, 72, 128, -96, 128, -110, 125, -121, 117, -125, 107, -126, 92)
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
 resource_local_to_scene = true
@@ -531,7 +526,7 @@ uid = SubResource("Resource_vfal8")
 z_index = 5
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_081ql")
+uid = SubResource("Resource_8qye6")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -539,28 +534,6 @@ center_of_mass = NodePath("..")
 buoyancy_accel = 0.0
 
 [node name="Items" type="Node2D" parent="LevelContainer"]
-
-[node name="PlaceableBuilding" parent="LevelContainer/Items" node_paths=PackedStringArray("building_sprite", "building_collision", "base_position") instance=ExtResource("8_dv5as")]
-position = Vector2(-2165, 2490)
-building_sprite = NodePath("Sprite2D")
-building_collision = NodePath("StaticBody2D")
-base_position = NodePath("Node2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="LevelContainer/Items/PlaceableBuilding"]
-scale = Vector2(2, 2)
-texture = ExtResource("9_o2tjs")
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="LevelContainer/Items/PlaceableBuilding/Sprite2D"]
-scale = Vector2(0.5, 0.5)
-occluder = SubResource("OccluderPolygon2D_bdf5b")
-
-[node name="Node2D" type="Node2D" parent="LevelContainer/Items/PlaceableBuilding"]
-position = Vector2(0, 120)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Items/PlaceableBuilding"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Items/PlaceableBuilding/StaticBody2D"]
-polygon = PackedVector2Array(-106, 105, 108, 105, 107, -105, -106, -105)
 
 [node name="LightLine" parent="LevelContainer/Items" instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)
