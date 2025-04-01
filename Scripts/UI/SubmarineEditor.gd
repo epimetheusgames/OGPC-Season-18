@@ -11,6 +11,7 @@ extends Control
 @onready var submarine_end_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineEndModule.tscn")
 @onready var submarine_door_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineDoorModule.tscn")
 @onready var submarine_weapons_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineWeaponsModule.tscn")
+@onready var submarine_T_module := preload("res://Scenes/TSCN/Entities/Submarine/SubmarineModules/SubmarineTModule.tscn")
 
 @export var grid_columns : int = 4
 @export var grid_rows : int = 4
@@ -43,6 +44,9 @@ func add_module(new_module: SubmarineModule):
 func module_adding_checks(require_control_module := true) -> bool:
 	if !has_control_module && require_control_module:
 		return false
+	
+	if has_control_module && !require_control_module:
+		return false
 
 	if adding_module:
 		module_adding.queue_free()
@@ -74,6 +78,10 @@ func _on_door_module_button_up() -> void:
 func _on_weapons_module_button_up() -> void:
 	if module_adding_checks():
 		add_module(submarine_weapons_module.instantiate())
+
+func _on_t_module_button_up() -> void:
+	if module_adding_checks():
+		add_module(submarine_T_module.instantiate())
 
 func _process(delta: float) -> void:
 	if adding_module:

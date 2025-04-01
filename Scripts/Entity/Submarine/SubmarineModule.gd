@@ -37,7 +37,7 @@ func _ready() -> void:
 			var old_rot: float = child.global_rotation
 			$"ModuleArea".remove_child(child)
 			$"../../SubmarineArea".add_child(child)
-			child.position += self.position
+			child.position += self.position - $"../".control_module_position
 			child.global_rotation = old_rot
 	
 	$ModuleArea.area_entered.connect(_area_mouse_entered)

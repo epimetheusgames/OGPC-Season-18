@@ -68,6 +68,18 @@ text = "Corner Module"
 layout_mode = 2
 text = "End Module"
 
+[node name="DoorModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Door Module"
+
+[node name="WeaponsModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "Weapons Module"
+
+[node name="TModule" type="Button" parent="SplitContainer/PanelContainer/VSplitContainer/GridContainer"]
+layout_mode = 2
+text = "T Module"
+
 [node name="SubmarineView" type="PanelContainer" parent="SplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -120,5 +132,8 @@ file_mode = 0
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/PassageModule" to="." method="_on_passage_module_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/CornerPassageModule" to="." method="_on_corner_passage_module_button_up"]
 [connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/EndModule" to="." method="_on_end_passage_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/DoorModule" to="." method="_on_door_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/WeaponsModule" to="." method="_on_weapons_module_button_up"]
+[connection signal="button_up" from="SplitContainer/PanelContainer/VSplitContainer/GridContainer/TModule" to="." method="_on_t_module_button_up"]
 [connection signal="file_selected" from="SaveDialog" to="." method="_on_save_dialog_file_selected"]
 [connection signal="file_selected" from="LoadDialog" to="." method="_on_load_dialog_file_selected"]

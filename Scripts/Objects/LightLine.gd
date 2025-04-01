@@ -10,7 +10,10 @@ var old_points: PackedVector2Array
 var attachments: Array[PackedVector2Array]
 var calculating := false
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+	Global.save_load_framework.save_nodes.connect(_save)
+
+func _process(_delta: float) -> void:
 	if (attachments.is_empty() || old_points != line.points) && !calculating:
 		recalculate_attachments()
 		
@@ -51,3 +54,6 @@ func recalculate_attachments():
 				new_attachments[-1].append(to_local(raycast.get_collision_point()))
 	calculating = false
 	attachments = new_attachments
+
+func _save() -> void:
+	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self, ["old_points", "attachments", "calculating"]))

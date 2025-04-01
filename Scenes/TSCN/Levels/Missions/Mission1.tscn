@@ -1,14 +1,16 @@
-[gd_scene load_steps=69 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=73 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
+[ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
 [ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="2_3svaj"]
+[ext_resource type="AudioStream" uid="uid://bdjdysj3l46f7" path="res://Assets/SFX/Wind.ogg" id="2_8qye6"]
+[ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="2_bdf5b"]
+[ext_resource type="Script" uid="uid://bn44me3sxajlb" path="res://Scripts/Skeleton/Nodes/Ingame/LocalGameTimeSaver.gd" id="2_mcejo"]
 [ext_resource type="Texture2D" uid="uid://vuyq5s7dknal" path="res://Assets/Art/Level/SandTexture.png" id="3_kali0"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
-[ext_resource type="PackedScene" uid="uid://cs6xsivghesmh" path="res://Scenes/TSCN/Objects/PlaceableBuilding.tscn" id="8_dv5as"]
-[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="9_o2tjs"]
 [ext_resource type="Texture2D" uid="uid://u8val5ultomx" path="res://Assets/Art/Level/Skybox.png" id="12_3svaj"]
 [ext_resource type="Script" uid="uid://bthrd0wdm5ufn" path="res://Scripts/Level/ResearchStation.gd" id="12_jw53c"]
 [ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="12_kali0"]
@@ -46,6 +48,19 @@ glow_levels/4 = 0.3
 glow_levels/5 = 0.5
 glow_levels/6 = 0.2
 glow_blend_mode = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8qye6"]
+load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-5e1dd40c6ff283288799a66678ca82b9.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fu4r"]
+shader = ExtResource("2_bdf5b")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_8qye6")
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.9
+shader_parameter/height = 1.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 29502, -545, 29079, 11053, -6903, 10932)])
@@ -194,18 +209,18 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dn3vl"]
 polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 7993, 6031, 7981, 6030, 7969, 6033, 7925, 6050, 7919, 6051, 7910, 6047, 7894, 6042, 7895, 6039, 7900, 6035, 7900, 6032, 7898, 6030, 7894, 6029, 7886, 6030, 7873, 6032, 7852, 6035, 7835, 6035, 7807, 6032, 7787, 6029, 7763, 6020, 7729, 6011, 7671, 6012, 7571, 6020, 7668, 6209, 7699, 6171, 7705, 6164, 7721, 6155, 7739, 6148, 7760, 6130, 7781, 6101, 7790, 6095, 7806, 6118, 7824, 6133, 7851, 6140, 7881, 6141, 7909, 6136, 7931, 6129, 7950, 6120, 7966, 6110, 7974, 6104, 7985, 6101, 8021, 6095, 8113, 6068, 8146, 6061)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdf5b"]
+size = Vector2(35708.5, 724)
+
 [sub_resource type="Resource" id="Resource_vfal8"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_3svaj"]
+[sub_resource type="Resource" id="Resource_8qye6"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bdf5b"]
-polygon = PackedVector2Array(-128, -87, -127, -107, -117, -120, -100, -127, 101, -127, 114, -120, 126, -105, 126, 108, 121, 115, 110, 124, 98, 128, 72, 128, -96, 128, -110, 125, -121, 117, -125, 107, -126, 92)
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
 resource_local_to_scene = true
@@ -285,6 +300,9 @@ collision_use_scale = true
 [node name="Mission1" type="Node2D"]
 script = ExtResource("1_314ux")
 
+[node name="LocalGameTimeSaver" type="Node" parent="."]
+script = ExtResource("2_mcejo")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5ulyy")
 
@@ -292,9 +310,18 @@ environment = SubResource("Environment_5ulyy")
 
 [node name="Environment" type="Node2D" parent="LevelContainer"]
 
+[node name="EnvironmentEffects" type="Node" parent="LevelContainer/Environment"]
+script = ExtResource("2_3fu4r")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
+stream = ExtResource("2_8qye6")
+autoplay = true
+bus = &"Wind"
+parameters/looping = true
+
 [node name="ColorRect" type="ColorRect" parent="LevelContainer/Environment"]
 z_index = -10
-material = ExtResource("2_3svaj")
+material = SubResource("ShaderMaterial_3fu4r")
 offset_left = 29595.0
 offset_top = 30.0
 offset_right = 65802.0
@@ -453,6 +480,32 @@ position = Vector2(188, 0)
 polygon = PackedVector2Array(2933, 1326, 2437, 848, 4226, 910)
 script = ExtResource("5_aep54")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Environment/Collisions"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Environment/Collisions/StaticBody2D"]
+position = Vector2(11302.8, -375)
+shape = SubResource("RectangleShape2D_bdf5b")
+
+[node name="Skybox" type="Sprite2D" parent="LevelContainer/Environment/Collisions"]
+position = Vector2(-5528, -489)
+scale = Vector2(2, 2)
+texture = ExtResource("12_3svaj")
+
+[node name="Skybox2" type="Sprite2D" parent="LevelContainer/Environment/Collisions"]
+position = Vector2(-3480, -489)
+scale = Vector2(2, 2)
+texture = ExtResource("12_3svaj")
+
+[node name="Skybox3" type="Sprite2D" parent="LevelContainer/Environment/Collisions"]
+position = Vector2(-1432, -489)
+scale = Vector2(2, 2)
+texture = ExtResource("12_3svaj")
+
+[node name="Skybox4" type="Sprite2D" parent="LevelContainer/Environment/Collisions"]
+position = Vector2(616, -489)
+scale = Vector2(2, 2)
+texture = ExtResource("12_3svaj")
+
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="LevelContainer/Environment"]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="LevelContainer/Environment"]
@@ -473,7 +526,7 @@ uid = SubResource("Resource_vfal8")
 z_index = 5
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_3svaj")
+uid = SubResource("Resource_8qye6")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -481,48 +534,6 @@ center_of_mass = NodePath("..")
 buoyancy_accel = 0.0
 
 [node name="Items" type="Node2D" parent="LevelContainer"]
-
-[node name="PlaceableBuilding" parent="LevelContainer/Items" node_paths=PackedStringArray("building_sprite", "building_collision", "base_position") instance=ExtResource("8_dv5as")]
-position = Vector2(-2165, 2490)
-building_sprite = NodePath("Sprite2D")
-building_collision = NodePath("StaticBody2D")
-base_position = NodePath("Node2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="LevelContainer/Items/PlaceableBuilding"]
-scale = Vector2(2, 2)
-texture = ExtResource("9_o2tjs")
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="LevelContainer/Items/PlaceableBuilding/Sprite2D"]
-scale = Vector2(0.5, 0.5)
-occluder = SubResource("OccluderPolygon2D_bdf5b")
-
-[node name="Node2D" type="Node2D" parent="LevelContainer/Items/PlaceableBuilding"]
-position = Vector2(0, 120)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Items/PlaceableBuilding"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Items/PlaceableBuilding/StaticBody2D"]
-polygon = PackedVector2Array(-106, 105, 108, 105, 107, -105, -106, -105)
-
-[node name="Skybox" type="Sprite2D" parent="LevelContainer/Items/PlaceableBuilding"]
-position = Vector2(-3363, -2979)
-scale = Vector2(2, 2)
-texture = ExtResource("12_3svaj")
-
-[node name="Skybox2" type="Sprite2D" parent="LevelContainer/Items/PlaceableBuilding"]
-position = Vector2(-1315, -2979)
-scale = Vector2(2, 2)
-texture = ExtResource("12_3svaj")
-
-[node name="Skybox3" type="Sprite2D" parent="LevelContainer/Items/PlaceableBuilding"]
-position = Vector2(733, -2979)
-scale = Vector2(2, 2)
-texture = ExtResource("12_3svaj")
-
-[node name="Skybox4" type="Sprite2D" parent="LevelContainer/Items/PlaceableBuilding"]
-position = Vector2(2781, -2979)
-scale = Vector2(2, 2)
-texture = ExtResource("12_3svaj")
 
 [node name="LightLine" parent="LevelContainer/Items" instance=ExtResource("30_ykjed")]
 position = Vector2(860, 1002)
@@ -571,6 +582,11 @@ z_index = 45
 color = Color(0.233925, 0.233925, 0.233925, 1)
 polygon = PackedVector2Array(-4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819)
 
+[node name="Floor" type="Polygon2D" parent="LevelContainer/ResearchStation"]
+z_index = 7
+color = Color(0.266575, 0.266575, 0.266575, 1)
+polygon = PackedVector2Array(-2678, 2651, -2670, 2762, -4259, 2798, -4309, 2689)
+
 [node name="GravityArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["gravity_areas"]]
 z_index = 7
 metadata/_edit_lock_ = true
@@ -606,7 +622,8 @@ color = Color(0.0943156, 0.129072, 0.171545, 1)
 
 [node name="UnlockTerminal" parent="LevelContainer/ResearchStation" instance=ExtResource("13_bdf5b")]
 z_index = 7
-position = Vector2(-4081, 2642)
+position = Vector2(-4081, 2615)
+scale = Vector2(0.8, 0.8)
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
