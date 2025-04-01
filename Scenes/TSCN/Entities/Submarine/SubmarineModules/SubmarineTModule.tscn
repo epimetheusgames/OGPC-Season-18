@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ljbdcb8qetwy"]
+[gd_scene load_steps=11 format=3 uid="uid://ljbdcb8qetwy"]
 
 [ext_resource type="Script" uid="uid://bmskoe21i84vc" path="res://Scripts/Entity/Submarine/SubmarineModule.gd" id="1_4f4gm"]
 [ext_resource type="Script" uid="uid://cywews2kwsymx" path="res://Scripts/Entity/Submarine/AttachmentPoint.gd" id="2_hrry7"]
@@ -11,6 +11,9 @@ metadata/_custom_type_script = "uid://dlliifnia7sm4"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_egheg"]
 size = Vector2(400, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hrry7"]
+size = Vector2(400, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prr85"]
 size = Vector2(120, 40)
@@ -56,7 +59,7 @@ metadata/_custom_type_script = "uid://cywews2kwsymx"
 
 [node name="Floor" type="CollisionShape2D" parent="Collision"]
 position = Vector2(0, 180)
-shape = SubResource("RectangleShape2D_prr85")
+shape = SubResource("RectangleShape2D_hrry7")
 
 [node name="RightCiel" type="CollisionShape2D" parent="Collision"]
 position = Vector2(140, -180)
