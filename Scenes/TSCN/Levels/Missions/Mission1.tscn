@@ -1,8 +1,9 @@
-[gd_scene load_steps=69 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=72 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="2_3svaj"]
+[ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="2_bdf5b"]
 [ext_resource type="Texture2D" uid="uid://vuyq5s7dknal" path="res://Assets/Art/Level/SandTexture.png" id="3_kali0"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
@@ -46,6 +47,19 @@ glow_levels/4 = 0.3
 glow_levels/5 = 0.5
 glow_levels/6 = 0.2
 glow_blend_mode = 0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8qye6"]
+load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-5e1dd40c6ff283288799a66678ca82b9.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fu4r"]
+shader = ExtResource("2_bdf5b")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_8qye6")
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.9
+shader_parameter/height = 1.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 29502, -545, 29079, 11053, -6903, 10932)])
@@ -199,7 +213,7 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_3svaj"]
+[sub_resource type="Resource" id="Resource_mcejo"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -294,7 +308,7 @@ environment = SubResource("Environment_5ulyy")
 
 [node name="ColorRect" type="ColorRect" parent="LevelContainer/Environment"]
 z_index = -10
-material = ExtResource("2_3svaj")
+material = SubResource("ShaderMaterial_3fu4r")
 offset_left = 29595.0
 offset_top = 30.0
 offset_right = 65802.0
@@ -473,7 +487,7 @@ uid = SubResource("Resource_vfal8")
 z_index = 5
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_3svaj")
+uid = SubResource("Resource_mcejo")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")

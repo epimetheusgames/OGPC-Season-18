@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=38 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -12,8 +12,8 @@
 [ext_resource type="Script" uid="uid://6ub1ahbtrw5b" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
 [ext_resource type="Script" uid="uid://ctyabps1pdr5y" path="res://Scripts/Skeleton/Nodes/DiscordRpc.gd" id="11_bhkpb"]
-[ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="12_o2nyu"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="13_wogkx"]
+[ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="14_41cf3"]
 [ext_resource type="Script" uid="uid://cr8brelxptd70" path="res://Scripts/UI/KeybindButtonHandler.gd" id="14_qt6oy"]
 [ext_resource type="Script" uid="uid://6t41dstdgs6k" path="res://Scripts/Skeleton/Nodes/MainMenu.gd" id="15_5virq"]
 [ext_resource type="FontFile" uid="uid://b8shwbf3tge0e" path="res://Assets/Fonts/Michroma/Michroma-Regular.ttf" id="16_nfklf"]
@@ -42,6 +42,32 @@ file = "res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"
 [sub_resource type="Resource" id="Resource_1tmkv"]
 script = ExtResource("9_y8obd")
 missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_py4au")])
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bhkpb"]
+load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-5e1dd40c6ff283288799a66678ca82b9.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_41cf3"]
+shader = ExtResource("14_41cf3")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_bhkpb")
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 0.9
+shader_parameter/height = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_lb45j"]
+load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-5e1dd40c6ff283288799a66678ca82b9.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1f6oh"]
+shader = ExtResource("14_41cf3")
+shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
+shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
+shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_lb45j")
+shader_parameter/always_top = false
+shader_parameter/blend_alpha = false
+shader_parameter/max_alpha = 1.0
+shader_parameter/height = 1.0
 
 [sub_resource type="Resource" id="Resource_wiowl"]
 resource_local_to_scene = true
@@ -110,7 +136,7 @@ spawn_variation = 300.0
 
 [node name="ColorRect" type="ColorRect" parent="UI"]
 z_index = -10
-material = ExtResource("12_o2nyu")
+material = SubResource("ShaderMaterial_41cf3")
 layout_mode = 0
 offset_left = -678.0
 offset_top = -114.0
@@ -119,7 +145,7 @@ offset_bottom = 3936.0
 color = Color(0.012, 0.012, 0.09, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="UI"]
-material = ExtResource("12_o2nyu")
+material = SubResource("ShaderMaterial_1f6oh")
 layout_mode = 0
 offset_left = -678.0
 offset_top = -114.0
@@ -327,11 +353,13 @@ position = Vector2(-1104, 400)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="UI/StaticBody2D"]
 position = Vector2(-1086, -586)
 scale = Vector2(2, 2)
-polygon = PackedVector2Array(88, 1035, 214, 1069, 1582, 1057, 1739, 1030, 1833, 986, 1877, 886, 1915, 722, 1911.32, 560.154, 1688.5, 502.5, 1908.94, 455.29, 1905, 282, 1878, 157, 1828, 76, 1731, 49, 1606, 20, 1030.81, 16.6967, 929, 197, 833.158, 15.5616, 213, 12, 122, 18, 54, 52, 12, 111, 42.1429, 310.714, -195.5, 224.5, -432.5, 188.5, -663.571, 222.857, -752.5, 268.5, -787, 414.5, -692.143, 597.143, -545.5, 649.5, -341.5, 649.5, -41.99, 643.735, 51, 693.5, 86, 1048, 48, 1137, -983.571, 933.571, -1129.29, 250, -71, -40, 2001, -23, 1980, 1192, 51, 1137)
+polygon = PackedVector2Array(88, 1035, 214, 1069, 1582, 1057, 1739, 1030, 1833, 986, 1877, 886, 1915, 722, 1911.32, 560.154, 1688.5, 502.5, 1908.94, 455.29, 1905, 282, 1878, 157, 1828, 76, 1731, 49, 1606, 20, 1030.81, 16.6967, 929, 197, 833.158, 15.5616, 213, 12, 122, 18, 54, 52, 12, 111, 42.1429, 310.714, -195.5, 224.5, -421.5, 31.5, -782, 85, -956.5, 207.5, -951.5, 575, -746, 770, -421.5, 746, -209, 682, -41.99, 643.735, 51, 693.5, 86, 1048, 48, 1137, -983.571, 933.571, -1129.29, 250, -770, -143, -71, -40, 2001, -23, 1980, 1192, 51, 1137)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="UI/StaticBody2D"]
 position = Vector2(-242, -58)
-polygon = PackedVector2Array(-47, 440, -206, 192, -605, 449, -139, 689)
+polygon = PackedVector2Array(-47, 440, -206, 192, -720, 460, -638.006, 492.318, -139, 689)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="UI"]
 
 [node name="Game" type="Node" parent="."]
 
