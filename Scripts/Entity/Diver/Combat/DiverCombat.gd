@@ -17,7 +17,8 @@ extends Node2D
 @onready var reload_bar: TextureProgressBar = $"ReloadBar"
 
 # Loaded weapons in inventory (Optimize for switching weapons)
-var current_weapons: Dictionary
+var primary_weapon: Weapon
+var secondary_weapon: Weapon
 var selected_weapon: Weapon
 var unlocked_weapons: PlayerUnlockedWeapons
 
@@ -25,15 +26,6 @@ func _ready():
 	if !unlocked_weapons:
 		unlocked_weapons = PlayerUnlockedWeapons.new()
 
-	if unlocked_weapons.has_speargun:
-		add_weapon("speargun")
-	if unlocked_weapons.has_pistol:
-		add_weapon("pistol")
-	if unlocked_weapons.has_knife:
-		add_weapon("knife")
-		set_weapon("knife")
-
-var a: int = 0  # I'll remove this later
 func _process(_delta: float) -> void:
 	for weapon in get_children():
 		if weapon is Weapon && weapon.visible && !weapon == selected_weapon:
@@ -51,18 +43,17 @@ func _process(_delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("swap"):
-		if a == 0:
-			set_weapon("pistol")
-			Global.godot_steam_abstraction.run_remote_function(self, "set_weapon", ["pistol"])
-			a = 1
-		elif a == 1:
-			set_weapon("speargun")
-			Global.godot_steam_abstraction.run_remote_function(self, "set_weapon", ["speargun"])
-			a = 2
-		elif a == 2:
-			set_weapon("knife")
-			Global.godot_steam_abstraction.run_remote_function(self, "set_weapon", ["knife"])
-			a = 0
+		if primary_weapon.enabled:
+			primary_weapon.enabled = false
+			secondary_weapon.enabled = true
+			selected_weapon = secondary_weapon
+		elif secondary_weapon.enabled:
+			secondary_weapon.enabled = false
+			primary_weapon.enabled = true
+			selected_weapon = primary_weapon
+		else:
+			primary_weapon.enabled = true
+			selected_weapon = primary_weapon
 	
 	if !selected_weapon:
 		return
@@ -82,47 +73,6 @@ func _process(_delta: float) -> void:
 	if selected_weapon.use_hand2:
 		var new_hand_pos: Vector2 = selected_weapon.get_hand2_pos()
 		diver.diver_animation.set_hand2_position(new_hand_pos)
-
-# current_weapons (setters / getters)
-func add_weapon(weapon_name: String) -> void:
-	if current_weapons.has(weapon_name):
-		return
-	
-	var weapon: PackedScene = all_weapons.get(weapon_name)
-	if weapon == null:
-		Global.print_error("Weapon not found")
-		return
-	
-	var new_weapon: Weapon = weapon.instantiate()
-	
-	current_weapons[weapon_name] = new_weapon
-	add_child(new_weapon)
-
-func remove_weapon(weapon_name: String) -> void:
-	var result: bool = current_weapons.erase(weapon_name)
-	if result == false:
-		printerr("Weapon not found")
-
-func remove_all_weapons() -> void:
-	current_weapons.clear()
-
-# selected_weapon (setters / getters)
-func set_weapon(weapon_name: String) -> void:
-	var weapon: Weapon = current_weapons.get(weapon_name)
-	
-	if weapon == null:
-		printerr("Weapon not found")
-		return
-	if weapon == selected_weapon:
-		return
-	
-	disable_all()
-	weapon.enabled = true
-	selected_weapon = weapon
-
-func disable_all() -> void:
-	for weapon: Weapon in current_weapons.values():
-		weapon.enabled = false
 
 # Reload bar
 func set_reload_bar(val: float) -> void:
