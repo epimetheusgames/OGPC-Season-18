@@ -17,6 +17,8 @@ func _process(_delta: float) -> void:
 	health_progress.value = Global.player.get_diver_health()
 	oxygen_progress.value = Global.player.get_oxygen()
 	
+	$MarginContainer/HBoxContainer/MoneyStatus.text = "Money: " + str(Global.player.diver_stats.current_money)
+	
 	if Global.player.diver_movement.is_in_research_station:
 		$MarginContainer/HBoxContainer/Seperator2.visible = true
 		$MarginContainer/HBoxContainer/MoneyStatus.visible = true

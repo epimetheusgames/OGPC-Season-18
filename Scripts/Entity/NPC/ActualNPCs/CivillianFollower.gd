@@ -13,6 +13,8 @@ var target_path_position: Vector2
 var going_to_building := false
 
 func _ready() -> void:
+	position += Util.random_vector(Global.rng, 50, 0)
+	
 	if !detection_area:
 		Global.print_error("Follower at path " + str(get_path()) + " has no detection_area. Searching for one.")
 		return
@@ -49,6 +51,7 @@ func _physics_process(delta: float) -> void:
 	if going_to_building && global_position.distance_squared_to(following.global_position) < follow_distance ** 2:
 		var building: PlaceableBuilding = following.get_parent()
 		building.current_occupants += 1
+		Global.player.diver_stats.current_money += 50
 		queue_free()
 	
 	velocity = (target_path_position - global_position).normalized() * swim_speed

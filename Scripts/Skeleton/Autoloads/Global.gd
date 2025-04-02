@@ -95,6 +95,8 @@ var bitmask_conversion = {
 	"Interaction": 64,
 }
 
+var rng := RandomNumberGenerator.new()
+
 ## Overrides a default function which is great, prints to the ingame chat 
 ## if verbose debug is on, and also prints to the console.
 func print_debug(message: String):

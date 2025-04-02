@@ -47,7 +47,8 @@ func damage(damage_amount: float, _by: Attackbox) -> void:
 	damaged.emit(abs(health - new_health))
 	health = new_health
 	
-	Global.player.diver_movement.knockback((Global.player.global_position - _by.global_position).normalized())
+	if _by:
+		Global.player.diver_movement.knockback((Global.player.global_position - _by.global_position).normalized())
 	
 	if health == 0:
 		died.emit()

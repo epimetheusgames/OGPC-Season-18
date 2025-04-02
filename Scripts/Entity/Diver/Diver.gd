@@ -77,6 +77,12 @@ func _ready() -> void:
 	else:
 		camera.enabled = false
 
+func _process(delta: float) -> void:
+	super(delta)
+	
+	if !Global.is_multiplayer || _is_node_owner():
+		Global.player = self
+
 func _physics_process(_delta: float):
 	diver_stats.oxygen_loss = oxygen_loss
 	
@@ -135,6 +141,7 @@ func _save() -> void:
 				get_path_to(diver_stats): [
 					"health",
 					"oxygen_percentage",
+					"current_money",
 				],
 				get_path_to(diver_combat): [
 					"selected_weapon",

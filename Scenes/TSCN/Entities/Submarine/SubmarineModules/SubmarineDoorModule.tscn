@@ -52,3 +52,11 @@ occluder = SubResource("OccluderPolygon2D_1q60b")
 
 [node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_jsslb")
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -144.0
+offset_top = 9.0
+offset_right = 143.0
+offset_bottom = 200.0
+color = Color(0.223529, 0.223529, 0.223529, 1)

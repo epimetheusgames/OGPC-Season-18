@@ -19,6 +19,7 @@ size = Vector2(82, 82)
 
 [node name="Leviathan" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox")]
 position = Vector2(296, 288)
+collision_mask = 2049
 motion_mode = 1
 script = ExtResource("1_ucxug")
 LEVIATHAN_NODE = ExtResource("1_ljr6s")

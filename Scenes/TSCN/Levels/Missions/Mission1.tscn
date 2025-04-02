@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=74 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -211,6 +211,9 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdf5b"]
 size = Vector2(35708.5, 724)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8qye6"]
+radius = 463.518
 
 [sub_resource type="Resource" id="Resource_vfal8"]
 resource_local_to_scene = true
@@ -504,6 +507,13 @@ texture = ExtResource("12_3svaj")
 position = Vector2(616, -489)
 scale = Vector2(2, 2)
 texture = ExtResource("12_3svaj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="LevelContainer/Environment/Collisions"]
+collision_layer = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Environment/Collisions/StaticBody2D2"]
+position = Vector2(-2894, 2581)
+shape = SubResource("CircleShape2D_8qye6")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="LevelContainer/Environment"]
 
