@@ -34,6 +34,9 @@ func _on_secondary_button_button_up() -> void:
 		return
 	secondary_weapon = selected_icon.name
 	secondary_button.text = selected_icon.formatted_name
+	if Global.player.diver_combat.secondary_weapon:
+		Global.player.diver_combat.secondary_weapon.enabled = false
+	Global.player.diver_combat.secondary_weapon = Global.player.diver_combat.instantiated_weapons[secondary_weapon]
 	selected_icon = null
 
 func _on_primary_button_button_up() -> void:
@@ -41,4 +44,7 @@ func _on_primary_button_button_up() -> void:
 		return
 	primary_weapon = selected_icon.name
 	primary_button.text = selected_icon.formatted_name
+	if Global.player.diver_combat.primary_weapon:
+		Global.player.diver_combat.primary_weapon.enabled = false
+	Global.player.diver_combat.primary_weapon = Global.player.diver_combat.instantiated_weapons[primary_weapon]
 	selected_icon = null

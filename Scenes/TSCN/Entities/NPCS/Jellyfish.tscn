@@ -21,7 +21,7 @@ bottom_width = 140.0
 size = Vector2(286, 108)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1lc1p"]
-radius = 26.0192
+radius = 64.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fvllq"]
 polygon = PackedVector2Array(-139, -57, 148, -56, 147, 54, -139, 53)

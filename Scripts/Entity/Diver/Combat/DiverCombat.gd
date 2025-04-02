@@ -17,6 +17,7 @@ extends Node2D
 @onready var reload_bar: TextureProgressBar = $"ReloadBar"
 
 # Loaded weapons in inventory (Optimize for switching weapons)
+var instantiated_weapons: Dictionary[String, Weapon]
 var primary_weapon: Weapon
 var secondary_weapon: Weapon
 var selected_weapon: Weapon
@@ -25,6 +26,15 @@ var unlocked_weapons: PlayerUnlockedWeapons
 func _ready():
 	if !unlocked_weapons:
 		unlocked_weapons = PlayerUnlockedWeapons.new()
+	
+	for key in all_weapons.keys():
+		var new_weapon: Weapon = all_weapons[key].instantiate()
+		instantiated_weapons[key] = new_weapon
+		add_child(new_weapon)
+	
+	for child in get_children():
+		if child is Weapon:
+			child.enabled = false
 
 func _process(_delta: float) -> void:
 	for weapon in get_children():
@@ -42,18 +52,21 @@ func _process(_delta: float) -> void:
 	if diver.diver_movement.is_in_gravity_area:
 		return
 	
-	if Input.is_action_just_pressed("swap"):
+	if Input.is_action_just_pressed("swap") && primary_weapon && secondary_weapon:
 		if primary_weapon.enabled:
 			primary_weapon.enabled = false
 			secondary_weapon.enabled = true
 			selected_weapon = secondary_weapon
-		elif secondary_weapon.enabled:
+		elif secondary_weapon && secondary_weapon.enabled:
 			secondary_weapon.enabled = false
 			primary_weapon.enabled = true
 			selected_weapon = primary_weapon
 		else:
 			primary_weapon.enabled = true
 			selected_weapon = primary_weapon
+	elif Input.is_action_just_pressed("swap") && primary_weapon && !primary_weapon.enabled:
+		primary_weapon.enabled = true
+		selected_weapon = primary_weapon
 	
 	if !selected_weapon:
 		return
