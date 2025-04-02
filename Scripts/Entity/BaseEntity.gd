@@ -15,9 +15,9 @@ var entity_type = "Entity"
 @export var sync_by_increment: bool = false
 @export var sync_increment: float = 0
 
-var node_owner = 0
+var node_owner := 0
 var save_resource := EntitySave.new()
-var components_dictionary = {}
+var components_dictionary := {}
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():

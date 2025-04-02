@@ -34,6 +34,8 @@ var _player_detection_area: Area2D
 var _player_detection_collision_shape: CollisionShape2D
 
 ## Set via update_closest_player, the closest player by distance to the enemy.
+## This will be the player that is visible because only the closest player is 
+## checked.
 var closest_player: Diver
 
 ## If the player is in the detection area, regardless of visibility.

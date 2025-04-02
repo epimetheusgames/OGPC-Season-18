@@ -7,6 +7,7 @@ extends Enemy
 @onready var limbs: Array[Node2D] = [anim.arm1, anim.arm2, anim.leg1, anim.leg2]
 var targets: Array[Node2D] = []
 var end_targets: Array[Node2D] = []
+var target_velocity: Vector2
 
 func _ready() -> void:
 	super()
@@ -39,26 +40,38 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
+	for i in range(targets.size()):
+		ropes[i].is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
+		ropes[i].gravity = -target_velocity.normalized() * 10
+		targets[i].global_position = arms[i].points[1].rotated(arms[i].global_rotation) + arms[i].global_position
+		
+		if player_visible:
+			end_targets[i].global_position = limbs[i].global_position
+			ropes[i].end_pos_on = true
+		else:
+			ropes[i].end_pos_on = false
+	
+	if closest_player && \
+	   ((Global.godot_steam_abstraction && Global.is_multiplayer && node_owner == closest_player.node_owner) || \
+		!Global.is_multiplayer || !Global.godot_steam_abstraction \
+	):
+		closest_player.global_position += (global_position - closest_player.global_position).normalized() * 0.7 * delta * 60
+	
+	if Global.godot_steam_abstraction && Global.is_multiplayer && !_is_node_owner():
+		return
+	
 	var rng := RandomNumberGenerator.new()
 	
 	$NavAgent.target_position = target_position
 	
 	var path_pos: Vector2 = $NavAgent.get_next_path_position()
-	var target_velocity := (path_pos - global_position).normalized() * settings.base_speed
+	target_velocity = (path_pos - global_position).normalized() * settings.base_speed
 	position += target_velocity * delta * 60
 	rotation = Util.better_angle_lerp(rotation, target_velocity.angle() + PI / 2, 0.1, delta)
 	
-	for i in range(targets.size()):
-		ropes[i].is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
-		targets[i].global_position = arms[i].points[1].rotated(arms[i].global_rotation) + arms[i].global_position
-		ropes[i].gravity = -target_velocity.normalized() * 10
-		
-		if player_visible:
-			end_targets[i].global_position = limbs[i].global_position
-			ropes[i].end_pos_on = true
-			Global.player.diver_movement.velocity += (global_position - Global.player.global_position).normalized() * 0.7 * delta * 60
-		else:
-			ropes[i].end_pos_on = false
+	if Global.godot_steam_abstraction && Global.is_multiplayer:
+		Global.godot_steam_abstraction.sync_var(self, "player_visible")
+		Global.godot_steam_abstraction.sync_var(self, "target_velocity")
 	
 	if position.distance_to(target_position) < 50:
 		_target_reached()

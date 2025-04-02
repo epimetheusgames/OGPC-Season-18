@@ -13,10 +13,12 @@ var input_vector: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 var is_in_gravity_area := false
 var spawned_in_research_station := false
+var is_in_research_station := false
 
 @onready var diver: Diver = get_parent()
 @export var use_mouse_movement := false
 @export var gravity := 1.0
+@export var knockback_velocity := 200.0
 
 signal boosted
 
@@ -98,8 +100,8 @@ func update_movement_velocity(delta: float):
 	if velocity.length() > MAX_SPEED:
 		velocity = velocity.normalized() * MAX_SPEED
 
-func knockback(force: Vector2) -> void:
-	velocity += force
+func knockback(direction: Vector2) -> void:
+	velocity += direction * knockback_velocity
 
 func get_velocity() -> Vector2:
 	return self.velocity
@@ -112,6 +114,7 @@ func _on_general_detection_box_area_entered(area: Area2D) -> void:
 		diver.set_state(Util.DiverState.IN_GRAVITY_AREA)
 		is_in_gravity_area = true
 	if area.is_in_group("research_station_area") && Global.godot_steam_abstraction && diver.saveable_timer.time_left <= 0:
+		is_in_research_station = true
 		if spawned_in_research_station:
 			Global.save_load_framework.save_state()
 		else:
@@ -121,3 +124,5 @@ func _on_general_detection_box_area_exited(area: Area2D) -> void:
 	if area.is_in_group("gravity_areas"):
 		diver.set_state(Util.DiverState.SWIMMING)
 		is_in_gravity_area = false
+	if area.is_in_group("research_station_area"):
+		is_in_research_station = false

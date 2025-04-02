@@ -9,7 +9,7 @@ func _ready() -> void:
 	if !Global.submarine:
 		Global.submarine = self
 	 
-	var custom_sub : CustomSubmarineResource = load("uid://ducurftcfe6yj")
+	var custom_sub : CustomSubmarineResource = load("res://Scenes/Resource/TestSubmarines/custom_sub_gen.tres")
 	module_container.load_sub(custom_sub)
 	
 	if Global.godot_steam_abstraction && Global.is_multiplayer && _is_node_owner():

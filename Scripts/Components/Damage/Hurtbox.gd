@@ -6,6 +6,7 @@ extends Area2D
 
 @export var hurt_by_enemy: bool = false
 @export var hurt_by_player: bool = false
+@export var definetely_a_player: bool = false
 
 @export var max_health: float = 100.0
 var health: float = max_health
@@ -45,6 +46,8 @@ func damage(damage_amount: float, _by: Attackbox) -> void:
 	var new_health = clamp(health - damage_amount, 0, max_health)
 	damaged.emit(abs(health - new_health))
 	health = new_health
+	
+	Global.player.diver_movement.knockback((Global.player.global_position - _by.global_position).normalized())
 	
 	if health == 0:
 		died.emit()

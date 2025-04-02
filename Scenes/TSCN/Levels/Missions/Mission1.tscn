@@ -316,7 +316,6 @@ script = ExtResource("2_3fu4r")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
 stream = ExtResource("2_8qye6")
 autoplay = true
-bus = &"Wind"
 parameters/looping = true
 
 [node name="ColorRect" type="ColorRect" parent="LevelContainer/Environment"]
