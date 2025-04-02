@@ -8,11 +8,12 @@ var instantiate_path: String
 var parent_path: String
 var node_name: String
 var scene_override_path: FilePathResource
+var use_already_existing_node := false
 
 ## Static function to create a NodeSaver.
-static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary[NodePath, Array] = {}, scene_override: FilePathResource = null):
+static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary[NodePath, Array] = {}, use_already_existing_node := false, scene_override: FilePathResource = null):
 	var ret := NodeSaver.new()
-	ret.save_node(mission, node, properties, _child_properties, scene_override)
+	ret.save_node(mission, node, properties, _child_properties, use_already_existing_node, scene_override)
 	return ret
 
 ## Recursively, ind new nodes in the original that could've been added be the developer,
@@ -39,25 +40,32 @@ func load_node(mission: MissionRoot) -> void:
 	if !add_to:
 		Global.print_error("Failed to load an object at path " + instantiate_path + " relative to mission root")
 	
-	var to_add: Node
-	if !packed_scene:
-		to_add = load(scene_override_path.file).instantiate()
-	else:
-		to_add = packed_scene.instantiate()
-
 	var replace := mission.get_node_or_null(instantiate_path)
-	if replace:
-		var differing_nodes: Array[NodePath] = compare_node_trees(to_add, replace)
-		for path in differing_nodes:
-			var node := replace.get_node(path)
-			var node_parent_path := replace.get_path_to(node.get_parent())
-			node.get_parent().remove_child(node)
-			to_add.get_node(node_parent_path).add_child(node)
+	var to_add: Node
+	
+	if !use_already_existing_node:
+		if !packed_scene:
+			to_add = load(scene_override_path.file).instantiate()
+		else:
+			to_add = packed_scene.instantiate()
+		
+		if replace:
+			var differing_nodes: Array[NodePath] = compare_node_trees(to_add, replace)
+			for path in differing_nodes:
+				var node := replace.get_node(path)
+				var node_parent_path := replace.get_path_to(node.get_parent())
+				node.get_parent().remove_child(node)
+				to_add.get_node(node_parent_path).add_child(node)
 
-		replace.queue_free()
+			replace.queue_free()
+		else:
+			Global.print_debug("No node to replace at path " + instantiate_path + " relative to mission root.")
 	else:
-		Global.print_debug("No node to replace at path " + instantiate_path + " relative to mission root.")
-
+		if !replace:
+			Global.print_debug("No node to replace at path " + instantiate_path + " but was supposed to use the existing node.")
+			return
+		to_add = replace
+		
 	for variable: String in variable_properties.keys():
 		to_add.set(variable, variable_properties[variable])
 	
@@ -70,22 +78,24 @@ func load_node(mission: MissionRoot) -> void:
 		for variable: String in child_variables.keys():
 			node_to_set.set(variable, child_variables[variable])
 	
-	add_to.add_child(to_add, true)
+	if !use_already_existing_node:
+		add_to.add_child(to_add, true)
 
-	# Wait a bit, make sure the node we replaced is fully deleted.
-	await add_to.get_tree().create_timer(0.2, false).timeout
+		# Wait a bit, make sure the node we replaced is fully deleted.
+		await add_to.get_tree().create_timer(0.2, false).timeout
 
-	# Ensure node name stays constant, sometimes Godot can put a number after it.
-	to_add.name = node_name
+		# Ensure node name stays constant, sometimes Godot can put a number after it.
+		to_add.name = node_name
 
 ## Packs a node into this NodeSaver. Static function for this is create
 ## Child properties is path (String): variable names (Array[String]).
-func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary[NodePath, Array] = {}, scene_override: FilePathResource = null) -> void:
+func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary[NodePath, Array] = {}, use_existing_node := false, scene_override: FilePathResource = null) -> void:
 	Global.print_debug("DEBUG: Saving node at path " + str(mission.get_path_to(node)) + " relative to mission root.")
 
 	_recursively_set_owners(node, node)
 	
 	node_name = node.name
+	use_already_existing_node = use_existing_node
 	instantiate_path = mission.get_path_to(node)
 	parent_path = mission.get_path_to(node.get_parent())
 

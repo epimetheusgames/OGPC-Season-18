@@ -147,6 +147,7 @@ func _save() -> void:
 					"selected_weapon",
 				],
 			},
+			false,
 			diver_scene,
 		)
 	)
