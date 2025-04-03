@@ -52,15 +52,14 @@ func _process(delta: float) -> void:
 			ropes[i].end_pos_on = false
 	
 	if closest_player && \
-	   ((Global.godot_steam_abstraction && Global.is_multiplayer && node_owner == closest_player.node_owner) || \
-		!Global.is_multiplayer || !Global.godot_steam_abstraction \
+	   (((Global.godot_steam_abstraction && Global.is_multiplayer && node_owner == closest_player.node_owner) || \
+		!Global.is_multiplayer || !Global.godot_steam_abstraction) && \
+		closest_player.global_position.distance_squared_to(global_position) < 1000 ** 2
 	):
 		closest_player.global_position += (global_position - closest_player.global_position).normalized() * 0.7 * delta * 60
 	
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !_is_node_owner():
 		return
-	
-	var rng := RandomNumberGenerator.new()
 	
 	$NavAgent.target_position = target_position
 	

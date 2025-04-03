@@ -78,10 +78,6 @@ shape = SubResource("RectangleShape2D_j3u10")
 position = Vector2(0, -180)
 shape = SubResource("RectangleShape2D_j3u10")
 
-[node name="NavigationObstacle" type="StaticBody2D" parent="."]
-collision_layer = 256
-collision_mask = 0
-
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_q4cbb")
 

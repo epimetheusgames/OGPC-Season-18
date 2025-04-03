@@ -1,8 +1,8 @@
-[gd_scene load_steps=74 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=77 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
-[ext_resource type="Script" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
+[ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
 [ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="2_3svaj"]
 [ext_resource type="AudioStream" uid="uid://bdjdysj3l46f7" path="res://Assets/SFX/Wind.ogg" id="2_8qye6"]
 [ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="2_bdf5b"]
@@ -18,10 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://bi6i18nskixdt" path="res://Scenes/TSCN/Entities/NPCS/CivillianFollower.tscn" id="13_gnr5v"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="15_at1j7"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
+[ext_resource type="PackedScene" uid="uid://cs6xsivghesmh" path="res://Scenes/TSCN/Objects/PlaceableBuilding.tscn" id="16_3fu4r"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/NPCS/Boid.tscn" id="16_a7n5p"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
+[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="17_mcejo"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Script" uid="uid://2vvi3dga7td1" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
@@ -220,10 +222,13 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_8qye6"]
+[sub_resource type="Resource" id="Resource_mcejo"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mcejo"]
+radius = 303.007
 
 [sub_resource type="Resource" id="Resource_ulf3c"]
 resource_local_to_scene = true
@@ -316,9 +321,10 @@ environment = SubResource("Environment_5ulyy")
 [node name="EnvironmentEffects" type="Node" parent="LevelContainer/Environment"]
 script = ExtResource("2_3fu4r")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
+[node name="Wind" type="AudioStreamPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
 stream = ExtResource("2_8qye6")
 autoplay = true
+bus = &"Wind"
 parameters/looping = true
 
 [node name="ColorRect" type="ColorRect" parent="LevelContainer/Environment"]
@@ -512,6 +518,7 @@ texture = ExtResource("12_3svaj")
 collision_layer = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Environment/Collisions/StaticBody2D2"]
+visible = false
 position = Vector2(-2894, 2581)
 shape = SubResource("CircleShape2D_8qye6")
 
@@ -535,7 +542,7 @@ uid = SubResource("Resource_vfal8")
 z_index = 5
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_8qye6")
+uid = SubResource("Resource_mcejo")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -553,6 +560,30 @@ points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 
 [node name="Raycasts" parent="LevelContainer/Items/LightLine" index="1"]
 position = Vector2(-4236, -362)
+
+[node name="PlaceableBuilding" parent="LevelContainer/Items" node_paths=PackedStringArray("building_sprite", "building_collision", "base_position") instance=ExtResource("16_3fu4r")]
+position = Vector2(-2200, 2502)
+building_sprite = NodePath("Icon")
+building_collision = NodePath("StaticBody2D")
+base_position = NodePath("Node2D")
+
+[node name="Icon" type="Sprite2D" parent="LevelContainer/Items/PlaceableBuilding"]
+texture = ExtResource("17_mcejo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Items/PlaceableBuilding"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Items/PlaceableBuilding/StaticBody2D"]
+polygon = PackedVector2Array(-58, 61, -63, 53, -63, -52, -56, -61, -45, -65, 54, -64, 62, -58, 64, -46, 64, 53, 57, 62, 42, 64, -51, 64)
+
+[node name="Node2D" type="Node2D" parent="LevelContainer/Items/PlaceableBuilding"]
+position = Vector2(0, 64)
+
+[node name="Area2D" type="Area2D" parent="LevelContainer/Items"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Items/Area2D"]
+visible = false
+position = Vector2(-2200, 2502)
+shape = SubResource("CircleShape2D_mcejo")
 
 [node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node", "black_background", "research_station_area", "gravity_area", "exterior_polygon", "parallax_bubbles", "unlock_terminal")]
 script = ExtResource("12_jw53c")
