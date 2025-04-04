@@ -54,6 +54,7 @@ func _process(delta: float) -> void:
 	if closest_player && \
 	   (((Global.godot_steam_abstraction && Global.is_multiplayer && node_owner == closest_player.node_owner) || \
 		!Global.is_multiplayer || !Global.godot_steam_abstraction) && \
+		player_visible && \
 		closest_player.global_position.distance_squared_to(global_position) < 1000 ** 2
 	):
 		closest_player.global_position += (global_position - closest_player.global_position).normalized() * 0.7 * delta * 60

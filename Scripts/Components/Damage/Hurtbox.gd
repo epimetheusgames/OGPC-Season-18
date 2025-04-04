@@ -37,7 +37,7 @@ func can_take_damage(attackbox: Attackbox) -> bool:
 		(attackbox.attacker_type == Attackbox.AttackerType.OTHER)
 	) && (!is_invincible)
 
-func damage(damage_amount: float, _by: Attackbox) -> void:
+func damage(damage_amount: float, by: Attackbox) -> void:
 	if is_invincible:
 		return
 	
@@ -47,8 +47,8 @@ func damage(damage_amount: float, _by: Attackbox) -> void:
 	damaged.emit(abs(health - new_health))
 	health = new_health
 	
-	if _by:
-		Global.player.diver_movement.knockback((Global.player.global_position - _by.global_position).normalized())
+	if by && definetely_a_player:
+		Global.player.diver_movement.knockback((Global.player.global_position - by.global_position).normalized())
 	
 	if health == 0:
 		died.emit()
