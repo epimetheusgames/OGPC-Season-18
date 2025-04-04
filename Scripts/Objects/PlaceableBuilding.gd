@@ -68,6 +68,10 @@ func _ready() -> void:
 	Global.save_load_framework.save_nodes.connect(_save_self)
 
 func _process(delta: float) -> void:
+	# TODO: Fix
+	if !placed_by:
+		placed_by = Global.player
+
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !placed_by._is_node_owner():
 		return
 	
