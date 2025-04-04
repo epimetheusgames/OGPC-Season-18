@@ -23,6 +23,7 @@ polygon = PackedVector2Array(-200, 200, 200, 200, 200.009, 167.97, -199.991, 167
 rotation = 1.57085
 script = ExtResource("1_pshir")
 path = SubResource("Resource_uu67r")
+rotation_increment = 180
 
 [node name="ModuleArea" type="Area2D" parent="."]
 
