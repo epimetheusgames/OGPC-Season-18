@@ -1,8 +1,8 @@
-[gd_scene load_steps=74 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=75 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
-[ext_resource type="Script" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
+[ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
 [ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="2_3svaj"]
 [ext_resource type="AudioStream" uid="uid://bdjdysj3l46f7" path="res://Assets/SFX/Wind.ogg" id="2_8qye6"]
 [ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="2_bdf5b"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Script" uid="uid://2vvi3dga7td1" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
 [ext_resource type="Shader" uid="uid://cdyuhcdqlxumk" path="res://Scripts/GLSL/GDShader/Screen/Vignette.gdshader" id="23_r7jln"]
+[ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Arrowfish.tscn" id="27_3fu4r"]
 [ext_resource type="Shader" uid="uid://7mjleihpyy3x" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="Shader" uid="uid://cgotkxkod1mlf" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="29_g0sdt"]
@@ -220,7 +221,7 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_8qye6"]
+[sub_resource type="Resource" id="Resource_3fu4r"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -535,7 +536,7 @@ uid = SubResource("Resource_vfal8")
 z_index = 5
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_8qye6")
+uid = SubResource("Resource_3fu4r")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -674,6 +675,9 @@ player_view_dist = 1500
 enemy_close_dist = 2500
 draw_spawn_positions = true
 enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg")])
+
+[node name="Arrowfish" parent="LevelContainer/Entities" instance=ExtResource("27_3fu4r")]
+position = Vector2(-1103, 3309)
 
 [node name="ParallaxLayer" type="ParallaxBackground" parent="."]
 layer = 0

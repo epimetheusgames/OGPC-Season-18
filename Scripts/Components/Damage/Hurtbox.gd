@@ -11,7 +11,7 @@ extends Area2D
 @export var max_health: float = 100.0
 var health: float = max_health
 
-@export var is_invincible: bool = false
+var is_invincible: bool = false
 
 signal damaged_by(by: Attackbox)
 
@@ -26,7 +26,13 @@ signal died()
 
 
 func _ready() -> void:
+	# Idk man you'll probably want multiple collision shapes that do damage like the thingy 
+	assert(get_child_count() == 1, "Hurtbox has no collision shape node assigned")
+	
 	var collision: CollisionShape2D = get_child(0)
+	
+	assert(collision is CollisionShape2D, "Hurtbox has no collision shape node assigned")
+	
 	collision.debug_color = Color.GREEN
 	collision.debug_color.a = 0.3
 

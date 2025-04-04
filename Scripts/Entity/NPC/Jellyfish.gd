@@ -4,6 +4,8 @@
 class_name Jellyfish
 extends Enemy
 
+#TODO: FIX THIS KAI
+"""
 const BOOST_MULTIPLIER: float = 7
 const ROTATION_SPEED: float = 0.3
 const BOOST_DECAY_RATE: float = 0.9  # Controls how fast boost fades
@@ -85,3 +87,4 @@ func update_targets():
 	else:
 		for i in range(tentacles.ropes.size()):
 			tentacles.ropes[i].gravity = target_velocity.normalized() * 10
+"""
