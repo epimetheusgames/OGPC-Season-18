@@ -7,7 +7,7 @@ extends Node2D
 const CONST_ACCEL: int = 40
 const TAP_ACCEL: int = 50
 const MAX_SPEED: int = 7000
-const MAX_ROTATION: float = 40.0
+const MAX_ROTATION: float = 10.0
 const ROTATION_RATE: float = 1.2
 const BUOYANCY_CHANGE_RATE = 1
 const MAX_BUOYANCY = 70.0

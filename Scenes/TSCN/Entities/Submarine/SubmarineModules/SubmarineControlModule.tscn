@@ -23,6 +23,7 @@ polygon = PackedVector2Array(-200, 200, 200, 200, 200, 160, -200, 160)
 [node name="SubmarineControlModule" type="Node2D"]
 script = ExtResource("1_ofa5d")
 path = SubResource("Resource_384ja")
+rotation_increment = 180
 
 [node name="ModuleArea" type="Area2D" parent="."]
 

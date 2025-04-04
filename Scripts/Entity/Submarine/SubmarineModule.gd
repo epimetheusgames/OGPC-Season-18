@@ -3,6 +3,8 @@ class_name SubmarineModule
 
 @export var path : FilePathResource
 
+@export var rotation_increment = 90
+
 var attachment_points : Array[AttachmentPoint]
 var render_attachment_points := false
 var is_editor_peice := false
@@ -84,10 +86,10 @@ func _area_mouse_exited(area) -> void:
 	if area.name == "MouseArea":
 		mouse_in_area = false
 
-func rotate_module(by: float) -> void:
-	rotation += by
+func rotate_module() -> void:
+	rotation += deg_to_rad(rotation_increment)
 	for point in attachment_points:
-		point.direction = point.direction.length() * Vector2.from_angle(point.direction.angle() + by)
+		point.direction = point.direction.length() * Vector2.from_angle(point.direction.angle() + deg_to_rad(rotation_increment))
 
 func create_module_resource() -> SubmarineModuleResource:
 	var module_resource = SubmarineModuleResource.new()

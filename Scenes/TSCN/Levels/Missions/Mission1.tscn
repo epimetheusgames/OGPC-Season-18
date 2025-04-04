@@ -540,7 +540,7 @@ uid = SubResource("Resource_vfal8")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("32_6lnpa")]
 z_index = 5
-position = Vector2(-1897, 2580)
+position = Vector2(-1529, 489)
 motion_mode = 1
 uid = SubResource("Resource_mcejo")
 
