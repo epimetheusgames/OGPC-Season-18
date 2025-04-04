@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d24oi85rw114u"]
 
 [ext_resource type="Script" uid="uid://cyvf25qnqef7g" path="res://Scripts/Entity/Diver/Combat/Pistol/PistolBullet.gd" id="1_hykh4"]
-[ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="2_gvdbw"]
+[ext_resource type="Script" uid="uid://ced6k1jq3eqag" path="res://Scripts/Components/Damage/OneShotAttack.gd" id="2_v6uvr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pk0f"]
 size = Vector2(14, 26)
@@ -11,7 +11,7 @@ size = Vector2(34, 67)
 
 [node name="PistolBullet2D" type="Area2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_hykh4")
-attackbox = NodePath("Attackbox")
+attackbox = NodePath("OneShotAttack")
 speed = 1000.0
 size = 10.0
 damage = 10.0
@@ -26,11 +26,13 @@ offset_bottom = 15.0
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_6pk0f")
 
-[node name="Attackbox" type="Area2D" parent="."]
-script = ExtResource("2_gvdbw")
+[node name="OneShotAttack" type="Area2D" parent="."]
+script = ExtResource("2_v6uvr")
 attacker_type = 1
+damage_amount = 3.0
+metadata/_custom_type_script = "uid://ced6k1jq3eqag"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_4bauh")
 

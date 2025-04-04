@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dd4arsu8r6mkx"]
+[gd_scene load_steps=6 format=3 uid="uid://dd4arsu8r6mkx"]
 
 [ext_resource type="Script" uid="uid://dh0ffpkyxt836" path="res://Arrowfish.gd" id="1_bu73s"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="2_8v7gp"]
+[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://EnemyFov.gd" id="3_8v7gp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bsgvg"]
 radius = 25.0
@@ -11,15 +12,19 @@ height = 138.0
 radius = 46.0
 height = 256.0
 
-[node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent")]
-position = Vector2(382, 373)
+[node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov")]
+position = Vector2(471, 329)
+rotation = 6.28318
 script = ExtResource("1_bu73s")
 hurtbox = NodePath("Hurtbox")
 nav_agent = NodePath("NavAgent")
+enemy_fov = NodePath("EnemyFov")
 
-[node name="Sprite" type="Polygon2D" parent="."]
-color = Color(0.924393, 0.567753, 0.919931, 1)
-polygon = PackedVector2Array(-39, 27, -41, -37, 0, -21, 49, -36, 201, -1, 50, 24, 0, 6)
+[node name="EnemyFov" type="Node2D" parent="."]
+position = Vector2(72, -4)
+script = ExtResource("3_8v7gp")
+angle_of_view = 100.0
+metadata/_custom_type_script = "uid://0j0vsqeeio1s"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(54, -5)
@@ -37,3 +42,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_bu73s")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
+
+[node name="Sprite" type="Polygon2D" parent="."]
+color = Color(0.924393, 0.567753, 0.919931, 1)
+polygon = PackedVector2Array(-39, 27, -41, -37, 0, -21, 49, -36, 201, -1, 50, 24, 0, 6)

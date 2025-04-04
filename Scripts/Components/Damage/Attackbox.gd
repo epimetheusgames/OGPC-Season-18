@@ -1,4 +1,6 @@
 ## Abstract class for dealing damage to Hurtbox
+## DON'T ADD THIS TO SCENE TREE
+## Use implementations ContinuousAttack and OneShotAttack
 # Owned by: kaitaobenson
 
 class_name Attackbox
@@ -7,7 +9,7 @@ extends Area2D
 enum AttackerType {
 	ENEMY,
 	PLAYER,
-	OTHER,
+	OTHER, # Should damage both enemy and player
 }
 
 @export var attacker_type: AttackerType = AttackerType.OTHER
@@ -26,33 +28,35 @@ var is_attacking := false
 
 func _ready() -> void:
 	var collision: CollisionShape2D = get_child(0)
+	
+	assert(collision is CollisionShape2D, "Attackbox has no collision shape node assigned")
+	
 	collision.debug_color = Color.RED
 	collision.debug_color.a = 0.3
 
 func _process(_delta: float) -> void:
-	if !is_attacking:
-		return
-	
-	var areas: Array[Area2D] = get_overlapping_areas()
-	
-	for area in areas:
-		if area is Hurtbox:
-			var hurtbox: Hurtbox = area
-			damage_hurtbox(hurtbox)
-			hurtbox_hit.emit(hurtbox)
-	
-	is_attacking = false
+	detect_and_damage_hurtboxes()
+
+func detect_and_damage_hurtboxes() -> void:
+	# Damaging behavior goes here
+	pass
+	#assert(false, "Abstract method 'detect_and_damage_hurtboxes()' must be overridden.")
 
 func damage_hurtbox(hurtbox: Hurtbox) -> void:
 	if hurtbox.can_take_damage(self):
+		
 		Global.print_debug("DEBUG: Attackbox at path " + str(get_path()) + " damages the hurtbox below.")
+		
 		hurtbox.damage(damage_amount, self)
 		display_number(int(damage_amount), hurtbox.global_position)
+		
 		damage_dealt.emit(hurtbox, damage_amount)
 		
-		if hurtbox.health - damage_amount <= 0:
+		if hurtbox.health <= 0:  
 			killed.emit()
 
+
+# TODO: Improve this and move it to some global static function probably, w/ object pooling
 func display_number(value: int, _position: Vector2) -> void:
 	var number = Label.new()
 	number.top_level = true
@@ -71,4 +75,3 @@ func display_number(value: int, _position: Vector2) -> void:
 	tween.set_parallel(true)
 	tween.tween_property(number, "position:y", number.position.y - 100, 0.8).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(number, "modulate:a", 0, 0.8).set_trans(Tween.TRANS_QUAD)
-	

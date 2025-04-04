@@ -1,4 +1,5 @@
-## Attacks continuously, will delay after hitting a hurtbox.
+## Attacks continuously, will hit all hurtboxes in it's area once,
+## then wait until delay is over
 # Owned by: kaitaobenson
 
 class_name ContinuousAttack
@@ -12,13 +13,15 @@ var is_delayed: bool = false
 var delay_timer: Timer
 
 func _ready() -> void:
+	super()
+	
 	delay_timer = Timer.new()
 	delay_timer.wait_time = delay_time
 	delay_timer.one_shot = true
 	delay_timer.connect("timeout", _on_timer_timeout)
 	add_child(delay_timer)
 
-func _process(delta: float) -> void:
+func detect_and_damage_hurtboxes() -> void:
 	if is_delayed:
 		return
 	

@@ -1,8 +1,12 @@
+## Base class for all enemies
+# Owned by: kaibenson
+
 class_name Enemy
 extends CharacterBody2D
 
 @export var hurtbox: Hurtbox
 @export var nav_agent: NavigationAgent2D
+@export var enemy_fov: EnemyFov
 
 @export var drop_item: BaseItem
 

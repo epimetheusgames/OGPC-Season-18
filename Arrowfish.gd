@@ -18,12 +18,24 @@ func _ready() -> void:
 	wander_timer.timeout.connect(_update_wander_position)
 	
 	wander_timer.start()
+	
+	hurtbox.damaged.connect(_on_take_damage)
+	hurtbox.died.connect(_on_death)
+
+func _on_take_damage(_amount: float, _by: Attackbox):
+	print("ARROWFISH DAMAGED, HELTH: " + str(hurtbox.health))
+
+func _on_death():
+	print("Arrowfish died ;(")
+	queue_free()
 
 func _physics_process(delta: float) -> void:
 	# Code for choosing which state to be in here
-	enemy_state = ENEMY_STATE.CHASE
+	enemy_state = ENEMY_STATE.WANDER
 	
-	_call_movement(delta)
+	print(enemy_fov.can_see_point(get_global_mouse_position()))
+	
+	#_call_movement(delta)
 	velocity *= 0.99
 	move_and_slide()
 

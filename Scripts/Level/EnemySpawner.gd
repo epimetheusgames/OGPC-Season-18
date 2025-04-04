@@ -63,6 +63,7 @@ func generate_spawn_positions() -> Array[SpawnInfo]:
 	return output
 
 func _process(delta: float) -> void:
+	return
 	if !Global.is_multiplayer_host() && Global.is_multiplayer:
 		return
 	
