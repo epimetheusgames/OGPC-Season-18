@@ -47,6 +47,9 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_bu73s")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_line_width = 1.0
 
 [node name="Sprite" type="Polygon2D" parent="."]
 color = Color(0.924393, 0.567753, 0.919931, 1)
@@ -61,6 +64,8 @@ metadata/_custom_type_script = "uid://balgnejnh7c1p"
 script = ExtResource("5_n7nl4")
 aim_state = NodePath("../Aim")
 
+[node name="WanderTimer" type="Timer" parent="StateMachine/Wander"]
+
 [node name="Aim" type="Node" parent="StateMachine" node_paths=PackedStringArray("dash_state", "chase_state")]
 script = ExtResource("6_sf2hr")
 dash_state = NodePath("../Dash")
@@ -70,8 +75,9 @@ chase_state = NodePath("../Chase")
 script = ExtResource("7_04wa5")
 chase_state = NodePath("../Chase")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("escape_state", "wander_state")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("aim_state", "escape_state", "wander_state")]
 script = ExtResource("8_gf7n5")
+aim_state = NodePath("../Aim")
 escape_state = NodePath("../Escape")
 wander_state = NodePath("../Wander")
 

@@ -1,9 +1,15 @@
+## Chase state for Arrowfish
+# Owned by: kaibenson
+
 extends State
+
+@export var aim_state: State
+@export var escape_state: State
+@export var wander_state: State
 
 var enemy: Enemy
 
-@export var escape_state: State
-@export var wander_state: State
+var chase_speed: float = 10.0
 
 func init() -> void:
 	assert(parent is Enemy, "This state must have Enemy parent")
@@ -15,8 +21,6 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-func process_input(event: InputEvent) -> State:
-	return null
 
 func process_frame(delta: float) -> State:
 	return null
@@ -27,11 +31,14 @@ func process_physics(delta: float) -> State:
 	enemy.nav_agent.target_position = diver_pos
 	
 	var next_path_pos = enemy.nav_agent.get_next_path_position()
-	enemy.accelerate_towards(next_path_pos, 5, delta)
+	enemy.accelerate_towards(next_path_pos, chase_speed, delta)
 	
 	if enemy.hurtbox.health < 30:
 		return escape_state
+	elif enemy.global_position.distance_to(diver_pos) > 700 && enemy.enemy_fov.can_see_point(diver_pos):
+		return aim_state
 	elif !enemy.enemy_fov.can_see_point(diver_pos):
-		return wander_state
+		pass
+		#return wander_state
 	
 	return null

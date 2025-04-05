@@ -7,6 +7,7 @@ extends State
 
 var enemy: Enemy
 
+var wait_time: float = 2.0
 var aim_timer: float = 0.0
 
 func init() -> void:
@@ -19,9 +20,6 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-func process_input(event: InputEvent) -> State:
-	return null
-
 func process_frame(delta: float) -> State:
 	return null
 
@@ -33,11 +31,15 @@ func process_physics(delta: float) -> State:
 		enemy.global_position.angle_to_point(diver_pos),
 		4.0 * delta
 	)
+	enemy.velocity *= 0.6
 	
 	aim_timer += delta
 	
-	if aim_timer >= 5.0:
+	if aim_timer >= wait_time:
 		aim_timer = 0.0
 		return dash_state
+	
+	if !enemy.enemy_fov.can_see_point(diver_pos):
+		return chase_state
 	
 	return null
