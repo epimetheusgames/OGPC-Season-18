@@ -563,10 +563,10 @@ scale = Vector2(228.643, -232.132)
 position = Vector2(34, -110)
 
 [node name="LegIkTarget1" type="Node2D" parent="Animation"]
-position = Vector2(5, 83)
+position = Vector2(108, 0)
 
 [node name="LegIkTarget2" type="Node2D" parent="Animation"]
-position = Vector2(-87, 14)
+position = Vector2(-144, -1)
 
 [node name="Arrow" type="Node2D" parent="Animation"]
 use_parent_material = true

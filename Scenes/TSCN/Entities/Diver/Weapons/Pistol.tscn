@@ -68,8 +68,9 @@ animations = [{
 "speed": 25.0
 }]
 
-[node name="Pistol" type="Node2D"]
+[node name="Pistol" type="Node2D" node_paths=PackedStringArray("hand1pos")]
 script = ExtResource("1_n4wnc")
+hand1pos = NodePath("Hand1Pos")
 bullet_scene = ExtResource("2_3x5oy")
 dist_from_head = 80.0
 knockback = 500.0

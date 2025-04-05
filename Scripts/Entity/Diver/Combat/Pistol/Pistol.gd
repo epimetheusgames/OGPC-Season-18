@@ -7,6 +7,7 @@ extends Gun
 @onready var pistol_sprite: AnimatedSprite2D = $"PistolSprite"
 @onready var emit_point: Node2D = $"EmitPoint"
 @onready var cone_of_fire: ConeOfFire = $"ConeOfFire"
+@export var hand1pos: Node2D
 
 var shooting: bool = false
 
@@ -75,7 +76,7 @@ func _on_tranquilizer_gun_sprite_animation_finished() -> void:
 	pistol_sprite.play("Idle")
 
 func get_hand1_pos() -> Vector2:
-	return $Hand1Pos.global_position
+	return hand1pos.global_position
 
 func get_hand2_pos() -> Vector2:
-	return $Hand1Pos.global_position
+	return hand1pos.global_position
