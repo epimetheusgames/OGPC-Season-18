@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d24oi85rw114u"]
+[gd_scene load_steps=7 format=3 uid="uid://d24oi85rw114u"]
 
 [ext_resource type="Script" uid="uid://cyvf25qnqef7g" path="res://Scripts/Entity/Diver/Combat/Pistol/PistolBullet.gd" id="1_hykh4"]
 [ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="2_gvdbw"]
+[ext_resource type="Texture2D" uid="uid://tiecptnkuai8" path="res://Assets/Art/Entity/Player/Dart.png" id="3_qverg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pk0f"]
 size = Vector2(14, 26)
@@ -9,18 +10,21 @@ size = Vector2(14, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bauh"]
 size = Vector2(34, 67)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qverg"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+gravity = Vector3(0, -90, 0)
+damping_min = 1.0
+damping_max = 1.0
+
 [node name="PistolBullet2D" type="Area2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_hykh4")
 attackbox = NodePath("Attackbox")
 speed = 1000.0
 size = 10.0
 damage = 10.0
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -8.0
-offset_top = -13.0
-offset_right = 8.0
-offset_bottom = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -33,6 +37,18 @@ attacker_type = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_4bauh")
+
+[node name="Dart" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+rotation = 1.57079
+scale = Vector2(3.03518, 3.03518)
+texture = ExtResource("3_qverg")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 600
+lifetime = 10.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_qverg")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

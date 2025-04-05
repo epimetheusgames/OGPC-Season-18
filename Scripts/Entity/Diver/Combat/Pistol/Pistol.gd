@@ -10,6 +10,12 @@ extends Gun
 
 var shooting: bool = false
 
+func _ready() -> void:
+	super()
+
+	use_hand1 = true
+	use_hand2 = true
+
 func _process(delta: float) -> void:
 	super(delta)
 	
@@ -61,9 +67,15 @@ func _on_tranquilizer_gun_sprite_animation_finished() -> void:
 		
 	if !flipped:
 		flipped = true
-		pistol_sprite.scale.y = -1
+		pistol_sprite.scale.y = 1
 	else:
 		flipped = false
-		pistol_sprite.scale.y = 1
+		pistol_sprite.scale.y = -1
 	
 	pistol_sprite.play("Idle")
+
+func get_hand1_pos() -> Vector2:
+	return $Hand1Pos.global_position
+
+func get_hand2_pos() -> Vector2:
+	return $Hand1Pos.global_position
