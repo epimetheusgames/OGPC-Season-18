@@ -11,7 +11,7 @@ extends Node2D
 
 func can_see_point(pos: Vector2) -> bool:
 	# Check radius
-	if global_position.distance_to(pos) > view_radius:
+	if global_position.distance_squared_to(pos) > view_radius * view_radius:
 		return false
 	
 	# Check angle

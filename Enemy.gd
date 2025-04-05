@@ -10,24 +10,24 @@ extends CharacterBody2D
 
 @export var drop_item: BaseItem
 
-enum ENEMY_STATE {
+enum EnemyState {
 	WANDER,
 	CHASE,
 	ESCAPE,
 }
 
-var enemy_state: ENEMY_STATE = ENEMY_STATE.WANDER
+#var EnemyState: EnemyState = EnemyState.WANDER
 
 func _ready() -> void:
 	pass
 
 func _call_movement(delta: float) -> void:
-	match enemy_state:
-		ENEMY_STATE.WANDER:
+	match EnemyState:
+		EnemyState.WANDER:
 			wander(delta)
-		ENEMY_STATE.CHASE:
+		EnemyState.CHASE:
 			chase(delta)
-		ENEMY_STATE.ESCAPE:
+		EnemyState.ESCAPE:
 			escape(delta)
 
 # Override these movement functions

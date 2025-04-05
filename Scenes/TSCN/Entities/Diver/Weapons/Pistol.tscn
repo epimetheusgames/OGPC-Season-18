@@ -1,13 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dul1o4r1c8ash"]
+[gd_scene load_steps=11 format=3 uid="uid://dul1o4r1c8ash"]
 
 [ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Entity/Player/TranquilizerPistol.png" id="1_2gvrx"]
 [ext_resource type="Script" uid="uid://c5ghrd4ktgyhh" path="res://Scripts/Entity/Diver/Combat/Pistol/Pistol.gd" id="1_n4wnc"]
 [ext_resource type="PackedScene" uid="uid://d24oi85rw114u" path="res://Scenes/TSCN/Entities/Diver/Weapons/PistolBullet.tscn" id="2_3x5oy"]
 [ext_resource type="PackedScene" uid="uid://cyelkkty2ihsb" path="res://Scenes/TSCN/Entities/Diver/Weapons/ConeOfFire.tscn" id="3_amfsj"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m6uma"]
-atlas = ExtResource("1_2gvrx")
-region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_koqf3"]
 atlas = ExtResource("1_2gvrx")
@@ -31,14 +27,6 @@ region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_inovh"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m6uma")
-}],
-"loop": false,
-"name": &"Flip",
-"speed": 120.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_koqf3")
@@ -71,6 +59,8 @@ animations = [{
 [node name="Pistol" type="Node2D"]
 script = ExtResource("1_n4wnc")
 bullet_scene = ExtResource("2_3x5oy")
+max_bullet_amount = 6
+cooldown_time = 0.05
 dist_from_head = 70.0
 knockback = 500.0
 use_hand1 = true
@@ -84,8 +74,9 @@ spread_decrease_factor = 5.0
 [node name="PistolSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_inovh")
-animation = &"Flip"
+animation = &"Idle"
 autoplay = "Shoot"
+frame_progress = 0.909941
 
 [node name="EmitPoint" type="Node2D" parent="."]
 position = Vector2(24, -15)

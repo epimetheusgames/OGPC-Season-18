@@ -479,8 +479,8 @@ polygon = PackedVector2Array(2785, 1195, 2437, 848, 4141, 831)
 script = ExtResource("5_aep54")
 
 [node name="AutoTerrain" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-position = Vector2(188, 0)
-polygon = PackedVector2Array(2933, 1326, 2437, 848, 4226, 910)
+position = Vector2(-3227, 2226)
+polygon = PackedVector2Array(2933, 1326, 2437, 848, 3272, 941)
 script = ExtResource("5_aep54")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Environment/Collisions"]
@@ -677,7 +677,7 @@ draw_spawn_positions = true
 enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg")])
 
 [node name="Arrowfish" parent="LevelContainer/Entities" instance=ExtResource("27_3fu4r")]
-position = Vector2(-1103, 3309)
+position = Vector2(2013, 2592)
 
 [node name="ParallaxLayer" type="ParallaxBackground" parent="."]
 layer = 0

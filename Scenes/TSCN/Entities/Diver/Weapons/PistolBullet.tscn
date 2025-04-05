@@ -14,7 +14,7 @@ script = ExtResource("1_hykh4")
 attackbox = NodePath("OneShotAttack")
 speed = 1000.0
 size = 10.0
-damage = 10.0
+damage = 5.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -8.0
@@ -29,7 +29,7 @@ shape = SubResource("RectangleShape2D_6pk0f")
 [node name="OneShotAttack" type="Area2D" parent="."]
 script = ExtResource("2_v6uvr")
 attacker_type = 1
-damage_amount = 3.0
+damage_amount = 5.0
 metadata/_custom_type_script = "uid://ced6k1jq3eqag"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]

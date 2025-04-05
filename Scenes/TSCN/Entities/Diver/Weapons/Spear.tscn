@@ -8,6 +8,7 @@
 size = Vector2(74, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2tr2w"]
+radius = 11.0
 
 [node name="Spear" type="Area2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_x2dlv")
@@ -32,7 +33,7 @@ position = Vector2(-29, 0)
 [node name="OneShotAttack" type="Area2D" parent="."]
 script = ExtResource("4_garpb")
 attacker_type = 1
-damage_amount = 10.0
+damage_amount = 50.0
 metadata/_custom_type_script = "uid://ced6k1jq3eqag"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]

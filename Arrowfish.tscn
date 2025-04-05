@@ -23,7 +23,6 @@ enemy_fov = NodePath("EnemyFov")
 [node name="EnemyFov" type="Node2D" parent="."]
 position = Vector2(72, -4)
 script = ExtResource("3_8v7gp")
-angle_of_view = 100.0
 metadata/_custom_type_script = "uid://0j0vsqeeio1s"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
