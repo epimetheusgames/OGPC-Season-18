@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Script" uid="uid://2vvi3dga7td1" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
 [ext_resource type="Shader" uid="uid://cdyuhcdqlxumk" path="res://Scripts/GLSL/GDShader/Screen/Vignette.gdshader" id="23_r7jln"]
-[ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Arrowfish.tscn" id="27_3fu4r"]
+[ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Arrowfish/Arrowfish.tscn" id="27_3fu4r"]
 [ext_resource type="Shader" uid="uid://7mjleihpyy3x" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="Shader" uid="uid://cgotkxkod1mlf" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="29_g0sdt"]
