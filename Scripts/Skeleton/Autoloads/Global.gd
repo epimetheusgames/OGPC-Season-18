@@ -84,6 +84,9 @@ var research_station: ResearchStation
 ## Ingame canvas modulate used for lighting (time of day)
 var canvas_modulate: CanvasModulate
 
+## The light that acts as the sun.
+var sun: DirectionalLight2D
+
 ## Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {
 	"General Collision": 1,

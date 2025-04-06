@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=55 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://nn7jp07uetnh" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -160,9 +160,21 @@ collision_use_scale = true
 radius = 25.0
 height = 110.0
 
+[sub_resource type="Gradient" id="Gradient_eo78x"]
+offsets = PackedFloat32Array(0, 0.675781, 1)
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0.0745098, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_chbw5"]
+gradient = SubResource("Gradient_eo78x")
+width = 1000
+height = 1000
+fill = 1
+fill_from = Vector2(0.5, 0.527778)
+fill_to = Vector2(0.846154, 0.865385)
+
 [sub_resource type="Gradient" id="Gradient_in7v8"]
-offsets = PackedFloat32Array(0, 0.425781, 0.675781, 1)
-colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0.423529, 1, 1, 1, 0.0745098, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.675781, 1)
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0.0745098, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_iyvmc"]
 gradient = SubResource("Gradient_in7v8")
@@ -173,6 +185,7 @@ fill_from = Vector2(0.5, 0.527778)
 fill_to = Vector2(0.846154, 0.865385)
 
 [node name="Diver" type="CharacterBody2D" node_paths=PackedStringArray("camera", "follower")]
+modulate = Color(3, 3, 3, 1)
 motion_mode = 1
 script = ExtResource("1_1l6ma")
 diver_scene = SubResource("Resource_fmqh5")
@@ -181,7 +194,6 @@ follower = NodePath("Movement/CivillianFollower")
 uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_ghsq1")
 
@@ -418,7 +430,6 @@ auto_calculate_length_and_angle = false
 length = 38.2
 bone_angle = 15.0
 metadata/_edit_lock_ = true
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
 use_parent_material = true
@@ -431,7 +442,6 @@ auto_calculate_length_and_angle = false
 length = 37.0
 bone_angle = 28.0
 metadata/_edit_lock_ = true
-metadata/_local_pose_override_enabled_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm1/Forearm1"]
 position = Vector2(17.8001, 8.27792)
@@ -625,11 +635,11 @@ debug_color = Color(0, 0.649449, 0.143183, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="GeneralDetectionBox" type="Area2D" parent="Stats" groups=["player_area"]]
+visible = false
 rotation = -0.000201209
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/GeneralDetectionBox"]
-visible = false
 rotation = -0.000201209
 shape = SubResource("CapsuleShape2D_wi5t0")
 debug_color = Color(0, 0.649449, 0.143183, 0.42)
@@ -652,54 +662,52 @@ scale = Vector2(0.272378, 0.272378)
 script = ExtResource("9_xqhlv")
 metadata/_edit_lock_ = true
 
-[node name="FlashLight" type="PointLight2D" parent="Light"]
-position = Vector2(0, -70)
+[node name="Flashlight" type="PointLight2D" parent="Light"]
+position = Vector2(7, -65)
 scale = Vector2(1.5, 1.5)
 color = Color(0.35, 0.35, 0.35, 1)
 energy = 11.04
 range_item_cull_mask = 3
 shadow_enabled = true
-shadow_filter = 2
+shadow_filter = 1
 shadow_filter_smooth = 3.1
 texture = ExtResource("10_qg316")
 texture_scale = 0.8
-metadata/_edit_lock_ = true
 
-[node name="FlashLightSoft" type="PointLight2D" parent="Light/FlashLight"]
+[node name="FlashLightSoft" type="PointLight2D" parent="Light/Flashlight"]
 color = Color(0.237539, 0.237539, 0.237539, 1)
-energy = 1.02
+energy = 1.2
 range_item_cull_mask = 3
 shadow_filter = 1
 shadow_filter_smooth = 3.1
 texture = ExtResource("10_qg316")
 texture_scale = 0.7
-metadata/_edit_lock_ = true
 
-[node name="LightArea" type="Area2D" parent="Light/FlashLight"]
+[node name="LightArea" type="Area2D" parent="Light/Flashlight"]
 scale = Vector2(0.666667, 0.666667)
 collision_layer = 4
 collision_mask = 0
 metadata/_edit_lock_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light/FlashLight/LightArea"]
-visible = false
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light/Flashlight/LightArea"]
 polygon = PackedVector2Array(1, -2, 361, -643, 126, -681, -93, -682, -315, -617)
 
 [node name="BodyLight" type="PointLight2D" parent="Light"]
-visible = false
+energy = 0.3
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 2
-texture = SubResource("GradientTexture2D_iyvmc")
+texture = SubResource("GradientTexture2D_chbw5")
+texture_scale = 0.7
 metadata/_edit_lock_ = true
 
-[node name="PlayerVisualDetectionArea" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerVisualDetectionArea"]
-visible = false
-shape = SubResource("CapsuleShape2D_wi5t0")
+[node name="BodyLightSoft" type="PointLight2D" parent="Light/BodyLight"]
+energy = 0.2
+range_item_cull_mask = 3
+shadow_filter = 1
+texture = SubResource("GradientTexture2D_iyvmc")
+texture_scale = 0.7
+metadata/_edit_lock_ = true
 
 [node name="BuoyancyComponent" type="Node" parent="." node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("13_arg6r")

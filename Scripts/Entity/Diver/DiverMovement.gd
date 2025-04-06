@@ -13,7 +13,7 @@ var input_vector: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 var is_in_gravity_area := false
 var spawned_in_research_station := false
-var is_in_research_station := false
+var is_in_research_station := true
 
 @onready var diver: Diver = get_parent()
 @export var use_mouse_movement := false
@@ -82,10 +82,9 @@ func update_movement_velocity(delta: float):
 	
 	if is_in_gravity_area:
 		diver.rotation = 0
-		velocity.y += gravity * delta * 60
 		
 		if input_vector.length_squared() > 0:
-			velocity = input_vector * 3 * delta * 60
+			velocity.x += input_vector.x * 3 * delta * 60
 		else:
 			velocity.x = 0
 	

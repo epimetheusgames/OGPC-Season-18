@@ -6,7 +6,7 @@ extends Node2D
 @export var enemy_close_dist: int = 2000
 @export var draw_spawn_positions: bool
 @export var enemy_list: Array[EnemySpawnerInfo]
-@export var target_enemies_close: int = 3
+@export var target_enemies_close: int = 0
 
 var spawned_enemies: Array[Enemy]
 var counter := 0
