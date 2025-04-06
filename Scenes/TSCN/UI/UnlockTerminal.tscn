@@ -9,18 +9,21 @@
 script = ExtResource("2_1re2d")
 name = "pistol"
 formatted_name = "Pistol"
+cost = 10
 metadata/_custom_type_script = "uid://dmqhnwjlxysck"
 
 [sub_resource type="Resource" id="Resource_rasfv"]
 script = ExtResource("2_1re2d")
 name = "knife"
 formatted_name = "Knife"
+cost = 5
 metadata/_custom_type_script = "uid://dmqhnwjlxysck"
 
 [sub_resource type="Resource" id="Resource_l73cy"]
 script = ExtResource("2_1re2d")
 name = "speargun"
 formatted_name = "Speargun"
+cost = 25
 metadata/_custom_type_script = "uid://dmqhnwjlxysck"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fm50s"]

@@ -56,8 +56,9 @@ animations = [{
 "speed": 25.0
 }]
 
-[node name="Pistol" type="Node2D"]
+[node name="Pistol" type="Node2D" node_paths=PackedStringArray("hand1pos")]
 script = ExtResource("1_n4wnc")
+hand1pos = NodePath("Hand1Pos")
 bullet_scene = ExtResource("2_3x5oy")
 max_bullet_amount = 6
 cooldown_time = 0.05
@@ -80,6 +81,9 @@ frame_progress = 0.909941
 
 [node name="EmitPoint" type="Node2D" parent="."]
 position = Vector2(24, -15)
+
+[node name="Hand1Pos" type="Node2D" parent="."]
+position = Vector2(-15, 2)
 
 [connection signal="animation_changed" from="PistolSprite" to="." method="_on_tranquilizer_gun_sprite_animation_changed"]
 [connection signal="animation_finished" from="PistolSprite" to="." method="_on_tranquilizer_gun_sprite_animation_finished"]

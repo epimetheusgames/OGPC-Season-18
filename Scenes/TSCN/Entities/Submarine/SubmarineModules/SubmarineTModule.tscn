@@ -30,6 +30,7 @@ polygon = PackedVector2Array(200, -200, 80, -200, 80, -160, 200, -160)
 [node name="SubmarineTModule" type="Node2D"]
 script = ExtResource("1_4f4gm")
 path = SubResource("Resource_egheg")
+rotation_increment = 180
 metadata/_custom_type_script = "uid://bmskoe21i84vc"
 
 [node name="ModuleArea" type="Area2D" parent="."]

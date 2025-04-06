@@ -94,10 +94,10 @@ static func do_pointcast(world_2d: World2D, point: Vector2, mask: int = 0xFFFFFF
 # -- Math --
 
 ## Framerate independant linear interpolation.
-static func better_lerp(a: float, b: float, decay: float, delta: float):
+static func better_lerp(from: float, to: float, weight: float, delta: float):
 	# Convert decay from 0-1 to 1-25.
-	decay = (decay * 25.0)
-	return b + (a - b) * exp(-decay * delta)
+	weight = (weight * 25.0)
+	return from + (from - to) * exp(-weight * delta)
 
 ## Framerate independant linear interpolation (Vector2).
 static func better_vec2_lerp(a: Vector2, b: Vector2, decay: float, delta: float):

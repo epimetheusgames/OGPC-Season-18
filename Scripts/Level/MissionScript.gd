@@ -2,6 +2,7 @@ class_name MissionRoot
 extends Node2D
 
 @export var canvas_modulate: CanvasModulate
+@export var sun: DirectionalLight2D
 
 var line_one_material
 var line_two_material
@@ -12,6 +13,7 @@ var line_six_material
 	
 func _ready():
 	Global.canvas_modulate = canvas_modulate
+	Global.sun = sun
 		
 	# What the acrualy skib is this code
 	var overlay_ui = CanvasLayer.new()

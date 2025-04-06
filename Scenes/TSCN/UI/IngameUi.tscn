@@ -136,18 +136,22 @@ theme = ExtResource("5_6galc")
 text = "00:00"
 horizontal_alignment = 2
 
-[node name="Seperator" type="VSeparator" parent="HUD/MarginContainer/HBoxContainer"]
+[node name="Seperator2" type="VSeparator" parent="HUD/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MoneyStatus" type="Label" parent="HUD/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("5_6galc")
 text = "Money: 0"
 
-[node name="Seperator2" type="VSeparator" parent="HUD/MarginContainer/HBoxContainer"]
+[node name="Seperator" type="VSeparator" parent="HUD/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="SavingText" type="Label" parent="HUD/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("5_6galc")
 text = "Saving ..."

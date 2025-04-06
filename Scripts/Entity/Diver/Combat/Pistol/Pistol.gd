@@ -7,6 +7,7 @@ extends Gun
 @onready var pistol_sprite: AnimatedSprite2D = $"PistolSprite"
 @onready var emit_point: Node2D = $"EmitPoint"
 @onready var cone_of_fire: ConeOfFire = $"ConeOfFire"
+@export var hand1pos: Node2D
 
 func _process(delta: float) -> void:
 	super(delta)

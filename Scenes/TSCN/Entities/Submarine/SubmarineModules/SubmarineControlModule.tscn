@@ -23,6 +23,7 @@ polygon = PackedVector2Array(-200, 200, 200, 200, 200, 160, -200, 160)
 [node name="SubmarineControlModule" type="Node2D"]
 script = ExtResource("1_ofa5d")
 path = SubResource("Resource_384ja")
+rotation_increment = 180
 
 [node name="ModuleArea" type="Area2D" parent="."]
 
@@ -77,10 +78,6 @@ shape = SubResource("RectangleShape2D_j3u10")
 [node name="Ceiling" type="CollisionShape2D" parent="Collision"]
 position = Vector2(0, -180)
 shape = SubResource("RectangleShape2D_j3u10")
-
-[node name="NavigationObstacle" type="StaticBody2D" parent="."]
-collision_layer = 256
-collision_mask = 0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_q4cbb")

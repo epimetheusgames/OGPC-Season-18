@@ -186,7 +186,7 @@ func _process(delta: float) -> void:
 					adding_module = false
 			
 		if Input.is_action_just_pressed("rotate_peice"):
-			module_adding.rotate_module(PI / 2)
+			module_adding.rotate_module()
 
 		if Input.is_action_just_pressed("mouse_right_click"):
 			if module_adding is SubmarineControlModule:
@@ -212,13 +212,6 @@ func _process(delta: float) -> void:
 				#for our_point in module_adding.attachment_points:
 					#if point.direction.is_equal_approx(-our_point.direction) && point.global_position.distance_to(our_point.global_position) < 100 && !point.attached_point && !our_point.attached_point:
 						#draw_line(our_point.global_position - global_position, point.global_position - global_position, Color.RED, 2)
-
-func find_assosiated_point(point: Vector2, direction: Vector2, multiplier: int = 1) -> AttachmentPoint:
-	for module in modules:
-		for real_point in module.attachment_points:
-			if real_point.global_position.distance_to(point) < 1 && real_point.direction.is_equal_approx(direction * multiplier):
-				return real_point
-	return null
 
 # TODO: Add more stuff here.
 func do_submarine_sanity_checks() -> bool:
@@ -282,7 +275,10 @@ func _on_load_dialog_file_selected(path: String) -> void:
 		origin.add_child(new_module)
 		for i in range(len(module.attachment_points)):
 			new_module.attachment_points[i].is_attached = true
-		new_module.rotate_module(module.rotation)
+		if round(fmod(module.rotation, 2*PI)) != 0:
+			for i in range(round(module.rotation / deg_to_rad(new_module.rotation_increment))):
+				print(module.rotation)
+				new_module.rotate_module()
 		
 		modules.append(new_module)
 		module_grid[module.grid_position.y][module.grid_position.x] = new_module

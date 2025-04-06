@@ -37,7 +37,6 @@ func can_take_damage(attackbox: Attackbox) -> bool:
 		(attackbox.attacker_type == Attackbox.AttackerType.OTHER)
 	) && (!is_invincible)
 
-
 func damage(damage_amount: float, by: Attackbox) -> void:
 	if is_invincible:
 		return

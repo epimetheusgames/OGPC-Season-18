@@ -49,7 +49,9 @@ func _get_index_by_name(button_name: String) -> int:
 	return -1
 
 func _button_up(button_name: String) -> void:
-	selected_icon = icons[_get_index_by_name(button_name)]
+	var clicked_icon := icons[_get_index_by_name(button_name)]
+	if Global.player.diver_stats.current_money >= clicked_icon.cost:
+		selected_icon = clicked_icon
 
 func _on_secondary_button_button_up() -> void:
 	if !selected_icon || primary_weapon == selected_icon.name:
