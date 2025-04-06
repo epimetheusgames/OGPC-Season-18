@@ -61,6 +61,9 @@ shader_parameter/blend_alpha = false
 shader_parameter/max_alpha = 0.9
 shader_parameter/height = 1.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8qye6"]
+radius = 463.518
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
 outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 29502, -545, 29079, 11053, -6903, 10932)])
 source_geometry_mode = 1
@@ -211,9 +214,6 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdf5b"]
 size = Vector2(35708.5, 724)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8qye6"]
-radius = 463.518
-
 [sub_resource type="Resource" id="Resource_vfal8"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
@@ -352,6 +352,13 @@ offset_right = 65802.0
 offset_bottom = 10502.0
 scale = Vector2(-1, 1)
 color = Color(0.052, 0.052, 0.216, 1)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="LevelContainer/Environment"]
+collision_layer = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Environment/StaticBody2D2"]
+position = Vector2(-2894, 2581)
+shape = SubResource("CircleShape2D_8qye6")
 
 [node name="Collisions" type="NavigationRegion2D" parent="LevelContainer/Environment" groups=["obstacles"]]
 z_index = 2
@@ -500,14 +507,6 @@ script = ExtResource("5_aep54")
 position = Vector2(11302.8, -375)
 shape = SubResource("RectangleShape2D_bdf5b")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="LevelContainer/Environment/Collisions"]
-collision_layer = 2048
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Environment/Collisions/StaticBody2D2"]
-visible = false
-position = Vector2(-2894, 2581)
-shape = SubResource("CircleShape2D_8qye6")
-
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="LevelContainer/Environment"]
 energy = 0.5
 
@@ -604,6 +603,7 @@ polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494,
 metadata/_edit_lock_ = true
 
 [node name="Exterior" type="Polygon2D" parent="LevelContainer/ResearchStation"]
+visible = false
 z_index = 45
 color = Color(0.233925, 0.233925, 0.233925, 1)
 polygon = PackedVector2Array(-4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819)

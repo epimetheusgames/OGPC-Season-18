@@ -28,6 +28,10 @@ func _ready() -> void:
 	if secondary_weapon:
 		Global.player.diver_combat.secondary_weapon = Global.player.diver_combat.instantiated_weapons[secondary_weapon]
 
+func _process(delta: float) -> void:
+	for i in range(icons.size()):
+		buttons[i].button.disabled = Global.player.diver_stats.current_money < icons[i].cost
+
 func _save() -> void:
 	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self,
 		[
@@ -51,6 +55,7 @@ func _get_index_by_name(button_name: String) -> int:
 func _button_up(button_name: String) -> void:
 	var clicked_icon := icons[_get_index_by_name(button_name)]
 	if Global.player.diver_stats.current_money >= clicked_icon.cost:
+		Global.player.diver_stats.current_money -= clicked_icon.cost
 		selected_icon = clicked_icon
 
 func _on_secondary_button_button_up() -> void:
