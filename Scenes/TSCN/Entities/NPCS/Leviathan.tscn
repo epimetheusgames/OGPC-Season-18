@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://co2canly84hyf"]
+[gd_scene load_steps=10 format=3 uid="uid://co2canly84hyf"]
 
 [ext_resource type="Script" uid="uid://baedw6bviawtd" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
 [ext_resource type="PackedScene" uid="uid://dwxcjl4jrkyw3" path="res://Scenes/TSCN/Entities/NPCS/LeviathanNode.tscn" id="1_ljr6s"]
 [ext_resource type="Script" uid="uid://bmq6c6h4ure25" path="res://Scripts/Entity/NPC/Leviathan.gd" id="1_ucxug"]
-[ext_resource type="Resource" uid="uid://bdgr4mym5uqvq" path="res://Scenes/Resource/Entity/LeviathanSettings.tres" id="3_sik31"]
 [ext_resource type="Script" uid="uid://ck16solkwfpgw" path="res://Scripts/Components/Rope/RopeAttachment.gd" id="4_6mv3f"]
 [ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="5_on45p"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_6n4cc"]
@@ -17,16 +16,11 @@ size = Vector2(151, 157)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6nwr"]
 size = Vector2(82, 82)
 
-[node name="Leviathan" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox")]
+[node name="Leviathan" type="CharacterBody2D"]
 position = Vector2(296, 288)
 collision_mask = 2049
 motion_mode = 1
 script = ExtResource("1_ucxug")
-LEVIATHAN_NODE = ExtResource("1_ljr6s")
-node_amount = 60
-settings = ExtResource("3_sik31")
-hurtbox = NodePath("Hurtbox")
-attackbox = NodePath("Attackbox")
 
 [node name="Head" parent="." instance=ExtResource("1_ljr6s")]
 

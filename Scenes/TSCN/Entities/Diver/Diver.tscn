@@ -588,7 +588,7 @@ position = Vector2(59, -80)
 scale = Vector2(228.643, -232.132)
 
 [node name="ArmIkTarget2" type="Node2D" parent="Animation"]
-position = Vector2(31, -102)
+position = Vector2(27, -101)
 
 [node name="LegIkTarget1" type="Node2D" parent="Animation"]
 position = Vector2(7, 95)

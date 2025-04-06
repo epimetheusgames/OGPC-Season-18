@@ -9,6 +9,12 @@ extends Gun
 @onready var cone_of_fire: ConeOfFire = $"ConeOfFire"
 @export var hand1pos: Node2D
 
+func _ready() -> void:
+	super()
+	
+	use_hand1 = true
+	use_hand2 = true
+
 func _process(delta: float) -> void:
 	super(delta)
 	
@@ -35,3 +41,9 @@ func perform_attack(remote=false, node_name="") -> void:
 	bullet.global_position = emit_point.global_position
 	var shot_angle: float = cone_of_fire.get_shot_angle()
 	bullet.fire(shot_angle)
+
+func get_hand1_pos() -> Vector2:
+	return hand1pos.global_position
+
+func get_hand2_pos() -> Vector2:
+	return hand1pos.global_position
