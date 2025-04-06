@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=76 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Script" uid="uid://2vvi3dga7td1" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
 [ext_resource type="Shader" uid="uid://cdyuhcdqlxumk" path="res://Scripts/GLSL/GDShader/Screen/Vignette.gdshader" id="23_r7jln"]
-[ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Arrowfish/Arrowfish.tscn" id="27_3fu4r"]
+[ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Enemies/Arrowfish/Arrowfish.tscn" id="27_3fu4r"]
 [ext_resource type="Shader" uid="uid://7mjleihpyy3x" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="Shader" uid="uid://cgotkxkod1mlf" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="29_g0sdt"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
 [ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="35_47o3q"]
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
+[ext_resource type="PackedScene" uid="uid://dk3xlgrb0w35a" path="res://Enemies/Shark/Shark.tscn" id="38_mcejo"]
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
 background_mode = 3
@@ -223,7 +224,7 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_3fu4r"]
+[sub_resource type="Resource" id="Resource_081ql"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -558,7 +559,7 @@ uid = SubResource("Resource_vfal8")
 z_index = 5
 position = Vector2(-1897, 2580)
 motion_mode = 1
-uid = SubResource("Resource_3fu4r")
+uid = SubResource("Resource_081ql")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -575,7 +576,7 @@ min_point_dist = 300.0
 points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 
 [node name="Raycasts" parent="LevelContainer/Items/LightLine" index="1"]
-position = Vector2(-4236, -362)
+position = Vector2(-3578, 731)
 
 [node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node", "black_background", "research_station_area", "gravity_area", "exterior_polygon", "parallax_bubbles", "unlock_terminal")]
 script = ExtResource("12_jw53c")
@@ -838,6 +839,9 @@ texture = SubResource("GradientTexture2D_0nxag")
 lifetime = 5.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_hcosd")
+
+[node name="Shark" parent="." instance=ExtResource("38_mcejo")]
+position = Vector2(-991, 2559)
 
 [editable path="LevelContainer/Items/LightLine"]
 [editable path="LevelContainer/Entities/Boids/Boid"]

@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=3 uid="uid://dd4arsu8r6mkx"]
 
-[ext_resource type="Script" uid="uid://dh0ffpkyxt836" path="res://Arrowfish/Arrowfish.gd" id="1_bu73s"]
+[ext_resource type="Script" uid="uid://dh0ffpkyxt836" path="res://Enemies/Arrowfish/Arrowfish.gd" id="1_bu73s"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="2_8v7gp"]
-[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Arrowfish/EnemyFov.gd" id="3_8v7gp"]
-[ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Arrowfish/StateMachine.gd" id="4_yojgw"]
-[ext_resource type="Script" uid="uid://dxpj4m1xnw30a" path="res://Arrowfish/States/Wander.gd" id="5_n7nl4"]
-[ext_resource type="Script" uid="uid://dt23bymwfg1de" path="res://Arrowfish/States/Aim.gd" id="6_sf2hr"]
-[ext_resource type="Script" uid="uid://nvugdxkv30q2" path="res://Arrowfish/States/Dash.gd" id="7_04wa5"]
-[ext_resource type="Script" uid="uid://d1ajssj74v5bx" path="res://Arrowfish/States/Chase.gd" id="8_gf7n5"]
-[ext_resource type="Script" uid="uid://ba4u3jj7atg1n" path="res://Arrowfish/States/Escape.gd" id="9_h5wab"]
+[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Enemies/EnemyFov.gd" id="3_8v7gp"]
+[ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Enemies/StateMachine.gd" id="4_yojgw"]
+[ext_resource type="Script" uid="uid://dxpj4m1xnw30a" path="res://Enemies/Arrowfish/States/Wander.gd" id="5_n7nl4"]
+[ext_resource type="Script" uid="uid://dt23bymwfg1de" path="res://Enemies/Arrowfish/States/Aim.gd" id="6_sf2hr"]
+[ext_resource type="Script" uid="uid://nvugdxkv30q2" path="res://Enemies/Arrowfish/States/Dash.gd" id="7_04wa5"]
+[ext_resource type="Script" uid="uid://d1ajssj74v5bx" path="res://Enemies/Arrowfish/States/Chase.gd" id="8_gf7n5"]
+[ext_resource type="Script" uid="uid://ba4u3jj7atg1n" path="res://Enemies/Arrowfish/States/Escape.gd" id="9_h5wab"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bsgvg"]
 radius = 25.0
@@ -19,7 +19,7 @@ radius = 46.0
 height = 256.0
 
 [node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov")]
-position = Vector2(471, 329)
+position = Vector2(-60, 3)
 rotation = 6.28318
 script = ExtResource("1_bu73s")
 hurtbox = NodePath("Hurtbox")

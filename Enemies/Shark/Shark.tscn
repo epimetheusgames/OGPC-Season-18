@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk3xlgrb0w35a"]
+
+[ext_resource type="Script" uid="uid://c15nrqvtfug1m" path="res://Enemies/Shark/Shark.gd" id="1_6faw0"]
+[ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="2_6wtiw"]
+[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Enemies/EnemyFov.gd" id="3_42slt"]
+[ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Enemies/StateMachine.gd" id="4_t55ll"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6faw0"]
+radius = 133.0
+height = 664.0
+
+[node name="Shark" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov")]
+script = ExtResource("1_6faw0")
+hurtbox = NodePath("Hurtbox")
+nav_agent = NodePath("NavigationAgent2D")
+enemy_fov = NodePath("EnemyFov")
+
+[node name="Sprite" type="Polygon2D" parent="."]
+position = Vector2(-82, -15)
+scale = Vector2(0.500983, 0.5)
+color = Color(0.583769, 0, 0.338531, 1)
+polygon = PackedVector2Array(-547, 164, -883, -200, -120, -71, 420, -331, 982, -179, 1497, -86, 1153, 76, 1536, 99, 1064, 309, 637, 280, 248, 545, 468, 275, -119, 362, -758, 506)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(52, 11)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6faw0")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("2_6wtiw")
+metadata/_custom_type_script = "uid://ctpnlukrn1asj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(52, 11)
+rotation = 1.5708
+scale = Vector2(1.41734, 1.22189)
+shape = SubResource("CapsuleShape2D_6faw0")
+debug_color = Color(0.219953, 0.749043, 0, 0.42)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="EnemyFov" type="Node2D" parent="."]
+script = ExtResource("3_42slt")
+metadata/_custom_type_script = "uid://0j0vsqeeio1s"
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_t55ll")
+metadata/_custom_type_script = "uid://balgnejnh7c1p"
