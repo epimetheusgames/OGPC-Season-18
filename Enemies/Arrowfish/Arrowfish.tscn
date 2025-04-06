@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://dd4arsu8r6mkx"]
+
+[ext_resource type="Script" uid="uid://dh0ffpkyxt836" path="res://Enemies/Arrowfish/Arrowfish.gd" id="1_bu73s"]
+[ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="2_8v7gp"]
+[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Enemies/EnemyFov.gd" id="3_8v7gp"]
+[ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Enemies/StateMachine.gd" id="4_yojgw"]
+[ext_resource type="Script" uid="uid://dxpj4m1xnw30a" path="res://Enemies/Arrowfish/States/Wander.gd" id="5_n7nl4"]
+[ext_resource type="Script" uid="uid://dt23bymwfg1de" path="res://Enemies/Arrowfish/States/Aim.gd" id="6_sf2hr"]
+[ext_resource type="Script" uid="uid://nvugdxkv30q2" path="res://Enemies/Arrowfish/States/Dash.gd" id="7_04wa5"]
+[ext_resource type="Script" uid="uid://d1ajssj74v5bx" path="res://Enemies/Arrowfish/States/Chase.gd" id="8_gf7n5"]
+[ext_resource type="Script" uid="uid://ba4u3jj7atg1n" path="res://Enemies/Arrowfish/States/Escape.gd" id="9_h5wab"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bsgvg"]
+radius = 25.0
+height = 138.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bu73s"]
+radius = 46.0
+height = 256.0
+
+[node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov")]
+position = Vector2(-60, 3)
+rotation = 6.28318
+script = ExtResource("1_bu73s")
+hurtbox = NodePath("Hurtbox")
+nav_agent = NodePath("NavAgent")
+enemy_fov = NodePath("EnemyFov")
+
+[node name="EnemyFov" type="Node2D" parent="."]
+position = Vector2(72, -4)
+script = ExtResource("3_8v7gp")
+metadata/_custom_type_script = "uid://0j0vsqeeio1s"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(54, -5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bsgvg")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("2_8v7gp")
+hurt_by_player = true
+metadata/_custom_type_script = "uid://ctpnlukrn1asj"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(69, -7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bu73s")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+debug_path_custom_line_width = 1.0
+
+[node name="Sprite" type="Polygon2D" parent="."]
+color = Color(0.924393, 0.567753, 0.919931, 1)
+polygon = PackedVector2Array(-39, 27, -41, -37, 0, -21, 49, -36, 201, -1, 50, 24, 0, 6)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("4_yojgw")
+starting_state = NodePath("Wander")
+metadata/_custom_type_script = "uid://balgnejnh7c1p"
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("aim_state")]
+script = ExtResource("5_n7nl4")
+aim_state = NodePath("../Aim")
+
+[node name="WanderTimer" type="Timer" parent="StateMachine/Wander"]
+
+[node name="Aim" type="Node" parent="StateMachine" node_paths=PackedStringArray("dash_state", "chase_state")]
+script = ExtResource("6_sf2hr")
+dash_state = NodePath("../Dash")
+chase_state = NodePath("../Chase")
+
+[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_state")]
+script = ExtResource("7_04wa5")
+chase_state = NodePath("../Chase")
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("aim_state", "escape_state", "wander_state")]
+script = ExtResource("8_gf7n5")
+aim_state = NodePath("../Aim")
+escape_state = NodePath("../Escape")
+wander_state = NodePath("../Wander")
+
+[node name="Escape" type="Node" parent="StateMachine" node_paths=PackedStringArray("wander_state")]
+script = ExtResource("9_h5wab")
+wander_state = NodePath("../Wander")

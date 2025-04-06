@@ -124,7 +124,7 @@ static func angle_to_vector_radians(angle: float, magnitude: float) -> Vector2:
 static func random_direction(rng: RandomNumberGenerator) -> Vector2:
 	return Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)).normalized()
 
-## Randomish directin plus a random magnitude.
+## Randomish direction plus a random magnitude.
 static func random_vector(rng: RandomNumberGenerator, max_length: float, min_length: float = 0) -> Vector2:
 	return random_direction(rng) * rng.randf_range(min_length, max_length)
 
@@ -169,3 +169,10 @@ static func eval(input: String):
 	script.reload()
 	script_holder.set_script(script)
 	return script_holder.eval()
+
+static func clamp_vector_length(v: Vector2, min_length: float, max_length: float) -> Vector2:
+	var len = v.length()
+	if len == 0:
+		return v
+	var clamped_len = clamp(len, min_length, max_length)
+	return v.normalized() * clamped_len

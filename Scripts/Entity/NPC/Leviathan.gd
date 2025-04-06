@@ -1,6 +1,6 @@
 ## This is a big fish enemy
 # Owned by: kaitaobenson
-
+"""
 class_name Leviathan
 extends Enemy
 
@@ -69,3 +69,4 @@ func update_leviathan_nodes(delta: float) -> void:
 		else:
 			leviathan_nodes[i].global_rotation = rope.points[i].angle_to_point(rope.points[i - 1])
 		
+"""

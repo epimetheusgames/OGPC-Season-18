@@ -84,13 +84,17 @@ func _process(delta: float) -> void:
 		Global.godot_steam_abstraction.sync_var(self, "visible")
 
 func attack() -> void:
-	if reload_timer_over && cooldown_timer_over:
-		perform_attack()
-		bullets_left -= 1
-		
-		if bullets_left == 0:
-			reload_timer_over = false
-			reload_timer.start(reload_time)
-		
-		cooldown_timer_over = false
-		cooldown_timer.start(cooldown_time)
+	if !reload_timer_over or !cooldown_timer_over:
+		return
+	
+	cooldown_timer_over = false
+	print("Firing! Bullets left BEFORE shot:", bullets_left)  # Debug
+	perform_attack()
+	bullets_left -= 1
+	print("Bullets left AFTER shot:", bullets_left)  # Debug
+	
+	if bullets_left == 0:
+		reload_timer_over = false
+		reload_timer.start(reload_time)
+	
+	cooldown_timer.start(cooldown_time)

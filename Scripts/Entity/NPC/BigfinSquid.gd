@@ -1,6 +1,7 @@
 class_name BigfinSquid
 extends Enemy
 
+"""
 @onready var anim: DiverAnimation = Global.player.diver_animation
 @onready var arms: Array[Line2D] = [$RightFrontArm, $LeftFrontArm, $RightBackArm, $LeftBackArm]
 @onready var ropes: Array[VerletRope] = [$RightFrontArmRope, $LeftFrontArmRope, $RightBackArmRope, $LeftBackArmRope]
@@ -78,3 +79,4 @@ func _process(delta: float) -> void:
 	
 	for rope in ropes:
 		rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
+"""

@@ -2,16 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://447pglvl377e" path="res://Assets/Art/Spear.png" id="1_mdbjp"]
 [ext_resource type="Script" uid="uid://d1cyo4wvnktl6" path="res://Scripts/Entity/Diver/Combat/Speargun/Spear.gd" id="1_x2dlv"]
-[ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="3_dr42o"]
+[ext_resource type="Script" uid="uid://ced6k1jq3eqag" path="res://Scripts/Components/Damage/OneShotAttack.gd" id="4_garpb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwnx7"]
 size = Vector2(74, 4)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2tr2w"]
+radius = 11.0
 
 [node name="Spear" type="Area2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_x2dlv")
-attackbox = NodePath("Attackbox")
+attackbox = NodePath("OneShotAttack")
 speed = 1000.0
 size = 10.0
 damage = 100.0
@@ -29,11 +30,13 @@ metadata/_edit_lock_ = true
 [node name="RopePoint" type="Node2D" parent="."]
 position = Vector2(-29, 0)
 
-[node name="Attackbox" type="Area2D" parent="."]
-script = ExtResource("3_dr42o")
+[node name="OneShotAttack" type="Area2D" parent="."]
+script = ExtResource("4_garpb")
 attacker_type = 1
+damage_amount = 50.0
+metadata/_custom_type_script = "uid://ced6k1jq3eqag"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]
 position = Vector2(36, 0)
 shape = SubResource("CircleShape2D_2tr2w")
 
