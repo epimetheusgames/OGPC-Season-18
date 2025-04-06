@@ -4,6 +4,10 @@
 class_name DiverAnimation
 extends Node2D
 
+
+@export var left_raycast: RayCast2D
+@export var right_raycast: RayCast2D
+
 ## Diver root.
 @onready var diver: Diver = get_parent()
 
@@ -25,6 +29,9 @@ extends Node2D
 ## now.
 @onready var arrow: Node2D = $"Arrow"
 
+@onready var left_collision_point: Vector2 = left_raycast.get_collision_point()
+@onready var right_collision_point: Vector2 = right_raycast.get_collision_point()
+
 var displayed_nametag: Label
 
 ## Leg oscillation
@@ -35,7 +42,6 @@ var leg_osc_counter2: float = 0
 var osc_speed: float = 2.0
 var hand1_weapon_control: bool = false
 var hand2_weapon_control: bool = false
-
 var in_unlock_terminal_area := false
 
 func _ready() -> void:
@@ -88,6 +94,24 @@ func _process(delta: float) -> void:
 	if diver.get_state() != Util.DiverState.IN_GRAVITY_AREA:
 		leg_target1.global_position = _animate_leg(1, delta)
 		leg_target2.global_position = _animate_leg(2, delta)
+	else:
+		if Global.player.diver_movement.velocity.x < 0:
+			left_raycast.position.x = -36
+			right_raycast.position.x = -20
+		elif Global.player.diver_movement.velocity.x > 0:
+			right_raycast.position.x = 36
+			left_raycast.position.x = 20
+		else:
+			left_raycast.position.x = -8
+			right_raycast.position.x = 8
+
+		if left_raycast.is_colliding() && left_collision_point.distance_squared_to(left_raycast.get_collision_point()) > 100 ** 2:
+			left_collision_point = left_raycast.get_collision_point()
+		elif right_raycast.is_colliding() && right_collision_point.distance_squared_to(right_raycast.get_collision_point()) > 100 ** 2:
+			right_collision_point = right_raycast.get_collision_point()
+
+		leg_target1.global_position = left_collision_point
+		leg_target2.global_position = right_collision_point
 	
 	# Arms
 	if !hand1_weapon_control:

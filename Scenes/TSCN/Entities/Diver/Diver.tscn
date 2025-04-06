@@ -38,7 +38,7 @@ height = 158.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_auddj"]
 radius = 24.0
-height = 186.0
+height = 146.0
 
 [sub_resource type="Resource" id="Resource_og7y3"]
 script = ExtResource("6_3bvk2")
@@ -223,9 +223,21 @@ use_offset_position = false
 follow_distance = 200.0
 metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
-[node name="Animation" type="Node2D" parent="."]
+[node name="Animation" type="Node2D" parent="." node_paths=PackedStringArray("left_raycast", "right_raycast")]
 use_parent_material = true
 script = ExtResource("3_k6pml")
+left_raycast = NodePath("LegRaycasts/Left")
+right_raycast = NodePath("LegRaycasts/Right")
+
+[node name="LegRaycasts" type="Node2D" parent="Animation"]
+
+[node name="Left" type="RayCast2D" parent="Animation/LegRaycasts"]
+position = Vector2(-8, 24)
+target_position = Vector2(0, 150)
+
+[node name="Right" type="RayCast2D" parent="Animation/LegRaycasts"]
+position = Vector2(8, 24)
+target_position = Vector2(0, 150)
 
 [node name="Polygons" type="Node2D" parent="Animation"]
 texture_filter = 1
@@ -401,7 +413,6 @@ occluder_light_mask = 2
 use_parent_material = true
 position = Vector2(9, -49)
 rotation = -0.630285
-scale = Vector2(1, 1)
 rest = Transform2D(0.964522, -0.264003, 0.264003, 0.964522, 18, -55)
 auto_calculate_length_and_angle = false
 length = 38.2
@@ -563,7 +574,7 @@ scale = Vector2(228.643, -232.132)
 position = Vector2(34, -110)
 
 [node name="LegIkTarget1" type="Node2D" parent="Animation"]
-position = Vector2(108, 0)
+position = Vector2(7, 95)
 
 [node name="LegIkTarget2" type="Node2D" parent="Animation"]
 position = Vector2(-144, -1)

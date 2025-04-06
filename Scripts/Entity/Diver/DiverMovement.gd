@@ -85,7 +85,7 @@ func update_movement_velocity(delta: float):
 		velocity.y += gravity * delta * 60
 		
 		if input_vector.length_squared() > 0:
-			velocity += input_vector * 4 * delta * 60
+			velocity = input_vector * 3 * delta * 60
 		else:
 			velocity.x = 0
 	
