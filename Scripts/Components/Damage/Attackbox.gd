@@ -24,8 +24,6 @@ signal damage_dealt(hurtbox: Hurtbox, damage_amount: float)
 # Signals when a hurtbox damaged reaches 0 health
 signal killed()
 
-var is_attacking := false
-
 func _ready() -> void:
 	var collision: CollisionShape2D = get_child(0)
 	
@@ -33,9 +31,6 @@ func _ready() -> void:
 	
 	collision.debug_color = Color.RED
 	collision.debug_color.a = 0.3
-
-func _process(_delta: float) -> void:
-	detect_and_damage_hurtboxes()
 
 func detect_and_damage_hurtboxes() -> void:
 	# Damaging behavior goes here

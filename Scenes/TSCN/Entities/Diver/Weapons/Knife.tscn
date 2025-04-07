@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bqn8vxsjcu0mn" path="res://Scripts/Entity/Diver/Combat/BluntTipKnife/BluntTipKnife.gd" id="1_tafim"]
 [ext_resource type="Texture2D" uid="uid://6kfea377ayda" path="res://Assets/Art/Entity/Player/Knife.png" id="2_7cqu0"]
-[ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="3_y24ks"]
+[ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="3_deupv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cwcf"]
-size = Vector2(86, 24)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qwjc4"]
+size = Vector2(112, 127)
 
 [node name="Knife" type="Node2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_tafim")
-attackbox = NodePath("Attackbox")
+attackbox = NodePath("ContinuousAttack")
+cooldown_time = 0.1
 
 [node name="Hand1" type="Node2D" parent="."]
 position = Vector2(18, 0)
@@ -19,9 +20,13 @@ position = Vector2(24, 0)
 rotation = -1.5708
 texture = ExtResource("2_7cqu0")
 
-[node name="Attackbox" type="Area2D" parent="."]
-script = ExtResource("3_y24ks")
+[node name="ContinuousAttack" type="Area2D" parent="."]
+script = ExtResource("3_deupv")
+delay_time = 0.4
+attacker_type = 1
+damage_amount = 10.0
+metadata/_custom_type_script = "uid://bf0bikj8np6x"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
-position = Vector2(37, 0)
-shape = SubResource("RectangleShape2D_7cwcf")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousAttack"]
+position = Vector2(46, 53.5)
+shape = SubResource("RectangleShape2D_qwjc4")

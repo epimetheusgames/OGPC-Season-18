@@ -25,7 +25,6 @@ func _ready() -> void:
 	
 	slash_angle = spread_angle/2
 
-
 func _on_cooldown_timeout() -> void:
 	cooldown_timer_over = true
 
@@ -54,16 +53,13 @@ func _process(delta: float) -> void:
 
 func attack() -> void:
 	if enabled && cooldown_timer_over:
-		attackbox.is_attacking = true
+		attackbox.detect_and_damage_hurtboxes()
 		
 		perform_attack()
 		animate_slash_angle()
 		
 		cooldown_timer_over = false
 		cooldown_timer.start(cooldown_time)
-		
-		await get_tree().create_timer(slash_time + 0.05).timeout
-		attackbox.is_attacking = false
 
 func _hit_enemy() -> void:
 	attackbox.is_attacking = false

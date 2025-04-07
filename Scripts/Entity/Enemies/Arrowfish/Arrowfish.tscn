@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dd4arsu8r6mkx"]
+[gd_scene load_steps=15 format=3 uid="uid://dd4arsu8r6mkx"]
 
 [ext_resource type="Script" uid="uid://dh0ffpkyxt836" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.gd" id="1_bu73s"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="2_8v7gp"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://nvugdxkv30q2" path="res://Scripts/Entity/Enemies/Arrowfish/States/Dash.gd" id="7_04wa5"]
 [ext_resource type="Script" uid="uid://d1ajssj74v5bx" path="res://Scripts/Entity/Enemies/Arrowfish/States/Chase.gd" id="8_gf7n5"]
 [ext_resource type="Script" uid="uid://ba4u3jj7atg1n" path="res://Scripts/Entity/Enemies/Arrowfish/States/Escape.gd" id="9_h5wab"]
+[ext_resource type="Script" uid="uid://crynjoiy8hntp" path="res://Scripts/Entity/Enemies/Arrowfish/States/Dead.gd" id="11_oel4a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bsgvg"]
 radius = 25.0
@@ -22,14 +23,18 @@ height = 256.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_oel4a"]
 radius = 36.2215
 
-[node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "nav_agent", "enemy_fov")]
+[node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "nav_agent", "enemy_fov", "dead_state", "state_machine")]
 position = Vector2(-60, 3)
 rotation = 6.28318
+collision_layer = 0
 script = ExtResource("1_bu73s")
 hurtbox = NodePath("Hurtbox")
 attackbox = NodePath("ContinuousAttack")
 nav_agent = NodePath("NavAgent")
 enemy_fov = NodePath("EnemyFov")
+attack_dist = 175.0
+dead_state = NodePath("StateMachine/Dead")
+state_machine = NodePath("StateMachine")
 
 [node name="EnemyFov" type="Node2D" parent="."]
 position = Vector2(72, -4)
@@ -100,3 +105,7 @@ wander_state = NodePath("../Wander")
 [node name="Escape" type="Node" parent="StateMachine" node_paths=PackedStringArray("wander_state")]
 script = ExtResource("9_h5wab")
 wander_state = NodePath("../Wander")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("11_oel4a")
+metadata/_custom_type_script = "uid://ra88gjbxjc11"

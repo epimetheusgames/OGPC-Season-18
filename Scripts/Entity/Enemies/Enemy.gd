@@ -10,6 +10,8 @@ extends Entity
 @export var nav_agent: NavigationAgent2D
 @export var enemy_fov: EnemyFov
 @export var attack_dist: float
+@export var dead_state: State
+@export var state_machine: StateMachine
 
 @export var drop_item: PackedScene
 
@@ -37,16 +39,22 @@ func accelerate_towards(pos: Vector2, accel: float, delta: float) -> void:
 
 func move_towards(pos: Vector2, speed: float, delta: float) -> void:
 	velocity = (pos - global_position).normalized() * speed
-	print(velocity)
+	#print(velocity)
 	if velocity.length() > 0.1:
 		rotation = velocity.angle()
 
 # signals
 func _die() -> void:
-	var item: BaseItem = drop_item.instantiate()
-	get_parent().add_child(item)
-	item.global_position = global_position
-	queue_free()
+	if drop_item:
+		var item: BaseItem = drop_item.instantiate()
+		get_parent().add_child(item)
+		item.global_position = global_position
+	if hurtbox:
+		hurtbox.queue_free()
+	if state_machine && dead_state:
+		state_machine.change_state(dead_state)
+	else:
+		queue_free()
 
 # Other util
 func get_diver_pos() -> Vector2:

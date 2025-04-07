@@ -20,7 +20,6 @@ signal healed(heal_amount: float)
 # Signals when the health is at 0
 signal died()
 
-
 func _ready() -> void:
 	var collision: CollisionShape2D = get_child(0)
 	
@@ -41,16 +40,18 @@ func damage(damage_amount: float, by: Attackbox) -> void:
 	if is_invincible:
 		return
 	
-	Global.print_debug("DEBUG: Hurtbox at path " + str(get_path()) + " was damaged. Amount: " + str(damage_amount))
-	
 	var new_health = clamp(health - damage_amount, 0, max_health)
 	
 	health = new_health
+	
+	Global.print_debug("DEBUG: Hurtbox at path " + str(get_path()) + " was damaged. Amount: " + str(damage_amount) + ". New health: " + str(health))
 	
 	damaged.emit(abs(health - new_health), by)
 	
 	if health == 0:
 		died.emit()
+		if get_parent() is Enemy:
+			get_parent()._die()
 
 func heal(heal_amount: float) -> void:
 	var new_health = clamp(health + heal_amount, 0, max_health)

@@ -43,7 +43,7 @@ func process_physics(delta: float) -> State:
 
 func has_reached_pos(pos: Vector2) -> bool:
 	var distance: float = enemy.global_position.distance_to(pos)
-	print("DISTANCE: " + str(distance))
+	#print("DISTANCE: " + str(distance))
 	if distance < 150:
 		return true
 	else:
