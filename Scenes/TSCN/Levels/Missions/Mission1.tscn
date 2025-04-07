@@ -222,7 +222,7 @@ resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
 
-[sub_resource type="Resource" id="Resource_smvjr"]
+[sub_resource type="Resource" id="Resource_mcejo"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -553,7 +553,7 @@ uid = SubResource("Resource_vfal8")
 z_index = 5
 position = Vector2(-1529, 489)
 motion_mode = 1
-uid = SubResource("Resource_smvjr")
+uid = SubResource("Resource_mcejo")
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("21_pr3qq")
@@ -700,7 +700,7 @@ position = Vector2(2013, 2592)
 position = Vector2(2207, 2456)
 
 [node name="Arrowfish3" parent="LevelContainer/Entities" instance=ExtResource("27_3fu4r")]
-position = Vector2(2013, 2592)
+position = Vector2(-2445, 2011)
 
 [node name="ParallaxLayer" type="ParallaxBackground" parent="."]
 layer = 0

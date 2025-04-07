@@ -52,7 +52,6 @@ func damage(damage_amount: float, by: Attackbox) -> void:
 	if health == 0:
 		died.emit()
 
-
 func heal(heal_amount: float) -> void:
 	var new_health = clamp(health + heal_amount, 0, max_health)
 	health = new_health

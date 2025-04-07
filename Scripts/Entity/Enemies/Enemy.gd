@@ -2,16 +2,24 @@
 # Owned by: kaibenson
 
 class_name Enemy
-extends CharacterBody2D
+extends Entity
 
 @export var hurtbox: Hurtbox
+@export var attackbox: Attackbox
 @export var animations: AnimatedSprite2D
 @export var nav_agent: NavigationAgent2D
 @export var enemy_fov: EnemyFov
+@export var attack_dist: float
 
-@export var drop_item: BaseItem
+@export var drop_item: PackedScene
 
+func _ready() -> void:
+	if hurtbox:
+		hurtbox.died.connect(_die)
 
+func _process(delta: float) -> void:
+	if attackbox:
+		attackbox.detect_and_damage_hurtboxes()
 
 # Some standard movement options to use
 func spring_towards(pos: Vector2, spring_strength: float, spring_damping: float, delta: float) -> void:
@@ -33,9 +41,20 @@ func move_towards(pos: Vector2, speed: float, delta: float) -> void:
 	if velocity.length() > 0.1:
 		rotation = velocity.angle()
 
+# signals
+func _die() -> void:
+	var item: BaseItem = drop_item.instantiate()
+	get_parent().add_child(item)
+	item.global_position = global_position
+	queue_free()
+
 # Other util
 func get_diver_pos() -> Vector2:
-	if Global.player:
-		return Global.player.global_position
-	
-	return Vector2.ZERO
+	var closest_player: Diver
+	var closest_squared_distance := 1000000000.0
+	for player in Global.player_array:
+		var dist := player.global_position.distance_squared_to(global_position)
+		if dist < closest_squared_distance:
+			closest_squared_distance = dist
+			closest_player = player
+	return closest_player.global_position

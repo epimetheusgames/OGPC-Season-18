@@ -18,6 +18,7 @@ extends Node
 
 signal game_started(slot_num: int)
 signal save_nodes
+signal on_exit_to_menu
 
 enum LOAD_ERROR {
 	OK,
@@ -188,6 +189,8 @@ func load_level(level_path: String, save: GameSave = null):
 
 # Close and save game and exit to menu.
 func exit_to_menu() -> void:
+	on_exit_to_menu.emit()
+	
 	# Doesn't need to be put in the ingame debug chat.
 	if Global.verbose_debug:
 		print("DEBUG: Exit to menu called, printing stack.")

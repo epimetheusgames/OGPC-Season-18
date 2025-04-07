@@ -23,7 +23,6 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
-
 func process_frame(delta: float) -> State:
 	return null
 
@@ -38,7 +37,7 @@ func process_physics(delta: float) -> State:
 	if has_reached_pos(target_pos):
 		return chase_state
 	
-	enemy.spring_towards(target_pos, 10, 0.1, delta)
+	enemy.spring_towards(target_pos, 3, 0.1, delta)
 	
 	return null
 

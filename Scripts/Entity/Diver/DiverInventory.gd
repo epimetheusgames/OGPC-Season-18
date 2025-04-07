@@ -5,6 +5,7 @@ extends Node2D
 @export var inventory: Array[InventoryItem]
 var hovering_item: Node2D
 var hovering_resource: InventoryItem
+@onready var diver: Diver = get_parent()
 
 #🤔
 var hovering_item_item: BaseItem
@@ -28,6 +29,12 @@ func _process(delta: float) -> void:
 				hovering_item_item.ammount -= 1
 		elif Input.is_action_just_released("mouse_left_click"): 
 			just_selected = false
+	
+	if diver.diver_movement.is_in_research_station:
+		for item in inventory:
+			if item.sellable_resource:
+				diver.diver_stats.current_money += item.cost * item.count
+				inventory.remove_at(inventory.find(item))
 
 func _on_item_detection_area_area_entered(area: Area2D) -> void:
 	var hoverings_child: BaseItem 

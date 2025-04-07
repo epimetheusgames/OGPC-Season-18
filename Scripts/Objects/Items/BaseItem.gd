@@ -5,6 +5,7 @@ extends Area2D
 @export var icon: Texture2D
 @export var cost: int
 @export var item_name: String
+@export var sellable_resource: bool = false
 var ammount: int = 1
 
 func _ready() -> void:
@@ -18,4 +19,5 @@ func generate_inventory_item() -> InventoryItem:
 	item.icon = icon
 	item.cost = cost
 	item.count = ammount
+	item.sellable_resource = sellable_resource
 	return item

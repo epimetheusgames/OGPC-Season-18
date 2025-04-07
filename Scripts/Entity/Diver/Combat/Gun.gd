@@ -17,7 +17,7 @@ enum GunState {
 var reload_timer: Timer
 var reload_timer_over: bool = true
 
-@export var cooldown_time: float = 0.5  # Time inbetween shots
+@export var cooldown_time: float = 0.1  # Time inbetween shots
 var cooldown_timer: Timer
 var cooldown_timer_over: bool = true
 

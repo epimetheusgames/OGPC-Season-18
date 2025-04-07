@@ -65,6 +65,8 @@ func _ready() -> void:
 	if !Global.is_multiplayer || _is_node_owner():
 		Global.player = self
 	
+	Global.player_array.append(self)
+	
 	$BuoyancyComponent.waves = water_manager
 	
 	diver_movement.boosted.connect(_boost)
@@ -109,6 +111,9 @@ func _physics_process(_delta: float):
 	move_and_slide()
 	
 	_sync_multiplayer()
+
+func _exit_tree() -> void:
+	Global.player_array.pop_at(Global.player_array.find(self))
 
 # --- HELPERS ---
 
@@ -178,7 +183,7 @@ func get_state() -> Util.DiverState:
 	return diver_state
 
 # Sets general diver state.
-func set_state(state : Util.DiverState):
+func set_state(state : Util.DiverState) -> void:
 	diver_state = state
 
 # Gets the diver username if the game is in multiplayer mode.

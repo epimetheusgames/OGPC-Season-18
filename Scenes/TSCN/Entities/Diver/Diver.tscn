@@ -51,6 +51,7 @@ scene = SubResource("Resource_og7y3")
 cost = 25
 icon = ExtResource("5_v3mw5")
 count = 5
+sellable_resource = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d3kj"]
 radius = 51.0

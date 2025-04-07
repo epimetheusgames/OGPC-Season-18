@@ -18,6 +18,7 @@ scene = SubResource("Resource_e24cl")
 icon = ExtResource("3_genkx")
 cost = 5
 item_name = "Coral"
+sellable_resource = true
 metadata/_custom_type_script = "uid://fpnredcqa4b5"
 
 [node name="Coral1" type="Sprite2D" parent="."]

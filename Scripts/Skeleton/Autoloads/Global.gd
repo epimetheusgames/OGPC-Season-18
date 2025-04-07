@@ -98,6 +98,8 @@ var bitmask_conversion = {
 	"Interaction": 64,
 }
 
+var player_array: Array[Diver]
+
 var rng := RandomNumberGenerator.new()
 
 ## Overrides a default function which is great, prints to the ingame chat 
