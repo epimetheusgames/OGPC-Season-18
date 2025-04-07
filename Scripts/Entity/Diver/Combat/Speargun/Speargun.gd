@@ -31,13 +31,13 @@ func _process(delta: float) -> void:
 		Global.godot_steam_abstraction.sync_var(self, "rotation")
 
 func get_hand1_pos() -> Vector2:
-	if flipped || gun_state == GunState.HOLDING:
+	if gun_state == GunState.HOLDING:
 		return hand1_point.global_position
 	else:
 		return hand2_point.global_position
 
 func get_hand2_pos() -> Vector2:
-	if flipped || gun_state == GunState.HOLDING:
+	if gun_state == GunState.HOLDING:
 		return hand2_point.global_position
 	else:
 		return hand1_point.global_position

@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=14 format=4 uid="uid://dk5y5253vbhe4"]
 
-[ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/NPC/Jellyfish.gd" id="1_dd7wo"]
-[ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/NPC/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
-[ext_resource type="Resource" uid="uid://bn07gfpt0o7wj" path="res://Scenes/Resource/Entity/JellyfishSettings.tres" id="2_fvfwy"]
-[ext_resource type="Script" uid="uid://cmyaowe8fevss" path="res://Scripts/Entity/NPC/Jellyfish/Tentacles.gd" id="3_5yh7k"]
+[ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/Enemies/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
+[ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/Enemies/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
+[ext_resource type="Script" uid="uid://cmyaowe8fevss" path="res://Scripts/Entity/Enemies/Jellyfish/Tentacles.gd" id="3_5yh7k"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_gyt63"]
 [ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="7_i60sr"]
 [ext_resource type="Shader" uid="uid://dog5ar7m8hypg" path="res://Scripts/GLSL/GDShader/JellyfishColors.gdshader" id="8_2ikp3"]
@@ -34,16 +33,12 @@ shader_parameter/out_colors = PackedColorArray(0, 0, 0.75, 0.301961, 0.25, 0, 0.
 [sub_resource type="CircleShape2D" id="CircleShape2D_meyxk"]
 radius = 41.0
 
-[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "light_detector")]
+[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox")]
 collision_layer = 128
 collision_mask = 129
 motion_mode = 1
 script = ExtResource("1_dd7wo")
-settings = ExtResource("2_fvfwy")
-forward_direction = Vector2(0, -1)
 hurtbox = NodePath("Hurtbox")
-attackbox = NodePath("Attackbox")
-light_detector = NodePath("LightDetector")
 
 [node name="Tentacles" type="Node2D" parent="." node_paths=PackedStringArray("on_screen_notifier")]
 script = ExtResource("2_7lbwn")

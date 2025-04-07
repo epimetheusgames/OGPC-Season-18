@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcg6sc5pivsv6"]
+
+[ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_xwig7"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_tadbb"]
+[ext_resource type="Texture2D" uid="uid://cxc68u4hulex3" path="res://Assets/Art/Level/Coral1.png" id="3_genkx"]
+
+[sub_resource type="Resource" id="Resource_e24cl"]
+script = ExtResource("2_tadbb")
+file = "uid://bcg6sc5pivsv6"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwig7"]
+size = Vector2(116, 136)
+
+[node name="BaseItem" type="Area2D"]
+script = ExtResource("1_xwig7")
+scene = SubResource("Resource_e24cl")
+icon = ExtResource("3_genkx")
+cost = 5
+item_name = "Coral"
+metadata/_custom_type_script = "uid://fpnredcqa4b5"
+
+[node name="Coral1" type="Sprite2D" parent="."]
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("3_genkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-11, 3)
+shape = SubResource("RectangleShape2D_xwig7")

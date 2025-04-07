@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://dl6v2p1fxvitc" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
-[ext_resource type="Script" uid="uid://cfcc8wf5m0kgj" path="res://Scripts/Entity/NPC/ActualNPCs/PlayerFollowerDummy.gd" id="9_soyuq"]
+[ext_resource type="Script" uid="uid://cfcc8wf5m0kgj" path="res://Scripts/Entity/NPC/PlayerFollowerDummy.gd" id="9_soyuq"]
 [ext_resource type="Script" uid="uid://dau0csslipmpi" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="10_qg316"]
@@ -194,6 +194,7 @@ follower = NodePath("Movement/CivillianFollower")
 uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_ghsq1")
 
@@ -223,9 +224,11 @@ script = ExtResource("4_lqvql")
 script = ExtResource("2_lxvv3")
 
 [node name="RightWallRaycast" type="RayCast2D" parent="Movement"]
+visible = false
 target_position = Vector2(48, 0)
 
 [node name="LeftWallRaycast" type="RayCast2D" parent="Movement"]
+visible = false
 target_position = Vector2(-48, 0)
 
 [node name="CivillianFollower" type="CharacterBody2D" parent="Movement"]
@@ -244,10 +247,12 @@ right_raycast = NodePath("LegRaycasts/Right")
 [node name="LegRaycasts" type="Node2D" parent="Animation"]
 
 [node name="Left" type="RayCast2D" parent="Animation/LegRaycasts"]
+visible = false
 position = Vector2(-8, 24)
 target_position = Vector2(0, 150)
 
 [node name="Right" type="RayCast2D" parent="Animation/LegRaycasts"]
+visible = false
 position = Vector2(8, 24)
 target_position = Vector2(0, 150)
 
@@ -430,6 +435,7 @@ auto_calculate_length_and_angle = false
 length = 38.2
 bone_angle = 15.0
 metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
 
 [node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
 use_parent_material = true
@@ -442,6 +448,7 @@ auto_calculate_length_and_angle = false
 length = 37.0
 bone_angle = 28.0
 metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm1/Forearm1"]
 position = Vector2(17.8001, 8.27792)
@@ -577,11 +584,11 @@ occluder_light_mask = 2
 metadata/_edit_lock_ = true
 
 [node name="ArmIkTarget1" type="Node2D" parent="Animation"]
-position = Vector2(71, -74)
+position = Vector2(59, -80)
 scale = Vector2(228.643, -232.132)
 
 [node name="ArmIkTarget2" type="Node2D" parent="Animation"]
-position = Vector2(34, -110)
+position = Vector2(27, -101)
 
 [node name="LegIkTarget1" type="Node2D" parent="Animation"]
 position = Vector2(7, 95)
@@ -672,6 +679,7 @@ shadow_filter = 1
 shadow_filter_smooth = 3.1
 texture = ExtResource("10_qg316")
 texture_scale = 0.8
+metadata/_edit_lock_ = true
 
 [node name="FlashLightSoft" type="PointLight2D" parent="Light/Flashlight"]
 color = Color(0.237539, 0.237539, 0.237539, 1)
@@ -681,6 +689,7 @@ shadow_filter = 1
 shadow_filter_smooth = 3.1
 texture = ExtResource("10_qg316")
 texture_scale = 0.7
+metadata/_edit_lock_ = true
 
 [node name="LightArea" type="Area2D" parent="Light/Flashlight"]
 scale = Vector2(0.666667, 0.666667)
@@ -689,7 +698,9 @@ collision_mask = 0
 metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light/Flashlight/LightArea"]
+visible = false
 polygon = PackedVector2Array(1, -2, 361, -643, 126, -681, -93, -682, -315, -617)
+metadata/_edit_lock_ = true
 
 [node name="BodyLight" type="PointLight2D" parent="Light"]
 energy = 0.3

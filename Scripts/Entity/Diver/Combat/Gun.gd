@@ -25,7 +25,6 @@ var cooldown_timer_over: bool = true
 @export var dist_from_head: float = 100.0
 @export var knockback: float = 10.0
 
-var flipped: bool = false
 var gun_state := GunState.HOLDING
 
 
@@ -69,12 +68,6 @@ func _process(delta: float) -> void:
 	global_rotation = rot
 	
 	var deg_rot: float = Util.normalize_angle_degrees(rad_to_deg(rot))
-	flipped = deg_rot > 90 && deg_rot < 270
-	
-	if flipped:
-		scale.y = -1
-	else:
-		scale.y = 1
 	
 	if Global.godot_steam_abstraction && Global.is_multiplayer:
 		Global.godot_steam_abstraction.run_remote_function(Global.player.diver_combat, "set_reload_bar", [bar_val])
