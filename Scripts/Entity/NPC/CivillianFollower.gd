@@ -7,7 +7,7 @@ extends Entity
 @export var start_of_chain := false
 @export var use_offset_position := true
 @export var swim_speed: float
-@export var follow_distance: float
+@export var follow_distance: float 
 
 var target_path_position: Vector2
 var going_to_building := false

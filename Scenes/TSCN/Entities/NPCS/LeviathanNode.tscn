@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwxcjl4jrkyw3"]
 
-[ext_resource type="Script" uid="uid://dc6d4gjmiwxua" path="res://Scripts/Entity/NPC/LeviathanNode.gd" id="1_dth6h"]
+[ext_resource type="Script" uid="uid://dc6d4gjmiwxua" path="res://Scripts/Entity/Enemies/Leviathan/LeviathanNode.gd" id="1_dth6h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pq0sw"]
 radius = 42.107

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dwaifexgjw8vl"]
 
-[ext_resource type="Script" uid="uid://bsnra70iu462c" path="res://Scripts/Entity/NPC/BiterFish.gd" id="1_k5pkd"]
+[ext_resource type="Script" uid="uid://bsnra70iu462c" path="res://Scripts/Entity/Enemies/BiterFish/BiterFish.gd" id="1_k5pkd"]
 [ext_resource type="Resource" uid="uid://qf8cjw5p7qeh" path="res://Scenes/Resource/Entity/BiterFishSettings.tres" id="2_8ir73"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="3_manu4"]
 [ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="4_wno1v"]

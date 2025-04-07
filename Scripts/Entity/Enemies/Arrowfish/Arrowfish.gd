@@ -9,4 +9,4 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
 	move_and_slide()
-	print("Current state: " + state_machine.current_state.name)
+	#print("Current state: " + state_machine.current_state.name)

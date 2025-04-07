@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=4 uid="uid://dk5y5253vbhe4"]
 
-[ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/NPC/Jellyfish.gd" id="1_dd7wo"]
-[ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/NPC/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
-[ext_resource type="Script" uid="uid://cmyaowe8fevss" path="res://Scripts/Entity/NPC/Jellyfish/Tentacles.gd" id="3_5yh7k"]
+[ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/Enemies/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
+[ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/Enemies/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
+[ext_resource type="Script" uid="uid://cmyaowe8fevss" path="res://Scripts/Entity/Enemies/Jellyfish/Tentacles.gd" id="3_5yh7k"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_gyt63"]
 [ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="7_i60sr"]
 [ext_resource type="Shader" uid="uid://dog5ar7m8hypg" path="res://Scripts/GLSL/GDShader/JellyfishColors.gdshader" id="8_2ikp3"]

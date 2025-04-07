@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bi6i18nskixdt"]
 
-[ext_resource type="Script" uid="uid://beofwn0pgkcaq" path="res://Scripts/Entity/NPC/ActualNPCs/CivillianFollower.gd" id="1_o7vjs"]
+[ext_resource type="Script" uid="uid://beofwn0pgkcaq" path="res://Scripts/Entity/NPC/CivillianFollower.gd" id="1_o7vjs"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="2_l6860"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5cylf"]

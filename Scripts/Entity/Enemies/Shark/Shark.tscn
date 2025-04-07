@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dk3xlgrb0w35a"]
 
-[ext_resource type="Script" uid="uid://c15nrqvtfug1m" path="res://Enemies/Shark/Shark.gd" id="1_6faw0"]
+[ext_resource type="Script" uid="uid://c15nrqvtfug1m" path="res://Scripts/Entity/Enemies/Shark/Shark.gd" id="1_6faw0"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="2_6wtiw"]
-[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Enemies/EnemyFov.gd" id="3_42slt"]
-[ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Enemies/StateMachine.gd" id="4_t55ll"]
+[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Scripts/Entity/Enemies/EnemyFov.gd" id="3_42slt"]
+[ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Scripts/Entity/Enemies/StateMachine.gd" id="4_t55ll"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6faw0"]
 radius = 133.0

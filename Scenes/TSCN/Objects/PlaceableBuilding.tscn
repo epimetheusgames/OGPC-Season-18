@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crayjmaukyqsy" path="res://Scripts/Objects/PlaceableBuilding.gd" id="1_hfllt"]
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_0erx1"]
-[ext_resource type="Script" uid="uid://ct4d1cr2873gf" path="res://Scripts/Entity/NPC/ActualNPCs/AnyFollowerDummy.gd" id="3_sok0k"]
+[ext_resource type="Script" uid="uid://ct4d1cr2873gf" path="res://Scripts/Entity/NPC/AnyFollowerDummy.gd" id="3_sok0k"]
 
 [sub_resource type="Resource" id="Resource_xgfk5"]
 script = ExtResource("2_0erx1")

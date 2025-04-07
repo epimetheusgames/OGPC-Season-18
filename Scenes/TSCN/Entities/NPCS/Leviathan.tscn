@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://baedw6bviawtd" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
 [ext_resource type="PackedScene" uid="uid://dwxcjl4jrkyw3" path="res://Scenes/TSCN/Entities/NPCS/LeviathanNode.tscn" id="1_ljr6s"]
-[ext_resource type="Script" uid="uid://bmq6c6h4ure25" path="res://Scripts/Entity/NPC/Leviathan.gd" id="1_ucxug"]
+[ext_resource type="Script" uid="uid://bmq6c6h4ure25" path="res://Scripts/Entity/Enemies/Leviathan/Leviathan.gd" id="1_ucxug"]
 [ext_resource type="Script" uid="uid://ck16solkwfpgw" path="res://Scripts/Components/Rope/RopeAttachment.gd" id="4_6mv3f"]
 [ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="5_on45p"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_6n4cc"]
