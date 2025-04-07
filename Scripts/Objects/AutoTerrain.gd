@@ -20,7 +20,7 @@ func _ready() -> void:
 	if !texture:
 		texture = preloaded_texture
 	texture_repeat = TEXTURE_REPEAT_ENABLED
-	if !material:
+	if !material: 
 		material = preloaded_shader_material.duplicate(true)
 	
 	if shader:
