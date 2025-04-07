@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc8nwmffdtqmh"]
+
+[ext_resource type="Script" uid="uid://ba3dxjvftete5" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineBurstWeaponBullet.gd" id="1_ii88i"]
+[ext_resource type="Script" uid="uid://ced6k1jq3eqag" path="res://Scripts/Components/Damage/OneShotAttack.gd" id="2_ufoms"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jagb"]
+size = Vector2(4, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4v2j"]
+size = Vector2(10, 22.5)
+
+[node name="SubmarineBurstWeaponBullet" type="Area2D" node_paths=PackedStringArray("attackbox")]
+script = ExtResource("1_ii88i")
+attackbox = NodePath("OneShotAttack")
+speed = 200.0
+size = 1.0
+damage = 1.0
+metadata/_custom_type_script = "uid://do2ogc84k7glm"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -7.0
+offset_top = -6.0
+offset_right = 7.0
+offset_bottom = 7.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1jagb")
+
+[node name="OneShotAttack" type="Area2D" parent="."]
+script = ExtResource("2_ufoms")
+attacker_type = 1
+damage_amount = 5.0
+metadata/_custom_type_script = "uid://ced6k1jq3eqag"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]
+shape = SubResource("RectangleShape2D_j4v2j")
