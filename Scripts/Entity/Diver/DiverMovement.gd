@@ -82,6 +82,7 @@ func update_movement_velocity(delta: float):
 	
 	if is_in_gravity_area:
 		diver.rotation = 0
+		velocity.y += 5 * delta * 60
 		
 		if input_vector.length_squared() > 0:
 			velocity.x += input_vector.x * 3 * delta * 60

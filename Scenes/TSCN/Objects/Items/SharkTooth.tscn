@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dh36vholiarea"]
+
+[ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_nnk5a"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_wuy8s"]
+
+[sub_resource type="Resource" id="Resource_xrety"]
+script = ExtResource("2_wuy8s")
+file = "uid://dh36vholiarea"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j0t2t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wuy8s"]
+radius = 79.7621
+
+[node name="SharkTooth" type="Area2D"]
+script = ExtResource("1_nnk5a")
+scene = SubResource("Resource_xrety")
+icon = SubResource("PlaceholderTexture2D_j0t2t")
+cost = 40
+item_name = "Shark Tooth"
+sellable_resource = true
+metadata/_custom_type_script = "uid://fpnredcqa4b5"
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-141, 58, -137, 64, -128, 55, -110, 63, -85, 54, -60, 60, -22, 57, -3, 67, 13, 59, 59, 64, 66, 58, 80, 61, 117, 54, 135, 61, -2, -177)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -35)
+shape = SubResource("CircleShape2D_wuy8s")
