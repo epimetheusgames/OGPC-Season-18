@@ -14,13 +14,9 @@ var velocity: Vector2
 
 func _ready() -> void:
 	top_level = true
-	attackbox.damage_dealt.connect(should_die)
 
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
-
-func should_die(hurtbox: Hurtbox, damage_amount: float):
-	attackbox.is_attacking = false
 
 func fire(angle: float) -> void:
 	pass  # Override

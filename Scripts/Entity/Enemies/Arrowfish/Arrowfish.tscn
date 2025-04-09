@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dd4arsu8r6mkx"]
+[gd_scene load_steps=16 format=3 uid="uid://dd4arsu8r6mkx"]
 
 [ext_resource type="Script" uid="uid://dh0ffpkyxt836" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.gd" id="1_bu73s"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="2_8v7gp"]
+[ext_resource type="PackedScene" uid="uid://b6tmbilbuib0l" path="res://Scenes/TSCN/Objects/Items/ArrowFishTail.tscn" id="2_dyarh"]
 [ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Scripts/Entity/Enemies/EnemyFov.gd" id="3_8v7gp"]
 [ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="4_34ujk"]
 [ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Scripts/Entity/Enemies/StateMachine.gd" id="4_yojgw"]
@@ -10,7 +11,7 @@
 [ext_resource type="Script" uid="uid://nvugdxkv30q2" path="res://Scripts/Entity/Enemies/Arrowfish/States/Dash.gd" id="7_04wa5"]
 [ext_resource type="Script" uid="uid://d1ajssj74v5bx" path="res://Scripts/Entity/Enemies/Arrowfish/States/Chase.gd" id="8_gf7n5"]
 [ext_resource type="Script" uid="uid://ba4u3jj7atg1n" path="res://Scripts/Entity/Enemies/Arrowfish/States/Escape.gd" id="9_h5wab"]
-[ext_resource type="Script" uid="uid://crynjoiy8hntp" path="res://Scripts/Entity/Enemies/Arrowfish/States/Dead.gd" id="11_oel4a"]
+[ext_resource type="Script" uid="uid://crynjoiy8hntp" path="res://Scripts/Entity/Enemies/UniversalStates/Dead.gd" id="11_oel4a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bsgvg"]
 radius = 25.0
@@ -27,6 +28,7 @@ radius = 36.2215
 position = Vector2(-60, 3)
 rotation = 6.28318
 collision_layer = 0
+collision_mask = 2049
 script = ExtResource("1_bu73s")
 hurtbox = NodePath("Hurtbox")
 attackbox = NodePath("ContinuousAttack")
@@ -35,6 +37,7 @@ enemy_fov = NodePath("EnemyFov")
 attack_dist = 175.0
 dead_state = NodePath("StateMachine/Dead")
 state_machine = NodePath("StateMachine")
+drop_item = ExtResource("2_dyarh")
 
 [node name="EnemyFov" type="Node2D" parent="."]
 position = Vector2(72, -4)

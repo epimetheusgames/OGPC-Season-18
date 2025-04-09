@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6tmbilbuib0l"]
+
+[ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_bgjow"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_v74yr"]
+
+[sub_resource type="Resource" id="Resource_cs5ck"]
+script = ExtResource("2_v74yr")
+file = "uid://b6tmbilbuib0l"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tk7fl"]
+size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bgjow"]
+radius = 41.0
+
+[node name="ArrowFishTail" type="Area2D"]
+script = ExtResource("1_bgjow")
+scene = SubResource("Resource_cs5ck")
+icon = SubResource("PlaceholderTexture2D_tk7fl")
+cost = 15
+item_name = "Arrow Fish Tail"
+sellable_resource = true
+metadata/_custom_type_script = "uid://fpnredcqa4b5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, -2)
+shape = SubResource("CircleShape2D_bgjow")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0.35, 0.783333, 1)
+polygon = PackedVector2Array(-49, -37, -10, -9, 30, -34, 32, -29, 30, -26, 32, -23, 29, -19, 32, -15, 29, -10, 33, -6, 29, -2, 32, 1, 28, 6, 33, 9, 31, 13, 33, 19, 30, 24, -12, 7, -42, 27, -25, -3)

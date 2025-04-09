@@ -176,3 +176,15 @@ static func clamp_vector_length(v: Vector2, min_length: float, max_length: float
 		return v
 	var clamped_len = clamp(len, min_length, max_length)
 	return v.normalized() * clamped_len
+
+static func get_random_point_in_circle(circle_pos: Vector2, circle_radius: float) -> Vector2:
+	while true:
+		var rand_pos: Vector2 = Vector2(
+			randi_range(circle_pos.x - circle_radius, circle_pos.x + circle_radius),
+			randi_range(circle_pos.y - circle_radius, circle_pos.y + circle_radius)
+		)
+		
+		if circle_pos.distance_to(rand_pos) <= circle_radius:
+			return rand_pos
+	
+	return Vector2.ZERO # Shouldn't happen

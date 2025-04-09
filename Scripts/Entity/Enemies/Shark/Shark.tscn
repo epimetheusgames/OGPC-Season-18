@@ -1,19 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk3xlgrb0w35a"]
+[gd_scene load_steps=13 format=3 uid="uid://dk3xlgrb0w35a"]
 
 [ext_resource type="Script" uid="uid://c15nrqvtfug1m" path="res://Scripts/Entity/Enemies/Shark/Shark.gd" id="1_6faw0"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="2_6wtiw"]
+[ext_resource type="PackedScene" uid="uid://dh36vholiarea" path="res://Scenes/TSCN/Objects/Items/SharkTooth.tscn" id="2_oy8f6"]
 [ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Scripts/Entity/Enemies/EnemyFov.gd" id="3_42slt"]
+[ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="3_t2qye"]
 [ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Scripts/Entity/Enemies/StateMachine.gd" id="4_t55ll"]
+[ext_resource type="Script" uid="uid://gfak45mt233w" path="res://Scripts/Entity/Enemies/Shark/States/Chase.gd" id="5_i7d7g"]
+[ext_resource type="Script" uid="uid://4cd01h6rq6gh" path="res://Scripts/Entity/Enemies/Shark/States/Dash.gd" id="6_yvuj7"]
+[ext_resource type="Script" uid="uid://crynjoiy8hntp" path="res://Scripts/Entity/Enemies/UniversalStates/Dead.gd" id="8_oy8f6"]
+[ext_resource type="Script" uid="uid://di7a3aeesshlj" path="res://Scripts/Entity/Enemies/Shark/States/Wander.gd" id="9_oy8f6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6faw0"]
 radius = 133.0
 height = 664.0
 
-[node name="Shark" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_oy8f6"]
+radius = 102.396
+
+[node name="Shark" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "nav_agent", "enemy_fov", "dead_state", "state_machine")]
 script = ExtResource("1_6faw0")
 hurtbox = NodePath("Hurtbox")
+attackbox = NodePath("ContinuousAttack")
 nav_agent = NodePath("NavigationAgent2D")
 enemy_fov = NodePath("EnemyFov")
+attack_dist = 715.0
+dead_state = NodePath("StateMachine/Dead")
+state_machine = NodePath("StateMachine")
+drop_item = ExtResource("2_oy8f6")
 
 [node name="Sprite" type="Polygon2D" parent="."]
 position = Vector2(-82, -15)
@@ -37,12 +51,39 @@ scale = Vector2(1.41734, 1.22189)
 shape = SubResource("CapsuleShape2D_6faw0")
 debug_color = Color(0.219953, 0.749043, 0, 0.42)
 
+[node name="ContinuousAttack" type="Area2D" parent="."]
+script = ExtResource("3_t2qye")
+metadata/_custom_type_script = "uid://bf0bikj8np6x"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousAttack"]
+position = Vector2(612, 0)
+shape = SubResource("CircleShape2D_oy8f6")
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="EnemyFov" type="Node2D" parent="."]
 script = ExtResource("3_42slt")
 metadata/_custom_type_script = "uid://0j0vsqeeio1s"
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("4_t55ll")
+starting_state = NodePath("Wander")
 metadata/_custom_type_script = "uid://balgnejnh7c1p"
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("dash_state", "wander_state")]
+script = ExtResource("5_i7d7g")
+dash_state = NodePath("../Dash")
+wander_state = NodePath("../Wander")
+
+[node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_state")]
+script = ExtResource("6_yvuj7")
+chase_state = NodePath("../Chase")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_state")]
+script = ExtResource("9_oy8f6")
+chase_state = NodePath("../Chase")
+
+[node name="WanderTimer" type="Timer" parent="StateMachine/Wander"]
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("8_oy8f6")

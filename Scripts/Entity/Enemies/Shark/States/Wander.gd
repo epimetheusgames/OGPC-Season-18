@@ -1,14 +1,14 @@
-## Wander state for the Arrowfish
+## Wander state for the Shark
 # Owned by: kaibenson
 extends State
 
-@export var aim_state: State
+@export var chase_state: State
 
 var enemy: Enemy
 
 var wander_anchor: Vector2
 var wander_radius: float = 900.0
-var wander_speed: float = 4.0
+var wander_speed: float = 6
 
 # Generates a new wander_target_pos periodically
 @onready var wander_timer: Timer = $"WanderTimer"
@@ -30,13 +30,11 @@ func enter() -> void:
 func exit() -> void:
 	wander_timer.stop()
 
-
 func process_frame(delta: float) -> State:
 	return null
 
-
 func _update_wander_position() -> void:
-	wander_target_pos = get_random_point_in_circle(wander_anchor, wander_radius)
+	wander_target_pos = Util.get_random_point_in_circle(wander_anchor, wander_radius)
 	wander_timer.wait_time = randf_range(wait_time - 1, wait_time + 1)
 
 func process_physics(delta: float) -> State:
@@ -48,19 +46,6 @@ func process_physics(delta: float) -> State:
 	var diver_pos: Vector2 = enemy.get_diver_pos()
 	
 	if enemy.enemy_fov.can_see_point(diver_pos):
-		return aim_state
+		return chase_state
 	
 	return null
-
-
-static func get_random_point_in_circle(circle_pos: Vector2, circle_radius: float) -> Vector2:
-	while true:
-		var rand_pos: Vector2 = Vector2(
-			randi_range(circle_pos.x - circle_radius, circle_pos.x + circle_radius),
-			randi_range(circle_pos.y - circle_radius, circle_pos.y + circle_radius)
-		)
-		
-		if circle_pos.distance_to(rand_pos) <= circle_radius:
-			return rand_pos
-	
-	return Vector2.ZERO # Shouldn't happen

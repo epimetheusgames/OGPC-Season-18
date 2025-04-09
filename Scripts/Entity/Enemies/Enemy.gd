@@ -15,7 +15,12 @@ extends Entity
 
 @export var drop_item: PackedScene
 
+var dead_from_save := false
+
 func _ready() -> void:
+	if dead_from_save:
+		_die()
+	
 	if hurtbox:
 		hurtbox.died.connect(_die)
 
@@ -45,12 +50,12 @@ func move_towards(pos: Vector2, speed: float, delta: float) -> void:
 
 # signals
 func _die() -> void:
-	if drop_item:
+	if drop_item && !dead_from_save:
 		var item: BaseItem = drop_item.instantiate()
 		get_parent().add_child(item)
 		item.global_position = global_position
-	if hurtbox:
-		hurtbox.queue_free()
+	if attackbox:
+		attackbox.queue_free()
 	if state_machine && dead_state:
 		state_machine.change_state(dead_state)
 	else:

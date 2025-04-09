@@ -546,7 +546,7 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
-position = Vector2(1830, 3108)
+position = Vector2(-3339, 2546)
 uid = SubResource("Resource_vfal8")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("32_6lnpa")]
@@ -618,8 +618,7 @@ metadata/_edit_lock_ = true
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/ResearchStation/Wall"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/Wall/StaticBody2D"]
-visible = false
-polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2676, 2757)
+polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2799, 2760)
 
 [node name="Background" type="Polygon2D" parent="LevelContainer/ResearchStation"]
 z_index = 7
