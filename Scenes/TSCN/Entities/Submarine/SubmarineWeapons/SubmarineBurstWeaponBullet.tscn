@@ -12,7 +12,7 @@ size = Vector2(10, 22.5)
 [node name="SubmarineBurstWeaponBullet" type="Area2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_ii88i")
 attackbox = NodePath("OneShotAttack")
-speed = 200.0
+speed = 1000.0
 size = 1.0
 damage = 1.0
 metadata/_custom_type_script = "uid://do2ogc84k7glm"
@@ -29,8 +29,10 @@ shape = SubResource("RectangleShape2D_1jagb")
 [node name="OneShotAttack" type="Area2D" parent="."]
 script = ExtResource("2_ufoms")
 attacker_type = 1
-damage_amount = 5.0
+damage_amount = 15.0
 metadata/_custom_type_script = "uid://ced6k1jq3eqag"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]
 shape = SubResource("RectangleShape2D_j4v2j")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

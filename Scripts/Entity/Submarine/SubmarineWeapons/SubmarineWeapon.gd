@@ -4,7 +4,10 @@
 class_name SubmarineWeapon 
 extends Node2D
 
+@onready var emission_point = get_node("ProjectileEmissionPoint")
+
 # Subclass dependent variables
+@export var base_texture : Texture2D
 @export var projectile_scene : PackedScene
 @export var rotation_range : float
 @export var rotation_speed : float
@@ -12,11 +15,14 @@ extends Node2D
 
 var max_rotation : float
 var min_rotation : float
+var target_rot : float
 
 var shot_timer : Timer
 var passive_decrease_timer : Timer
 
 var is_being_operated := true
+
+var in_rotation_range := true
 
 var shot_timer_over := true
 
@@ -46,6 +52,8 @@ func _ready() -> void:
 	passive_decrease_timer.one_shot = true
 	add_child(passive_decrease_timer)
 	passive_decrease_timer.connect("timeout", _on_passive_decrease_timer_timeout)
+	
+	
 
 func _on_shot_cooldown_timeout() -> void:
 	shot_timer_over = true
@@ -78,10 +86,11 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("attack"):
 			attack()
 		
-		var mouse_vector_angle = get_mouse_input_vector().angle()
-		#print(rad_to_deg(mouse_vector_angle))
-		var target_rot = clamp(rad_to_deg(mouse_vector_angle), min_rotation, max_rotation)
-		rotation = Util.better_angle_lerp(rotation, deg_to_rad(target_rot), .2, delta)
+		var mouse_vector_angle = (get_global_mouse_position()-global_position).angle()
+		if clamp(rad_to_deg(mouse_vector_angle), min_rotation, max_rotation) == rad_to_deg(mouse_vector_angle):
+			target_rot = mouse_vector_angle
+		
+		rotation = Util.better_angle_lerp(rotation, target_rot, .2, delta)
 
 func get_mouse_input_vector() -> Vector2:
 	return (Vector2(DisplayServer.mouse_get_position()) - global_position).normalized()

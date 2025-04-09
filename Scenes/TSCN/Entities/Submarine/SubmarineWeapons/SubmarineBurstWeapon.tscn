@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://yigraya7x7v4"]
+[gd_scene load_steps=5 format=3 uid="uid://yigraya7x7v4"]
 
 [ext_resource type="Script" uid="uid://dok3q8kyc2lfx" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineBurstWeapon.gd" id="1_ofjw0"]
 [ext_resource type="PackedScene" uid="uid://bc8nwmffdtqmh" path="res://Scenes/TSCN/Entities/Submarine/SubmarineWeapons/SubmarineBurstWeaponBullet.tscn" id="2_t1hu4"]
+[ext_resource type="Texture2D" uid="uid://ek04bw643dyr" path="res://Assets/Art/Entity/Submarine/BurstWeaponBarrel.png" id="3_jyae7"]
+[ext_resource type="Texture2D" uid="uid://b08d8cxp7h6w" path="res://Assets/Art/Entity/Submarine/BurstWeaponBase.png" id="4_i1obx"]
 
 [node name="SubmarineBurstWeapon" type="Node2D"]
 script = ExtResource("1_ofjw0")
+time_between_bursts = 0.1
+base_texture = ExtResource("4_i1obx")
 projectile_scene = ExtResource("2_t1hu4")
 rotation_range = 160.0
 shot_cooldown = 0.6
@@ -15,8 +19,12 @@ cooling_heat_decrease_per_sec = 24.0
 overheat_heat_decrease_per_sec = 6.0
 metadata/_custom_type_script = "uid://dq4evq2as7gnq"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_top = -7.0
-offset_right = 151.0
-offset_bottom = 8.0
-color = Color(0.212305, 0.212305, 0.212305, 1)
+[node name="ProjectileEmissionPoint" type="Node2D" parent="."]
+position = Vector2(200, 0)
+rotation = 1.5708
+
+[node name="Barrel" type="Sprite2D" parent="."]
+position = Vector2(70, 0)
+rotation = 1.5708
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("3_jyae7")
