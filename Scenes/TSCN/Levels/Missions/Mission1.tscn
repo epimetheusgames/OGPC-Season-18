@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=77 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -156,8 +156,6 @@ void fragment() {
 	COLOR = mix(edge_pixel, in_pixel, fade_amm) * color_multiplier;
 }"
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oshqg"]
-
 [sub_resource type="Gradient" id="Gradient_ijkxv"]
 offsets = PackedFloat32Array(0.0192308)
 colors = PackedColorArray(0.663023, 0.427097, 0.199698, 1)
@@ -173,9 +171,9 @@ shader_parameter/num_points = 55
 shader_parameter/global_position = Vector2(0, 0)
 shader_parameter/fade_width = 215
 shader_parameter/tex_scale = 103.0
-shader_parameter/color_multiplier = 1.0
+shader_parameter/color_multiplier = 0.4
 shader_parameter/in_tex = SubResource("GradientTexture1D_qa8ko")
-shader_parameter/edge_tex = SubResource("CompressedTexture2D_oshqg")
+shader_parameter/edge_tex = ExtResource("3_kali0")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5pa5j"]
 polygon = PackedVector2Array(8679, 5002, 9047, 5336, 9183, 5637, 9286.61, 6298.09, 8888, 6329, 8869, 6327, 8847, 6312, 8834, 6291, 8820, 6264, 8688, 5939, 8231.47, 5846.22, 8266, 5487, 8095, 5352, 7072, 5422, 7022, 5386, 6755, 5675, 6228, 5724, 5714, 5477, 4839, 5811, 4630, 6507, 4876, 7120, 5517, 7946, 6255, 7475, 5572, 6810, 5558, 6018, 6249, 5825, 6855, 5758, 7022, 5503, 7028, 5942, 7488, 6159, 7612.65, 6184.18, 7557, 6341, 7685, 6352, 7714.44, 6204.74, 7790, 6220, 7934, 6207, 8196, 6152, 8455, 6117, 8526, 5994, 8644, 6003, 8753, 6310, 8808.8, 6366.02, 8688, 6527, 8667, 6913, 8626, 7196, 8361, 7416, 7604, 7379, 7513, 7500, 7912.02, 7502.64, 7882, 7922, 7133, 7864, 7113, 8001, 7790, 8116, 7818, 8116, 7830, 8101, 7844, 8091, 7859, 8087, 7883, 8092, 7883, 8102, 7864, 8108, 7849, 8120, 7845, 8129, 7855, 8138, 7868, 8141, 7860, 8154, 7859, 8162, 7860, 8176, 7861, 8200, 7860, 8225, 7820, 8313, 7741, 8437, 7712, 8461, 7699, 8498, 7707, 8500, 7729, 8478, 7791, 8469, 7801, 8461, 7810, 8452, 7843.91, 8384.17, 7848, 8379, 7860, 8376, 7865, 8373, 7873, 8362, 7928, 8213, 7940, 8208, 7953, 8211, 8043, 8249, 8134, 8701, 8421, 8713, 8435, 8711, 8447, 8708, 8458, 8712, 8467, 8720, 8511, 8739, 8562, 8741, 8593, 8727, 8611, 8695, 8602, 8659, 8580, 8643, 8547, 8634, 8516, 8639, 8481, 8646, 8448, 8645, 8431, 8649, 8239, 8578, 8135, 8272, 8219, 8109, 8153, 7950, 8036, 7916, 8041.99, 7503.5, 8421, 7506, 8481, 7464, 8690, 7754, 8762, 7706, 8549, 7410, 8660, 7323, 8769, 6993, 8743, 6853, 8768, 6595, 8887, 6398, 9293.39, 6364.91, 9356, 6982, 9554, 8558, 9696, 9804, 9711, 9852, 9736, 9890, 9785, 9927, 9841, 9887, 9873.57, 9808.01, 10055, 8722, 10293, 7009, 10727, 6849, 11117, 6644, 11438, 6421, 11531, 6293, 11602, 6143, 11716, 5815, 11905, 5394, 12164, 5129, 12489, 4955, 12848, 4861, 13245, 4812, 14300, 4726, 15355, 4527, 17079, 3985, 18177, 3500, 19217, 2745, 20158, 2004, 21174, 1448, 22407, 995, 24185, 591, 25865, 457, 27107, 288, 27648.2, 200.549, 27679, 201, 27701.8, 191.89, 27794, 177, 27828.2, 170.554, 27849, 157, 27859, 153, 27875, 152, 27931.9, 150.985, 27991.8, 139.679, 28014, 127, 28068.6, 125.203, 28287, 84, 28309, 75, 28323.9, 55.8398, 28378.7, -21.7406, 28408, -49, 28450, -68, 28729, -135, 28852, -605, 28508, 11298, 6989, 10098, 3474, 8020, 3964, 5535)
@@ -362,6 +360,7 @@ metadata/_edit_lock_ = true
 collision_layer = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Environment/StaticBody2D2"]
+visible = false
 position = Vector2(-2894, 2581)
 shape = SubResource("CircleShape2D_8qye6")
 
@@ -402,6 +401,7 @@ occluder = SubResource("OccluderPolygon2D_7lwei")
 
 [node name="AutoPolygonTexture4" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
 material = SubResource("ShaderMaterial_2s0g2")
+position = Vector2(0, 1)
 polygon = PackedVector2Array(9293, 6365, 9554, 8558, 9696, 9804, 9711, 9852, 9736, 9890, 9785, 9927, 9841, 9887, 9873.57, 9808.01, 10055, 8722, 10293, 7009, 10727, 6849, 11117, 6644, 11438, 6421, 11531, 6293, 11602, 6143, 11716, 5815, 11905, 5394, 12164, 5129, 12489, 4955, 12848, 4861, 13245, 4812, 14300, 4726, 15355, 4527, 17079, 3985, 18177, 3500, 19217, 2745, 20158, 2004, 21174, 1448, 22407, 995, 24185, 591, 25865, 457, 27107, 288, 27648.2, 200.549, 27679, 201, 27701.8, 191.89, 27794, 177, 27828.2, 170.554, 27849, 157, 27859, 153, 27875, 152, 27931.9, 150.985, 27991.8, 139.679, 28014, 127, 28068.6, 125.203, 28287, 84, 28309, 75, 28323.9, 55.8398, 28378.7, -21.7406, 28408, -49, 28450, -68, 28729, -135, 28852, -605, 28508, 11298, 8896, 10316, 9134, 6378)
 script = ExtResource("5_aep54")
 
@@ -618,6 +618,7 @@ metadata/_edit_lock_ = true
 [node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/ResearchStation/Wall"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/Wall/StaticBody2D"]
+visible = false
 polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2799, 2760)
 
 [node name="Background" type="Polygon2D" parent="LevelContainer/ResearchStation"]
@@ -636,6 +637,7 @@ polygon = PackedVector2Array(-4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239,
 z_index = 7
 color = Color(0.266575, 0.266575, 0.266575, 1)
 polygon = PackedVector2Array(-2678, 2651, -2670, 2762, -4259, 2798, -4309, 2689)
+metadata/_edit_lock_ = true
 
 [node name="GravityArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["gravity_areas"]]
 z_index = 7

@@ -30,7 +30,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	for i in range(icons.size()):
-		buttons[i].button.disabled = Global.player.diver_stats.current_money < icons[i].cost
+		buttons[i].button.disabled = Global.player.diver_stats.current_money < icons[i].cost && \
+									 !Global.player.diver_combat.unlocked_weapons.get("has_" + icons[i].name)
 
 func _save() -> void:
 	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self,
@@ -48,13 +49,19 @@ func _save() -> void:
 func _get_index_by_name(button_name: String) -> int:
 	for i in range(icons.size()):
 		if icons[i].name == button_name:
-			print(icons[i].name)
 			return i
 	return -1
 
 func _button_up(button_name: String) -> void:
 	var clicked_icon := icons[_get_index_by_name(button_name)]
+	var unlocked_weapons := Global.player.diver_combat.unlocked_weapons
+	
+	if unlocked_weapons.get("has_" + clicked_icon.name):
+		selected_icon = clicked_icon
+		return
+	
 	if Global.player.diver_stats.current_money >= clicked_icon.cost:
+		unlocked_weapons.set("has_" + clicked_icon.name, true)
 		Global.player.diver_stats.current_money -= clicked_icon.cost
 		selected_icon = clicked_icon
 
@@ -69,11 +76,17 @@ func _on_secondary_button_button_up() -> void:
 	selected_icon = null
 
 func _on_primary_button_button_up() -> void:
+	var diver_primary_weapon_obj := Global.player.diver_combat.primary_weapon
 	if !selected_icon || secondary_weapon == selected_icon.name:
+		primary_weapon = ""
+		primary_button.text = "Primary Weapon"
+		if diver_primary_weapon_obj:
+			diver_primary_weapon_obj.enabled = false
+		diver_primary_weapon_obj = null
 		return
 	primary_weapon = selected_icon.name
 	primary_button.text = selected_icon.formatted_name
-	if Global.player.diver_combat.primary_weapon:
-		Global.player.diver_combat.primary_weapon.enabled = false
-	Global.player.diver_combat.primary_weapon = Global.player.diver_combat.instantiated_weapons[primary_weapon]
+	if diver_primary_weapon_obj:
+		diver_primary_weapon_obj.enabled = false
+	diver_primary_weapon_obj = Global.player.diver_combat.instantiated_weapons[primary_weapon]
 	selected_icon = null
