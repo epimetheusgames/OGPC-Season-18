@@ -75,12 +75,15 @@ columns = 4
 
 [node name="Pistol" parent="SubViewportContainer/SubViewport/WeaponUnlock/GridContainer" instance=ExtResource("3_fm50s")]
 layout_mode = 2
+weapon_name = "Pistol"
 
 [node name="Knife" parent="SubViewportContainer/SubViewport/WeaponUnlock/GridContainer" instance=ExtResource("3_fm50s")]
 layout_mode = 2
+weapon_name = "Knife"
 
 [node name="Speargun" parent="SubViewportContainer/SubViewport/WeaponUnlock/GridContainer" instance=ExtResource("3_fm50s")]
 layout_mode = 2
+weapon_name = "Speargun"
 
 [node name="HSeparator" type="HSeparator" parent="SubViewportContainer/SubViewport/WeaponUnlock"]
 layout_mode = 2
@@ -107,7 +110,11 @@ theme = ExtResource("1_fnds5")
 theme_override_font_sizes/font_size = 50
 text = "Second Weapon"
 
-[node name="Button" type="Button" parent="SubViewportContainer/SubViewport/WeaponUnlock/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="SubViewportContainer/SubViewport/WeaponUnlock/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="SubViewportContainer/SubViewport/WeaponUnlock/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_fnds5")

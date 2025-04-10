@@ -78,11 +78,6 @@ func _on_secondary_button_button_up() -> void:
 func _on_primary_button_button_up() -> void:
 	var diver_primary_weapon_obj := Global.player.diver_combat.primary_weapon
 	if !selected_icon || secondary_weapon == selected_icon.name:
-		primary_weapon = ""
-		primary_button.text = "Primary Weapon"
-		if diver_primary_weapon_obj:
-			diver_primary_weapon_obj.enabled = false
-		diver_primary_weapon_obj = null
 		return
 	primary_weapon = selected_icon.name
 	primary_button.text = selected_icon.formatted_name
