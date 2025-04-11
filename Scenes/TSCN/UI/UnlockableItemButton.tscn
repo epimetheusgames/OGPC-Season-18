@@ -6,7 +6,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d85qo"]
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="UnlockableItemButton" type="PanelContainer"]
 offset_right = 369.0
 offset_bottom = 362.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d85qo")

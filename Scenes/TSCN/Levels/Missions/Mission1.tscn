@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
-[ext_resource type="Script" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
+[ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
 [ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="2_3svaj"]
 [ext_resource type="AudioStream" uid="uid://bdjdysj3l46f7" path="res://Assets/SFX/Wind.ogg" id="2_8qye6"]
 [ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="2_bdf5b"]
