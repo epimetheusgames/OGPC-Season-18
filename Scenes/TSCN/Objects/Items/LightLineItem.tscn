@@ -14,7 +14,7 @@ script = ExtResource("1_6yiws")
 light_line_scene = ExtResource("2_bd15o")
 scene = SubResource("Resource_ob34d")
 icon = ExtResource("4_triej")
-cost = 25
+cost = 5
 item_name = "Light Line"
 
 [node name="ColorRect" type="ColorRect" parent="."]
