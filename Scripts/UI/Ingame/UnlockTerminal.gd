@@ -47,6 +47,9 @@ func _process(delta: float) -> void:
 	for i in range(icons.size()):
 		buttons[i].button.disabled = Global.player.diver_stats.current_money < icons[i].cost && \
 									 !Global.player.diver_combat.unlocked_weapons.get("has_" + icons[i].name)
+	
+	for i in range(actual_items.size()):
+		item_buttons[i].button.disabled = Global.player.diver_stats.current_money < actual_items[i].cost
 
 func _save() -> void:
 	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self,
