@@ -32,6 +32,8 @@ func _process(delta: float) -> void:
 	
 	if diver.diver_movement.is_in_research_station:
 		for item in inventory:
+			if !is_instance_valid(item) || !item:
+				continue
 			if item.sellable_resource:
 				diver.diver_stats.current_money += item.cost * item.count
 				inventory.remove_at(inventory.find(item))

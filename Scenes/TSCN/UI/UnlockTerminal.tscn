@@ -1,12 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://bp7br2o4yntou"]
+[gd_scene load_steps=14 format=3 uid="uid://bp7br2o4yntou"]
 
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="1_fnds5"]
 [ext_resource type="Script" uid="uid://b6wg1chfejpyv" path="res://Scripts/UI/Ingame/UnlockTerminal.gd" id="1_uqbbo"]
 [ext_resource type="Script" uid="uid://dmqhnwjlxysck" path="res://Scripts/ResourceScripts/Misc/WeaponIcon.gd" id="2_1re2d"]
 [ext_resource type="PackedScene" uid="uid://btrwpowo3m5xg" path="res://Scenes/TSCN/UI/UnlockableWeaponButton.tscn" id="3_fm50s"]
 [ext_resource type="PackedScene" uid="uid://ritdw7h4f83y" path="res://Scenes/TSCN/Objects/Items/LightLineItem.tscn" id="3_q42uy"]
+[ext_resource type="PackedScene" uid="uid://dbhho2ec64bks" path="res://Scenes/TSCN/Objects/Items/PlaceableBuildingItem.tscn" id="4_2ocmr"]
 [ext_resource type="PackedScene" uid="uid://6nnlp7fpthm4" path="res://Scenes/TSCN/UI/UnlockableItemButton.tscn" id="5_rasfv"]
 [ext_resource type="Texture2D" uid="uid://kbno8w3pbkse" path="res://Assets/Art/Icons/LightLineIcon.png" id="6_l73cy"]
+[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="9_3phen"]
 
 [sub_resource type="Resource" id="Resource_fm50s"]
 script = ExtResource("2_1re2d")
@@ -36,8 +38,8 @@ radius = 210.288
 script = ExtResource("1_uqbbo")
 icons = Array[ExtResource("2_1re2d")]([SubResource("Resource_fm50s"), SubResource("Resource_rasfv"), SubResource("Resource_l73cy")])
 buttons = [NodePath("SubViewportContainer/SubViewport/WeaponUnlock/GridContainer/Pistol"), NodePath("SubViewportContainer/SubViewport/WeaponUnlock/GridContainer/Knife"), NodePath("SubViewportContainer/SubViewport/WeaponUnlock/GridContainer/Speargun")]
-item_buttons = [NodePath("SubViewportContainer/SubViewport/ItemUnlock/GridContainer/LightLineButton")]
-items = Array[PackedScene]([ExtResource("3_q42uy")])
+item_buttons = [NodePath("SubViewportContainer/SubViewport/ItemUnlock/GridContainer/LightLineButton"), NodePath("SubViewportContainer/SubViewport/ItemUnlock/GridContainer/PlaceableBuildingItem")]
+items = Array[PackedScene]([ExtResource("3_q42uy"), ExtResource("4_2ocmr")])
 primary_button = NodePath("SubViewportContainer/SubViewport/WeaponUnlock/HBoxContainer/PrimaryButton")
 secondary_button = NodePath("SubViewportContainer/SubViewport/WeaponUnlock/HBoxContainer/SecondaryButton")
 
@@ -140,6 +142,12 @@ layout_mode = 2
 size_flags_vertical = 3
 item_name = "Light Line"
 texture = ExtResource("6_l73cy")
+
+[node name="PlaceableBuildingItem" parent="SubViewportContainer/SubViewport/ItemUnlock/GridContainer" instance=ExtResource("5_rasfv")]
+layout_mode = 2
+size_flags_vertical = 3
+item_name = "Building"
+texture = ExtResource("9_3phen")
 
 [node name="HSeparator" type="HSeparator" parent="SubViewportContainer/SubViewport/ItemUnlock"]
 layout_mode = 2

@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bp7br2o4yntou" path="res://Scenes/TSCN/UI/UnlockTerminal.tscn" id="13_bdf5b"]
 [ext_resource type="PackedScene" uid="uid://bi6i18nskixdt" path="res://Scenes/TSCN/Entities/NPCS/CivillianFollower.tscn" id="13_gnr5v"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
-[ext_resource type="PackedScene" uid="uid://cs6xsivghesmh" path="res://Scenes/TSCN/Objects/PlaceableBuilding.tscn" id="16_3fu4r"]
+[ext_resource type="PackedScene" uid="uid://cs6xsivghesmh" path="res://Scenes/TSCN/Objects/Buildings/PlaceableBuilding.tscn" id="16_3fu4r"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
@@ -842,6 +842,22 @@ position = Vector2(581, 2729)
 [node name="BaseItem" parent="." instance=ExtResource("38_081ql")]
 position = Vector2(-1902, 3286)
 rotation = 0.787773
+
+[node name="BaseItem2" parent="." instance=ExtResource("38_081ql")]
+position = Vector2(-1814, 3372)
+rotation = 0.787773
+
+[node name="BaseItem3" parent="." instance=ExtResource("38_081ql")]
+position = Vector2(-1707, 3466)
+rotation = 0.639031
+
+[node name="BaseItem4" parent="." instance=ExtResource("38_081ql")]
+position = Vector2(-1992, 3198)
+rotation = 0.808024
+
+[node name="BaseItem5" parent="." instance=ExtResource("38_081ql")]
+position = Vector2(-2075, 3116)
+rotation = 0.808024
 
 [editable path="LevelContainer/Items/LightLine"]
 [editable path="UILayer/IngameUI"]
