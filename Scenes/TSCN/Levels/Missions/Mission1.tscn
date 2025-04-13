@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=76 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
 [ext_resource type="Script" uid="uid://bthrd0wdm5ufn" path="res://Scripts/Level/ResearchStation.gd" id="12_jw53c"]
 [ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="12_kali0"]
+[ext_resource type="PackedScene" uid="uid://6ajyn7xeilmv" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="12_mcejo"]
 [ext_resource type="PackedScene" uid="uid://bp7br2o4yntou" path="res://Scenes/TSCN/UI/UnlockTerminal.tscn" id="13_bdf5b"]
 [ext_resource type="PackedScene" uid="uid://bi6i18nskixdt" path="res://Scenes/TSCN/Entities/NPCS/CivillianFollower.tscn" id="13_gnr5v"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
@@ -31,7 +32,6 @@
 [ext_resource type="Shader" uid="uid://cgotkxkod1mlf" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="29_g0sdt"]
 [ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="30_ec8ks"]
 [ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
-[ext_resource type="PackedScene" uid="uid://b8b85s6osaha0" path="res://Scenes/TSCN/Entities/Submarine/Submarine.tscn" id="32_6lnpa"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
 [ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="35_47o3q"]
@@ -216,11 +216,6 @@ polygon = PackedVector2Array(8221, 6042, 8071, 6050, 8055, 6049, 8028, 6042, 799
 size = Vector2(35708.5, 724)
 
 [sub_resource type="Resource" id="Resource_vfal8"]
-resource_local_to_scene = true
-script = ExtResource("17_j8dce")
-uid = 3625
-
-[sub_resource type="Resource" id="Resource_mcejo"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -549,15 +544,11 @@ z_index = 20
 position = Vector2(-3339, 2546)
 uid = SubResource("Resource_vfal8")
 
-[node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("32_6lnpa")]
-z_index = 5
-position = Vector2(-1529, 489)
-motion_mode = 1
-uid = SubResource("Resource_mcejo")
+[node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
+position = Vector2(-1292, 557)
 
-[node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine" node_paths=PackedStringArray("center_of_mass")]
+[node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine"]
 script = ExtResource("21_pr3qq")
-center_of_mass = NodePath("..")
 buoyancy_accel = 0.0
 
 [node name="Items" type="Node2D" parent="LevelContainer"]
@@ -805,7 +796,7 @@ metadata/_edit_lock_ = true
 
 [node name="ChatPanel" parent="UILayer/IngameUI/StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable" index="1" node_paths=PackedStringArray("teleport_places", "enemy_root")]
 teleport_place_names = Array[String](["research-station", "submarine"])
-teleport_places = [NodePath("../../../../../../LevelContainer/ResearchStation/ResearchStationPosition"), NodePath("../../../../../../LevelContainer/Player/Submarine")]
+teleport_places = [NodePath("../../../../../../LevelContainer/ResearchStation/ResearchStationPosition"), null]
 enemy_root = NodePath("../../../../../../LevelContainer/Entities/EnemySpawner")
 
 [node name="DeathScreen" parent="UILayer" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("32_kyt52")]
