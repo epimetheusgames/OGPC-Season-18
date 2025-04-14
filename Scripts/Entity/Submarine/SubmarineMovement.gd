@@ -15,6 +15,7 @@ const MIN_BUOYANCY = -70.0
 
 @onready var buoyancy_component = get_parent().get_node("BuoyancyComponent")
 
+var in_interaction_area : bool = false
 var current_angle: float = 0.0
 var target_angle: float = 0.0
 var input_direction: int = 0
@@ -32,6 +33,22 @@ func _physics_process(delta: float) -> void:
 			get_parent().rotation = current_angle
 			input_direction = get_input_direction()
 			update_buoyancy(delta)
+	
+	if Input.is_action_just_pressed("interact"):
+		if Global.player.get_state() != Util.DiverState.DRIVING_SUBMARINE and in_interaction_area: 
+			Global.player.set_state(Util.DiverState.DRIVING_SUBMARINE)
+			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = true
+		elif Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+			Global.player.set_state(Util.DiverState.IN_SUBMARINE)
+			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = false
+
+func _on_interaction_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("player_area"):
+		in_interaction_area = true
+
+func _on_interaction_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group("player_area"):
+		in_interaction_area = false
 
 func decay_velocity(delta : float):
 	velocity = velocity * 0.95 * delta * 60
