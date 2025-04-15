@@ -1,16 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://yigraya7x7v4"]
+[gd_scene load_steps=4 format=3 uid="uid://yigraya7x7v4"]
 
 [ext_resource type="Script" uid="uid://dok3q8kyc2lfx" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineBurstWeapon.gd" id="1_ofjw0"]
 [ext_resource type="PackedScene" uid="uid://bc8nwmffdtqmh" path="res://Scenes/TSCN/Entities/Submarine/SubmarineWeapons/SubmarineBurstWeaponBullet.tscn" id="2_t1hu4"]
 [ext_resource type="Texture2D" uid="uid://ek04bw643dyr" path="res://Assets/Art/Entity/Submarine/BurstWeaponBarrel.png" id="3_jyae7"]
-[ext_resource type="Texture2D" uid="uid://b08d8cxp7h6w" path="res://Assets/Art/Entity/Submarine/BurstWeaponBase.png" id="4_i1obx"]
 
 [node name="SubmarineBurstWeapon" type="Node2D"]
 script = ExtResource("1_ofjw0")
 time_between_bursts = 0.1
-base_texture = ExtResource("4_i1obx")
 projectile_scene = ExtResource("2_t1hu4")
-rotation_range = 160.0
+rotation_range = 90.0
 shot_cooldown = 0.6
 heat_increase_per_shot = 10.0
 passive_decrease_cooldown = 1.5

@@ -3,6 +3,7 @@ class_name Submarine
 extends Entity
 
 @onready var submarine_movement = $"SubmarineMovement"
+@onready var seat_pos = $"InteractionArea/SeatPos"
 
 func _ready() -> void:
 	if !Global.submarine:
@@ -12,7 +13,7 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	velocity = submarine_movement.get_velocity()
 	if Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
-		Global.player.global_transform = global_transform
+		Global.player.global_transform = seat_pos.global_transform
 
 func _on_submarine_area_area_entered(area: Area2D) -> void:
 	if area.get_parent() is Diver:
