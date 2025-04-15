@@ -154,7 +154,7 @@ void fragment() {
 	vec4 in_pixel = texture(in_tex, position / tex_scale);
 	vec4 edge_pixel = texture(edge_tex, position / tex_scale);
 
-	COLOR = mix(edge_pixel, in_pixel, fade_amm) * color_multiplier;
+	COLOR = vec4(mix(edge_pixel, in_pixel, fade_amm).rgb * color_multiplier, 1.0);
 }"
 
 [sub_resource type="Gradient" id="Gradient_ijkxv"]

@@ -13,6 +13,7 @@ metadata/_custom_type_script = "uid://dlliifnia7sm4"
 [sub_resource type="CircleShape2D" id="CircleShape2D_t7hxf"]
 
 [node name="RockItem" type="Area2D"]
+modulate = Color(3, 3, 3, 1)
 script = ExtResource("1_spr8y")
 scene = SubResource("Resource_7o5xh")
 icon = ExtResource("2_t7hxf")
