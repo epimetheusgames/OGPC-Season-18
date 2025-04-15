@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://6kbux1lvwaw3"]
+
+[ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_spr8y"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_5edmc"]
+[ext_resource type="Texture2D" uid="uid://yjtmqo4jfell" path="res://Assets/Art/Items/Rockies.png" id="2_t7hxf"]
+[ext_resource type="Script" uid="uid://cwsnc2u5yvmke" path="res://Scripts/Objects/Items/EditorRockVisibleThing.gd" id="3_t7hxf"]
+
+[sub_resource type="Resource" id="Resource_7o5xh"]
+script = ExtResource("2_5edmc")
+file = "uid://dqb5sqhg7l1io"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t7hxf"]
+
+[node name="RockItem" type="Area2D"]
+script = ExtResource("1_spr8y")
+scene = SubResource("Resource_7o5xh")
+icon = ExtResource("2_t7hxf")
+cost = 3
+item_name = "Rock"
+sellable_resource = true
+metadata/_custom_type_script = "uid://fpnredcqa4b5"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("2_t7hxf")
+region_enabled = true
+region_rect = Rect2(0, 0, 47.291, 48.9125)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -8)
+scale = Vector2(5, 5)
+texture = ExtResource("2_t7hxf")
+region_enabled = true
+region_rect = Rect2(55.7151, 0, 41.1034, 55.2374)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("2_t7hxf")
+region_enabled = true
+region_rect = Rect2(0, 60.9727, 37.2346, 31.5444)
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("2_t7hxf")
+region_enabled = true
+region_rect = Rect2(51.2543, 61.9286, 26.4464, 29.9513)
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("2_t7hxf")
+region_enabled = true
+region_rect = Rect2(0, 107.174, 42.6513, 20.3924)
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(5, 5)
+texture = ExtResource("2_t7hxf")
+region_enabled = true
+region_rect = Rect2(57.9456, 104.625, 54.1672, 23.3748)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_t7hxf")
+
+[node name="EditorRockVisibleThing" type="Node" parent="." node_paths=PackedStringArray("rock_sprites")]
+script = ExtResource("3_t7hxf")
+rock_sprites = [NodePath("../Sprite2D"), NodePath("../Sprite2D2"), NodePath("../Sprite2D3"), NodePath("../Sprite2D4"), NodePath("../Sprite2D5"), NodePath("../Sprite2D6")]

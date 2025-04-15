@@ -13,7 +13,24 @@ var hovering_item_item: BaseItem
 
 var just_selected := false
 
+## Relative to mission root, saved, so they can be deleted.
+var collected_item_paths: Array[NodePath]
+
+func _ready() -> void:
+	await get_tree().create_timer(0.1).timeout
+	
+	for path in collected_item_paths:
+		var item: BaseItem = Global.current_mission_node.get_node_or_null(path)
+		if !item:
+			continue
+		item.queue_free()
+
 func _process(delta: float) -> void:
+	# Clean up inventory
+	for item in inventory:
+		if !is_instance_valid(item) || !item:
+			inventory.remove_at(inventory.find(item))
+	
 	if hovering_item && is_instance_valid(hovering_item):
 		hovering_item.global_position = get_global_mouse_position()
 		if Input.is_action_just_released("mouse_left_click") && !just_selected:
@@ -30,6 +47,7 @@ func _process(delta: float) -> void:
 		elif Input.is_action_just_released("mouse_left_click"): 
 			just_selected = false
 	
+	# Sell items automatically, there should be an animation for this.
 	if diver.diver_movement.is_in_research_station:
 		for item in inventory:
 			if !is_instance_valid(item) || !item:

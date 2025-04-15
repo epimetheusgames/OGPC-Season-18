@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=77 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
 [ext_resource type="PackedScene" uid="uid://bcg6sc5pivsv6" path="res://Scenes/TSCN/Objects/Items/CoralItem.tscn" id="38_081ql"]
 [ext_resource type="PackedScene" uid="uid://dk3xlgrb0w35a" path="res://Scripts/Entity/Enemies/Shark/Shark.tscn" id="38_mcejo"]
+[ext_resource type="PackedScene" uid="uid://6kbux1lvwaw3" path="res://Scenes/TSCN/Objects/Items/RockItem.tscn" id="39_081ql"]
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
 background_mode = 3
@@ -849,6 +850,30 @@ rotation = 0.808024
 [node name="BaseItem5" parent="." instance=ExtResource("38_081ql")]
 position = Vector2(-2075, 3116)
 rotation = 0.808024
+
+[node name="RockItem" parent="." instance=ExtResource("39_081ql")]
+position = Vector2(-1518, 3669)
+
+[node name="RockItem2" parent="." instance=ExtResource("39_081ql")]
+position = Vector2(-1252, 3840)
+
+[node name="RockItem3" parent="." instance=ExtResource("39_081ql")]
+position = Vector2(644, 4505)
+
+[node name="RockItem4" parent="." instance=ExtResource("39_081ql")]
+position = Vector2(-1064, 3960)
+
+[node name="RockItem5" parent="." instance=ExtResource("39_081ql")]
+position = Vector2(-913, 4052)
+
+[node name="RockItem6" parent="." instance=ExtResource("39_081ql")]
+position = Vector2(-630, 4161)
+
+[node name="RockItem7" parent="." instance=ExtResource("39_081ql")]
+position = Vector2(-399, 4248)
+
+[node name="RockItem8" parent="." instance=ExtResource("39_081ql")]
+position = Vector2(-210, 4315)
 
 [editable path="LevelContainer/Items/LightLine"]
 [editable path="UILayer/IngameUI"]
