@@ -10,6 +10,7 @@ func _ready() -> void:
 	super()
 
 func _process(delta):
+	super(delta)
 	pull_toward_anchor2()
 	pull_toward_anchor1()
 

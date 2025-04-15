@@ -1,0 +1,125 @@
+[gd_scene load_steps=19 format=3 uid="uid://cdjlclue36iw6"]
+
+[ext_resource type="Texture2D" uid="uid://c63kp7rpxgd22" path="res://Assets/Art/Level/Kelp.png" id="1_yifkv"]
+[ext_resource type="Script" uid="uid://blocsbnryedbt" path="res://Kelp/KelpSegment.gd" id="2_evsf2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ts3s"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 0, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k027d"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 16, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miclt"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 32, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jpid"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 48, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7osu"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 64, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k118c"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 80, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdp0o"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 96, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2awqh"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 112, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evyjh"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 128, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5756t"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 144, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fk54q"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 160, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp14m"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 176, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2tm1"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 192, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4vcn"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 208, 36, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qmmd"]
+atlas = ExtResource("1_yifkv")
+region = Rect2(36, 224, 36, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yy0dx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ts3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k027d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miclt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jpid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7osu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k118c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdp0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2awqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evyjh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5756t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fk54q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mp14m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2tm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4vcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qmmd")
+}],
+"loop": true,
+"name": &"KelpSegments",
+"speed": 5.0
+}]
+
+[node name="KelpSegment" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_yy0dx")
+animation = &"KelpSegments"
+frame = 13
+frame_progress = 0.00818703
+offset = Vector2(6, 0)
+script = ExtResource("2_evsf2")
