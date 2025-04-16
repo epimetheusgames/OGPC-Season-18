@@ -25,17 +25,20 @@ signal damage_dealt(hurtbox: Hurtbox, damage_amount: float)
 signal killed()
 
 func _ready() -> void:
-	var collision: CollisionShape2D = get_child(0)
+	var collision: Node2D = get_child(0)
 	
-	assert(collision is CollisionShape2D, "Attackbox has no collision shape node assigned")
+	assert(collision is CollisionShape2D || collision is CollisionPolygon2D, 
+	"Attackbox has no collision shape node assigned")
 	
-	collision.debug_color = Color.RED
-	collision.debug_color.a = 0.3
+	if collision is CollisionShape2D:
+		collision.debug_color = Color.RED
+		collision.debug_color.a = 0.3
+
+func _process(delta: float) -> void:
+	detect_and_damage_hurtboxes()
 
 func detect_and_damage_hurtboxes() -> void:
-	# Damaging behavior goes here
-	pass
-	#assert(false, "Abstract method 'detect_and_damage_hurtboxes()' must be overridden.")
+	pass # Damaging behavior goes here
 
 func damage_hurtbox(hurtbox: Hurtbox) -> void:
 	if hurtbox.can_take_damage(self):

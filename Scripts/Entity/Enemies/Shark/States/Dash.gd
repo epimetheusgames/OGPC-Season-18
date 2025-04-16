@@ -2,16 +2,11 @@
 # Owned by: kaibenson
 extends State
 
-var enemy: Enemy
-
 @export var chase_state: State
 
 # Dash to this pos
 var target_pos: Vector2
 
-func init() -> void:
-	assert(parent is Enemy, "This state must have Enemy parent")
-	enemy = parent
 
 func enter() -> void:
 	target_pos = enemy.get_diver_pos()

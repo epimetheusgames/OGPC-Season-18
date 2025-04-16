@@ -1,16 +1,15 @@
-## Wander state for the Arrowfish
-# Owned by: kaibenson
+## Jellyfish wander
 extends State
 
 @export var aim_state: State
 
 var wander_anchor: Vector2
-var wander_radius: float = 900.0
-var wander_speed: float = 4.0
+var wander_radius: float = 1000.0
+var wander_speed: float = 100.0
 
 # Generates a new wander_target_pos periodically
 @onready var wander_timer: Timer = $"WanderTimer"
-var wait_time: float = 2.0
+var wait_time: float = 10.0
 
 var wander_target_pos: Vector2
 
@@ -31,31 +30,18 @@ func process_frame(delta: float) -> State:
 
 
 func _update_wander_position() -> void:
-	wander_target_pos = get_random_point_in_circle(wander_anchor, wander_radius)
+	wander_target_pos = Util.get_random_point_in_circle(wander_anchor, wander_radius)
 	wander_timer.wait_time = randf_range(wait_time - 1, wait_time + 1)
 
 func process_physics(delta: float) -> State:
 	enemy.nav_agent.target_position = wander_target_pos
 	var next_path_pos = enemy.nav_agent.get_next_path_position()
 	
-	enemy.accelerate_towards(next_path_pos, wander_speed, delta)
+	enemy = enemy as Jellyfish
+	enemy.boost(wander_speed, 5, next_path_pos)
+	print("SLDSFSDFSDF: " + str(next_path_pos))
 	
 	var diver_pos: Vector2 = enemy.get_diver_pos()
 	
-	if enemy.enemy_fov.can_see_point(diver_pos):
-		return aim_state
 	
 	return null
-
-
-static func get_random_point_in_circle(circle_pos: Vector2, circle_radius: float) -> Vector2:
-	while true:
-		var rand_pos: Vector2 = Vector2(
-			randi_range(circle_pos.x - circle_radius, circle_pos.x + circle_radius),
-			randi_range(circle_pos.y - circle_radius, circle_pos.y + circle_radius)
-		)
-		
-		if circle_pos.distance_to(rand_pos) <= circle_radius:
-			return rand_pos
-	
-	return Vector2.ZERO # Shouldn't happen

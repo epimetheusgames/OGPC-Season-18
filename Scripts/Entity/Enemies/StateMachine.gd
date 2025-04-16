@@ -12,9 +12,9 @@ var current_state: State
 
 # Initialize by giving each state a reference to the parent and animations,
 # then changing to the starting state
-func init(parent: CharacterBody2D) -> void:
+func init(enemy: Enemy) -> void:
 	for state: State in get_children():
-		state.parent = parent
+		state.enemy = enemy
 		state.init()
 	
 	change_state(starting_state)

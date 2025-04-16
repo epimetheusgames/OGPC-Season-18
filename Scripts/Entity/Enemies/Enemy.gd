@@ -5,12 +5,9 @@ class_name Enemy
 extends Entity
 
 @export var hurtbox: Hurtbox
-@export var attackbox: Attackbox
 @export var animations: AnimatedSprite2D
 @export var nav_agent: NavigationAgent2D
 @export var enemy_fov: EnemyFov
-@export var attack_dist: float
-@export var dead_state: State
 @export var state_machine: StateMachine
 
 @export var drop_item: PackedScene
@@ -24,29 +21,27 @@ func _ready() -> void:
 	if hurtbox:
 		hurtbox.died.connect(_die)
 
-func _process(delta: float) -> void:
-	if attackbox:
-		attackbox.detect_and_damage_hurtboxes()
 
-# Some standard movement options to use
-func spring_towards(pos: Vector2, spring_strength: float, spring_damping: float, delta: float) -> void:
-	var force: Vector2 = ((pos - global_position) * spring_strength) - (velocity * spring_damping)
-	velocity += force * delta
-	
-	if velocity.length() > 0.1:
-		rotation = velocity.angle()
+## Standard movement options to use ##
 
-func accelerate_towards(pos: Vector2, accel: float, delta: float) -> void:
-	velocity += (pos - global_position).normalized() * accel
-	
-	if velocity.length() > 0.1:
-		rotation = velocity.angle()
+# Constant speed
+func move_towards(pos: Vector2, speed: float) -> Vector2:
+	return (pos - global_position).normalized() * speed
 
-func move_towards(pos: Vector2, speed: float, delta: float) -> void:
-	velocity = (pos - global_position).normalized() * speed
-	#print(velocity)
-	if velocity.length() > 0.1:
-		rotation = velocity.angle()
+# Add speed
+func accelerate_towards(pos: Vector2, speed: float) -> Vector2:
+	return velocity + (pos - global_position).normalized() * speed
+
+# Lerps from current velocity to new velocity according to drift_factor
+func drift_towards(pos: Vector2, speed: float, drift_factor: float) -> Vector2:
+	var new_vel = (pos - global_position).normalized() * speed
+	return velocity.lerp(new_vel, drift_factor)
+
+# Speed based on distance to target
+func spring_towards(pos: Vector2, strength: float, damping: float) -> Vector2:
+	var force: Vector2 = ((pos - global_position) * strength) - (velocity * damping)
+	return velocity + force
+
 
 # signals
 func _die() -> void:
@@ -54,12 +49,14 @@ func _die() -> void:
 		var item: BaseItem = drop_item.instantiate()
 		get_parent().add_child(item)
 		item.global_position = global_position
+	"""
 	if attackbox:
 		attackbox.queue_free()
 	if state_machine && dead_state:
 		state_machine.change_state(dead_state)
 	else:
 		queue_free()
+	"""
 
 # Other util
 func get_diver_pos() -> Vector2:

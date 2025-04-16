@@ -65,22 +65,21 @@ func simulate(delta: float):
 		var node: VerletNode = verlet_nodes[i]
 		var temp: Vector2 = node.position
 		
-		# Calculate velocity, applying damping to slow down the points
-		var velocity: Vector2 = (node.position - node.old_position) * damping + (gravity * TIMESTEP * TIMESTEP * delta * 60)
+		# Verlet velocity update
+		var velocity: Vector2 = (node.position - node.old_position) * damping
+		velocity += gravity * (TIMESTEP * TIMESTEP)
 		
-		# Iteratively resolve collisions or simply move the node if collisions are disabled
+		# Apply velocity
 		var resolved_position = node.position
-		for j in range(3):  # Apply multiple iterations of collision resolution
-			if enable_collisions:
-				resolved_position += collide_and_translate(resolved_position, velocity / 3, i)  # Divide motion for each iteration
-			else:
-				# Just move freely if collisions are disabled
-				resolved_position += (velocity) * delta * 60
+		if enable_collisions:
+			for j in range(3):  # Iteratively resolve collisions
+				resolved_position += collide_and_translate(resolved_position, velocity / 3, i)
+		else:
+			resolved_position += velocity
 		
 		node.position = resolved_position
-		
-		# Update the previous position for the next step
 		node.old_position = temp
+
 
 # Apply constraints such as anchor positions and node separation
 func apply_constraints():

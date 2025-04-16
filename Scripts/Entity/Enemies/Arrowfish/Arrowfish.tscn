@@ -24,18 +24,15 @@ height = 256.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_oel4a"]
 radius = 36.2215
 
-[node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "nav_agent", "enemy_fov", "dead_state", "state_machine")]
+[node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov", "state_machine")]
 position = Vector2(-60, 3)
 rotation = 6.28318
 collision_layer = 0
 collision_mask = 2049
 script = ExtResource("1_bu73s")
 hurtbox = NodePath("Hurtbox")
-attackbox = NodePath("ContinuousAttack")
 nav_agent = NodePath("NavAgent")
 enemy_fov = NodePath("EnemyFov")
-attack_dist = 175.0
-dead_state = NodePath("StateMachine/Dead")
 state_machine = NodePath("StateMachine")
 drop_item = ExtResource("2_dyarh")
 

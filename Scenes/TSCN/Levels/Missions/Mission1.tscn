@@ -841,5 +841,8 @@ position = Vector2(-997, 2270)
 position = Vector2(-1902, 3286)
 rotation = 0.787773
 
+[node name="Jellyfish" parent="." instance=ExtResource("16_cbdp8")]
+position = Vector2(-1213, 3155)
+
 [editable path="LevelContainer/Items/LightLine"]
 [editable path="UILayer/IngameUI"]

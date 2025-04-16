@@ -5,14 +5,9 @@ extends State
 @export var dash_state: State
 @export var chase_state: State
 
-var enemy: Enemy
-
 var wait_time: float = 2.0
 var aim_timer: float = 0.0
 
-func init() -> void:
-	assert(parent is Enemy, "This state must have Enemy parent")
-	enemy = parent
 
 func enter() -> void:
 	pass

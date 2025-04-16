@@ -1,6 +1,6 @@
 ## A silly class for storing tentacle data
 
-class_name Tentacles
+class_name TentacleData
 extends Resource
 
 @export var color: Color = Color.WHITE

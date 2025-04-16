@@ -4,45 +4,34 @@
 class_name JellyfishTentacles
 extends Node2D
 
-@export var tentacles: Array[Tentacles] = []
+@export var tentacle_data: TentacleData
 
 @onready var jellyfish: Jellyfish = get_parent()
+@onready var attackbox_polygon: CollisionPolygon2D = $"ContinuousAttack/CollisionPolygon2D"
 
-var boosting: bool = false
-var is_on_screen := false
 var ropes: Array[VerletRope] = []
-@export var on_screen_notifier: VisibleOnScreenNotifier2D
-
-var end_targets: Array[Node2D]
 
 func _ready() -> void:
-	for tentacle in tentacles: 
-		add_tentacle(tentacle)
-
-func add_tentacle(tentacle_data: Tentacles) -> void:
 	for i in range(tentacle_data.amount):
 		# ANCHOR
 		var new_tentacle_anchor := Node2D.new()
 		new_tentacle_anchor.name = "Anchor"
 		
-		var new_end_anchor := Node2D.new()
-		new_end_anchor.name = "EndAnchor"
-		
 		add_child(new_tentacle_anchor, true)
-		add_child(new_end_anchor, true)
 		
-		end_targets.append(new_end_anchor)
+		var x_pos = 0
 		
-		# ROPE
-		var spacing = tentacle_data.bottom_width / (tentacle_data.amount - 1)
-		var x_pos = (-tentacle_data.bottom_width / 2) + (i * spacing) + randf_range(-spacing * 0.1, spacing * 0.1)
+		if tentacle_data.amount != 1:
+			var spacing = tentacle_data.bottom_width / (tentacle_data.amount - 1)
+			x_pos = (-tentacle_data.bottom_width / 2) + (i * spacing)
 		
 		new_tentacle_anchor.position = Vector2(x_pos, 0)
 		
+		# ROPE
 		var new_rope := VerletRope.new()
 		new_rope.component_container = get_parent().get_path()
 		new_rope.name = "TentacleRope"
-		new_rope.enable_collisions = true
+		new_rope.enable_collisions = false
 		new_rope.damping = 0.5
 		
 		new_rope.point_separation = 40
@@ -69,26 +58,37 @@ func add_tentacle(tentacle_data: Tentacles) -> void:
 		
 		new_rope.start_anchor_node = new_tentacle_anchor
 
-func boost(_speed: float) -> void:
-	boosting = true
-	
-	for rope in ropes:
-		var anchor: Node2D = rope.get_parent()  # Rope's parent is the anchor
-		if anchor:
-			var extra_rotation: float = anchor.position.x * 0.01
-			
-			var tentacle_gravity: Vector2 = Vector2(0, 100)
-			tentacle_gravity = tentacle_gravity.rotated(jellyfish.global_rotation + PI + extra_rotation)
-			
-			rope.gravity = tentacle_gravity
-	
-	await get_tree().create_timer(1.5).timeout
-	boosting = false
 
-func _process(_delta: float) -> void:
-	if not boosting:
-		var tentacle_gravity: Vector2 = Vector2(0, 50)
-		tentacle_gravity = tentacle_gravity.rotated(jellyfish.global_rotation)
+func _physics_process(delta: float) -> void:
+	var pos =  attackbox_polygon.global_position
+	
+	var tentacle_amount = ropes.size() - 1
+	var rope_length = ropes[0].points.size() - 1
+	
+	var p1 = ropes[0].points[0] - pos
+	var p2 = ropes[0].points[rope_length] - pos
+	
+	var p3 = ropes[tentacle_amount].points[0] - pos
+	var p4 = ropes[tentacle_amount].points[rope_length] - pos
+	
+	attackbox_polygon.global_rotation = 0.0
+	attackbox_polygon.polygon = [p1, p2, p4, p3]
+
+
+func tentacles_up(speed: float) -> void:
+	_adjust_tentacle_gravity(speed * 100, 0.01)
+
+func tentacles_down(speed: float) -> void:
+	_adjust_tentacle_gravity(speed * -100, 0.0001)
+
+
+func _adjust_tentacle_gravity(y_gravity: float, extra_rot_factor: float) -> void:
+	for rope in ropes:
+		var anchor: Node2D = rope.get_parent()
 		
-		for rope in ropes:
-			rope.gravity = tentacle_gravity
+		var extra_rotation: float = anchor.position.x * extra_rot_factor
+		var angle = jellyfish.global_rotation + PI + extra_rotation
+		var raw_gravity = Vector2(0, y_gravity)
+		var tentacle_gravity = raw_gravity.rotated(angle)
+		
+		rope.gravity = tentacle_gravity

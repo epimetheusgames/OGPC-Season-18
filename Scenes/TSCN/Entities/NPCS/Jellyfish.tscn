@@ -1,98 +1,115 @@
-[gd_scene load_steps=14 format=4 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=17 format=4 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/Enemies/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/Enemies/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
-[ext_resource type="Script" uid="uid://cmyaowe8fevss" path="res://Scripts/Entity/Enemies/Jellyfish/Tentacles.gd" id="3_5yh7k"]
+[ext_resource type="Script" uid="uid://cmyaowe8fevss" path="res://Scripts/Entity/Enemies/Jellyfish/TentacleData.gd" id="3_546cb"]
+[ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="4_i2om7"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_gyt63"]
-[ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="7_i60sr"]
+[ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Scripts/Entity/Enemies/StateMachine.gd" id="6_pcetc"]
+[ext_resource type="Script" uid="uid://xmfg6ehqurmh" path="res://Scripts/Entity/Enemies/Jellyfish/States/Wander.gd" id="7_j553b"]
 [ext_resource type="Shader" uid="uid://dog5ar7m8hypg" path="res://Scripts/GLSL/GDShader/JellyfishColors.gdshader" id="8_2ikp3"]
 [ext_resource type="Texture2D" uid="uid://dsihl1750cku6" path="res://Assets/Art/Entity/JellyFishBell.png" id="8_7y3es"]
+[ext_resource type="Script" uid="uid://ra88gjbxjc11" path="res://Scripts/Entity/Enemies/State.gd" id="8_546cb"]
+[ext_resource type="Script" uid="uid://l2gvhd65hxtl" path="res://Scripts/Entity/Enemies/Jellyfish/States/Boost.gd" id="9_i2om7"]
+[ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="12_nxkv1"]
 
-[sub_resource type="Resource" id="Resource_rbmc1"]
-script = ExtResource("3_5yh7k")
-color = Color(0.229667, 0, 0.53, 0.494118)
-length = 300.0
-thickness = 6.0
-amount = 8
-bottom_width = 140.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_05v0o"]
+radius = 35.0
+height = 192.0
+
+[sub_resource type="Resource" id="Resource_546cb"]
+script = ExtResource("3_546cb")
+color = Color(1, 1, 0, 1)
+length = 500.0
+thickness = 5.0
+amount = 6
+bottom_width = 200.0
+metadata/_custom_type_script = "uid://cmyaowe8fevss"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgvvg"]
-size = Vector2(286, 108)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_1lc1p"]
-radius = 64.0
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fvllq"]
-polygon = PackedVector2Array(-139, -57, 148, -56, 147, 54, -139, 53)
+size = Vector2(272, 108)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tvsdd"]
 shader = ExtResource("8_2ikp3")
 shader_parameter/colors = PackedVector4Array(1, 1, 1, 0.25, 1, 1, 1, 0.3, 1, 1, 1, 0.35, 1, 1, 1, 0.43, 1, 1, 1, 0.57, 1, 1, 1, 0.68)
 shader_parameter/out_colors = PackedColorArray(0, 0, 0.75, 0.301961, 0.25, 0, 0.75, 0.180392, 0.375, 0, 0.75, 0.301961, 0.4625, 0, 0.75, 0.360784, 0.25, 0, 0.75, 0.301961, 0.325, 0, 0.75, 0.301961)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_meyxk"]
-radius = 41.0
-
-[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox")]
-collision_layer = 128
-collision_mask = 129
+[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "state_machine")]
+position = Vector2(913, 506)
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 hurtbox = NodePath("Hurtbox")
-
-[node name="Tentacles" type="Node2D" parent="." node_paths=PackedStringArray("on_screen_notifier")]
-script = ExtResource("2_7lbwn")
-tentacles = Array[ExtResource("3_5yh7k")]([SubResource("Resource_rbmc1")])
-on_screen_notifier = NodePath("../VisibleOnScreenNotifier2D")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-0.499985, 76)
-scale = Vector2(21.85, 12.7)
-
-[node name="Hurtbox" type="Area2D" parent="."]
-position = Vector2(0, -56)
-script = ExtResource("6_gyt63")
-hurt_by_player = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(4.5, -0.5)
-shape = SubResource("RectangleShape2D_qgvvg")
-
-[node name="Attackbox" type="Area2D" parent="."]
-script = ExtResource("7_i60sr")
-attacker_type = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
-position = Vector2(8, -120)
-shape = SubResource("CircleShape2D_1lc1p")
-
-[node name="BulletDetectionArea" type="Area2D" parent="."]
-position = Vector2(0, -56)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetectionArea"]
-position = Vector2(4, -2)
-shape = SubResource("RectangleShape2D_qgvvg")
-
-[node name="LightDetector" type="Area2D" parent="."]
-position = Vector2(0, -56)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LightDetector"]
-position = Vector2(4, -2)
-shape = SubResource("RectangleShape2D_qgvvg")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-position = Vector2(0, -56)
-occluder = SubResource("OccluderPolygon2D_fvllq")
-occluder_light_mask = 2
-
-[node name="JellyFishBell" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_tvsdd")
-position = Vector2(7, -56)
-scale = Vector2(3.5, 3.5)
-texture = ExtResource("8_7y3es")
+nav_agent = NodePath("NavigationAgent2D")
+state_machine = NodePath("StateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, -47)
-shape = SubResource("CircleShape2D_meyxk")
+position = Vector2(0, -38)
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_05v0o")
+metadata/_edit_lock_ = true
+
+[node name="Tentacles" type="Node2D" parent="."]
+script = ExtResource("2_7lbwn")
+tentacle_data = SubResource("Resource_546cb")
+
+[node name="ContinuousAttack" type="Area2D" parent="Tentacles"]
+script = ExtResource("4_i2om7")
+attacker_type = 0
+metadata/_custom_type_script = "uid://bf0bikj8np6x"
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tentacles/ContinuousAttack"]
+polygon = PackedVector2Array(-100, 3, -100, 300, 100, 300, 100, 3)
+metadata/_edit_lock_ = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+script = ExtResource("6_gyt63")
+hurt_by_player = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -51)
+shape = SubResource("RectangleShape2D_qgvvg")
+debug_color = Color(6.49765e-06, 0.647455, 0.210561, 0.42)
+metadata/_edit_lock_ = true
+
+[node name="JellyfishBell" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_tvsdd")
+position = Vector2(4.76837e-07, -56)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("8_7y3es")
+metadata/_edit_lock_ = true
+
+[node name="Dummy2" parent="." instance=ExtResource("12_nxkv1")]
+top_level = true
+position = Vector2(1175, 599)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("6_pcetc")
+starting_state = NodePath("Defend")
+metadata/_custom_type_script = "uid://balgnejnh7c1p"
+
+[node name="Wander" type="Node" parent="StateMachine"]
+script = ExtResource("7_j553b")
+
+[node name="WanderTimer" type="Timer" parent="StateMachine/Wander"]
+wait_time = 10.0
+
+[node name="Defend" type="Node" parent="StateMachine"]
+script = ExtResource("8_546cb")
+metadata/_custom_type_script = "uid://ra88gjbxjc11"
+
+[node name="Timer" type="Timer" parent="StateMachine/Defend"]
+wait_time = 4.0
+autostart = true
+
+[node name="Boost" type="Node" parent="StateMachine"]
+script = ExtResource("9_i2om7")
+
+[node name="Dummy" parent="." instance=ExtResource("12_nxkv1")]
+top_level = true
+position = Vector2(553, 622)

@@ -5,8 +5,6 @@ extends State
 
 @export var wander_state: State
 
-var enemy: Enemy
-
 var escape_toggle: bool = true
 var escape_angle_variation: float = 20.0
 
@@ -16,9 +14,6 @@ var escape_target_pos: Vector2
 
 
 func init() -> void:
-	assert(parent is Enemy, "This state must have Enemy parent")
-	enemy = parent
-	
 	add_child(escape_timer)
 	
 	escape_timer.one_shot = false

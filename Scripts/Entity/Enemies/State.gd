@@ -4,10 +4,10 @@
 class_name State
 extends Node
 
-var parent: CharacterBody2D
+var enemy: Enemy
 
 func init() -> void:
-	pass
+	$"Timer".connect("timeout", done)
 
 func enter() -> void:
 	pass
@@ -23,3 +23,8 @@ func process_frame(delta: float) -> State:
 
 func process_physics(delta: float) -> State:
 	return null
+
+func done() -> void:
+	enemy = enemy as Jellyfish
+	var target: Vector2 = enemy.get_global_mouse_position()
+	enemy.boost(300, 2, target)
