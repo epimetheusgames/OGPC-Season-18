@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://dlliifnia7sm4"
 [sub_resource type="CircleShape2D" id="CircleShape2D_t7hxf"]
 
 [node name="RockItem" type="Area2D"]
-modulate = Color(3, 3, 3, 1)
+modulate = Color(2, 2, 2, 1)
 script = ExtResource("1_spr8y")
 scene = SubResource("Resource_7o5xh")
 icon = ExtResource("2_t7hxf")
@@ -73,3 +73,4 @@ shape = SubResource("CircleShape2D_t7hxf")
 [node name="EditorRockVisibleThing" type="Node" parent="." node_paths=PackedStringArray("rock_sprites")]
 script = ExtResource("3_t7hxf")
 rock_sprites = [NodePath("../Sprite2D"), NodePath("../Sprite2D2"), NodePath("../Sprite2D3"), NodePath("../Sprite2D4"), NodePath("../Sprite2D5"), NodePath("../Sprite2D6")]
+kIlL_iT_aLl = true

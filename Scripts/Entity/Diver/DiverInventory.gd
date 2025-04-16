@@ -65,6 +65,7 @@ func _on_item_detection_area_area_entered(area: Area2D) -> void:
 
 func __collect_item(area: BaseItem) -> void:
 	var res: InventoryItem = area.generate_inventory_item()
+	collected_item_paths.append(Global.current_mission_node.get_path_to(area))
 	area.queue_free()
 	for item in inventory:
 		if !item:
