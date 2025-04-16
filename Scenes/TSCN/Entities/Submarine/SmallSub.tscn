@@ -25,10 +25,9 @@ shape = SubResource("RectangleShape2D_fvx1j")
 [node name="SeatPos" type="Node2D" parent="InteractionArea"]
 position = Vector2(-148, 31)
 
-[node name="SubmarineArea" type="Area2D" parent="." groups=["Submarine Area", "submarine_area"]]
+[node name="SubmarineArea" type="Area2D" parent="." groups=["Submarine Area", "gravity_areas"]]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SubmarineArea"]
-visible = false
 position = Vector2(-150, -125)
 polygon = PackedVector2Array(3, 18, 6, 22, 10, 26, 20, 31, 492, 31, 397, 221, 391, 230, 386, 233, 380, 235, 371, 236, 357, 237, -110, 238, -128, 212, -141, 190, -156, 159, -163, 135, -165, 127, -165, 98, -162, 85, -159, 77, -156, 71, -149, 62, -142, 55, -135, 50, -126, 45, -104, 34, -74, 26, -46, 21, -24, 19)
 
@@ -48,16 +47,19 @@ metadata/_edit_lock_ = true
 [node name="Collision" type="Node2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
+visible = false
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(-110, 238, 357, 237, 371, 236, 380, 235, 386, 233, 391, 230, 397, 221, 492, 31, 319, 31, 319, -19, 326, -14, 333, -7, 341, -2, 360, 2, 494, 2, 502, 10, 502, 17, 502, 43, 501, 47, 408, 233, 399, 239, 389, 240, 380, 252, 370, 263, 360, 272, 344, 283, 325, 293, 308, 299, 280, 304, 234, 304, 193, 332, 189, 333, 42, 333, 39, 332, 34, 327, 26, 304, -118, 303, -122, 299, -123, 293, -123, 267, -126, 251, -126, 244)
+polygon = PackedVector2Array(-110, 238, 385, 240, 391, 230, 397, 221, 492, 31, 319, 31, 319, -19, 360, 2, 494, 2, 502, 10, 502, 43, 408, 233, 399, 239, 388, 241, 360, 272, 325, 293, 280, 304, 234, 304, 193, 332, 42, 333, 34, 327, 26, 304, -118, 303, -123, 293, -123, 267, -126, 244)
 
 [node name="Bubble" type="CollisionPolygon2D" parent="Collision"]
+visible = false
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(0, 2, 3, 18, -24, 19, -46, 21, -74, 26, -104, 34, -126, 45, -135, 50, -142, 55, -149, 62, -156, 71, -159, 77, -162, 85, -165, 98, -165, 127, -163, 135, -156, 159, -141, 190, -128, 212, -110, 238, -126, 244, -137, 229, -152, 204, -168, 172, -176, 150, -182, 125, -183, 115, -183, 93, -179, 78, -172, 64, -164, 53, -152, 41, -140, 33, -113, 20, -87, 12, -39, 4)
+polygon = PackedVector2Array(0, 2, 3, 18, -24, 19, -74, 26, -104, 34, -126, 45, -149, 62, -159, 77, -165, 98, -163, 135, -141, 190, -110, 238, -126, 244, -168, 172, -182, 125, -183, 93, -172, 64, -152, 41, -113, 20, -39, 4)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collision"]
+visible = false
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(0, 2, 192, 2, 207, -2, 217, -7, 224, -14, 230, -19, 230, 31, 20, 31, 10, 26, 6, 22, 3, 18)
+polygon = PackedVector2Array(0, 2, 192, 2, 230, -19, 230, 31, 20, 31, 10, 26, 6, 22, 3, 18)
 
 [connection signal="area_entered" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_exited"]
