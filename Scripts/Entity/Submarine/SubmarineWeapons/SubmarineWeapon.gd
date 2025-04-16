@@ -5,6 +5,7 @@ class_name SubmarineWeapon
 extends Node2D
 
 @onready var emission_point = get_node("ProjectileEmissionPoint")
+@onready var heat_shader : ShaderMaterial = $"Barrel".material
 
 # Subclass dependent variables
 @export var projectile_scene : PackedScene
@@ -19,7 +20,7 @@ var target_rot : float
 var shot_timer : Timer
 var passive_decrease_timer : Timer
 
-var is_being_operated := false
+var is_being_operated := true
 
 var in_rotation_range := true
 
@@ -60,6 +61,9 @@ func _on_passive_decrease_timer_timeout() -> void:
 	passive_heat_drain = true
 
 func _physics_process(delta: float) -> void:
+	heat_shader.set_shader_parameter("heat", heat)
+	#print(heat)
+	print(heat_shader.get_shader_parameter("heat"))
 	if passive_heat_drain:
 		heat -= passive_heat_decrease_per_sec * delta
 		if heat <= 0:
@@ -102,7 +106,6 @@ func attack():
 	
 	shot_timer_over = false
 	passive_heat_drain = false
-	heat += heat_increase_per_shot
 	
 	fire()
 	

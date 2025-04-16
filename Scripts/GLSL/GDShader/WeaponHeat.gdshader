@@ -7,10 +7,12 @@ uniform sampler2D gradient_tex;              // The gradient texture for the hea
 uniform float blend_strength : hint_range(0.0, 1.0) = 1.0;
 
 // Determines if the gradient should scroll vertically or horizontally
-uniform bool vertical_gradient = false;
+uniform bool vertical_gradient = true;
 
-// Controls how fast the gradient scrolls over time.
-uniform float speed = 1.0;
+uniform float heat = 0.0;
+
+// Moves heat gradient threshold
+uniform float threshold = .7;
 
 void fragment() {
     // Sample the gun texture normally using UV coordinates.
@@ -22,10 +24,10 @@ void fragment() {
     }
     
     // Compute the animated coordinate. Using TIME will create an animation effect.
-    float gradient_coord = (vertical_gradient ? UV.y : UV.x) + (TIME * speed);
+    float gradient_coord = (vertical_gradient ? UV.y : UV.x) - (.005 * heat) + threshold;
     
     // Wrap the coordinate so it loops when it goes past 1.0.
-    gradient_coord = fract(gradient_coord);
+    gradient_coord = clamp(gradient_coord, 0.0, 1.0);
     
     // Sample the gradient texture.
     // (If your gradient texture is 1D-like, sample along the x-axis, with y fixed to 0.0)

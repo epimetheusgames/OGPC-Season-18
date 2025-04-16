@@ -1,8 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://yigraya7x7v4"]
+[gd_scene load_steps=8 format=3 uid="uid://yigraya7x7v4"]
 
 [ext_resource type="Script" uid="uid://dok3q8kyc2lfx" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineBurstWeapon.gd" id="1_ofjw0"]
 [ext_resource type="PackedScene" uid="uid://bc8nwmffdtqmh" path="res://Scenes/TSCN/Entities/Submarine/SubmarineWeapons/SubmarineBurstWeaponBullet.tscn" id="2_t1hu4"]
+[ext_resource type="Shader" uid="uid://dnxrfjohfxpbm" path="res://Scripts/GLSL/GDShader/WeaponHeat.gdshader" id="3_i1obx"]
 [ext_resource type="Texture2D" uid="uid://ek04bw643dyr" path="res://Assets/Art/Entity/Submarine/BurstWeaponBarrel.png" id="3_jyae7"]
+
+[sub_resource type="Gradient" id="Gradient_jyae7"]
+offsets = PackedFloat32Array(0, 0.553398, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 0, 0.117647, 1, 0, 0, 0.235294)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i1obx"]
+gradient = SubResource("Gradient_jyae7")
+fill_from = Vector2(0.670659, 0.550898)
+fill_to = Vector2(0.323353, 0.550898)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1obx"]
+shader = ExtResource("3_i1obx")
+shader_parameter/gun_texture = ExtResource("3_jyae7")
+shader_parameter/gradient_tex = SubResource("GradientTexture2D_i1obx")
+shader_parameter/blend_strength = 1.0
+shader_parameter/vertical_gradient = true
+shader_parameter/heat = 3.345
+shader_parameter/threshold = 0.7
 
 [node name="SubmarineBurstWeapon" type="Node2D"]
 script = ExtResource("1_ofjw0")
@@ -22,6 +41,7 @@ position = Vector2(200, 0)
 rotation = 1.5708
 
 [node name="Barrel" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_i1obx")
 position = Vector2(70, 0)
 rotation = 1.5708
 scale = Vector2(0.03, 0.03)

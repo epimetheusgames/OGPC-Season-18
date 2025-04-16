@@ -36,6 +36,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("interact"):
 		if Global.player.get_state() != Util.DiverState.DRIVING_SUBMARINE and in_interaction_area: 
+			print("klsdflk")
 			Global.player.set_state(Util.DiverState.DRIVING_SUBMARINE)
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = true
 		elif Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
