@@ -6,13 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://ek04bw643dyr" path="res://Assets/Art/Entity/Submarine/BurstWeaponBarrel.png" id="3_jyae7"]
 
 [sub_resource type="Gradient" id="Gradient_jyae7"]
-offsets = PackedFloat32Array(0, 0.553398, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 0, 0.117647, 1, 0, 0, 0.235294)
+offsets = PackedFloat32Array(0, 0.0485437, 0.252427, 0.495146)
+colors = PackedColorArray(1, 1, 0.478431, 0, 1, 0.52549, 0.172549, 0.352941, 1, 0, 0, 0.0588235, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_i1obx"]
 gradient = SubResource("Gradient_jyae7")
-fill_from = Vector2(0.670659, 0.550898)
-fill_to = Vector2(0.323353, 0.550898)
+fill_from = Vector2(0, 0.568862)
+fill_to = Vector2(0.658683, 0.57485)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i1obx"]
 shader = ExtResource("3_i1obx")
@@ -20,8 +20,8 @@ shader_parameter/gun_texture = ExtResource("3_jyae7")
 shader_parameter/gradient_tex = SubResource("GradientTexture2D_i1obx")
 shader_parameter/blend_strength = 1.0
 shader_parameter/vertical_gradient = true
-shader_parameter/heat = 3.345
-shader_parameter/threshold = 0.7
+shader_parameter/heat = 0.0
+shader_parameter/threshold = 0.3
 
 [node name="SubmarineBurstWeapon" type="Node2D"]
 script = ExtResource("1_ofjw0")

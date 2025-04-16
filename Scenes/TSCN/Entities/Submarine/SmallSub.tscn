@@ -57,7 +57,7 @@ polygon = PackedVector2Array(0, 2, 3, 18, -60, 21, -131, 45, -159, 72, -165, 127
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collision"]
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(0, 2, 192, 2, 230, -19, 230, 31, 19, 30, 3, 18)
+polygon = PackedVector2Array(0, 2, 192, 2, 230, -19, 230, 30, 19, 30, 3, 18)
 
 [connection signal="area_entered" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_exited"]

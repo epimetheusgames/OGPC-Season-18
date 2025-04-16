@@ -12,7 +12,7 @@ uniform bool vertical_gradient = true;
 uniform float heat = 0.0;
 
 // Moves heat gradient threshold
-uniform float threshold = .7;
+uniform float threshold = 0.3;
 
 void fragment() {
     // Sample the gun texture normally using UV coordinates.
@@ -23,8 +23,8 @@ void fragment() {
         discard;
     }
     
-    // Compute the animated coordinate. Using TIME will create an animation effect.
-    float gradient_coord = (vertical_gradient ? UV.y : UV.x) - (.005 * heat) + threshold;
+    // Compute the animated coordinate
+    float gradient_coord = (vertical_gradient ? UV.y : UV.x) - (.003 * heat) + threshold;
     
     // Wrap the coordinate so it loops when it goes past 1.0.
     gradient_coord = clamp(gradient_coord, 0.0, 1.0);

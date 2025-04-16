@@ -20,7 +20,7 @@ var target_rot : float
 var shot_timer : Timer
 var passive_decrease_timer : Timer
 
-var is_being_operated := true
+var is_being_operated := false
 
 var in_rotation_range := true
 
@@ -101,7 +101,7 @@ func attack():
 	# Carson's anti nesting stuff
 	if !shot_timer_over or cooling or overheating:
 		return
-	if heat >= 100:
+	if round(heat) >= 100:
 		overheating = true
 	
 	shot_timer_over = false
