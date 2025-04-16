@@ -26,6 +26,7 @@ shape = SubResource("RectangleShape2D_fvx1j")
 position = Vector2(-148, 31)
 
 [node name="SubmarineArea" type="Area2D" parent="." groups=["Submarine Area", "gravity_areas"]]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SubmarineArea"]
 position = Vector2(-150, -125)
@@ -47,19 +48,16 @@ metadata/_edit_lock_ = true
 [node name="Collision" type="Node2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
-visible = false
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(-110, 238, 385, 240, 391, 230, 397, 221, 492, 31, 319, 31, 319, -19, 360, 2, 494, 2, 502, 10, 502, 43, 408, 233, 399, 239, 388, 241, 360, 272, 325, 293, 280, 304, 234, 304, 193, 332, 42, 333, 34, 327, 26, 304, -118, 303, -123, 293, -123, 267, -126, 244)
+polygon = PackedVector2Array(-110, 238, 385, 240, 492, 31, 319, 31, 319, -19, 360, 2, 494, 2, 502, 10, 502, 43, 408, 233, 388, 241, 360, 272, 310, 299, 234, 304, 193, 332, 40, 333, 26, 304, -121, 302, -123, 266, -118, 258, -126, 244)
 
 [node name="Bubble" type="CollisionPolygon2D" parent="Collision"]
-visible = false
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(0, 2, 3, 18, -24, 19, -74, 26, -104, 34, -126, 45, -149, 62, -159, 77, -165, 98, -163, 135, -141, 190, -110, 238, -126, 244, -168, 172, -182, 125, -183, 93, -172, 64, -152, 41, -113, 20, -39, 4)
+polygon = PackedVector2Array(0, 2, 3, 18, -60, 21, -131, 45, -159, 72, -165, 127, -141, 190, -110, 238, -126, 244, -169, 167, -182, 118, -179, 83, -164, 52, -113, 20, -39, 4)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collision"]
-visible = false
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(0, 2, 192, 2, 230, -19, 230, 31, 20, 31, 10, 26, 6, 22, 3, 18)
+polygon = PackedVector2Array(0, 2, 192, 2, 230, -19, 230, 31, 19, 30, 3, 18)
 
 [connection signal="area_entered" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_exited"]
