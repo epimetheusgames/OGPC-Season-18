@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=69 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -35,7 +35,6 @@
 [ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="35_47o3q"]
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
 [ext_resource type="PackedScene" uid="uid://bcg6sc5pivsv6" path="res://Scenes/TSCN/Objects/Items/CoralItem.tscn" id="38_081ql"]
-[ext_resource type="PackedScene" uid="uid://dk3xlgrb0w35a" path="res://Scripts/Entity/Enemies/Shark/Shark.tscn" id="38_mcejo"]
 [ext_resource type="PackedScene" uid="uid://6kbux1lvwaw3" path="res://Scenes/TSCN/Objects/Items/RockItem.tscn" id="39_081ql"]
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
@@ -614,9 +613,6 @@ position = Vector2(2207, 2456)
 [node name="Arrowfish3" parent="LevelContainer/Entities" instance=ExtResource("27_3fu4r")]
 position = Vector2(-2445, 2011)
 
-[node name="Shark" parent="LevelContainer/Entities" instance=ExtResource("38_mcejo")]
-position = Vector2(581, 2729)
-
 [node name="ParallaxLayer" type="ParallaxBackground" parent="."]
 layer = 0
 
@@ -749,6 +745,10 @@ texture = SubResource("GradientTexture2D_0nxag")
 lifetime = 5.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_hcosd")
+
+[node name="CivillianFollower" parent="." instance=ExtResource("13_gnr5v")]
+z_index = 52
+position = Vector2(-3539, 2524)
 
 [editable path="LevelContainer/Items/LightLine"]
 [editable path="UILayer/IngameUI"]

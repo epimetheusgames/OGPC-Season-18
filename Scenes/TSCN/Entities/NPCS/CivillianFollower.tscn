@@ -1,14 +1,193 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi6i18nskixdt"]
+[gd_scene load_steps=24 format=3 uid="uid://bi6i18nskixdt"]
 
 [ext_resource type="Script" uid="uid://beofwn0pgkcaq" path="res://Scripts/Entity/NPC/CivillianFollower.gd" id="1_o7vjs"]
-[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="2_l6860"]
+[ext_resource type="Texture2D" uid="uid://y48rk6lmacle" path="res://Assets/Art/Entity/Player/PlayerSkinSideways.png" id="2_5cylf"]
+[ext_resource type="Texture2D" uid="uid://bbcjmvub6x46b" path="res://Assets/Art/Entity/Player/PlayerSkin.png" id="3_jhedc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5cylf"]
-radius = 35.0
-height = 218.0
+radius = 13.0
+height = 154.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l6860"]
-radius = 403.045
+radius = 164.757
+
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_x6r6a"]
+execution_mode = 1
+target_nodepath = NodePath("../ArmIkTarget1")
+flip_bend_direction = true
+joint_one_bone_idx = 2
+joint_one_bone2d_node = NodePath("Torso/UpperArm1")
+joint_two_bone_idx = 3
+joint_two_bone2d_node = NodePath("Torso/UpperArm1/Forearm1")
+
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_fmc8w"]
+target_nodepath = NodePath("../ArmIkTarget2")
+flip_bend_direction = true
+joint_one_bone_idx = 4
+joint_one_bone2d_node = NodePath("Torso/UpperArm2")
+joint_two_bone_idx = 5
+joint_two_bone2d_node = NodePath("Torso/UpperArm2/Forearm2")
+
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_bbylp"]
+target_nodepath = NodePath("../LegIkTarget1")
+joint_one_bone_idx = 6
+joint_one_bone2d_node = NodePath("Torso/Thigh1")
+joint_two_bone_idx = 7
+joint_two_bone2d_node = NodePath("Torso/Thigh1/Calf1")
+
+[sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_hss3m"]
+target_nodepath = NodePath("../LegIkTarget2")
+joint_one_bone_idx = 8
+joint_one_bone2d_node = NodePath("Torso/Thigh2")
+joint_two_bone_idx = 9
+joint_two_bone2d_node = NodePath("Torso/Thigh2/Calf2")
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_dxhuu"]
+enabled = true
+modification_count = 4
+modifications/0 = SubResource("SkeletonModification2DTwoBoneIK_x6r6a")
+modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_fmc8w")
+modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_bbylp")
+modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_hss3m")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8ut7h"]
+polygon = PackedVector2Array(-16, -17, 16, -17, 16, 15, -16, 15)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uyrbc"]
+polygon = PackedVector2Array(-7.99992, 23, -8.00009, -25, 7.99991, -25, 7.00008, 23)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x74ix"]
+polygon = PackedVector2Array(159.99, 32.25, 160.99, 79.25, 174.99, 80.25, 174.99, 33.25)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gfajb"]
+polygon = PackedVector2Array(6.99991, 24, -8.00009, 24, -7.99991, -24, 7.00009, -24)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8fpqk"]
+polygon = PackedVector2Array(-6.99992, 23, -8.00007, -20, 7.99993, -20, 8.00008, 23)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_47bcp"]
+polygon = PackedVector2Array(-8, -32, 9, -32, 9, 32, -7, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6gphr"]
+polygon = PackedVector2Array(8, -32, -8, -32, -7, 28, 8, 28)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0vf0v"]
+polygon = PackedVector2Array(-8, -31, 8, -31, 8, 33, -8, 33)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hj7ur"]
+polygon = PackedVector2Array(-28, -31, -12, -31, -12, -90, -28, -90)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pvjb6"]
+polygon = PackedVector2Array(13, 39, 13, -15, -21, -15, -19, 39)
+
+[sub_resource type="Animation" id="Animation_5cylf"]
+resource_name = "LegOscillate"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegIkTarget1:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(31.25, 115), Vector2(-36.25, 113.75), Vector2(31.25, 115)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LegIkTarget2:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-40, 115), Vector2(30, 116.25), Vector2(-40, 115)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmIkTarget1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.01, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-36.25, 15), Vector2(40, 20), Vector2(-36.25, 15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmIkTarget2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.03333, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(31.25, 25), Vector2(-47.5, 28.75), Vector2(31.25, 25)]
+}
+
+[sub_resource type="Animation" id="Animation_jhedc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegIkTarget1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31.25, 115)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LegIkTarget2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 115)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmIkTarget1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, -106.25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmIkTarget2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-33.75, 1.24998)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jhedc"]
+_data = {
+&"LegOscillate": SubResource("Animation_5cylf"),
+&"RESET": SubResource("Animation_jhedc")
+}
 
 [node name="CivillianFollower" type="CharacterBody2D" node_paths=PackedStringArray("navigation", "detection_area")]
 collision_layer = 0
@@ -20,16 +199,373 @@ follow_distance = 300.0
 metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 5)
 shape = SubResource("CapsuleShape2D_5cylf")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1, -0.500002)
-scale = Vector2(0.5625, 1.57031)
-texture = ExtResource("2_l6860")
 
 [node name="CivillianArea" type="Area2D" parent="." groups=["civillian_area"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CivillianArea"]
+visible = false
 shape = SubResource("CircleShape2D_l6860")
+
+[node name="AnimSkeleton" type="Node2D" parent="."]
+scale = Vector2(0.8, 0.8)
+
+[node name="Polygons" type="Node2D" parent="AnimSkeleton"]
+texture_filter = 1
+use_parent_material = true
+metadata/_edit_lock_ = true
+
+[node name="UpperArm2" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+use_parent_material = true
+position = Vector2(-37, -56)
+rotation = 1.5708
+offset = Vector2(-88, -55)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(80, 80, 79.6509, 36.8429, 95.5677, 36.8429, 96, 80)
+uv = PackedVector2Array(79.3925, 31.5152, 79.2307, 80.2438, 96.4576, 80.5269, 96.1745, 30.7873)
+polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
+metadata/_edit_lock_ = true
+
+[node name="Forearm2" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+use_parent_material = true
+position = Vector2(-77, -55)
+rotation = 1.57079
+scale = Vector2(1, -1)
+offset = Vector2(-56.0993, -40.2919)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(47.2143, 15.4954, 47.116, 64.5229, 64.703, 64.7194, 64.8013, 14.8567)
+uv = PackedVector2Array(47.2143, 15.4954, 47.116, 64.5229, 64.703, 64.7194, 64.8013, 14.8567)
+polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Forearm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Forearm2", PackedFloat32Array(1, 1, 1, 1), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
+metadata/_edit_lock_ = true
+
+[node name="Body" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+use_parent_material = true
+position = Vector2(3, -39)
+offset = Vector2(-131, -87)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(111.851, 70.0117, 118.529, 69.9653, 118.437, 62.9157, 136.617, 62.6838, 136.895, 69.8725, 145.151, 70.1044, 145.554, 129.179, 109.889, 129.179, 110.422, 69.7281, 127.376, 98.5866)
+uv = PackedVector2Array(111.851, 70.0117, 118.529, 69.9653, 118.437, 62.9157, 136.617, 62.6838, 136.895, 69.8725, 145.151, 70.1044, 145.554, 129.179, 109.889, 129.179, 110.422, 69.7281, 127.376, 98.5866)
+polygons = [PackedInt32Array(9, 1, 2), PackedInt32Array(9, 3, 2), PackedInt32Array(9, 4, 3), PackedInt32Array(9, 5, 4), PackedInt32Array(5, 6, 9), PackedInt32Array(9, 6, 7), PackedInt32Array(9, 8, 7), PackedInt32Array(9, 1, 0), PackedInt32Array(9, 0, 8)]
+bones = ["Torso", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1), "Torso/Head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+internal_vertex_count = 1
+metadata/_edit_lock_ = true
+
+[node name="Thigh1" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+use_parent_material = true
+position = Vector2(18, 29)
+offset = Vector2(-177, -129)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(158.633, 95.1684, 158.633, 160.791, 176.701, 160.791, 176.756, 94.9467)
+uv = PackedVector2Array(158.633, 95.1684, 158.633, 160.791, 176.701, 160.791, 176.756, 94.9467)
+polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(1, 1, 1, 1), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
+metadata/_edit_lock_ = true
+
+[node name="Calf1" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+use_parent_material = true
+position = Vector2(21, 84)
+offset = Vector2(-163, -209)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(142.862, 174.73, 142.729, 241.366, 160.951, 241.056, 161.306, 174.863)
+uv = PackedVector2Array(142.862, 174.73, 142.729, 241.366, 160.951, 241.056, 161.306, 174.863)
+polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(1, 1, 1, 1), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
+metadata/_edit_lock_ = true
+
+[node name="Thigh2" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+use_parent_material = true
+position = Vector2(-19, 29)
+offset = Vector2(-78, -129)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(78.6611, 94.4609, 97.2638, 94.3767, 97.348, 161.128, 77.146, 160.875)
+uv = PackedVector2Array(78.6611, 94.4609, 97.2638, 94.3767, 97.348, 161.128, 77.146, 160.875)
+polygons = [PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(1, 1, 1, 1), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
+metadata/_edit_lock_ = true
+
+[node name="Calf2" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+use_parent_material = true
+position = Vector2(-22, 82)
+offset = Vector2(-92, -209)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(94.9078, 174.952, 94.6873, 240.382, 113.098, 240.382, 112.767, 174.952)
+uv = PackedVector2Array(94.9078, 174.952, 94.6873, 240.382, 113.098, 240.382, 112.767, 174.952)
+polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(1, 1, 1, 1)]
+metadata/_edit_lock_ = true
+
+[node name="Head" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+use_parent_material = true
+position = Vector2(0, -71)
+offset = Vector2(-128, -33)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
+uv = PackedVector2Array(110.915, 15.1724, 111.101, 48.7448, 144.859, 49.1165, 144.921, 14.4291)
+polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 1, 2)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
+metadata/_edit_lock_ = true
+
+[node name="UpperArm1" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+z_index = 10
+texture_repeat = 1
+use_parent_material = true
+position = Vector2(42, -53)
+rotation = 1.5708
+offset = Vector2(-167.993, -54.2543)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(160, 32, 160, 80, 176, 80, 176, 32)
+uv = PackedVector2Array(158.595, 31.1322, 158.659, 80.7521, 177.346, 80.8158, 177.027, 30.3031)
+polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm1/Arm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Arm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
+metadata/_edit_lock_ = true
+
+[node name="Forearm1" type="Polygon2D" parent="AnimSkeleton/Polygons"]
+modulate = Color(0.505882, 1, 0, 1)
+z_index = 10
+use_parent_material = true
+position = Vector2(77, -53)
+rotation = 1.5708
+offset = Vector2(-56, -41)
+texture = ExtResource("2_5cylf")
+skeleton = NodePath("../../Skeleton")
+polygon = PackedVector2Array(64, 16, 64, 64, 48, 64, 48, 16)
+uv = PackedVector2Array(46.9619, 15.5686, 46.2722, 65.2294, 65.5847, 65.2294, 65.1824, 14.8789)
+polygons = [PackedInt32Array(0, 3, 2), PackedInt32Array(0, 2, 1)]
+bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Forearm1", PackedFloat32Array(1, 1, 1, 1), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Forearm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
+metadata/_edit_lock_ = true
+
+[node name="AirTank" type="Sprite2D" parent="AnimSkeleton/Polygons"]
+visible = false
+modulate = Color(0.505882, 1, 0, 1)
+position = Vector2(-23, -28)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_jhedc")
+region_enabled = true
+region_rect = Rect2(227, 32, 26, 80)
+metadata/_edit_lock_ = true
+
+[node name="Skeleton" type="Skeleton2D" parent="AnimSkeleton"]
+visible = false
+use_parent_material = true
+modification_stack = SubResource("SkeletonModificationStack2D_dxhuu")
+metadata/_edit_lock_ = true
+
+[node name="Torso" type="Bone2D" parent="AnimSkeleton/Skeleton"]
+use_parent_material = true
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+metadata/_edit_lock_ = true
+
+[node name="Head" type="Bone2D" parent="AnimSkeleton/Skeleton/Torso"]
+use_parent_material = true
+position = Vector2(0, -62)
+scale = Vector2(0.999997, 0.999997)
+rest = Transform2D(1, 0, 0, 1, 0, -62)
+auto_calculate_length_and_angle = false
+length = 21.83
+bone_angle = 270.0
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso/Head"]
+position = Vector2(0, -9.00003)
+occluder = SubResource("OccluderPolygon2D_8ut7h")
+occluder_light_mask = 2
+
+[node name="UpperArm1" type="Bone2D" parent="AnimSkeleton/Skeleton/Torso"]
+use_parent_material = true
+position = Vector2(9, -49)
+rotation = -0.155843
+scale = Vector2(1, 1)
+rest = Transform2D(0.964522, -0.264003, 0.264003, 0.964522, 18, -55)
+auto_calculate_length_and_angle = false
+length = 38.2
+bone_angle = 15.0
+metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
+
+[node name="Forearm1" type="Bone2D" parent="AnimSkeleton/Skeleton/Torso/UpperArm1"]
+use_parent_material = true
+position = Vector2(36.7337, 11.7541)
+rotation = -1.57333
+scale = Vector2(1.08388, 1.00115)
+skew = -5.6386e-05
+rest = Transform2D(1.06785, -0.185714, 0.171539, 0.986349, 40.2459, 12.0526)
+auto_calculate_length_and_angle = false
+length = 37.0
+bone_angle = 28.0
+metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso/UpperArm1/Forearm1"]
+position = Vector2(17.8001, 8.27792)
+rotation = 1.96787
+scale = Vector2(0.986316, 0.936111)
+skew = 0.0597258
+occluder = SubResource("OccluderPolygon2D_uyrbc")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso/UpperArm1"]
+position = Vector2(118.86, -140.568)
+rotation = 1.85157
+scale = Vector2(1.00006, 1.00006)
+occluder = SubResource("OccluderPolygon2D_x74ix")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="UpperArm2" type="Bone2D" parent="AnimSkeleton/Skeleton/Torso"]
+use_parent_material = true
+position = Vector2(-5, -52)
+rotation = 3.03278
+scale = Vector2(0.999991, 0.999991)
+rest = Transform2D(0.984064, 0.177815, -0.177815, 0.984064, -18, -55)
+metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
+
+[node name="Forearm2" type="Bone2D" parent="AnimSkeleton/Skeleton/Torso/UpperArm2"]
+use_parent_material = true
+position = Vector2(-41.3307, 7.46825)
+rotation = -1.31499
+scale = Vector2(0.999998, 0.999998)
+rest = Transform2D(0.984562, 0.175033, -0.175033, 0.984562, -41.3307, 7.46825)
+auto_calculate_length_and_angle = false
+length = 38.0
+bone_angle = 159.0
+metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso/UpperArm2/Forearm2"]
+position = Vector2(-20.7467, 7.335)
+rotation = -1.92815
+occluder = SubResource("OccluderPolygon2D_gfajb")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso/UpperArm2"]
+position = Vector2(-17.7418, 3.03804)
+rotation = 1.40121
+occluder = SubResource("OccluderPolygon2D_8fpqk")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="Thigh1" type="Bone2D" parent="AnimSkeleton/Skeleton/Torso"]
+use_parent_material = true
+position = Vector2(0, -2)
+rotation = 1.26402
+scale = Vector2(0.999955, 0.999955)
+rest = Transform2D(1, 0, 0, 1, 9, -4)
+auto_calculate_length_and_angle = false
+length = 36.7338
+bone_angle = 87.9546
+metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
+
+[node name="Calf1" type="Bone2D" parent="AnimSkeleton/Skeleton/Torso/Thigh1"]
+use_parent_material = true
+position = Vector2(2.98055, 37.2037)
+rotation = -0.035699
+scale = Vector2(0.996553, 0.999962)
+rest = Transform2D(0.996554, 0, 0, 1, 2, 56)
+auto_calculate_length_and_angle = false
+length = 57.824
+bone_angle = 90.0
+metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso/Thigh1/Calf1"]
+position = Vector2(-1.69385, 30.0053)
+rotation = 0.00797233
+scale = Vector2(1.00346, 1)
+skew = 5.51939e-05
+occluder = SubResource("OccluderPolygon2D_47bcp")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso/Thigh1"]
+position = Vector2(0.775972, 28.0071)
+rotation = 0.0079999
+occluder = SubResource("OccluderPolygon2D_6gphr")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="Thigh2" type="Bone2D" parent="AnimSkeleton/Skeleton/Torso"]
+use_parent_material = true
+position = Vector2(-1.42679e-06, -2)
+rotation = 1.52878
+scale = Vector2(0.999978, 0.999978)
+rest = Transform2D(1, 0, 0, 1, -9, -4)
+auto_calculate_length_and_angle = false
+length = 41.0
+bone_angle = 92.0096
+metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
+
+[node name="Calf2" type="Bone2D" parent="AnimSkeleton/Skeleton/Torso/Thigh2"]
+use_parent_material = true
+position = Vector2(-1.43894, 41.0098)
+rotation = 0.035074
+rest = Transform2D(1, 0, 0, 1, -2, 57)
+auto_calculate_length_and_angle = false
+length = 59.378
+bone_angle = 90.0
+metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso/Thigh2/Calf2"]
+position = Vector2(1, 28)
+occluder = SubResource("OccluderPolygon2D_0vf0v")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso/Thigh2"]
+position = Vector2(19, 86)
+occluder = SubResource("OccluderPolygon2D_hj7ur")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="AnimSkeleton/Skeleton/Torso"]
+position = Vector2(3, -39)
+occluder = SubResource("OccluderPolygon2D_pvjb6")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="ArmIkTarget1" type="Node2D" parent="AnimSkeleton"]
+position = Vector2(40, -106.25)
+scale = Vector2(228.643, -232.132)
+
+[node name="ArmIkTarget2" type="Node2D" parent="AnimSkeleton"]
+position = Vector2(-33.75, 1.24998)
+
+[node name="LegIkTarget1" type="Node2D" parent="AnimSkeleton"]
+position = Vector2(31.25, 115)
+
+[node name="LegIkTarget2" type="Node2D" parent="AnimSkeleton"]
+position = Vector2(-40, 115)
+
+[node name="SwimmingAnimationPlayer" type="AnimationPlayer" parent="AnimSkeleton"]
+libraries = {
+&"": SubResource("AnimationLibrary_jhedc")
+}

@@ -10,10 +10,9 @@ script = ExtResource("2_e6mh0")
 file = "res://Scenes/TSCN/Objects/PlaceableBuilding.tscn"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j551m"]
-radius = 500.157
+radius = 110.018
 
 [node name="DefaultPlaceableBuilding" type="Node2D" node_paths=PackedStringArray("building_sprite", "building_collision", "base_position", "player_follower_dummy")]
-position = Vector2(-2200, 2502)
 script = ExtResource("1_t277u")
 scene = SubResource("Resource_xgfk5")
 building_sprite = NodePath("Icon")
@@ -83,7 +82,6 @@ target_position = Vector2(-1, -1)
 [node name="BuildingArea" type="Area2D" parent="." groups=["building_area"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingArea"]
-visible = false
 shape = SubResource("CircleShape2D_j551m")
 
 [node name="AnyFollowerDummy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("follows")]

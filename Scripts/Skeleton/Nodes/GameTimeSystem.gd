@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	while true:
 		await get_tree().create_timer(seconds_per_ten_minutes).timeout
-		if _minutes < 60:
+		if _minutes < 50:
 			_minutes += 10
 		elif _hours < 23:
 			_minutes = 0
