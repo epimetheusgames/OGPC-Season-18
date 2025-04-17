@@ -11,6 +11,7 @@ extends Entity
 
 var target_path_position: Vector2
 var going_to_building := false
+var is_in_gravity_area := false
 
 func _ready() -> void:
 	position += Util.random_vector(Global.rng, 50, 0)
@@ -26,6 +27,7 @@ func _ready() -> void:
 		Global.save_load_framework.save_nodes.connect(_on_save_nodes)
 	
 	detection_area.area_entered.connect(_area_entered)
+	detection_area.area_exited.connect(_area_exited)
 	
 	while true:
 		await get_tree().create_timer(0.1).timeout
@@ -48,6 +50,9 @@ func _physics_process(delta: float) -> void:
 	if global_position.distance_squared_to(navigation.target_position) < 5 ^ 2:
 		return
 	
+	if !$AnimSkeleton/SwimmingAnimationPlayer.is_playing() && !is_in_gravity_area:
+		$AnimSkeleton/SwimmingAnimationPlayer.play("LegOscillate")
+	
 	if going_to_building && global_position.distance_squared_to(following.global_position) < follow_distance ** 2:
 		var building: PlaceableBuilding = following.get_parent()
 		building.current_occupants += 1
@@ -56,6 +61,10 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = (target_path_position - global_position).normalized() * swim_speed
 	rotation = Util.better_angle_lerp(rotation, velocity.angle() + PI / 2.0, 0.1, delta)
+	
+	if is_in_gravity_area:
+		$AnimSkeleton/SwimmingAnimationPlayer.play("RESET")
+		rotation = 0
 
 	move_and_slide()
 
@@ -66,6 +75,9 @@ func get_follow_position() -> Vector2:
 	return global_position
 
 func _area_entered(area: Area2D) -> void:
+	if area.is_in_group("gravity_areas"):
+		is_in_gravity_area = true
+	
 	if going_to_building:
 		return
 
@@ -89,3 +101,7 @@ func _area_entered(area: Area2D) -> void:
 		following = area.get_parent()
 	if area.is_in_group("player_area"):
 		following = Global.player.follower
+
+func _area_exited(area: Area2D) -> void:
+	if area.is_in_group("gravity_areas"):
+		is_in_gravity_area = false

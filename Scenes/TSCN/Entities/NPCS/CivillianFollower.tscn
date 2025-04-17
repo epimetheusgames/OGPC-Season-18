@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bi6i18nskixdt"]
+[gd_scene load_steps=24 format=3 uid="uid://bi6i18nskixdt"]
 
 [ext_resource type="Script" uid="uid://beofwn0pgkcaq" path="res://Scripts/Entity/NPC/CivillianFollower.gd" id="1_o7vjs"]
 [ext_resource type="Texture2D" uid="uid://y48rk6lmacle" path="res://Assets/Art/Entity/Player/PlayerSkinSideways.png" id="2_5cylf"]
@@ -79,6 +79,115 @@ polygon = PackedVector2Array(-28, -31, -12, -31, -12, -90, -28, -90)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_pvjb6"]
 polygon = PackedVector2Array(13, 39, 13, -15, -21, -15, -19, 39)
+
+[sub_resource type="Animation" id="Animation_5cylf"]
+resource_name = "LegOscillate"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegIkTarget1:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(31.25, 115), Vector2(-36.25, 113.75), Vector2(31.25, 115)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LegIkTarget2:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-40, 115), Vector2(30, 116.25), Vector2(-40, 115)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmIkTarget1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.01, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-36.25, 15), Vector2(40, 20), Vector2(-36.25, 15)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmIkTarget2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.03333, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(31.25, 25), Vector2(-47.5, 28.75), Vector2(31.25, 25)]
+}
+
+[sub_resource type="Animation" id="Animation_jhedc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegIkTarget1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31.25, 115)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LegIkTarget2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-40, 115)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ArmIkTarget1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, -106.25)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ArmIkTarget2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-33.75, 1.24998)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jhedc"]
+_data = {
+&"LegOscillate": SubResource("Animation_5cylf"),
+&"RESET": SubResource("Animation_jhedc")
+}
 
 [node name="CivillianFollower" type="CharacterBody2D" node_paths=PackedStringArray("navigation", "detection_area")]
 collision_layer = 0
@@ -444,14 +553,19 @@ occluder_light_mask = 2
 metadata/_edit_lock_ = true
 
 [node name="ArmIkTarget1" type="Node2D" parent="AnimSkeleton"]
-position = Vector2(-22.5, 72.5)
+position = Vector2(40, -106.25)
 scale = Vector2(228.643, -232.132)
 
 [node name="ArmIkTarget2" type="Node2D" parent="AnimSkeleton"]
-position = Vector2(-35, 47.5)
+position = Vector2(-33.75, 1.24998)
 
 [node name="LegIkTarget1" type="Node2D" parent="AnimSkeleton"]
-position = Vector2(2.49999, 102.5)
+position = Vector2(31.25, 115)
 
 [node name="LegIkTarget2" type="Node2D" parent="AnimSkeleton"]
-position = Vector2(-27.5, 108.75)
+position = Vector2(-40, 115)
+
+[node name="SwimmingAnimationPlayer" type="AnimationPlayer" parent="AnimSkeleton"]
+libraries = {
+&"": SubResource("AnimationLibrary_jhedc")
+}

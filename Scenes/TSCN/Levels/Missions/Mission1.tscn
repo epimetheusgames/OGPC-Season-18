@@ -453,7 +453,7 @@ min_point_dist = 300.0
 points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
 
 [node name="Raycasts" parent="LevelContainer/Items/LightLine" index="1"]
-position = Vector2(-3825, 85)
+position = Vector2(-4236, -362)
 
 [node name="Area2D" type="Area2D" parent="LevelContainer/Items"]
 
@@ -745,6 +745,10 @@ texture = SubResource("GradientTexture2D_0nxag")
 lifetime = 5.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_hcosd")
+
+[node name="CivillianFollower" parent="." instance=ExtResource("13_gnr5v")]
+z_index = 52
+position = Vector2(-3539, 2524)
 
 [editable path="LevelContainer/Items/LightLine"]
 [editable path="UILayer/IngameUI"]
