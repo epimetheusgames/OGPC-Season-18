@@ -436,6 +436,7 @@ auto_calculate_length_and_angle = false
 length = 38.2
 bone_angle = 15.0
 metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
 
 [node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
 use_parent_material = true
@@ -448,6 +449,7 @@ auto_calculate_length_and_angle = false
 length = 37.0
 bone_angle = 28.0
 metadata/_edit_lock_ = true
+metadata/_local_pose_override_enabled_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm1/Forearm1"]
 position = Vector2(17.8001, 8.27792)

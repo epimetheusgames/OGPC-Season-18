@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://6ajyn7xeilmv"]
+[gd_scene load_steps=10 format=3 uid="uid://6ajyn7xeilmv"]
 
 [ext_resource type="Script" uid="uid://0js7gtnvp1vm" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_ru2mo"]
 [ext_resource type="Script" uid="uid://bpcsoat0wk1ci" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_eisgo"]
 [ext_resource type="Texture2D" uid="uid://d2bs2aysqkwqb" path="res://Assets/Art/Entity/Submarine/Submarine.png" id="3_j4tp4"]
 [ext_resource type="Script" uid="uid://dxlkbqcv2x2hh" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineWeaponSlot.gd" id="4_j4tp4"]
 [ext_resource type="PackedScene" uid="uid://yigraya7x7v4" path="res://Scenes/TSCN/Entities/Submarine/SubmarineWeapons/SubmarineBurstWeapon.tscn" id="5_qnb0f"]
+[ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="6_qnb0f"]
+[ext_resource type="Texture2D" uid="uid://dywqtkftqlcbi" path="res://Assets/Art/Entity/Submarine/SubmarineLight.png" id="7_d1qs6"]
+[ext_resource type="Texture2D" uid="uid://mx8o4yak3yo8" path="res://Assets/Art/Entity/Submarine/SubmarineAura.png" id="8_bxi20"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvx1j"]
 size = Vector2(96, 139)
@@ -58,6 +61,25 @@ polygon = PackedVector2Array(0, 2, 3, 18, -60, 21, -131, 45, -159, 72, -165, 127
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collision"]
 position = Vector2(-150, -125)
 polygon = PackedVector2Array(0, 2, 192, 2, 230, -19, 230, 30, 19, 30, 3, 18)
+
+[node name="Headlight" type="PointLight2D" parent="."]
+position = Vector2(-276, 156)
+rotation = 4.71239
+scale = Vector2(1.5, 1.5)
+energy = 10.0
+texture = ExtResource("6_qnb0f")
+offset = Vector2(0, 20)
+
+[node name="SubmarineInteriorLight" type="PointLight2D" parent="."]
+position = Vector2(4, 7)
+energy = 2.0
+shadow_enabled = true
+texture = ExtResource("7_d1qs6")
+
+[node name="SubmarineAura" type="PointLight2D" parent="."]
+position = Vector2(4, 7)
+energy = 0.25
+texture = ExtResource("8_bxi20")
 
 [connection signal="area_entered" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_exited"]

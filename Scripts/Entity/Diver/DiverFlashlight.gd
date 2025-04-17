@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	if Global.is_multiplayer && diver.has_multiplayer_sync && !diver._is_node_owner():
 		return
 	
-	if diver.get_state() == Util.DiverState.IN_GRAVITY_AREA:
+	if diver.get_state() != Util.DiverState.SWIMMING:
 		flashlight.visible = false
 		body_light.visible = false
 	else:
