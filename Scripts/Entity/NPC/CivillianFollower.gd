@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	
 	velocity = (target_path_position - global_position).normalized() * swim_speed
+	rotation = Util.better_angle_lerp(rotation, velocity.angle() + PI / 2.0, 0.1, delta)
 
 	move_and_slide()
 
