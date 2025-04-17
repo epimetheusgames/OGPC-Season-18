@@ -60,8 +60,12 @@ func _die() -> void:
 
 # Other util
 func get_diver_pos() -> Vector2:
+	if Global.player_array.is_empty():
+		return get_global_mouse_position()
+	
 	var closest_player: Diver
 	var closest_squared_distance := 1000000000.0
+	
 	for player in Global.player_array:
 		var dist := player.global_position.distance_squared_to(global_position)
 		if dist < closest_squared_distance:

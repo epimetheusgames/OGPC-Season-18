@@ -25,7 +25,7 @@ func process_physics(delta: float) -> State:
 	enemy.nav_agent.target_position = diver_pos
 	
 	var next_path_pos = enemy.nav_agent.get_next_path_position()
-	enemy.accelerate_towards(next_path_pos, chase_speed, delta)
+	enemy.accelerate_towards(next_path_pos, chase_speed)
 	
 	if enemy.hurtbox.health < 250:
 		return escape_state

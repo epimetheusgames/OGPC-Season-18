@@ -7,7 +7,7 @@ extends Node
 var enemy: Enemy
 
 func init() -> void:
-	$"Timer".connect("timeout", done)
+	pass
 
 func enter() -> void:
 	pass
@@ -23,8 +23,3 @@ func process_frame(delta: float) -> State:
 
 func process_physics(delta: float) -> State:
 	return null
-
-func done() -> void:
-	enemy = enemy as Jellyfish
-	var target: Vector2 = enemy.get_global_mouse_position()
-	enemy.boost(300, 2, target)

@@ -18,7 +18,6 @@ func init(enemy: Enemy) -> void:
 		state.init()
 	
 	change_state(starting_state)
-	print("ARARRAR: " + str(current_state))
 
 func change_state(new_state: State) -> void:
 	if current_state:

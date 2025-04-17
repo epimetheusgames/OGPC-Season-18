@@ -15,6 +15,8 @@ enum AttackerType {
 @export var attacker_type: AttackerType = AttackerType.OTHER
 @export var damage_amount: float = 1.0
 
+@export var damaging: bool = true
+
 # Signals when it hits a hurtbox
 signal hurtbox_hit(hurtbox, Hurtbox)
 
@@ -35,7 +37,8 @@ func _ready() -> void:
 		collision.debug_color.a = 0.3
 
 func _process(delta: float) -> void:
-	detect_and_damage_hurtboxes()
+	if damaging:
+		detect_and_damage_hurtboxes()
 
 func detect_and_damage_hurtboxes() -> void:
 	pass # Damaging behavior goes here

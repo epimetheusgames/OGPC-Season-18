@@ -27,8 +27,7 @@ func detect_and_damage_hurtboxes() -> void:
 	
 	var areas: Array[Area2D] = get_overlapping_areas()
 	var hit_hurtbox: bool = false
-	print(areas)
-
+	
 	for area in areas:
 		if !area is Hurtbox:
 			continue

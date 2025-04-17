@@ -1,21 +1,23 @@
-[gd_scene load_steps=17 format=4 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=15 format=3 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/Enemies/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/Enemies/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
+[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Scripts/Entity/Enemies/EnemyFov.gd" id="2_nxkv1"]
 [ext_resource type="Script" uid="uid://cmyaowe8fevss" path="res://Scripts/Entity/Enemies/Jellyfish/TentacleData.gd" id="3_546cb"]
 [ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="4_i2om7"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_gyt63"]
 [ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Scripts/Entity/Enemies/StateMachine.gd" id="6_pcetc"]
 [ext_resource type="Script" uid="uid://xmfg6ehqurmh" path="res://Scripts/Entity/Enemies/Jellyfish/States/Wander.gd" id="7_j553b"]
-[ext_resource type="Shader" uid="uid://dog5ar7m8hypg" path="res://Scripts/GLSL/GDShader/JellyfishColors.gdshader" id="8_2ikp3"]
 [ext_resource type="Texture2D" uid="uid://dsihl1750cku6" path="res://Assets/Art/Entity/JellyFishBell.png" id="8_7y3es"]
-[ext_resource type="Script" uid="uid://ra88gjbxjc11" path="res://Scripts/Entity/Enemies/State.gd" id="8_546cb"]
 [ext_resource type="Script" uid="uid://l2gvhd65hxtl" path="res://Scripts/Entity/Enemies/Jellyfish/States/Boost.gd" id="9_i2om7"]
-[ext_resource type="PackedScene" uid="uid://c3kno3jft2psf" path="res://Scenes/TSCN/Entities/Dummy.tscn" id="12_nxkv1"]
+[ext_resource type="Script" uid="uid://itsqohytpwm2" path="res://Scripts/Entity/Enemies/Jellyfish/States/Spin.gd" id="11_i2om7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_05v0o"]
 radius = 35.0
 height = 192.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgvvg"]
+size = Vector2(272, 108)
 
 [sub_resource type="Resource" id="Resource_546cb"]
 script = ExtResource("3_546cb")
@@ -26,45 +28,25 @@ amount = 6
 bottom_width = 200.0
 metadata/_custom_type_script = "uid://cmyaowe8fevss"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgvvg"]
-size = Vector2(272, 108)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvsdd"]
-shader = ExtResource("8_2ikp3")
-shader_parameter/colors = PackedVector4Array(1, 1, 1, 0.25, 1, 1, 1, 0.3, 1, 1, 1, 0.35, 1, 1, 1, 0.43, 1, 1, 1, 0.57, 1, 1, 1, 0.68)
-shader_parameter/out_colors = PackedColorArray(0, 0, 0.75, 0.301961, 0.25, 0, 0.75, 0.180392, 0.375, 0, 0.75, 0.301961, 0.4625, 0, 0.75, 0.360784, 0.25, 0, 0.75, 0.301961, 0.325, 0, 0.75, 0.301961)
-
-[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "state_machine")]
+[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov", "state_machine")]
 position = Vector2(913, 506)
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 hurtbox = NodePath("Hurtbox")
 nav_agent = NodePath("NavigationAgent2D")
+enemy_fov = NodePath("EnemyFov")
 state_machine = NodePath("StateMachine")
+
+[node name="EnemyFov" type="Node2D" parent="."]
+script = ExtResource("2_nxkv1")
+metadata/_custom_type_script = "uid://0j0vsqeeio1s"
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -38)
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_05v0o")
 metadata/_edit_lock_ = true
-
-[node name="Tentacles" type="Node2D" parent="."]
-script = ExtResource("2_7lbwn")
-tentacle_data = SubResource("Resource_546cb")
-
-[node name="ContinuousAttack" type="Area2D" parent="Tentacles"]
-script = ExtResource("4_i2om7")
-attacker_type = 0
-metadata/_custom_type_script = "uid://bf0bikj8np6x"
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tentacles/ContinuousAttack"]
-polygon = PackedVector2Array(-100, 3, -100, 300, 100, 300, 100, 3)
-metadata/_edit_lock_ = true
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
-debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="Hurtbox" type="Area2D" parent="."]
 script = ExtResource("6_gyt63")
@@ -78,38 +60,48 @@ debug_color = Color(6.49765e-06, 0.647455, 0.210561, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="JellyfishBell" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_tvsdd")
-position = Vector2(4.76837e-07, -56)
+position = Vector2(0, -56)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("8_7y3es")
 metadata/_edit_lock_ = true
 
-[node name="Dummy2" parent="." instance=ExtResource("12_nxkv1")]
-top_level = true
-position = Vector2(1175, 599)
+[node name="Tentacles" type="Node2D" parent="."]
+script = ExtResource("2_7lbwn")
+tentacle_data = SubResource("Resource_546cb")
+metadata/_edit_lock_ = true
+
+[node name="ContinuousAttack" type="Area2D" parent="Tentacles"]
+script = ExtResource("4_i2om7")
+attacker_type = 0
+damage_amount = 10.0
+metadata/_custom_type_script = "uid://bf0bikj8np6x"
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tentacles/ContinuousAttack"]
+polygon = PackedVector2Array(-100, 3, -100, 300, 100, 300, 100, 3)
+metadata/_edit_lock_ = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("6_pcetc")
-starting_state = NodePath("Defend")
+starting_state = NodePath("Wander")
 metadata/_custom_type_script = "uid://balgnejnh7c1p"
 
-[node name="Wander" type="Node" parent="StateMachine"]
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("boost_state")]
 script = ExtResource("7_j553b")
+boost_state = NodePath("../Boost")
 
-[node name="WanderTimer" type="Timer" parent="StateMachine/Wander"]
-wait_time = 10.0
-
-[node name="Defend" type="Node" parent="StateMachine"]
-script = ExtResource("8_546cb")
-metadata/_custom_type_script = "uid://ra88gjbxjc11"
-
-[node name="Timer" type="Timer" parent="StateMachine/Defend"]
+[node name="Timer" type="Timer" parent="StateMachine/Wander"]
 wait_time = 4.0
-autostart = true
 
-[node name="Boost" type="Node" parent="StateMachine"]
+[node name="Boost" type="Node" parent="StateMachine" node_paths=PackedStringArray("spin_state")]
 script = ExtResource("9_i2om7")
+spin_state = NodePath("../Spin")
 
-[node name="Dummy" parent="." instance=ExtResource("12_nxkv1")]
-top_level = true
-position = Vector2(553, 622)
+[node name="Spin" type="Node" parent="StateMachine" node_paths=PackedStringArray("wander_state", "boost_state")]
+script = ExtResource("11_i2om7")
+wander_state = NodePath("../Wander")
+boost_state = NodePath("../Boost")

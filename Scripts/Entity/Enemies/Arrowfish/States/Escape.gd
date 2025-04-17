@@ -54,7 +54,7 @@ func process_physics(delta: float) -> State:
 	enemy.nav_agent.target_position = escape_target_pos
 	var escape_pos = enemy.nav_agent.get_next_path_position()
 	
-	enemy.move_towards(escape_pos, 500, delta)
+	enemy.move_towards(escape_pos, 500)
 	
 	if enemy.global_position.distance_to(diver_pos) > 800:
 		return wander_state

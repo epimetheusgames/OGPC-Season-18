@@ -32,7 +32,7 @@ func process_physics(delta: float) -> State:
 	if has_reached_pos(target_pos):
 		return chase_state
 	
-	enemy.spring_towards(target_pos, 3, 0.1, delta)
+	enemy.spring_towards(target_pos, 3, 0.1)
 	
 	return null
 

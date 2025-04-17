@@ -11,17 +11,23 @@ func _ready() -> void:
 	state_machine.init(self)
 
 func _physics_process(delta: float) -> void:
+	state_machine.process_physics(delta)
+	
 	if boost_duration > 0:
 		var target: Vector2 = global_position + boost_direction * 100
 		velocity = drift_towards(target, boost_speed, 0.1)
 		tentacles.tentacles_down(5)
 		boost_duration -= delta
+		
+		if velocity.length() > 0.1:
+			rotation = lerp_angle(rotation, velocity.angle() + PI/2, 0.05)
+		
+		print("boostin")
 	else:
-		tentacles.tentacles_up(2)
+		tentacles.tentacles_up(3)
 		velocity *= 0.99
+		print("wait")
 	
-	if velocity.length() > 0.1:
-		rotation = lerp_angle(rotation, velocity.angle() + PI/2, 0.05)
 	
 	move_and_slide()
 

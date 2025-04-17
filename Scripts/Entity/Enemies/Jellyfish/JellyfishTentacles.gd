@@ -31,7 +31,6 @@ func _ready() -> void:
 		var new_rope := VerletRope.new()
 		new_rope.component_container = get_parent().get_path()
 		new_rope.name = "TentacleRope"
-		new_rope.enable_collisions = false
 		new_rope.damping = 0.5
 		
 		new_rope.point_separation = 40
