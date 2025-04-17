@@ -22,11 +22,9 @@ func _physics_process(delta: float) -> void:
 		if velocity.length() > 0.1:
 			rotation = lerp_angle(rotation, velocity.angle() + PI/2, 0.05)
 		
-		print("boostin")
 	else:
 		tentacles.tentacles_up(3)
 		velocity *= 0.99
-		print("wait")
 	
 	
 	move_and_slide()

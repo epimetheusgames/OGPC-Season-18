@@ -4,7 +4,7 @@ extends State
 @export var spin_state: State
 
 const wait_time: float = 0.8
-const boost_time: float = 5.0
+const boost_time: float = 3.0
 
 var wait_timer: float
 var boost_timer: float

@@ -29,7 +29,6 @@ bottom_width = 200.0
 metadata/_custom_type_script = "uid://cmyaowe8fevss"
 
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov", "state_machine")]
-position = Vector2(913, 506)
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 hurtbox = NodePath("Hurtbox")
