@@ -79,6 +79,7 @@ func _ready() -> void:
 	else:
 		camera.enabled = false
 
+
 func _process(delta: float) -> void:
 	super(delta)
 	
