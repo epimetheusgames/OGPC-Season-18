@@ -71,4 +71,7 @@ func get_diver_pos() -> Vector2:
 		if dist < closest_squared_distance:
 			closest_squared_distance = dist
 			closest_player = player
-	return closest_player.global_position
+	if closest_player:
+		return closest_player.global_position
+	else:
+		return Vector2.ZERO

@@ -1,16 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://yigraya7x7v4"]
+[gd_scene load_steps=8 format=3 uid="uid://yigraya7x7v4"]
 
 [ext_resource type="Script" uid="uid://dok3q8kyc2lfx" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineBurstWeapon.gd" id="1_ofjw0"]
 [ext_resource type="PackedScene" uid="uid://bc8nwmffdtqmh" path="res://Scenes/TSCN/Entities/Submarine/SubmarineWeapons/SubmarineBurstWeaponBullet.tscn" id="2_t1hu4"]
-[ext_resource type="Texture2D" uid="uid://ek04bw643dyr" path="res://Assets/Art/Entity/Submarine/BurstWeaponBarrel.png" id="3_jyae7"]
-[ext_resource type="Texture2D" uid="uid://b08d8cxp7h6w" path="res://Assets/Art/Entity/Submarine/BurstWeaponBase.png" id="4_i1obx"]
+[ext_resource type="Shader" uid="uid://dnxrfjohfxpbm" path="res://Scripts/GLSL/GDShader/WeaponHeat.gdshader" id="3_i1obx"]
+[ext_resource type="Texture2D" uid="uid://cumq67dglgew5" path="res://Assets/Art/Entity/Submarine/WBurstWeaponBase.png" id="4_i1obx"]
+
+[sub_resource type="Gradient" id="Gradient_jyae7"]
+offsets = PackedFloat32Array(0, 0.0485437, 0.252427, 0.495146)
+colors = PackedColorArray(1, 1, 0.478431, 0, 1, 0.52549, 0.172549, 0.352941, 1, 0, 0, 0.0588235, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i1obx"]
+gradient = SubResource("Gradient_jyae7")
+fill_from = Vector2(0, 0.568862)
+fill_to = Vector2(0.658683, 0.57485)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i1obx"]
+shader = ExtResource("3_i1obx")
+shader_parameter/gun_texture = ExtResource("4_i1obx")
+shader_parameter/gradient_tex = SubResource("GradientTexture2D_i1obx")
+shader_parameter/blend_strength = 1.0
+shader_parameter/vertical_gradient = true
+shader_parameter/heat = 0.0
+shader_parameter/threshold = 0.3
 
 [node name="SubmarineBurstWeapon" type="Node2D"]
 script = ExtResource("1_ofjw0")
 time_between_bursts = 0.1
-base_texture = ExtResource("4_i1obx")
 projectile_scene = ExtResource("2_t1hu4")
-rotation_range = 160.0
+rotation_range = 90.0
 shot_cooldown = 0.6
 heat_increase_per_shot = 10.0
 passive_decrease_cooldown = 1.5
@@ -24,7 +41,7 @@ position = Vector2(200, 0)
 rotation = 1.5708
 
 [node name="Barrel" type="Sprite2D" parent="."]
-position = Vector2(70, 0)
-rotation = 1.5708
-scale = Vector2(0.03, 0.03)
-texture = ExtResource("3_jyae7")
+material = SubResource("ShaderMaterial_i1obx")
+position = Vector2(92, 2)
+rotation = 3.14159
+texture = ExtResource("4_i1obx")

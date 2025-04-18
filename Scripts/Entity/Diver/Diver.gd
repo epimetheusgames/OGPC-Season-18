@@ -150,7 +150,11 @@ func _save() -> void:
 				],
 				get_path_to(diver_combat): [
 					"selected_weapon",
+					"unlocked_weapons",
 				],
+				get_path_to(diver_inventory): [
+					"collected_item_paths",
+				]
 			},
 			false,
 			diver_scene,

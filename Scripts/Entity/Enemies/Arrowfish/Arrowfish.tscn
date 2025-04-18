@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dd4arsu8r6mkx"]
+[gd_scene load_steps=17 format=3 uid="uid://dd4arsu8r6mkx"]
 
 [ext_resource type="Script" uid="uid://dh0ffpkyxt836" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.gd" id="1_bu73s"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="2_8v7gp"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://d1ajssj74v5bx" path="res://Scripts/Entity/Enemies/Arrowfish/States/Chase.gd" id="8_gf7n5"]
 [ext_resource type="Script" uid="uid://ba4u3jj7atg1n" path="res://Scripts/Entity/Enemies/Arrowfish/States/Escape.gd" id="9_h5wab"]
 [ext_resource type="Script" uid="uid://crynjoiy8hntp" path="res://Scripts/Entity/Enemies/UniversalStates/Dead.gd" id="11_oel4a"]
+[ext_resource type="Texture2D" uid="uid://qkv2iqdb2b7b" path="res://Assets/Art/Entity/ArrowFish.png" id="13_hduy5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bsgvg"]
 radius = 25.0
@@ -72,10 +73,6 @@ shape = SubResource("CircleShape2D_oel4a")
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_line_width = 1.0
 
-[node name="Sprite" type="Polygon2D" parent="."]
-color = Color(0.924393, 0.567753, 0.919931, 1)
-polygon = PackedVector2Array(-39, 27, -41, -37, 0, -21, 49, -36, 201, -1, 50, 24, 0, 6)
-
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("4_yojgw")
 starting_state = NodePath("Wander")
@@ -109,3 +106,8 @@ wander_state = NodePath("../Wander")
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("11_oel4a")
 metadata/_custom_type_script = "uid://ra88gjbxjc11"
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(69, 1.00035)
+scale = Vector2(-0.0272223, 0.0272223)
+texture = ExtResource("13_hduy5")

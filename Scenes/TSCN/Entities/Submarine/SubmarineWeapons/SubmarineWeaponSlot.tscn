@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0usjl34t3ctm"]
+
+[ext_resource type="Script" uid="uid://dxlkbqcv2x2hh" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineWeaponSlot.gd" id="1_deeik"]
+
+[node name="SubmarineWeaponSlot" type="Node2D"]
+script = ExtResource("1_deeik")
