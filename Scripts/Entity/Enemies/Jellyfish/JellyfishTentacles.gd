@@ -52,6 +52,11 @@ func _ready() -> void:
 		new_line.smoothing_on = true
 		new_line.default_color = tentacle_data.color
 		
+		# There's a weird bug with lines glowing, turn the brightness down
+		new_line.modulate.r *= 0.5
+		new_line.modulate.g *= 0.5
+		new_line.modulate.b *= 0.5
+		
 		new_rope.add_child(new_line)
 		new_rope.rope_drawer = new_line
 		

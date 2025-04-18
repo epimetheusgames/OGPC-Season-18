@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=54 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://nn7jp07uetnh" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://dl6v2p1fxvitc" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
-[ext_resource type="Script" uid="uid://cfcc8wf5m0kgj" path="res://Scripts/Entity/NPC/PlayerFollowerDummy.gd" id="9_soyuq"]
+[ext_resource type="Script" path="res://Scripts/Entity/NPC/PlayerFollowerDummy.gd" id="9_soyuq"]
 [ext_resource type="Script" uid="uid://dau0csslipmpi" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="10_qg316"]
@@ -55,6 +55,9 @@ sellable_resource = false
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d3kj"]
 radius = 51.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eo78x"]
+light_mode = 1
 
 [sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_v7jax"]
 execution_mode = 1
@@ -162,8 +165,7 @@ radius = 25.0
 height = 110.0
 
 [sub_resource type="Gradient" id="Gradient_eo78x"]
-offsets = PackedFloat32Array(0, 0.675781, 1)
-colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0.0745098, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0.36, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_chbw5"]
 gradient = SubResource("Gradient_eo78x")
@@ -171,22 +173,9 @@ width = 1000
 height = 1000
 fill = 1
 fill_from = Vector2(0.5, 0.527778)
-fill_to = Vector2(0.846154, 0.865385)
-
-[sub_resource type="Gradient" id="Gradient_in7v8"]
-offsets = PackedFloat32Array(0, 0.675781, 1)
-colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0.0745098, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_iyvmc"]
-gradient = SubResource("Gradient_in7v8")
-width = 1000
-height = 1000
-fill = 1
-fill_from = Vector2(0.5, 0.527778)
-fill_to = Vector2(0.846154, 0.865385)
+fill_to = Vector2(0.692308, 0.732906)
 
 [node name="Diver" type="CharacterBody2D" node_paths=PackedStringArray("camera", "follower")]
-modulate = Color(3, 3, 3, 1)
 motion_mode = 1
 script = ExtResource("1_1l6ma")
 diver_scene = SubResource("Resource_fmqh5")
@@ -240,7 +229,6 @@ follow_distance = 200.0
 metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
 [node name="Animation" type="Node2D" parent="." node_paths=PackedStringArray("left_raycast", "right_raycast")]
-use_parent_material = true
 script = ExtResource("3_k6pml")
 left_raycast = NodePath("LegRaycasts/Left")
 right_raycast = NodePath("LegRaycasts/Right")
@@ -259,7 +247,7 @@ target_position = Vector2(0, 150)
 
 [node name="Polygons" type="Node2D" parent="Animation"]
 texture_filter = 1
-use_parent_material = true
+material = SubResource("CanvasItemMaterial_eo78x")
 metadata/_edit_lock_ = true
 
 [node name="UpperArm2" type="Polygon2D" parent="Animation/Polygons"]
@@ -392,8 +380,8 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="AirTank" type="Sprite2D" parent="Animation/Polygons"]
-visible = false
 modulate = Color(0.549553, 0.549553, 0.549553, 1)
+use_parent_material = true
 position = Vector2(-23, -28)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_do014")
@@ -673,50 +661,22 @@ metadata/_edit_lock_ = true
 position = Vector2(7, -65)
 scale = Vector2(1.5, 1.5)
 color = Color(0.35, 0.35, 0.35, 1)
-energy = 11.04
+energy = 8.0
 range_item_cull_mask = 3
 shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 3.1
+shadow_filter = 2
+shadow_filter_smooth = 1.0
 texture = ExtResource("10_qg316")
 texture_scale = 0.8
 metadata/_edit_lock_ = true
 
-[node name="FlashLightSoft" type="PointLight2D" parent="Light/Flashlight"]
-color = Color(0.237539, 0.237539, 0.237539, 1)
-energy = 1.2
-range_item_cull_mask = 3
-shadow_filter = 1
-shadow_filter_smooth = 3.1
-texture = ExtResource("10_qg316")
-texture_scale = 0.7
-metadata/_edit_lock_ = true
-
-[node name="LightArea" type="Area2D" parent="Light/Flashlight"]
-scale = Vector2(0.666667, 0.666667)
-collision_layer = 4
-collision_mask = 0
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light/Flashlight/LightArea"]
-visible = false
-polygon = PackedVector2Array(1, -2, 361, -643, 126, -681, -93, -682, -315, -617)
-metadata/_edit_lock_ = true
-
 [node name="BodyLight" type="PointLight2D" parent="Light"]
-energy = 0.3
+energy = 3.0
 range_item_cull_mask = 3
 shadow_enabled = true
 shadow_filter = 2
+shadow_filter_smooth = 1.0
 texture = SubResource("GradientTexture2D_chbw5")
-texture_scale = 0.7
-metadata/_edit_lock_ = true
-
-[node name="BodyLightSoft" type="PointLight2D" parent="Light/BodyLight"]
-energy = 0.2
-range_item_cull_mask = 3
-shadow_filter = 1
-texture = SubResource("GradientTexture2D_iyvmc")
 texture_scale = 0.7
 metadata/_edit_lock_ = true
 
@@ -729,6 +689,14 @@ max_buoyancy_vel = 10.0
 component_container = NodePath("..")
 
 [node name="Camera" type="Camera2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -227.0
+offset_top = -189.0
+offset_right = 207.0
+offset_bottom = 156.0
+color = Color(0.268398, 0.268398, 0.268398, 1)
 
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
 [connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Movement" method="_on_general_detection_box_area_entered"]
