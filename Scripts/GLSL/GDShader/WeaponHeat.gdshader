@@ -1,7 +1,6 @@
 shader_type canvas_item;
 
-uniform sampler2D gun_texture; // The gun's texture
-uniform sampler2D gradient_tex;              // The gradient texture for the heat effect
+uniform sampler2D gradient_texture; // The gradient texture for the heat effect
 
 // How strongly the gradient tints the gun (0 = no tint, 1 = full tint)
 uniform float blend_strength : hint_range(0.0, 1.0) = 1.0;
@@ -11,34 +10,24 @@ uniform bool vertical_gradient = true;
 
 uniform float heat = 0.0;
 
-// Moves heat gradient threshold
-uniform float threshold = 0.3;
+uniform float max_heat = 100.0;
+
+// Maximum gradient shift from the minimum
+uniform float pixel_shift_range = 100.0;
+
+// Minimum gradient shift caused by heat
+uniform float min_pixel_shift = -95.0;
 
 void fragment() {
-    // Sample the gun texture normally using UV coordinates.
-    vec4 base_color = texture(gun_texture, UV);
-
-    // If the pixel is effectively transparent, keep it that way.
-    if (base_color.a < 0.01) {
-        discard;
-    }
-
-    // Compute the animated coordinate
-    float gradient_coord = (vertical_gradient ? UV.y : UV.x) - (.003 * heat) + threshold;
-
-    // Wrap the coordinate so it loops when it goes past 1.0.
-    gradient_coord = clamp(gradient_coord, 0.0, 1.0);
-
-    // Sample the gradient texture.
-    // (If your gradient texture is 1D-like, sample along the x-axis, with y fixed to 0.0)
-    vec4 grad_color = texture(gradient_tex, vec2(gradient_coord, 0.0));
-
-    // Blend the gun's base color with the gradient effect.
-    // Here, multiplying the base color by the gradient color gives a tinted effect.
-    vec4 tinted_color = vec4(
-        mix(base_color.rgb, base_color.rgb * grad_color.rgb, blend_strength),
-        base_color.a
-    );
-
-    COLOR = tinted_color;
+	// Base texture pixel
+	vec4 base_texture_pixel = texture(TEXTURE, UV);
+	
+	vec2 gradient_coords = vec2(clamp(UV.x - (min_pixel_shift + (heat / max_heat)*pixel_shift_range)/float(textureSize(TEXTURE, 0).x), 0.0, 1.0), UV.y);
+	
+	// Gradient texture pixel
+	vec4 gradient_texture_pixel = texture(gradient_texture, gradient_coords);
+	
+	vec4 tinted_color = vec4(mix(base_texture_pixel.rgb, base_texture_pixel.rgb * gradient_texture_pixel.rgb, blend_strength), base_texture_pixel.a);
+	COLOR = tinted_color;
+	
 }
