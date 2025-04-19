@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=17 format=3 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/Enemies/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/Enemies/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dsihl1750cku6" path="res://Assets/Art/Entity/JellyFishBell.png" id="8_7y3es"]
 [ext_resource type="Script" uid="uid://l2gvhd65hxtl" path="res://Scripts/Entity/Enemies/Jellyfish/States/Boost.gd" id="9_i2om7"]
 [ext_resource type="Script" uid="uid://itsqohytpwm2" path="res://Scripts/Entity/Enemies/Jellyfish/States/Spin.gd" id="11_i2om7"]
+[ext_resource type="Texture2D" uid="uid://cpr5p62p2pwcg" path="res://Assets/Art/Entity/JellyFishBellGlow.png" id="12_nxkv1"]
+[ext_resource type="Script" uid="uid://frjt5conmasl" path="res://Glow.gd" id="13_e3uxy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_05v0o"]
 radius = 35.0
@@ -104,3 +106,9 @@ spin_state = NodePath("../Spin")
 script = ExtResource("11_i2om7")
 wander_state = NodePath("../Wander")
 boost_state = NodePath("../Boost")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(4.76837e-07, -56)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("12_nxkv1")
+script = ExtResource("13_e3uxy")

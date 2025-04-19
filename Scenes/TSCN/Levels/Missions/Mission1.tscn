@@ -435,7 +435,7 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
-position = Vector2(-3339, 2546)
+position = Vector2(-1725, 2251)
 uid = SubResource("Resource_vfal8")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
@@ -616,10 +616,10 @@ position = Vector2(2207, 2456)
 position = Vector2(-2445, 2011)
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -16813.0
-offset_top = -3020.0
-offset_right = 30038.0
-offset_bottom = 18160.0
+offset_left = -16766.0
+offset_top = -2999.0
+offset_right = 30085.0
+offset_bottom = 18181.0
 color = Color(0.0312209, 0.0673709, 0.274788, 1)
 
 [node name="ParallaxLayer" type="ParallaxBackground" parent="."]
