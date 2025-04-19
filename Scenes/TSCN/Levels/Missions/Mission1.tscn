@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=62 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
@@ -22,12 +22,8 @@
 [ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
-[ext_resource type="Script" uid="uid://2vvi3dga7td1" path="res://Scripts/Level/VignetteShaderManager.gd" id="23_npnyn"]
-[ext_resource type="Shader" uid="uid://cdyuhcdqlxumk" path="res://Scripts/GLSL/GDShader/Screen/Vignette.gdshader" id="23_r7jln"]
 [ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.tscn" id="27_3fu4r"]
-[ext_resource type="Shader" uid="uid://7mjleihpyy3x" path="res://Scripts/GLSL/GDShader/Screen/Pixelize.gdshader" id="28_oeu54"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
-[ext_resource type="Shader" uid="uid://cgotkxkod1mlf" path="res://Scripts/GLSL/GDShader/Screen/Posterize.gdshader" id="29_g0sdt"]
 [ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="30_ec8ks"]
 [ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
@@ -238,23 +234,6 @@ probability = 2
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gnvk0"]
 viewport_path = NodePath("ParticlesViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_alu57"]
-shader = ExtResource("29_g0sdt")
-shader_parameter/posterization_level = 7.114
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g5871"]
-shader = ExtResource("28_oeu54")
-shader_parameter/SCREEN_SIZE = Vector2(1920, 1080)
-shader_parameter/pixelization_level = 4.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cr65h"]
-shader = ExtResource("23_r7jln")
-shader_parameter/inner_radius = 0.1
-shader_parameter/outer_radius = 1.0
-shader_parameter/vignette_strength = 0.6
-shader_parameter/dither_strength = 0.03
-shader_parameter/vignette_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_dsxlw"]
 colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
@@ -659,54 +638,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.6, 0.6)
 texture = SubResource("ViewportTexture_gnvk0")
-
-[node name="ShadersLayer" type="CanvasLayer" parent="."]
-
-[node name="Quantize" type="BackBufferCopy" parent="ShadersLayer"]
-visible = false
-rect = Rect2(0, 0, 1920, 1080)
-metadata/_edit_lock_ = true
-
-[node name="ColorRect" type="ColorRect" parent="ShadersLayer/Quantize"]
-material = SubResource("ShaderMaterial_alu57")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_lock_ = true
-
-[node name="Pixelize" type="BackBufferCopy" parent="ShadersLayer"]
-visible = false
-rect = Rect2(0, 0, 1920, 1080)
-metadata/_edit_lock_ = true
-
-[node name="ColorRect" type="ColorRect" parent="ShadersLayer/Pixelize"]
-material = SubResource("ShaderMaterial_g5871")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 44.0
-offset_right = 1.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_lock_ = true
-
-[node name="Vignette" type="BackBufferCopy" parent="ShadersLayer"]
-rect = Rect2(0, 0, 1920, 1080)
-script = ExtResource("23_npnyn")
-metadata/_edit_lock_ = true
-
-[node name="ColorRect" type="ColorRect" parent="ShadersLayer/Vignette"]
-material = SubResource("ShaderMaterial_cr65h")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3
