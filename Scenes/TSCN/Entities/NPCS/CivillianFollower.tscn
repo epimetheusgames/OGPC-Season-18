@@ -398,7 +398,6 @@ occluder_light_mask = 2
 use_parent_material = true
 position = Vector2(9, -49)
 rotation = -0.155843
-scale = Vector2(1, 1)
 rest = Transform2D(0.964522, -0.264003, 0.264003, 0.964522, 18, -55)
 auto_calculate_length_and_angle = false
 length = 38.2
