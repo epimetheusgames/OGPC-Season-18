@@ -30,5 +30,5 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 	velocity = submarine_movement.get_velocity()
-	if Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+	if Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
 		Global.player.global_transform = seat_pos.global_transform

@@ -1,8 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=36 format=3 uid="uid://5g1k55gpynrt"]
 
-[ext_resource type="Script" uid="uid://nn7jp07uetnh" path="res://Scripts/Entity/Diver/Diver.gd" id="1_1l6ma"]
+[ext_resource type="Script" uid="uid://b2s21mlnq8264" path="res://Scripts/Entity/Diver/Diver.gd" id="1_soyuq"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
-[ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="2_sa7rx"]
 [ext_resource type="Script" uid="uid://cqnwbqciaog6v" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
 [ext_resource type="Script" uid="uid://1laqql4gx1r2" path="res://Scripts/Entity/Diver/DiverInventory.gd" id="3_r5rx4"]
 [ext_resource type="Script" uid="uid://cdrx7funwnj4w" path="res://Scripts/ResourceScripts/Misc/InventoryItem.gd" id="4_7u6dt"]
@@ -21,15 +20,7 @@
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
-
-[sub_resource type="Resource" id="Resource_fmqh5"]
-script = ExtResource("6_3bvk2")
-file = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
-
-[sub_resource type="Resource" id="Resource_175vb"]
-resource_local_to_scene = true
-script = ExtResource("2_sa7rx")
-uid = 3625
+[ext_resource type="Script" uid="uid://dw54av5q4enf2" path="res://Scripts/Objects/Camera.gd" id="21_soyuq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 24.0
@@ -109,13 +100,10 @@ fill = 1
 fill_from = Vector2(0.5, 0.527778)
 fill_to = Vector2(0.692308, 0.732906)
 
-[node name="Diver" type="CharacterBody2D" node_paths=PackedStringArray("camera", "follower")]
+[node name="Diver" type="CharacterBody2D" node_paths=PackedStringArray("camera")]
 motion_mode = 1
-script = ExtResource("1_1l6ma")
-diver_scene = SubResource("Resource_fmqh5")
+script = ExtResource("1_soyuq")
 camera = NodePath("Camera2D")
-follower = NodePath("Movement/CivillianFollower")
-uid = SubResource("Resource_175vb")
 
 [node name="Body" type="CollisionShape2D" parent="."]
 visible = false
@@ -486,6 +474,9 @@ texture = SubResource("GradientTexture2D_chbw5")
 texture_scale = 0.7
 metadata/_edit_lock_ = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("21_soyuq")
+
 [node name="BuoyancyComponent" type="Node" parent="." node_paths=PackedStringArray("center_of_mass")]
 script = ExtResource("13_arg6r")
 center_of_mass = NodePath("..")
@@ -493,8 +484,6 @@ gravity = 20
 buoyancy_accel = 1.0
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
 [connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Movement" method="_on_general_detection_box_area_entered"]

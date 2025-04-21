@@ -4,15 +4,6 @@ class_name Util
 
 # -- Enums --
 
-## Higher level diver state.
-enum DiverState {
-	SWIMMING,
-	IN_SUBMARINE,
-	DRIVING_SUBMARINE,
-	OPERATING_MODULE,
-	IN_GRAVITY_AREA,
-}
-
 ## The success type this msision requires (used in a chain)
 enum MissionSuccessType {
 	ACQUIRE_ITEM, 

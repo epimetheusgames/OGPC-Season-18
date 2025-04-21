@@ -4,45 +4,31 @@
 class_name Diver
 extends Entity
 
-## General state of the diver. In the future substates should be implemented.
-var diver_state: Util.DiverState
+enum DiverState {
+	SWIMMING,
+	IN_SUBMARINE,
+	DRIVING_SUBMARINE,
+	OPERATING_MODULE,
+	IN_GRAVITY_AREA,
+}
+
+var diver_state: DiverState
  
-## Node that handles movement.
 @onready var diver_movement: DiverMovement = $"Movement"
-
-## Node that handles skeletal animations.
 @onready var diver_animation: DiverAnimation = $"Animation"
-
-## Node that handles combat and combat animations.
 @onready var diver_combat: DiverCombat = $"Combat"
+@onready var diver_flashlight: DiverFlashlight = $"Light"  # Shouldn't be a node probably.
+@onready var diver_inventory: DiverInventory = $"Inventory"  # Handles diver's inventory "backend".
+@onready var diver_stats: DiverStats = $"Stats"  # Handles health, oxygen, etc.
 
-## Handles the flashlight, shouldn't be a node probably.
-@onready var diver_flashlight: DiverFlashlight = $"Light"
-
-## Handles diver's inventory "backend".
-@onready var diver_inventory: DiverInventory = $"Inventory"
-
-## Handles health, oxygen, etc.
-@onready var diver_stats: DiverStats = $"Stats"
-
-## The polygon attached to the waves (the probably don't exist because Kai is mean)
-@onready var water_polygon: Polygon2D = water_manager.get_children()[0] if water_manager else null
-@onready var saveable_timer := get_tree().create_timer(0.5)
-
-## FilePath of the diver.
-@export var diver_scene: FilePathResource
-
-## Waves root.
-@export var water_manager: Node2D
-
-## The camera.
 @export var camera: Camera2D
 
-## Bubbles paralax.
-@export var parallax: ParallaxBackground
+@export var diver_scene: FilePathResource  # FilePath of the diver ??
 
-## Turns on and off diver movement. I'm not sure if this is really used.
-@export var no_movement := false
+
+@export var parallax: ParallaxBackground  #  ???
+
+@export var no_movement := false  # ???
 
 ## The amount of oxygen percentage lost every frame.
 @export var oxygen_loss := 0.01
@@ -59,7 +45,7 @@ func _ready() -> void:
 	if Global.godot_steam_abstraction && node_owner == 0 && !Global.godot_steam_abstraction.is_lobby_owner:
 		node_owner = Global.godot_steam_abstraction.steam_id
 	
-	set_state(Util.DiverState.SWIMMING)
+	set_state(DiverState.SWIMMING)
 	
 	# When instantiated this is probably going to be the default player.
 	if !Global.is_multiplayer || _is_node_owner():
@@ -67,17 +53,10 @@ func _ready() -> void:
 	
 	Global.player_array.append(self)
 	
-	$BuoyancyComponent.waves = water_manager
-	
 	diver_movement.boosted.connect(_boost)
 	
 	if Global.save_load_framework:
 		Global.save_load_framework.save_nodes.connect(_save)
-	
-	if !(Global.is_multiplayer && Global.godot_steam_abstraction && !_is_node_owner()):
-		camera.enabled = true
-	else:
-		camera.enabled = false
 
 
 func _process(delta: float) -> void:
@@ -89,17 +68,33 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float):
 	diver_stats.oxygen_loss = oxygen_loss
 	
-	if get_state() == Util.DiverState.IN_GRAVITY_AREA:
+	if get_state() == DiverState.IN_GRAVITY_AREA:
 		$Body.disabled = true
 		$LargeBody.disabled = false
 	else:
 		$Body.disabled = false
 		$LargeBody.disabled = true
 	
-	if get_state() == Util.DiverState.IN_SUBMARINE || get_state() == Util.DiverState.DRIVING_SUBMARINE:
+	if get_state() == DiverState.IN_SUBMARINE || get_state() == DiverState.DRIVING_SUBMARINE:
 		z_index = 21
 	else:
 		z_index = 20
+	
+	
+	# Camera
+	if !(Global.is_multiplayer && Global.godot_steam_abstraction && 	_is_node_owner()):
+		camera.enabled = true
+	else:
+		camera.enabled = false
+	
+	if diver_animation.in_unlock_terminal_area:
+		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2(3, 3), 0.2, _delta)
+		camera.global_position = Util.better_vec2_lerp(camera.global_position, Global.research_station.unlock_terminal.global_position, 0.1, _delta)
+		Global.current_mission_node.get_node("UILayer").visible = false
+	else:
+		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2.ONE, 0.2, _delta)
+		camera.position = Util.better_vec2_lerp(camera.position, Vector2.ZERO, 0.1, _delta)
+		Global.current_mission_node.get_node("UILayer").visible = true
 	
 	if camera && parallax:
 		parallax.scroll_base_offset.y += 100
@@ -164,12 +159,12 @@ func _save() -> void:
 
 # Update player velocity and rotation.
 func _update_vel_rot() -> void:
-	if get_state() == Util.DiverState.DRIVING_SUBMARINE:
+	if get_state() == DiverState.DRIVING_SUBMARINE:
 		return
 		
 	velocity = diver_movement.get_velocity()
 	
-	if get_state() == Util.DiverState.IN_GRAVITY_AREA:
+	if get_state() == DiverState.IN_GRAVITY_AREA:
 		return
 	
 	var target_angle: float = velocity.angle() + PI/2
@@ -184,11 +179,11 @@ func _boost() -> void:
 # --- SETTERS AND GETTERS --- 
 
 # Gets general diver state.
-func get_state() -> Util.DiverState:
+func get_state() -> DiverState:
 	return diver_state
 
 # Sets general diver state.
-func set_state(state : Util.DiverState) -> void:
+func set_state(state : DiverState) -> void:
 	diver_state = state
 
 # Gets the diver username if the game is in multiplayer mode.

@@ -8,8 +8,12 @@ extends Node2D
 
 @onready var jellyfish: Jellyfish = get_parent()
 @onready var attackbox_polygon: CollisionPolygon2D = $"ContinuousAttack/CollisionPolygon2D"
+@onready var glow_ball: PointLight2D = $"GlowBall"  # I couldn't think of a better name ;(
 
 var ropes: Array[VerletRope] = []
+var glow_balls1: Array[PointLight2D] = []
+var glow_balls2: Array[PointLight2D] = []
+var glow_balls3: Array[PointLight2D] = []
 
 func _ready() -> void:
 	for i in range(tentacle_data.amount):
@@ -57,10 +61,27 @@ func _ready() -> void:
 		new_line.modulate.g *= 0.5
 		new_line.modulate.b *= 0.5
 		
+		new_line.z_index = 1000
+		
 		new_rope.add_child(new_line)
 		new_rope.rope_drawer = new_line
 		
 		new_rope.start_anchor_node = new_tentacle_anchor
+		
+		# GLOW BALL
+		var gl_1 = glow_ball.duplicate()
+		add_child(gl_1)
+		glow_balls1.append(gl_1)
+		
+		var gl_2 = glow_ball.duplicate()
+		add_child(gl_2)
+		glow_balls2.append(gl_2)
+		
+		var gl_3 = glow_ball.duplicate()
+		add_child(gl_3)
+		glow_balls3.append(gl_3)
+	
+	glow_ball.queue_free()
 
 
 func _physics_process(delta: float) -> void:
@@ -77,6 +98,11 @@ func _physics_process(delta: float) -> void:
 	
 	attackbox_polygon.global_rotation = 0.0
 	attackbox_polygon.polygon = [p1, p2, p4, p3]
+	
+	for i in range(ropes.size()):
+		glow_balls1[i].global_position = ropes[i].points[2]
+		glow_balls2[i].global_position = ropes[i].points[6]
+		glow_balls3[i].global_position = ropes[i].points[11]
 
 
 func tentacles_up(speed: float) -> void:

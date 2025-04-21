@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=19 format=3 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/Enemies/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/Enemies/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
@@ -29,6 +29,16 @@ thickness = 5.0
 amount = 6
 bottom_width = 200.0
 metadata/_custom_type_script = "uid://cmyaowe8fevss"
+
+[sub_resource type="Gradient" id="Gradient_e3uxy"]
+offsets = PackedFloat32Array(0, 0.293103, 0.773399, 0.884236, 1)
+colors = PackedColorArray(100, 100, 100, 1, 85.2359, 85.2359, 85.2359, 0.843949, 5.389, 5.389, 5.389, 0, 3.24221, 3.24221, 3.24221, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_miqq8"]
+gradient = SubResource("Gradient_e3uxy")
+fill = 1
+fill_from = Vector2(0.529915, 0.512821)
+fill_to = Vector2(0.901709, 0.538462)
 
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov", "state_machine")]
 motion_mode = 1
@@ -66,6 +76,12 @@ scale = Vector2(3.5, 3.5)
 texture = ExtResource("8_7y3es")
 metadata/_edit_lock_ = true
 
+[node name="Glow" type="PointLight2D" parent="JellyfishBell"]
+position = Vector2(1.36239e-07, 0)
+scale = Vector2(1, 1)
+texture = ExtResource("12_nxkv1")
+script = ExtResource("13_e3uxy")
+
 [node name="Tentacles" type="Node2D" parent="."]
 script = ExtResource("2_7lbwn")
 tentacle_data = SubResource("Resource_546cb")
@@ -81,6 +97,10 @@ metadata/_edit_lock_ = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tentacles/ContinuousAttack"]
 polygon = PackedVector2Array(-100, 3, -100, 300, 100, 300, 100, 3)
 metadata/_edit_lock_ = true
+
+[node name="GlowBall" type="PointLight2D" parent="Tentacles"]
+texture = SubResource("GradientTexture2D_miqq8")
+script = ExtResource("13_e3uxy")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
@@ -106,9 +126,3 @@ spin_state = NodePath("../Spin")
 script = ExtResource("11_i2om7")
 wander_state = NodePath("../Wander")
 boost_state = NodePath("../Boost")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(4.76837e-07, -56)
-scale = Vector2(3.5, 3.5)
-texture = ExtResource("12_nxkv1")
-script = ExtResource("13_e3uxy")

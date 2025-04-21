@@ -29,7 +29,6 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-
 func boost(speed: float, duration: float, target_pos: Vector2):
 	boost_speed = speed
 	boost_duration = duration

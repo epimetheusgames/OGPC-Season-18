@@ -1,6 +1,5 @@
-[gd_scene load_steps=62 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=61 format=3 uid="uid://dh0cluhw5hbar"]
 
-[ext_resource type="PackedScene" uid="uid://c82fjb0hbad0q" path="res://Scenes/TSCN/UI/DevPanel.tscn" id="1_6r47m"]
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
 [ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="2_3svaj"]
@@ -194,7 +193,7 @@ polygon = PackedVector2Array(-6566, -385, -6543, 320, -6500, 365, -6403, 393, -6
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdf5b"]
 size = Vector2(35708.5, 724)
 
-[sub_resource type="Resource" id="Resource_vfal8"]
+[sub_resource type="Resource" id="Resource_kali0"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -414,8 +413,8 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
-position = Vector2(-1725, 2251)
-uid = SubResource("Resource_vfal8")
+position = Vector2(-3325, 2568)
+uid = SubResource("Resource_kali0")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
 position = Vector2(-1292, 557)
@@ -641,13 +640,6 @@ texture = SubResource("ViewportTexture_gnvk0")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3
-
-[node name="DevPanel" parent="UILayer" instance=ExtResource("1_6r47m")]
-visible = false
-offset_left = 136.0
-offset_top = 179.0
-offset_right = 136.0
-offset_bottom = 179.0
 
 [node name="IngameUI" parent="UILayer" instance=ExtResource("29_54jb5")]
 metadata/_edit_lock_ = true

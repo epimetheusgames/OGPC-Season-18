@@ -15,6 +15,8 @@ var is_in_gravity_area := false
 var spawned_in_research_station := false
 var is_in_research_station := true
 
+@onready var saveable_timer := get_tree().create_timer(0.5)
+
 @onready var diver: Diver = get_parent()
 @export var use_mouse_movement := false
 @export var gravity := 1.0
@@ -23,10 +25,10 @@ var is_in_research_station := true
 signal boosted
 
 func _physics_process(delta: float) -> void:
-	if (Global.is_multiplayer && !diver._is_node_owner()) || diver.get_state() == Util.DiverState.DRIVING_SUBMARINE || diver.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+	if (Global.is_multiplayer && !diver._is_node_owner()) || diver.get_state() == Diver.DiverState.DRIVING_SUBMARINE || diver.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
 		return
 	
-	if diver.get_state() == Util.DiverState.IN_GRAVITY_AREA or diver.get_state() == Util.DiverState.IN_SUBMARINE:
+	if diver.get_state() == Diver.DiverState.IN_GRAVITY_AREA or diver.get_state() == Diver.DiverState.IN_SUBMARINE:
 		input_vector = get_walking_input_vector()
 	else:
 		input_vector = get_input_vector()
@@ -111,12 +113,12 @@ func get_current_angle() -> float:
 
 func _on_general_detection_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("gravity_areas"):
-		diver.set_state(Util.DiverState.IN_GRAVITY_AREA)
+		diver.set_state(Diver.DiverState.IN_GRAVITY_AREA)
 		is_in_gravity_area = true
 	if area.is_in_group("submarine_area"):
-		diver.set_state(Util.DiverState.IN_SUBMARINE)
+		diver.set_state(Diver.DiverState.IN_SUBMARINE)
 		is_in_gravity_area = true
-	if area.is_in_group("research_station_area") && Global.godot_steam_abstraction && diver.saveable_timer.time_left <= 0:
+	if area.is_in_group("research_station_area") && Global.godot_steam_abstraction && saveable_timer.time_left <= 0:
 		is_in_research_station = true
 		if spawned_in_research_station:
 			Global.save_load_framework.save_state()
@@ -125,7 +127,7 @@ func _on_general_detection_box_area_entered(area: Area2D) -> void:
 
 func _on_general_detection_box_area_exited(area: Area2D) -> void:
 	if area.is_in_group("gravity_areas") or area.is_in_group("submarine_area"):
-		diver.set_state(Util.DiverState.SWIMMING)
+		diver.set_state(Diver.DiverState.SWIMMING)
 		is_in_gravity_area = false
 	if area.is_in_group("research_station_area"):
 		is_in_research_station = false

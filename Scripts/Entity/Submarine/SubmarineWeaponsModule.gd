@@ -23,16 +23,16 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("interact"):
-		if Global.player.get_state() != Util.DiverState.OPERATING_MODULE and in_interaction_area: 
-			Global.player.set_state(Util.DiverState.OPERATING_MODULE)
+		if Global.player.get_state() != Diver.DiverState.OPERATING_MODULE and in_interaction_area: 
+			Global.player.set_state(Diver.DiverState.OPERATING_MODULE)
 			is_being_operated = true
 			attached_weapon.is_being_operated = true
-		elif Global.player.get_state() == Util.DiverState.OPERATING_MODULE:
-			Global.player.set_state(Util.DiverState.IN_SUBMARINE)
+		elif Global.player.get_state() == Diver.DiverState.OPERATING_MODULE:
+			Global.player.set_state(Diver.DiverState.IN_SUBMARINE)
 			is_being_operated = false
 			attached_weapon.is_being_operated = false
 	
-	if is_being_operated && Global.player.get_state() == Util.DiverState.OPERATING_MODULE:
+	if is_being_operated && Global.player.get_state() == Diver.DiverState.OPERATING_MODULE:
 		Global.player.global_transform = global_transform
 
 func _on_interaction_area_area_entered(area: Area2D) -> void:
