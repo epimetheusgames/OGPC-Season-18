@@ -6,6 +6,8 @@ extends Node2D
 ## Root node of the whole game
 var root_node: Node
 
+## Brightness percentage, in decimal form 
+var  brightness_decimal: int = 1
 ## Save load framework node, constant.
 var save_load_framework: SaveLoadFramework
 
@@ -84,6 +86,8 @@ var research_station: ResearchStation
 ## Ingame canvas modulate used for lighting (time of day)
 var canvas_modulate: CanvasModulate
 
+## Canvas modulate used to change the brightness of the game depending on whats set in settings
+var brightness_modulate: CanvasModulate
 ## The light that acts as the sun.
 var sun: DirectionalLight2D
 
@@ -167,3 +171,10 @@ func is_multiplayer_host() -> bool:
 	if godot_steam_abstraction:
 		return godot_steam_abstraction.is_lobby_owner
 	return false
+
+## Set game brightness throuhg brightness modulate, based on percentage from 0 to 100
+func set_brightness(percentage):
+	brightness_decimal = percentage/100
+	brightness_modulate.color.r = 255*brightness_decimal
+	brightness_modulate.color.g = 255*brightness_decimal
+	brightness_modulate.color.b = 255*brightness_decimal
