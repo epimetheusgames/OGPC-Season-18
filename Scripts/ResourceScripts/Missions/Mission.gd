@@ -2,6 +2,7 @@
 class_name Mission
 extends Resource
 
+@export var total_civillians_saved_to_complete := 0
 @export var mission_filepath: FilePathResource
 @export var title: String
 @export var description: String

@@ -87,6 +87,10 @@ var canvas_modulate: CanvasModulate
 ## The light that acts as the sun.
 var sun: DirectionalLight2D
 
+var death_menu: DeathScreen
+var success_menu: MissionSuccessScreen
+var pause_menu: PauseMenu
+
 ## Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {
 	"General Collision": 1,

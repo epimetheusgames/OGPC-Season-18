@@ -42,8 +42,9 @@ sequence = Array[ExtResource("3_gp47f")]([SubResource("Resource_wrh2p"), SubReso
 
 [resource]
 script = ExtResource("2_4hp0o")
+total_civillians_saved_to_complete = 3
 mission_filepath = SubResource("Resource_mkq3y")
 title = "First mission"
-description = "Kill the Leviathan"
+description = "House three people"
 success_state_checker = SubResource("Resource_dft4t")
 unlocks = Array[ExtResource("1_d5g2i")]([])

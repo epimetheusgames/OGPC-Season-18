@@ -12,9 +12,13 @@ extends Entity
 var target_path_position: Vector2
 var going_to_building := false
 var is_in_gravity_area := false
+var followed_by: CivillianFollower
 
 func _ready() -> void:
-	position += Util.random_vector(Global.rng, 50, 0)
+	var skel: Skeleton2D = $AnimSkeleton/Skeleton
+	if skel:
+		skel.set_modification_stack(skel.get_modification_stack().duplicate(true))
+		position += Util.random_vector(Global.rng, 50, 0)
 	
 	if !detection_area:
 		Global.print_error("Follower at path " + str(get_path()) + " has no detection_area. Searching for one.")
@@ -28,6 +32,7 @@ func _ready() -> void:
 	
 	detection_area.area_entered.connect(_area_entered)
 	detection_area.area_exited.connect(_area_exited)
+	Global.game_time_system.day_ended.connect(_on_day_ended)
 	
 	while true:
 		await get_tree().create_timer(0.1).timeout
@@ -55,9 +60,11 @@ func _physics_process(delta: float) -> void:
 	
 	if going_to_building && global_position.distance_squared_to(following.global_position) < follow_distance ** 2:
 		var building: PlaceableBuilding = following.get_parent()
-		building.current_occupants += 1
-		Global.player.diver_stats.current_money += 50
-		queue_free()
+		if !building.current_occupants >= building.max_occupants && building.placed:
+			building.current_occupants += 1
+			Global.player.diver_stats.current_money += 15
+			Global.current_mission_node.total_saved_civillians += 1
+			queue_free()
 	
 	velocity = (target_path_position - global_position).normalized() * swim_speed
 	rotation = Util.better_angle_lerp(rotation, velocity.angle() + PI / 2.0, 0.1, delta)
@@ -72,7 +79,7 @@ func _physics_process(delta: float) -> void:
 
 ## Gets position the following civillian should navigate to, in global coordinates.
 func get_follow_position() -> Vector2:
-	return global_position
+	return global_position + Vector2.from_angle(rotation + PI / 2.0) * 300
 
 func _area_entered(area: Area2D) -> void:
 	if area.is_in_group("gravity_areas"):
@@ -97,11 +104,29 @@ func _area_entered(area: Area2D) -> void:
 	if following:
 		return
 
-	if area.is_in_group("civillian_area"):
+	if area.is_in_group("civillian_area") && !area.get_parent().followed_by:
+		var tester: CivillianFollower = area.get_parent().following
+		
+		# Prevent infinite loops by making sure chains lead back to the player.
+		while true:
+			if !tester:
+				return
+			if tester is PlayerFollowerDummy:
+				break
+			tester = tester.follower
+		
 		following = area.get_parent()
-	if area.is_in_group("player_area"):
+		area.get_parent().followed_by = self
+	if area.is_in_group("player_area") && !Global.player.follower.followed_by:
 		following = Global.player.follower
+		Global.player.follower.followed_by = self
 
 func _area_exited(area: Area2D) -> void:
 	if area.is_in_group("gravity_areas"):
 		is_in_gravity_area = false
+
+func _on_day_ended() -> void:
+	Global.death_menu.ingame_ui.visible = false
+	Global.death_menu.visible = true
+	Global.death_menu.title.text = "Mission Failed"
+	get_tree().paused = true

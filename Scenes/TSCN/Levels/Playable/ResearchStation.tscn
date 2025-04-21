@@ -118,26 +118,6 @@ zoom = Vector2(1.9, 1.9)
 script = ExtResource("2_e3xfe")
 metadata/_edit_lock_ = true
 
-[node name="MoveRightButton" type="Button" parent="Camera2D"]
-z_index = 15
-offset_left = 820.0
-offset_top = -45.0
-offset_right = 913.0
-offset_bottom = 54.0
-theme_override_font_sizes/font_size = 66
-text = ">"
-metadata/_edit_lock_ = true
-
-[node name="MoveLeftButton" type="Button" parent="Camera2D"]
-z_index = 15
-offset_left = -914.0
-offset_top = -41.0
-offset_right = -821.0
-offset_bottom = 58.0
-theme_override_font_sizes/font_size = 66
-text = "<"
-metadata/_edit_lock_ = true
-
 [node name="CameraPositions" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
@@ -277,8 +257,5 @@ set_default_onready = true
 [node name="RichTextLabel" type="RichTextLabel" parent="MinimalChat"]
 layout_mode = 2
 bbcode_enabled = true
-
-[connection signal="button_up" from="Camera2D/MoveRightButton" to="Camera2D" method="_on_move_right_button_button_up"]
-[connection signal="button_up" from="Camera2D/MoveLeftButton" to="Camera2D" method="_on_move_left_button_button_up"]
 
 [editable path="Waves"]

@@ -5,11 +5,14 @@ extends Control
 @export var ingame_ui: Control
 @export var vignette_shader: ColorRect
 
+func _ready() -> void:
+	Global.success_menu = self
+
 func _process(_delta: float) -> void:
-	if Global.current_mission && Global.current_mission.success_state_checker.check_success():
+	if Global.current_mission && Global.current_mission.success_state_checker.check_success() || \
+	   Global.current_mission_node.total_saved_civillians > Global.current_mission.total_civillians_saved_to_complete:
 		if Global.current_mission in Global.mission_system.mission_tree.get_available_missions():
 			Global.mission_system.complete_mission(Global.current_mission)
-		vignette_shader.material.set_shader_parameter("vignette_strength", 1.5)
 		ingame_ui.visible = false
 		get_tree().paused = true
 		visible = true

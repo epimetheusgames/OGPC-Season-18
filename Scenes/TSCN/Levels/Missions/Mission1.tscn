@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=63 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://vuyq5s7dknal" path="res://Assets/Art/Level/SandTexture.png" id="3_kali0"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
+[ext_resource type="AudioStream" uid="uid://cqn1ekjfcc0fx" path="res://Assets/Music/Sunlight.mp3" id="5_3fu4r"]
 [ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
+[ext_resource type="Texture2D" uid="uid://dyxe351do4ctp" path="res://Assets/Art/Level/WAFFLEHOUSE.png" id="6_mcejo"]
 [ext_resource type="Script" uid="uid://bthrd0wdm5ufn" path="res://Scripts/Level/ResearchStation.gd" id="12_jw53c"]
 [ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="12_kali0"]
 [ext_resource type="PackedScene" uid="uid://6ajyn7xeilmv" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="12_mcejo"]
@@ -193,7 +195,7 @@ polygon = PackedVector2Array(-6566, -385, -6543, 320, -6500, 365, -6403, 393, -6
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdf5b"]
 size = Vector2(35708.5, 724)
 
-[sub_resource type="Resource" id="Resource_kali0"]
+[sub_resource type="Resource" id="Resource_jw53c"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -271,7 +273,7 @@ script = ExtResource("1_314ux")
 canvas_modulate = NodePath("CanvasModulate")
 sun = NodePath("DirectionalLight2D")
 
-[node name="LocalGameTimeSaver" type="Node" parent="."]
+[node name="GlobalVariableSaver" type="Node" parent="."]
 script = ExtResource("2_mcejo")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -295,6 +297,17 @@ stream = ExtResource("2_8qye6")
 autoplay = true
 bus = &"Wind"
 parameters/looping = true
+
+[node name="Music" type="AudioStreamPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
+stream = ExtResource("5_3fu4r")
+volume_db = -80.0
+autoplay = true
+bus = &"Music"
+
+[node name="Wafflehouse" type="Sprite2D" parent="LevelContainer/Environment/EnvironmentEffects"]
+modulate = Color(0.687215, 0.687215, 0.687215, 1)
+position = Vector2(3126, 4420)
+texture = ExtResource("6_mcejo")
 
 [node name="ColorRect" type="ColorRect" parent="LevelContainer/Environment"]
 visible = false
@@ -414,7 +427,7 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
 position = Vector2(-3325, 2568)
-uid = SubResource("Resource_kali0")
+uid = SubResource("Resource_jw53c")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
 position = Vector2(-1292, 557)
@@ -564,7 +577,7 @@ color = Color(0.0943156, 0.129072, 0.171545, 1)
 
 [node name="UnlockTerminal" parent="LevelContainer/ResearchStation" instance=ExtResource("13_bdf5b")]
 z_index = 7
-position = Vector2(-4081, 2615)
+position = Vector2(-4062, 2624)
 scale = Vector2(0.8, 0.8)
 
 [node name="PointLight2D" type="PointLight2D" parent="LevelContainer/ResearchStation"]
@@ -676,13 +689,6 @@ texture = SubResource("GradientTexture2D_0nxag")
 lifetime = 5.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_hcosd")
-
-[node name="CivillianFollower" parent="." instance=ExtResource("13_gnr5v")]
-z_index = 52
-position = Vector2(-3539, 2524)
-
-[node name="Jellyfish" parent="." instance=ExtResource("16_cbdp8")]
-position = Vector2(-1326, 3040)
 
 [editable path="LevelContainer/Items/LightLine"]
 [editable path="UILayer/IngameUI"]
