@@ -41,7 +41,7 @@ func _process(_delta: float) -> void:
 		if weapon is Weapon && weapon.visible && !weapon == selected_weapon:
 			weapon.visible = false
 	
-	if diver.get_state() == Util.DiverState.IN_GRAVITY_AREA:
+	if diver.get_state() == Diver.DiverState.IN_GRAVITY_AREA:
 		visible = false
 	else:
 		visible = true

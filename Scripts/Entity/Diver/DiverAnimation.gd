@@ -98,7 +98,7 @@ func _process(delta: float) -> void:
 	arrow.global_rotation = diver.diver_movement.get_current_angle()
 	
 	# Legs
-	if diver.get_state() != Util.DiverState.IN_GRAVITY_AREA:
+	if diver.get_state() != Diver.DiverState.IN_GRAVITY_AREA:
 		leg_target1.global_position = _animate_leg(1, delta)
 		leg_target2.global_position = _animate_leg(2, delta)
 	else:
@@ -130,18 +130,7 @@ func _process(delta: float) -> void:
 		arm_target2.position = _animate_arm(2, delta)
 	else:
 		hand2_weapon_control = false
-	
-	# Camera
-	if in_unlock_terminal_area:
-		diver.camera.zoom = Util.better_vec2_lerp(diver.camera.zoom, Vector2(3, 3), 0.2, delta)
-		diver.camera.global_position = Util.better_vec2_lerp(diver.camera.global_position, Global.research_station.unlock_terminal.global_position, 0.1, delta)
-		Global.current_mission_node.get_node("ShadersLayer").visible = false
-		Global.current_mission_node.get_node("UILayer").visible = false
-	else:
-		diver.camera.zoom = Util.better_vec2_lerp(diver.camera.zoom, Vector2.ONE, 0.2, delta)
-		diver.camera.position = Util.better_vec2_lerp(diver.camera.position, Vector2.ZERO, 0.1, delta)
-		Global.current_mission_node.get_node("ShadersLayer").visible = true
-		Global.current_mission_node.get_node("UILayer").visible = true
+
 
 ## Animates one of the legs (leg = 1 or leg = 2) with the delta time.
 func _animate_leg(leg: int, delta: float) -> Vector2:

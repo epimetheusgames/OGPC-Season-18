@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl7oejcvhsgci"]
+
+[ext_resource type="Script" uid="uid://cwlxani8o4mm" path="res://Kelp/Kelp.gd" id="1_jrc13"]
+[ext_resource type="Script" uid="uid://baedw6bviawtd" path="res://Scripts/Components/Rope/FabrikRope.gd" id="2_yos12"]
+[ext_resource type="PackedScene" uid="uid://cdjlclue36iw6" path="res://Kelp/KelpSegment.tscn" id="2_yqwc2"]
+[ext_resource type="Script" uid="uid://cdi0hiygq0pte" path="res://Scripts/Components/Rope/RopeLineDrawer.gd" id="3_yqwc2"]
+
+[node name="Kelp" type="Node2D"]
+position = Vector2(337, 346)
+script = ExtResource("1_jrc13")
+length = 50
+kelp = ExtResource("2_yqwc2")
+
+[node name="FabrikRope" type="Node" parent="." node_paths=PackedStringArray("start_anchor_node")]
+script = ExtResource("2_yos12")
+point_amount = 50
+point_separation = 80.0
+start_anchor_node = NodePath("..")
+metadata/_custom_type_script = "uid://baedw6bviawtd"
+
+[node name="RopeLineDrawer" type="Line2D" parent="." node_paths=PackedStringArray("rope")]
+visible = false
+script = ExtResource("3_yqwc2")
+rope = NodePath("../FabrikRope")
+metadata/_custom_type_script = "uid://cdi0hiygq0pte"

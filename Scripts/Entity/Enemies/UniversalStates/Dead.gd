@@ -1,11 +1,6 @@
 ## For being dead
 extends State
 
-var enemy: Enemy
-
-func init() -> void:
-	assert(parent is Enemy, "This state must have Enemy parent")
-	enemy = parent
 
 func enter() -> void:
 	pass

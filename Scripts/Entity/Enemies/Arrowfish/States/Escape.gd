@@ -5,8 +5,6 @@ extends State
 
 @export var wander_state: State
 
-var enemy: Enemy
-
 var escape_toggle: bool = true
 var escape_angle_variation: float = 20.0
 
@@ -16,9 +14,6 @@ var escape_target_pos: Vector2
 
 
 func init() -> void:
-	assert(parent is Enemy, "This state must have Enemy parent")
-	enemy = parent
-	
 	add_child(escape_timer)
 	
 	escape_timer.one_shot = false
@@ -59,7 +54,7 @@ func process_physics(delta: float) -> State:
 	enemy.nav_agent.target_position = escape_target_pos
 	var escape_pos = enemy.nav_agent.get_next_path_position()
 	
-	enemy.move_towards(escape_pos, 500, delta)
+	enemy.move_towards(escape_pos, 500)
 	
 	if enemy.global_position.distance_to(diver_pos) > 800:
 		return wander_state

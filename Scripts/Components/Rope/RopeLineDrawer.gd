@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 		visible = false
 		return
 	
-	visible = true
+	#visible = true
 	
 	if smoothing_on:
 		points = Util.smooth_line(rope.points, resolution_multiplier)

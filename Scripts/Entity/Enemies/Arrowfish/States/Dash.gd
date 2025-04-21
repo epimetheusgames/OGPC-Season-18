@@ -2,8 +2,6 @@
 # Owned by: kaibenson
 extends State
 
-var enemy: Enemy
-
 @export var chase_state: State
 
 # Time to wait before dashing
@@ -13,9 +11,6 @@ var pause_timer: float = 0.0
 # Dash to this pos
 var target_pos: Vector2
 
-func init() -> void:
-	assert(parent is Enemy, "This state must have Enemy parent")
-	enemy = parent
 
 func enter() -> void:
 	target_pos = enemy.get_diver_pos()
@@ -37,7 +32,7 @@ func process_physics(delta: float) -> State:
 	if has_reached_pos(target_pos):
 		return chase_state
 	
-	enemy.spring_towards(target_pos, 3, 0.1, delta)
+	enemy.spring_towards(target_pos, 3, 0.1)
 	
 	return null
 

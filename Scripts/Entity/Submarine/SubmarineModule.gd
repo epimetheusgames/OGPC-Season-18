@@ -47,7 +47,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if !is_editor_peice:
-		if Global.player.get_state() == Util.DiverState.IN_SUBMARINE:
+		if Global.player.get_state() == Diver.DiverState.IN_SUBMARINE:
 			for child in $NavigationObstacle.get_children():
 				child.disabled = true
 		else:

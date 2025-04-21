@@ -7,13 +7,7 @@ extends State
 @export var escape_state: State
 @export var wander_state: State
 
-var enemy: Enemy
-
 var chase_speed: float = 10.0
-
-func init() -> void:
-	assert(parent is Enemy, "This state must have Enemy parent")
-	enemy = parent
 
 func enter() -> void:
 	pass
@@ -31,7 +25,7 @@ func process_physics(delta: float) -> State:
 	enemy.nav_agent.target_position = diver_pos
 	
 	var next_path_pos = enemy.nav_agent.get_next_path_position()
-	enemy.accelerate_towards(next_path_pos, chase_speed, delta)
+	enemy.accelerate_towards(next_path_pos, chase_speed)
 	
 	if enemy.hurtbox.health < 250:
 		return escape_state

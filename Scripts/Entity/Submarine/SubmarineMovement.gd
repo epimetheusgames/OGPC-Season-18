@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	decay_velocity(delta)
 	
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
-		if Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
+		if Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
 			update_movement_velocity(delta * 60)
 			update_target_angle(delta)
 			update_current_angle(delta * 60)
@@ -35,11 +35,12 @@ func _physics_process(delta: float) -> void:
 			update_buoyancy(delta)
 	
 	if Input.is_action_just_pressed("interact"):
-		if Global.player.get_state() != Util.DiverState.DRIVING_SUBMARINE and in_interaction_area: 
-			Global.player.set_state(Util.DiverState.DRIVING_SUBMARINE)
+		if Global.player.get_state() != Diver.DiverState.DRIVING_SUBMARINE and in_interaction_area: 
+			print("klsdflk")
+			Global.player.set_state(Diver.DiverState.DRIVING_SUBMARINE)
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = true
-		elif Global.player.get_state() == Util.DiverState.DRIVING_SUBMARINE:
-			Global.player.set_state(Util.DiverState.IN_SUBMARINE)
+		elif Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
+			Global.player.set_state(Diver.DiverState.IN_SUBMARINE)
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = false
 
 func _on_interaction_area_area_entered(area: Area2D) -> void:

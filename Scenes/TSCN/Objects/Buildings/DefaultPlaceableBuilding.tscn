@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2lyihyk6qgq2"]
+
+[ext_resource type="Script" uid="uid://crayjmaukyqsy" path="res://Scripts/Objects/PlaceableBuilding.gd" id="1_t277u"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_e6mh0"]
+[ext_resource type="Script" uid="uid://ct4d1cr2873gf" path="res://Scripts/Entity/NPC/AnyFollowerDummy.gd" id="3_ivgdk"]
+[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="4_wu04h"]
+
+[sub_resource type="Resource" id="Resource_xgfk5"]
+script = ExtResource("2_e6mh0")
+file = "res://Scenes/TSCN/Objects/PlaceableBuilding.tscn"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j551m"]
+radius = 79.0253
+
+[node name="DefaultPlaceableBuilding" type="Node2D" node_paths=PackedStringArray("building_sprite", "building_collision", "base_position", "player_follower_dummy")]
+script = ExtResource("1_t277u")
+scene = SubResource("Resource_xgfk5")
+building_sprite = NodePath("Icon")
+building_collision = NodePath("StaticBody2D")
+base_position = NodePath("Node2D")
+player_follower_dummy = NodePath("AnyFollowerDummy")
+max_occupants = 3
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, 1)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(1, 0)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, -1)
+
+[node name="RayCast2D4" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-1, 0)
+
+[node name="RayCast2D5" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-1, 1)
+
+[node name="RayCast2D6" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(1, 1)
+
+[node name="RayCast2D7" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(1, -1)
+
+[node name="RayCast2D8" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-1, -1)
+
+[node name="RayCast2D9" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(0, 1)
+
+[node name="RayCast2D10" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(1, 0)
+
+[node name="RayCast2D11" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(0, -1)
+
+[node name="RayCast2D12" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(-1, 0)
+
+[node name="RayCast2D13" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(-1, 1)
+
+[node name="RayCast2D14" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(1, 1)
+
+[node name="RayCast2D15" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(1, -1)
+
+[node name="RayCast2D16" type="RayCast2D" parent="Raycasts"]
+rotation = 0.383972
+target_position = Vector2(-1, -1)
+
+[node name="BuildingArea" type="Area2D" parent="." groups=["building_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingArea"]
+shape = SubResource("CircleShape2D_j551m")
+
+[node name="AnyFollowerDummy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("follows")]
+script = ExtResource("3_ivgdk")
+follows = NodePath("..")
+metadata/_custom_type_script = "uid://ct4d1cr2873gf"
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("4_wu04h")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-58, 61, -63, 53, -63, -52, -56, -61, -45, -65, 54, -64, 62, -58, 64, -46, 64, 53, 57, 62, 42, 64, -51, 64)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, 64)

@@ -5,9 +5,11 @@ class_name SubmarineBurstWeapon
 extends SubmarineWeapon
 
 @export var time_between_bursts := 0.3
+@export var bursts : int = 3
 
 func fire():
-	for i in range(3):
+	for i in range(bursts):
+		heat += heat_increase_per_shot/bursts
 		var bullet : BaseBullet = projectile_scene.instantiate()
 		add_child(bullet)
 		bullet.global_position = emission_point.global_position

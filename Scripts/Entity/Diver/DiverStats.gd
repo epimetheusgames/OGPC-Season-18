@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 		return
 	
 	oxygen_percentage -= oxygen_loss * delta * 60
-	if diver.get_state() == Util.DiverState.IN_GRAVITY_AREA:
+	if diver.get_state() == Diver.DiverState.IN_GRAVITY_AREA:
 		oxygen_percentage = 100
 	if abs(diver.global_position.y) < 80:
 		oxygen_percentage = 100

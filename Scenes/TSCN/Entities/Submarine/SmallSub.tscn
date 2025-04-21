@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://6ajyn7xeilmv"]
+[gd_scene load_steps=10 format=3 uid="uid://6ajyn7xeilmv"]
 
 [ext_resource type="Script" uid="uid://0js7gtnvp1vm" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_ru2mo"]
 [ext_resource type="Script" uid="uid://bpcsoat0wk1ci" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_eisgo"]
-[ext_resource type="Texture2D" uid="uid://brmo5xmp7aayu" path="res://Assets/Art/Entity/Submarine/SubmarineFrame.png" id="2_fvx1j"]
+[ext_resource type="Texture2D" uid="uid://d2bs2aysqkwqb" path="res://Assets/Art/Entity/Submarine/Submarine.png" id="3_j4tp4"]
 [ext_resource type="Script" uid="uid://dxlkbqcv2x2hh" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineWeaponSlot.gd" id="4_j4tp4"]
 [ext_resource type="PackedScene" uid="uid://yigraya7x7v4" path="res://Scenes/TSCN/Entities/Submarine/SubmarineWeapons/SubmarineBurstWeapon.tscn" id="5_qnb0f"]
+[ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="6_qnb0f"]
+[ext_resource type="Texture2D" uid="uid://dywqtkftqlcbi" path="res://Assets/Art/Entity/Submarine/SubmarineLight.png" id="7_d1qs6"]
+[ext_resource type="Texture2D" uid="uid://mx8o4yak3yo8" path="res://Assets/Art/Entity/Submarine/SubmarineAura.png" id="8_bxi20"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvx1j"]
 size = Vector2(96, 139)
@@ -25,23 +28,16 @@ shape = SubResource("RectangleShape2D_fvx1j")
 [node name="SeatPos" type="Node2D" parent="InteractionArea"]
 position = Vector2(-148, 31)
 
-[node name="SubmarineArea" type="Area2D" parent="."]
+[node name="SubmarineArea" type="Area2D" parent="." groups=["Submarine Area", "gravity_areas"]]
+visible = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SubmarineArea"]
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(-110.355, 237.455, -59.3554, 225.455, 46.6446, 236.455, 108.645, 236.455, 357.645, 236.455, 372.645, 235.455, 380.645, 234.455, 386.645, 232.455, 392.645, 228.455, 396.645, 221.455, 490.645, 30.4552, 318.645, 30.4552, 318.645, -19.5448, 325.645, -13.5448, 332.645, -6.54485, 341.645, -1.54485, 359.645, 1.45515, 493.645, 1.45515, 501.645, 9.45515, 501.645, 16.4552, 496.645, 28.4552, 501.645, 37.4552, 501.645, 42.4552, 500.645, 46.4552, 407.645, 232.455, 398.645, 238.455, 388.645, 240.455, 379.645, 251.455, 369.645, 262.455, 358.645, 271.455, 343.645, 282.455, 323.645, 292.455, 306.645, 298.455, 279.645, 303.455, 233.645, 303.455, 190.645, 332.455, 41.6446, 332.455, 38.6446, 331.455, 33.6446, 326.455, 25.6446, 303.455, -118.355, 302.455, -122.355, 298.455, -123.355, 292.455, -123.355, 266.455, -122.355, 261.455, -118.355, 257.455, -126.355, 250.455, -126.355, 243.455)
-
-[node name="Bubble" type="CollisionPolygon2D" parent="."]
-position = Vector2(-150, -125)
-polygon = PackedVector2Array(-0.355408, 1.45515, 2.64459, 17.4552, -22.3554, 17.4552, -46.3554, 19.4552, -74.3554, 24.4552, -105.355, 32.4552, -128.355, 44.4552, -136.355, 49.4552, -142.355, 54.4552, -149.355, 61.4552, -156.355, 70.4552, -159.355, 76.4552, -162.355, 84.4552, -165.355, 97.4552, -165.355, 126.455, -162.355, 138.455, -155.355, 159.455, -141.355, 189.455, -128.355, 211.455, -110.355, 237.455, -126.355, 243.455, -136.355, 229.455, -151.355, 204.455, -168.355, 171.455, -176.355, 149.455, -181.355, 124.455, -183.355, 114.455, -183.355, 93.4552, -178.355, 77.4552, -171.355, 63.4552, -163.355, 52.4552, -151.355, 40.4552, -140.355, 32.4552, -113.355, 19.4552, -87.3554, 11.4552, -39.3554, 3.45515)
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
-position = Vector2(-150, -125)
-polygon = PackedVector2Array(-0.355408, 1.45515, 191.645, 1.45515, 208.645, -1.54485, 216.645, -6.54485, 223.645, -13.5448, 229.645, -19.5448, 229.645, 30.4552, 20.6446, 30.4552, 16.6446, 25.4552, 10.6446, 25.4552, 5.64459, 22.4552, 2.64459, 17.4552)
+polygon = PackedVector2Array(3, 18, 6, 22, 10, 26, 20, 31, 492, 31, 397, 221, 391, 230, 386, 233, 380, 235, 371, 236, 357, 237, -110, 238, -128, 212, -141, 190, -156, 159, -163, 135, -165, 127, -165, 98, -162, 85, -159, 77, -156, 71, -149, 62, -142, 55, -135, 50, -126, 45, -104, 34, -74, 26, -46, 21, -24, 19)
 
 [node name="Frame" type="Sprite2D" parent="."]
 position = Vector2(4, 7)
-texture = ExtResource("2_fvx1j")
+texture = ExtResource("3_j4tp4")
 
 [node name="SubmarineWeaponSlot" type="Node2D" parent="."]
 position = Vector2(-136, 194)
@@ -51,6 +47,39 @@ metadata/_custom_type_script = "uid://dxlkbqcv2x2hh"
 
 [node name="SubmarineBurstWeapon" parent="SubmarineWeaponSlot" instance=ExtResource("5_qnb0f")]
 metadata/_edit_lock_ = true
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
+position = Vector2(-150, -125)
+polygon = PackedVector2Array(-110, 238, 385, 240, 492, 31, 319, 31, 319, -19, 360, 2, 494, 2, 502, 10, 502, 43, 408, 233, 388, 241, 360, 272, 310, 299, 234, 304, 193, 332, 40, 333, 26, 304, -121, 302, -123, 266, -118, 258, -126, 244)
+
+[node name="Bubble" type="CollisionPolygon2D" parent="Collision"]
+position = Vector2(-150, -125)
+polygon = PackedVector2Array(0, 2, 3, 18, -60, 21, -131, 45, -159, 72, -165, 127, -141, 190, -110, 238, -126, 244, -169, 167, -182, 118, -179, 83, -164, 52, -113, 20, -39, 4)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collision"]
+position = Vector2(-150, -125)
+polygon = PackedVector2Array(0, 2, 192, 2, 230, -19, 230, 30, 19, 30, 3, 18)
+
+[node name="Headlight" type="PointLight2D" parent="."]
+position = Vector2(-276, 156)
+rotation = 4.71239
+scale = Vector2(1.5, 1.5)
+energy = 10.0
+texture = ExtResource("6_qnb0f")
+offset = Vector2(0, 20)
+
+[node name="SubmarineInteriorLight" type="PointLight2D" parent="."]
+position = Vector2(4, 7)
+energy = 2.0
+shadow_enabled = true
+texture = ExtResource("7_d1qs6")
+
+[node name="SubmarineAura" type="PointLight2D" parent="."]
+position = Vector2(4, 7)
+energy = 0.25
+texture = ExtResource("8_bxi20")
 
 [connection signal="area_entered" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_exited"]

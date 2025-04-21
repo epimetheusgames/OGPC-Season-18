@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	if Global.is_multiplayer && diver.has_multiplayer_sync && !diver._is_node_owner():
 		return
 	
-	if diver.get_state() == Util.DiverState.IN_GRAVITY_AREA:
+	if diver.get_state() != Diver.DiverState.SWIMMING:
 		flashlight.visible = false
 		body_light.visible = false
 	else:
@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
 	
 	var angle_to_mouse := flashlight.global_position.angle_to_point(get_global_mouse_position()) + PI/2
 	flashlight.global_rotation = Util.better_angle_lerp(flashlight.global_rotation, angle_to_mouse, 0.5, delta)
+	body_light.global_rotation = 0.0
 	
 	if Global.godot_steam_abstraction:
 		Global.godot_steam_abstraction.sync_var(flashlight, "visible")

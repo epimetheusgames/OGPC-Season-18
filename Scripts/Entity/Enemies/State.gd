@@ -4,7 +4,7 @@
 class_name State
 extends Node
 
-var parent: CharacterBody2D
+var enemy: Enemy
 
 func init() -> void:
 	pass

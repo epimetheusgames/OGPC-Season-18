@@ -43,6 +43,7 @@ func _ready() -> void:
 		add_child(occluder)
 		occluder.occluder = OccluderPolygon2D.new()
 		occluder.occluder.polygon = get_smaller_polygon(polygon, 0)
+		occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
 		
 	collision_body.collision_layer = 3
 

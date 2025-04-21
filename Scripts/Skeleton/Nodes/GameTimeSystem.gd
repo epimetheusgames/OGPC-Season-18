@@ -5,6 +5,7 @@ extends Node
 
 var _hours: int = 0
 var _minutes: int = 0
+var _days: int = 0
 
 signal day_ended
 signal time_changed(hours: int, minutes: int)
@@ -14,7 +15,7 @@ func _ready() -> void:
 	
 	while true:
 		await get_tree().create_timer(seconds_per_ten_minutes).timeout
-		if _minutes < 60:
+		if _minutes < 50:
 			_minutes += 10
 		elif _hours < 23:
 			_minutes = 0
@@ -22,12 +23,16 @@ func _ready() -> void:
 		else:
 			_hours = 0
 			_minutes = 0
+			_days += 1
 			day_ended.emit()
 		time_changed.emit(_hours, _minutes)
 
 # Returns hours, minutes.
 func get_time() -> Array[int]:
 	return [_hours, _minutes]
+
+func get_day() -> int:
+	return _days
 
 func set_time(hours: int, minutes: int = 0):
 	Global.print_debug("Game time overriden, stack printing in terminal.")

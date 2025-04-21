@@ -68,7 +68,7 @@ var dialog_active: bool = false
 ## Idk what this is.
 var dialog_played: bool = true
 
-## The node of the current mission.
+## The node of the current mission. If you make this typed you'll break the game. (brake)
 var current_mission_node = null
 
 ## The resource this mission uses.
@@ -90,6 +90,10 @@ var canvas_modulate: CanvasModulate
 var brightness_modulate: CanvasModulate
 ## The light that acts as the sun.
 var sun: DirectionalLight2D
+
+var death_menu: DeathScreen
+var success_menu: MissionSuccessScreen
+var pause_menu: PauseMenu
 
 ## Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {

@@ -113,7 +113,7 @@ func _on_primary_button_button_up() -> void:
 	primary_button.text = selected_icon.formatted_name
 	if diver_primary_weapon_obj:
 		diver_primary_weapon_obj.enabled = false
-	diver_primary_weapon_obj = Global.player.diver_combat.instantiated_weapons[primary_weapon]
+	Global.player.diver_combat.primary_weapon = Global.player.diver_combat.instantiated_weapons[primary_weapon]
 	selected_icon = null
 
 func _on_back_button_button_up() -> void:

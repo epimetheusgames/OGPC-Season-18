@@ -4,6 +4,10 @@ extends Control
 
 @export var ingame_ui: Control
 @export var vignette_shader: ColorRect
+@export var title: Label
+
+func _ready() -> void:
+	Global.death_menu = self
 
 func _process(_delta: float) -> void:
 	if Global.player && Global.player.get_diver_health() <= 0:
@@ -16,7 +20,3 @@ func _process(_delta: float) -> void:
 func _on_restart_button_button_up() -> void:
 	get_tree().paused = false
 	Global.mission_system.restart_mission()
-
-func _on_quit_button_button_up() -> void:
-	get_tree().paused = false
-	Global.save_load_framework.exit_to_menu()
