@@ -5,6 +5,9 @@ extends Control
 @export var ingame_ui: Control
 @export var vignette_shader: ColorRect
 
+func _ready() -> void:
+	Global.pause_menu = self
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("esc"):
 		if !visible:

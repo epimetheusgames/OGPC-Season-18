@@ -10,7 +10,7 @@ script = ExtResource("2_e6mh0")
 file = "res://Scenes/TSCN/Objects/PlaceableBuilding.tscn"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j551m"]
-radius = 110.018
+radius = 79.0253
 
 [node name="DefaultPlaceableBuilding" type="Node2D" node_paths=PackedStringArray("building_sprite", "building_collision", "base_position", "player_follower_dummy")]
 script = ExtResource("1_t277u")

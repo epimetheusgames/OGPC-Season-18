@@ -9,7 +9,7 @@ radius = 13.0
 height = 154.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l6860"]
-radius = 164.757
+radius = 123.406
 
 [sub_resource type="SkeletonModification2DTwoBoneIK" id="SkeletonModification2DTwoBoneIK_x6r6a"]
 execution_mode = 1
@@ -208,7 +208,7 @@ shape = SubResource("CapsuleShape2D_5cylf")
 [node name="CivillianArea" type="Area2D" parent="." groups=["civillian_area"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CivillianArea"]
-visible = false
+position = Vector2(-2, -20)
 shape = SubResource("CircleShape2D_l6860")
 
 [node name="AnimSkeleton" type="Node2D" parent="."]

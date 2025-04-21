@@ -57,7 +57,12 @@ func _process(_delta: float) -> void:
 
 func _spawn() -> void:
 	Global.print_debug("Spawned new follower when day ended.")
-	follower_spawn_node.add_child(follower.instantiate())
+	
+	# Ramp up difficulty
+	for i in range(Global.game_time_system._days):
+		var follower_node: CivillianFollower = follower.instantiate()
+		follower_spawn_node.add_child(follower_node)
+		follower_node.position += Util.random_vector(Global.rng, 50, 0)
 
 func _area_entered(area: Area2D) -> void:
 	if !area.is_in_group("player_area") || !black_background:
