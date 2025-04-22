@@ -236,7 +236,7 @@ func _queue_clear_ui_elements() -> void:
 	for child in get_children():
 		child.queue_free()
 
-# Regenerates UI elements from keybind data.
+# Regenerates UI elements from keybind data in the JSON file.
 func generate_ui_elements() -> void:
 	var new_buttons = []
 	var new_entries = []

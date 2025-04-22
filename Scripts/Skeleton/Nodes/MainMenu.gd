@@ -101,7 +101,9 @@ func _on_multiplayer_join_game_button_button_up() -> void:
 	Global.godot_steam_abstraction.join_lobby_by_name($LobbyNameInput.text)
 	set_multiplayer_status("Waiting for host connection.")
 	$MultiplayerJoinGameButton.disabled = true
-
+func _on_settings_button_up() -> void:
+	$"../MenuSettings".visible = true
+	self.visible = false
 func _process(_delta: float) -> void:
 	var members = Global.godot_steam_abstraction.lobby_members
 	if Global.is_multiplayer:
