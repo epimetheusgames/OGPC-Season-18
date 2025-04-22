@@ -82,18 +82,18 @@ func _physics_process(_delta: float):
 	
 	
 	# Camera
-	if !(Global.is_multiplayer && Global.godot_steam_abstraction && 	_is_node_owner()):
+	if !(Global.is_multiplayer && Global.godot_steam_abstraction && _is_node_owner()):
 		camera.enabled = true
 	else:
 		camera.enabled = false
 	
 	if diver_animation.in_unlock_terminal_area:
-		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2(3, 3), 0.2, _delta)
-		camera.global_position = Util.better_vec2_lerp(camera.global_position, Global.research_station.unlock_terminal.global_position, 0.1, _delta)
+		camera.target_zoom = Vector2(3, 3)
+		camera.target_position = Global.research_station.unlock_terminal.global_position
 		Global.current_mission_node.get_node("UILayer").visible = false
 	else:
-		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2.ONE, 0.2, _delta)
-		camera.position = Util.better_vec2_lerp(camera.position, Vector2.ZERO, 0.1, _delta)
+		camera.target_zoom = Vector2(1, 1)
+		camera.target_position = global_position
 		Global.current_mission_node.get_node("UILayer").visible = true
 	
 	if camera && parallax:

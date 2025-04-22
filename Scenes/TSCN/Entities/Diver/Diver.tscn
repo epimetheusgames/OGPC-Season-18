@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://dl6v2p1fxvitc" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
-[ext_resource type="Script" uid="uid://cfcc8wf5m0kgj" path="res://Scripts/Entity/NPC/PlayerFollowerDummy.gd" id="9_soyuq"]
+[ext_resource type="Script" path="res://Scripts/Entity/NPC/PlayerFollowerDummy.gd" id="9_soyuq"]
 [ext_resource type="Script" uid="uid://dau0csslipmpi" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="10_qg316"]
