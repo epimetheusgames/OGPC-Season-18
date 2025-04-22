@@ -1,69 +1,32 @@
-[gd_scene load_steps=63 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=40 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
-[ext_resource type="Material" uid="uid://ce1tvqssy1p2w" path="res://Scenes/Resource/Level/OceanDepthMaterial.tres" id="2_3svaj"]
 [ext_resource type="AudioStream" uid="uid://bdjdysj3l46f7" path="res://Assets/SFX/Wind.ogg" id="2_8qye6"]
-[ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="2_bdf5b"]
 [ext_resource type="Script" uid="uid://bn44me3sxajlb" path="res://Scripts/Skeleton/Nodes/Ingame/LocalGameTimeSaver.gd" id="2_mcejo"]
 [ext_resource type="Texture2D" uid="uid://vuyq5s7dknal" path="res://Assets/Art/Level/SandTexture.png" id="3_kali0"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="AudioStream" uid="uid://cqn1ekjfcc0fx" path="res://Assets/Music/Sunlight.mp3" id="5_3fu4r"]
 [ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
-[ext_resource type="Texture2D" uid="uid://dyxe351do4ctp" path="res://Assets/Art/Level/WAFFLEHOUSE.png" id="6_mcejo"]
-[ext_resource type="Script" uid="uid://bthrd0wdm5ufn" path="res://Scripts/Level/ResearchStation.gd" id="12_jw53c"]
-[ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="12_kali0"]
 [ext_resource type="PackedScene" uid="uid://6ajyn7xeilmv" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="12_mcejo"]
-[ext_resource type="PackedScene" uid="uid://bp7br2o4yntou" path="res://Scenes/TSCN/UI/UnlockTerminal.tscn" id="13_bdf5b"]
-[ext_resource type="PackedScene" uid="uid://bi6i18nskixdt" path="res://Scenes/TSCN/Entities/NPCS/CivillianFollower.tscn" id="13_gnr5v"]
+[ext_resource type="PackedScene" uid="uid://brtj1ur8tgigg" path="res://Scenes/ResearchStation.tscn" id="13_eg3rs"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
-[ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.tscn" id="27_3fu4r"]
+[ext_resource type="Texture2D" uid="uid://ctwe161d8x2ne" path="res://Assets/Art/Misc/Bubble.png" id="22_l3b62"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="30_ec8ks"]
-[ext_resource type="PackedScene" uid="uid://emt5tsgm8dft" path="res://Scenes/TSCN/Objects/LightLine.tscn" id="30_ykjed"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
 [ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="35_47o3q"]
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
-[ext_resource type="PackedScene" uid="uid://bcg6sc5pivsv6" path="res://Scenes/TSCN/Objects/Items/CoralItem.tscn" id="38_081ql"]
-[ext_resource type="PackedScene" uid="uid://6kbux1lvwaw3" path="res://Scenes/TSCN/Objects/Items/RockItem.tscn" id="39_081ql"]
-
-[sub_resource type="Environment" id="Environment_5ulyy"]
-background_mode = 3
-background_canvas_max_layer = 10
-glow_enabled = true
-glow_levels/1 = 0.3
-glow_levels/2 = 0.3
-glow_levels/3 = 0.4
-glow_levels/4 = 0.3
-glow_levels/5 = 0.5
-glow_levels/6 = 0.2
-glow_blend_mode = 0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8qye6"]
-load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-5e1dd40c6ff283288799a66678ca82b9.ctex"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fu4r"]
-shader = ExtResource("2_bdf5b")
-shader_parameter/water_col = Vector4(0.05, 0.05, 0.2, 1)
-shader_parameter/shallow_water_col = Vector4(0, 0.05, 0.01, 1)
-shader_parameter/depth_color_tex = SubResource("CompressedTexture2D_8qye6")
-shader_parameter/always_top = false
-shader_parameter/blend_alpha = false
-shader_parameter/max_alpha = 0.9
-shader_parameter/height = 1.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_8qye6"]
-radius = 463.518
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
-outlines = Array[PackedVector2Array]([PackedVector2Array(-6712, -371, 29502, -545, 29079, 11053, -6903, 10932)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-7158, -8735, 30252, -8582, 30713, 12105, -7849, 12336)])
 source_geometry_mode = 1
 source_geometry_group_name = &"obstacles"
 agent_radius = 41.62
@@ -148,28 +111,6 @@ void fragment() {
 	COLOR = vec4(mix(edge_pixel, in_pixel, fade_amm).rgb * color_multiplier, 1.0);
 }"
 
-[sub_resource type="Gradient" id="Gradient_ijkxv"]
-offsets = PackedFloat32Array(0.0192308)
-colors = PackedColorArray(0.663023, 0.427097, 0.199698, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qa8ko"]
-gradient = SubResource("Gradient_ijkxv")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2s0g2"]
-resource_local_to_scene = true
-shader = SubResource("Shader_c3wo4")
-shader_parameter/points = PackedVector2Array(9293, 6365, 9554, 8558, 9696, 9804, 9711, 9852, 9736, 9890, 9785, 9927, 9841, 9887, 9873.57, 9808.01, 10055, 8722, 10293, 7009, 10727, 6849, 11117, 6644, 11438, 6421, 11531, 6293, 11602, 6143, 11716, 5815, 11905, 5394, 12164, 5129, 12489, 4955, 12848, 4861, 13245, 4812, 14300, 4726, 15355, 4527, 17079, 3985, 18177, 3500, 19217, 2745, 20158, 2004, 21174, 1448, 22407, 995, 24185, 591, 25865, 457, 27107, 288, 27648.2, 200.549, 27679, 201, 27701.8, 191.89, 27794, 177, 27828.2, 170.554, 27849, 157, 27859, 153, 27875, 152, 27931.9, 150.985, 27991.8, 139.679, 28014, 127, 28068.6, 125.203, 28287, 84, 28309, 75, 28323.9, 55.8398, 28378.7, -21.7406, 28408, -49, 28450, -68, 28729, -135, 28852, -605, 28508, 11298, 8896, 10316, 9134, 6378)
-shader_parameter/num_points = 55
-shader_parameter/global_position = Vector2(0, 0)
-shader_parameter/fade_width = 215
-shader_parameter/tex_scale = 103.0
-shader_parameter/color_multiplier = 0.4
-shader_parameter/in_tex = SubResource("GradientTexture1D_qa8ko")
-shader_parameter/edge_tex = ExtResource("3_kali0")
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5pa5j"]
-polygon = PackedVector2Array(8679, 5002, 9047, 5336, 9183, 5637, 9286.61, 6298.09, 8888, 6329, 8869, 6327, 8847, 6312, 8834, 6291, 8820, 6264, 8688, 5939, 8231.47, 5846.22, 8266, 5487, 8095, 5352, 7072, 5422, 7022, 5386, 6755, 5675, 6228, 5724, 5714, 5477, 4839, 5811, 4630, 6507, 4876, 7120, 5517, 7946, 6255, 7475, 5572, 6810, 5558, 6018, 6249, 5825, 6855, 5758, 7022, 5503, 7028, 5942, 7488, 6159, 7612.65, 6184.18, 7557, 6341, 7685, 6352, 7714.44, 6204.74, 7790, 6220, 7934, 6207, 8196, 6152, 8455, 6117, 8526, 5994, 8644, 6003, 8753, 6310, 8808.8, 6366.02, 8688, 6527, 8667, 6913, 8626, 7196, 8361, 7416, 7604, 7379, 7513, 7500, 7912.02, 7502.64, 7882, 7922, 7133, 7864, 7113, 8001, 7790, 8116, 7818, 8116, 7830, 8101, 7844, 8091, 7859, 8087, 7883, 8092, 7883, 8102, 7864, 8108, 7849, 8120, 7845, 8129, 7855, 8138, 7868, 8141, 7860, 8154, 7859, 8162, 7860, 8176, 7861, 8200, 7860, 8225, 7820, 8313, 7741, 8437, 7712, 8461, 7699, 8498, 7707, 8500, 7729, 8478, 7791, 8469, 7801, 8461, 7810, 8452, 7843.91, 8384.17, 7848, 8379, 7860, 8376, 7865, 8373, 7873, 8362, 7928, 8213, 7940, 8208, 7953, 8211, 8043, 8249, 8134, 8701, 8421, 8713, 8435, 8711, 8447, 8708, 8458, 8712, 8467, 8720, 8511, 8739, 8562, 8741, 8593, 8727, 8611, 8695, 8602, 8659, 8580, 8643, 8547, 8634, 8516, 8639, 8481, 8646, 8448, 8645, 8431, 8649, 8239, 8578, 8135, 8272, 8219, 8109, 8153, 7950, 8036, 7916, 8041.99, 7503.5, 8421, 7506, 8481, 7464, 8690, 7754, 8762, 7706, 8549, 7410, 8660, 7323, 8769, 6993, 8743, 6853, 8768, 6595, 8887, 6398, 9293.39, 6364.91, 9356, 6982, 9554, 8558, 9696, 9804, 9711, 9852, 9736, 9890, 9785, 9927, 9841, 9887, 9873.57, 9808.01, 10055, 8722, 10293, 7009, 10727, 6849, 11117, 6644, 11438, 6421, 11531, 6293, 11602, 6143, 11716, 5815, 11905, 5394, 12164, 5129, 12489, 4955, 12848, 4861, 13245, 4812, 14300, 4726, 15355, 4527, 17079, 3985, 18177, 3500, 19217, 2745, 20158, 2004, 21174, 1448, 22407, 995, 24185, 591, 25865, 457, 27107, 288, 27648.2, 200.549, 27679, 201, 27701.8, 191.89, 27794, 177, 27828.2, 170.554, 27849, 157, 27859, 153, 27875, 152, 27931.9, 150.985, 27991.8, 139.679, 28014, 127, 28068.6, 125.203, 28287, 84, 28309, 75, 28323.9, 55.8398, 28378.7, -21.7406, 28408, -49, 28450, -68, 28729, -135, 28852, -605, 28508, 11298, 6989, 10098, 3474, 8020, 3964, 5535)
-
 [sub_resource type="Gradient" id="Gradient_l7jee"]
 offsets = PackedFloat32Array(0.0192308)
 colors = PackedColorArray(0.663023, 0.427097, 0.199698, 1)
@@ -189,31 +130,10 @@ shader_parameter/color_multiplier = 0.4
 shader_parameter/in_tex = SubResource("GradientTexture1D_dhgix")
 shader_parameter/edge_tex = ExtResource("3_kali0")
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lcoem"]
-polygon = PackedVector2Array(-6566, -385, -6543, 320, -6500, 365, -6403, 393, -6159, 398, -5328, 435, -4544, 454, -4310, 469, -4076, 496, -3842, 563, -3612, 673, -3432, 782, -3235, 964, -3067, 1261, -2929, 1578, -2647, 2424, -2257, 3037, -1798, 3487, -1335, 3823, -802, 4137, -130, 4372, 724, 4529, 1318, 4587, 2704, 4677, 6698, 4820, 7695, 4842, 8011, 4858, 8255, 4887, 8485, 4933, 8692, 4996, 8869, 5093, 8993, 5220, 9087, 5378, 9183, 5637, 9164.54, 5629.71, 9143.79, 5621.52, 9117.06, 5610.97, 9099.5, 5604.04, 9080.47, 5596.53, 9060.71, 5588.73, 9033.99, 5578.18, 9007.12, 5567.57, 8987.65, 5559.89, 8965.45, 5551.12, 8941.02, 5541.48, 8918.52, 5532.6, 8894.7, 5523.2, 8880.32, 5517.52, 8883, 5513, 8867, 5507, 8131, 5099, 5174, 5401, 3962.85, 5982.79, 3761.88, 8075.19, 6759.56, 9876.11, 11676, 10320, 10611, 11196, -7048, 11272, -6700, 368)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdf5b"]
-size = Vector2(35708.5, 724)
-
-[sub_resource type="Resource" id="Resource_jw53c"]
+[sub_resource type="Resource" id="Resource_eg3rs"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mcejo"]
-radius = 303.007
-
-[sub_resource type="Gradient" id="Gradient_mcejo"]
-offsets = PackedFloat32Array(0, 0.675781, 1)
-colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0.0745098, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_081ql"]
-gradient = SubResource("Gradient_mcejo")
-width = 1000
-height = 1000
-fill = 1
-fill_from = Vector2(0.5, 0.527778)
-fill_to = Vector2(0.846154, 0.865385)
 
 [sub_resource type="Resource" id="Resource_xdqqp"]
 script = ExtResource("16_4wjdw")
@@ -233,19 +153,20 @@ scene = ExtResource("35_47o3q")
 group_size = 1
 probability = 2
 
+[sub_resource type="Environment" id="Environment_5ulyy"]
+background_mode = 3
+background_canvas_max_layer = 10
+glow_enabled = true
+glow_levels/1 = 0.3
+glow_levels/2 = 0.3
+glow_levels/3 = 0.4
+glow_levels/4 = 0.3
+glow_levels/5 = 0.5
+glow_levels/6 = 0.2
+glow_blend_mode = 0
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_gnvk0"]
-viewport_path = NodePath("ParticlesViewport")
-
-[sub_resource type="Gradient" id="Gradient_dsxlw"]
-colors = PackedColorArray(0.58, 0.699, 1, 0.52549, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0nxag"]
-gradient = SubResource("Gradient_dsxlw")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
+viewport_path = NodePath("Ligght and stuff/Bubbles/BubblesViewport")
 
 [sub_resource type="Curve" id="Curve_6rk86"]
 _data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
@@ -268,22 +189,11 @@ scale_curve = SubResource("CurveTexture_pq4a2")
 collision_mode = 2
 collision_use_scale = true
 
-[node name="Mission1" type="Node2D" node_paths=PackedStringArray("canvas_modulate", "sun")]
+[node name="Mission1" type="Node2D"]
 script = ExtResource("1_314ux")
-canvas_modulate = NodePath("CanvasModulate")
-sun = NodePath("DirectionalLight2D")
 
 [node name="GlobalVariableSaver" type="Node" parent="."]
 script = ExtResource("2_mcejo")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_5ulyy")
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-energy = 0.5
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.62, 0.62, 0.62, 1)
 
 [node name="LevelContainer" type="Node2D" parent="."]
 
@@ -304,119 +214,42 @@ volume_db = -80.0
 autoplay = true
 bus = &"Music"
 
-[node name="Wafflehouse" type="Sprite2D" parent="LevelContainer/Environment/EnvironmentEffects"]
-modulate = Color(0.687215, 0.687215, 0.687215, 1)
-position = Vector2(3126, 4420)
-texture = ExtResource("6_mcejo")
-
-[node name="ColorRect" type="ColorRect" parent="LevelContainer/Environment"]
-visible = false
-z_index = -10
-material = SubResource("ShaderMaterial_3fu4r")
-offset_left = 29595.0
-offset_top = 31.0
-offset_right = 65802.0
-offset_bottom = 10503.0
-scale = Vector2(-1, 1)
-color = Color(0.0516436, 0.0516593, 0.216342, 1)
-metadata/_edit_lock_ = true
-
-[node name="ColorRect2" type="ColorRect" parent="LevelContainer/Environment"]
-visible = false
-z_index = 70
-material = ExtResource("2_3svaj")
-offset_left = 29595.0
-offset_top = 30.0
-offset_right = 65802.0
-offset_bottom = 10502.0
-scale = Vector2(-1, 1)
-color = Color(0.052, 0.052, 0.216, 1)
-metadata/_edit_lock_ = true
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="LevelContainer/Environment"]
-collision_layer = 2048
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Environment/StaticBody2D2"]
-visible = false
-position = Vector2(-2894, 2581)
-shape = SubResource("CircleShape2D_8qye6")
-
 [node name="Collisions" type="NavigationRegion2D" parent="LevelContainer/Environment" groups=["obstacles"]]
 z_index = 2
+position = Vector2(-10165, -10896)
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = SubResource("GDScript_5py2y")
-metadata/_edit_lock_ = true
 
-[node name="AutoPolygonTexture4" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-material = SubResource("ShaderMaterial_2s0g2")
-position = Vector2(0, 1)
-polygon = PackedVector2Array(9293, 6365, 9554, 8558, 9696, 9804, 9711, 9852, 9736, 9890, 9785, 9927, 9841, 9887, 9873.57, 9808.01, 10055, 8722, 10293, 7009, 10727, 6849, 11117, 6644, 11438, 6421, 11531, 6293, 11602, 6143, 11716, 5815, 11905, 5394, 12164, 5129, 12489, 4955, 12848, 4861, 13245, 4812, 14300, 4726, 15355, 4527, 17079, 3985, 18177, 3500, 19217, 2745, 20158, 2004, 21174, 1448, 22407, 995, 24185, 591, 25865, 457, 27107, 288, 27648.2, 200.549, 27679, 201, 27701.8, 191.89, 27794, 177, 27828.2, 170.554, 27849, 157, 27859, 153, 27875, 152, 27931.9, 150.985, 27991.8, 139.679, 28014, 127, 28068.6, 125.203, 28287, 84, 28309, 75, 28323.9, 55.8398, 28378.7, -21.7406, 28408, -49, 28450, -68, 28729, -135, 28852, -605, 28508, 11298, 8896, 10316, 9134, 6378)
-script = ExtResource("5_aep54")
+[node name="World" type="Node2D" parent="LevelContainer/Environment/Collisions"]
+position = Vector2(11006, 34721)
 
-[node name="Collision" type="StaticBody2D" parent="LevelContainer/Environment/Collisions/AutoPolygonTexture4"]
-collision_mask = 129
-
-[node name="LightOccluder" type="LightOccluder2D" parent="LevelContainer/Environment/Collisions/AutoPolygonTexture4"]
-visible = false
-occluder = SubResource("OccluderPolygon2D_5pa5j")
-
-[node name="GROUND" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
+[node name="Terrain1" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 material = SubResource("ShaderMaterial_2sekr")
-polygon = PackedVector2Array(-6592, -112, -6543, 320, -6500, 365, -6403, 393, -6159, 398, -5328, 435, -4544, 454, -4310, 469, -4076, 496, -3842, 563, -3612, 673, -3432, 782, -3235, 964, -3067, 1261, -2929, 1578, -2647, 2424, -2798, 2431, -2950, 2226, -3222, 2183, -3572, 2215, -4004, 2291, -4279, 2470, -4306, 2759, -4236, 2805, -2517, 2778, -2257, 3037, -1798, 3487, -1335, 3823, -802, 4137, -130, 4372, 724, 4529, 1318, 4587, 2704, 4677, 6698, 4820, 7695, 4842, 8011, 4858, 8255, 4887, 8485, 4933, 8692, 4996, 8869, 5093, 8993, 5220, 9087, 5378, 9295, 6390, 9176, 8288, 8929, 10308, -7048, 11272, -6700, 368)
+position = Vector2(-7958, -33141)
+scale = Vector2(0.4, 0.4)
+polygon = PackedVector2Array(-16102, -6397, -10730.5, -14054.5, -12680.5, -16324.5, -10835.5, -19392, -2505.5, -19292, -7068, -11859.5, -1830.5, -10439.5, 4579.5, -11087, -1233, -5424.5, -4625.5, 785.502, -8580.5, 1333, -10825.5, -1509.5, -12745.5, -161.998, -14721, 1452, -13796, 9374, -10181, 9442, -13917, 11918, -13135, 14785, -10322, 17194, -5115, 15961, -3628, 18320, 4084, 18736, 8248, 11064, 7782, 16437, 8288, 17897, 10148, 19744, 14951, 20383, 18841, 17436, 17879, 13068, 13139, 10374, 21138, 9781, 27991, 6580, 24800, 13281, 24105, 15820, 26569, 17479, 37124, 19129, 44553, 18478, 50121, 15768, 51965, 18138, 54651, 18191, 55178, 14451, 52175, 10289, 54515, 6540, 55438, 1560, 55243, -3796, 46896, -2850, 42220, -5271, 39290, -7645, 41166.5, -7977.33, 40752, -12701, 43111, -7910, 45027, -7738, 47901, -6657, 51243, -7099, 53826, -10442, 53174, -13071, 50074, -15890, 46192, -16995, 41108, -17037, 43947, -19458, 51539, -18939, 56306, -14073, 57651, -9647, 59680, -5081, 61487, 22886, -18849, 22932, -18689, 7663)
 script = ExtResource("5_aep54")
 
-[node name="Collision" type="StaticBody2D" parent="LevelContainer/Environment/Collisions/GROUND"]
-collision_mask = 129
-
-[node name="LightOccluder" type="LightOccluder2D" parent="LevelContainer/Environment/Collisions/GROUND"]
-visible = false
-occluder = SubResource("OccluderPolygon2D_lcoem")
-
-[node name="Polygon2D" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-visible = false
-polygon = PackedVector2Array(5593, 8711, 5595, 8682, 5601, 8671, 5615, 8659, 5622, 8645, 5623, 8634, 5637, 8618, 5658, 8596, 5686, 8574, 5699, 8551, 5702, 8524, 5706, 8498, 5723, 8475, 5737, 8461, 5754, 8428, 5764, 8380, 5769, 8351, 5791, 8324, 5844, 8275, 5988, 8154, 6066, 8112, 6072, 8151, 6081, 8109, 6108, 8092, 6128, 8086, 6138, 8152, 6145, 8084, 6180, 8076, 6260, 8073, 6268, 8144, 6270, 8074, 6317, 8071, 6332, 8166, 6345, 8105, 6378, 8105, 6383, 8150, 6386, 8103, 6434, 8103, 6442, 8154, 6448, 8102, 6469, 8102, 6478, 8119, 6506, 8119, 6513, 8163, 6523, 8117, 6562, 8120, 6576, 8182, 6592, 8121, 6640, 8121, 6657, 8132, 6683, 8135, 6703, 8119, 6718, 8117, 6740, 8132, 6809, 8252, 6821, 8263, 6847, 8258, 6878, 8267, 6926, 8314, 6953, 8373, 6968, 8399, 6987, 8415, 7016, 8416, 7047, 8422, 7084, 8431, 7127, 8445, 7170, 8461, 7210, 8472, 7248, 8480, 7289, 8497, 7340, 8512, 6530, 7775, 5419, 8253)
+[node name="Terrain2" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+material = SubResource("ShaderMaterial_2sekr")
+position = Vector2(-6685, -34034)
+scale = Vector2(0.4, 0.4)
+polygon = PackedVector2Array(-10349, 12965, -7198, 11175, -4549, 9337, -2329, 6855, -488, 2610, 642, -1596, 4509, 1292, 3328, 4563, 2254, 8302, 1028, 10138, 292, 14821, -1780, 12345, -4090, 13802, -7413, 15400, -9848, 14970)
 script = ExtResource("5_aep54")
 
-[node name="Polygon2D2" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-visible = false
-polygon = PackedVector2Array(5593, 8711, 5596, 8730, 5605, 8742, 5621, 8751, 5641, 8749, 5658, 8734, 5669, 8720, 5682, 8713, 5710, 8709, 5748, 8708, 5764, 8702, 5772, 8689, 5784, 8664, 5800, 8640, 5826, 8625, 5855, 8614, 5874, 8601, 5891, 8566, 5910, 8509, 5934, 8487, 5963, 8471, 5995, 8467, 6023, 8467, 6047, 8479, 6061, 8492, 6083, 8500, 6123, 8506, 6185, 8513, 6204, 8506, 6220, 8483, 6230, 8464, 6240, 8463, 6248, 8481, 6255, 8493, 6262, 8506, 6279, 8514, 6307, 8519, 6330, 8532, 6356, 8560, 6393, 8605, 6423, 8667, 6445, 8731, 6462, 8763, 6484, 8776, 6517, 8782, 6554, 8763, 6584, 8750, 6618, 8744, 6650, 8727, 6676, 8725, 6707, 8743, 6737, 8764, 6786, 8769, 6839, 8773, 6918, 8768, 6969, 8739, 7023, 8694, 7082, 8664, 7184, 8656, 7259, 8668, 7280, 8668, 7309, 8659, 7326, 8637, 7362, 8611, 7393, 8589, 7400, 8573, 7399, 8548, 7384, 8533, 7363, 8520, 7340, 8512, 7474, 8519, 7333, 8925, 5416, 8829)
+[node name="Terrain3" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+material = SubResource("ShaderMaterial_2sekr")
+position = Vector2(-6924, -34328)
+scale = Vector2(0.4, 0.4)
+polygon = PackedVector2Array(10813, 9119, 7152, 5916, 7581, -260, 3358, -5336, 13647, -4405, 21953, -4900, 23259, -8641, 26754, -5857, 31431, -6014, 28594, -2087, 28827, 3114, 25240, 6094, 25468, 3272, 23829, 177, 17944, -1524, 13776, -1004, 10670, 1284, 9726, 5116)
 script = ExtResource("5_aep54")
 
-[node name="AutoTerrain6" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-position = Vector2(-569, 1167)
-polygon = PackedVector2Array(2457, 1238, 2437, 848, 2782, 1017)
+[node name="Terrain4" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+material = SubResource("ShaderMaterial_2sekr")
+position = Vector2(2450, -24105)
+scale = Vector2(0.4, 0.4)
+polygon = PackedVector2Array(6462, -15589, 8254, -13956, 4770, -8829, 12089, -13838, 21181, -12501, 23787, -14721, 23787, -19788, 9502, -18244)
 script = ExtResource("5_aep54")
-
-[node name="AutoTerrain2" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-position = Vector2(-4242, 1658)
-polygon = PackedVector2Array(2785, 1195, 2437, 848, 4141, 831)
-script = ExtResource("5_aep54")
-
-[node name="AutoTerrain5" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-position = Vector2(-999, 1550)
-polygon = PackedVector2Array(2031, 1829, 2437, 848, 2700, 1000)
-script = ExtResource("5_aep54")
-
-[node name="AutoTerrain4" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-position = Vector2(-412, 1944)
-polygon = PackedVector2Array(2538, 1242, 2341, 889, 2697, 727, 3135, 794, 3274, 1443, 2867, 954)
-script = ExtResource("5_aep54")
-
-[node name="AutoTerrain3" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-position = Vector2(-4, 1286)
-polygon = PackedVector2Array(2538, 1242, 2437, 848, 2987, 1518)
-script = ExtResource("5_aep54")
-
-[node name="AutoTerrain" type="Polygon2D" parent="LevelContainer/Environment/Collisions"]
-position = Vector2(-3227, 2226)
-polygon = PackedVector2Array(2933, 1326, 2437, 848, 3272, 941)
-script = ExtResource("5_aep54")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Environment/Collisions"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Environment/Collisions/StaticBody2D"]
-position = Vector2(11302.8, -375)
-shape = SubResource("RectangleShape2D_bdf5b")
 
 [node name="Player" type="Node2D" parent="LevelContainer"]
 
@@ -426,8 +259,8 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
-position = Vector2(-3325, 2568)
-uid = SubResource("Resource_jw53c")
+position = Vector2(-10316, -5741)
+uid = SubResource("Resource_eg3rs")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
 position = Vector2(-1292, 557)
@@ -436,157 +269,10 @@ position = Vector2(-1292, 557)
 script = ExtResource("21_pr3qq")
 buoyancy_accel = 0.0
 
+[node name="ResearchStation" parent="LevelContainer" instance=ExtResource("13_eg3rs")]
+position = Vector2(-11403, -5944)
+
 [node name="Items" type="Node2D" parent="LevelContainer"]
-
-[node name="LightLine" parent="LevelContainer/Items" instance=ExtResource("30_ykjed")]
-position = Vector2(860, 1002)
-min_point_dist = 300.0
-
-[node name="Line" parent="LevelContainer/Items/LightLine" index="0"]
-points = PackedVector2Array(-3399, 1367, -3578, 731, -3825, 85, -4236, -362)
-
-[node name="Raycasts" parent="LevelContainer/Items/LightLine" index="1"]
-position = Vector2(-4236, -362)
-
-[node name="Area2D" type="Area2D" parent="LevelContainer/Items"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelContainer/Items/Area2D"]
-visible = false
-position = Vector2(-2200, 2502)
-shape = SubResource("CircleShape2D_mcejo")
-
-[node name="BaseItem" parent="LevelContainer/Items" instance=ExtResource("38_081ql")]
-position = Vector2(-1902, 3286)
-rotation = 0.787773
-
-[node name="BaseItem2" parent="LevelContainer/Items" instance=ExtResource("38_081ql")]
-position = Vector2(-1814, 3372)
-rotation = 0.787773
-
-[node name="BaseItem3" parent="LevelContainer/Items" instance=ExtResource("38_081ql")]
-position = Vector2(-632, 3297)
-rotation = -2.43263
-
-[node name="BaseItem4" parent="LevelContainer/Items" instance=ExtResource("38_081ql")]
-position = Vector2(-1992, 3198)
-rotation = 0.808024
-
-[node name="BaseItem5" parent="LevelContainer/Items" instance=ExtResource("38_081ql")]
-position = Vector2(-2075, 3116)
-rotation = 0.808024
-
-[node name="RockItem" parent="LevelContainer/Items" instance=ExtResource("39_081ql")]
-position = Vector2(-411, 3096)
-rotation = -0.727022
-
-[node name="RockItem2" parent="LevelContainer/Items" instance=ExtResource("39_081ql")]
-position = Vector2(-1356, 3781)
-
-[node name="RockItem3" parent="LevelContainer/Items" instance=ExtResource("39_081ql")]
-position = Vector2(-1615, 2490)
-
-[node name="RockItem4" parent="LevelContainer/Items" instance=ExtResource("39_081ql")]
-position = Vector2(-1305, 2829)
-rotation = 2.63551
-
-[node name="RockItem5" parent="LevelContainer/Items" instance=ExtResource("39_081ql")]
-position = Vector2(-889, 4037)
-
-[node name="RockItem6" parent="LevelContainer/Items" instance=ExtResource("39_081ql")]
-position = Vector2(-644, 3067)
-
-[node name="RockItem7" parent="LevelContainer/Items" instance=ExtResource("39_081ql")]
-position = Vector2(-398, 3480)
-rotation = -2.51431
-
-[node name="ResearchStation" type="Node2D" parent="LevelContainer" node_paths=PackedStringArray("position_node", "follower_spawn_node", "black_background", "research_station_area", "gravity_area", "exterior_polygon", "parallax_bubbles", "unlock_terminal")]
-script = ExtResource("12_jw53c")
-position_node = NodePath("ResearchStationPosition")
-follower_spawn_node = NodePath("FollowerSpawnPosition")
-black_background = NodePath("ColorRect")
-research_station_area = NodePath("ResearchStationArea")
-gravity_area = NodePath("GravityArea")
-exterior_polygon = NodePath("Exterior")
-parallax_bubbles = NodePath("../../ParallaxLayer")
-follower = ExtResource("13_gnr5v")
-unlock_terminal = NodePath("UnlockTerminal")
-metadata/_edit_lock_ = true
-
-[node name="Wall" type="Polygon2D" parent="LevelContainer/ResearchStation"]
-z_index = 8
-color = Color(0.854385, 0.854385, 0.854385, 1)
-polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819, -2678, 2744, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2676, 2757, -2678, 2743)
-metadata/_edit_lock_ = true
-
-[node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/ResearchStation/Wall"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/Wall/StaticBody2D"]
-visible = false
-polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2799, 2760)
-
-[node name="Background" type="Polygon2D" parent="LevelContainer/ResearchStation"]
-z_index = 7
-color = Color(0.334727, 0.334727, 0.334727, 1)
-polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
-metadata/_edit_lock_ = true
-
-[node name="Exterior" type="Polygon2D" parent="LevelContainer/ResearchStation"]
-visible = false
-z_index = 45
-color = Color(0.233925, 0.233925, 0.233925, 1)
-polygon = PackedVector2Array(-4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819)
-
-[node name="Floor" type="Polygon2D" parent="LevelContainer/ResearchStation"]
-z_index = 7
-color = Color(0.266575, 0.266575, 0.266575, 1)
-polygon = PackedVector2Array(-2678, 2651, -2670, 2762, -4259, 2798, -4309, 2689)
-metadata/_edit_lock_ = true
-
-[node name="GravityArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["gravity_areas"]]
-z_index = 7
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/GravityArea"]
-visible = false
-polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
-
-[node name="ResearchStationArea" type="Area2D" parent="LevelContainer/ResearchStation" groups=["research_station_area"]]
-z_index = 7
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/ResearchStation/ResearchStationArea"]
-visible = false
-polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2856, 2778, -2915, 2451)
-
-[node name="ResearchStationPosition" type="Node2D" parent="LevelContainer/ResearchStation"]
-z_index = 7
-position = Vector2(-3197, 2602)
-
-[node name="FollowerSpawnPosition" type="Node2D" parent="LevelContainer/ResearchStation"]
-z_index = 7
-position = Vector2(-3931, 2621)
-script = ExtResource("12_kali0")
-
-[node name="ColorRect" type="ColorRect" parent="LevelContainer/ResearchStation"]
-visible = false
-z_index = 6
-offset_left = -5463.0
-offset_top = 1296.0
-offset_right = -1271.0
-offset_bottom = 3961.0
-color = Color(0.0943156, 0.129072, 0.171545, 1)
-
-[node name="UnlockTerminal" parent="LevelContainer/ResearchStation" instance=ExtResource("13_bdf5b")]
-z_index = 7
-position = Vector2(-4062, 2624)
-scale = Vector2(0.8, 0.8)
-
-[node name="PointLight2D" type="PointLight2D" parent="LevelContainer/ResearchStation"]
-position = Vector2(-2601, 2591)
-energy = 3.0
-range_z_max = 30
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_081ql")
-metadata/_edit_lock_ = true
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
@@ -597,59 +283,13 @@ enemy_close_dist = 2500
 draw_spawn_positions = true
 enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg")])
 
-[node name="Arrowfish" parent="LevelContainer/Entities" instance=ExtResource("27_3fu4r")]
-position = Vector2(2013, 2592)
-
-[node name="Arrowfish2" parent="LevelContainer/Entities" instance=ExtResource("27_3fu4r")]
-position = Vector2(2207, 2456)
-
-[node name="Arrowfish3" parent="LevelContainer/Entities" instance=ExtResource("27_3fu4r")]
-position = Vector2(-2445, 2011)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -16766.0
-offset_top = -2999.0
-offset_right = 30085.0
-offset_bottom = 18181.0
+[node name="Background" type="ColorRect" parent="LevelContainer"]
+offset_left = -16513.0
+offset_top = -19959.0
+offset_right = 18529.0
+offset_bottom = 1221.0
 color = Color(0.0312209, 0.0673709, 0.274788, 1)
-
-[node name="ParallaxLayer" type="ParallaxBackground" parent="."]
-layer = 0
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxLayer"]
-motion_scale = Vector2(2, 2)
-motion_mirroring = Vector2(1920, 1080)
 metadata/_edit_lock_ = true
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxLayer/ParallaxLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(1.5, 1.5)
-texture = SubResource("ViewportTexture_gnvk0")
-metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxLayer"]
-motion_scale = Vector2(1.3, 1.3)
-motion_mirroring = Vector2(1920, 1080)
-metadata/_edit_lock_ = true
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxLayer/ParallaxLayer2"]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("ViewportTexture_gnvk0")
-metadata/_edit_use_anchors_ = true
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxLayer"]
-motion_scale = Vector2(0.7, 0.7)
-motion_mirroring = Vector2(1920, 1080)
-metadata/_edit_lock_ = true
-
-[node name="TextureRect" type="TextureRect" parent="ParallaxLayer/ParallaxLayer3"]
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.6, 0.6)
-texture = SubResource("ViewportTexture_gnvk0")
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3
@@ -659,7 +299,7 @@ metadata/_edit_lock_ = true
 
 [node name="ChatPanel" parent="UILayer/IngameUI/StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable" index="1" node_paths=PackedStringArray("teleport_places", "enemy_root")]
 teleport_place_names = Array[String](["research-station", "submarine"])
-teleport_places = [NodePath("../../../../../../LevelContainer/ResearchStation/ResearchStationPosition"), null]
+teleport_places = [null, null]
 enemy_root = NodePath("../../../../../../LevelContainer/Entities/EnemySpawner")
 
 [node name="DeathScreen" parent="UILayer" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("32_kyt52")]
@@ -678,17 +318,65 @@ ingame_ui = NodePath("../IngameUI")
 process_mode = 2
 visible = false
 
-[node name="ParticlesViewport" type="SubViewport" parent="."]
+[node name="Ligght and stuff" type="Node2D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Ligght and stuff"]
+environment = SubResource("Environment_5ulyy")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Ligght and stuff"]
+color = Color(0, 0, 0, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Ligght and stuff"]
+editor_only = true
+
+[node name="Bubbles" type="ParallaxBackground" parent="Ligght and stuff"]
+layer = 0
+
+[node name="BubblesLayer1" type="ParallaxLayer" parent="Ligght and stuff/Bubbles"]
+motion_scale = Vector2(2, 2)
+motion_mirroring = Vector2(1920, 1080)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Ligght and stuff/Bubbles/BubblesLayer1"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
+texture = SubResource("ViewportTexture_gnvk0")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="BubblesLayer2" type="ParallaxLayer" parent="Ligght and stuff/Bubbles"]
+motion_scale = Vector2(1.3, 1.3)
+motion_mirroring = Vector2(1920, 1080)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Ligght and stuff/Bubbles/BubblesLayer2"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_gnvk0")
+metadata/_edit_use_anchors_ = true
+
+[node name="BubblesLayer3" type="ParallaxLayer" parent="Ligght and stuff/Bubbles"]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1920, 1080)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Ligght and stuff/Bubbles/BubblesLayer3"]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.6, 0.6)
+texture = SubResource("ViewportTexture_gnvk0")
+
+[node name="BubblesViewport" type="SubViewport" parent="Ligght and stuff/Bubbles"]
 transparent_bg = true
 use_hdr_2d = true
 size = Vector2i(1920, 1080)
 
-[node name="WaterParticles" type="GPUParticles2D" parent="ParticlesViewport"]
+[node name="BubbleParticles" type="GPUParticles2D" parent="Ligght and stuff/Bubbles/BubblesViewport"]
 position = Vector2(960, 540)
-texture = SubResource("GradientTexture2D_0nxag")
+texture = ExtResource("22_l3b62")
 lifetime = 5.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_hcosd")
 
-[editable path="LevelContainer/Items/LightLine"]
 [editable path="UILayer/IngameUI"]

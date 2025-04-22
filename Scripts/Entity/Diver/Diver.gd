@@ -104,6 +104,7 @@ func _physics_process(_delta: float):
 		return
 	
 	_update_vel_rot()
+	
 	move_and_slide()
 	
 	_sync_multiplayer()
@@ -161,7 +162,7 @@ func _save() -> void:
 func _update_vel_rot() -> void:
 	if get_state() == DiverState.DRIVING_SUBMARINE:
 		return
-		
+	
 	velocity = diver_movement.get_velocity()
 	
 	if get_state() == DiverState.IN_GRAVITY_AREA:

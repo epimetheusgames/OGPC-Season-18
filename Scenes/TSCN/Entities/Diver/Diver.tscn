@@ -106,7 +106,6 @@ script = ExtResource("1_soyuq")
 camera = NodePath("Camera2D")
 
 [node name="Body" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_ghsq1")
 

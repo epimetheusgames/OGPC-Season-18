@@ -37,16 +37,21 @@ func _ready() -> void:
 		collision_body.add_child(collision_polygon)
 		
 		collision_polygon.polygon = self.polygon
+		collision_polygon.position = offset
 	
 	if occluder == null:
 		occluder = LightOccluder2D.new()
 		add_child(occluder)
 		occluder.occluder = OccluderPolygon2D.new()
-		occluder.occluder.polygon = get_smaller_polygon(polygon, 0)
+		occluder.occluder.polygon = polygon
+		occluder.position = offset
 		occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
 		
 	collision_body.collision_layer = 3
+	
+	print_tree_pretty()
 
+"""
 func get_smaller_polygon(points: PackedVector2Array, shrink_distance: float) -> PackedVector2Array:
 	if points.size() == 0:
 		return points
@@ -62,3 +67,4 @@ func get_smaller_polygon(points: PackedVector2Array, shrink_distance: float) -> 
 		smaller_polygon.append(vertex - direction * shrink_distance)
 	
 	return smaller_polygon
+"""
