@@ -8,8 +8,7 @@ func _ready() -> void:
 	#shake(10, 1
 
 func _process(delta: float) -> void:
-	
-	print(target_position)
+	pass
 	#global_position = target_position
 
 func shake(force: int, duration: float) -> void:

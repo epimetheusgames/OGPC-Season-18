@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=3 uid="uid://brtj1ur8tgigg"]
+
+[ext_resource type="Script" uid="uid://bthrd0wdm5ufn" path="res://Scripts/Level/ResearchStation.gd" id="1_bt1gc"]
+[ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="1_sxr26"]
+[ext_resource type="PackedScene" uid="uid://bp7br2o4yntou" path="res://Scenes/TSCN/UI/UnlockTerminal.tscn" id="2_bt1gc"]
+
+[sub_resource type="Gradient" id="Gradient_mcejo"]
+offsets = PackedFloat32Array(0, 0.675781, 1)
+colors = PackedColorArray(1, 1, 1, 0.501961, 1, 1, 1, 0.0745098, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gk820"]
+gradient = SubResource("Gradient_mcejo")
+width = 1000
+height = 1000
+fill = 1
+fill_from = Vector2(0.5, 0.527778)
+fill_to = Vector2(0.846154, 0.865385)
+
+[node name="ResearchStation" type="Node2D"]
+script = ExtResource("1_bt1gc")
+
+[node name="Wall" type="Polygon2D" parent="."]
+z_index = 8
+position = Vector2(3322, -2471)
+color = Color(0.854385, 0.854385, 0.854385, 1)
+polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819, -2678, 2744, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2676, 2757, -2678, 2743)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall/StaticBody2D"]
+polygon = PackedVector2Array(-2577, 2819, -4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2748, 2466, -2834, 2471, -2976, 2256, -3218, 2217, -3561, 2245, -3989, 2330, -4243, 2497, -4273, 2745, -4224, 2782, -2799, 2760)
+
+[node name="Background" type="Polygon2D" parent="."]
+z_index = 7
+position = Vector2(3322, -2471)
+color = Color(0.334727, 0.334727, 0.334727, 1)
+polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
+
+[node name="Exterior" type="Polygon2D" parent="."]
+z_index = 45
+color = Color(0.233925, 0.233925, 0.233925, 1)
+polygon = PackedVector2Array(-4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819)
+
+[node name="Floor" type="Polygon2D" parent="."]
+visible = false
+z_index = 7
+position = Vector2(3322, -2471)
+color = Color(0.266575, 0.266575, 0.266575, 1)
+polygon = PackedVector2Array(-2678, 2651, -2670, 2762, -4259, 2798, -4309, 2689)
+
+[node name="GravityArea" type="Area2D" parent="." groups=["gravity_areas"]]
+z_index = 7
+position = Vector2(3322, -2471)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GravityArea"]
+visible = false
+polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
+
+[node name="ResearchStationArea" type="Area2D" parent="." groups=["research_station_area"]]
+z_index = 7
+position = Vector2(5472, -3829)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ResearchStationArea"]
+visible = false
+polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2856, 2778, -2915, 2451)
+
+[node name="ResearchStationPosition" type="Node2D" parent="."]
+z_index = 7
+position = Vector2(2275, -1227)
+
+[node name="FollowerSpawnPosition" type="Node2D" parent="."]
+z_index = 7
+position = Vector2(1541, -1208)
+script = ExtResource("1_sxr26")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = 6
+offset_left = -5463.0
+offset_top = 1296.0
+offset_right = -1271.0
+offset_bottom = 3961.0
+color = Color(0.0943156, 0.129072, 0.171545, 1)
+
+[node name="UnlockTerminal" parent="." instance=ExtResource("2_bt1gc")]
+z_index = 7
+position = Vector2(1410, -1205)
+scale = Vector2(0.8, 0.8)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(721, 120)
+energy = 3.0
+range_z_max = 30
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_gk820")

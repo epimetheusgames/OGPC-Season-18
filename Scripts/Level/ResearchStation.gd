@@ -1,13 +1,14 @@
 class_name ResearchStation
 extends Node2D
 
-@export var position_node: Node2D
-@export var follower_spawn_node: Node2D
-@export var black_background: ColorRect
-@export var research_station_area: Area2D
-@export var gravity_area: Area2D
-@export var exterior_polygon: Polygon2D
-@export var parallax_bubbles: ParallaxBackground
+@onready var position_node: Node2D = $"ResearchStationPosition"
+@onready var follower_spawn_node: Node2D = $"FollowerSpawnPosition"
+@onready var black_background: ColorRect = $"ColorRect"
+@onready var research_station_area: Area2D = $"ResearchStationArea"
+@onready var gravity_area: Area2D = $"GravityArea"
+@onready var exterior_polygon: Polygon2D = $"Exterior"
+
+@onready var parallax_bubbles: ParallaxBackground # plugh
 @export var follower: PackedScene
 @export var unlock_terminal: UnlockTerminal
 

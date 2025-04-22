@@ -18,7 +18,6 @@ func _ready() -> void:
 		add_child(new_kelp_segment)
 		kelp_segments.append(new_kelp_segment)
 	
-	print(kelp_segments.size())
 	rope.end_pos_on = true
 
 func _process(delta: float) -> void:
