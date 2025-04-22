@@ -308,11 +308,51 @@ auto_calculate_length_and_angle = false
 length = 42.0
 bone_angle = 0.0
 metadata/_edit_lock_ = true
-metadata/_local_pose_override_enabled_ = true
 
 [node name="Forearm1" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm1"]
-position = Vector2(38.9137, 2.59425)
-rest = Transform2D(1, 0, 0, 1, 38.9137, 2.59425)
+use_parent_material = true
+position = Vector2(36.7337, 11.7541)
+rotation = -1.39184
+scale = Vector2(1.08388, 1.00115)
+skew = -5.6386e-05
+rest = Transform2D(1.06785, -0.185714, 0.171539, 0.986349, 40.2459, 12.0526)
+auto_calculate_length_and_angle = false
+length = 37.0
+bone_angle = 28.0
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm1/Forearm1"]
+position = Vector2(17.8001, 8.27792)
+rotation = 1.96787
+scale = Vector2(0.986316, 0.936111)
+skew = 0.0597258
+occluder = SubResource("OccluderPolygon2D_k7w8u")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Animation/Skeleton/Torso/UpperArm1"]
+position = Vector2(118.86, -140.568)
+rotation = 1.85157
+scale = Vector2(1.00006, 1.00006)
+occluder = SubResource("OccluderPolygon2D_u101i")
+occluder_light_mask = 2
+metadata/_edit_lock_ = true
+
+[node name="UpperArm2" type="Bone2D" parent="Animation/Skeleton/Torso"]
+use_parent_material = true
+position = Vector2(-5, -52)
+rotation = 2.97263
+scale = Vector2(0.999991, 0.999991)
+rest = Transform2D(0.984064, 0.177815, -0.177815, 0.984064, -18, -55)
+metadata/_local_pose_override_enabled_ = true
+metadata/_edit_lock_ = true
+
+[node name="Forearm2" type="Bone2D" parent="Animation/Skeleton/Torso/UpperArm2"]
+use_parent_material = true
+position = Vector2(-41.3307, 7.46825)
+rotation = 0.187753
+scale = Vector2(0.999998, 0.999998)
+rest = Transform2D(0.984562, 0.175033, -0.175033, 0.984562, -41.3307, 7.46825)
 auto_calculate_length_and_angle = false
 length = 38.0
 bone_angle = 0.0
