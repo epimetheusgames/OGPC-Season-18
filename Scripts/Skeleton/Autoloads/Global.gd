@@ -179,6 +179,6 @@ func is_multiplayer_host() -> bool:
 ## Set game brightness throuhg brightness modulate, based on percentage from 0 to 100
 func set_brightness(percentage):
 	brightness_decimal = percentage/100
-	brightness_modulate.color.r = 255*brightness_decimal
-	brightness_modulate.color.g = 255*brightness_decimal
-	brightness_modulate.color.b = 255*brightness_decimal
+	brightness_modulate.color.r = brightness_decimal
+	brightness_modulate.color.g = brightness_decimal
+	brightness_modulate.color.b = brightness_decimal
