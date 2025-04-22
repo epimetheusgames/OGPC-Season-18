@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://cqn1ekjfcc0fx" path="res://Assets/Music/Sunlight.mp3" id="5_3fu4r"]
 [ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
 [ext_resource type="PackedScene" uid="uid://6ajyn7xeilmv" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="12_mcejo"]
-[ext_resource type="PackedScene" path="res://Scenes/ResearchStation.tscn" id="13_eg3rs"]
+[ext_resource type="PackedScene" uid="uid://brtj1ur8tgigg" path="res://Scenes/ResearchStation.tscn" id="13_eg3rs"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
@@ -166,7 +166,7 @@ glow_levels/6 = 0.2
 glow_blend_mode = 0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gnvk0"]
-viewport_path = NodePath("Ligght and stuff/Bubbles/BubblesViewport")
+viewport_path = NodePath("Light and stuff/Bubbles/BubblesViewport")
 
 [sub_resource type="Curve" id="Curve_6rk86"]
 _data = [Vector2(0, 0), 0.0, 23.2523, 0, 0, Vector2(0.125645, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.185794, 0.0, 0, 0]
@@ -260,14 +260,7 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
 position = Vector2(-963, 308)
-no_movement = false
-oxygen_loss = 0.01
-oxygen_boost_loss = 1
-_has_physics = false
 uid = SubResource("Resource_eg3rs")
-has_multiplayer_sync = true
-sync_by_increment = false
-sync_increment = 0.0
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
 position = Vector2(-1315, 1706)
@@ -326,26 +319,26 @@ ingame_ui = NodePath("../IngameUI")
 process_mode = 2
 visible = false
 
-[node name="Ligght and stuff" type="Node2D" parent="."]
+[node name="Light and stuff" type="Node2D" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Ligght and stuff"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Light and stuff"]
 environment = SubResource("Environment_5ulyy")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="Ligght and stuff"]
+[node name="CanvasModulate" type="CanvasModulate" parent="Light and stuff"]
 color = Color(0, 0, 0, 1)
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Ligght and stuff"]
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Light and stuff"]
 editor_only = true
 
-[node name="Bubbles" type="ParallaxBackground" parent="Ligght and stuff"]
+[node name="Bubbles" type="ParallaxBackground" parent="Light and stuff"]
 layer = 0
 
-[node name="BubblesLayer1" type="ParallaxLayer" parent="Ligght and stuff/Bubbles"]
+[node name="BubblesLayer1" type="ParallaxLayer" parent="Light and stuff/Bubbles"]
 motion_scale = Vector2(2, 2)
 motion_mirroring = Vector2(1920, 1080)
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Ligght and stuff/Bubbles/BubblesLayer1"]
+[node name="TextureRect" type="TextureRect" parent="Light and stuff/Bubbles/BubblesLayer1"]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(1.5, 1.5)
@@ -353,34 +346,34 @@ texture = SubResource("ViewportTexture_gnvk0")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="BubblesLayer2" type="ParallaxLayer" parent="Ligght and stuff/Bubbles"]
+[node name="BubblesLayer2" type="ParallaxLayer" parent="Light and stuff/Bubbles"]
 motion_scale = Vector2(1.3, 1.3)
 motion_mirroring = Vector2(1920, 1080)
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Ligght and stuff/Bubbles/BubblesLayer2"]
+[node name="TextureRect" type="TextureRect" parent="Light and stuff/Bubbles/BubblesLayer2"]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("ViewportTexture_gnvk0")
 metadata/_edit_use_anchors_ = true
 
-[node name="BubblesLayer3" type="ParallaxLayer" parent="Ligght and stuff/Bubbles"]
+[node name="BubblesLayer3" type="ParallaxLayer" parent="Light and stuff/Bubbles"]
 motion_scale = Vector2(0.7, 0.7)
 motion_mirroring = Vector2(1920, 1080)
 metadata/_edit_lock_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Ligght and stuff/Bubbles/BubblesLayer3"]
+[node name="TextureRect" type="TextureRect" parent="Light and stuff/Bubbles/BubblesLayer3"]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.6, 0.6)
 texture = SubResource("ViewportTexture_gnvk0")
 
-[node name="BubblesViewport" type="SubViewport" parent="Ligght and stuff/Bubbles"]
+[node name="BubblesViewport" type="SubViewport" parent="Light and stuff/Bubbles"]
 transparent_bg = true
 use_hdr_2d = true
 size = Vector2i(1920, 1080)
 
-[node name="BubbleParticles" type="GPUParticles2D" parent="Ligght and stuff/Bubbles/BubblesViewport"]
+[node name="BubbleParticles" type="GPUParticles2D" parent="Light and stuff/Bubbles/BubblesViewport"]
 position = Vector2(960, 540)
 texture = ExtResource("22_l3b62")
 lifetime = 5.0

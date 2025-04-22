@@ -259,6 +259,7 @@ func generate_ui_elements() -> void:
 				new_buttons[-1].keybind_changed.connect(self._on_template_button_keybind_changed)
 				new_buttons[-1].set_meta("action", keybind_config_data["keybinds"][actionIterator]["actionName"])
 				new_buttons[-1].set_meta("key_number", event_iterator)
+				new_buttons[-1].visible = true	
 			last_entry_pos = new_text.position
 	else:
 		var new_text := RichTextLabel.new()
