@@ -41,8 +41,6 @@ var overheating := false
 func _ready() -> void:
 	max_rotation = rotation_degrees + rotation_range/2
 	min_rotation = rotation_degrees - rotation_range/2
-	print(max_rotation)
-	print(min_rotation)
 	# common kai W code
 	shot_timer = Timer.new()
 	shot_timer.one_shot = true
@@ -62,8 +60,7 @@ func _on_passive_decrease_timer_timeout() -> void:
 
 func _physics_process(delta: float) -> void:
 	heat_shader.set_shader_parameter("heat", heat)
-	#print(heat)
-	print(heat_shader.get_shader_parameter("heat"))
+	
 	if passive_heat_drain:
 		heat -= passive_heat_decrease_per_sec * delta
 		if heat <= 0:

@@ -67,6 +67,7 @@ building_area=""
 unlock_terminal_area=""
 obstacles=""
 submarine_area="The area of the submarine interior"
+ladder_area=""
 
 [input]
 

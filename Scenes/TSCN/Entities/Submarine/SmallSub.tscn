@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://6ajyn7xeilmv"]
+[gd_scene load_steps=11 format=3 uid="uid://6ajyn7xeilmv"]
 
 [ext_resource type="Script" uid="uid://0js7gtnvp1vm" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_ru2mo"]
 [ext_resource type="Script" uid="uid://bpcsoat0wk1ci" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_eisgo"]
@@ -11,6 +11,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvx1j"]
 size = Vector2(96, 139)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxi20"]
+size = Vector2(80, 250)
 
 [node name="Submarine" type="CharacterBody2D"]
 script = ExtResource("1_ru2mo")
@@ -77,9 +80,15 @@ shadow_enabled = true
 texture = ExtResource("7_d1qs6")
 
 [node name="SubmarineAura" type="PointLight2D" parent="."]
-position = Vector2(4, 7)
+position = Vector2(12, 13)
 energy = 0.25
 texture = ExtResource("8_bxi20")
+
+[node name="LadderArea" type="Area2D" parent="." groups=["ladder_area"]]
+position = Vector2(125, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderArea"]
+shape = SubResource("RectangleShape2D_bxi20")
 
 [connection signal="area_entered" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_exited"]
