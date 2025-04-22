@@ -125,9 +125,10 @@ seconds_per_ten_minutes = 1
 [node name="DiscordRPC" type="Node" parent="Skeleton"]
 script = ExtResource("11_bhkpb")
 
-[node name="UI" type="Container" parent="." node_paths=PackedStringArray("BrightnessSlider", "PerformanceButton", "SoundSlider")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("BrightnessSlider", "PerformanceButton", "SoundSlider")]
 process_mode = 3
 z_index = 11
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -140,11 +141,16 @@ BrightnessSlider = NodePath("MenuSettings/HBoxContainer/VBoxContainer/VBoxContai
 PerformanceButton = NodePath("MenuSettings/HBoxContainer/VBoxContainer/HBoxContainer/PerformanceModeButton")
 SoundSlider = NodePath("MenuSettings/SoundSubMenu/HBoxContainer/VBoxContainer/MasterVolumeSlider")
 
-[node name="MenuSettings" type="Container" parent="UI" node_paths=PackedStringArray("BrightnessSlider", "PerformanceButton", "SoundSlider")]
+[node name="MenuSettings" type="BoxContainer" parent="UI" node_paths=PackedStringArray("BrightnessSlider", "PerformanceButton", "SoundSlider")]
 process_mode = 3
+visible = false
 z_index = 22
 layout_mode = 2
+offset_right = 1904.0
+offset_bottom = 978.0
 mouse_filter = 2
+alignment = 1
+vertical = true
 script = ExtResource("12_c76v7")
 BrightnessSlider = NodePath("HBoxContainer/VBoxContainer/VBoxContainer/BrightnessSlider")
 PerformanceButton = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/PerformanceModeButton")
@@ -157,15 +163,13 @@ texture_normal = ExtResource("21_eg08b")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/MenuSettings"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_constants/separation = 50
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MenuSettings/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_stretch_ratio = 11.8
 mouse_filter = 2
 alignment = 1
@@ -179,7 +183,7 @@ text = "Edit Keybinds"
 
 [node name="SoundButton" type="Button" parent="UI/MenuSettings/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 6
 theme_override_font_sizes/font_size = 46
 action_mode = 0
 text = "Sound Settings"
@@ -188,7 +192,7 @@ text = "Sound Settings"
 clip_contents = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
 mouse_filter = 2
 alignment = 1
 
@@ -209,7 +213,7 @@ text = "Turn On"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MenuSettings/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 6
 mouse_filter = 2
 alignment = 1
 
@@ -303,6 +307,7 @@ metadata/action = ""
 [node name="MainMenu" type="Control" parent="UI"]
 z_index = 9
 layout_mode = 2
+anchors_preset = 0
 script = ExtResource("15_5virq")
 
 [node name="GameTitle" type="Label" parent="UI/MainMenu"]
