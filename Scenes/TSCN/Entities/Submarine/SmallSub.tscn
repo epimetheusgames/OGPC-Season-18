@@ -16,6 +16,7 @@ size = Vector2(96, 139)
 size = Vector2(80, 250)
 
 [node name="Submarine" type="CharacterBody2D"]
+z_index = 10
 script = ExtResource("1_ru2mo")
 metadata/_custom_type_script = "uid://0js7gtnvp1vm"
 
@@ -43,7 +44,8 @@ position = Vector2(4, 7)
 texture = ExtResource("3_j4tp4")
 
 [node name="SubmarineWeaponSlot" type="Node2D" parent="."]
-position = Vector2(-136, 194)
+z_index = -1
+position = Vector2(-124, 179)
 rotation = 2.35619
 script = ExtResource("4_j4tp4")
 metadata/_custom_type_script = "uid://dxlkbqcv2x2hh"
@@ -53,17 +55,20 @@ metadata/_edit_lock_ = true
 
 [node name="Collision" type="Node2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collision"]
+[node name="BottomRight" type="CollisionPolygon2D" parent="Collision"]
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(-110, 238, 385, 240, 492, 31, 319, 31, 319, -19, 360, 2, 494, 2, 502, 10, 502, 43, 408, 233, 388, 241, 360, 272, 310, 299, 234, 304, 193, 332, 40, 333, 26, 304, -121, 302, -123, 266, -118, 258, -126, 244)
+polygon = PackedVector2Array(-110, 238, -59, 225, -52, 225, -21, 240, 385, 240, 493, 28, 379, 28, 379, -19, 408, 2, 494, 2, 502, 10, 502, 43, 408, 233, 388, 241, 360, 272, 310, 299, 234, 304, 193, 332, 40, 333, 26, 304, -121, 302, -123, 266, -118, 258, -126, 244)
 
-[node name="Bubble" type="CollisionPolygon2D" parent="Collision"]
+[node name="Cage" type="CollisionPolygon2D" parent="Collision"]
 position = Vector2(-150, -125)
 polygon = PackedVector2Array(0, 2, 3, 18, -60, 21, -131, 45, -159, 72, -165, 127, -141, 190, -110, 238, -126, 244, -169, 167, -182, 118, -179, 83, -164, 52, -113, 20, -39, 4)
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collision"]
+[node name="Top" type="CollisionPolygon2D" parent="Collision"]
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(0, 2, 192, 2, 230, -19, 230, 30, 19, 30, 3, 18)
+polygon = PackedVector2Array(0, 2, 270, 2, 296, -19, 296, 28, 50.4275, 28, 22, 32, 14, 27, 3, 18)
+
+[node name="Bubble" type="CollisionPolygon2D" parent="Collision"]
+polygon = PackedVector2Array(-209, 100, -202, 100, -212, 89, -220, 77, -226, 65, -231, 49, -234, 32, -234, 20, -232, 2, -228, -14, -221, -32, -212, -47, -200, -60, -188, -71, -171, -82, -152, -89, -139, -92, -133, -92, -128, -93, -136, -98, -163, -92, -191, -76, -219, -47, -238, 2, -238, 39, -228, 70)
 
 [node name="Headlight" type="PointLight2D" parent="."]
 position = Vector2(-276, 156)
@@ -73,20 +78,23 @@ energy = 10.0
 range_z_max = 10
 texture = ExtResource("6_qnb0f")
 offset = Vector2(0, 20)
+metadata/_edit_lock_ = true
 
 [node name="SubmarineInteriorLight" type="PointLight2D" parent="."]
 position = Vector2(4, 7)
 energy = 2.0
 shadow_enabled = true
 texture = ExtResource("7_d1qs6")
+metadata/_edit_lock_ = true
 
 [node name="SubmarineAura" type="PointLight2D" parent="."]
 position = Vector2(12, 13)
 energy = 0.25
 texture = ExtResource("8_bxi20")
+metadata/_edit_lock_ = true
 
 [node name="LadderArea" type="Area2D" parent="." groups=["ladder_area"]]
-position = Vector2(125, -10)
+position = Vector2(187.5, -10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LadderArea"]
 shape = SubResource("RectangleShape2D_bxi20")
