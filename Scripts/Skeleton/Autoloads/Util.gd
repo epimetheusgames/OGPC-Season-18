@@ -99,6 +99,10 @@ static func better_angle_lerp(a: float, b: float, decay: float, delta: float):
 	decay = (decay * 25.0)
 	return b + (angle_difference(b, a)) * exp(-decay * delta)
 
+## Takes returns whichever value between y and z that x is closest to
+static func snap_to_nearest(x: float, y: float, z: float):
+	return y if abs(x-y) <= abs(x-z) else z
+
 ## Turns an angle in degrees and a magnitude in pixels to a vector.
 static func angle_to_vector_degrees(angle: float, magnitude: float) -> Vector2:
 	var x: float = magnitude * cos(deg_to_rad(angle))

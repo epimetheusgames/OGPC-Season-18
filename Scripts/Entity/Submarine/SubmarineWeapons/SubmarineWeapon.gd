@@ -23,6 +23,7 @@ var passive_decrease_timer : Timer
 var is_being_operated := false
 
 var in_rotation_range := true
+var buffer_angle := 0.0
 
 var shot_timer_over := true
 
@@ -51,6 +52,9 @@ func _ready() -> void:
 	passive_decrease_timer.one_shot = true
 	add_child(passive_decrease_timer)
 	passive_decrease_timer.connect("timeout", _on_passive_decrease_timer_timeout)
+	print(rotation_range)
+	print(max_rotation)
+	print(min_rotation)
 
 func _on_shot_cooldown_timeout() -> void:
 	shot_timer_over = true
@@ -88,6 +92,13 @@ func _physics_process(delta: float) -> void:
 		var mouse_vector_angle = (get_global_mouse_position()-global_position).angle() - get_parent().global_rotation
 		if clamp(rad_to_deg(mouse_vector_angle), min_rotation, max_rotation) == rad_to_deg(mouse_vector_angle):
 			target_rot = mouse_vector_angle
+			in_rotation_range = true
+		elif in_rotation_range == true:
+			buffer_angle = deg_to_rad(Util.snap_to_nearest(target_rot, min_rotation, max_rotation))
+			in_rotation_range = false
+			target_rot = buffer_angle
+		else:
+			target_rot = buffer_angle
 		
 		rotation = Util.better_angle_lerp(rotation, target_rot, .2, delta)
 
