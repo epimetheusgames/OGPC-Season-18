@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl7oejcvhsgci"]
+[gd_scene load_steps=5 format=3 uid="uid://dl7oejcvhsgci"]
 
 [ext_resource type="Script" uid="uid://cwlxani8o4mm" path="res://Kelp/Kelp.gd" id="1_jrc13"]
 [ext_resource type="PackedScene" uid="uid://cdjlclue36iw6" path="res://Kelp/KelpSegment.tscn" id="2_yqwc2"]
 [ext_resource type="Script" uid="uid://cdi0hiygq0pte" path="res://Scripts/Components/Rope/RopeLineDrawer.gd" id="3_yqwc2"]
 [ext_resource type="Script" uid="uid://cxt7y067vc2qg" path="res://Scripts/Components/Rope/VerletRope.gd" id="5_efvqj"]
-[ext_resource type="Texture2D" uid="uid://c63kp7rpxgd22" path="res://Assets/Art/Level/Kelp.png" id="5_puba8"]
 
 [node name="Kelp" type="Node2D"]
-z_index = 485
+z_index = 1
+z_as_relative = false
 script = ExtResource("1_jrc13")
 length = 45
 kelp = ExtResource("2_yqwc2")
@@ -29,6 +29,7 @@ smoothing_on = true
 resolution_multiplier = 5.0
 metadata/_custom_type_script = "uid://cdi0hiygq0pte"
 
-[node name="Kelp" type="Sprite2D" parent="."]
-position = Vector2(73, -50)
-texture = ExtResource("5_puba8")
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+z_index = -4096
+position = Vector2(11, -2618.25)
+scale = Vector2(27, 268.375)

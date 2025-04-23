@@ -264,14 +264,16 @@ position = Vector2(-13452, -5825)
 uid = SubResource("Resource_qhgdr")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
+z_index = 1
 position = Vector2(-11386, -6296)
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine"]
 script = ExtResource("21_pr3qq")
 buoyancy_accel = 0.0
 
-[node name="ResearchStation" parent="LevelContainer" instance=ExtResource("13_eg3rs")]
+[node name="ResearchStation" parent="LevelContainer" node_paths=PackedStringArray("parallax_bubbles") instance=ExtResource("13_eg3rs")]
 position = Vector2(-13107, -5905)
+parallax_bubbles = NodePath("../../Light and stuff/Bubbles")
 metadata/_edit_lock_ = true
 
 [node name="Items" type="Node2D" parent="LevelContainer"]
@@ -295,6 +297,15 @@ metadata/_edit_lock_ = true
 
 [node name="Kelp" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
 position = Vector2(-12022, -5559)
+
+[node name="Kelp2" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
+position = Vector2(-11822, -5559)
+
+[node name="Kelp3" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
+position = Vector2(-11598, -5559)
+
+[node name="Kelp4" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
+position = Vector2(-11422, -5559)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3

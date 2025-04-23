@@ -31,6 +31,9 @@ func _ready() -> void:
 			sway_amplitudes.append(0.0)
 
 func _process(delta: float) -> void:
+	if !$VisibleOnScreenNotifier2D.is_on_screen():
+		return
+	
 	if first_time:
 		first_time = false
 		return
@@ -39,7 +42,7 @@ func _process(delta: float) -> void:
 	
 	for i in range(length - 1):
 		var kelp_segment: KelpSegment = kelp_segments[i]
-		kelp_segment.global_position = drawer.points[i]
+		kelp_segment.global_position = (drawer.points[i] + drawer.points[i + 1]) / 2.0
 		
 		if i > 0 && i < length - 1:
 			var dir := drawer.points[i - 1].direction_to(drawer.points[i + 1])

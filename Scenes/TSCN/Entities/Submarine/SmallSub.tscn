@@ -70,6 +70,7 @@ position = Vector2(-276, 156)
 rotation = 4.71239
 scale = Vector2(1.5, 1.5)
 energy = 10.0
+range_z_max = 10
 texture = ExtResource("6_qnb0f")
 offset = Vector2(0, 20)
 

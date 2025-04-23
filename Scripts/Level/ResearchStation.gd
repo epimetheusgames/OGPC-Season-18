@@ -8,7 +8,7 @@ extends Node2D
 @onready var gravity_area: Area2D = $"GravityArea"
 @onready var exterior_polygon: Polygon2D = $"Exterior"
 
-@onready var parallax_bubbles: ParallaxBackground # plugh
+@export var parallax_bubbles: ParallaxBackground
 @export var follower: PackedScene
 @export var unlock_terminal: UnlockTerminal
 
@@ -46,7 +46,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if !black_background || !exterior_polygon || !parallax_bubbles:
 		return
-
+	
 	if player_in_area && black_background.modulate.a < 1:
 		black_background.modulate.a = 1
 		exterior_polygon.modulate.a = 0
