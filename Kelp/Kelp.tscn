@@ -1,25 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl7oejcvhsgci"]
+[gd_scene load_steps=6 format=3 uid="uid://dl7oejcvhsgci"]
 
 [ext_resource type="Script" uid="uid://cwlxani8o4mm" path="res://Kelp/Kelp.gd" id="1_jrc13"]
-[ext_resource type="Script" uid="uid://baedw6bviawtd" path="res://Scripts/Components/Rope/FabrikRope.gd" id="2_yos12"]
 [ext_resource type="PackedScene" uid="uid://cdjlclue36iw6" path="res://Kelp/KelpSegment.tscn" id="2_yqwc2"]
 [ext_resource type="Script" uid="uid://cdi0hiygq0pte" path="res://Scripts/Components/Rope/RopeLineDrawer.gd" id="3_yqwc2"]
+[ext_resource type="Script" uid="uid://cxt7y067vc2qg" path="res://Scripts/Components/Rope/VerletRope.gd" id="5_efvqj"]
+[ext_resource type="Texture2D" uid="uid://c63kp7rpxgd22" path="res://Assets/Art/Level/Kelp.png" id="5_puba8"]
 
 [node name="Kelp" type="Node2D"]
-position = Vector2(337, 346)
+z_index = 485
 script = ExtResource("1_jrc13")
-length = 50
+length = 45
 kelp = ExtResource("2_yqwc2")
 
-[node name="FabrikRope" type="Node" parent="." node_paths=PackedStringArray("start_anchor_node")]
-script = ExtResource("2_yos12")
-point_amount = 50
-point_separation = 80.0
+[node name="VerletRope" type="Node" parent="." node_paths=PackedStringArray("start_anchor_node")]
+script = ExtResource("5_efvqj")
+gravity = Vector2(0, 0)
+point_amount = 10
+point_separation = 400.0
 start_anchor_node = NodePath("..")
-metadata/_custom_type_script = "uid://baedw6bviawtd"
+metadata/_custom_type_script = "uid://cxt7y067vc2qg"
 
 [node name="RopeLineDrawer" type="Line2D" parent="." node_paths=PackedStringArray("rope")]
 visible = false
+default_color = Color(0.09, 1, 0.469167, 1)
 script = ExtResource("3_yqwc2")
-rope = NodePath("../FabrikRope")
+rope = NodePath("../VerletRope")
+smoothing_on = true
+resolution_multiplier = 5.0
 metadata/_custom_type_script = "uid://cdi0hiygq0pte"
+
+[node name="Kelp" type="Sprite2D" parent="."]
+position = Vector2(73, -50)
+texture = ExtResource("5_puba8")

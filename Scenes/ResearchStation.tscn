@@ -37,12 +37,13 @@ color = Color(0.334727, 0.334727, 0.334727, 1)
 polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494, -4302, 2757, -4217, 2802, -2642, 2778, -2730, 2448)
 
 [node name="Exterior" type="Polygon2D" parent="."]
+visible = false
 z_index = 45
+position = Vector2(3322, -2471)
 color = Color(0.233925, 0.233925, 0.233925, 1)
 polygon = PackedVector2Array(-4248, 2840, -4355, 2768, -4315, 2426, -4005, 2239, -3559, 2159, -3208, 2131, -2928, 2188, -2779, 2401, -2699, 2398, -2576, 2819)
 
 [node name="Floor" type="Polygon2D" parent="."]
-visible = false
 z_index = 7
 position = Vector2(3322, -2471)
 color = Color(0.266575, 0.266575, 0.266575, 1)
@@ -84,7 +85,7 @@ color = Color(0.0943156, 0.129072, 0.171545, 1)
 
 [node name="UnlockTerminal" parent="." instance=ExtResource("2_bt1gc")]
 z_index = 7
-position = Vector2(1410, -1205)
+position = Vector2(-729, 141)
 scale = Vector2(0.8, 0.8)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]

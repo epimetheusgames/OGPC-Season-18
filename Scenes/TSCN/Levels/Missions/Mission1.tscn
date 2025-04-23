@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=41 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
+[ext_resource type="PackedScene" uid="uid://dl7oejcvhsgci" path="res://Kelp/Kelp.tscn" id="19_qhgdr"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Texture2D" uid="uid://ctwe161d8x2ne" path="res://Assets/Art/Misc/Bubble.png" id="22_l3b62"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
@@ -130,7 +131,7 @@ shader_parameter/color_multiplier = 0.4
 shader_parameter/in_tex = SubResource("GradientTexture1D_dhgix")
 shader_parameter/edge_tex = ExtResource("3_kali0")
 
-[sub_resource type="Resource" id="Resource_eg3rs"]
+[sub_resource type="Resource" id="Resource_qhgdr"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -227,7 +228,7 @@ position = Vector2(11006, 34721)
 material = SubResource("ShaderMaterial_2sekr")
 position = Vector2(-7958, -33141)
 scale = Vector2(0.4, 0.4)
-polygon = PackedVector2Array(-16102, -6397, -10730.5, -14054.5, -12680.5, -16324.5, -10835.5, -19392, -2505.5, -19292, -7068, -11859.5, -1830.5, -10439.5, 4579.5, -11087, -1233, -5424.5, -4625.5, 785.502, -8580.5, 1333, -10825.5, -1509.5, -12745.5, -161.998, -14721, 1452, -13796, 9374, -10181, 9442, -13917, 11918, -13135, 14785, -10322, 17194, -5115, 15961, -3628, 18320, 4084, 18736, 8248, 11064, 7782, 16437, 8288, 17897, 10148, 19744, 14951, 20383, 18841, 17436, 17879, 13068, 13139, 10374, 21138, 9781, 27991, 6580, 24800, 13281, 24105, 15820, 26569, 17479, 37124, 19129, 44553, 18478, 50121, 15768, 51965, 18138, 54651, 18191, 55178, 14451, 52175, 10289, 54515, 6540, 55438, 1560, 55243, -3796, 46896, -2850, 42220, -5271, 39290, -7645, 41166.5, -7977.33, 40752, -12701, 43111, -7910, 45027, -7738, 47901, -6657, 51243, -7099, 53826, -10442, 53174, -13071, 50074, -15890, 46192, -16995, 41108, -17037, 43947, -19458, 51539, -18939, 56306, -14073, 57651, -9647, 59680, -5081, 61487, 22886, -18849, 22932, -18689, 7663)
+polygon = PackedVector2Array(-16102, -6397, -10730.5, -14054.5, -12680.5, -16324.5, -10835.5, -19392, -2505.5, -19292, -7068, -11859.5, -1830.5, -10439.5, 4579.5, -11087, -1233, -5424.5, -4625.5, 785.502, -8580.5, 1333, -10825.5, -1509.5, -12745.5, -161.998, -14721, 1452, -14167.5, 7807.5, -15636.4, 7779.21, -16680, 8092.5, -17426.5, 8490.23, -17470, 9240, -17142.5, 9405, -10182.5, 9332.5, -13917, 11918, -13135, 14785, -10322, 17194, -5115, 15961, -3628, 18320, 4084, 18736, 8248, 11064, 7782, 16437, 8288, 17897, 10148, 19744, 14951, 20383, 18841, 17436, 17879, 13068, 13139, 10374, 21138, 9781, 27991, 6580, 24800, 13281, 24105, 15820, 26569, 17479, 37124, 19129, 44553, 18478, 50121, 15768, 51965, 18138, 54651, 18191, 55178, 14451, 52175, 10289, 54515, 6540, 55438, 1560, 55243, -3796, 46896, -2850, 42220, -5271, 39290, -7645, 41166.5, -7977.33, 40752, -12701, 43111, -7910, 45027, -7738, 47901, -6657, 51243, -7099, 53826, -10442, 53174, -13071, 50074, -15890, 46192, -16995, 41108, -17037, 43947, -19458, 51539, -18939, 56306, -14073, 57651, -9647, 59680, -5081, 61487, 22886, -18849, 22932, -22305, 12382.5, -22082.5, 6332.5)
 script = ExtResource("5_aep54")
 
 [node name="Terrain2" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
@@ -259,18 +260,18 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
-position = Vector2(-963, 308)
-uid = SubResource("Resource_eg3rs")
+position = Vector2(-13452, -5825)
+uid = SubResource("Resource_qhgdr")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
-position = Vector2(-1315, 1706)
+position = Vector2(-11386, -6296)
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine"]
 script = ExtResource("21_pr3qq")
 buoyancy_accel = 0.0
 
 [node name="ResearchStation" parent="LevelContainer" instance=ExtResource("13_eg3rs")]
-position = Vector2(-11403, -5944)
+position = Vector2(-13107, -5905)
 metadata/_edit_lock_ = true
 
 [node name="Items" type="Node2D" parent="LevelContainer"]
@@ -291,6 +292,9 @@ offset_right = 18529.0
 offset_bottom = 1221.0
 color = Color(0.0312209, 0.0673709, 0.274788, 1)
 metadata/_edit_lock_ = true
+
+[node name="Kelp" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
+position = Vector2(-12022, -5559)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3

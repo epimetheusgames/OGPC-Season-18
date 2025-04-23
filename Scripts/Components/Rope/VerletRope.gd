@@ -37,6 +37,9 @@ func _process(delta: float) -> void:
 		start_pos = start_anchor_node.global_position
 	if end_anchor_node:
 		end_pos = end_anchor_node.global_position
+		
+	for i in range(verlet_nodes.size()):
+		verlet_nodes[i].position = points[i]
 	
 	simulate(delta)
 	
