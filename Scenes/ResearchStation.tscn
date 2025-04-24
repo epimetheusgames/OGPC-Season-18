@@ -16,8 +16,9 @@ fill = 1
 fill_from = Vector2(0.5, 0.527778)
 fill_to = Vector2(0.846154, 0.865385)
 
-[node name="ResearchStation" type="Node2D"]
+[node name="ResearchStation" type="Node2D" node_paths=PackedStringArray("unlock_terminal")]
 script = ExtResource("1_bt1gc")
+unlock_terminal = NodePath("UnlockTerminal")
 
 [node name="Wall" type="Polygon2D" parent="."]
 z_index = 8

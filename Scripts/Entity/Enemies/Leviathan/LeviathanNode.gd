@@ -1,2 +1,0 @@
-class_name LeviathanNode
-extends CollisionShape2D

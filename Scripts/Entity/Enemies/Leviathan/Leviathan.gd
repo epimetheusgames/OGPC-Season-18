@@ -1,72 +1,49 @@
 ## This is a big fish enemy
 # Owned by: kaitaobenson
-"""
+
 class_name Leviathan
 extends Enemy
 
-@export var LEVIATHAN_NODE: PackedScene
-
-@export var node_amount: int = 100
-@export var node_separation: float = 30.0
-
-@onready var start_node: LeviathanNode = $"Head"
 @onready var rope: FabrikRope = $"FabrikRope"
+@onready var head_segment: Node2D = $"HeadSegment"
+@onready var body_segment: Node2D = $"BodySegment"
 
-var leviathan_nodes: Array[LeviathanNode]
-var nav_target: Vector2
+@onready var leviathan_segments: Array[Node2D] = []
 
 func _ready() -> void:
-	super()
+	# Add in leviathan segments
+	for i in range(rope.point_amount - 1):
+		var new_segment = body_segment.duplicate()
+		new_segment.z_index = rope.point_amount - i
+		add_child(new_segment)
+		leviathan_segments.append(new_segment)
 	
-	# Set rope data
-	rope.point_amount = node_amount
-	rope.point_separation = node_separation
-	rope.start_pos_on = true
+	head_segment.z_index = rope.point_amount + 1
 	
-	# Add in leviathan nodes
-	leviathan_nodes.append(start_node)
+	body_segment.queue_free()
 	
-	for i in range(rope.point_amount - 2):
-		var new_node: LeviathanNode = LEVIATHAN_NODE.instantiate()
-		
-		add_child(new_node)
-		leviathan_nodes.append(new_node)
+	state_machine.init(self)
 	
-	while true:
-		await get_tree().create_timer(0.1).timeout
-		$Nav.target_position = target_position
-		nav_target = $Nav.get_next_path_position()
-		if !$Nav.is_target_reachable():
-			_target_reached()
-
-func _process(delta: float) -> void:
-	super(delta)
+	
 
 func _physics_process(delta: float) -> void:
-	update_leviathan_nodes(delta)
 	
-	velocity = Util.better_vec2_lerp(velocity, (nav_target - position).normalized() * target_speed, 0.2, delta)
-	global_position += velocity * delta * 60
+	var animation: AnimatedSprite2D = head_segment.get_node("AnimatedSprite2D")
+	animation.play("Munch")
 	
-	if global_position.distance_to(target_position) < 20:
-		_target_reached()
+	head_segment.global_rotation = rope.points[0].angle_to_point(rope.points[1]) + PI
+
+	for i in range(rope.point_amount - 1):
+		var segment = leviathan_segments[i]
+		var prev_point = rope.points[i]
+		var current_point = rope.points[i + 1]
 		
+		segment.global_position = current_point
+		segment.global_rotation = prev_point.angle_to_point(current_point) + PI
+	
 	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
 		Global.godot_steam_abstraction.sync_var(rope, "points")
-
-func update_leviathan_nodes(delta: float) -> void:
-	rope.start_pos_on = true
-	rope.start_pos = global_position
 	
-	for i in range(rope.point_amount - 1):
-		leviathan_nodes[i].global_position = rope.points[i]
-		if i == 0:
-			leviathan_nodes[i].global_rotation = \
-				Util.better_angle_lerp(
-					leviathan_nodes[i].global_rotation, 
-					rope.points[i].angle_to_point(target_position), 
-					0.2, delta)
-		else:
-			leviathan_nodes[i].global_rotation = rope.points[i].angle_to_point(rope.points[i - 1])
-		
-"""
+	#velocity = (get_diver_pos() - position).normalized() * 300
+	state_machine.process_physics(delta)
+	move_and_slide()
