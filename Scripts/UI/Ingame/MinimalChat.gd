@@ -10,6 +10,9 @@ func _ready() -> void:
 	if set_default_onready:
 		Global.chat = self
 	text.scroll_to_paragraph(text.get_paragraph_count())
+	
+	if !Global.verbose_debug:
+		visible = false
 
 	push_debug("Chat initialised at path " + str(get_path()))
 	push_debug("Reminder, to prevent debug and error text in chat, disable verbose_debug in root.")

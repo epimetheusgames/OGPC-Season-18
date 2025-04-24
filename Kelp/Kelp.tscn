@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cxt7y067vc2qg" path="res://Scripts/Components/Rope/VerletRope.gd" id="5_efvqj"]
 
 [node name="Kelp" type="Node2D"]
-z_index = 1
+z_index = 36
 z_as_relative = false
 script = ExtResource("1_jrc13")
 length = 45

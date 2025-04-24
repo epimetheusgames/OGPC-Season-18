@@ -225,6 +225,7 @@ script = SubResource("GDScript_5py2y")
 position = Vector2(11006, 34721)
 
 [node name="Terrain1" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+z_index = 68
 material = SubResource("ShaderMaterial_2sekr")
 position = Vector2(-7958, -33141)
 scale = Vector2(0.4, 0.4)
@@ -232,6 +233,7 @@ polygon = PackedVector2Array(-16102, -6397, -10730.5, -14054.5, -12680.5, -16324
 script = ExtResource("5_aep54")
 
 [node name="Terrain2" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+z_index = 68
 material = SubResource("ShaderMaterial_2sekr")
 position = Vector2(-6685, -34034)
 scale = Vector2(0.4, 0.4)
@@ -239,6 +241,7 @@ polygon = PackedVector2Array(-10349, 12965, -7198, 11175, -4549, 9337, -2329, 68
 script = ExtResource("5_aep54")
 
 [node name="Terrain3" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+z_index = 68
 material = SubResource("ShaderMaterial_2sekr")
 position = Vector2(-6924, -34328)
 scale = Vector2(0.4, 0.4)
@@ -246,11 +249,20 @@ polygon = PackedVector2Array(10813, 9119, 7152, 5916, 7581, -260, 3358, -5336, 1
 script = ExtResource("5_aep54")
 
 [node name="Terrain4" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+z_index = 68
 material = SubResource("ShaderMaterial_2sekr")
 position = Vector2(2450, -24105)
 scale = Vector2(0.4, 0.4)
 polygon = PackedVector2Array(6462, -15589, 8254, -13956, 4770, -8829, 12089, -13838, 21181, -12501, 23787, -14721, 23787, -19788, 9502, -18244)
 script = ExtResource("5_aep54")
+
+[node name="Background" type="ColorRect" parent="LevelContainer/Environment"]
+offset_left = -16513.0
+offset_top = -19959.0
+offset_right = 18529.0
+offset_bottom = 1221.0
+color = Color(0.0312209, 0.0673709, 0.274788, 1)
+metadata/_edit_lock_ = true
 
 [node name="Player" type="Node2D" parent="LevelContainer"]
 
@@ -286,14 +298,6 @@ player_view_dist = 1500
 enemy_close_dist = 2500
 draw_spawn_positions = true
 enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg")])
-
-[node name="Background" type="ColorRect" parent="LevelContainer"]
-offset_left = -16513.0
-offset_top = -19959.0
-offset_right = 18529.0
-offset_bottom = 1221.0
-color = Color(0.0312209, 0.0673709, 0.274788, 1)
-metadata/_edit_lock_ = true
 
 [node name="Kelp" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
 position = Vector2(-12022, -5559)

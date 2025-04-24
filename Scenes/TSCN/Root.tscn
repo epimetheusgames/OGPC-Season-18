@@ -82,7 +82,6 @@ shader_parameter/height = 1.0
 
 [node name="Root" type="Node" node_paths=PackedStringArray("brightness_modulate", "KeyactionHandler")]
 script = ExtResource("1_thbo5")
-verbose_debug = true
 super_efficient_auto_enable_maximum = 25
 brightness_modulate = NodePath("Game/GameContainer/BrightnessModulate")
 game_skeleton_node = NodePath("Skeleton")
@@ -603,14 +602,14 @@ button_template = NodePath("../../../UI/TemplateButton")
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -10
 material = SubResource("ShaderMaterial_41cf3")
-offset_right = 3239.0
+offset_right = 2394.0
 offset_bottom = 2956.0
 mouse_filter = 2
 color = Color(0.012, 0.012, 0.09, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_1f6oh")
-offset_right = 3182.0
+offset_right = 2380.0
 offset_bottom = 2914.0
 mouse_filter = 2
 color = Color(0.012, 0.012, 0.09, 0.674)
