@@ -429,7 +429,7 @@ scroll_active = false
 [node name="BrightnessSlider" type="HSlider" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
-value = 100.0
+value = 50.0
 script = ExtResource("20_8vvda")
 
 [node name="Background" type="ColorRect" parent="UI/MenuSettings"]
