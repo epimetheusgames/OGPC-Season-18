@@ -18,11 +18,12 @@ var base_time := 0.0
 var first_time := true
 
 func _ready() -> void:
-	for i in range(length):
+	for i in range(length - 2):
 		var new_kelp_segment: KelpSegment = kelp.instantiate()
 		new_kelp_segment.scale = Vector2(5,5)
 		add_child(new_kelp_segment)
 		kelp_segments.append(new_kelp_segment)
+		new_kelp_segment.frame = i % new_kelp_segment.segment_frames
 	
 	for i in range(rope.points.size()):
 		if i % segment_spacing == 0:
@@ -40,7 +41,7 @@ func _process(delta: float) -> void:
 	
 	base_time += delta
 	
-	for i in range(length - 1):
+	for i in range(length - 3):
 		var kelp_segment: KelpSegment = kelp_segments[i]
 		kelp_segment.global_position = (drawer.points[i] + drawer.points[i + 1]) / 2.0
 		

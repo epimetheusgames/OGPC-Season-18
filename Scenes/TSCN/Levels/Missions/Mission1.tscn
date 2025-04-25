@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=42 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dl7oejcvhsgci" path="res://Kelp/Kelp.tscn" id="19_qhgdr"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Texture2D" uid="uid://ctwe161d8x2ne" path="res://Assets/Art/Misc/Bubble.png" id="22_l3b62"]
+[ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.tscn" id="26_k8n8v"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="30_ec8ks"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
@@ -131,7 +132,7 @@ shader_parameter/color_multiplier = 0.4
 shader_parameter/in_tex = SubResource("GradientTexture1D_dhgix")
 shader_parameter/edge_tex = ExtResource("3_kali0")
 
-[sub_resource type="Resource" id="Resource_qhgdr"]
+[sub_resource type="Resource" id="Resource_k8n8v"]
 resource_local_to_scene = true
 script = ExtResource("17_j8dce")
 uid = 3625
@@ -272,12 +273,13 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
-position = Vector2(-11205, -6565)
-uid = SubResource("Resource_qhgdr")
+position = Vector2(-13233, -5828)
+uid = SubResource("Resource_k8n8v")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
 z_index = 1
 position = Vector2(-11386, -6296)
+metadata/_edit_lock_ = true
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine"]
 script = ExtResource("21_pr3qq")
@@ -301,15 +303,19 @@ enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubR
 
 [node name="Kelp" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
 position = Vector2(-12022, -5559)
+metadata/_edit_lock_ = true
 
 [node name="Kelp2" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
 position = Vector2(-11822, -5559)
+metadata/_edit_lock_ = true
 
 [node name="Kelp3" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
 position = Vector2(-11598, -5559)
+metadata/_edit_lock_ = true
 
 [node name="Kelp4" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
 position = Vector2(-11422, -5559)
+metadata/_edit_lock_ = true
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3
@@ -398,5 +404,8 @@ texture = ExtResource("22_l3b62")
 lifetime = 5.0
 visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_hcosd")
+
+[node name="Arrowfish" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-11489, -5878)
 
 [editable path="UILayer/IngameUI"]

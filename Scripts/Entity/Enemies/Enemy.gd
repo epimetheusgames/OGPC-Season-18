@@ -5,10 +5,12 @@ class_name Enemy
 extends Entity
 
 @export var hurtbox: Hurtbox
+@export var attackbox: Attackbox
 @export var animations: AnimatedSprite2D
 @export var nav_agent: NavigationAgent2D
 @export var enemy_fov: EnemyFov
 @export var state_machine: StateMachine
+@export var dead_state: State
 
 @export var drop_item: PackedScene
 
@@ -21,27 +23,25 @@ func _ready() -> void:
 	if hurtbox:
 		hurtbox.died.connect(_die)
 
-
 ## Standard movement options to use ##
 
 # Constant speed
-func move_towards(pos: Vector2, speed: float) -> Vector2:
-	return (pos - global_position).normalized() * speed
+func move_towards(pos: Vector2, speed: float) -> void:
+	velocity = (pos - global_position).normalized() * speed
 
 # Add speed
-func accelerate_towards(pos: Vector2, speed: float) -> Vector2:
-	return velocity + (pos - global_position).normalized() * speed
+func accelerate_towards(pos: Vector2, speed: float) -> void:
+	velocity += (pos - global_position).normalized() * speed
 
 # Lerps from current velocity to new velocity according to drift_factor
-func drift_towards(pos: Vector2, speed: float, drift_factor: float) -> Vector2:
+func drift_towards(pos: Vector2, speed: float, drift_factor: float) -> void:
 	var new_vel = (pos - global_position).normalized() * speed
-	return velocity.lerp(new_vel, drift_factor)
+	velocity = velocity.lerp(new_vel, drift_factor)
 
 # Speed based on distance to target
-func spring_towards(pos: Vector2, strength: float, damping: float) -> Vector2:
+func spring_towards(pos: Vector2, strength: float, damping: float) -> void:
 	var force: Vector2 = ((pos - global_position) * strength) - (velocity * damping)
-	return velocity + force
-
+	velocity += force
 
 # signals
 func _die() -> void:
@@ -49,14 +49,13 @@ func _die() -> void:
 		var item: BaseItem = drop_item.instantiate()
 		get_parent().add_child(item)
 		item.global_position = global_position
-	"""
+		
 	if attackbox:
 		attackbox.queue_free()
 	if state_machine && dead_state:
 		state_machine.change_state(dead_state)
 	else:
 		queue_free()
-	"""
 
 # Other util
 func get_diver_pos() -> Vector2:

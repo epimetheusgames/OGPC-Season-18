@@ -45,7 +45,6 @@ func detect_and_damage_hurtboxes() -> void:
 
 func damage_hurtbox(hurtbox: Hurtbox) -> void:
 	if hurtbox.can_take_damage(self):
-		
 		Global.print_debug("DEBUG: Attackbox at path " + str(get_path()) + " damages the hurtbox below.")
 		
 		hurtbox.damage(damage_amount, self)

@@ -39,7 +39,7 @@ func _ready():
 func _process(_delta: float) -> void:
 	for weapon in get_children():
 		if weapon is Weapon && weapon.visible && !weapon == selected_weapon:
-			weapon.visible = false
+			weapon.enabled = false
 	
 	if diver.get_state() == Diver.DiverState.IN_GRAVITY_AREA:
 		visible = false

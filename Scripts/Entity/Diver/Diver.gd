@@ -21,7 +21,7 @@ var diver_state: DiverState
 @onready var diver_inventory: DiverInventory = $"Inventory"  # Handles diver's inventory "backend".
 @onready var diver_stats: DiverStats = $"Stats"  # Handles health, oxygen, etc.
 
-@export var camera: Camera2D
+@export var camera: DiverCamera
 
 @export var diver_scene: FilePathResource  # FilePath of the diver ??
 

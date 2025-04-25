@@ -11,6 +11,8 @@ var current_money: int = 0
 @onready var diver: Diver = get_parent()
 
 func _ready() -> void:
+	hurtbox.damaged.connect(_damaged)
+	
 	while true:
 		await get_tree().create_timer(0.8).timeout
 		if oxygen_percentage <= 0:
@@ -31,6 +33,9 @@ func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction:
 		Global.godot_steam_abstraction.sync_var(self, "health")
 		Global.godot_steam_abstraction.sync_var(self, "oxygen_percentage")
+
+func _damaged(damage_amount: float, by: Attackbox) -> void:
+	diver.camera.shake(2.5, 0.4)
 
 func _on_general_detection_box_area_entered(area: Area2D) -> void:
 	if area is CompletionArea:
