@@ -261,7 +261,7 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
-position = Vector2(-10316, -5741)
+position = Vector2(-8390, -7192)
 uid = SubResource("Resource_eg3rs")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
@@ -388,6 +388,6 @@ position = Vector2(-9705, -6716)
 position = Vector2(-9501, -6348)
 
 [node name="Leviathan" parent="." instance=ExtResource("35_47o3q")]
-position = Vector2(-9817, -5631)
+position = Vector2(10609, -14976)
 
 [editable path="UILayer/IngameUI"]

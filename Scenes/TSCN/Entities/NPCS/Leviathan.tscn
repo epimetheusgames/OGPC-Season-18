@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://co2canly84hyf"]
+[gd_scene load_steps=18 format=3 uid="uid://co2canly84hyf"]
 
 [ext_resource type="Script" uid="uid://baedw6bviawtd" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
 [ext_resource type="Script" uid="uid://bmq6c6h4ure25" path="res://Scripts/Entity/Enemies/Leviathan/Leviathan.gd" id="1_ucxug"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://frjt5conmasl" path="res://Glow.gd" id="5_nosed"]
 [ext_resource type="Texture2D" uid="uid://dxw0i3idcoqsk" path="res://Assets/Art/Entity/LeviathanSegmentGlow.png" id="7_h50ie"]
 [ext_resource type="Script" uid="uid://bhh3js370fo5i" path="res://Scripts/Entity/Enemies/Leviathan/Wander.gd" id="10_nosed"]
+[ext_resource type="Script" uid="uid://com05s2oww1wi" path="res://Scripts/Entity/Enemies/Leviathan/Chase.gd" id="11_h50ie"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1u835"]
 radius = 130.0
@@ -124,6 +125,9 @@ metadata/_custom_type_script = "uid://balgnejnh7c1p"
 
 [node name="Wander" type="Node" parent="StateMachine"]
 script = ExtResource("10_nosed")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource("11_h50ie")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 top_level = true

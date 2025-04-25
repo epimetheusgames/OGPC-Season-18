@@ -1,5 +1,7 @@
 extends State
 
+@export var chase_state: State
+
 var ray_container: Node2D
 var ray1: RayCast2D
 var ray2: RayCast2D
@@ -7,7 +9,8 @@ var ray3: RayCast2D
 
 @onready var noise := FastNoiseLite.new()
 
-var wall_avoid_angle := 0.0  # In radians
+var wall_avoid_clockwise: bool = true
+var wall_avoid_angle: float = 0.0  # In radians
 
 func init():
 	noise.seed = randi()
@@ -40,14 +43,18 @@ func process_physics(delta: float) -> State:
 
 	# Avoid wall if colliding
 	while ray1.is_colliding() || ray2.is_colliding() || ray3.is_colliding():
-		wall_avoid_angle += deg_to_rad(1.0)  # Rotate a bit more
+		wall_avoid_angle += 0.02 if wall_avoid_clockwise else -0.02
 		ray_container.rotation = wall_avoid_angle + get_fluctuating_angle(time)
 		force_update_rays()
 	
 	# Move forward
 	leviathan.velocity = Vector2(300, 0).rotated(ray_container.global_rotation)
 	
-	return null
+	var diver_pos: Vector2 = enemy.get_diver_pos()
+	if leviathan.enemy_fov.can_see_point(diver_pos):
+		return chase_state
+	else:
+		return null
 
 func force_update_rays() -> void:
 	ray1.force_raycast_update()
