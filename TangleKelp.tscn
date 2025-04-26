@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://ditralukui2v6"]
+
+[ext_resource type="Script" uid="uid://cdi0hiygq0pte" path="res://Scripts/Components/Rope/RopeLineDrawer.gd" id="1_5kru5"]
+[ext_resource type="Script" uid="uid://b5shqbyatklks" path="res://TangleKelp.gd" id="1_35vbo"]
+[ext_resource type="Script" uid="uid://cxt7y067vc2qg" path="res://Scripts/Components/Rope/VerletRope.gd" id="1_ii3qh"]
+[ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="4_p7lhy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7lhy"]
+radius = 64.0
+
+[node name="TangleKelp" type="StaticBody2D"]
+script = ExtResource("1_35vbo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(4, 4)
+polygon = PackedVector2Array(-19, 2, -19, -9, -9, -9, 2, -15, 8, -11, 14, -2, 22, -2, 25, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(4, 4)
+color = Color(0.761386, 0.378452, 0, 1)
+polygon = PackedVector2Array(-19, 2, -19, -9, -9, -9, 2, -15, 8, -11, 14, -2, 22, -2, 25, 2)
+
+[node name="Rope1" type="Node2D" parent="."]
+position = Vector2(-65, -38)
+scale = Vector2(-0.419154, 0.149684)
+
+[node name="RopeLineDrawer" type="Line2D" parent="Rope1" node_paths=PackedStringArray("rope")]
+position = Vector2(17, 11)
+script = ExtResource("1_5kru5")
+rope = NodePath("../VerletRope")
+metadata/_custom_type_script = "uid://cdi0hiygq0pte"
+
+[node name="VerletRope" type="Node" parent="Rope1" node_paths=PackedStringArray("start_anchor_node")]
+script = ExtResource("1_ii3qh")
+gravity = Vector2(0, 0)
+point_amount = 13
+point_separation = 50.0
+start_anchor_node = NodePath("..")
+metadata/_custom_type_script = "uid://cxt7y067vc2qg"
+
+[node name="Rope2" type="Node2D" parent="."]
+position = Vector2(-19, -47)
+
+[node name="RopeLineDrawer" type="Line2D" parent="Rope2" node_paths=PackedStringArray("rope")]
+script = ExtResource("1_5kru5")
+rope = NodePath("../VerletRope")
+metadata/_custom_type_script = "uid://cdi0hiygq0pte"
+
+[node name="VerletRope" type="Node" parent="Rope2" node_paths=PackedStringArray("start_anchor_node")]
+script = ExtResource("1_ii3qh")
+gravity = Vector2(0, 0)
+point_amount = 13
+point_separation = 50.0
+start_anchor_node = NodePath("..")
+metadata/_custom_type_script = "uid://cxt7y067vc2qg"
+
+[node name="Rope3" type="Node2D" parent="."]
+position = Vector2(18, -53)
+
+[node name="RopeLineDrawer" type="Line2D" parent="Rope3" node_paths=PackedStringArray("rope")]
+script = ExtResource("1_5kru5")
+rope = NodePath("../VerletRope")
+metadata/_custom_type_script = "uid://cdi0hiygq0pte"
+
+[node name="VerletRope" type="Node" parent="Rope3" node_paths=PackedStringArray("start_anchor_node")]
+script = ExtResource("1_ii3qh")
+gravity = Vector2(0, 0)
+point_amount = 13
+point_separation = 50.0
+start_anchor_node = NodePath("..")
+metadata/_custom_type_script = "uid://cxt7y067vc2qg"
+
+[node name="Rope4" type="Node2D" parent="."]
+position = Vector2(75, -10)
+
+[node name="RopeLineDrawer" type="Line2D" parent="Rope4" node_paths=PackedStringArray("rope")]
+position = Vector2(-12, -10)
+script = ExtResource("1_5kru5")
+rope = NodePath("../VerletRope")
+metadata/_custom_type_script = "uid://cdi0hiygq0pte"
+
+[node name="VerletRope" type="Node" parent="Rope4" node_paths=PackedStringArray("start_anchor_node")]
+script = ExtResource("1_ii3qh")
+gravity = Vector2(0, 0)
+point_amount = 13
+point_separation = 50.0
+start_anchor_node = NodePath("..")
+metadata/_custom_type_script = "uid://cxt7y067vc2qg"
+
+[node name="ContinuousAttack" type="Area2D" parent="."]
+position = Vector2(1, -241)
+script = ExtResource("4_p7lhy")
+damage_amount = 10.0
+metadata/_custom_type_script = "uid://bf0bikj8np6x"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousAttack"]
+shape = SubResource("CircleShape2D_p7lhy")
+debug_color = Color(0.995691, 0, 0.200717, 0.42)
