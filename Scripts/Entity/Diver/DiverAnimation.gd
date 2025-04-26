@@ -69,13 +69,10 @@ func _ready() -> void:
 		ui.add_child(displayed_nametag)
 
 func _process(delta: float) -> void:
-	
-	#if diver.diver_movement.is_in_research_station:
-		#Global.canvas_modulate.color.v = 0.55
-		#Global.sun.energy = 0.5
-	#else:
-		#Global.canvas_modulate.color.v = 0.1
-		#Global.sun.energy = 0
+	if diver.diver_movement.is_in_research_station:
+		Global.canvas_modulate.color.v = 0.55
+	else:
+		Global.canvas_modulate.color.v = 0.1
 	
 	if Global.godot_steam_abstraction && Global.is_multiplayer:
 		if diver._is_node_owner():
