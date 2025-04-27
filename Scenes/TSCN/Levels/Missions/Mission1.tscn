@@ -275,7 +275,7 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
-position = Vector2(-11205, -6565)
+position = Vector2(-12027, -5835)
 uid = SubResource("Resource_k8n8v")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]

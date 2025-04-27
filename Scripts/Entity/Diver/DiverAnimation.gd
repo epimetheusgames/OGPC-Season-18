@@ -25,9 +25,6 @@ extends Node2D
 @onready var leg_target1: Node2D = $"LegIkTarget1"
 @onready var leg_target2: Node2D = $"LegIkTarget2"
 
-## Arrow that points in the direction the keyboard is pointing, but it's invisible
-## now.
-@onready var arrow: Node2D = $"Arrow"
 
 @onready var left_collision_point: Vector2 = left_raycast.get_collision_point()
 @onready var right_collision_point: Vector2 = right_raycast.get_collision_point()
@@ -94,9 +91,6 @@ func _process(delta: float) -> void:
 		return
 	
 	_sync_multiplayer()
-	
-	# Update the arrow rotation
-	arrow.global_rotation = diver.diver_movement.get_current_angle()
 	
 	# Legs
 	if diver.get_state() != Diver.DiverState.IN_GRAVITY_AREA:

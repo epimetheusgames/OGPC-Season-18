@@ -1,46 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://71htappd3cxj"]
+[gd_scene load_steps=13 format=3 uid="uid://71htappd3cxj"]
 
 [ext_resource type="Script" uid="uid://1xmo13kpmgen" path="res://Scripts/UI/Ingame/TeamInfoPanel.gd" id="1_0ajfg"]
 [ext_resource type="Script" uid="uid://cdry0a2rsou8n" path="res://Scripts/UI/Ingame/PersonHUD.gd" id="1_0aoln"]
 [ext_resource type="Script" uid="uid://bkx0xsu4kft4l" path="res://Scripts/UI/Ingame/Inventory.gd" id="3_f466a"]
+[ext_resource type="Texture2D" uid="uid://cfrm8qgopidh4" path="res://Assets/Art/HealthBar.png" id="3_txvd7"]
 [ext_resource type="Script" uid="uid://b1to7rj6srtxg" path="res://Scripts/UI/Ingame/ChatPanel.gd" id="4_d8efl"]
+[ext_resource type="Texture2D" uid="uid://b4fwmgn77i3ts" path="res://Assets/Art/HealthBarProgress.png" id="4_s6r6i"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="5_6galc"]
-
-[sub_resource type="Gradient" id="Gradient_eq4ay"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.5, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uj8mc"]
-gradient = SubResource("Gradient_eq4ay")
-width = 200
-height = 30
-
-[sub_resource type="Gradient" id="Gradient_e0iga"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.17, 1, 0.363667, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tl1p2"]
-gradient = SubResource("Gradient_e0iga")
-width = 200
-height = 30
-
-[sub_resource type="Gradient" id="Gradient_aq7m3"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.496653, 0.496654, 0.496653, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gr1oq"]
-gradient = SubResource("Gradient_aq7m3")
-width = 200
-height = 30
-
-[sub_resource type="Gradient" id="Gradient_221s0"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_q3rum"]
-gradient = SubResource("Gradient_221s0")
-width = 200
-height = 30
+[ext_resource type="Script" uid="uid://ck4dghi3kpbdd" path="res://Scripts/UI/Bar.gd" id="5_s6r6i"]
+[ext_resource type="Texture2D" uid="uid://cb7t2q24l4xf" path="res://Assets/Art/OxygenBar.png" id="5_ti1bd"]
+[ext_resource type="Texture2D" uid="uid://bbq3i5mso53js" path="res://Assets/Art/OxygenBarProgress.png" id="6_yehem"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l72ri"]
 
@@ -82,19 +51,22 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="HealthProgress" type="TextureProgressBar" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer"]
+texture_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_6galc")
 value = 100.0
-texture_under = SubResource("GradientTexture2D_uj8mc")
-texture_progress = SubResource("GradientTexture2D_tl1p2")
+texture_over = ExtResource("3_txvd7")
+texture_progress = ExtResource("4_s6r6i")
+script = ExtResource("5_s6r6i")
 
 [node name="HealthText" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer/HealthProgress"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-offset_left = 4.0
-offset_right = 124.0
-offset_bottom = 30.0
+offset_left = 65.0
+offset_top = 15.0
+offset_right = 185.0
+offset_bottom = 45.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 21
 text = "Health"
@@ -115,15 +87,18 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 value = 100.0
-texture_under = SubResource("GradientTexture2D_gr1oq")
-texture_progress = SubResource("GradientTexture2D_q3rum")
+texture_over = ExtResource("5_ti1bd")
+texture_progress = ExtResource("6_yehem")
+script = ExtResource("5_s6r6i")
+shake_force = 0.5
 
 [node name="OxygenText" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer/OxygenProgress"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-offset_left = 3.0
-offset_right = 123.0
-offset_bottom = 30.0
+offset_left = 65.0
+offset_top = 15.0
+offset_right = 185.0
+offset_bottom = 45.0
 theme = ExtResource("5_6galc")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 21
@@ -167,6 +142,7 @@ offset_right = 239.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("3_f466a")
+metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Inventory"]
 layout_mode = 2
@@ -271,6 +247,7 @@ stretch_mode = 0
 layout_mode = 0
 offset_right = 605.0
 offset_bottom = 1080.0
+metadata/_edit_lock_ = true
 
 [node name="StatsAndChat" type="VBoxContainer" parent="StatsAndChatDraggable"]
 layout_mode = 2

@@ -30,6 +30,7 @@ scale = Vector2(-0.419154, 0.149684)
 position = Vector2(17, 11)
 script = ExtResource("1_5kru5")
 rope = NodePath("../VerletRope")
+smoothing_on = true
 metadata/_custom_type_script = "uid://cdi0hiygq0pte"
 
 [node name="VerletRope" type="Node" parent="Rope1" node_paths=PackedStringArray("start_anchor_node")]
@@ -46,6 +47,7 @@ position = Vector2(-19, -47)
 [node name="RopeLineDrawer" type="Line2D" parent="Rope2" node_paths=PackedStringArray("rope")]
 script = ExtResource("1_5kru5")
 rope = NodePath("../VerletRope")
+smoothing_on = true
 metadata/_custom_type_script = "uid://cdi0hiygq0pte"
 
 [node name="VerletRope" type="Node" parent="Rope2" node_paths=PackedStringArray("start_anchor_node")]
@@ -62,6 +64,7 @@ position = Vector2(18, -53)
 [node name="RopeLineDrawer" type="Line2D" parent="Rope3" node_paths=PackedStringArray("rope")]
 script = ExtResource("1_5kru5")
 rope = NodePath("../VerletRope")
+smoothing_on = true
 metadata/_custom_type_script = "uid://cdi0hiygq0pte"
 
 [node name="VerletRope" type="Node" parent="Rope3" node_paths=PackedStringArray("start_anchor_node")]
@@ -79,6 +82,7 @@ position = Vector2(75, -10)
 position = Vector2(-12, -10)
 script = ExtResource("1_5kru5")
 rope = NodePath("../VerletRope")
+smoothing_on = true
 metadata/_custom_type_script = "uid://cdi0hiygq0pte"
 
 [node name="VerletRope" type="Node" parent="Rope4" node_paths=PackedStringArray("start_anchor_node")]

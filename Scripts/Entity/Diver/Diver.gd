@@ -53,7 +53,8 @@ func _ready() -> void:
 	
 	Global.player_array.append(self)
 	
-	diver_movement.boosted.connect(_boost)
+	# TODO: kms
+	#diver_movement.boosted.connect(_boost)
 	
 	if Global.save_load_framework:
 		Global.save_load_framework.save_nodes.connect(_save)
@@ -102,8 +103,6 @@ func _physics_process(_delta: float):
 	if Global.is_multiplayer && has_multiplayer_sync && !_is_node_owner():
 		move_and_slide()
 		return
-	
-	_update_vel_rot()
 	
 	move_and_slide()
 	
@@ -157,21 +156,6 @@ func _save() -> void:
 			diver_scene,
 		)
 	)
-
-# Update player velocity and rotation.
-func _update_vel_rot() -> void:
-	if get_state() == DiverState.DRIVING_SUBMARINE:
-		return
-	
-	velocity = diver_movement.get_velocity()
-	
-	if get_state() == DiverState.IN_GRAVITY_AREA:
-		return
-	
-	var target_angle: float = velocity.angle() + PI/2
-	
-	var angle_diff: float = angle_difference(rotation, target_angle)
-	rotation += clamp(angle_diff * 0.1, -0.1, 0.1)
 
 # Updates oxygen, should be attached to a signal.
 func _boost() -> void:
