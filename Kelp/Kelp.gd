@@ -20,7 +20,7 @@ var first_time := true
 func _ready() -> void:
 	for i in range(length - 2):
 		var new_kelp_segment: KelpSegment = kelp.instantiate()
-		new_kelp_segment.scale = Vector2(5,5)
+		new_kelp_segment.scale = Vector2(3, 3)
 		add_child(new_kelp_segment)
 		kelp_segments.append(new_kelp_segment)
 		new_kelp_segment.frame = i % new_kelp_segment.segment_frames

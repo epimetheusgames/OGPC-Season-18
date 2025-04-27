@@ -84,7 +84,7 @@ var chat_text: String
 var research_station: ResearchStation
 
 ## Ingame canvas modulate used for lighting (time of day)
-var canvas_modulate: CanvasModulate
+var brightness_modulate: CanvasModulate
 
 ## The light that acts as the sun.
 var sun: DirectionalLight2D
@@ -177,6 +177,6 @@ func is_multiplayer_host() -> bool:
 ## Set game brightness throuhg brightness modulate, based on percentage from 0 to 100
 func set_brightness(percentage):
 	brightness_decimal = percentage/100
-	canvas_modulate.color.r = brightness_decimal
-	canvas_modulate.color.g = brightness_decimal
-	canvas_modulate.color.b = brightness_decimal
+	brightness_modulate.color.r = brightness_decimal
+	brightness_modulate.color.g = brightness_decimal
+	brightness_modulate.color.b = brightness_decimal
