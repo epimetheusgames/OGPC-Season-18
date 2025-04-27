@@ -433,6 +433,7 @@ value = 50.0
 script = ExtResource("20_8vvda")
 
 [node name="Background" type="ColorRect" parent="UI/MenuSettings"]
+visible = false
 z_index = -2
 layout_direction = 2
 offset_left = -3.0

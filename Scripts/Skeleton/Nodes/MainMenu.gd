@@ -55,6 +55,8 @@ func _on_singleplayer_button_button_up() -> void:
 	# Carsons code is straight doo doo
 	#$"../StaticBody2D/CollisionPolygon2D2".disabled = true
 	Global.ui_root_node.visible = false
+	# The best solution is a fast one
+	Global.brightness_modulate.visible = false
 	Global.save_load_framework.start_game(0) 
 
 func _on_multiplayer_button_button_up() -> void:
