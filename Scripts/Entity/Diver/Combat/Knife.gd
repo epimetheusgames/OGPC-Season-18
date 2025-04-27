@@ -36,9 +36,11 @@ func _process(delta: float) -> void:
 	
 	if !enabled:
 		visible = false
+		attackbox.damaging = false
 		return
 	
 	visible = true
+	attackbox.damaging = true
 	
 	var angle_to_mouse: float = head_pos.angle_to_point(mouse_pos)
 	angle_to_mouse += deg_to_rad(slash_angle)
@@ -53,8 +55,6 @@ func _process(delta: float) -> void:
 
 func attack() -> void:
 	if enabled && cooldown_timer_over:
-		attackbox.detect_and_damage_hurtboxes()
-		
 		perform_attack()
 		animate_slash_angle()
 		

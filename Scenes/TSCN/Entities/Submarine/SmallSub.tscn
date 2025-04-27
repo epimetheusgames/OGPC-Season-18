@@ -48,7 +48,6 @@ z_index = -1
 position = Vector2(-124, 179)
 rotation = 2.35619
 script = ExtResource("4_j4tp4")
-metadata/_custom_type_script = "uid://dxlkbqcv2x2hh"
 
 [node name="SubmarineBurstWeapon" parent="SubmarineWeaponSlot" instance=ExtResource("5_qnb0f")]
 metadata/_edit_lock_ = true

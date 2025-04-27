@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	
 	if boost_duration > 0:
 		var target: Vector2 = global_position + boost_direction * 100
-		velocity = drift_towards(target, boost_speed, 0.1)
+		drift_towards(target, boost_speed, 0.1)
 		tentacles.tentacles_down(5)
 		boost_duration -= delta
 		

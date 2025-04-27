@@ -21,7 +21,7 @@ var diver_state: DiverState
 @onready var diver_inventory: DiverInventory = $"Inventory"  # Handles diver's inventory "backend".
 @onready var diver_stats: DiverStats = $"Stats"  # Handles health, oxygen, etc.
 
-@export var camera: Camera2D
+@export var camera: DiverCamera
 
 @export var diver_scene: FilePathResource  # FilePath of the diver ??
 
@@ -58,7 +58,6 @@ func _ready() -> void:
 	if Global.save_load_framework:
 		Global.save_load_framework.save_nodes.connect(_save)
 
-
 func _process(delta: float) -> void:
 	super(delta)
 	
@@ -78,8 +77,7 @@ func _physics_process(_delta: float):
 	if get_state() == DiverState.IN_SUBMARINE || get_state() == DiverState.DRIVING_SUBMARINE:
 		z_index = 21
 	else:
-		z_index = 20
-	
+		z_index = 100
 	
 	# Camera
 	if !(Global.is_multiplayer && Global.godot_steam_abstraction && 	_is_node_owner()):

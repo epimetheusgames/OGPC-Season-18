@@ -76,7 +76,7 @@ position = Vector2(-25, 51)
 
 [node name="FollowerSpawnPosition" type="Node2D" parent="."]
 z_index = 7
-position = Vector2(-378, 77)
+position = Vector2(-378, 197)
 script = ExtResource("1_sxr26")
 
 [node name="ColorRect" type="ColorRect" parent="."]

@@ -14,7 +14,6 @@ var line_six_material
 var total_saved_civillians := 0
 
 func _ready():
-	Global.canvas_modulate = canvas_modulate
 	Global.sun = sun
 	
 	# What the acrualy skib is this code
