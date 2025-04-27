@@ -28,7 +28,6 @@ func _ready() -> void:
 	collision.debug_color = Color.GREEN
 	collision.debug_color.a = 0.3
 
-
 func can_take_damage(attackbox: Attackbox) -> bool:
 	return (
 		(attackbox.attacker_type == Attackbox.AttackerType.ENEMY && hurt_by_enemy) ||

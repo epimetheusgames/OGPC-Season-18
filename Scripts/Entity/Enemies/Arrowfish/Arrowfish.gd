@@ -8,6 +8,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	state_machine.process_physics(delta)
 	move_and_slide()
+	
+	if state_machine.current_state != $StateMachine/Aim:
+		rotation = Util.better_angle_lerp(rotation, velocity.angle(), 0.8, delta)
 	#print("Current state: " + state_machine.current_state.name)
 
 func _on_save() -> void:

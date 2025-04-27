@@ -6,7 +6,7 @@
 
 [node name="Settings" type="Node2D" node_paths=PackedStringArray("BrightnessSlider", "PerformanceButton", "SoundSlider")]
 process_mode = 3
-z_index = 35
+z_index = 46
 script = ExtResource("1_3dd0e")
 BrightnessSlider = NodePath("ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer/BrightnessSlider")
 PerformanceButton = NodePath("ContainTheDumbShit/HBoxContainer/VBoxContainer/HBoxContainer/PerformanceButton")
@@ -33,6 +33,26 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_stretch_ratio = 11.8
 mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer"]
+z_index = 8
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(140, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Game Brightness"
+fit_content = true
+scroll_active = false
+
+[node name="BrightnessSlider" type="HSlider" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+value = 50.0
+script = ExtResource("2_s8p8c")
 
 [node name="KeybindButton" type="Button" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -68,25 +88,6 @@ autowrap_mode = 0
 [node name="PerformanceButton" type="Button" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Turn On"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(140, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Game Brightness"
-fit_content = true
-scroll_active = false
-
-[node name="BrightnessSlider" type="HSlider" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-value = 50.0
-script = ExtResource("2_s8p8c")
 
 [node name="Background" type="ColorRect" parent="."]
 z_index = -2

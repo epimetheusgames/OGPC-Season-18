@@ -26,13 +26,13 @@ func process_physics(delta: float) -> State:
 		return chase_state
 	
 	pause_timer += delta
-	if pause_timer < pause_timer:
+	if pause_timer < pause_time:
 		return null
 	
 	if has_reached_pos(target_pos):
 		return chase_state
 	
-	enemy.spring_towards(target_pos, 3, 0.1)
+	enemy.spring_towards(target_pos, 0.5, 0.1)
 	
 	return null
 

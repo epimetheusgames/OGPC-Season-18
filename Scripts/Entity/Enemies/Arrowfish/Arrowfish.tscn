@@ -25,16 +25,18 @@ height = 256.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_oel4a"]
 radius = 36.2215
 
-[node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov", "state_machine")]
+[node name="Arrowfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "nav_agent", "enemy_fov", "state_machine", "dead_state")]
 position = Vector2(-60, 3)
 rotation = 6.28318
 collision_layer = 0
 collision_mask = 2049
 script = ExtResource("1_bu73s")
 hurtbox = NodePath("Hurtbox")
+attackbox = NodePath("ContinuousAttack")
 nav_agent = NodePath("NavAgent")
 enemy_fov = NodePath("EnemyFov")
 state_machine = NodePath("StateMachine")
+dead_state = NodePath("StateMachine/Dead")
 drop_item = ExtResource("2_dyarh")
 
 [node name="EnemyFov" type="Node2D" parent="."]
@@ -66,7 +68,7 @@ damage_amount = 5.0
 metadata/_custom_type_script = "uid://bf0bikj8np6x"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousAttack"]
-position = Vector2(199, -0.998991)
+position = Vector2(237, -7.9988)
 shape = SubResource("CircleShape2D_oel4a")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
