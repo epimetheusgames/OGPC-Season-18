@@ -30,6 +30,7 @@ func _ready() -> void:
 	
 	if collision_body == null:
 		collision_body = StaticBody2D.new()
+		collision_body.add_to_group("environment_collision")
 		add_child(collision_body)
 	
 	if collision_polygon == null:

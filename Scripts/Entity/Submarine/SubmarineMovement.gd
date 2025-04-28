@@ -5,7 +5,6 @@ class_name SubmarineMovement
 extends Node2D
 
 const CONST_ACCEL: int = 40
-const TAP_ACCEL: int = 50
 const MAX_SPEED: float = 7500.0
 const MAX_ROTATION: float = 10.0
 const ROTATION_RATE: float = 1.2
@@ -19,17 +18,42 @@ var input_vector: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
 var buoyancy = 0
 
+var health : float = 500.0
+var invunerability_timer : Timer
+var invunerability_length : float = .1
+var invunerable : bool = false
+
+func _ready() -> void:
+	invunerability_timer = Timer.new()
+	invunerability_timer.one_shot = true
+	add_child(invunerability_timer)
+	invunerability_timer.connect("timeout", _on_invunerability_cooldown_timeout)
+
 func _physics_process(delta: float) -> void:
 	decay_velocity(delta)
-	print(current_angle)
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
-		if Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
-			input_vector = get_input_vector()
-			update_movement_velocity(delta * 60)
-			update_current_angle(delta * 60)
-			get_parent().rotation = current_angle
-		## MAKE THIS APPROX = TO OR SOMETHING
-		elif current_angle != 0:
+		if !invunerable:
+			for i in range(get_parent().get_slide_collision_count()):
+				var collision = get_parent().get_slide_collision(i)
+				var body = collision.get_collider()
+				if body.is_in_group("environment_collision"):
+					var reflection_velocity = collision.get_collider_velocity() + velocity
+					var collision_normal_angle = collision.get_normal().angle()
+					var new_angle = 2 * collision_normal_angle - reflection_velocity.angle() - PI
+					print(rad_to_deg(new_angle))
+					print(rad_to_deg(collision_normal_angle))
+					print(rad_to_deg(velocity.angle()))
+					velocity = Util.angle_to_vector_radians(new_angle, reflection_velocity.length())
+					invunerability_timer.start(invunerability_length)
+					invunerable = true
+					break
+			if Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
+				input_vector = get_input_vector()
+				update_movement_velocity(delta * 60)
+				update_current_angle(delta * 60)
+				get_parent().rotation = current_angle
+			## MAKE THIS APPROX = TO OR SOMETHING
+		if current_angle != 0:
 			update_current_angle(delta * 60)
 			get_parent().rotation = current_angle
 	
@@ -42,6 +66,9 @@ func _physics_process(delta: float) -> void:
 			Global.player.set_state(Diver.DiverState.IN_SUBMARINE)
 			target_angle = 0.0
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = false
+
+func _on_invunerability_cooldown_timeout():
+	invunerable = false
 
 func _on_interaction_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_area"):
@@ -77,15 +104,11 @@ func update_current_angle(delta: float) -> void:
 	current_angle = Util.better_angle_lerp(current_angle, target_angle, 0.0025, delta)
 
 func update_movement_velocity(delta: float):
+	print(input_vector)
 	if input_vector.x != 0.0:
 		velocity += input_vector.x * Util.angle_to_vector_radians(current_angle, CONST_ACCEL * delta)
-		
-		if Input.is_action_just_pressed("move"):
-			velocity += input_vector.x * Util.angle_to_vector_radians(current_angle, TAP_ACCEL * delta)
 	elif input_vector.y != 0.0:
 		velocity += Vector2(0, input_vector.y) * CONST_ACCEL * delta
-		if Input.is_action_just_pressed("move"):
-			velocity += Vector2(0, input_vector.y) * TAP_ACCEL * delta
 	
 	# Clamp velocity to MAX_SPEED
 	if velocity.length() > MAX_SPEED:

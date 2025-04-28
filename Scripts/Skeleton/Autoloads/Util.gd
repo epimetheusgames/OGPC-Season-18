@@ -104,13 +104,13 @@ static func snap_to_nearest(x: float, y: float, z: float):
 	return y if abs(x-y) <= abs(x-z) else z
 
 ## Turns an angle in degrees and a magnitude in pixels to a vector.
-static func angle_to_vector_degrees(angle: float, magnitude: float) -> Vector2:
+static func angle_to_vector_degrees(angle: float, magnitude: float = 1.0) -> Vector2:
 	var x: float = magnitude * cos(deg_to_rad(angle))
 	var y: float = magnitude * sin(deg_to_rad(angle))
 	return Vector2(x, y)
 
 ## Turns an angle in radians and a magnitude in pixels into a vector.
-static func angle_to_vector_radians(angle: float, magnitude: float) -> Vector2:
+static func angle_to_vector_radians(angle: float, magnitude: float = 1.0) -> Vector2:
 	var x: float = magnitude * cos(angle)
 	var y: float = magnitude * sin(angle)
 	return Vector2(x, y)

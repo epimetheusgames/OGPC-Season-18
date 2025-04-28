@@ -13,7 +13,7 @@ size = Vector2(8, 29.8125)
 [node name="SubmarineBurstWeaponBullet" type="Area2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_ii88i")
 attackbox = NodePath("OneShotAttack")
-speed = 1000.0
+speed = 2000.0
 size = 1.0
 damage = 1.0
 metadata/_custom_type_script = "uid://do2ogc84k7glm"
@@ -31,6 +31,7 @@ metadata/_custom_type_script = "uid://ced6k1jq3eqag"
 shape = SubResource("RectangleShape2D_j4v2j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(-0.5, -1)
 rotation = 1.5708
 texture = ExtResource("3_1jagb")
