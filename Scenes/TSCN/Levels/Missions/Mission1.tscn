@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=41 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -14,10 +14,9 @@
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
-[ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="PackedScene" uid="uid://dl7oejcvhsgci" path="res://Kelp/Kelp.tscn" id="19_qhgdr"]
-[ext_resource type="PackedScene" path="res://TangleKelp.tscn" id="20_k8n8v"]
+[ext_resource type="PackedScene" uid="uid://ditralukui2v6" path="res://TangleKelp.tscn" id="20_k8n8v"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Texture2D" uid="uid://ctwe161d8x2ne" path="res://Assets/Art/Misc/Bubble.png" id="22_l3b62"]
 [ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.tscn" id="26_k8n8v"]
@@ -132,11 +131,6 @@ shader_parameter/tex_scale = 103.0
 shader_parameter/color_multiplier = 0.4
 shader_parameter/in_tex = SubResource("GradientTexture1D_dhgix")
 shader_parameter/edge_tex = ExtResource("3_kali0")
-
-[sub_resource type="Resource" id="Resource_l3b62"]
-resource_local_to_scene = true
-script = ExtResource("17_j8dce")
-uid = 3625
 
 [sub_resource type="Resource" id="Resource_xdqqp"]
 script = ExtResource("16_4wjdw")
@@ -275,7 +269,6 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
 position = Vector2(-12027, -5835)
-uid = SubResource("Resource_k8n8v")
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
 z_index = 1
