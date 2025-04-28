@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=42 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Texture2D" uid="uid://ctwe161d8x2ne" path="res://Assets/Art/Misc/Bubble.png" id="22_l3b62"]
 [ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.tscn" id="26_k8n8v"]
+[ext_resource type="PackedScene" uid="uid://6kbux1lvwaw3" path="res://Scenes/TSCN/Objects/Items/RockItem.tscn" id="27_l3b62"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="30_ec8ks"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
@@ -393,5 +394,20 @@ process_material = SubResource("ParticleProcessMaterial_hcosd")
 
 [node name="Arrowfish" parent="." instance=ExtResource("26_k8n8v")]
 position = Vector2(-11489, -5878)
+
+[node name="RockItem" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-12009, -5637)
+
+[node name="RockItem5" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-12179, -5630)
+
+[node name="RockItem2" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11830, -5637)
+
+[node name="RockItem3" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11655, -5639)
+
+[node name="RockItem4" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11480, -5644)
 
 [editable path="UILayer/IngameUI"]

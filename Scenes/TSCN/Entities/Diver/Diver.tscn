@@ -136,12 +136,13 @@ script = ExtResource("4_lqvql")
 script = ExtResource("2_lxvv3")
 
 [node name="RightWallRaycast" type="RayCast2D" parent="Movement"]
-visible = false
 target_position = Vector2(48, 0)
 
 [node name="LeftWallRaycast" type="RayCast2D" parent="Movement"]
-visible = false
 target_position = Vector2(-48, 0)
+
+[node name="DownRaycast" type="RayCast2D" parent="Movement"]
+target_position = Vector2(0, 92)
 
 [node name="CivillianFollower" type="CharacterBody2D" parent="Movement"]
 script = ExtResource("9_soyuq")

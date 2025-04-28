@@ -11,8 +11,8 @@ const SWIM_MAX_SPEED: float = 650.0
 var speed: float = SWIM_BASE_SPEED
 
 # Walk
-const WALK_SPEED: float = 300.0
-const GRAVITY: float = 1.0
+const WALK_SPEED: float = 400.0
+const GRAVITY: float = 30.0
 
 # Ladder
 const LADDER_FORCE: float = 100.0
@@ -27,6 +27,7 @@ var ladder: Area2D = null
 
 @onready var saveable_timer := get_tree().create_timer(0.5)
 @onready var diver: Diver = get_parent()
+@onready var down_raycast: RayCast2D = $"DownRaycast"
 
 var is_boosting: bool = false
 
@@ -68,9 +69,16 @@ func _physics_process(delta: float) -> void:
 	elif is_in_gravity_area:
 		# Walk
 		diver.global_rotation = 0
-		diver.velocity.y += 5 * delta * 60
+		
+		if down_raycast.is_colliding():
+			diver.velocity.y = 0.1
+		else:
+			diver.velocity.y += GRAVITY * delta * 60
+		
+		print(diver.velocity.y)
+		
 		if input_vector.length_squared() > 0:
-			diver.velocity.x += input_vector.x * 3 * delta * 60
+			diver.velocity.x = input_vector.x * WALK_SPEED * delta * 60
 		else:
 			diver.velocity.x = 0
 	
