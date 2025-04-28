@@ -26,16 +26,6 @@ var diver_state: DiverState
 @export var diver_scene: FilePathResource  # FilePath of the diver ??
 
 
-@export var parallax: ParallaxBackground  #  ???
-
-@export var no_movement := false  # ???
-
-## The amount of oxygen percentage lost every frame.
-@export var oxygen_loss := 0.01
-
-## The amount of oxygen percentage lost when the player boosts.
-@export var oxygen_boost_loss := 1
-
 ## Player follower
 @export var follower: CivillianFollower
 
@@ -53,9 +43,6 @@ func _ready() -> void:
 	
 	Global.player_array.append(self)
 	
-	# TODO: kms
-	#diver_movement.boosted.connect(_boost)
-	
 	if Global.save_load_framework:
 		Global.save_load_framework.save_nodes.connect(_save)
 
@@ -66,7 +53,6 @@ func _process(delta: float) -> void:
 		Global.player = self
 
 func _physics_process(_delta: float):
-	diver_stats.oxygen_loss = oxygen_loss
 	
 	if get_state() == DiverState.IN_GRAVITY_AREA:
 		$Body.disabled = true
@@ -95,8 +81,8 @@ func _physics_process(_delta: float):
 		camera.position = Util.better_vec2_lerp(camera.position, Vector2.ZERO, 0.1, _delta)
 		Global.current_mission_node.get_node("UILayer").visible = true
 	
-	if camera && parallax:
-		parallax.scroll_base_offset.y += 100
+	#if camera && parallax:
+	#	parallax.scroll_base_offset.y += 100
 	
 	if Global.is_multiplayer && has_multiplayer_sync && !_is_node_owner():
 		move_and_slide()
@@ -155,9 +141,6 @@ func _save() -> void:
 		)
 	)
 
-# Updates oxygen, should be attached to a signal.
-func _boost() -> void:
-	diver_stats.oxygen_percentage -= oxygen_boost_loss
 
 # --- SETTERS AND GETTERS --- 
 
@@ -186,4 +169,4 @@ func get_diver_max_health() -> float:
 	return diver_stats.get_max_health()
 
 func get_oxygen() -> float:
-	return diver_stats.oxygen_percentage
+	return diver_stats.oxygen

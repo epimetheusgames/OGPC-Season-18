@@ -28,8 +28,11 @@ var ladder: Area2D = null
 @onready var saveable_timer := get_tree().create_timer(0.5)
 @onready var diver: Diver = get_parent()
 
+var is_boosting: bool = false
+
 var input_vector: Vector2
 var input_angle: float
+
 
 func _physics_process(delta: float) -> void:
 	if (Global.is_multiplayer && !diver._is_node_owner()) || diver.get_state() == Diver.DiverState.DRIVING_SUBMARINE || diver.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
@@ -40,8 +43,11 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("boost"):
 		speed += SWIM_ACCEL
+		is_boosting = true
 	else:
 		speed -= SWIM_ACCEL
+		is_boosting = false
+	
 	speed = clamp(speed, SWIM_BASE_SPEED, SWIM_MAX_SPEED)
 	
 	input_vector = get_wasd_input_vector()

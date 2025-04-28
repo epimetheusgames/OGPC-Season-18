@@ -50,21 +50,3 @@ func _ready() -> void:
 	collision_body.collision_layer = 3
 	
 	print_tree_pretty()
-
-"""
-func get_smaller_polygon(points: PackedVector2Array, shrink_distance: float) -> PackedVector2Array:
-	if points.size() == 0:
-		return points
-	
-	var center: Vector2 = Vector2.ZERO
-	for vertex in polygon:
-		center += vertex
-	center /= points.size()
-	
-	var smaller_polygon = PackedVector2Array()
-	for vertex in points:
-		var direction: Vector2 = (vertex - center).normalized()
-		smaller_polygon.append(vertex - direction * shrink_distance)
-	
-	return smaller_polygon
-"""
