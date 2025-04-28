@@ -4,54 +4,87 @@
 class_name DiverMovement
 extends Node2D
 
-const CONST_ACCEL: int = 5
-const TAP_ACCEL: int = 300
-const MAX_SPEED: int = 700
+# Swim
+const SWIM_BASE_SPEED: float = 250.0
+const SWIM_ACCEL: float = 10.0
+const SWIM_MAX_SPEED: float = 650.0
+var speed: float = SWIM_BASE_SPEED
 
-var current_angle: float = 0
-var input_vector: Vector2 = Vector2.ZERO
-var velocity: Vector2 = Vector2.ZERO
+# Walk
+const WALK_SPEED: float = 300.0
+const GRAVITY: float = 1.0
+
+# Ladder
+const LADDER_FORCE: float = 100.0
+
 var is_in_gravity_area := false
 var spawned_in_research_station := false
 var is_in_research_station := true
 var is_in_ladder_area := false
 var is_climbing_ladder := false
+
 var ladder: Area2D = null
 
-
 @onready var saveable_timer := get_tree().create_timer(0.5)
-
 @onready var diver: Diver = get_parent()
-@export var use_mouse_movement := false
-@export var gravity := 1.0
-@export var knockback_velocity := 200.0
 
-signal boosted
+var is_boosting: bool = false
+
+var input_vector: Vector2
+var input_angle: float
+
 
 func _physics_process(delta: float) -> void:
 	if (Global.is_multiplayer && !diver._is_node_owner()) || diver.get_state() == Diver.DiverState.DRIVING_SUBMARINE || diver.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
 		return
 	
-	if is_climbing_ladder:
-		input_vector = get_ladder_input_vector()
-	elif (diver.get_state() == Diver.DiverState.IN_GRAVITY_AREA or diver.get_state() == Diver.DiverState.IN_SUBMARINE):
-		input_vector = get_walking_input_vector()
-	else:
-		input_vector = get_input_vector()
-	
 	if is_in_ladder_area && Input.is_action_just_pressed("interact"):
 		is_climbing_ladder = !is_climbing_ladder
 	
-	update_current_angle(delta * 60)
-	update_movement_velocity(delta * 60)
+	if Input.is_action_pressed("boost"):
+		speed += SWIM_ACCEL
+		is_boosting = true
+	else:
+		speed -= SWIM_ACCEL
+		is_boosting = false
+	
+	speed = clamp(speed, SWIM_BASE_SPEED, SWIM_MAX_SPEED)
+	
+	input_vector = get_wasd_input_vector()
+	
+	if input_vector.length() > 0:
+		input_angle = input_vector.angle() + PI/2
+	
+	
+	if is_climbing_ladder:
+		# Ladder
+		diver.global_rotation = ladder.global_rotation
+		if input_vector.length_squared() > 0:
+			diver.velocity.x += input_vector.x * 3 * delta * 60
+			diver.velocity.y += input_vector.y * 3 * delta * 60
+		else:
+			diver.velocity = Vector2.ZERO
+		
+	elif is_in_gravity_area:
+		# Walk
+		diver.global_rotation = 0
+		diver.velocity.y += 5 * delta * 60
+		if input_vector.length_squared() > 0:
+			diver.velocity.x += input_vector.x * 3 * delta * 60
+		else:
+			diver.velocity.x = 0
+	
+	else:
+		# Swim
+		if input_vector.length() > 0:
+			diver.global_rotation += angle_difference(diver.global_rotation, input_angle) * 0.05
+			diver.velocity = Vector2.UP.rotated(diver.global_rotation) * speed
+	
+	diver.velocity *= 0.98
 
-func get_input_vector() -> Vector2:
-	if use_mouse_movement:
-		return get_mouse_input_vector()
-	return get_wasd_input_vector()
 
 func get_wasd_input_vector() -> Vector2:
-	input_vector = Vector2.ZERO
+	var input_vector = Vector2.ZERO
 	
 	if Input.is_action_pressed("right"):
 		input_vector += Vector2.RIGHT
@@ -61,86 +94,9 @@ func get_wasd_input_vector() -> Vector2:
 		input_vector += Vector2.UP
 	if Input.is_action_pressed("down"):
 		input_vector += Vector2.DOWN
-	
-	return input_vector.normalized()
-
-func get_ladder_input_vector() -> Vector2:
-	input_vector = Vector2.ZERO
-	
-	if Input.is_action_pressed("right"):
-		input_vector += Vector2.RIGHT
-	if Input.is_action_pressed("left"):
-		input_vector += Vector2.LEFT
-	if Input.is_action_pressed("up"):
-		input_vector += Vector2.UP
-	if Input.is_action_pressed("down"):
-		input_vector += Vector2.DOWN
-	
-	if input_vector.length_squared() == 0:
-		return Vector2.ZERO
-	return Util.angle_to_vector_radians(input_vector.angle() + ladder.global_rotation, 1)
-
-func get_walking_input_vector() -> Vector2:
-	input_vector = Vector2.ZERO
-	
-	if Input.is_action_pressed("right"):
-		input_vector += Vector2.RIGHT
-	if Input.is_action_pressed("left"):
-		input_vector += Vector2.LEFT
 	
 	return input_vector
 
-## This is mostly a workaround for now until the bug with getting the mouse 
-## position inside a viewport gets fixed
-func get_mouse_input_vector() -> Vector2:
-	return (Vector2(DisplayServer.mouse_get_position()) - Vector2(960, 540)).normalized()
-
-func update_current_angle(delta: float) -> void:
-	if is_in_gravity_area:
-		current_angle = Util.better_angle_lerp(current_angle, Vector2.UP.angle(), 0.4, delta)
-		return
-	
-	if input_vector != Vector2.ZERO:
-		var input_angle = input_vector.angle()
-		current_angle = Util.better_angle_lerp(current_angle, input_angle, 0.1, delta)
-
-func update_movement_velocity(delta: float):
-	velocity = velocity * 0.97
-	
-	if is_climbing_ladder:
-		diver.global_rotation = ladder.global_rotation
-		if input_vector.length_squared() > 0:
-			velocity.x += input_vector.x * 3 * delta * 60
-			velocity.y += input_vector.y * 3 * delta * 60
-		else:
-			velocity = Vector2.ZERO
-	elif is_in_gravity_area:
-		diver.rotation = 0
-		velocity.y += 5 * delta * 60
-		if input_vector.length_squared() > 0:
-			velocity.x += input_vector.x * 3 * delta * 60
-		else:
-			velocity.x = 0
-	
-	elif input_vector != Vector2.ZERO: 
-		velocity += Util.angle_to_vector_radians(current_angle, CONST_ACCEL * delta)
-	
-	if Input.is_action_just_pressed("move"):
-		velocity += Util.angle_to_vector_radians(current_angle, TAP_ACCEL * delta)
-		boosted.emit()
-	
-	# Clamp velocity to MAX_SPEED
-	if velocity.length() > MAX_SPEED:
-		velocity = velocity.normalized() * MAX_SPEED
-
-func knockback(direction: Vector2) -> void:
-	velocity += direction * knockback_velocity
-
-func get_velocity() -> Vector2:
-	return self.velocity
-
-func get_current_angle() -> float:
-	return self.current_angle
 
 func _on_general_detection_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("gravity_areas"):
@@ -169,5 +125,5 @@ func _on_general_detection_box_area_exited(area: Area2D) -> void:
 		is_in_ladder_area = false
 		if is_climbing_ladder:
 			is_climbing_ladder = false
-			velocity = velocity/2
+			diver.velocity = diver.velocity/2
 		ladder = null

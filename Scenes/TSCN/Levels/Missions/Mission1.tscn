@@ -1,20 +1,20 @@
-[gd_scene load_steps=43 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=51 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
 [ext_resource type="AudioStream" uid="uid://bdjdysj3l46f7" path="res://Assets/SFX/Wind.ogg" id="2_8qye6"]
 [ext_resource type="Script" uid="uid://bn44me3sxajlb" path="res://Scripts/Skeleton/Nodes/Ingame/LocalGameTimeSaver.gd" id="2_mcejo"]
-[ext_resource type="Texture2D" uid="uid://vuyq5s7dknal" path="res://Assets/Art/Level/SandTexture.png" id="3_kali0"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="4_0aydx"]
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="4_iytd7"]
 [ext_resource type="AudioStream" uid="uid://cqn1ekjfcc0fx" path="res://Assets/Music/Sunlight.mp3" id="5_3fu4r"]
 [ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
+[ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Level/WallTexture.png" id="7_l3b62"]
+[ext_resource type="PackedScene" uid="uid://6kbux1lvwaw3" path="res://Scenes/TSCN/Objects/Items/RockItem.tscn" id="10_l3b62"]
 [ext_resource type="PackedScene" uid="uid://6ajyn7xeilmv" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="12_mcejo"]
 [ext_resource type="PackedScene" uid="uid://brtj1ur8tgigg" path="res://Scenes/ResearchStation.tscn" id="13_eg3rs"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
-[ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="17_j8dce"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
 [ext_resource type="PackedScene" uid="uid://dl7oejcvhsgci" path="res://Kelp/Kelp.tscn" id="19_qhgdr"]
 [ext_resource type="PackedScene" uid="uid://ditralukui2v6" path="res://TangleKelp.tscn" id="20_k8n8v"]
@@ -116,14 +116,14 @@ void fragment() {
 	COLOR = vec4(mix(edge_pixel, in_pixel, fade_amm).rgb * color_multiplier, 1.0);
 }"
 
-[sub_resource type="Gradient" id="Gradient_l7jee"]
+[sub_resource type="Gradient" id="Gradient_l3b62"]
 offsets = PackedFloat32Array(0.0192308)
 colors = PackedColorArray(0.663023, 0.427097, 0.199698, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dhgix"]
-gradient = SubResource("Gradient_l7jee")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fukii"]
+gradient = SubResource("Gradient_l3b62")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2sekr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3w4x2"]
 resource_local_to_scene = true
 shader = SubResource("Shader_c3wo4")
 shader_parameter/points = PackedVector2Array(-6592, -112, -6543, 320, -6500, 365, -6403, 393, -6159, 398, -5328, 435, -4544, 454, -4310, 469, -4076, 496, -3842, 563, -3612, 673, -3432, 782, -3235, 964, -3067, 1261, -2929, 1578, -2647, 2424, -2257, 3037, -1798, 3487, -1335, 3823, -802, 4137, -130, 4372, 724, 4529, 1318, 4587, 2704, 4677, 6698, 4820, 7695, 4842, 8011, 4858, 8255, 4887, 8485, 4933, 8692, 4996, 8869, 5093, 8993, 5220, 9087, 5378, 9183, 5637, 9164.54, 5629.71, 9143.79, 5621.52, 9117.06, 5610.97, 9099.5, 5604.04, 9080.47, 5596.53, 9060.71, 5588.73, 9033.99, 5578.18, 9007.12, 5567.57, 8987.65, 5559.89, 8965.45, 5551.12, 8941.02, 5541.48, 8918.52, 5532.6, 8894.7, 5523.2, 8880.32, 5517.52, 8883, 5513, 8867, 5507, 8131, 5099, 5090, 5248, 3962.85, 5982.79, 3761.88, 8075.19, 6759.56, 9876.11, 11676, 10320, 10611, 11196, -7048, 11272, -6700, 368)
@@ -132,13 +132,65 @@ shader_parameter/global_position = Vector2(0, 0)
 shader_parameter/fade_width = 215
 shader_parameter/tex_scale = 103.0
 shader_parameter/color_multiplier = 0.4
-shader_parameter/in_tex = SubResource("GradientTexture1D_dhgix")
-shader_parameter/edge_tex = ExtResource("3_kali0")
+shader_parameter/in_tex = SubResource("GradientTexture1D_fukii")
+shader_parameter/edge_tex = ExtResource("7_l3b62")
 
-[sub_resource type="Resource" id="Resource_l3b62"]
+[sub_resource type="Gradient" id="Gradient_kali0"]
+offsets = PackedFloat32Array(0.0192308)
+colors = PackedColorArray(0.663023, 0.427097, 0.199698, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gnr5v"]
+gradient = SubResource("Gradient_kali0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jw53c"]
 resource_local_to_scene = true
-script = ExtResource("17_j8dce")
-uid = 3625
+shader = SubResource("Shader_c3wo4")
+shader_parameter/points = PackedVector2Array(-6592, -112, -6543, 320, -6500, 365, -6403, 393, -6159, 398, -5328, 435, -4544, 454, -4310, 469, -4076, 496, -3842, 563, -3612, 673, -3432, 782, -3235, 964, -3067, 1261, -2929, 1578, -2647, 2424, -2257, 3037, -1798, 3487, -1335, 3823, -802, 4137, -130, 4372, 724, 4529, 1318, 4587, 2704, 4677, 6698, 4820, 7695, 4842, 8011, 4858, 8255, 4887, 8485, 4933, 8692, 4996, 8869, 5093, 8993, 5220, 9087, 5378, 9183, 5637, 9164.54, 5629.71, 9143.79, 5621.52, 9117.06, 5610.97, 9099.5, 5604.04, 9080.47, 5596.53, 9060.71, 5588.73, 9033.99, 5578.18, 9007.12, 5567.57, 8987.65, 5559.89, 8965.45, 5551.12, 8941.02, 5541.48, 8918.52, 5532.6, 8894.7, 5523.2, 8880.32, 5517.52, 8883, 5513, 8867, 5507, 8131, 5099, 5090, 5248, 3962.85, 5982.79, 3761.88, 8075.19, 6759.56, 9876.11, 11676, 10320, 10611, 11196, -7048, 11272, -6700, 368)
+shader_parameter/num_points = 59
+shader_parameter/global_position = Vector2(0, 0)
+shader_parameter/fade_width = 215
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = 0.4
+shader_parameter/in_tex = SubResource("GradientTexture1D_gnr5v")
+shader_parameter/edge_tex = ExtResource("7_l3b62")
+
+[sub_resource type="Gradient" id="Gradient_bdf5b"]
+offsets = PackedFloat32Array(0.0192308)
+colors = PackedColorArray(0.663023, 0.427097, 0.199698, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8qye6"]
+gradient = SubResource("Gradient_bdf5b")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fu4r"]
+resource_local_to_scene = true
+shader = SubResource("Shader_c3wo4")
+shader_parameter/points = PackedVector2Array(-6592, -112, -6543, 320, -6500, 365, -6403, 393, -6159, 398, -5328, 435, -4544, 454, -4310, 469, -4076, 496, -3842, 563, -3612, 673, -3432, 782, -3235, 964, -3067, 1261, -2929, 1578, -2647, 2424, -2257, 3037, -1798, 3487, -1335, 3823, -802, 4137, -130, 4372, 724, 4529, 1318, 4587, 2704, 4677, 6698, 4820, 7695, 4842, 8011, 4858, 8255, 4887, 8485, 4933, 8692, 4996, 8869, 5093, 8993, 5220, 9087, 5378, 9183, 5637, 9164.54, 5629.71, 9143.79, 5621.52, 9117.06, 5610.97, 9099.5, 5604.04, 9080.47, 5596.53, 9060.71, 5588.73, 9033.99, 5578.18, 9007.12, 5567.57, 8987.65, 5559.89, 8965.45, 5551.12, 8941.02, 5541.48, 8918.52, 5532.6, 8894.7, 5523.2, 8880.32, 5517.52, 8883, 5513, 8867, 5507, 8131, 5099, 5090, 5248, 3962.85, 5982.79, 3761.88, 8075.19, 6759.56, 9876.11, 11676, 10320, 10611, 11196, -7048, 11272, -6700, 368)
+shader_parameter/num_points = 59
+shader_parameter/global_position = Vector2(0, 0)
+shader_parameter/fade_width = 215
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = 0.4
+shader_parameter/in_tex = SubResource("GradientTexture1D_8qye6")
+shader_parameter/edge_tex = ExtResource("7_l3b62")
+
+[sub_resource type="Gradient" id="Gradient_081ql"]
+offsets = PackedFloat32Array(0.0192308)
+colors = PackedColorArray(0.663023, 0.427097, 0.199698, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_smvjr"]
+gradient = SubResource("Gradient_081ql")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpuy4"]
+resource_local_to_scene = true
+shader = SubResource("Shader_c3wo4")
+shader_parameter/points = PackedVector2Array(-6592, -112, -6543, 320, -6500, 365, -6403, 393, -6159, 398, -5328, 435, -4544, 454, -4310, 469, -4076, 496, -3842, 563, -3612, 673, -3432, 782, -3235, 964, -3067, 1261, -2929, 1578, -2647, 2424, -2257, 3037, -1798, 3487, -1335, 3823, -802, 4137, -130, 4372, 724, 4529, 1318, 4587, 2704, 4677, 6698, 4820, 7695, 4842, 8011, 4858, 8255, 4887, 8485, 4933, 8692, 4996, 8869, 5093, 8993, 5220, 9087, 5378, 9183, 5637, 9164.54, 5629.71, 9143.79, 5621.52, 9117.06, 5610.97, 9099.5, 5604.04, 9080.47, 5596.53, 9060.71, 5588.73, 9033.99, 5578.18, 9007.12, 5567.57, 8987.65, 5559.89, 8965.45, 5551.12, 8941.02, 5541.48, 8918.52, 5532.6, 8894.7, 5523.2, 8880.32, 5517.52, 8883, 5513, 8867, 5507, 8131, 5099, 5090, 5248, 3962.85, 5982.79, 3761.88, 8075.19, 6759.56, 9876.11, 11676, 10320, 10611, 11196, -7048, 11272, -6700, 368)
+shader_parameter/num_points = 59
+shader_parameter/global_position = Vector2(0, 0)
+shader_parameter/fade_width = 215
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = 0.4
+shader_parameter/in_tex = SubResource("GradientTexture1D_smvjr")
+shader_parameter/edge_tex = ExtResource("7_l3b62")
 
 [sub_resource type="Resource" id="Resource_xdqqp"]
 script = ExtResource("16_4wjdw")
@@ -230,15 +282,16 @@ position = Vector2(11006, 34721)
 
 [node name="Terrain1" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = SubResource("ShaderMaterial_2sekr")
+material = SubResource("ShaderMaterial_3w4x2")
 position = Vector2(-7958, -33141)
 scale = Vector2(0.4, 0.4)
 polygon = PackedVector2Array(-16102, -6397, -10730.5, -14054.5, -12680.5, -16324.5, -10835.5, -19392, -2505.5, -19292, -7068, -11859.5, -1830.5, -10439.5, 4579.5, -11087, -1233, -5424.5, -4625.5, 785.502, -8580.5, 1333, -10825.5, -1509.5, -12745.5, -161.998, -14721, 1452, -14167.5, 7807.5, -15636.4, 7779.21, -16680, 8092.5, -17426.5, 8490.23, -17470, 9240, -17142.5, 9405, -10182.5, 9332.5, -13917, 11918, -13135, 14785, -10322, 17194, -5115, 15961, -3628, 18320, 4084, 18736, 8248, 11064, 7782, 16437, 8288, 17897, 10148, 19744, 14951, 20383, 18841, 17436, 17879, 13068, 13139, 10374, 21138, 9781, 27991, 6580, 24800, 13281, 24105, 15820, 26569, 17479, 37124, 19129, 44553, 18478, 50121, 15768, 51965, 18138, 54651, 18191, 55178, 14451, 52175, 10289, 54515, 6540, 55438, 1560, 55243, -3796, 46896, -2850, 42220, -5271, 39290, -7645, 41166.5, -7977.33, 40752, -12701, 43111, -7910, 45027, -7738, 47901, -6657, 51243, -7099, 53826, -10442, 53174, -13071, 50074, -15890, 46192, -16995, 41108, -17037, 43947, -19458, 51539, -18939, 56306, -14073, 57651, -9647, 59680, -5081, 61487, 22886, -18849, 22932, -22305, 12382.5, -22082.5, 6332.5)
 script = ExtResource("5_aep54")
+shader = false
 
 [node name="Terrain2" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World" groups=["environment_collision"]]
 z_index = 68
-material = SubResource("ShaderMaterial_2sekr")
+material = SubResource("ShaderMaterial_jw53c")
 position = Vector2(-6685, -34034)
 scale = Vector2(0.4, 0.4)
 polygon = PackedVector2Array(-10349, 12965, -7198, 11175, -4549, 9337, -2329, 6855, -488, 2610, 642, -1596, 4509, 1292, 3328, 4563, 2254, 8302, 1028, 10138, 292, 14821, -1780, 12345, -4090, 13802, -7413, 15400, -9848, 14970)
@@ -246,7 +299,7 @@ script = ExtResource("5_aep54")
 
 [node name="Terrain3" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = SubResource("ShaderMaterial_2sekr")
+material = SubResource("ShaderMaterial_3fu4r")
 position = Vector2(-6924, -34328)
 scale = Vector2(0.4, 0.4)
 polygon = PackedVector2Array(10813, 9119, 7152, 5916, 7581, -260, 3358, -5336, 13647, -4405, 21953, -4900, 23259, -8641, 26754, -5857, 31431, -6014, 28594, -2087, 28827, 3114, 25240, 6094, 25468, 3272, 23829, 177, 17944, -1524, 13776, -1004, 10670, 1284, 9726, 5116)
@@ -254,7 +307,7 @@ script = ExtResource("5_aep54")
 
 [node name="Terrain4" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = SubResource("ShaderMaterial_2sekr")
+material = SubResource("ShaderMaterial_vpuy4")
 position = Vector2(2450, -24105)
 scale = Vector2(0.4, 0.4)
 polygon = PackedVector2Array(6462, -15589, 8254, -13956, 4770, -8829, 12089, -13838, 21181, -12501, 23787, -14721, 23787, -19788, 9502, -18244)
@@ -275,9 +328,8 @@ script = ExtResource("4_iytd7")
 spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
-z_index = 100
-position = Vector2(-11205, -6565)
-uid = SubResource("Resource_l3b62")
+z_index = 20
+position = Vector2(-12027, -5835)
 
 [node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
 z_index = 1
@@ -402,5 +454,23 @@ process_material = SubResource("ParticleProcessMaterial_hcosd")
 
 [node name="Arrowfish" parent="." instance=ExtResource("26_k8n8v")]
 position = Vector2(-11489, -5878)
+
+[node name="RockItem" parent="." instance=ExtResource("10_l3b62")]
+position = Vector2(-11843, -5604)
+
+[node name="RockItem2" parent="." instance=ExtResource("10_l3b62")]
+position = Vector2(-12019, -5604)
+
+[node name="RockItem3" parent="." instance=ExtResource("10_l3b62")]
+position = Vector2(-12179, -5604)
+
+[node name="RockItem4" parent="." instance=ExtResource("10_l3b62")]
+position = Vector2(-11667, -5604)
+
+[node name="RockItem5" parent="." instance=ExtResource("10_l3b62")]
+position = Vector2(-11547, -5604)
+
+[node name="RockItem6" parent="." instance=ExtResource("10_l3b62")]
+position = Vector2(-11347, -5604)
 
 [editable path="UILayer/IngameUI"]

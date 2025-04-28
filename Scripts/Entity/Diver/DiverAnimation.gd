@@ -25,9 +25,6 @@ extends Node2D
 @onready var leg_target1: Node2D = $"LegIkTarget1"
 @onready var leg_target2: Node2D = $"LegIkTarget2"
 
-## Arrow that points in the direction the keyboard is pointing, but it's invisible
-## now.
-@onready var arrow: Node2D = $"Arrow"
 
 @onready var left_collision_point: Vector2 = left_raycast.get_collision_point()
 @onready var right_collision_point: Vector2 = right_raycast.get_collision_point()
@@ -70,9 +67,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if diver.diver_movement.is_in_research_station:
-		Global.canvas_modulate.color.v = 0.55
+		Global.brightness_modulate.color.v = 0.55
 	else:
-		Global.canvas_modulate.color.v = 0.1
+		Global.brightness_modulate.color.v = 0.1
 	
 	if Global.godot_steam_abstraction && Global.is_multiplayer:
 		if diver._is_node_owner():
@@ -92,18 +89,15 @@ func _process(delta: float) -> void:
 	
 	_sync_multiplayer()
 	
-	# Update the arrow rotation
-	arrow.global_rotation = diver.diver_movement.get_current_angle()
-	
 	# Legs
 	if diver.get_state() != Diver.DiverState.IN_GRAVITY_AREA:
 		leg_target1.global_position = _animate_leg(1, delta)
 		leg_target2.global_position = _animate_leg(2, delta)
 	else:
-		if Global.player.diver_movement.velocity.x < 0:
+		if Global.player.velocity.x < 0:
 			left_raycast.position.x = -36
 			right_raycast.position.x = -20
-		elif Global.player.diver_movement.velocity.x > 0:
+		elif Global.player.velocity.x > 0:
 			right_raycast.position.x = 36
 			left_raycast.position.x = 20
 		else:

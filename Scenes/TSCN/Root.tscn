@@ -433,6 +433,7 @@ value = 50.0
 script = ExtResource("20_8vvda")
 
 [node name="Background" type="ColorRect" parent="UI/MenuSettings"]
+visible = false
 z_index = -2
 layout_direction = 2
 offset_left = -3.0
@@ -625,6 +626,7 @@ color = Color(0.012, 0.012, 0.09, 0.674)
 [connection signal="button_up" from="UI/MainMenu/SettingsButton" to="UI/MainMenu" method="_on_settings_button_up"]
 [connection signal="button_up" from="UI/MainMenu/QuitButton" to="UI/MainMenu" method="_on_quit_button_button_up"]
 [connection signal="pressed" from="UI/MenuSettings/ContainTheDumbShit/BackButton" to="UI/MenuSettings" method="_back_button_pressed"]
-[connection signal="changed" from="UI/MenuSettings/SoundSubMenu/VBoxContainer/MasterVolumeSlider" to="UI/MenuSettings" method="_master_volume_changed"]
+[connection signal="value_changed" from="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer/BrightnessSlider" to="UI/MenuSettings" method="_brightness_slider_value_changed"]
+[connection signal="value_changed" from="UI/MenuSettings/SoundSubMenu/VBoxContainer/MasterVolumeSlider" to="UI/MenuSettings" method="_master_volume_changed"]
 
 [editable path="UI/Boid"]

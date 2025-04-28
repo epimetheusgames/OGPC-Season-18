@@ -6,17 +6,69 @@
 
 [node name="Settings" type="Node2D" node_paths=PackedStringArray("BrightnessSlider", "PerformanceButton", "SoundSlider")]
 process_mode = 3
-z_index = 35
+z_index = 46
 script = ExtResource("1_3dd0e")
 BrightnessSlider = NodePath("ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer/BrightnessSlider")
 PerformanceButton = NodePath("ContainTheDumbShit/HBoxContainer/VBoxContainer/HBoxContainer/PerformanceButton")
 SoundSlider = NodePath("SoundSubMenu/VBoxContainer/MasterVolumeSlider")
+
+[node name="SoundSubMenu" type="HBoxContainer" parent="."]
+visible = false
+z_index = 2
+offset_left = 12.0
+offset_top = 3.0
+offset_right = 1921.0
+offset_bottom = 1057.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SoundSubMenu"]
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SoundSubMenu/VBoxContainer"]
+custom_minimum_size = Vector2(140, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 36
+text = "Overall Volume"
+fit_content = true
+scroll_active = false
+scroll_following = true
+autowrap_mode = 0
+
+[node name="MasterVolumeSlider" type="HSlider" parent="SoundSubMenu/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 0.5
+script = ExtResource("2_s8p8c")
+
+[node name="BackButton" type="TextureButton" parent="SoundSubMenu"]
+z_index = 14
+z_as_relative = false
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("2_l4xm8")
+
+[node name="SoundMenuBackground" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+offset_left = -10.0
+offset_top = 3.0
+offset_right = 1921.0
+offset_bottom = 1057.0
+size_flags_horizontal = 3
+mouse_filter = 2
+color = Color(0.262745, 0.262745, 0.262745, 1)
 
 [node name="ContainTheDumbShit" type="BoxContainer" parent="."]
 offset_right = 1938.0
 offset_bottom = 1049.0
 size_flags_horizontal = 6
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="BackButton" type="TextureButton" parent="ContainTheDumbShit"]
 layout_mode = 2
@@ -33,6 +85,25 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_stretch_ratio = 11.8
 mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(140, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Game Brightness"
+fit_content = true
+scroll_active = false
+
+[node name="BrightnessSlider" type="HSlider" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+value = 50.0
+script = ExtResource("2_s8p8c")
 
 [node name="KeybindButton" type="Button" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -69,25 +140,6 @@ autowrap_mode = 0
 layout_mode = 2
 text = "Turn On"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(140, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Game Brightness"
-fit_content = true
-scroll_active = false
-
-[node name="BrightnessSlider" type="HSlider" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-value = 50.0
-script = ExtResource("2_s8p8c")
-
 [node name="Background" type="ColorRect" parent="."]
 z_index = -2
 layout_direction = 2
@@ -98,52 +150,5 @@ size_flags_horizontal = 3
 mouse_filter = 2
 color = Color(0.262932, 0.262932, 0.262932, 1)
 
-[node name="SoundSubMenu" type="HBoxContainer" parent="."]
-visible = false
-z_index = 2
-offset_left = 12.0
-offset_top = 3.0
-offset_right = 1921.0
-offset_bottom = 1057.0
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SoundSubMenu"]
-layout_mode = 2
-size_flags_horizontal = 6
-mouse_filter = 2
-alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="SoundSubMenu/VBoxContainer"]
-custom_minimum_size = Vector2(140, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 36
-text = "Overall Volume"
-fit_content = true
-scroll_active = false
-scroll_following = true
-autowrap_mode = 0
-
-[node name="MasterVolumeSlider" type="HSlider" parent="SoundSubMenu/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("2_s8p8c")
-
-[node name="BackButton" type="TextureButton" parent="SoundSubMenu"]
-z_index = 14
-z_as_relative = false
-layout_mode = 2
-action_mode = 0
-texture_normal = ExtResource("2_l4xm8")
-
-[node name="SoundMenuBackground" type="ColorRect" parent="."]
-visible = false
-z_index = 1
-offset_left = -10.0
-offset_top = 3.0
-offset_right = 1921.0
-offset_bottom = 1057.0
-size_flags_horizontal = 3
-mouse_filter = 2
-color = Color(0.262745, 0.262745, 0.262745, 1)
-
 [connection signal="changed" from="SoundSubMenu/VBoxContainer/MasterVolumeSlider" to="." method="_master_volume_changed"]
+[connection signal="value_changed" from="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer/BrightnessSlider" to="." method="_brightness_slider_value_changed"]

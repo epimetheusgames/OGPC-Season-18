@@ -173,6 +173,12 @@ material = SubResource("CanvasItemMaterial_eo78x")
 position = Vector2(-129, -111)
 metadata/_edit_lock_ = true
 
+[node name="OxygenTank" type="Polygon2D" parent="Animation/Polygons"]
+position = Vector2(-131, 13)
+texture = ExtResource("11_eo78x")
+polygon = PackedVector2Array(220.933, 117.063, 260.513, 116.719, 261.029, 26.3743, 224.719, 25.858)
+uv = PackedVector2Array(220.933, 117.063, 260.513, 116.719, 261.029, 26.3743, 224.719, 25.858)
+
 [node name="Body" type="Polygon2D" parent="Animation/Polygons"]
 position = Vector2(1, -15)
 texture = ExtResource("11_eo78x")
@@ -388,15 +394,6 @@ position = Vector2(85, 100)
 
 [node name="LegIkTarget2" type="Node2D" parent="Animation"]
 position = Vector2(-85, 100)
-
-[node name="Arrow" type="Node2D" parent="Animation"]
-use_parent_material = true
-
-[node name="Polygon2D" type="Polygon2D" parent="Animation/Arrow"]
-visible = false
-use_parent_material = true
-position = Vector2(105, -1)
-polygon = PackedVector2Array(0, -7, 0, 8, 17, 0)
 
 [node name="PlayerName" type="Label" parent="Animation"]
 offset_left = -190.0

@@ -180,7 +180,8 @@ func load_level(level_path: String, save: GameSave = null):
 	game_container.add_child(instantiated)
 	Global.current_mission_node = instantiated
 	Global.game_time_system.set_time(0, 0)
-
+	if(level_path!="res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"):
+		Global.brightness_modulate.visible = true
 	if !save || Global.is_multiplayer:
 		return
 	

@@ -80,6 +80,3 @@ func _area_exited(area: Area2D) -> void:
 func _gravity_area_exited(area: Area2D) -> void:
 	if !area.is_in_group("player_area"):
 		return
-	
-	var stats: DiverStats = area.get_parent()
-	stats.diver.diver_movement.velocity.x += 0
