@@ -94,10 +94,10 @@ func _process(delta: float) -> void:
 		leg_target1.global_position = _animate_leg(1, delta)
 		leg_target2.global_position = _animate_leg(2, delta)
 	else:
-		if Global.player.diver_movement.velocity.x < 0:
+		if Global.player.velocity.x < 0:
 			left_raycast.position.x = -36
 			right_raycast.position.x = -20
-		elif Global.player.diver_movement.velocity.x > 0:
+		elif Global.player.velocity.x > 0:
 			right_raycast.position.x = 36
 			left_raycast.position.x = 20
 		else:
