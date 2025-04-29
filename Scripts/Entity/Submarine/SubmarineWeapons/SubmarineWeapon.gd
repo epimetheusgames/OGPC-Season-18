@@ -52,9 +52,6 @@ func _ready() -> void:
 	passive_decrease_timer.one_shot = true
 	add_child(passive_decrease_timer)
 	passive_decrease_timer.connect("timeout", _on_passive_decrease_timer_timeout)
-	print(rotation_range)
-	print(max_rotation)
-	print(min_rotation)
 
 func _on_shot_cooldown_timeout() -> void:
 	shot_timer_over = true
