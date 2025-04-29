@@ -9,6 +9,7 @@ extends Gun
 @onready var cone_of_fire: ConeOfFire = $"ConeOfFire"
 
 @onready var gunshot_sounds = $"GunshotSounds"
+@onready var reload_sounds = $"ReloadSounds"
 
 @export var hand1pos: Node2D
 
@@ -17,6 +18,9 @@ func _ready() -> void:
 	
 	use_hand1 = true
 	use_hand2 = true
+	
+	reload_finish.connect(play_reload_sound)
+
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -49,7 +53,8 @@ func perform_attack(remote=false, node_name="") -> void:
 	var shot_angle: float = cone_of_fire.get_shot_angle()
 	bullet.fire(shot_angle)
 
-
+func play_reload_sound() -> void:
+	reload_sounds.play_random()
 
 func get_hand1_pos() -> Vector2:
 	return hand1pos.global_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dul1o4r1c8ash"]
+[gd_scene load_steps=20 format=3 uid="uid://dul1o4r1c8ash"]
 
 [ext_resource type="Texture2D" uid="uid://b5rb3ffgkimtn" path="res://Assets/Art/Entity/Player/TranquilizerPistol.png" id="1_2gvrx"]
 [ext_resource type="Script" uid="uid://c5ghrd4ktgyhh" path="res://Scripts/Entity/Diver/Combat/Pistol/Pistol.gd" id="1_n4wnc"]
@@ -10,6 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://c46u7gp3re6fa" path="res://Assets/SFX/Pistol/pistol-gunshot-3.mp3" id="7_idqos"]
 [ext_resource type="AudioStream" uid="uid://crbpvs3tr66tb" path="res://Assets/SFX/Pistol/pistol-gunshot-4.mp3" id="8_dqh76"]
 [ext_resource type="AudioStream" uid="uid://se5l4okx6kel" path="res://Assets/SFX/Pistol/pistol-gunshot-5.mp3" id="9_nyhbn"]
+[ext_resource type="AudioStream" uid="uid://bykspcxsn46x3" path="res://Assets/SFX/Pistol/reload-1.mp3" id="11_nyhbn"]
+[ext_resource type="AudioStream" uid="uid://c1mlyn2m1i44l" path="res://Assets/SFX/Pistol/reload-2.mp3" id="12_3c0r1"]
+[ext_resource type="AudioStream" uid="uid://bk2iv62yg0pj8" path="res://Assets/SFX/Pistol/reload-3.mp3" id="13_bs7xt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_koqf3"]
 atlas = ExtResource("1_2gvrx")
@@ -109,3 +112,16 @@ stream = ExtResource("8_dqh76")
 
 [node name="Gunshot5" type="AudioStreamPlayer2D" parent="GunshotSounds"]
 stream = ExtResource("9_nyhbn")
+
+[node name="ReloadSounds" type="Node2D" parent="."]
+script = ExtResource("6_idqos")
+metadata/_custom_type_script = "uid://bp6e1wanf5ku7"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ReloadSounds"]
+stream = ExtResource("11_nyhbn")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="ReloadSounds"]
+stream = ExtResource("12_3c0r1")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="ReloadSounds"]
+stream = ExtResource("13_bs7xt")
