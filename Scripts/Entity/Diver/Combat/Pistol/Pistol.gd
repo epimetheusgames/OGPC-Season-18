@@ -7,6 +7,9 @@ extends Gun
 @onready var pistol_sprite: AnimatedSprite2D = $"PistolSprite"
 @onready var emit_point: Node2D = $"EmitPoint"
 @onready var cone_of_fire: ConeOfFire = $"ConeOfFire"
+
+@onready var gunshot_sounds = $"GunshotSounds"
+
 @export var hand1pos: Node2D
 
 func _ready() -> void:
@@ -24,6 +27,9 @@ func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction && (!Global.is_multiplayer || Global.player._is_node_owner()):
 		Global.godot_steam_abstraction.sync_var(self, "position")
 		Global.godot_steam_abstraction.sync_var(self, "rotation")
+	
+	if gun_state == GunState.AIMING:
+		cone_of_fire.spread_angle_degrees -= 5
 
 func perform_attack(remote=false, node_name="") -> void:
 	super(remote, node_name)
@@ -33,6 +39,7 @@ func perform_attack(remote=false, node_name="") -> void:
 		node_name = str(rng.randi())
 	
 	pistol_sprite.play("Shoot")
+	gunshot_sounds.play_random()
 	
 	var bullet: BaseBullet = bullet_scene.instantiate()
 	bullet.name = node_name
@@ -41,6 +48,8 @@ func perform_attack(remote=false, node_name="") -> void:
 	bullet.global_position = emit_point.global_position
 	var shot_angle: float = cone_of_fire.get_shot_angle()
 	bullet.fire(shot_angle)
+
+
 
 func get_hand1_pos() -> Vector2:
 	return hand1pos.global_position

@@ -77,8 +77,11 @@ func _process(_delta: float) -> void:
 	if Input.is_action_pressed("aim") && selected_weapon is Gun:
 		selected_weapon = selected_weapon as Gun
 		selected_weapon.gun_state = Gun.GunState.AIMING
+		diver.diver_movement.is_aiming_weapon = true
+		
 	elif selected_weapon is Gun:
 		selected_weapon.gun_state = Gun.GunState.HOLDING
+		diver.diver_movement.is_aiming_weapon = false
 	
 	if selected_weapon.use_hand1:
 		var new_hand_pos: Vector2 = selected_weapon.get_hand1_pos()
