@@ -10,6 +10,7 @@ var boost_oxygen_loss: float = 0.05
 var current_money: int = 0
 
 @onready var hurtbox: Hurtbox = $Hurtbox
+@onready var detection_area: Area2D = $"GeneralDetectionBox"
 @onready var diver: Diver = get_parent()
 
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dr3xh14crxk34"
-path="res://.godot/imported/ReloadBar.png-bff4bfd0764b2a8d330272290ea615bf.ctex"
+path="res://.godot/imported/ReloadBar.png-fab444f1d25f8a19378099e2164df3c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ReloadBar.png"
-dest_files=["res://.godot/imported/ReloadBar.png-bff4bfd0764b2a8d330272290ea615bf.ctex"]
+source_file="res://Assets/Art/ReloadBar.png"
+dest_files=["res://.godot/imported/ReloadBar.png-fab444f1d25f8a19378099e2164df3c2.ctex"]
 
 [params]
 

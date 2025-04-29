@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_spr8y"]
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_5edmc"]
 [ext_resource type="Texture2D" uid="uid://yjtmqo4jfell" path="res://Assets/Art/Items/Rockies.png" id="2_t7hxf"]
-[ext_resource type="Script" uid="uid://cwsnc2u5yvmke" path="res://Scripts/Objects/Items/EditorRockVisibleThing.gd" id="3_t7hxf"]
+[ext_resource type="Script" path="res://Scripts/Objects/Items/EditorRockVisibleThing.gd" id="3_t7hxf"]
 
 [sub_resource type="Resource" id="Resource_7o5xh"]
 script = ExtResource("2_5edmc")

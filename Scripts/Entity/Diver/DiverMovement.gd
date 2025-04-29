@@ -6,27 +6,30 @@ extends Node2D
 
 # Swim
 const SWIM_BASE_SPEED: float = 250.0
+const SWIM_AIMING_SPEED: float = 100.0
 const SWIM_ACCEL: float = 10.0
 const SWIM_MAX_SPEED: float = 650.0
 var speed: float = SWIM_BASE_SPEED
 
 # Walk
-const WALK_SPEED: float = 300.0
-const GRAVITY: float = 1.0
+const WALK_SPEED: float = 400.0
+const GRAVITY: float = 30.0
 
 # Ladder
 const LADDER_FORCE: float = 100.0
 
-var is_in_gravity_area := false
-var spawned_in_research_station := false
-var is_in_research_station := true
-var is_in_ladder_area := false
-var is_climbing_ladder := false
+var is_in_gravity_area: bool = false
+var spawned_in_research_station: bool = false
+var is_in_research_station: bool = true
+var is_in_ladder_area: bool = false
+var is_climbing_ladder: bool = false
+var is_aiming_weapon: bool = false
 
 var ladder: Area2D = null
 
 @onready var saveable_timer := get_tree().create_timer(0.5)
 @onready var diver: Diver = get_parent()
+@onready var down_raycast: RayCast2D = $"DownRaycast"
 
 var is_boosting: bool = false
 
@@ -41,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	if is_in_ladder_area && Input.is_action_just_pressed("interact"):
 		is_climbing_ladder = !is_climbing_ladder
 	
-	if Input.is_action_pressed("boost"):
+	if Input.is_action_pressed("boost") && !is_aiming_weapon:
 		speed += SWIM_ACCEL
 		is_boosting = true
 	else:
@@ -68,15 +71,27 @@ func _physics_process(delta: float) -> void:
 	elif is_in_gravity_area:
 		# Walk
 		diver.global_rotation = 0
-		diver.velocity.y += 5 * delta * 60
+		
+		if down_raycast.is_colliding():
+			diver.velocity.y = 0.1
+		else:
+			diver.velocity.y += GRAVITY * delta * 60
+		
+		print(diver.velocity.y)
+		
 		if input_vector.length_squared() > 0:
-			diver.velocity.x += input_vector.x * 3 * delta * 60
+			diver.velocity.x = input_vector.x * WALK_SPEED * delta * 60
 		else:
 			diver.velocity.x = 0
 	
 	else:
 		# Swim
-		if input_vector.length() > 0:
+		if is_aiming_weapon:
+			# Move slow while aiming
+			diver.global_rotation += angle_difference(diver.global_rotation, input_angle) * 0.05
+			diver.velocity = Vector2.UP.rotated(diver.global_rotation) * SWIM_AIMING_SPEED
+		
+		elif input_vector.length() > 0:
 			diver.global_rotation += angle_difference(diver.global_rotation, input_angle) * 0.05
 			diver.velocity = Vector2.UP.rotated(diver.global_rotation) * speed
 	

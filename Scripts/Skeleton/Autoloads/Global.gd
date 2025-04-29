@@ -43,6 +43,9 @@ var player: Diver
 var submarine : Entity
 var dialog_core: TextureRect = null
 
+## List of enemy targets
+var enemy_targets : Array[Vector2]
+
 ## Handles networking, constant.
 var godot_steam_abstraction: GodotSteamAbstraction
 

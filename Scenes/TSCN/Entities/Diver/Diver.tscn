@@ -109,12 +109,12 @@ follower = NodePath("Movement/CivillianFollower")
 [node name="Body" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_ghsq1")
+disabled = true
 
 [node name="LargeBody" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(0, 13)
 shape = SubResource("CapsuleShape2D_auddj")
-disabled = true
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("3_r5rx4")
@@ -136,12 +136,13 @@ script = ExtResource("4_lqvql")
 script = ExtResource("2_lxvv3")
 
 [node name="RightWallRaycast" type="RayCast2D" parent="Movement"]
-visible = false
 target_position = Vector2(48, 0)
 
 [node name="LeftWallRaycast" type="RayCast2D" parent="Movement"]
-visible = false
 target_position = Vector2(-48, 0)
+
+[node name="DownRaycast" type="RayCast2D" parent="Movement"]
+target_position = Vector2(0, 92)
 
 [node name="CivillianFollower" type="CharacterBody2D" parent="Movement"]
 script = ExtResource("9_soyuq")

@@ -21,9 +21,12 @@ var reload_timer_over: bool = true
 var cooldown_timer: Timer
 var cooldown_timer_over: bool = true
 
-
 @export var dist_from_head: float = 100.0
 @export var knockback: float = 10.0
+
+signal shot()
+signal reload_start()
+signal reload_finish()
 
 var gun_state := GunState.HOLDING
 
@@ -42,6 +45,7 @@ func _ready() -> void:
 func _on_reload_timeout() -> void:
 	reload_timer_over = true
 	bullets_left = max_bullet_amount
+	reload_finish.emit()
 
 func _on_cooldown_timeout() -> void:
 	cooldown_timer_over = true
@@ -81,13 +85,13 @@ func attack() -> void:
 		return
 	
 	cooldown_timer_over = false
-	print("Firing! Bullets left BEFORE shot:", bullets_left)  # Debug
 	perform_attack()
+	shot.emit()
 	bullets_left -= 1
-	print("Bullets left AFTER shot:", bullets_left)  # Debug
 	
 	if bullets_left == 0:
 		reload_timer_over = false
 		reload_timer.start(reload_time)
+		reload_start.emit()
 	
 	cooldown_timer.start(cooldown_time)
