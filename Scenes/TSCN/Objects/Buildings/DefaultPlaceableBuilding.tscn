@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2lyihyk6qgq2"]
+[gd_scene load_steps=8 format=3 uid="uid://d2lyihyk6qgq2"]
 
 [ext_resource type="Script" uid="uid://crayjmaukyqsy" path="res://Scripts/Objects/PlaceableBuilding.gd" id="1_t277u"]
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_e6mh0"]
 [ext_resource type="Script" uid="uid://ct4d1cr2873gf" path="res://Scripts/Entity/NPC/AnyFollowerDummy.gd" id="3_ivgdk"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="4_wu04h"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="5_e6mh0"]
 
 [sub_resource type="Resource" id="Resource_xgfk5"]
 script = ExtResource("2_e6mh0")
@@ -12,14 +13,16 @@ file = "res://Scenes/TSCN/Objects/PlaceableBuilding.tscn"
 [sub_resource type="CircleShape2D" id="CircleShape2D_j551m"]
 radius = 79.0253
 
-[node name="DefaultPlaceableBuilding" type="Node2D" node_paths=PackedStringArray("building_sprite", "building_collision", "base_position", "player_follower_dummy")]
+[node name="DefaultPlaceableBuilding" type="Node2D" node_paths=PackedStringArray("building_sprite", "building_collision", "base_position", "detection_area", "player_follower_dummy", "building_status")]
 script = ExtResource("1_t277u")
 scene = SubResource("Resource_xgfk5")
 building_sprite = NodePath("Icon")
 building_collision = NodePath("StaticBody2D")
 base_position = NodePath("Node2D")
+detection_area = NodePath("BuildingArea")
 player_follower_dummy = NodePath("AnyFollowerDummy")
-max_occupants = 3
+max_occupants = 1
+building_status = NodePath("BuildingStatus")
 
 [node name="Raycasts" type="Node2D" parent="."]
 
@@ -99,3 +102,12 @@ polygon = PackedVector2Array(-58, 61, -63, 53, -63, -52, -56, -61, -45, -65, 54,
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0, 64)
+
+[node name="BuildingStatus" type="Label" parent="."]
+offset_left = -125.0
+offset_top = -97.0
+offset_right = 127.0
+offset_bottom = -73.0
+theme = ExtResource("5_e6mh0")
+text = "Status: Unoccupied"
+horizontal_alignment = 1

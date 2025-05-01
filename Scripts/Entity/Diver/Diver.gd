@@ -32,6 +32,8 @@ var diver_state: DiverState
 # --- OVERRIDES ---
 
 func _ready() -> void:
+	super()
+	
 	if Global.godot_steam_abstraction && node_owner == 0 && !Global.godot_steam_abstraction.is_lobby_owner:
 		node_owner = Global.godot_steam_abstraction.steam_id
 	
@@ -67,6 +69,9 @@ func _physics_process(_delta: float):
 	if get_state() == DiverState.IN_GRAVITY_AREA:
 		$Body.disabled = true
 		$LargeBody.disabled = false
+	elif get_state() == DiverState.DRIVING_SUBMARINE:
+		$Body.disabled = true
+		$LargeBody.disabled = true
 	else:
 		$Body.disabled = false
 		$LargeBody.disabled = true
