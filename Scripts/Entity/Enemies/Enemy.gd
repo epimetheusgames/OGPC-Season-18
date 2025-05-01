@@ -50,6 +50,9 @@ func _die() -> void:
 		get_parent().add_child(item)
 		item.global_position = global_position
 		
+	if hurtbox:
+		hurtbox.queue_free()
+	
 	if attackbox:
 		attackbox.queue_free()
 	if state_machine && dead_state:

@@ -13,6 +13,7 @@ const raycast_length_mul = 0.5
 @export var player_follower_dummy: AnyFollowerDummy
 @export var max_occupants: int
 @export var current_occupants: int
+@export var building_status: Label
 
 @onready var raycasts: Node2D = $Raycasts
 
@@ -74,6 +75,14 @@ func _process(delta: float) -> void:
 
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !placed_by._is_node_owner():
 		return
+	
+	if building_status:
+		if current_occupants >= max_occupants:
+			building_status.text = "Status: Full"
+		elif current_occupants > 0:
+			building_status.text = "Partially Full: " + str(current_occupants) + "/" + str(max_occupants)
+		else:
+			building_status.text = "Status: Empty"
 	
 	if !placed:
 		for child in building_collision.get_children():

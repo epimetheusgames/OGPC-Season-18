@@ -32,6 +32,8 @@ var diver_state: DiverState
 # --- OVERRIDES ---
 
 func _ready() -> void:
+	super()
+	
 	if Global.godot_steam_abstraction && node_owner == 0 && !Global.godot_steam_abstraction.is_lobby_owner:
 		node_owner = Global.godot_steam_abstraction.steam_id
 	
