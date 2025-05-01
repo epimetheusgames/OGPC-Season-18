@@ -20,8 +20,4 @@ func _on_save() -> void:
 			"global_rotation",
 			"dead_from_save",
 		],
-		{
-			get_path_to($Hurtbox): [
-				"health"
-			]
-		}))
+		{get_path_to($Hurtbox): ["health"]} if get_node_or_null("Hurtbox") else {}))

@@ -15,9 +15,22 @@ var entity_type = "Entity"
 @export var sync_by_increment: bool = false
 @export var sync_increment: float = 0
 
+@export_category("Nametag")
+@export var nametag_point: Node2D
+@export var nametag_text: String
+
 var node_owner := 0
 var save_resource := EntitySave.new()
 var components_dictionary := {}
+
+var nametag: Label
+
+func _ready() -> void:
+	await get_tree().create_timer(0.1).timeout
+	if nametag_point:
+		nametag = Label.new()
+		nametag.text = nametag_text
+		nametag_point.add_child(nametag)
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -25,6 +38,12 @@ func _process(_delta: float) -> void:
 		
 	if _has_physics:
 		move_and_slide()
+	
+	if nametag:
+		nametag_point.global_rotation = 0
+		nametag.text = nametag_text
+		nametag.position.x = -nametag.size.x / 2.0
+		nametag.position.y = -nametag.size.y / 2.0
 	
 	save_resource.position = position
 	save_resource.velocity = velocity

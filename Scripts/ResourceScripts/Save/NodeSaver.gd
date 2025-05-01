@@ -11,7 +11,7 @@ var scene_override_path: FilePathResource
 var use_already_existing_node := false
 
 ## Static function to create a NodeSaver.
-static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary[NodePath, Array] = {}, use_already_existing_node := false, scene_override: FilePathResource = null):
+static func create(mission: MissionRoot, node: Node, properties: Array[String], _child_properties: Dictionary = {}, use_already_existing_node := false, scene_override: FilePathResource = null):
 	var ret := NodeSaver.new()
 	ret.save_node(mission, node, properties, _child_properties, use_already_existing_node, scene_override)
 	return ret
@@ -89,7 +89,7 @@ func load_node(mission: MissionRoot) -> void:
 
 ## Packs a node into this NodeSaver. Static function for this is create
 ## Child properties is path (String): variable names (Array[String]).
-func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary[NodePath, Array] = {}, use_existing_node := false, scene_override: FilePathResource = null) -> void:
+func save_node(mission: MissionRoot, node: Node, properties: Array[String], children_properties: Dictionary = {}, use_existing_node := false, scene_override: FilePathResource = null) -> void:
 	Global.print_debug("DEBUG: Saving node at path " + str(mission.get_path_to(node)) + " relative to mission root.")
 
 	_recursively_set_owners(node, node)
