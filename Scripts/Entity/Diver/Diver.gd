@@ -67,6 +67,9 @@ func _physics_process(_delta: float):
 	if get_state() == DiverState.IN_GRAVITY_AREA:
 		$Body.disabled = true
 		$LargeBody.disabled = false
+	elif get_state() == DiverState.DRIVING_SUBMARINE:
+		$Body.disabled = true
+		$LargeBody.disabled = true
 	else:
 		$Body.disabled = false
 		$LargeBody.disabled = true

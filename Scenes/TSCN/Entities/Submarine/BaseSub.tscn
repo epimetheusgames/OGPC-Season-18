@@ -81,7 +81,7 @@ polygon = PackedVector2Array(-209, 100, -202, 100, -212, 89, -220, 77, -226, 65,
 position = Vector2(-276, 156)
 rotation = 4.71239
 scale = Vector2(1.5, 1.5)
-energy = 10.0
+energy = 6.0
 range_z_max = 10
 texture = ExtResource("6_qnb0f")
 offset = Vector2(0, 20)
@@ -90,6 +90,7 @@ metadata/_edit_lock_ = true
 [node name="SubmarineInteriorLight" type="PointLight2D" parent="."]
 position = Vector2(4, 7)
 energy = 2.0
+range_z_max = 10
 shadow_enabled = true
 texture = ExtResource("7_d1qs6")
 metadata/_edit_lock_ = true

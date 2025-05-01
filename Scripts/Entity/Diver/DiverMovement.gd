@@ -16,7 +16,7 @@ const WALK_SPEED: float = 400.0
 const GRAVITY: float = 30.0
 
 # Ladder
-const LADDER_FORCE: float = 100.0
+const LADDER_CLIMB_SPEED: float = 30.0
 
 var is_in_gravity_area: bool = false
 var spawned_in_research_station: bool = false
@@ -63,8 +63,8 @@ func _physics_process(delta: float) -> void:
 		# Ladder
 		diver.global_rotation = ladder.global_rotation
 		if input_vector.length_squared() > 0:
-			diver.velocity.x += input_vector.x * 3 * delta * 60
-			diver.velocity.y += input_vector.y * 3 * delta * 60
+			diver.velocity.x += input_vector.x * LADDER_CLIMB_SPEED * delta * 60
+			diver.velocity.y += input_vector.y * LADDER_CLIMB_SPEED * delta * 60
 		else:
 			diver.velocity = Vector2.ZERO
 		
