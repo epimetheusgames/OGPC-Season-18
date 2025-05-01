@@ -5,6 +5,7 @@
 class_name BluntTipKnife
 extends Knife
 
+@onready var swoosh_sounds: AudioVariationPlayer = $"SwooshSounds"
 
 func perform_attack(remote=false, node_name="") -> void:
-	pass
+	swoosh_sounds.play_random()

@@ -1,16 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://os6ytsadrm1v"]
+[gd_scene load_steps=7 format=3 uid="uid://os6ytsadrm1v"]
 
 [ext_resource type="Script" uid="uid://bqn8vxsjcu0mn" path="res://Scripts/Entity/Diver/Combat/BluntTipKnife/BluntTipKnife.gd" id="1_tafim"]
 [ext_resource type="Texture2D" uid="uid://6kfea377ayda" path="res://Assets/Art/Entity/Player/Knife.png" id="2_7cqu0"]
 [ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="3_deupv"]
+[ext_resource type="Script" uid="uid://bp6e1wanf5ku7" path="res://Scenes/TSCN/Entities/Diver/Weapons/SoundVariationPlayer.gd" id="4_x5v4r"]
+[ext_resource type="AudioStream" uid="uid://b4kwdgxhl3lb0" path="res://Assets/SFX/Edited/Knife/swoosh-1.mp3" id="5_n0an6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qwjc4"]
-size = Vector2(112, 127)
+size = Vector2(65, 21)
 
 [node name="Knife" type="Node2D" node_paths=PackedStringArray("attackbox")]
 script = ExtResource("1_tafim")
 attackbox = NodePath("ContinuousAttack")
-cooldown_time = 0.1
+cooldown_time = 0.5
 
 [node name="Hand1" type="Node2D" parent="."]
 position = Vector2(18, 0)
@@ -28,5 +30,19 @@ damage_amount = 10.0
 metadata/_custom_type_script = "uid://bf0bikj8np6x"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousAttack"]
-position = Vector2(46, 53.5)
+position = Vector2(22.5, 0.5)
 shape = SubResource("RectangleShape2D_qwjc4")
+
+[node name="SwooshSounds" type="Node2D" parent="."]
+script = ExtResource("4_x5v4r")
+pitch_variation = 0.5
+metadata/_custom_type_script = "uid://bp6e1wanf5ku7"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SwooshSounds"]
+stream = ExtResource("5_n0an6")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="SwooshSounds"]
+stream = ExtResource("5_n0an6")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="SwooshSounds"]
+stream = ExtResource("5_n0an6")
