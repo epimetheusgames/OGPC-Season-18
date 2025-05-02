@@ -40,6 +40,13 @@ func _physics_process(_delta: float) -> void:
 	velocity = submarine_movement.get_velocity()
 	move_and_slide()
 
+func flip():
+	for child in get_children():
+		if "scale" in child:
+			child.scale.x = -child.scale.x
+		else:
+			print(child)
+
 ## Called when cage breaks
 func cage_broken():
 	collision_shapes.erase($"Cage")

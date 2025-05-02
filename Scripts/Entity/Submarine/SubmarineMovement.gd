@@ -8,6 +8,7 @@ const CONST_ACCEL: int = 40
 const MAX_SPEED: float = 7500.0
 const MAX_ROTATION: float = 10.0
 const ROTATION_RATE: float = 1.2
+const BOUNCE_VELOCITY_DECAY: float = .9
 
 @onready var buoyancy_component = get_parent().get_node("BuoyancyComponent")
 
@@ -31,22 +32,25 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	decay_velocity(delta)
+	print(get_parent().velocity)
+	
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
 		if !invunerable:
 			for i in range(get_parent().get_slide_collision_count()):
 				var collision = get_parent().get_slide_collision(i)
 				var body = collision.get_collider()
+				
 				if body.is_in_group("environment_collision"):
 					var reflection_velocity = collision.get_collider_velocity() + velocity
 					var collision_normal_angle = collision.get_normal().angle()
 					var new_angle = 2 * collision_normal_angle - reflection_velocity.angle() - PI
-					print(rad_to_deg(new_angle))
-					print(rad_to_deg(collision_normal_angle))
-					print(rad_to_deg(velocity.angle()))
-					velocity = Util.angle_to_vector_radians(new_angle, reflection_velocity.length())
+					
+					velocity = Util.angle_to_vector_radians(new_angle, reflection_velocity.length() * BOUNCE_VELOCITY_DECAY)
+					print("Submarine bounced with new velocity: " + str(velocity))
 					invunerability_timer.start(invunerability_length)
 					invunerable = true
 					break
+			
 			if Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
 				input_vector = get_input_vector()
 				update_movement_velocity(delta * 60)
@@ -59,11 +63,10 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("interact"):
 		if Global.player.get_state() != Diver.DiverState.DRIVING_SUBMARINE and in_interaction_area: 
-			print("klsdflk")
 			Global.player.set_state(Diver.DiverState.DRIVING_SUBMARINE)
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = true
 		elif Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
-			Global.player.set_state(Diver.DiverState.IN_SUBMARINE)
+			Global.player.set_state(Diver.DiverState.IN_GRAVITY_AREA)
 			target_angle = 0.0
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = false
 
@@ -104,9 +107,10 @@ func update_current_angle(delta: float) -> void:
 	current_angle = Util.better_angle_lerp(current_angle, target_angle, 0.0025, delta)
 
 func update_movement_velocity(delta: float):
-	print(input_vector)
 	if input_vector.x != 0.0:
 		velocity += input_vector.x * Util.angle_to_vector_radians(current_angle, CONST_ACCEL * delta)
+		#if input_vector.x * scale.x > 0:
+		#	get_parent().flip()
 	elif input_vector.y != 0.0:
 		velocity += Vector2(0, input_vector.y) * CONST_ACCEL * delta
 	

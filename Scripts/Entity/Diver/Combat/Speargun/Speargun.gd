@@ -7,9 +7,17 @@ extends Gun
 
 @onready var emit_point: Node2D = $"EmitPoint"
 @onready var cone_of_fire: ConeOfFire = $"EmitPoint/ConeOfFire"
+@onready var gun_animation: AnimatedSprite2D = $"GunAnimation"
+
+@onready var gunshot_sounds: AudioVariationPlayer = $"GunshotSounds"
+@onready var reload_sounds: AudioVariationPlayer = $"ReloadSounds"
 
 @onready var hand1_point: Node2D = $"Hand1Point"
 @onready var hand2_point: Node2D = $"Hand2Point"
+
+func _ready() -> void:
+	super()
+	reload_finish.connect(reload_animation)
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -29,6 +37,11 @@ func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction && (!Global.is_multiplayer || Global.player._is_node_owner()):
 		Global.godot_steam_abstraction.sync_var(self, "position")
 		Global.godot_steam_abstraction.sync_var(self, "rotation")
+
+
+func reload_animation() -> void:
+	reload_sounds.play_random()
+	gun_animation.play("Idle")
 
 func get_hand1_pos() -> Vector2:
 	if gun_state == GunState.HOLDING:
@@ -56,7 +69,8 @@ func perform_attack(remote=false, node_name="") -> void:
 	new_spear.global_position = emit_point.global_position
 	new_spear.global_rotation = global_rotation
 	
-	$GunAnimation.play("Shoot")
+	gun_animation.play("Shoot")
+	gunshot_sounds.play_random()
 	
 	var angle: float = cone_of_fire.get_shot_angle()
 	new_spear.fire(angle)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=50 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://cqn1ekjfcc0fx" path="res://Assets/Music/Sunlight.mp3" id="5_3fu4r"]
 [ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="5_aep54"]
 [ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Level/WallTexture.png" id="7_l3b62"]
-[ext_resource type="PackedScene" uid="uid://6ajyn7xeilmv" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="12_mcejo"]
 [ext_resource type="PackedScene" uid="uid://brtj1ur8tgigg" path="res://Scenes/ResearchStation.tscn" id="13_eg3rs"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
@@ -273,6 +272,7 @@ z_index = 2
 position = Vector2(-10165, -10896)
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = SubResource("GDScript_5py2y")
+metadata/_edit_lock_ = true
 
 [node name="World" type="Node2D" parent="LevelContainer/Environment/Collisions"]
 position = Vector2(11006, 34721)
@@ -328,9 +328,19 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 z_index = 20
 position = Vector2(-13147, -5731)
 
-[node name="Submarine" parent="LevelContainer/Player" instance=ExtResource("12_mcejo")]
+[node name="Submarine" parent="LevelContainer/Player"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 z_index = 1
 position = Vector2(-11386, -6296)
+script = null
 metadata/_edit_lock_ = true
 
 [node name="BuoyancyComponent" type="Node" parent="LevelContainer/Player/Submarine"]
@@ -475,5 +485,29 @@ position = Vector2(-11614, -5709)
 
 [node name="RockItem7" parent="." instance=ExtResource("27_l3b62")]
 position = Vector2(-11480, -5644)
+
+[node name="RockItem9" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11614, -5709)
+
+[node name="RockItem10" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11614, -5709)
+
+[node name="RockItem11" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11614, -5709)
+
+[node name="RockItem13" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11625, -5913)
+
+[node name="RockItem12" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11614, -5709)
+
+[node name="RockItem14" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11614, -5709)
+
+[node name="RockItem15" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11614, -5709)
+
+[node name="RockItem16" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11614, -5709)
 
 [editable path="UILayer/IngameUI"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=43 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://b2s21mlnq8264" path="res://Scripts/Entity/Diver/Diver.gd" id="1_soyuq"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://dl6v2p1fxvitc" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
-[ext_resource type="Script" uid="uid://cfcc8wf5m0kgj" path="res://Scripts/Entity/NPC/PlayerFollowerDummy.gd" id="9_soyuq"]
+[ext_resource type="Script" path="res://Scripts/Entity/NPC/PlayerFollowerDummy.gd" id="9_soyuq"]
 [ext_resource type="Script" uid="uid://dau0csslipmpi" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="10_qg316"]
@@ -20,7 +20,14 @@
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
+[ext_resource type="Script" uid="uid://bp6e1wanf5ku7" path="res://Scenes/TSCN/Entities/Diver/Weapons/SoundVariationPlayer.gd" id="20_gnc2j"]
+[ext_resource type="AudioStream" uid="uid://ddw8r2pp1mrg1" path="res://Assets/SFX/Edited/Diver/footstep-1.mp3" id="21_juvxq"]
 [ext_resource type="Script" uid="uid://dw54av5q4enf2" path="res://Scripts/Objects/Camera.gd" id="21_soyuq"]
+[ext_resource type="AudioStream" uid="uid://dm4p7pxgqnq5u" path="res://Assets/SFX/Edited/Diver/footstep-2.mp3" id="22_l44qt"]
+[ext_resource type="AudioStream" uid="uid://bp8kk5wrl6qjt" path="res://Assets/SFX/Edited/Diver/footstep-3.mp3" id="23_vhq57"]
+[ext_resource type="AudioStream" uid="uid://dp6nw53tmf8ke" path="res://Assets/SFX/Edited/Diver/footstep-4.mp3" id="24_c6fqq"]
+[ext_resource type="AudioStream" uid="uid://cot6buci0nady" path="res://Assets/SFX/Edited/Diver/footstep-5.mp3" id="25_yxkba"]
+[ext_resource type="AudioStream" uid="uid://dnlsincpw3bl2" path="res://Assets/SFX/Edited/Diver/footstep-6.mp3" id="26_cos02"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 24.0
@@ -471,6 +478,37 @@ shadow_filter_smooth = 1.0
 texture = SubResource("GradientTexture2D_chbw5")
 texture_scale = 0.7
 metadata/_edit_lock_ = true
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="FootstepSounds" type="Node2D" parent="Sound"]
+script = ExtResource("20_gnc2j")
+delay_time = 0.5
+metadata/_custom_type_script = "uid://bp6e1wanf5ku7"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sound/FootstepSounds"]
+stream = ExtResource("21_juvxq")
+volume_db = 1.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Sound/FootstepSounds"]
+stream = ExtResource("22_l44qt")
+volume_db = 1.0
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="Sound/FootstepSounds"]
+stream = ExtResource("23_vhq57")
+volume_db = 1.0
+
+[node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="Sound/FootstepSounds"]
+stream = ExtResource("24_c6fqq")
+volume_db = 1.0
+
+[node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="Sound/FootstepSounds"]
+stream = ExtResource("25_yxkba")
+volume_db = 1.0
+
+[node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="Sound/FootstepSounds"]
+stream = ExtResource("26_cos02")
+volume_db = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("21_soyuq")

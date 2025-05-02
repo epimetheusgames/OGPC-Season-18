@@ -1,10 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccpwr2asewfok"]
-
-[ext_resource type="Script" uid="uid://cjjjlhi3d1gmj" path="res://Scripts/Entity/Submarine/MiniSub.gd" id="1_qwrrb"]
+[gd_scene format=3 uid="uid://dpuqudpawu2ly"]
 
 [node name="MiniSub" type="CharacterBody2D"]
 position = Vector2(98, 35)
-script = ExtResource("1_qwrrb")
 
 [node name="Polygon2D3" type="Polygon2D" parent="."]
 color = Color(0.204681, 0.20468, 0.20468, 1)
