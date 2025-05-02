@@ -5,7 +5,12 @@
 class_name AudioVariationPlayer
 extends Node2D
 
-@export var pitch_variation: float = 0.1
+@export var pitch_min: float = 1.0
+@export var pitch_max: float = 1.0
+
+@export var volume_min: float = 0.0
+@export var volume_max: float = 0.0
+
 @export var delay_time: float = 0.0
 
 var rng := RandomNumberGenerator.new()
@@ -39,10 +44,13 @@ func play_random() -> void:
 			break
 		
 		var index = rng.randi_range(0, audio_players.size() - 1)
+		var audio_player: AudioStreamPlayer2D = audio_players[index]
 		
 		if audio_done_playing[index]:
-			audio_players[index].pitch_scale = randf_range(1.0 - pitch_variation, 1.0 + pitch_variation)
-			audio_players[index].play()
+			audio_player.pitch_scale = rng.randf_range(pitch_min, pitch_max)
+			audio_player.volume_db = rng.randf_range(volume_min, volume_max)
+			
+			audio_player.play()
 			audio_done_playing[index] = false
 			break
 		

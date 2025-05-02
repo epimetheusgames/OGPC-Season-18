@@ -75,6 +75,8 @@ animation = &"Shoot"
 
 [node name="GunshotSounds" type="Node2D" parent="."]
 script = ExtResource("5_souka")
+pitch_min = 1.1
+pitch_max = 0.9
 metadata/_custom_type_script = "uid://bp6e1wanf5ku7"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GunshotSounds"]
@@ -85,6 +87,10 @@ stream = ExtResource("7_fg62l")
 
 [node name="ReloadSounds" type="Node2D" parent="."]
 script = ExtResource("5_souka")
+pitch_min = 1.1
+pitch_max = 0.9
+volume_min = 2.0
+volume_max = 2.5
 metadata/_custom_type_script = "uid://bp6e1wanf5ku7"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ReloadSounds"]

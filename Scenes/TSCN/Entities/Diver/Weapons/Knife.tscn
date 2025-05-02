@@ -35,7 +35,7 @@ shape = SubResource("RectangleShape2D_qwjc4")
 
 [node name="SwooshSounds" type="Node2D" parent="."]
 script = ExtResource("4_x5v4r")
-pitch_variation = 0.5
+pitch_min = 0.6
 metadata/_custom_type_script = "uid://bp6e1wanf5ku7"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SwooshSounds"]
