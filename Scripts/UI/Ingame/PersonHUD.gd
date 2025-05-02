@@ -5,10 +5,12 @@ extends PanelContainer
 @onready var health_progress: TextureProgressBar = $MarginContainer/HBoxContainer/HealthVBox/HBoxContainer/HealthProgress
 @onready var oxygen_progress: TextureProgressBar = $MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer/OxygenProgress
 @onready var time: Label = $MarginContainer/HBoxContainer/TimeText
+@onready var warning_text: Label = $MarginContainer/HBoxContainer/WarningText
 
 func _ready() -> void:
 	if Global.game_time_system:
 		Global.game_time_system.time_changed.connect(_time_changed)
+		Global.game_time_system.day_ended.connect(_day_ended)
 	
 	if Global.save_load_framework:
 		Global.save_load_framework.save_nodes.connect(_saving_game)
@@ -30,3 +32,8 @@ func _saving_game() -> void:
 
 func _time_changed(hour: int, minute: int):
 	time.text = "Current Time: " + Global.game_time_system.format_time(hour, minute)
+
+func _day_ended() -> void:
+	warning_text.text = "Civillians have spawned at the Research Station"
+	await get_tree().create_timer(10).timeout
+	warning_text.text = ""
