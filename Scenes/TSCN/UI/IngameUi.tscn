@@ -104,6 +104,12 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 21
 text = "Oxygen"
 
+[node name="WarningText" type="Label" parent="HUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("5_6galc")
+horizontal_alignment = 2
+
 [node name="TimeText" type="Label" parent="HUD/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
