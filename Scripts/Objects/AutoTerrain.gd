@@ -45,6 +45,6 @@ func _ready() -> void:
 		occluder.position = offset
 		occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
 		
-	collision_body.collision_layer = 3
+	collision_body.collision_layer = 17
 	
 	print_tree_pretty()

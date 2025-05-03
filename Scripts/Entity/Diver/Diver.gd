@@ -22,9 +22,7 @@ var diver_state: DiverState
 @onready var diver_stats: DiverStats = $"Stats"  # Handles health, oxygen, etc.
 
 @export var camera: DiverCamera
-
 @export var diver_scene: FilePathResource  # FilePath of the diver ??
-
 
 ## Player follower
 @export var follower: CivillianFollower
@@ -54,9 +52,7 @@ func _process(delta: float) -> void:
 	if !Global.is_multiplayer || _is_node_owner():
 		Global.player = self
 
-
 func _physics_process(_delta: float):
-	
 	if get_state() == DiverState.IN_GRAVITY_AREA:
 		$Body.disabled = true
 		$LargeBody.disabled = false
@@ -81,11 +77,9 @@ func _physics_process(_delta: float):
 	if diver_animation.in_unlock_terminal_area:
 		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2(3, 3), 0.2, _delta)
 		camera.global_position = Util.better_vec2_lerp(camera.global_position, Global.research_station.unlock_terminal.global_position, 0.1, _delta)
-		Global.current_mission_node.get_node("UILayer").visible = false
 	else:
 		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2.ONE, 0.2, _delta)
 		camera.position = Util.better_vec2_lerp(camera.position, Vector2.ZERO, 0.1, _delta)
-		Global.current_mission_node.get_node("UILayer").visible = true
 	
 	#if camera && parallax:
 	#	parallax.scroll_base_offset.y += 100

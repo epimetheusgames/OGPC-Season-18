@@ -12,11 +12,6 @@ extends PanelContainer
 ]
 
 func _process(_delta: float) -> void:
-	if Global.research_station.player_in_area:
-		visible = false
-	else:
-		visible = true
-
 	var i := 0
 	for slot in Global.player.diver_inventory.inventory:
 		if !slot:

@@ -25,9 +25,11 @@ extends Node2D
 @onready var leg_target1: Node2D = $"LegIkTarget1"
 @onready var leg_target2: Node2D = $"LegIkTarget2"
 
-
 @onready var left_collision_point: Vector2 = left_raycast.get_collision_point()
 @onready var right_collision_point: Vector2 = right_raycast.get_collision_point()
+
+@export var default_sprite: Texture2D
+@export var walking_sprite: Texture2D
 
 var displayed_nametag: Label
 
@@ -94,9 +96,12 @@ func _process(delta: float) -> void:
 		$WalkingAnimation.stop()
 		leg_target1.global_position = _animate_leg(1, delta)
 		leg_target2.global_position = _animate_leg(2, delta)
+		for polygon: Polygon2D in $Polygons.get_children():
+			polygon.texture = default_sprite
 	else:
 		$WalkingAnimation.play("Walking", -1, 3 * diver.velocity.x / 392)
-		print(diver.velocity.x)
+		for polygon: Polygon2D in $Polygons.get_children():
+			polygon.texture = walking_sprite
 	
 	# Arms
 	if !hand1_weapon_control:
