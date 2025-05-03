@@ -6,8 +6,7 @@ extends Node2D
 
 const CONST_ACCEL: int = 40
 const MAX_SPEED: float = 7500.0
-const MAX_ROTATION: float = 10.0
-const ROTATION_RATE: float = 1.2
+const MAX_ROTATION: float = PI/12
 const BOUNCE_VELOCITY_DECAY: float = .9
 
 @onready var buoyancy_component = get_parent().get_node("BuoyancyComponent")
@@ -17,11 +16,10 @@ var current_angle: float = 0.0
 var target_angle: float = 0.0
 var input_vector: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.ZERO
-var buoyancy = 0
 
 var health : float = 500.0
 var invunerability_timer : Timer
-var invunerability_length : float = .1
+var invunerability_length : float = .25
 var invunerable : bool = false
 
 func _ready() -> void:
@@ -32,14 +30,12 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	decay_velocity(delta)
-	print(get_parent().velocity)
 	
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
 		if !invunerable:
 			for i in range(get_parent().get_slide_collision_count()):
 				var collision = get_parent().get_slide_collision(i)
 				var body = collision.get_collider()
-				
 				if body.is_in_group("environment_collision"):
 					var reflection_velocity = collision.get_collider_velocity() + velocity
 					var collision_normal_angle = collision.get_normal().angle()
@@ -47,6 +43,9 @@ func _physics_process(delta: float) -> void:
 					
 					velocity = Util.angle_to_vector_radians(new_angle, reflection_velocity.length() * BOUNCE_VELOCITY_DECAY)
 					print("Submarine bounced with new velocity: " + str(velocity))
+					
+					var velocity_change : float = (reflection_velocity - velocity).length()
+					$"../Hurtbox".damage(velocity_change/30, null)
 					invunerability_timer.start(invunerability_length)
 					invunerable = true
 					break
@@ -99,7 +98,7 @@ func get_input_vector() -> Vector2:
 	
 	var xy_product = input_vector.x * input_vector.y
 	if xy_product != 0:
-		target_angle = PI/6 * xy_product / abs(xy_product)
+		target_angle = MAX_ROTATION * xy_product / abs(xy_product)
 	
 	return input_vector
 
