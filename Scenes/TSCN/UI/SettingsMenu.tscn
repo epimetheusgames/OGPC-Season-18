@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1oaylh32r500"]
+[gd_scene load_steps=5 format=3 uid="uid://c1oaylh32r500"]
 
 [ext_resource type="Script" uid="uid://bx18q8lr32ei8" path="res://Scripts/UI/SettingsMenu.gd" id="1_3dd0e"]
 [ext_resource type="Texture2D" uid="uid://cqx2208sneqm4" path="res://Assets/Art/UI/arrow.svg" id="2_l4xm8"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="2_ltcfv"]
 [ext_resource type="Script" uid="uid://b4d236x1wwn5k" path="res://Scripts/UI/sliderIsStupid.gd" id="2_s8p8c"]
 
 [node name="Settings" type="Node2D" node_paths=PackedStringArray("BrightnessSlider", "PerformanceButton", "SoundSlider")]
@@ -31,7 +32,7 @@ alignment = 1
 custom_minimum_size = Vector2(140, 20)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 36
+theme = ExtResource("2_ltcfv")
 text = "Overall Volume"
 fit_content = true
 scroll_active = false
@@ -40,6 +41,7 @@ autowrap_mode = 0
 
 [node name="MasterVolumeSlider" type="HSlider" parent="SoundSubMenu/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_ltcfv")
 max_value = 1.0
 step = 0.1
 value = 0.5
@@ -49,6 +51,7 @@ script = ExtResource("2_s8p8c")
 z_index = 14
 z_as_relative = false
 layout_mode = 2
+theme = ExtResource("2_ltcfv")
 action_mode = 0
 texture_normal = ExtResource("2_l4xm8")
 
@@ -72,6 +75,7 @@ mouse_filter = 2
 
 [node name="BackButton" type="TextureButton" parent="ContainTheDumbShit"]
 layout_mode = 2
+theme = ExtResource("2_ltcfv")
 action_mode = 0
 texture_normal = ExtResource("2_l4xm8")
 
@@ -95,6 +99,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(140, 20)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("2_ltcfv")
 text = "Game Brightness"
 fit_content = true
 scroll_active = false
@@ -102,19 +107,20 @@ scroll_active = false
 [node name="BrightnessSlider" type="HSlider" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
+theme = ExtResource("2_ltcfv")
 value = 50.0
 script = ExtResource("2_s8p8c")
 
 [node name="KeybindButton" type="Button" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_font_sizes/font_size = 53
+theme = ExtResource("2_ltcfv")
 text = "Edit Keybinds"
 
 [node name="SoundButton" type="Button" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 46
+theme = ExtResource("2_ltcfv")
 action_mode = 0
 text = "Sound Settings"
 
@@ -130,7 +136,7 @@ custom_minimum_size = Vector2(10, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_font_sizes/normal_font_size = 34
+theme = ExtResource("2_ltcfv")
 text = "Efficiency Mode"
 fit_content = true
 scroll_active = false
@@ -138,6 +144,7 @@ autowrap_mode = 0
 
 [node name="PerformanceButton" type="Button" parent="ContainTheDumbShit/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_ltcfv")
 text = "Turn On"
 
 [node name="Background" type="ColorRect" parent="."]

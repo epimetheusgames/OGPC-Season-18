@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="5_jvequ"]
 [ext_resource type="Script" uid="uid://cwga2scp61606" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="6_pmicg"]
 [ext_resource type="Script" uid="uid://clgd0ups3ekte" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="7_vxmb5"]
-[ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="8_py4au"]
+[ext_resource type="Resource" uid="uid://c2722x3n5nlk5" path="res://Scenes/Resource/Level/Tutorial.tres" id="8_c76v7"]
 [ext_resource type="Script" uid="uid://duycl57xwmfpr" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="9_y8obd"]
 [ext_resource type="Script" uid="uid://6ub1ahbtrw5b" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
@@ -41,11 +41,11 @@ file = "uid://dh0cluhw5hbar"
 
 [sub_resource type="Resource" id="Resource_wq34i"]
 script = ExtResource("5_jvequ")
-file = "res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"
+file = "uid://c0nn12ilucaoj"
 
 [sub_resource type="Resource" id="Resource_1tmkv"]
 script = ExtResource("9_y8obd")
-missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_py4au")])
+missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_c76v7")])
 
 [sub_resource type="Resource" id="Resource_wiowl"]
 resource_local_to_scene = true
@@ -364,6 +364,7 @@ size_flags_vertical = 3
 
 [node name="BackButton" type="TextureButton" parent="UI/MenuSettings/ContainTheDumbShit"]
 layout_mode = 2
+theme = ExtResource("13_wogkx")
 action_mode = 0
 texture_normal = ExtResource("21_eg08b")
 
@@ -381,13 +382,13 @@ mouse_filter = 2
 [node name="KeybindButton" type="Button" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_font_sizes/font_size = 53
+theme = ExtResource("13_wogkx")
 text = "Edit Keybinds"
 
 [node name="SoundButton" type="Button" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 46
+theme = ExtResource("13_wogkx")
 action_mode = 0
 text = "Sound Settings"
 
@@ -403,7 +404,7 @@ custom_minimum_size = Vector2(10, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_font_sizes/normal_font_size = 34
+theme = ExtResource("13_wogkx")
 text = "Efficiency Mode"
 fit_content = true
 scroll_active = false
@@ -411,6 +412,7 @@ autowrap_mode = 0
 
 [node name="PerformanceButton" type="Button" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("13_wogkx")
 text = "Turn On"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer"]
@@ -422,6 +424,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(140, 20)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("13_wogkx")
 text = "Game Brightness"
 fit_content = true
 scroll_active = false
@@ -429,6 +432,7 @@ scroll_active = false
 [node name="BrightnessSlider" type="HSlider" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
 process_mode = 3
 layout_mode = 2
+theme = ExtResource("13_wogkx")
 value = 50.0
 script = ExtResource("20_8vvda")
 
@@ -462,7 +466,7 @@ alignment = 1
 custom_minimum_size = Vector2(140, 20)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/normal_font_size = 36
+theme = ExtResource("13_wogkx")
 text = "Overall Volume"
 fit_content = true
 scroll_active = false
@@ -471,12 +475,14 @@ autowrap_mode = 0
 
 [node name="MasterVolumeSlider" type="HSlider" parent="UI/MenuSettings/SoundSubMenu/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("13_wogkx")
 script = ExtResource("20_8vvda")
 
 [node name="BackButton" type="TextureButton" parent="UI/MenuSettings/SoundSubMenu"]
 z_index = 14
 z_as_relative = false
 layout_mode = 2
+theme = ExtResource("13_wogkx")
 action_mode = 0
 texture_normal = ExtResource("21_eg08b")
 

@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Mission" load_steps=9 format=3 uid="uid://c2722x3n5nlk5"]
+
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="1_reqcf"]
+[ext_resource type="Script" uid="uid://clgd0ups3ekte" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="2_qkhmx"]
+[ext_resource type="Script" uid="uid://dibek110g765h" path="res://Scripts/ResourceScripts/Missions/MissionSuccessStateSequence.gd" id="3_pr8o8"]
+[ext_resource type="Script" uid="uid://6py856oobeuv" path="res://Scripts/ResourceScripts/Missions/MissionSuccessState.gd" id="4_thw3l"]
+
+[sub_resource type="Resource" id="Resource_pr8o8"]
+script = ExtResource("1_reqcf")
+file = "uid://cadmtimivo2ra"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
+[sub_resource type="Resource" id="Resource_wc0t3"]
+script = ExtResource("4_thw3l")
+description = ""
+success_type = 0
+item_name = ""
+item_count = 0
+completion_area_name = ""
+something = ""
+metadata/_custom_type_script = "uid://6py856oobeuv"
+
+[sub_resource type="Resource" id="Resource_p1hjw"]
+script = ExtResource("3_pr8o8")
+sequence = Array[ExtResource("4_thw3l")]([SubResource("Resource_wc0t3")])
+metadata/_custom_type_script = "uid://dibek110g765h"
+
+[sub_resource type="Resource" id="Resource_thw3l"]
+script = ExtResource("1_reqcf")
+file = "uid://dh0cluhw5hbar"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
+[resource]
+script = ExtResource("2_qkhmx")
+total_civillians_saved_to_complete = 0
+mission_filepath = SubResource("Resource_pr8o8")
+title = "Tutorial"
+description = "Get a hang of the basics"
+success_state_checker = SubResource("Resource_p1hjw")
+unlocks = Array[ExtResource("1_reqcf")]([SubResource("Resource_thw3l")])
+metadata/_custom_type_script = "uid://clgd0ups3ekte"

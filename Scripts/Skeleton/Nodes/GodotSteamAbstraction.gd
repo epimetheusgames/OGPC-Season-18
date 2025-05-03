@@ -315,7 +315,9 @@ func read_packet() -> void:
 
 func check_for_voice() -> void:
 	var available_voice: Dictionary = Steam.getAvailableVoice()
-
+	if(available_voice.size()<1):
+		pass 
+		# idk man go do something
 	# Seems there is voice data
 	if available_voice['result'] == Steam.VOICE_RESULT_OK and available_voice['buffer'] > 0:
 		# Valve's getVoice uses 1024 but GodotSteam's is set at 8192?
