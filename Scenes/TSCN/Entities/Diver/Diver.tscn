@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=46 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://b2s21mlnq8264" path="res://Scripts/Entity/Diver/Diver.gd" id="1_soyuq"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 [ext_resource type="Script" uid="uid://bp6e1wanf5ku7" path="res://Scenes/TSCN/Entities/Diver/Weapons/SoundVariationPlayer.gd" id="20_gnc2j"]
+[ext_resource type="Script" uid="uid://ysnky678kpqd" path="res://Scenes/TSCN/Entities/Diver/DiverSound.gd" id="20_l44qt"]
 [ext_resource type="AudioStream" uid="uid://ddw8r2pp1mrg1" path="res://Assets/SFX/Edited/Diver/footstep-1.mp3" id="21_juvxq"]
 [ext_resource type="Script" uid="uid://dw54av5q4enf2" path="res://Scripts/Objects/Camera.gd" id="21_soyuq"]
 [ext_resource type="AudioStream" uid="uid://dm4p7pxgqnq5u" path="res://Assets/SFX/Edited/Diver/footstep-2.mp3" id="22_l44qt"]
@@ -28,6 +29,8 @@
 [ext_resource type="AudioStream" uid="uid://dp6nw53tmf8ke" path="res://Assets/SFX/Edited/Diver/footstep-4.mp3" id="24_c6fqq"]
 [ext_resource type="AudioStream" uid="uid://cot6buci0nady" path="res://Assets/SFX/Edited/Diver/footstep-5.mp3" id="25_yxkba"]
 [ext_resource type="AudioStream" uid="uid://dnlsincpw3bl2" path="res://Assets/SFX/Edited/Diver/footstep-6.mp3" id="26_cos02"]
+[ext_resource type="AudioStream" uid="uid://8ljhmcohhsrd" path="res://Assets/SFX/Edited/Diver/damaged.mp3" id="28_vhq57"]
+[ext_resource type="AudioStream" uid="uid://btbekaobwwiwe" path="res://Assets/SFX/PixabayRaw/bubbles-4.mp3" id="29_vhq57"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 24.0
@@ -416,8 +419,9 @@ rotation = 0.000201209
 script = ExtResource("7_ju8q7")
 metadata/_edit_lock_ = true
 
-[node name="Hurtbox" type="Area2D" parent="Stats"]
+[node name="Hurtbox" type="Area2D" parent="Stats" node_paths=PackedStringArray("entity")]
 script = ExtResource("7_3b7lw")
+entity = NodePath("../..")
 hurt_by_enemy = true
 metadata/_edit_lock_ = true
 
@@ -480,6 +484,7 @@ texture_scale = 0.7
 metadata/_edit_lock_ = true
 
 [node name="Sound" type="Node2D" parent="."]
+script = ExtResource("20_l44qt")
 
 [node name="FootstepSounds" type="Node2D" parent="Sound"]
 script = ExtResource("20_gnc2j")
@@ -513,6 +518,23 @@ volume_db = 5.0
 [node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="Sound/FootstepSounds"]
 stream = ExtResource("26_cos02")
 volume_db = 5.0
+
+[node name="DamageSounds" type="Node2D" parent="Sound"]
+script = ExtResource("20_gnc2j")
+metadata/_custom_type_script = "uid://bp6e1wanf5ku7"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sound/DamageSounds"]
+stream = ExtResource("28_vhq57")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Sound/DamageSounds"]
+stream = ExtResource("28_vhq57")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="Sound/DamageSounds"]
+stream = ExtResource("28_vhq57")
+
+[node name="BubbleSounds" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("29_vhq57")
+autoplay = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("21_soyuq")

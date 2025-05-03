@@ -59,8 +59,9 @@ rotation = 4.71239
 shape = SubResource("CapsuleShape2D_05v0o")
 metadata/_edit_lock_ = true
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("6_gyt63")
+entity = NodePath("..")
 hurt_by_player = true
 metadata/_edit_lock_ = true
 
@@ -71,14 +72,14 @@ debug_color = Color(6.49765e-06, 0.647455, 0.210561, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="JellyfishBell" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(0, -56)
 scale = Vector2(3.5, 3.5)
 texture = ExtResource("8_7y3es")
 metadata/_edit_lock_ = true
 
 [node name="Glow" type="PointLight2D" parent="JellyfishBell"]
-position = Vector2(1.36239e-07, 0)
-scale = Vector2(1, 1)
+position = Vector2(3.00927e-36, -1.14286)
 texture = ExtResource("12_nxkv1")
 script = ExtResource("13_e3uxy")
 

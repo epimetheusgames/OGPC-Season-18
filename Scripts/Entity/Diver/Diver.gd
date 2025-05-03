@@ -47,22 +47,13 @@ func _ready() -> void:
 	
 	if Global.save_load_framework:
 		Global.save_load_framework.save_nodes.connect(_save)
-	
-	diver_stats.hurtbox.damaged.connect(_damaged)
-
-func _damaged(damage_amount: float, by: Attackbox) -> void:
-	modulate.g = 0.0
-	modulate.b = 0.0
-	await get_tree().create_timer(0.6).timeout
-	modulate.g = 1.0
-	modulate.b = 1.0
-	
 
 func _process(delta: float) -> void:
 	super(delta)
 	
 	if !Global.is_multiplayer || _is_node_owner():
 		Global.player = self
+
 
 func _physics_process(_delta: float):
 	

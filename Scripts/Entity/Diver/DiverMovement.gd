@@ -35,6 +35,7 @@ var ladder: Area2D = null
 @onready var down_raycast: RayCast2D = $"DownRaycast"
 
 @onready var footstep_sounds: AudioVariationPlayer = $"../Sound/FootstepSounds"
+@onready var bubble_sounds: AudioStreamPlayer2D = $"../Sound/BubbleSounds"
 
 var is_boosting: bool = false
 
@@ -49,11 +50,13 @@ func _physics_process(delta: float) -> void:
 	if is_in_ladder_area && Input.is_action_just_pressed("interact"):
 		is_climbing_ladder = !is_climbing_ladder
 	
-	if Input.is_action_pressed("boost") && !is_aiming_weapon:
+	if Input.is_action_pressed("boost") && !is_aiming_weapon && !is_climbing_ladder && !is_in_gravity_area:
 		speed += SWIM_ACCEL
+		bubble_sounds.volume_db = -4.0
 		is_boosting = true
 	else:
 		speed -= SWIM_ACCEL
+		bubble_sounds.volume_db = -100.0
 		is_boosting = false
 	
 	speed = clamp(speed, SWIM_BASE_SPEED, SWIM_MAX_SPEED)

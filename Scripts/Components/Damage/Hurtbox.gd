@@ -4,6 +4,9 @@
 class_name Hurtbox
 extends Area2D
 
+# For coloring when damaged
+@export var entity: Node2D
+
 @export var hurt_by_enemy: bool = false
 @export var hurt_by_player: bool = false
 @export var max_health: float = 100.0
@@ -40,10 +43,9 @@ func damage(damage_amount: float, by: Attackbox) -> void:
 		return
 	
 	var new_health = clamp(health - damage_amount, 0, max_health)
-	
 	health = new_health
 	
-	Global.print_debug("DEBUG: Hurtbox at path " + str(get_path()) + " was damaged. Amount: " + str(damage_amount) + ". New health: " + str(health))
+	flash_red()
 	
 	damaged.emit(abs(health - new_health), by)
 	
@@ -57,3 +59,9 @@ func heal(heal_amount: float) -> void:
 	health = new_health
 	
 	healed.emit(abs(health - new_health))
+
+func flash_red() -> void:
+	if entity:
+		entity.modulate = Color(1, 0, 0)
+		await get_tree().create_timer(0.6).timeout
+		entity.modulate = Color(1, 1, 1)

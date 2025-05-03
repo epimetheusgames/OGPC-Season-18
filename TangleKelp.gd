@@ -4,6 +4,7 @@ const GRAB_DIST: float = 650
 const FOLLOW_DIST: float = 900
 
 @onready var attack_collision: CollisionShape2D = $"ContinuousAttack/CollisionShape2D"
+@onready var hurtbox: Hurtbox = $"Hurtbox"
 
 @onready var ropes: Array[VerletRope] = [
 	$"Rope1/VerletRope",
@@ -18,6 +19,8 @@ var target_rope_position: Vector2
 func _ready() -> void:
 	for rope in ropes:
 		rope.end_pos_on = true
+	
+	hurtbox.died.connect(die)
 
 func _process(delta: float) -> void:
 	var diver_pos = Global.player.global_position
@@ -39,3 +42,6 @@ func _process(delta: float) -> void:
 		rope.end_pos = rope_position
 	
 	attack_collision.global_position = rope_position
+
+func die() -> void:
+	queue_free()

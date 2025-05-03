@@ -49,8 +49,9 @@ position = Vector2(54, -5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_bsgvg")
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("2_8v7gp")
+entity = NodePath("..")
 hurt_by_player = true
 max_health = 25.0
 metadata/_custom_type_script = "uid://ctpnlukrn1asj"
