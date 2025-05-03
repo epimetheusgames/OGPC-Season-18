@@ -46,6 +46,7 @@ func damage(damage_amount: float, by: Attackbox) -> void:
 	health = new_health
 	
 	flash_red()
+	knockback(by.global_position, by.knockback_force)
 	
 	damaged.emit(abs(health - new_health), by)
 	
@@ -65,3 +66,11 @@ func flash_red() -> void:
 		entity.modulate = Color(1, 0, 0)
 		await get_tree().create_timer(0.6).timeout
 		entity.modulate = Color(1, 1, 1)
+
+func knockback(from_position: Vector2, force: float) -> void:
+	if force == 0:
+		return
+	
+	if entity is Diver:
+		var q = (entity.global_position - from_position).normalized() * force
+		entity.diver_movement.knockback(q)

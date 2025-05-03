@@ -14,6 +14,7 @@ enum AttackerType {
 
 @export var attacker_type: AttackerType = AttackerType.OTHER
 @export var damage_amount: float = 1.0
+@export var knockback_force: float = 0.0
 
 @export var damaging: bool = true
 

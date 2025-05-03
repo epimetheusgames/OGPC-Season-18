@@ -50,6 +50,7 @@ func _physics_process(delta: float) -> void:
 	if is_in_ladder_area && Input.is_action_just_pressed("interact"):
 		is_climbing_ladder = !is_climbing_ladder
 	
+	print(is_knocked_back)
 	if Input.is_action_pressed("boost") && !is_aiming_weapon && !is_climbing_ladder && !is_in_gravity_area:
 		speed += SWIM_ACCEL
 		bubble_sounds.volume_db = -4.0

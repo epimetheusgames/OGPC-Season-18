@@ -30,7 +30,6 @@ signal reload_finish()
 
 var gun_state := GunState.HOLDING
 
-
 func _ready() -> void:
 	reload_timer = Timer.new()
 	reload_timer.one_shot = true
@@ -67,11 +66,19 @@ func _process(delta: float) -> void:
 	
 	var dir: Vector2 = mouse_pos - head_pos
 	global_position = head_pos + dir.normalized() * dist_from_head
-	
-	var rot: float = head_pos.angle_to_point(mouse_pos)
-	global_rotation = rot
-	
-	var deg_rot: float = Util.normalize_angle_degrees(rad_to_deg(rot))
+
+	var angle_to_mouse := head_pos.angle_to_point(mouse_pos)
+	var local_mouse_dir := dir.rotated(-Global.player.rotation)
+
+	if local_mouse_dir.x >= 0:
+		scale.x = 1
+		global_rotation = angle_to_mouse
+	else:
+		scale.x = -1
+		global_rotation = angle_to_mouse + PI
+
+
+
 	
 	if Global.godot_steam_abstraction && Global.is_multiplayer:
 		Global.godot_steam_abstraction.run_remote_function(Global.player.diver_combat, "set_reload_bar", [bar_val])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=47 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://6kbux1lvwaw3" path="res://Scenes/TSCN/Objects/Items/RockItem.tscn" id="27_l3b62"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
 [ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="30_ec8ks"]
+[ext_resource type="PackedScene" uid="uid://bitnixx3cf0fb" path="res://Scenes/TSCN/Objects/GlowCoral.tscn" id="30_obv2f"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
 [ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="35_47o3q"]
@@ -593,5 +594,17 @@ position = Vector2(-11208, -5615)
 [node name="RockItem16" parent="." instance=ExtResource("27_l3b62")]
 position = Vector2(-11694, -5249)
 rotation = 2.42563
+
+[node name="Jellyfish" parent="." instance=ExtResource("16_cbdp8")]
+position = Vector2(-10810, -6077)
+
+[node name="GlowCoral" parent="." instance=ExtResource("30_obv2f")]
+position = Vector2(-9043, -5593)
+
+[node name="GlowCoral2" parent="." instance=ExtResource("30_obv2f")]
+position = Vector2(-8643, -5826)
+
+[node name="GlowCoral3" parent="." instance=ExtResource("30_obv2f")]
+position = Vector2(-9445, -5361)
 
 [editable path="UILayer/IngameUI"]

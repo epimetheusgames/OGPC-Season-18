@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=20 format=3 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/Enemies/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/Enemies/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
@@ -39,6 +39,10 @@ gradient = SubResource("Gradient_e3uxy")
 fill = 1
 fill_from = Vector2(0.529915, 0.512821)
 fill_to = Vector2(0.901709, 0.538462)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e3uxy"]
+radius = 33.0
+height = 278.0
 
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov", "state_machine")]
 motion_mode = 1
@@ -127,3 +131,16 @@ spin_state = NodePath("../Spin")
 script = ExtResource("11_i2om7")
 wander_state = NodePath("../Wander")
 boost_state = NodePath("../Boost")
+
+[node name="ContinuousAttack" type="Area2D" parent="."]
+script = ExtResource("4_i2om7")
+attacker_type = 0
+damage_amount = 0.0
+knockback_force = 1000.0
+metadata/_custom_type_script = "uid://bf0bikj8np6x"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousAttack"]
+position = Vector2(0, -83)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_e3uxy")
+debug_color = Color(0.983468, 0.127033, 0, 0.42)

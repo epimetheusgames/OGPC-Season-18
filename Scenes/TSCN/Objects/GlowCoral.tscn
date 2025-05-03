@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bitnixx3cf0fb"]
+
+[sub_resource type="Gradient" id="Gradient_25ydn"]
+offsets = PackedFloat32Array(0, 0.231771, 0.78125, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.833333, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dukpp"]
+gradient = SubResource("Gradient_25ydn")
+width = 1500
+height = 1500
+fill = 1
+fill_from = Vector2(0.504274, 0.510684)
+fill_to = Vector2(1, 0.538462)
+
+[node name="GlowCoral" type="StaticBody2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.419608, 0.419608, 0.811765, 1)
+polygon = PackedVector2Array(-98, -2, -136, -53, -112, -130, -32, -176, 75, -173, 124, -98, 124, -41, 116, -12, 89, -3)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(4, -62)
+texture = SubResource("GradientTexture2D_dukpp")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-94, -2, -84, -68, -2, -117, 74, -63, 89, -3)

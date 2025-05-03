@@ -21,7 +21,6 @@ func _ready() -> void:
 	
 	reload_finish.connect(play_reload_sound)
 
-
 func _process(delta: float) -> void:
 	super(delta)
 	

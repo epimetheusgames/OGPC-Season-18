@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://dl6v2p1fxvitc" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
 [ext_resource type="PackedScene" uid="uid://os6ytsadrm1v" path="res://Scenes/TSCN/Entities/Diver/Weapons/Knife.tscn" id="9_hstvg"]
-[ext_resource type="Script" uid="uid://cfcc8wf5m0kgj" path="res://Scripts/Entity/NPC/PlayerFollowerDummy.gd" id="9_soyuq"]
+[ext_resource type="Script" path="res://Scripts/Entity/NPC/PlayerFollowerDummy.gd" id="9_soyuq"]
 [ext_resource type="Script" uid="uid://dau0csslipmpi" path="res://Scripts/Entity/Diver/DiverFlashlight.gd" id="9_xqhlv"]
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="10_qg316"]
@@ -21,7 +21,7 @@
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 [ext_resource type="Script" uid="uid://bp6e1wanf5ku7" path="res://Scenes/TSCN/Entities/Diver/Weapons/SoundVariationPlayer.gd" id="20_gnc2j"]
-[ext_resource type="Script" path="res://Scenes/TSCN/Entities/Diver/DiverSound.gd" id="20_l44qt"]
+[ext_resource type="Script" uid="uid://ysnky678kpqd" path="res://Scenes/TSCN/Entities/Diver/DiverSound.gd" id="20_l44qt"]
 [ext_resource type="AudioStream" uid="uid://ddw8r2pp1mrg1" path="res://Assets/SFX/Edited/Diver/footstep-1.mp3" id="21_juvxq"]
 [ext_resource type="Script" uid="uid://dw54av5q4enf2" path="res://Scripts/Objects/Camera.gd" id="21_soyuq"]
 [ext_resource type="AudioStream" uid="uid://dm4p7pxgqnq5u" path="res://Assets/SFX/Edited/Diver/footstep-2.mp3" id="22_l44qt"]
@@ -95,6 +95,33 @@ modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_eo78x")
 modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_chbw5")
 modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_rji1q")
 
+[sub_resource type="Animation" id="Animation_c6fqq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegIkTarget1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-11, 95)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LegIkTarget2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-15, 95)]
+}
+
 [sub_resource type="Animation" id="Animation_vhq57"]
 resource_name = "Walking"
 length = 1.5
@@ -122,33 +149,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(35, 90), Vector2(-15, 95), Vector2(8, 69), Vector2(35, 90)]
-}
-
-[sub_resource type="Animation" id="Animation_c6fqq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LegIkTarget1:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-11, 95)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LegIkTarget2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-15, 95)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yxkba"]
