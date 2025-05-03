@@ -373,7 +373,7 @@ z_index = 68
 material = ExtResource("6_l3b62")
 position = Vector2(-7921, -33181)
 scale = Vector2(0.4, 0.4)
-polygon = PackedVector2Array(-16102, -6397, -12680.5, -16324.5, -10835.5, -19392, -3025, -21635, 12782.5, -22115, 35987.5, -23072.5, 39935, -21252.5, 41095, -17035, 40257.5, -15780, 38042.5, -15515, 36050, -13907.5, 31645, -16387.5, 27577.5, -17857.5, 8045, -18070, -4302.5, -15992.5, -7068, -11859.5, -1830.5, -10439.5, 4579.5, -11087, -1233, -5424.5, -4625.5, 785.502, -8580.5, 1333, -10825.5, -1509.5, -12745.5, -161.998, -14721, 1452, -14167.5, 7807.5, -15636.4, 7779.21, -16680, 8092.5, -17426.5, 8490.23, -17470, 9240, -17142.5, 9405, -10182.5, 9332.5, -13917, 11918, -13135, 14785, -10322, 17194, -5115, 15961, -3628, 18320, 4084, 18736, 8248, 11064, 7782, 16437, 8288, 17897, 10148, 19744, 13115, 17257.5, 14951, 20383, 18841, 17436, 17879, 13068, 13139, 10374, 21138, 9781, 27991, 6580, 24800, 13281, 24105, 15820, 26569, 17479, 37124, 19129, 44553, 18478, 50121, 15768, 51965, 18138, 54651, 18191, 55178, 14451, 52175, 10289, 54515, 6540, 55438, 1560, 54932.5, -2907.5, 46896, -2850, 42220, -5271, 39290, -7645, 41166.5, -7977.33, 40752, -12701, 43111, -7910, 45027, -7738, 47901, -6657, 51243, -7099, 53826, -10442, 53174, -13071, 50074, -15890, 46145, -16675, 41108, -17037, 43870, -20382.5, 51539, -18939, 56306, -14073, 57651, -9647, 59680, -5081, 61007.5, 22797.5, -21632.5, 23065, -22082.5, 6332.5)
+polygon = PackedVector2Array(-16102, -6397, -12680.5, -16324.5, -10835.5, -19392, -3025, -21635, 12782.5, -22115, 35987.5, -23072.5, 39935, -21252.5, 41095, -17035, 40257.5, -15780, 38042.5, -15515, 36050, -13907.5, 31645, -16387.5, 27577.5, -17857.5, 8045, -18070, -4302.5, -15992.5, -7068, -11859.5, -1830.5, -10439.5, 4579.5, -11087, -1233, -5424.5, -4625.5, 785.502, -8580.5, 1333, -10825.5, -1509.5, -12745.5, -161.998, -14721, 1452, -14215, 7980, -15545, 7945, -16680, 8092.5, -17426.5, 8490.23, -17470, 9240, -17142.5, 9405, -10182.5, 9332.5, -13917, 11918, -13135, 14785, -10322, 17194, -5115, 15961, -3628, 18320, 4084, 18736, 8248, 11064, 7782, 16437, 8288, 17897, 10148, 19744, 13115, 17257.5, 14951, 20383, 18841, 17436, 17879, 13068, 13139, 10374, 21138, 9781, 27991, 6580, 24800, 13281, 24105, 15820, 26569, 17479, 37124, 19129, 44553, 18478, 50121, 15768, 51965, 18138, 54651, 18191, 55178, 14451, 52175, 10289, 54515, 6540, 55438, 1560, 54932.5, -2907.5, 46896, -2850, 42220, -5271, 39290, -7645, 41166.5, -7977.33, 40752, -12701, 43111, -7910, 45027, -7738, 47901, -6657, 51243, -7099, 53826, -10442, 53174, -13071, 50074, -15890, 46145, -16675, 41108, -17037, 43870, -20382.5, 51539, -18939, 56306, -14073, 57651, -9647, 59680, -5081, 61007.5, 22797.5, -21632.5, 23065, -22082.5, 6332.5)
 script = ExtResource("5_aep54")
 metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
@@ -579,52 +579,19 @@ process_material = SubResource("ParticleProcessMaterial_hcosd")
 [node name="Arrowfish" parent="." instance=ExtResource("26_k8n8v")]
 position = Vector2(-11489, -5878)
 
-[node name="RockItem" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-12009, -5637)
+[node name="RockItem4" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-9905, -5058)
+rotation = -0.565163
 
 [node name="RockItem5" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-12179, -5630)
-
-[node name="RockItem2" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11830, -5637)
-
-[node name="RockItem3" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11655, -5639)
-
-[node name="RockItem4" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11480, -5644)
+position = Vector2(-12503, -4052)
+rotation = 1.0596
 
 [node name="RockItem6" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11480, -5644)
-
-[node name="RockItem8" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11614, -5709)
-
-[node name="RockItem7" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11480, -5644)
-
-[node name="RockItem9" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11614, -5709)
-
-[node name="RockItem10" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11614, -5709)
-
-[node name="RockItem11" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11614, -5709)
-
-[node name="RockItem13" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11625, -5913)
-
-[node name="RockItem12" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11614, -5709)
-
-[node name="RockItem14" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11614, -5709)
-
-[node name="RockItem15" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11614, -5709)
+position = Vector2(-11208, -5615)
 
 [node name="RockItem16" parent="." instance=ExtResource("27_l3b62")]
-position = Vector2(-11614, -5709)
+position = Vector2(-11694, -5249)
+rotation = 2.42563
 
 [editable path="UILayer/IngameUI"]

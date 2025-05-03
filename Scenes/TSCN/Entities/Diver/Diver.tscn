@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=49 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://b2s21mlnq8264" path="res://Scripts/Entity/Diver/Diver.gd" id="1_soyuq"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -94,6 +94,68 @@ modifications/0 = SubResource("SkeletonModification2DTwoBoneIK_soyuq")
 modifications/1 = SubResource("SkeletonModification2DTwoBoneIK_eo78x")
 modifications/2 = SubResource("SkeletonModification2DTwoBoneIK_chbw5")
 modifications/3 = SubResource("SkeletonModification2DTwoBoneIK_rji1q")
+
+[sub_resource type="Animation" id="Animation_vhq57"]
+resource_name = "Walking"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegIkTarget1:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.8, 1.15, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-30, 95), Vector2(12, 77), Vector2(28, 93), Vector2(-5, 89), Vector2(-30, 95)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LegIkTarget2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.68, 1.15, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(35, 90), Vector2(-15, 95), Vector2(8, 69), Vector2(35, 90)]
+}
+
+[sub_resource type="Animation" id="Animation_c6fqq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LegIkTarget1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-11, 95)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LegIkTarget2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-15, 95)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yxkba"]
+_data = {
+&"RESET": SubResource("Animation_c6fqq"),
+&"Walking": SubResource("Animation_vhq57")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wi5t0"]
 radius = 25.0
@@ -401,10 +463,10 @@ scale = Vector2(228.643, -232.132)
 position = Vector2(-100, -40)
 
 [node name="LegIkTarget1" type="Node2D" parent="Animation"]
-position = Vector2(85, 100)
+position = Vector2(-11, 95)
 
 [node name="LegIkTarget2" type="Node2D" parent="Animation"]
-position = Vector2(-85, 100)
+position = Vector2(-15, 95)
 
 [node name="PlayerName" type="Label" parent="Animation"]
 offset_left = -190.0
@@ -413,6 +475,11 @@ offset_right = 190.0
 offset_bottom = -100.0
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="WalkingAnimation" type="AnimationPlayer" parent="Animation"]
+libraries = {
+&"": SubResource("AnimationLibrary_yxkba")
+}
 
 [node name="Stats" type="Node2D" parent="."]
 rotation = 0.000201209

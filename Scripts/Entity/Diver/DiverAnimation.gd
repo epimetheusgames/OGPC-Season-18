@@ -91,26 +91,12 @@ func _process(delta: float) -> void:
 	
 	# Legs
 	if diver.get_state() != Diver.DiverState.IN_GRAVITY_AREA:
+		$WalkingAnimation.stop()
 		leg_target1.global_position = _animate_leg(1, delta)
 		leg_target2.global_position = _animate_leg(2, delta)
 	else:
-		if Global.player.velocity.x < 0:
-			left_raycast.position.x = -36
-			right_raycast.position.x = -20
-		elif Global.player.velocity.x > 0:
-			right_raycast.position.x = 36
-			left_raycast.position.x = 20
-		else:
-			left_raycast.position.x = -8
-			right_raycast.position.x = 8
-
-		if left_raycast.is_colliding() && left_collision_point.distance_squared_to(left_raycast.get_collision_point()) > 100 ** 2:
-			left_collision_point = left_raycast.get_collision_point()
-		elif right_raycast.is_colliding() && right_collision_point.distance_squared_to(right_raycast.get_collision_point()) > 100 ** 2:
-			right_collision_point = right_raycast.get_collision_point()
-
-		leg_target1.global_position = left_collision_point
-		leg_target2.global_position = right_collision_point
+		$WalkingAnimation.play("Walking", -1, 3 * diver.velocity.x / 392)
+		print(diver.velocity.x)
 	
 	# Arms
 	if !hand1_weapon_control:
