@@ -1,0 +1,442 @@
+[gd_scene load_steps=41 format=3 uid="uid://cadmtimivo2ra"]
+
+[ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_b5vb5"]
+[ext_resource type="Script" uid="uid://bn44me3sxajlb" path="res://Scripts/Skeleton/Nodes/Ingame/LocalGameTimeSaver.gd" id="2_umxmc"]
+[ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="3_581sq"]
+[ext_resource type="AudioStream" uid="uid://bsp8qc1ilhyv1" path="res://Assets/SFX/PixabayRaw/underwater-ambience.mp3" id="4_a4g38"]
+[ext_resource type="AudioStream" uid="uid://cqn1ekjfcc0fx" path="res://Assets/Music/Sunlight.mp3" id="5_5bfvc"]
+[ext_resource type="AudioStream" uid="uid://b4ilwlm2wu77m" path="res://Assets/Music/Abyss.mp3" id="6_8jg7d"]
+[ext_resource type="AudioStream" uid="uid://ciqgqnvf6arsr" path="res://Assets/Music/Submarine.mp3" id="7_irl3l"]
+[ext_resource type="Material" uid="uid://cexuq6aqq46ng" path="res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres" id="8_e5qbu"]
+[ext_resource type="Script" uid="uid://xurg5qfsdg1m" path="res://Scripts/Objects/AutoTerrain.gd" id="9_2gsqj"]
+[ext_resource type="Texture2D" uid="uid://njrwmcevcrni" path="res://Assets/Art/TerrainTexture.png" id="10_d34bj"]
+[ext_resource type="Shader" uid="uid://cgyujgfqy1jk6" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="11_spj8i"]
+[ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="12_rtq4m"]
+[ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="13_ehb7s"]
+[ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_sm620"]
+[ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_f8gvd"]
+[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="17_lm7fu"]
+[ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_gxoke"]
+[ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="19_0oo6k"]
+[ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_ftg1d"]
+[ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="22_rw4pk"]
+[ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="23_30um5"]
+[ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="24_uo1ug"]
+[ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="25_q8g00"]
+[ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="26_dwjxp"]
+
+[sub_resource type="Animation" id="Animation_obv2f"]
+resource_name = "HappyToScary"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HappyMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScaryMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubmarineMusic:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -80.0]
+}
+
+[sub_resource type="Animation" id="Animation_3w4x2"]
+resource_name = "HappyToSubmarine"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HappyMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubmarineMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScaryMusic:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -80.0]
+}
+
+[sub_resource type="Animation" id="Animation_kali0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HappyMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScaryMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubmarineMusic:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_gnr5v"]
+resource_name = "ScaryToSubmarine"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScaryMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubmarineMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HappyMusic:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -80.0]
+}
+
+[sub_resource type="Animation" id="Animation_jw53c"]
+resource_name = "SubmarineToHappy"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubmarineMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HappyMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScaryMusic:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jw53c"]
+_data = {
+&"HappyToScary": SubResource("Animation_obv2f"),
+&"HappyToSubmarine": SubResource("Animation_3w4x2"),
+&"RESET": SubResource("Animation_kali0"),
+&"ScaryToSubmarine": SubResource("Animation_gnr5v"),
+&"SubmarineToHappy": SubResource("Animation_jw53c")
+}
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
+outlines = Array[PackedVector2Array]([PackedVector2Array(-7158, -8735, 30252, -8582, 30713, 12105, -7849, 12336)])
+source_geometry_mode = 1
+source_geometry_group_name = &"obstacles"
+agent_radius = 41.62
+
+[sub_resource type="GDScript" id="GDScript_5py2y"]
+script/source = "extends NavigationRegion2D
+
+func _ready() -> void:
+	while true:
+		bake_navigation_polygon()
+		await get_tree().create_timer(0.5).timeout
+"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xdlvx"]
+load_path = "res://.godot/imported/WallTexture.png-8f92dfb4a12958014b5b11ca79389a8a.ctex"
+
+[sub_resource type="Gradient" id="Gradient_sis5m"]
+offsets = PackedFloat32Array(0.0729927)
+colors = PackedColorArray(0.00351917, 0.00351917, 0.00351917, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_30dfd"]
+gradient = SubResource("Gradient_sis5m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6mevv"]
+resource_local_to_scene = true
+shader = ExtResource("11_spj8i")
+shader_parameter/points = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
+shader_parameter/num_points = 8
+shader_parameter/global_position = Vector2(992, 334)
+shader_parameter/fade_width = 115
+shader_parameter/tex_scale = 103.0
+shader_parameter/in_tex = SubResource("GradientTexture1D_30dfd")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_xdlvx")
+
+[sub_resource type="Resource" id="Resource_xdqqp"]
+script = ExtResource("16_f8gvd")
+scene = ExtResource("17_lm7fu")
+group_size = 1
+probability = 10
+
+[sub_resource type="Resource" id="Resource_a077w"]
+script = ExtResource("16_f8gvd")
+scene = ExtResource("18_gxoke")
+group_size = 1
+probability = 4
+
+[sub_resource type="Resource" id="Resource_2j7sg"]
+script = ExtResource("16_f8gvd")
+scene = ExtResource("19_0oo6k")
+group_size = 1
+probability = 2
+
+[sub_resource type="Environment" id="Environment_5ulyy"]
+background_mode = 3
+background_canvas_max_layer = 10
+glow_enabled = true
+glow_levels/1 = 0.3
+glow_levels/2 = 0.3
+glow_levels/3 = 0.4
+glow_levels/4 = 0.3
+glow_levels/5 = 0.5
+glow_levels/6 = 0.2
+glow_blend_mode = 0
+
+[node name="Mission1" type="Node2D"]
+script = ExtResource("1_b5vb5")
+
+[node name="GlobalVariableSaver" type="Node" parent="."]
+script = ExtResource("2_umxmc")
+
+[node name="LevelContainer" type="Node2D" parent="."]
+
+[node name="Environment" type="Node2D" parent="LevelContainer"]
+
+[node name="EnvironmentEffects" type="Node" parent="LevelContainer/Environment"]
+script = ExtResource("3_581sq")
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
+stream = ExtResource("4_a4g38")
+autoplay = true
+bus = &"Wind"
+
+[node name="HappyMusic" type="AudioStreamPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
+stream = ExtResource("5_5bfvc")
+volume_db = -80.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="ScaryMusic" type="AudioStreamPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
+stream = ExtResource("6_8jg7d")
+volume_db = -80.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="SubmarineMusic" type="AudioStreamPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
+stream = ExtResource("7_irl3l")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="MusicFade" type="AnimationPlayer" parent="LevelContainer/Environment/EnvironmentEffects"]
+libraries = {
+&"": SubResource("AnimationLibrary_jw53c")
+}
+
+[node name="Background" type="ColorRect" parent="LevelContainer/Environment"]
+offset_left = -16513.0
+offset_top = -19959.0
+offset_right = 18529.0
+offset_bottom = 1221.0
+color = Color(0.0312209, 0.0673709, 0.274788, 1)
+metadata/_edit_lock_ = true
+
+[node name="Collisions" type="NavigationRegion2D" parent="LevelContainer/Environment" groups=["obstacles"]]
+z_index = 2
+position = Vector2(-10165, -10896)
+navigation_polygon = SubResource("NavigationPolygon_jsraf")
+script = SubResource("GDScript_5py2y")
+metadata/_edit_lock_ = true
+
+[node name="World" type="Node2D" parent="LevelContainer/Environment/Collisions" groups=["environment_collision"]]
+position = Vector2(11006, 34721)
+
+[node name="2" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+z_index = 68
+material = ExtResource("8_e5qbu")
+position = Vector2(-6703, -34023)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("10_d34bj")
+polygon = PackedVector2Array(8792.5, 2032.5, 8792.5, 8220, -4690, 8370, -4590, 2042.5, -552.5, 2042.5, -547.5, 6117.5, 5700, 6117.5, 5700, 2032.5)
+script = ExtResource("9_2gsqj")
+metadata/_custom_type_script = "uid://xurg5qfsdg1m"
+metadata/_edit_lock_ = true
+
+[node name="SubmarineDock" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+material = SubResource("ShaderMaterial_6mevv")
+position = Vector2(3533.63, -20587.3)
+scale = Vector2(0.496951, 0.416667)
+polygon = PackedVector2Array(-17411.4, -26504, -16398, -26505, -16138, -26374, -17671, -26373)
+script = ExtResource("9_2gsqj")
+metadata/_custom_type_script = "uid://xurg5qfsdg1m"
+
+[node name="Player" type="Node2D" parent="LevelContainer"]
+
+[node name="MultiplayerPlayerSpawnerComponent" type="Node" parent="LevelContainer/Player"]
+script = ExtResource("12_rtq4m")
+spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
+
+[node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("13_ehb7s")]
+z_index = 20
+position = Vector2(-7325, -9998)
+
+[node name="Items" type="Node2D" parent="LevelContainer"]
+
+[node name="Entities" type="Node2D" parent="LevelContainer"]
+
+[node name="EnemySpawner" type="Node2D" parent="LevelContainer/Entities"]
+script = ExtResource("15_sm620")
+player_view_dist = 1500
+enemy_close_dist = 2500
+draw_spawn_positions = true
+enemy_list = Array[ExtResource("16_f8gvd")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg")])
+
+[node name="LevelContainer_Player_Submarine#BuoyancyComponent" type="Node" parent="."]
+script = ExtResource("21_ftg1d")
+buoyancy_accel = 0.0
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="IngameUI" parent="UILayer" instance=ExtResource("22_rw4pk")]
+metadata/_edit_lock_ = true
+
+[node name="ChatPanel" parent="UILayer/IngameUI/StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable" index="1" node_paths=PackedStringArray("teleport_places", "enemy_root")]
+teleport_place_names = Array[String](["research-station", "submarine"])
+teleport_places = [null, null]
+enemy_root = NodePath("../../../../../../LevelContainer/Entities/EnemySpawner")
+
+[node name="DeathScreen" parent="UILayer" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("23_30um5")]
+visible = false
+ingame_ui = NodePath("../IngameUI")
+
+[node name="MissionSuccessScreen" parent="UILayer" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("24_uo1ug")]
+visible = false
+ingame_ui = NodePath("../IngameUI")
+
+[node name="PauseMenu" parent="UILayer" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("25_q8g00")]
+visible = false
+ingame_ui = NodePath("../IngameUI")
+
+[node name="Settings" parent="UILayer" instance=ExtResource("26_dwjxp")]
+process_mode = 2
+visible = false
+
+[node name="Light and stuff" type="Node2D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Light and stuff"]
+environment = SubResource("Environment_5ulyy")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Light and stuff"]
+editor_only = true
+
+[editable path="UILayer/IngameUI"]

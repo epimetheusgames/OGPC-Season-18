@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://besmd7x2u8hjs" path="res://Assets/Art/Level/WallTexture.png" id="2_vbjyk"]
 
 [sub_resource type="Gradient" id="Gradient_2s48v"]
-offsets = PackedFloat32Array(0)
+offsets = PackedFloat32Array(0.0291971)
 colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_5bdf5"]

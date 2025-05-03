@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=50 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://b2s21mlnq8264" path="res://Scripts/Entity/Diver/Diver.gd" id="1_soyuq"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dul1o4r1c8ash" path="res://Scenes/TSCN/Entities/Diver/Weapons/Pistol.tscn" id="10_oh1is"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Texture2D" uid="uid://y48rk6lmacle" path="res://Assets/Art/Entity/Player/PlayerSkinSideways.png" id="11_eo78x"]
+[ext_resource type="Texture2D" uid="uid://bddtl7rqt1vcg" path="res://Assets/Art/Entity/Player/PlayerWalkingRight.png" id="11_yxkba"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
@@ -227,6 +228,8 @@ metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 script = ExtResource("3_k6pml")
 left_raycast = NodePath("LegRaycasts/Left")
 right_raycast = NodePath("LegRaycasts/Right")
+default_sprite = ExtResource("11_eo78x")
+walking_sprite = ExtResource("11_yxkba")
 
 [node name="LegRaycasts" type="Node2D" parent="Animation"]
 
@@ -320,10 +323,10 @@ metadata/_edit_lock_ = true
 position = Vector2(170, 177)
 rotation = -0.523599
 offset = Vector2(-152, -198)
-texture = ExtResource("11_eo78x")
+texture = ExtResource("11_yxkba")
 skeleton = NodePath("../../Skeleton")
-polygon = PackedVector2Array(136.521, 157.469, 136.521, 246.502, 167.788, 247.827, 167.788, 158.263)
-uv = PackedVector2Array(136.521, 157.469, 136.521, 246.502, 167.788, 247.827, 167.788, 158.263)
+polygon = PackedVector2Array(141.885, 157.519, 139.308, 246.497, 189.244, 246.859, 188.16, 155.369)
+uv = PackedVector2Array(141.479, 157.48, 141.841, 245.773, 193.225, 246.859, 194.31, 158.565)
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Forearm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Forearm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(1, 1, 1, 1)]
 metadata/_edit_lock_ = true
 
@@ -342,10 +345,10 @@ metadata/_edit_lock_ = true
 position = Vector2(89, 176)
 rotation = 0.523599
 offset = Vector2(-104, -199)
-texture = ExtResource("11_eo78x")
+texture = ExtResource("11_yxkba")
 skeleton = NodePath("../../Skeleton")
-polygon = PackedVector2Array(86.1061, 154.389, 118.923, 155.858, 120.147, 247.206, 85.8612, 247.696)
-uv = PackedVector2Array(86.1061, 154.389, 118.923, 155.858, 120.147, 247.206, 85.8612, 247.696)
+polygon = PackedVector2Array(74.5359, 155.967, 135.301, 153.215, 136.83, 245.863, 72.2336, 244.316)
+uv = PackedVector2Array(67.9952, 154.251, 141.288, 154.154, 142.877, 247.928, 65.3462, 247.495)
 bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm1/Forearm1", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2", PackedFloat32Array(0, 0, 0, 0), "Torso/UpperArm2/Forearm2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh1/Calf1", PackedFloat32Array(1, 1, 1, 1), "Torso/Thigh2", PackedFloat32Array(0, 0, 0, 0), "Torso/Thigh2/Calf2", PackedFloat32Array(0, 0, 0, 0)]
 metadata/_edit_lock_ = true
 
@@ -360,6 +363,7 @@ bones = ["Torso", PackedFloat32Array(0, 0, 0, 0), "Torso/Head", PackedFloat32Arr
 metadata/_edit_lock_ = true
 
 [node name="Skeleton" type="Skeleton2D" parent="Animation"]
+visible = false
 use_parent_material = true
 modification_stack = SubResource("SkeletonModificationStack2D_uqd81")
 metadata/_edit_lock_ = true
