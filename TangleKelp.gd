@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 	
 	for rope in ropes:
 		rope.end_pos = rope_position
+		rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
 	
 	attack_collision.global_position = rope_position
 

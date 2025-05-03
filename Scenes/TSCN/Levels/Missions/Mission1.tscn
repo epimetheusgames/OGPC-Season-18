@@ -70,6 +70,46 @@ tracks/2/keys = {
 "values": [-80.0, -80.0]
 }
 
+[sub_resource type="Animation" id="Animation_3w4x2"]
+resource_name = "HappyToSubmarine"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HappyMusic:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubmarineMusic:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScaryMusic:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -80.0]
+}
+
 [sub_resource type="Animation" id="Animation_kali0"]
 length = 0.001
 tracks/0/type = "value"
@@ -140,46 +180,6 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("HappyMusic:volume_db")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-80.0, -80.0]
-}
-
-[sub_resource type="Animation" id="Animation_3w4x2"]
-resource_name = "HappyToSubmarine"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HappyMusic:volume_db")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -80.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SubmarineMusic:volume_db")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-80.0, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ScaryMusic:volume_db")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -424,18 +424,23 @@ metadata/_edit_lock_ = true
 
 [node name="Kelp" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-6106, -1788)
+length = 20
 
 [node name="Kelp2" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-6574, -1809)
+length = 20
 
 [node name="Kelp3" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-7050, -1804)
+length = 20
 
 [node name="Kelp4" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-7504, -1846)
+length = 20
 
 [node name="Kelp5" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-7882, -1863)
+length = 20
 
 [node name="Player" type="Node2D" parent="LevelContainer"]
 
@@ -473,6 +478,14 @@ position = Vector2(-11310, -5559)
 [node name="TangleKelp" parent="LevelContainer" instance=ExtResource("20_k8n8v")]
 position = Vector2(-10185, -2695)
 rotation = -0.235442
+
+[node name="TangleKelp3" parent="LevelContainer" instance=ExtResource("20_k8n8v")]
+position = Vector2(-8802, -2473)
+rotation = 1.00247
+
+[node name="TangleKelp2" parent="LevelContainer" instance=ExtResource("20_k8n8v")]
+position = Vector2(-11604, -2816)
+rotation = 0.690465
 
 [node name="LevelContainer_Player_Submarine#BuoyancyComponent" type="Node" parent="."]
 script = ExtResource("21_pr3qq")

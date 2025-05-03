@@ -21,7 +21,6 @@ start_anchor_node = NodePath("..")
 metadata/_custom_type_script = "uid://cxt7y067vc2qg"
 
 [node name="RopeLineDrawer" type="Line2D" parent="." node_paths=PackedStringArray("rope")]
-visible = false
 default_color = Color(0.09, 1, 0.469167, 1)
 script = ExtResource("3_yqwc2")
 rope = NodePath("../VerletRope")
@@ -30,6 +29,5 @@ resolution_multiplier = 5.0
 metadata/_custom_type_script = "uid://cdi0hiygq0pte"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-z_index = -4096
 position = Vector2(11, -2618.25)
 scale = Vector2(27, 268.375)

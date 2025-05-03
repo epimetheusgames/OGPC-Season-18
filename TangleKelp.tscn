@@ -116,3 +116,7 @@ metadata/_custom_type_script = "uid://ctpnlukrn1asj"
 position = Vector2(7.5, -28.5)
 shape = SubResource("RectangleShape2D_kbhfv")
 debug_color = Color(0, 0.648864, 0.166065, 0.42)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-8.49997, -448)
+scale = Vector2(60.05, 45.8)

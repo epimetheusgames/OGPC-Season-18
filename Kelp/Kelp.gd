@@ -4,7 +4,7 @@ extends Node2D
 @export var length: int = 100
 @export var kelp: PackedScene
 
-@onready var rope: BaseRope = $"VerletRope"
+@onready var rope: VerletRope = $"VerletRope"
 @onready var drawer: RopeLineDrawer = $"RopeLineDrawer"
 
 var kelp_segments: Array[KelpSegment] = []
@@ -32,14 +32,13 @@ func _ready() -> void:
 			sway_amplitudes.append(0.0)
 
 func _process(delta: float) -> void:
-	if !$VisibleOnScreenNotifier2D.is_on_screen():
-		return
-	
 	if first_time:
 		first_time = false
 		return
 	
 	base_time += delta
+	
+	rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
 	
 	for i in range(length - 3):
 		var kelp_segment: KelpSegment = kelp_segments[i]
