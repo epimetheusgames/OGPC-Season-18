@@ -7,7 +7,7 @@ extends Node2D
 var root_node: Node
 
 ## Brightness percentage, in decimal form 
-var  brightness_decimal: int = 1
+var brightness_decimal: int = 1
 ## Save load framework node, constant.
 var save_load_framework: SaveLoadFramework
 
