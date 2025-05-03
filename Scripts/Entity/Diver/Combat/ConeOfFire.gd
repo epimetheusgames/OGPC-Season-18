@@ -3,9 +3,7 @@
 class_name ConeOfFire
 extends Node2D
 
-const LINE_LENGTH: float = 200.0
-
-@export var range: float = 100.0
+const LINE_LENGTH: float = 400.0
 
 @export var max_spread_angle: float = 30.0
 @export var min_spread_angle: float = 5.0
@@ -15,6 +13,7 @@ const LINE_LENGTH: float = 200.0
 
 @onready var line1: Node2D = $"Line1"
 @onready var line2: Node2D = $"Line2"
+@onready var polygon: Polygon2D = $"Polygon2D"
 
 var spread_angle_degrees: float
 
@@ -24,11 +23,8 @@ var prev_rot: float
 func _ready() -> void:
 	spread_angle_degrees = max_spread_angle
 	
-	line1.scale.x = range / LINE_LENGTH
-	line2.scale.x = range / LINE_LENGTH
-	
-	line1.modulate.a = 0.01
-	line2.modulate.a = 0.01
+	#line1.modulate.a = 0.01
+	#line2.modulate.a = 0.01
 
 
 func _process(delta: float) -> void:
@@ -45,6 +41,11 @@ func _process(delta: float) -> void:
 	
 	line1.rotation_degrees = spread_angle_degrees / 2
 	line2.rotation_degrees = -spread_angle_degrees / 2
+	
+	polygon.polygon[0] = Vector2.ZERO
+	
+	polygon.polygon[1] = Vector2.RIGHT.rotated(deg_to_rad(spread_angle_degrees / 2)) * LINE_LENGTH
+	polygon.polygon[2] = Vector2.RIGHT.rotated(deg_to_rad(-spread_angle_degrees / 2)) * LINE_LENGTH
 
 # Gets random angle of shot within spread angle (Radians)
 # Weighted towards center slightly

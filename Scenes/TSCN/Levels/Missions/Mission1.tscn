@@ -607,4 +607,14 @@ position = Vector2(-8643, -5826)
 [node name="GlowCoral3" parent="." instance=ExtResource("30_obv2f")]
 position = Vector2(-9445, -5361)
 
+[node name="RockItem7" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11362, -5615)
+
+[node name="RockItem8" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11537, -5615)
+cost = 100
+
+[node name="RockItem9" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-11702, -5612)
+
 [editable path="UILayer/IngameUI"]

@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" uid="uid://cyvf25qnqef7g" path="res://Scripts/Entity/Diver/Combat/Pistol/PistolBullet.gd" id="1_hykh4"]
 [ext_resource type="Script" uid="uid://ced6k1jq3eqag" path="res://Scripts/Components/Damage/OneShotAttack.gd" id="2_v6uvr"]
-[ext_resource type="Texture2D" uid="uid://tiecptnkuai8" path="res://Assets/Art/Entity/Player/Dart.png" id="3_qverg"]
+[ext_resource type="Texture2D" uid="uid://dp8fcfs56tdru" path="res://Assets/Art/Entity/Player/PistolBullet.png" id="3_qverg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pk0f"]
-size = Vector2(14, 26)
+size = Vector2(14, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4bauh"]
-size = Vector2(34, 67)
+size = Vector2(21, 48.5)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qverg"]
 particle_flag_disable_z = true
 particle_flag_damping_as_friction = true
 emission_shape = 1
 emission_sphere_radius = 10.0
-gravity = Vector3(0, -90, 0)
+gravity = Vector3(0, 90, 0)
 damping_min = 1.0
 damping_max = 1.0
 
@@ -27,7 +27,6 @@ size = 10.0
 damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_6pk0f")
 
 [node name="OneShotAttack" type="Area2D" parent="."]
@@ -37,13 +36,14 @@ damage_amount = 5.0
 metadata/_custom_type_script = "uid://ced6k1jq3eqag"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]
-position = Vector2(0, 0.5)
+position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_4bauh")
+debug_color = Color(0.999895, 0, 0.0972053, 0.42)
 
 [node name="Dart" type="Sprite2D" parent="."]
-position = Vector2(0, -2)
-rotation = 1.57079
-scale = Vector2(3.03518, 3.03518)
+texture_filter = 1
+rotation = 4.71239
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_qverg")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]

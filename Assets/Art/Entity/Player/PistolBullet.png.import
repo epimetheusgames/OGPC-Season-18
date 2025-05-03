@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dp8fcfs56tdru"
-path="res://.godot/imported/SemiAutoPistolFlip.png-a0bd0657d2bede7755c5c9df0123610c.ctex"
+path="res://.godot/imported/PistolBullet.png-a1eccf9c7215a22eed4d22bf409b438e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Entity/Player/SemiAutoPistolFlip.png"
-dest_files=["res://.godot/imported/SemiAutoPistolFlip.png-a0bd0657d2bede7755c5c9df0123610c.ctex"]
+source_file="res://Assets/Art/Entity/Player/PistolBullet.png"
+dest_files=["res://.godot/imported/PistolBullet.png-a1eccf9c7215a22eed4d22bf409b438e.ctex"]
 
 [params]
 

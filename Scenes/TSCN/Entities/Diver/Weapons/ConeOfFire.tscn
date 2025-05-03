@@ -9,16 +9,24 @@ script = ExtResource("1_416bp")
 rotation = -0.261799
 
 [node name="ColorRect" type="ColorRect" parent="Line1"]
-offset_top = -6.0
-offset_right = 200.0
-offset_bottom = 4.0
-color = Color(1, 1, 1, 0.266667)
+visible = false
+offset_top = -2.0
+offset_right = 400.0
+offset_bottom = 3.0
+color = Color(1, 1, 0, 0.498039)
 
 [node name="Line2" type="Node2D" parent="."]
 rotation = 0.261799
 
 [node name="ColorRect" type="ColorRect" parent="Line2"]
-offset_top = -6.0
-offset_right = 200.0
-offset_bottom = 4.0
-color = Color(1, 1, 1, 0.262745)
+visible = false
+offset_left = 0.448289
+offset_top = -2.19067
+offset_right = 400.448
+offset_bottom = 2.80933
+color = Color(1, 1, 0, 0.490196)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+color = Color(1, 1, 0, 0.192157)
+polygon = PackedVector2Array(1, 0, 384, -103, 383, 106)
