@@ -6,9 +6,39 @@ func _ready():
 	Global.chat = $MinimalChat
 	Steam.lobby_match_list.connect(_lobby_list_updated)
 	
+	await get_tree().create_timer(0.1).timeout
+	
+	var save := Global.save_load_framework._load_global_config()
+	$SoundMenu/MasterVolumeSlider.value = save.master_volume
+	$SoundMenu/MusicVolumeSlider.value = save.music_volume
+	$SoundMenu/SFXVolumeSlider.value = save.sfx_volume
+	$BrightnessSlider.value = save.brightness
+	
 	while true:
 		await get_tree().create_timer(1).timeout
 		Global.godot_steam_abstraction.get_lobby_list()
+
+func _process(_delta: float) -> void:
+	var members = Global.godot_steam_abstraction.lobby_members
+	if Global.is_multiplayer:
+		var text := "Members of lobby:\n"
+		for member in members:
+			text += member["steam_name"] + "\n"
+		$Members.text = text
+	
+	if !Global.current_mission_node:
+		Global.chat = $MinimalChat
+
+# Should be remotely called.
+func set_multiplayer_status(status: String):
+	$MultiplayerStatus.text = status
+
+func _open_sound_button() -> void:
+	$SoundButton.visible = false
+	$KeybindButton.visible = false
+	$BackButton.visible = false
+	$BrightnessSlider.visible = false
+	$SoundMenu.visible = true
 
 func _lobby_list_updated(_lobbies: Array):
 	var lobby_text := "Available lobbies:\n"
@@ -17,6 +47,14 @@ func _lobby_list_updated(_lobbies: Array):
 			lobby_text += "Lobby name: " + lobby[1] + " | Members: " + str(lobby[3])
 	if !Global.is_multiplayer:
 		$Members.text = lobby_text
+
+func update_global_save() -> void:
+	var save := GlobalSave.new()
+	save.master_volume = $SoundMenu/MasterVolumeSlider.value
+	save.music_volume = $SoundMenu/MusicVolumeSlider.value
+	save.sfx_volume = $SoundMenu/SFXVolumeSlider.value
+	save.brightness = $BrightnessSlider.value
+	Global.save_load_framework._save_global_config(save)
 
 func _on_quit_button_button_up() -> void:
 	if $StartButton.visible:
@@ -103,20 +141,53 @@ func _on_multiplayer_join_game_button_button_up() -> void:
 	Global.godot_steam_abstraction.join_lobby_by_name($LobbyNameInput.text)
 	set_multiplayer_status("Waiting for host connection.")
 	$MultiplayerJoinGameButton.disabled = true
-func _on_settings_button_up() -> void:
-	$"../MenuSettings".visible = true
-	self.visible = false
-func _process(_delta: float) -> void:
-	var members = Global.godot_steam_abstraction.lobby_members
-	if Global.is_multiplayer:
-		var text := "Members of lobby:\n"
-		for member in members:
-			text += member["steam_name"] + "\n"
-		$Members.text = text
-	
-	if !Global.current_mission_node:
-		Global.chat = $MinimalChat
 
-# Should be remotely called.
-func set_multiplayer_status(status: String):
-	$MultiplayerStatus.text = status
+func _on_settings_button_up() -> void:
+	$SoundButton.visible = true
+	$KeybindButton.visible = true
+	$BackButton.visible = true
+	$BrightnessSlider.visible = true
+	$StartButton.visible = false
+	$SettingsButton.visible = false
+	$QuitButton.visible = false
+	$Members.visible = false
+
+func _on_brightness_slider_value_changed(value: float) -> void:
+	Global.set_brightness(value)
+	update_global_save()
+
+func _on_sound_button_button_up() -> void:
+	$SoundMenu.visible = true
+	$BrightnessSlider.visible = false
+	$BackButton.visible = false
+	$KeybindButton.visible = false
+	$SoundButton.visible = false
+
+func _on_sound_menu_back_button_button_up() -> void:
+	$SoundMenu.visible = false
+	$BrightnessSlider.visible = true
+	$BackButton.visible = true
+	$KeybindButton.visible = true
+	$SoundButton.visible = true
+
+func _on_back_button_button_up() -> void:
+	$BrightnessSlider.visible = false
+	$BackButton.visible = false
+	$KeybindButton.visible = false
+	$SoundButton.visible = false
+	$StartButton.visible = true
+	$SettingsButton.visible = true
+	$QuitButton.visible = true
+	$Members.visible = true
+
+func _on_master_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value / 100.0)
+	update_global_save()
+
+func _on_music_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Music"), value / 100.0)
+	update_global_save()
+
+func _on_sfx_volume_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), value / 100.0)
+	update_global_save()

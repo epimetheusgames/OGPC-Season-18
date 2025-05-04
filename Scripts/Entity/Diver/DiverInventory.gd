@@ -12,6 +12,7 @@ var hovering_item_item: BaseItem
 @export var inventory_size := 4
 
 var just_selected := false
+var collecting_money := false
 
 ## Relative to mission root, saved, so they can be deleted.
 var collected_item_paths: Array[NodePath]
@@ -48,13 +49,22 @@ func _process(delta: float) -> void:
 			just_selected = false
 	
 	# Sell items automatically, there should be an animation for this.
-	if diver.diver_movement.is_in_research_station:
+	if diver.diver_movement.is_in_research_station && !collecting_money:
+		var income := 0
 		for item in inventory:
 			if !is_instance_valid(item) || !item:
 				continue
 			if item.sellable_resource:
-				diver.diver_stats.current_money += item.cost * item.count
+				income += item.cost * item.count
 				inventory.remove_at(inventory.find(item))
+		if income > 1:
+			diver.diver_animation.animate_collected_item(income)
+			collecting_money = true
+			
+			await get_tree().create_timer(2.5).timeout
+			
+			diver.diver_stats.current_money += income
+			collecting_money = false
 
 func _on_item_detection_area_area_entered(area: Area2D) -> void:
 	var hoverings_child: BaseItem 

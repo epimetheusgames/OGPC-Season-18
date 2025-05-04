@@ -96,12 +96,12 @@ func _process(delta: float) -> void:
 		$WalkingAnimation.stop()
 		leg_target1.global_position = _animate_leg(1, delta)
 		leg_target2.global_position = _animate_leg(2, delta)
-		for polygon: Polygon2D in $Polygons.get_children():
-			polygon.texture = default_sprite
+		$Polygons/Calf1.texture = default_sprite
+		$Polygons/Calf2.texture = default_sprite
 	else:
 		$WalkingAnimation.play("Walking", -1, 3 * diver.velocity.x / 392)
-		for polygon: Polygon2D in $Polygons.get_children():
-			polygon.texture = walking_sprite
+		$Polygons/Calf1.texture = walking_sprite
+		$Polygons/Calf2.texture = walking_sprite
 	
 	# Arms
 	if !hand1_weapon_control:
@@ -113,7 +113,6 @@ func _process(delta: float) -> void:
 		arm_target2.position = _animate_arm(2, delta)
 	else:
 		hand2_weapon_control = false
-
 
 ## Animates one of the legs (leg = 1 or leg = 2) with the delta time.
 func _animate_leg(leg: int, delta: float) -> Vector2:
@@ -191,6 +190,10 @@ func get_hand2_position() -> Vector2:
 func set_hand2_position(pos: Vector2) -> void:
 	arm_target2.global_position = pos
 	hand2_weapon_control = true
+
+func animate_collected_item(cost: int):
+	$CollectItemAnimationText.text = "+" + str(cost)
+	$CollectAnimation.play("Collect")
 
 func _on_general_detection_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("unlock_terminal_area"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=39 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://6ub1ahbtrw5b" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
 [ext_resource type="Script" uid="uid://ctyabps1pdr5y" path="res://Scripts/Skeleton/Nodes/DiscordRpc.gd" id="11_bhkpb"]
-[ext_resource type="Script" uid="uid://dkccamrp2323g" path="res://Scripts/UI/godotisreallyspedihateprogrammingsomeonehelpmepleaseongod_iwonderwhatthiswillloklikewhenwedothegitvisualizationthingitwillprobabolylooksocookedlowkey.gd" id="12_c76v7"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="13_wogkx"]
 [ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="14_41cf3"]
 [ext_resource type="Script" uid="uid://cr8brelxptd70" path="res://Scripts/UI/KeybindButtonHandler.gd" id="14_qt6oy"]
@@ -21,9 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/NPCS/Boid.tscn" id="17_g72ff"]
 [ext_resource type="Script" uid="uid://s4npen7ydnt2" path="res://Scripts/UI/Ingame/MinimalChat.gd" id="18_al4tj"]
 [ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="18_vsi4y"]
-[ext_resource type="Script" uid="uid://b4d236x1wwn5k" path="res://Scripts/UI/sliderIsStupid.gd" id="20_8vvda"]
 [ext_resource type="Script" uid="uid://dku55y4bp1fny" path="res://Scripts/Skeleton/Nodes/KeypressHandler.gd" id="20_kh2s0"]
-[ext_resource type="Texture2D" uid="uid://cqx2208sneqm4" path="res://Assets/Art/UI/arrow.svg" id="21_eg08b"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="21_stqyc"]
 [ext_resource type="Script" uid="uid://d4bbjhr8uciri" path="res://Scripts/Skeleton/Nodes/PerformancePrompt.gd" id="22_3oc7k"]
 [ext_resource type="Script" uid="uid://dv2kwfcqucrrb" path="res://Scripts/UI/BrightnessModulate.gd" id="22_41cf3"]
@@ -297,12 +294,126 @@ offset_right = 1080.0
 offset_bottom = 618.0
 horizontal_alignment = 1
 
-[node name="Members" type="RichTextLabel" parent="UI/MainMenu"]
+[node name="SoundButton" type="Button" parent="UI/MainMenu"]
+visible = false
 layout_mode = 0
-offset_left = 825.0
-offset_top = 623.0
+offset_left = 821.0
+offset_top = 318.0
 offset_right = 1081.0
-offset_bottom = 766.0
+offset_bottom = 392.0
+size_flags_horizontal = 4
+theme = ExtResource("13_wogkx")
+theme_override_font_sizes/font_size = 36
+text = "Sound"
+
+[node name="KeybindButton" type="Button" parent="UI/MainMenu"]
+visible = false
+offset_left = 824.0
+offset_top = 414.0
+offset_right = 1081.0
+offset_bottom = 488.0
+size_flags_vertical = 6
+theme = ExtResource("13_wogkx")
+theme_override_font_sizes/font_size = 36
+text = "Keybinds"
+
+[node name="BackButton" type="Button" parent="UI/MainMenu"]
+visible = false
+layout_mode = 0
+offset_left = 824.0
+offset_top = 583.0
+offset_right = 1081.0
+offset_bottom = 657.0
+theme = ExtResource("13_wogkx")
+theme_override_font_sizes/font_size = 36
+text = "Back"
+
+[node name="BrightnessSlider" type="HSlider" parent="UI/MainMenu"]
+process_mode = 3
+visible = false
+offset_left = 831.0
+offset_top = 507.0
+offset_right = 1074.0
+offset_bottom = 597.0
+theme = ExtResource("13_wogkx")
+value = 50.0
+
+[node name="Label" type="Label" parent="UI/MainMenu/BrightnessSlider"]
+layout_mode = 0
+offset_top = -3.0
+offset_right = 243.0
+offset_bottom = 33.0
+theme = ExtResource("13_wogkx")
+theme_override_font_sizes/font_size = 25
+text = "Game Brightness"
+horizontal_alignment = 1
+
+[node name="SoundMenu" type="Control" parent="UI/MainMenu"]
+visible = false
+anchors_preset = 0
+
+[node name="MasterVolumeSlider" type="HSlider" parent="UI/MainMenu/SoundMenu"]
+layout_mode = 2
+offset_left = 833.0
+offset_top = 337.0
+offset_right = 1072.0
+offset_bottom = 403.0
+theme = ExtResource("13_wogkx")
+
+[node name="Label" type="Label" parent="UI/MainMenu/SoundMenu/MasterVolumeSlider"]
+offset_left = -9.0
+offset_top = -8.0
+offset_right = 234.0
+offset_bottom = 28.0
+theme = ExtResource("13_wogkx")
+theme_override_font_sizes/font_size = 25
+text = "Master"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="UI/MainMenu/SoundMenu"]
+layout_mode = 2
+offset_left = 833.0
+offset_top = 393.0
+offset_right = 1072.0
+offset_bottom = 459.0
+theme = ExtResource("13_wogkx")
+
+[node name="Label" type="Label" parent="UI/MainMenu/SoundMenu/MusicVolumeSlider"]
+offset_left = -9.0
+offset_top = -8.0
+offset_right = 234.0
+offset_bottom = 28.0
+theme = ExtResource("13_wogkx")
+theme_override_font_sizes/font_size = 25
+text = "Music"
+horizontal_alignment = 1
+
+[node name="SFXVolumeSlider" type="HSlider" parent="UI/MainMenu/SoundMenu"]
+layout_mode = 2
+offset_left = 832.0
+offset_top = 449.0
+offset_right = 1072.0
+offset_bottom = 515.0
+theme = ExtResource("13_wogkx")
+
+[node name="Label" type="Label" parent="UI/MainMenu/SoundMenu/SFXVolumeSlider"]
+offset_left = -9.0
+offset_top = -8.0
+offset_right = 234.0
+offset_bottom = 28.0
+theme = ExtResource("13_wogkx")
+theme_override_font_sizes/font_size = 25
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SoundMenuBackButton" type="Button" parent="UI/MainMenu/SoundMenu"]
+offset_left = 824.0
+offset_top = 503.0
+offset_right = 1081.0
+offset_bottom = 577.0
+theme = ExtResource("13_wogkx")
+theme_override_font_sizes/font_size = 36
+text = "Back"
 
 [node name="MinimalChat" type="PanelContainer" parent="UI/MainMenu" node_paths=PackedStringArray("text")]
 layout_mode = 0
@@ -312,10 +423,18 @@ offset_right = 1446.0
 offset_bottom = 584.0
 script = ExtResource("18_al4tj")
 text = NodePath("RichTextLabel")
+set_default_onready = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/MainMenu/MinimalChat"]
 layout_mode = 2
 bbcode_enabled = true
+
+[node name="Members" type="RichTextLabel" parent="UI/MainMenu"]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 623.0
+offset_right = 1081.0
+offset_bottom = 766.0
 
 [node name="Boid" parent="UI" instance=ExtResource("17_g72ff")]
 modulate = Color(0.704, 0.771, 0.885, 0.536)
@@ -347,155 +466,6 @@ position = Vector2(-242, -58)
 polygon = PackedVector2Array(-47, 440, -206, 192, -720, 460, -638.006, 492.318, -139, 689)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="UI"]
-
-[node name="MenuSettings" type="Node2D" parent="UI" node_paths=PackedStringArray("BrightnessSlider", "PerformanceButton", "SoundSlider")]
-process_mode = 3
-visible = false
-script = ExtResource("12_c76v7")
-BrightnessSlider = NodePath("ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer/BrightnessSlider")
-PerformanceButton = NodePath("ContainTheDumbShit/HBoxContainer/VBoxContainer/HBoxContainer/PerformanceButton")
-SoundSlider = NodePath("SoundSubMenu/VBoxContainer/MasterVolumeSlider")
-
-[node name="ContainTheDumbShit" type="BoxContainer" parent="UI/MenuSettings"]
-offset_right = 1938.0
-offset_bottom = 1049.0
-size_flags_horizontal = 6
-size_flags_vertical = 3
-
-[node name="BackButton" type="TextureButton" parent="UI/MenuSettings/ContainTheDumbShit"]
-layout_mode = 2
-theme = ExtResource("13_wogkx")
-action_mode = 0
-texture_normal = ExtResource("21_eg08b")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MenuSettings/ContainTheDumbShit"]
-layout_mode = 2
-size_flags_horizontal = 6
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_stretch_ratio = 11.8
-mouse_filter = 2
-
-[node name="KeybindButton" type="Button" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-theme = ExtResource("13_wogkx")
-text = "Edit Keybinds"
-
-[node name="SoundButton" type="Button" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("13_wogkx")
-action_mode = 0
-text = "Sound Settings"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-size_flags_vertical = 6
-mouse_filter = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(10, 40)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme = ExtResource("13_wogkx")
-text = "Efficiency Mode"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="PerformanceButton" type="Button" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("13_wogkx")
-text = "Turn On"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(140, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("13_wogkx")
-text = "Game Brightness"
-fit_content = true
-scroll_active = false
-
-[node name="BrightnessSlider" type="HSlider" parent="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-theme = ExtResource("13_wogkx")
-value = 50.0
-script = ExtResource("20_8vvda")
-
-[node name="Background" type="ColorRect" parent="UI/MenuSettings"]
-visible = false
-z_index = -2
-layout_direction = 2
-offset_left = -3.0
-offset_right = 1930.0
-offset_bottom = 1076.0
-size_flags_horizontal = 3
-mouse_filter = 2
-color = Color(0.262932, 0.262932, 0.262932, 1)
-
-[node name="SoundSubMenu" type="HBoxContainer" parent="UI/MenuSettings"]
-visible = false
-z_index = 2
-offset_left = 12.0
-offset_top = 3.0
-offset_right = 1921.0
-offset_bottom = 1057.0
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/MenuSettings/SoundSubMenu"]
-layout_mode = 2
-size_flags_horizontal = 6
-mouse_filter = 2
-alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/MenuSettings/SoundSubMenu/VBoxContainer"]
-custom_minimum_size = Vector2(140, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("13_wogkx")
-text = "Overall Volume"
-fit_content = true
-scroll_active = false
-scroll_following = true
-autowrap_mode = 0
-
-[node name="MasterVolumeSlider" type="HSlider" parent="UI/MenuSettings/SoundSubMenu/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("13_wogkx")
-script = ExtResource("20_8vvda")
-
-[node name="BackButton" type="TextureButton" parent="UI/MenuSettings/SoundSubMenu"]
-z_index = 14
-z_as_relative = false
-layout_mode = 2
-theme = ExtResource("13_wogkx")
-action_mode = 0
-texture_normal = ExtResource("21_eg08b")
-
-[node name="SoundMenuBackground" type="ColorRect" parent="UI/MenuSettings"]
-visible = false
-z_index = 1
-offset_left = -10.0
-offset_top = 3.0
-offset_right = 1921.0
-offset_bottom = 1057.0
-size_flags_horizontal = 3
-mouse_filter = 2
-color = Color(0.262745, 0.262745, 0.262745, 1)
 
 [node name="Game" type="Node" parent="."]
 
@@ -613,6 +583,7 @@ offset_right = 2394.0
 offset_bottom = 2956.0
 mouse_filter = 2
 color = Color(0.012, 0.012, 0.09, 1)
+metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_1f6oh")
@@ -620,6 +591,7 @@ offset_right = 2380.0
 offset_bottom = 2914.0
 mouse_filter = 2
 color = Color(0.012, 0.012, 0.09, 0.674)
+metadata/_edit_lock_ = true
 
 [connection signal="button_up" from="UI/TemplateButton" to="UI/TemplateButton" method="_on_button_up"]
 [connection signal="button_up" from="UI/MainMenu/StartButton" to="UI/MainMenu" method="_on_start_button_button_up"]
@@ -631,8 +603,12 @@ color = Color(0.012, 0.012, 0.09, 0.674)
 [connection signal="button_up" from="UI/MainMenu/MultiplayerHostGameButton" to="UI/MainMenu" method="_on_multiplayer_host_game_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/SettingsButton" to="UI/MainMenu" method="_on_settings_button_up"]
 [connection signal="button_up" from="UI/MainMenu/QuitButton" to="UI/MainMenu" method="_on_quit_button_button_up"]
-[connection signal="pressed" from="UI/MenuSettings/ContainTheDumbShit/BackButton" to="UI/MenuSettings" method="_back_button_pressed"]
-[connection signal="value_changed" from="UI/MenuSettings/ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer/BrightnessSlider" to="UI/MenuSettings" method="_brightness_slider_value_changed"]
-[connection signal="value_changed" from="UI/MenuSettings/SoundSubMenu/VBoxContainer/MasterVolumeSlider" to="UI/MenuSettings" method="_master_volume_changed"]
+[connection signal="button_up" from="UI/MainMenu/SoundButton" to="UI/MainMenu" method="_on_sound_button_button_up"]
+[connection signal="button_up" from="UI/MainMenu/BackButton" to="UI/MainMenu" method="_on_back_button_button_up"]
+[connection signal="value_changed" from="UI/MainMenu/BrightnessSlider" to="UI/MainMenu" method="_on_brightness_slider_value_changed"]
+[connection signal="value_changed" from="UI/MainMenu/SoundMenu/MasterVolumeSlider" to="UI/MainMenu" method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="UI/MainMenu/SoundMenu/MusicVolumeSlider" to="UI/MainMenu" method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="UI/MainMenu/SoundMenu/SFXVolumeSlider" to="UI/MainMenu" method="_on_sfx_volume_slider_value_changed"]
+[connection signal="button_up" from="UI/MainMenu/SoundMenu/SoundMenuBackButton" to="UI/MainMenu" method="_on_sound_menu_back_button_button_up"]
 
 [editable path="UI/Boid"]
