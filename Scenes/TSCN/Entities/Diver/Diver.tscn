@@ -544,10 +544,10 @@ metadata/_edit_lock_ = true
 
 [node name="CollectItemAnimationText" type="Label" parent="Animation"]
 modulate = Color(0.44, 0.428853, 0.1056, 0)
-offset_left = 864.0
-offset_top = -529.0
-offset_right = 964.0
-offset_bottom = -486.0
+offset_left = -50.0
+offset_top = -129.0
+offset_right = 50.0
+offset_bottom = -86.0
 theme = ExtResource("12_yxkba")
 theme_override_font_sizes/font_size = 30
 text = "+10"

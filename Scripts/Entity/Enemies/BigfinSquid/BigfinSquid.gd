@@ -1,17 +1,22 @@
 class_name BigfinSquid
 extends Enemy
 
-"""
-@onready var anim: DiverAnimation = Global.player.diver_animation
+
 @onready var arms: Array[Line2D] = [$RightFrontArm, $LeftFrontArm, $RightBackArm, $LeftBackArm]
 @onready var ropes: Array[VerletRope] = [$RightFrontArmRope, $LeftFrontArmRope, $RightBackArmRope, $LeftBackArmRope]
-@onready var limbs: Array[Node2D] = [anim.arm1, anim.arm2, anim.leg1, anim.leg2]
+@onready var limbs: Array[Node2D]
 var targets: Array[Node2D] = []
 var end_targets: Array[Node2D] = []
-var target_velocity: Vector2
 
 func _ready() -> void:
 	super()
+	
+	state_machine.init(self)
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	var anim := Global.player.diver_animation
+	limbs = [anim.arm1, anim.arm2, anim.leg1, anim.leg2]
 	
 	for i in range(ropes.size()):
 		var rope := ropes[i]
@@ -41,12 +46,21 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
+	var closest_player := get_closest_player()
+	state_machine.process_physics(delta)
+	move_and_slide()
+	
+	for rope in ropes:
+		rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
+		
+	rotation = velocity.angle() + PI / 2.0
+	
 	for i in range(targets.size()):
 		ropes[i].is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
-		ropes[i].gravity = -target_velocity.normalized() * 10
+		ropes[i].gravity = -velocity.normalized() * 10
 		targets[i].global_position = arms[i].points[1].rotated(arms[i].global_rotation) + arms[i].global_position
 		
-		if player_visible:
+		if closest_player:
 			end_targets[i].global_position = limbs[i].global_position
 			ropes[i].end_pos_on = true
 		else:
@@ -55,28 +69,9 @@ func _process(delta: float) -> void:
 	if closest_player && \
 	   (((Global.godot_steam_abstraction && Global.is_multiplayer && node_owner == closest_player.node_owner) || \
 		!Global.is_multiplayer || !Global.godot_steam_abstraction) && \
-		player_visible && \
 		closest_player.global_position.distance_squared_to(global_position) < 1000 ** 2
 	):
-		closest_player.global_position += (global_position - closest_player.global_position).normalized() * 0.7 * delta * 60
+		closest_player.global_position += (global_position - closest_player.global_position).normalized() * 1.5 * delta * 60
 	
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !_is_node_owner():
 		return
-	
-	$NavAgent.target_position = target_position
-	
-	var path_pos: Vector2 = $NavAgent.get_next_path_position()
-	target_velocity = (path_pos - global_position).normalized() * settings.base_speed
-	position += target_velocity * delta * 60
-	rotation = Util.better_angle_lerp(rotation, target_velocity.angle() + PI / 2, 0.1, delta)
-	
-	if Global.godot_steam_abstraction && Global.is_multiplayer:
-		Global.godot_steam_abstraction.sync_var(self, "player_visible")
-		Global.godot_steam_abstraction.sync_var(self, "target_velocity")
-	
-	if position.distance_to(target_position) < 50:
-		_target_reached()
-	
-	for rope in ropes:
-		rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
-"""

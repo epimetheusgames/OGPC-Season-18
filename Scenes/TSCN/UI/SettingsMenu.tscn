@@ -1,17 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1oaylh32r500"]
+[gd_scene load_steps=4 format=3 uid="uid://dxjynk0yqb3jk"]
 
-[ext_resource type="Script" uid="uid://bx18q8lr32ei8" path="res://Scripts/UI/SettingsMenu.gd" id="1_3dd0e"]
 [ext_resource type="Texture2D" uid="uid://cqx2208sneqm4" path="res://Assets/Art/UI/arrow.svg" id="2_l4xm8"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="2_ltcfv"]
 [ext_resource type="Script" uid="uid://b4d236x1wwn5k" path="res://Scripts/UI/sliderIsStupid.gd" id="2_s8p8c"]
 
-[node name="Settings" type="Node2D" node_paths=PackedStringArray("BrightnessSlider", "PerformanceButton", "SoundSlider")]
+[node name="Settings" type="Node2D"]
 process_mode = 3
 z_index = 46
-script = ExtResource("1_3dd0e")
-BrightnessSlider = NodePath("ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer/BrightnessSlider")
-PerformanceButton = NodePath("ContainTheDumbShit/HBoxContainer/VBoxContainer/HBoxContainer/PerformanceButton")
-SoundSlider = NodePath("SoundSubMenu/VBoxContainer/MasterVolumeSlider")
 
 [node name="SoundSubMenu" type="HBoxContainer" parent="."]
 visible = false

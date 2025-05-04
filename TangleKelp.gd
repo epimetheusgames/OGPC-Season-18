@@ -38,9 +38,11 @@ func _process(delta: float) -> void:
 	
 	rope_position = rope_position + (target_rope_position - rope_position) * 0.03
 	
+	var is_on_screen: bool = $VisibleOnScreenNotifier2D.is_on_screen()
+	
 	for rope in ropes:
 		rope.end_pos = rope_position
-		rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
+		rope.is_on_screen = is_on_screen
 	
 	attack_collision.global_position = rope_position
 

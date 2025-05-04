@@ -13,6 +13,8 @@ func _process(delta: float) -> void:
 	if "is_on_screen" in rope and not rope.get("is_on_screen"):
 		visible = false
 		return
+	
+	visible = true
 
 	var raw_points = Util.smooth_line(rope.points, resolution_multiplier) if smoothing_on else rope.points
 
