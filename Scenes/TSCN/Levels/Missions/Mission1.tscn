@@ -444,7 +444,19 @@ position = Vector2(-7882, -1863)
 length = 20
 
 [node name="BigfinSquid" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
-position = Vector2(-12049, -6320)
+position = Vector2(-11921, -4326)
+
+[node name="BigfinSquid2" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
+position = Vector2(-11022, -3696)
+
+[node name="BigfinSquid3" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
+position = Vector2(-8741, -3609)
+
+[node name="BigfinSquid4" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
+position = Vector2(-6326, -3125)
+
+[node name="BigfinSquid5" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
+position = Vector2(-4738, -4834)
 
 [node name="Player" type="Node2D" parent="LevelContainer"]
 
@@ -585,7 +597,25 @@ visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_hcosd")
 
 [node name="Arrowfish" parent="." instance=ExtResource("26_k8n8v")]
-position = Vector2(-11489, -5878)
+position = Vector2(-9899, -5927)
+
+[node name="Arrowfish2" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-8939, -6948)
+
+[node name="Arrowfish3" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-9612, -7975)
+
+[node name="Arrowfish4" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-8156, -8311)
+
+[node name="Arrowfish7" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-8156, -8311)
+
+[node name="Arrowfish5" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-11226, -8176)
+
+[node name="Arrowfish6" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-12052, -7528)
 
 [node name="RockItem4" parent="." instance=ExtResource("27_l3b62")]
 position = Vector2(-9905, -5058)
@@ -601,5 +631,13 @@ position = Vector2(-11208, -5615)
 [node name="RockItem16" parent="." instance=ExtResource("27_l3b62")]
 position = Vector2(-11694, -5249)
 rotation = 2.42563
+
+[node name="RockItem" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-9292, -2928)
+rotation = -0.244462
+
+[node name="RockItem2" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-4655, -3315)
+rotation = -1.12678
 
 [editable path="UILayer/IngameUI"]

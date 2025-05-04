@@ -100,6 +100,7 @@ alignment = 1
 [node name="PrimaryButton" type="Button" parent="SubViewportContainer/SubViewport/WeaponUnlock/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 theme = ExtResource("1_fnds5")
 theme_override_font_sizes/font_size = 50
 text = "Primary Weapon"
@@ -111,6 +112,7 @@ layout_mode = 2
 [node name="SecondaryButton" type="Button" parent="SubViewportContainer/SubViewport/WeaponUnlock/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 theme = ExtResource("1_fnds5")
 theme_override_font_sizes/font_size = 50
 text = "Second Weapon"
@@ -122,6 +124,7 @@ layout_mode = 2
 [node name="BackButton" type="Button" parent="SubViewportContainer/SubViewport/WeaponUnlock/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 theme = ExtResource("1_fnds5")
 theme_override_font_sizes/font_size = 50
 text = "Back"
@@ -154,6 +157,7 @@ layout_mode = 2
 [node name="BackButton" type="Button" parent="SubViewportContainer/SubViewport/ItemUnlock"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 theme = ExtResource("1_fnds5")
 theme_override_font_sizes/font_size = 50
 text = "Back"
@@ -174,6 +178,7 @@ layout_mode = 2
 [node name="WeaponsButton" type="Button" parent="SubViewportContainer/SubViewport/MainMenu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 theme = ExtResource("1_fnds5")
 theme_override_font_sizes/font_size = 50
 text = "Weapons"
@@ -184,6 +189,7 @@ layout_mode = 2
 [node name="ItemsButton" type="Button" parent="SubViewportContainer/SubViewport/MainMenu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_mode = 0
 theme = ExtResource("1_fnds5")
 theme_override_font_sizes/font_size = 50
 text = "Items
