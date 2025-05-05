@@ -6,6 +6,9 @@ func _ready() -> void:
 	state_machine.init(self)
 
 func _physics_process(delta: float) -> void:
+	if Global.player.global_position.distance_squared_to(global_position) > 3000 ** 2:
+		return
+	
 	state_machine.process_physics(delta)
 	move_and_slide()
 	

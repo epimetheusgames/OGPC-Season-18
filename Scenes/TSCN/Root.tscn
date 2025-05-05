@@ -308,6 +308,7 @@ text = "Sound"
 
 [node name="KeybindButton" type="Button" parent="UI/MainMenu"]
 visible = false
+layout_mode = 0
 offset_left = 824.0
 offset_top = 414.0
 offset_right = 1081.0
@@ -331,6 +332,7 @@ text = "Back"
 [node name="BrightnessSlider" type="HSlider" parent="UI/MainMenu"]
 process_mode = 3
 visible = false
+layout_mode = 0
 offset_left = 831.0
 offset_top = 507.0
 offset_right = 1074.0
@@ -361,6 +363,7 @@ offset_bottom = 403.0
 theme = ExtResource("13_wogkx")
 
 [node name="Label" type="Label" parent="UI/MainMenu/SoundMenu/MasterVolumeSlider"]
+layout_mode = 0
 offset_left = -9.0
 offset_top = -8.0
 offset_right = 234.0
@@ -379,6 +382,7 @@ offset_bottom = 459.0
 theme = ExtResource("13_wogkx")
 
 [node name="Label" type="Label" parent="UI/MainMenu/SoundMenu/MusicVolumeSlider"]
+layout_mode = 0
 offset_left = -9.0
 offset_top = -8.0
 offset_right = 234.0
@@ -397,6 +401,7 @@ offset_bottom = 515.0
 theme = ExtResource("13_wogkx")
 
 [node name="Label" type="Label" parent="UI/MainMenu/SoundMenu/SFXVolumeSlider"]
+layout_mode = 0
 offset_left = -9.0
 offset_top = -8.0
 offset_right = 234.0
@@ -407,6 +412,7 @@ text = "SFX"
 horizontal_alignment = 1
 
 [node name="SoundMenuBackButton" type="Button" parent="UI/MainMenu/SoundMenu"]
+layout_mode = 0
 offset_left = 824.0
 offset_top = 503.0
 offset_right = 1081.0
