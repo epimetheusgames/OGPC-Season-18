@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=64 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b4ilwlm2wu77m" path="res://Assets/Music/Abyss.mp3" id="6_3w4x2"]
 [ext_resource type="AudioStream" uid="uid://ciqgqnvf6arsr" path="res://Assets/Music/Submarine.mp3" id="6_fukii"]
 [ext_resource type="Material" uid="uid://cexuq6aqq46ng" path="res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres" id="6_l3b62"]
-[ext_resource type="Texture2D" uid="uid://njrwmcevcrni" path="res://Assets/Art/TerrainTexture.png" id="7_fukii"]
+[ext_resource type="Shader" uid="uid://cgyujgfqy1jk6" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="8_gnr5v"]
 [ext_resource type="PackedScene" uid="uid://brtj1ur8tgigg" path="res://Scenes/ResearchStation.tscn" id="13_eg3rs"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
@@ -241,12 +241,12 @@ _data = {
 }
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsraf"]
-vertices = PackedVector2Array(17488.3, -7731, 8196.28, -7347.58, 8196.74, -7347.6, 27531.6, 10700.5, 30670.4, 12063.6, -7805.98, 12294.1, -5608.51, 10807.8, -7117.72, -8693.21, -5789.87, 4064.24, -3394.42, -1034.47, -2025.12, -5007.5, 20616.5, -6658.45, 19543, -5358.12, 19094, -6990.69, 30211.3, -8540.54, 26998.2, -502.172, 26184.5, -2333.34, 25644.3, -4111.05, -1276.43, -6252.28, 23721.2, -6074.08, 1868.52, -7155.44, 19341.3, -3571.18, 19506.8, -1685.26, 18767.4, -1554.32, 16737.3, -1959.26, 16712.9, -2005.07, 19407.9, -3589.78, 11820.6, -3608.2, 11820.6, -4237.45, 17509.2, -3972.89, 24851.5, 4140.63, 23904.9, 5657.28, 23030.4, 4769.29, 23030.4, 2666.93, 25218.1, 2162.54, 7105.72, 352.781, 6933.85, 2827.12, 6156.22, 1199.91, 5409.43, -1686.15, 5673.79, 2536.08, 5242.81, 4036.52, 2356.26, -2677.98, 324.609, -3228.8, 1388.61, -4818.93, 6306.22, -5646.34, 4942.02, -2939.18, 11067.1, 2946.88, 12123.6, 1737.49, 13633.9, 576.828, 14260.7, 1760.55, 14168.3, 2904.79, 11529.5, 5411.45, 10199.9, 6794.23, 10575, 8497.32, 9077.58, 9631.76, 8341.97, 8379.5, 8293.22, 5710.55, 13399.6, -3082.51, 18754, -1502.51, 18989.9, 1627.63, 19274.7, 2790.57, 17255, 3290.42, 15689.3, 1707.4, 4535.53, -10.4688, 4967.01, -2885.61, -2760.21, 2139.26, -1988.09, 1508.43, -1253.48, 992.859, -365.094, 2117.69, -957.672, 5231.06, -2555.94, 4774.82, 7146.57, 9381.3, 6436.37, 8676.06, 6240.02, 8109.53, 6428.59, 5935.48, 21833.4, 441.688, 25020.9, 418.883, 20912, 2778.74, 19035.5, 1594.82, 19950.1, -533.391, 25112.6, 7331.17, 24909.3, 8774.06, 23891.7, 8753.98, 23145.5, 7795.01, 21308.8, 5244.25, 2687.19, 6255.27, 3582.42, 5690.6, 4405.09, 6673.67, 1657.53, 8827.59, 14217.3, 2930.27, 15996.3, 4389.74, 16720.9, 5050.05, 15328.2, 7099.53, 14331.6, 4163.46, 8049.39, 2488.88, 8420.8, 981.172, 9642.33, 81.3516, 11265.5, -121.148, 11638.1, 933.68, 11008.1, 2913.64, 8489.46, 4109.52, 8437.05, 4142.27, 8306.77, 5650.37, 6363.76, 5916, 4753.9, 4768.68, 15595.8, -379.18, 15377, 7148.22, 18307.6, 5142.59, 19760.1, 6308.83, 20894.9, 8890.41, 17936, 9149.69, 13728.1, 8491.9, 12775, 7850.17, 13044.1, 6866.97, 1058.35, 7877.05, -1032.8, 8372.22, -2132.21, 7430.7, -2433.9, 6324.65, -939.008, 5289.7, 329.969, 6722.29, 12867, -1556.9, 9575.4, -1360.73, 10358.6, -2943.76, -3762.31, 5260.27, -3859.86, 5211.12, -3845.4, 4961.83, -3574.11, 4817.29, -3130.9, 4759.69, 3335.9, 3417.25, 2455.63, 4401.4, 1401.65, 5132.71, 115.359, 5863.42, 1261.27, 1892.55, 4068.4, 1728.24, 4694.57, 8991.42, 4456.75, 6659.34, 14290.3, 4121.9, 1343.76, 6901.32, 19212, -4732.95, 19544.9, -5231.87, 21537.4, -5088.67, 23095.1, -4777.45, 21105.2, -1596.15, 20356.4, -1663.35, 2625.33, -604.367, 5435.27, -1735.36, 6558.66, -3593.33, 7767.8, -3121.91, 6333.33, -4272.58, 24317.2, -3666.12, 24570.1, -2646.31, 23559.7, -1338.61, 22250.3, -1165.42, 18318.8, -4626.09, 14108.5, -5561.45, 15725.6, -4977.04, 9361.88, -4633.69, 7080.25, -4583.44, 14831.5, -1941.91)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(6, 5, 7, 8), PackedInt32Array(9, 8, 7, 10), PackedInt32Array(11, 12, 13), PackedInt32Array(14, 4, 3, 15), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 10, 7), PackedInt32Array(14, 17, 19), PackedInt32Array(20, 18, 7), PackedInt32Array(2, 20, 7, 14, 0), PackedInt32Array(0, 14, 19, 11, 13), PackedInt32Array(21, 22, 23, 24, 25), PackedInt32Array(26, 21, 27, 28, 29), PackedInt32Array(30, 31, 32, 33, 34), PackedInt32Array(35, 36, 37, 38), PackedInt32Array(39, 37, 36, 40), PackedInt32Array(41, 42, 43, 44, 45), PackedInt32Array(46, 47, 48, 49, 50, 51), PackedInt32Array(52, 53, 54, 55, 56), PackedInt32Array(27, 21, 25, 57), PackedInt32Array(24, 23, 58), PackedInt32Array(59, 60, 61, 62), PackedInt32Array(38, 37, 63, 64), PackedInt32Array(65, 66, 67, 68, 69, 70), PackedInt32Array(56, 55, 71, 72, 73, 74), PackedInt32Array(75, 76, 34, 33, 77, 78), PackedInt32Array(79, 75, 78), PackedInt32Array(32, 31, 80, 81, 82, 83, 84), PackedInt32Array(85, 86, 87, 88), PackedInt32Array(89, 90, 91, 92, 93), PackedInt32Array(94, 95, 96, 97, 98, 99, 100), PackedInt32Array(40, 36, 101, 102, 56, 74, 103, 104), PackedInt32Array(62, 105, 24, 58, 79, 78, 59), PackedInt32Array(106, 107, 108, 109, 110, 111), PackedInt32Array(62, 61, 90, 89), PackedInt32Array(106, 111, 112, 113, 92), PackedInt32Array(114, 115, 116, 117, 118, 119), PackedInt32Array(57, 120, 121, 122, 27), PackedInt32Array(69, 123, 124, 125, 126, 127, 70), PackedInt32Array(128, 129, 130, 131, 118, 69, 68, 132, 133), PackedInt32Array(103, 134, 88, 135), PackedInt32Array(84, 83, 109, 108), PackedInt32Array(92, 113, 93), PackedInt32Array(89, 93, 136), PackedInt32Array(89, 136, 51, 50), PackedInt32Array(100, 99, 46, 51, 102, 101), PackedInt32Array(135, 104, 103), PackedInt32Array(87, 135, 88), PackedInt32Array(137, 85, 88, 114), PackedInt32Array(119, 137, 114), PackedInt32Array(131, 119, 118), PackedInt32Array(26, 138, 139, 140, 141, 142, 143), PackedInt32Array(63, 133, 132, 144, 64), PackedInt32Array(145, 38, 64), PackedInt32Array(121, 145, 64, 146, 147), PackedInt32Array(64, 45, 44, 148), PackedInt32Array(141, 149, 150, 151, 152, 142), PackedInt32Array(153, 138, 26, 29), PackedInt32Array(44, 154, 155, 29, 28, 156), PackedInt32Array(44, 156, 157), PackedInt32Array(44, 157, 148), PackedInt32Array(64, 148, 146), PackedInt32Array(121, 147, 122), PackedInt32Array(57, 25, 158)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-7158, -8735, 30252, -8582, 30713, 12105, -7849, 12336)])
+vertices = PackedVector2Array(17482.3, -83.5078, 18888.9, 1152.38, -18050.3, 1451.59, -15877, 24.4688, 10410.7, -17668.8, 9429.21, -16480, 9022.13, -17960, -16061.9, -6850.56, -15131.2, -19399, -13658, -11967.3, -12286.9, -15945.6, -11510.3, -17236.7, -8311.34, -18155.4, -1970.21, -18347.9, 15969.7, -19878, 7346.96, -18732.4, 13611.7, -17066.3, 15577.2, -15059.9, 16942.5, -11419.6, 16123.2, -13263.3, 9062.49, -14543.3, 9227.16, -12666.7, 8516.89, -12540.9, 6701.76, -12843.6, 6613.83, -13008.6, 14945.6, -8733.35, 14585.7, -6791.29, 13611.4, -5230.35, 12975.8, -6041.18, 12975.8, -8340.33, 14761.1, -10364, -4386.03, -8323.5, -3877.55, -9731.85, -3168.41, -10504.3, -3341, -8019.73, -4820.68, -6810.33, -7797.7, -13679.8, -9664.4, -14185.9, -8710.3, -15611.8, -3848.27, -16429.9, -5155.3, -13946.8, 927.68, -7808.42, 2035.2, -9076.13, 3435.16, -10152, 3987.16, -9109.66, 3891.47, -7925.2, 1338.64, -5587.15, -58.5312, -4027.36, 291.242, -2439.15, -1053.7, -1420.23, -1792.46, -2677.84, -1993.15, -5126.91, 8468.65, -12354.2, 5542.78, -11239.3, 3184.67, -14155.5, 1766, -14431.4, 1766, -15222.8, 7357.03, -14734.4, 8704.24, -9310.6, 8980.71, -8181.66, 7040.5, -7701.48, 5636.99, -9136.65, 11644.4, -10341.7, 10777.7, -8224.3, 8868.46, -9428.85, 9727.45, -11334.2, -3010.23, -1657.28, -3632.44, -2275.15, -3812.99, -2796.1, -3618.82, -5034.96, -5690.67, -11085.9, -4883.17, -12565.5, 14836.2, -3532.76, 14652.4, -2228.19, 13782.5, -2245.35, 13014.1, -3232.9, -8443.66, -2169.6, -7423.25, -4542.74, -6602.88, -5060.17, -5796.23, -4096.24, -5530.99, -2012.48, 4299.2, -6750.78, 5670.49, -6504.98, 6415.43, -5826.13, 5025.07, -3780.1, 2983.16, -3987.14, -12645.5, -6572.73, -12810.6, -8701.94, -11593.1, -9640.75, -10561.2, -8660.31, -12101, -6340.48, -1736.75, -6616.17, -1944.33, -5343.77, -3852.45, -5105.15, -5305.73, -6083.93, -2001.66, -8405.42, -1646.33, -9847.82, -479.172, -10707.6, 1029.36, -10895.8, 1360.79, -9957.5, 715.062, -7928.21, -1547.86, -6734.23, 5201.14, -3604.61, 8139.47, -5615.55, 9592.05, -4449.21, 10702.5, -2107.81, 7776.7, -1851.42, 3605.72, -2503.44, -6919.57, -7534.91, -7779.61, -6573.37, -8819.2, -5852.06, -11041.7, -5770.15, -11907.9, -5761.11, -8824.34, -8900.75, -6197.18, -9200.6, 2737.11, -3088.28, -9921.13, -4076.21, -11167.1, -2637.93, -12199.4, -3521.95, -12472.2, -4521.88, -10974.4, -5558.8, -10172.7, -5083.16, 4068.24, -7833.37, 4150.52, -6900.56, 2625.51, -12553.8, -585.852, -12362.4, 215.539, -13726.8, 11192.2, -5549.1, -5610.02, -4147.87, -8803.72, -3878.89, -9054.26, -3138.26, 9302.36, -14610.4, 9111.42, -15523.3, 9437.06, -16011.2, 11359.8, -15873.1, 12881.4, -15569, 10966.5, -12594.8, 10263.7, -12657.9, -8279.39, -10149.8, -7454.38, -11426.2, -5065.23, -13753.7, -4790.03, -12742.8, -3691.17, -14403.9, -2419.14, -13907.9, -3964.22, -15227, 14057, -14500.1, 14289.3, -13563.1, 13338.3, -12332.2, 12100, -12168.4, 8199.62, -15414.2, 3925.93, -16345.3, 5517.26, -15770.2, -793.633, -15635.3, -3105.55, -15584.3, 4704.81, -12944.6)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6), PackedInt32Array(7, 3, 2), PackedInt32Array(7, 2, 8), PackedInt32Array(9, 7, 8, 10), PackedInt32Array(11, 10, 8), PackedInt32Array(12, 11, 8), PackedInt32Array(13, 12, 8, 14, 15), PackedInt32Array(4, 6, 15, 14, 16), PackedInt32Array(17, 16, 14), PackedInt32Array(1, 0, 18), PackedInt32Array(14, 1, 18), PackedInt32Array(17, 14, 18, 19), PackedInt32Array(20, 21, 22, 23, 24), PackedInt32Array(25, 26, 27, 28, 29, 30), PackedInt32Array(31, 32, 33, 34, 35), PackedInt32Array(36, 37, 38, 39, 40), PackedInt32Array(41, 42, 43, 44, 45, 46), PackedInt32Array(47, 48, 49, 50, 51), PackedInt32Array(23, 22, 52, 53), PackedInt32Array(20, 54, 55, 56, 57), PackedInt32Array(58, 59, 60, 61), PackedInt32Array(62, 30, 29, 63, 64), PackedInt32Array(65, 62, 64), PackedInt32Array(51, 50, 66, 67, 68, 69), PackedInt32Array(33, 32, 70, 71), PackedInt32Array(72, 73, 74, 75, 27), PackedInt32Array(76, 77, 78, 79, 80), PackedInt32Array(81, 82, 83, 84, 85), PackedInt32Array(86, 87, 88, 89, 90), PackedInt32Array(35, 34, 91, 92, 51, 69, 93, 94), PackedInt32Array(95, 96, 97, 98, 99, 100, 101), PackedInt32Array(61, 53, 52, 65, 64, 58), PackedInt32Array(102, 103, 104, 105, 106, 107), PackedInt32Array(108, 109, 110, 111, 112, 90, 89, 113, 114), PackedInt32Array(102, 107, 115, 85, 84), PackedInt32Array(116, 117, 118, 119, 120, 121), PackedInt32Array(122, 61, 60, 82, 81, 123), PackedInt32Array(54, 124, 125, 126, 55), PackedInt32Array(127, 28, 27, 75, 105, 104), PackedInt32Array(122, 123, 46, 45), PackedInt32Array(101, 100, 41, 46, 92, 91), PackedInt32Array(128, 94, 93, 80), PackedInt32Array(79, 128, 80), PackedInt32Array(129, 77, 76, 130), PackedInt32Array(116, 129, 130, 117), PackedInt32Array(131, 132, 133, 134, 135, 136, 137), PackedInt32Array(110, 121, 120, 111), PackedInt32Array(70, 114, 113, 138, 139, 140), PackedInt32Array(71, 70, 140, 141), PackedInt32Array(125, 141, 140, 142, 143), PackedInt32Array(140, 40, 39, 144), PackedInt32Array(135, 145, 146, 147, 148, 136), PackedInt32Array(149, 132, 131, 20, 57), PackedInt32Array(39, 150, 151, 57, 56, 152), PackedInt32Array(39, 152, 153), PackedInt32Array(39, 153, 144), PackedInt32Array(140, 144, 142), PackedInt32Array(125, 143, 126), PackedInt32Array(54, 20, 24, 154)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-15262, -19547, 16100, -20030, 19061, 1301, -18223, 1603)])
 source_geometry_mode = 1
 source_geometry_group_name = &"obstacles"
-agent_radius = 41.62
+agent_radius = 150.0
 
 [sub_resource type="GDScript" id="GDScript_5py2y"]
 script/source = "extends NavigationRegion2D
@@ -256,6 +256,94 @@ func _ready() -> void:
 		bake_navigation_polygon()
 		await get_tree().create_timer(0.5).timeout
 "
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jw53c"]
+load_path = "res://.godot/imported/WallTexture.png-8f92dfb4a12958014b5b11ca79389a8a.ctex"
+
+[sub_resource type="Gradient" id="Gradient_3svaj"]
+offsets = PackedFloat32Array(0.0291971)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bdf5b"]
+gradient = SubResource("Gradient_3svaj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qye6"]
+resource_local_to_scene = true
+shader = ExtResource("8_gnr5v")
+shader_parameter/points = PackedVector2Array(-6440.8, -2558.8, -5072.2, -6529.8, -4334.2, -7756.8, -1210, -8654, 5113, -8846, 14395, -9229, 15974, -8501, 16438, -6814, 16103, -6312, 15217, -6206, 14420, -5563, 12658, -6555, 11031, -7143, 3218, -7228, -1721, -6397, -2827.2, -4743.8, -732.2, -4175.8, 1831.8, -4434.8, -493.2, -2169.8, -1850.2, 314.201, -3432.2, 533.2, -4505, -486, -5888.4, 580.8, -5686, 3192, -6218, 3178, -6672, 3237, -6970.6, 3396.09, -6988, 3696, -6857, 3762, -4073, 3733, -5566.8, 4767.2, -5254, 5914, -4128.8, 6877.6, -2046, 6384.4, -1451.2, 7328, 1633.6, 7494.4, 3299.2, 4425.6, 3112.8, 6574.8, 3315.2, 7158.8, 4059.2, 7897.6, 5246, 6903, 5980.4, 8153.2, 7536.4, 6974.4, 7151.6, 5227.2, 5255.6, 4149.6, 8455.2, 3912.4, 11196.4, 2632, 9920, 5312.4, 9642, 6328, 10627.6, 6991.6, 14849.6, 7651.6, 17821.2, 7391.2, 20048.4, 6307.2, 20786, 7255.2, 21860.4, 7276.4, 22071.2, 5780.4, 20870, 4115.6, 21806, 2616, 22175.2, 624, 21973, -1163, 18758.4, -1140, 16888, -2108.4, 15716, -3058, 16466.6, -3190.93, 16300.8, -5080.4, 17244.4, -3164, 18010.8, -3095.2, 19160.4, -2662.8, 20497.2, -2839.6, 21530.4, -4176.8, 21269.6, -5228.4, 20029.6, -6356, 18458, -6670, 16443.2, -6814.8, 17548, -8153, 20615.6, -7575.6, 22522.4, -5629.2, 23060.4, -3858.8, 23872, -2032.4, 24403, 9119, -8653, 9226, -8833, 2533)
+shader_parameter/num_points = 82
+shader_parameter/global_position = Vector2(-7078, -9353)
+shader_parameter/fade_width = 200
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(0.922352, 0.858406, 0.523811, 1)
+shader_parameter/in_tex = SubResource("GradientTexture1D_bdf5b")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_jw53c")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gnr5v"]
+load_path = "res://.godot/imported/WallTexture.png-8f92dfb4a12958014b5b11ca79389a8a.ctex"
+
+[sub_resource type="Gradient" id="Gradient_jw53c"]
+offsets = PackedFloat32Array(0.0291971)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3svaj"]
+gradient = SubResource("Gradient_jw53c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdf5b"]
+resource_local_to_scene = true
+shader = ExtResource("8_gnr5v")
+shader_parameter/points = PackedVector2Array(-4139.6, 5186, -2879.2, 4470, -1819.6, 3734.8, -931.6, 2742, -195.2, 1044, 256.8, -638.4, 1803.6, 516.8, 1331.2, 1825.2, 901.6, 3320.8, 411.2, 4055.2, 116.8, 5928.4, -712, 4938, -1636, 5520.8, -2965.2, 6160, -3939.2, 5988)
+shader_parameter/num_points = 15
+shader_parameter/global_position = Vector2(-5860, -10195)
+shader_parameter/fade_width = 200
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(0.576305, 0.693348, 0.847649, 1)
+shader_parameter/in_tex = SubResource("GradientTexture1D_3svaj")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_gnr5v")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8qye6"]
+load_path = "res://.godot/imported/WallTexture.png-8f92dfb4a12958014b5b11ca79389a8a.ctex"
+
+[sub_resource type="Gradient" id="Gradient_3fu4r"]
+offsets = PackedFloat32Array(0.0291971)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mcejo"]
+gradient = SubResource("Gradient_3fu4r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_081ql"]
+resource_local_to_scene = true
+shader = ExtResource("8_gnr5v")
+shader_parameter/points = PackedVector2Array(4325.2, 3647.6, 2860.8, 2366.4, 3032.4, -104, 1343.2, -2134.4, 5458.8, -1762, 8781.2, -1960, 9303.6, -3456.4, 10701.6, -2342.8, 12572.4, -2405.6, 11437.6, -834.8, 11530.8, 1245.6, 10096, 2437.6, 10187.2, 1308.8, 9531.6, 70.8, 7979, 1264, 6942, 2451, 7566, 490, 7177.6, -609.6, 5510.4, -401.6, 4268, 513.6, 3890.4, 2046.4)
+shader_parameter/num_points = 21
+shader_parameter/global_position = Vector2(-6047, -10450)
+shader_parameter/fade_width = 200
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(0.840281, 0.472253, 0.610461, 1)
+shader_parameter/in_tex = SubResource("GradientTexture1D_mcejo")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_8qye6")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3svaj"]
+load_path = "res://.godot/imported/WallTexture.png-8f92dfb4a12958014b5b11ca79389a8a.ctex"
+
+[sub_resource type="Gradient" id="Gradient_bdf5b"]
+offsets = PackedFloat32Array(0.0291971)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8qye6"]
+gradient = SubResource("Gradient_bdf5b")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fu4r"]
+resource_local_to_scene = true
+shader = ExtResource("8_gnr5v")
+shader_parameter/points = PackedVector2Array(2584.8, -6235.6, 3301.6, -5582.4, 1908, -3531.6, 4835.6, -5535.2, 6288, -4369, 7817, -5420, 9514.8, -5888.4, 9514.8, -7915.2, 7427, -7805, 5563, -8981, 5851, -7805, 3800.8, -7297.6)
+shader_parameter/num_points = 12
+shader_parameter/global_position = Vector2(3311, -267)
+shader_parameter/fade_width = 200
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(0.608594, 0.765084, 0.560701, 1)
+shader_parameter/in_tex = SubResource("GradientTexture1D_8qye6")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_3svaj")
 
 [sub_resource type="Resource" id="Resource_xdqqp"]
 script = ExtResource("16_4wjdw")
@@ -363,88 +451,98 @@ color = Color(0.0312209, 0.0673709, 0.274788, 1)
 metadata/_edit_lock_ = true
 
 [node name="Collisions" type="NavigationRegion2D" parent="LevelContainer/Environment" groups=["obstacles"]]
-z_index = 2
-position = Vector2(-10165, -10896)
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = SubResource("GDScript_5py2y")
-metadata/_edit_lock_ = true
+
+[node name="Wafflehouse" type="Sprite2D" parent="LevelContainer/Environment/Collisions"]
+position = Vector2(886, -12534)
+
+[node name="Wafflehouse2" type="Sprite2D" parent="LevelContainer/Environment/Collisions"]
+position = Vector2(12072, -8382)
 
 [node name="World" type="Node2D" parent="LevelContainer/Environment/Collisions" groups=["environment_collision"]]
-position = Vector2(11006, 34721)
 
-[node name="1" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+[node name="Terrain1" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = ExtResource("6_l3b62")
-position = Vector2(-7921, -33181)
-scale = Vector2(0.4, 0.4)
-polygon = PackedVector2Array(-16102, -6397, -12680.5, -16324.5, -10835.5, -19392, -3025, -21635, 12782.5, -22115, 35987.5, -23072.5, 39935, -21252.5, 41095, -17035, 40257.5, -15780, 38042.5, -15515, 36050, -13907.5, 31645, -16387.5, 27577.5, -17857.5, 8045, -18070, -4302.5, -15992.5, -7068, -11859.5, -1830.5, -10439.5, 4579.5, -11087, -1233, -5424.5, -4625.5, 785.502, -8580.5, 1333, -10825.5, -1509.5, -12745.5, -161.998, -14721, 1452, -14215, 7980, -15545, 7945, -16680, 8092.5, -17426.5, 8490.23, -17470, 9240, -17142.5, 9405, -10182.5, 9332.5, -13917, 11918, -13135, 14785, -10322, 17194, -5115, 15961, -3628, 18320, 4084, 18736, 8248, 11064, 7782, 16437, 8288, 17897, 10148, 19744, 13115, 17257.5, 14951, 20383, 18841, 17436, 17879, 13068, 13139, 10374, 21138, 9781, 27991, 6580, 24800, 13281, 24105, 15820, 26569, 17479, 37124, 19129, 44553, 18478, 50121, 15768, 51965, 18138, 54651, 18191, 55178, 14451, 52175, 10289, 54515, 6540, 55438, 1560, 54932.5, -2907.5, 46896, -2850, 42220, -5271, 39290, -7645, 41166.5, -7977.33, 40752, -12701, 43111, -7910, 45027, -7738, 47901, -6657, 51243, -7099, 53826, -10442, 53174, -13071, 50074, -15890, 46145, -16675, 41108, -17037, 43870, -20382.5, 51539, -18939, 56306, -14073, 57651, -9647, 59680, -5081, 61007.5, 22797.5, -21632.5, 23065, -22082.5, 6332.5)
+material = SubResource("ShaderMaterial_8qye6")
+position = Vector2(-7078, -9352)
+polygon = PackedVector2Array(-6440.8, -2558.8, -5072.2, -6529.8, -4334.2, -7756.8, -1210, -8654, 5113, -8846, 14395, -9229, 15974, -8501, 16438, -6814, 16103, -6312, 15217, -6206, 14420, -5563, 12658, -6555, 11031, -7143, 3218, -7228, -1721, -6397, -2827.2, -4743.8, -732.2, -4175.8, 1831.8, -4434.8, -493.2, -2169.8, -1334, -869, -1850.2, 314.201, -3432.2, 533.2, -4505, -486, -5888.4, 580.8, -5686, 3192, -6218, 3178, -6672, 3237, -6970.6, 3396.09, -6988, 3696, -6857, 3762, -4073, 3733, -5566.8, 4767.2, -5254, 5914, -4128.8, 6877.6, -2046, 6384.4, -1451.2, 7328, 1633.6, 7494.4, 3299.2, 4425.6, 3112.8, 6574.8, 3315.2, 7158.8, 4059.2, 7897.6, 5246, 6903, 5980.4, 8153.2, 7536.4, 6974.4, 7151.6, 5227.2, 5255.6, 4149.6, 8455.2, 3912.4, 11196.4, 2632, 9920, 5312.4, 9642, 6328, 10627.6, 6991.6, 14849.6, 7651.6, 17821.2, 7391.2, 20048.4, 6307.2, 20786, 7255.2, 21860.4, 7276.4, 22071.2, 5780.4, 20870, 4115.6, 21806, 2616, 22175.2, 624, 21973, -1163, 18758.4, -1140, 16888, -2108.4, 15716, -3058, 16466.6, -3190.93, 16300.8, -5080.4, 17244.4, -3164, 18010.8, -3095.2, 19160.4, -2662.8, 20497.2, -2839.6, 21530.4, -4176.8, 21269.6, -5228.4, 20029.6, -6356, 18458, -6670, 16443.2, -6814.8, 17548, -8153, 20615.6, -7575.6, 22522.4, -5629.2, 23060.4, -3858.8, 23872, -2032.4, 24403, 9119, -8653, 9226, -8833, 2533)
 script = ExtResource("5_aep54")
 metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
-[node name="2" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+[node name="Terrain2" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = ExtResource("6_l3b62")
-position = Vector2(-6703, -34023)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("7_fukii")
-polygon = PackedVector2Array(-10349, 12965, -7198, 11175, -4549, 9337, -2329, 6855, -488, 2610, 642, -1596, 4509, 1292, 3328, 4563, 2254, 8302, 1028, 10138, 292, 14821, -1780, 12345, -4090, 13802, -7413, 15400, -9848, 14970)
+material = SubResource("ShaderMaterial_bdf5b")
+position = Vector2(-5860, -10195)
+polygon = PackedVector2Array(-4139.6, 5186, -2879.2, 4470, -1819.6, 3734.8, -931.6, 2742, -195.2, 1044, 256.8, -638.4, 1803.6, 516.8, 1331.2, 1825.2, 901.6, 3320.8, 411.2, 4055.2, 116.8, 5928.4, -712, 4938, -1636, 5520.8, -2965.2, 6160, -3939.2, 5988)
 script = ExtResource("5_aep54")
 metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
-[node name="3" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+[node name="Terrain3" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = ExtResource("6_l3b62")
-position = Vector2(-6890, -34278)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("7_fukii")
-polygon = PackedVector2Array(10813, 9119, 7152, 5916, 7581, -260, 3358, -5336, 13647, -4405, 21953, -4900, 23259, -8641, 26754, -5857, 31431, -6014, 28594, -2087, 28827, 3114, 25240, 6094, 25468, 3272, 23829, 177, 19947.5, 3160, 17355, 6127.5, 18915, 1225, 17944, -1524, 13776, -1004, 10670, 1284, 9726, 5116)
+material = SubResource("ShaderMaterial_081ql")
+position = Vector2(-6047, -10450)
+polygon = PackedVector2Array(4325.2, 3647.6, 2860.8, 2366.4, 3032.4, -104, 1343.2, -2134.4, 5458.8, -1762, 8781.2, -1960, 9303.6, -3456.4, 10701.6, -2342.8, 12572.4, -2405.6, 11437.6, -834.8, 11530.8, 1245.6, 10096, 2437.6, 10187.2, 1308.8, 9531.6, 70.8, 7979, 1264, 6942, 2451, 7566, 490, 7177.6, -609.6, 5510.4, -401.6, 4268, 513.6, 3890.4, 2046.4)
 script = ExtResource("5_aep54")
 metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
-[node name="4" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+[node name="Terrain4" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = ExtResource("6_l3b62")
-position = Vector2(2468, -24095)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("7_fukii")
-polygon = PackedVector2Array(6462, -15589, 8254, -13956, 4770, -8829, 12089, -13838, 15720, -10922.5, 19542.5, -13550, 23787, -14721, 23787, -19788, 18567.5, -19512.5, 13907.5, -22452.5, 14627.5, -19512.5, 9502, -18244)
+material = SubResource("ShaderMaterial_3fu4r")
+position = Vector2(3311, -267)
+polygon = PackedVector2Array(2584.8, -6235.6, 3301.6, -5582.4, 1908, -3531.6, 4835.6, -5535.2, 6288, -4369, 7817, -5420, 9514.8, -5888.4, 9514.8, -7915.2, 7427, -7805, 5563, -8981, 5851, -7805, 3800.8, -7297.6)
 script = ExtResource("5_aep54")
 metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
-[node name="5" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+[node name="Terrain5" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
 material = ExtResource("6_l3b62")
-position = Vector2(2468, -24095)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("7_fukii")
-polygon = PackedVector2Array(-14242.5, -34472.5, -7807.5, -34030, -4237.5, -35652.5, -4237.5, -37070, -10287.5, -38045, -15962.5, -37920, -17722.5, -37187.5, -17205, -35627.5)
+position = Vector2(3311, -267)
+polygon = PackedVector2Array(-5697, -13789, -3123, -13612, -1695, -14261, -1695, -14828, -4115, -15218, -6385, -15168, -7089, -14875, -6882, -14251)
 script = ExtResource("5_aep54")
 metadata/_custom_type_script = "uid://xurg5qfsdg1m"
+metadata/_edit_lock_ = true
+
+[node name="AvoidRegion1" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-14300, -5622, -14109, -6071, -13450, -6438, -12794, -6473, -12222, -6229, -12057, -5734, -12069, -5408, -12862, -5339, -13606, -5305, -14247, -5433)
 metadata/_edit_lock_ = true
 
 [node name="Kelp" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-6106, -1788)
-length = 20
+kelp = null
 
 [node name="Kelp2" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-6574, -1809)
-length = 20
+kelp = null
 
 [node name="Kelp3" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-7050, -1804)
-length = 20
+kelp = null
 
 [node name="Kelp4" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-7504, -1846)
-length = 20
+kelp = null
 
 [node name="Kelp5" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
 position = Vector2(-7882, -1863)
-length = 20
+kelp = null
+
+[node name="BigfinSquid2" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
+position = Vector2(-11022, -3696)
+
+[node name="BigfinSquid3" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
+position = Vector2(-8741, -3609)
+
+[node name="BigfinSquid4" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
+position = Vector2(-6326, -3125)
+
+[node name="BigfinSquid5" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
+position = Vector2(-4738, -4834)
 
 [node name="Player" type="Node2D" parent="LevelContainer"]
 
@@ -475,9 +573,11 @@ enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubR
 
 [node name="Kelp" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
 position = Vector2(-11510, -5559)
+kelp = null
 
 [node name="Kelp2" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
 position = Vector2(-11310, -5559)
+kelp = null
 
 [node name="TangleKelp" parent="LevelContainer" instance=ExtResource("20_k8n8v")]
 position = Vector2(-10185, -2695)
@@ -585,7 +685,40 @@ visibility_rect = Rect2(-960, -540, 1920, 1080)
 process_material = SubResource("ParticleProcessMaterial_hcosd")
 
 [node name="Arrowfish" parent="." instance=ExtResource("26_k8n8v")]
-position = Vector2(-11489, -5878)
+position = Vector2(-8499, -6863)
+
+[node name="Arrowfish4" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-8156, -8311)
+
+[node name="Arrowfish7" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-8156, -8311)
+
+[node name="Arrowfish8" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-3562, -8300)
+
+[node name="Arrowfish9" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-3930, -7834)
+
+[node name="Arrowfish10" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-3432, -7563)
+
+[node name="Arrowfish11" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-4093, -7173)
+
+[node name="Arrowfish12" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-3324, -6848)
+
+[node name="Arrowfish13" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-3952, -6512)
+
+[node name="Arrowfish14" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-3334, -6133)
+
+[node name="Arrowfish15" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-4352, -5949)
+
+[node name="Arrowfish16" parent="." instance=ExtResource("26_k8n8v")]
+position = Vector2(-4666, -6382)
 
 [node name="RockItem4" parent="." instance=ExtResource("27_l3b62")]
 position = Vector2(-9905, -5058)

@@ -24,7 +24,7 @@ shape = SubResource("RectangleShape2D_1jagb")
 [node name="OneShotAttack" type="Area2D" parent="."]
 script = ExtResource("2_ufoms")
 attacker_type = 1
-damage_amount = 15.0
+damage_amount = 3.0
 metadata/_custom_type_script = "uid://ced6k1jq3eqag"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OneShotAttack"]

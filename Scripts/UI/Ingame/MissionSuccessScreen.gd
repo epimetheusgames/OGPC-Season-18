@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Global.current_mission && Global.current_mission.success_state_checker.check_success() || \
-	   Global.current_mission_node.total_saved_civillians > Global.current_mission.total_civillians_saved_to_complete:
+	   Global.current_mission_node.total_saved_civillians >= Global.current_mission.total_civillians_saved_to_complete:
 		if Global.current_mission in Global.mission_system.mission_tree.get_available_missions():
 			Global.mission_system.complete_mission(Global.current_mission)
 		ingame_ui.visible = false

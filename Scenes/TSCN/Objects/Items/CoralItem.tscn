@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_xwig7"]
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_tadbb"]
-[ext_resource type="Texture2D" uid="uid://cxc68u4hulex3" path="res://Assets/Art/Level/Coral1.png" id="3_genkx"]
+[ext_resource type="Texture2D" uid="uid://cxc68u4hulex3" path="res://Assets/Art/Items/Coral1.png" id="3_genkx"]
 
 [sub_resource type="Resource" id="Resource_e24cl"]
 script = ExtResource("2_tadbb")

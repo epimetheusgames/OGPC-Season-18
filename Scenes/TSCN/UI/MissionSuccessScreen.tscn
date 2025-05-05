@@ -32,16 +32,6 @@ theme_override_font_sizes/font_size = 72
 text = "Mission Success!"
 horizontal_alignment = 1
 
-[node name="FunnyText" type="Label" parent="."]
-layout_mode = 0
-offset_top = 320.0
-offset_right = 1922.0
-offset_bottom = 421.0
-theme = ExtResource("2_ly8ke")
-theme_override_font_sizes/font_size = 25
-text = "Good job. You did better than your predecessors"
-horizontal_alignment = 1
-
 [node name="ReturnToStation" type="Button" parent="."]
 layout_mode = 0
 offset_left = 712.0
@@ -51,7 +41,7 @@ offset_bottom = 512.0
 tooltip_text = "Tryhard"
 theme = ExtResource("2_ly8ke")
 theme_override_font_sizes/font_size = 36
-text = "Return to Research Station"
+text = "Return to Mission Selection"
 
 [node name="QuitButton" type="Button" parent="."]
 layout_mode = 0

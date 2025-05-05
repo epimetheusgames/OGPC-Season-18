@@ -31,7 +31,7 @@ func _ready() -> void:
 	if end_anchor_node:
 		end_pos_on = true
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if start_anchor_node:
 		start_pos = start_anchor_node.global_position
 	if end_anchor_node:

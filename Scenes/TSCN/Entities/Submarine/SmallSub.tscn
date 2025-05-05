@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ctt8tds4p8vt0"]
+[gd_scene load_steps=19 format=3 uid="uid://ctt8tds4p8vt0"]
 
 [ext_resource type="Script" uid="uid://0js7gtnvp1vm" path="res://Scripts/Entity/Submarine/Submarine.gd" id="1_ru2mo"]
 [ext_resource type="Script" uid="uid://bpcsoat0wk1ci" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_eisgo"]
@@ -10,11 +10,16 @@
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="6_qnb0f"]
 [ext_resource type="Texture2D" uid="uid://bbaduuful0s4h" path="res://Assets/Art/Entity/Submarine/Submarine_Glass.png" id="6_ynqne"]
 [ext_resource type="Texture2D" uid="uid://dywqtkftqlcbi" path="res://Assets/Art/Entity/Submarine/SubmarineLight.png" id="7_d1qs6"]
+[ext_resource type="Texture2D" uid="uid://d1t14t2bhk0sl" path="res://Assets/Art/Entity/Submarine/Submarine_Hatch.png" id="7_ynqne"]
 [ext_resource type="Texture2D" uid="uid://mx8o4yak3yo8" path="res://Assets/Art/Entity/Submarine/SubmarineAura.png" id="8_bxi20"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="9_3dfve"]
+[ext_resource type="Script" uid="uid://dyi7jpsbk30wn" path="res://Scripts/Entity/Submarine/HatchPivot.gd" id="9_b36t8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvx1j"]
 size = Vector2(96, 139)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ynqne"]
+radius = 167.503
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxi20"]
 size = Vector2(80, 250)
@@ -42,7 +47,6 @@ shape = SubResource("RectangleShape2D_fvx1j")
 position = Vector2(-148, 31)
 
 [node name="SubmarineArea" type="Area2D" parent="." groups=["Submarine Area", "gravity_areas"]]
-visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SubmarineArea"]
 position = Vector2(-150, -125)
@@ -79,11 +83,10 @@ script = ExtResource("4_j4tp4")
 metadata/_edit_lock_ = true
 
 [node name="Collision" type="Node2D" parent="."]
-visible = false
 
 [node name="BottomRight" type="CollisionPolygon2D" parent="Collision"]
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(-110, 238, -59, 225, -52, 225, -21, 240, 385, 240, 493, 28, 379, 28, 379, -19, 408, 2, 494, 2, 502, 10, 502, 43, 408, 233, 388, 241, 360, 272, 310, 299, 234, 304, 193, 332, 40, 333, 26, 304, -121, 302, -123, 266, -118, 258, -126, 244)
+polygon = PackedVector2Array(-110, 238, -59, 225, -52, 225, -21, 240, 385, 240, 493, 28, 379, 28, 379, 2, 494, 2, 502, 10, 502, 43, 408, 233, 388, 241, 360, 272, 310, 299, 234, 304, 193, 332, 40, 333, 26, 304, -121, 302, -123, 266, -118, 258, -126, 244)
 
 [node name="Bar" type="CollisionPolygon2D" parent="Collision"]
 position = Vector2(-150, -125)
@@ -91,10 +94,29 @@ polygon = PackedVector2Array(0, 2, 3, 18, -60, 21, -131, 45, -159, 72, -165, 127
 
 [node name="Top" type="CollisionPolygon2D" parent="Collision"]
 position = Vector2(-150, -125)
-polygon = PackedVector2Array(0, 2, 270, 2, 296, -19, 296, 28, 50.4275, 28, 22, 32, 14, 27, 3, 18)
+polygon = PackedVector2Array(0, 2, 296, 2, 296, 28, 50.4275, 28, 22, 32, 14, 27, 3, 18)
 
 [node name="Glass" type="CollisionPolygon2D" parent="Collision"]
 polygon = PackedVector2Array(-209, 100, -202, 100, -212, 89, -220, 77, -226, 65, -231, 49, -234, 32, -234, 20, -232, 2, -228, -14, -221, -32, -212, -47, -200, -60, -188, -71, -171, -82, -152, -89, -139, -92, -133, -92, -128, -93, -136, -98, -163, -92, -191, -76, -219, -47, -238, 2, -238, 39, -228, 70)
+
+[node name="Hatch" type="CollisionPolygon2D" parent="Collision"]
+position = Vector2(144, -127)
+polygon = PackedVector2Array(-2, -5, 83, -5, 83, -13, 88, -13, 88, -5, 92, -5, 92, 3, -2, 3)
+
+[node name="HatchArea" type="Area2D" parent="."]
+position = Vector2(187.5, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HatchArea"]
+shape = SubResource("CircleShape2D_ynqne")
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(145, -128)
+script = ExtResource("9_b36t8")
+
+[node name="Hatch" type="Sprite2D" parent="Pivot"]
+position = Vector2(44.5, -3.5)
+texture = ExtResource("7_ynqne")
+metadata/_edit_lock_ = true
 
 [node name="Headlight" type="PointLight2D" parent="."]
 position = Vector2(-276, 156)
@@ -107,6 +129,7 @@ offset = Vector2(0, 20)
 metadata/_edit_lock_ = true
 
 [node name="SubmarineInteriorLight" type="PointLight2D" parent="."]
+z_index = -100
 position = Vector2(4, 7)
 energy = 2.0
 shadow_enabled = true
@@ -125,13 +148,13 @@ position = Vector2(187.5, -10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LadderArea"]
 shape = SubResource("RectangleShape2D_bxi20")
+metadata/_edit_lock_ = true
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
-visible = false
 position = Vector2(0, 20)
 script = ExtResource("9_3dfve")
 entity = NodePath("..")
-hurt_by_enemy = true
+hurt_by_player = true
 metadata/_custom_type_script = "uid://ctpnlukrn1asj"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -142,3 +165,5 @@ shape = SubResource("CapsuleShape2D_lhhcb")
 [connection signal="area_exited" from="InteractionArea" to="SubmarineMovement" method="_on_interaction_area_area_exited"]
 [connection signal="area_entered" from="SubmarineArea" to="." method="_on_submarine_area_area_entered"]
 [connection signal="area_exited" from="SubmarineArea" to="." method="_on_submarine_area_area_exited"]
+[connection signal="area_entered" from="HatchArea" to="Pivot" method="_on_hatch_area_area_entered"]
+[connection signal="area_exited" from="HatchArea" to="Pivot" method="_on_hatch_area_area_exited"]

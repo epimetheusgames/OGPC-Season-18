@@ -13,10 +13,11 @@ gradient = SubResource("Gradient_2s48v")
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_4c6am")
-shader_parameter/points = PackedVector2Array(887, 622, 441, 339, 154, 116, 406, -263, -340, -192, -503, -39, -832, 249, -132, 692)
-shader_parameter/num_points = 8
-shader_parameter/global_position = Vector2(992, 334)
-shader_parameter/fade_width = 115
+shader_parameter/points = PackedVector2Array(-5697, -13789, -3123, -13612, -1695, -14261, -1695, -14828, -4115, -15218, -6385, -15168, -7089, -14875, -6882, -14251)
+shader_parameter/num_points = 20
+shader_parameter/global_position = Vector2(3311, -267)
+shader_parameter/fade_width = 200
 shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(0.395792, 0.546182, 0.549196, 1)
 shader_parameter/in_tex = SubResource("GradientTexture1D_5bdf5")
 shader_parameter/edge_tex = ExtResource("2_vbjyk")

@@ -77,3 +77,18 @@ func get_diver_pos() -> Vector2:
 		return closest_player.global_position
 	else:
 		return Vector2.ZERO
+
+func get_closest_player() -> Diver:
+	var closest_player: Diver
+	var closest_squared_distance := 99999999.0
+	
+	for player in Global.player_array:
+		var dist := player.global_position.distance_squared_to(global_position)
+		if dist < closest_squared_distance && enemy_fov.can_see_point(player.global_position):
+			closest_squared_distance = dist
+			closest_player = player
+	if closest_player:
+		return closest_player
+	else:
+		return null
+	

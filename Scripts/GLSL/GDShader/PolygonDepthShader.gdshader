@@ -6,9 +6,10 @@ uniform int num_points;
 uniform vec2 global_position;
 uniform int fade_width;
 uniform float tex_scale;
+uniform vec4 color_multiplier: source_color;
 
-uniform sampler2D in_tex : repeat_enable;
-uniform sampler2D edge_tex : repeat_enable;
+uniform sampler2D in_tex : repeat_enable, filter_nearest;
+uniform sampler2D edge_tex : repeat_enable, filter_nearest;
 
 varying vec2 world_pos;
 
@@ -19,7 +20,7 @@ void vertex() {
 void fragment() {
 	vec2 position = world_pos;
 	vec2 closest_point_pos = vec2(0.0, 0.0);
-	float closest_point_dist = 999999999.0;
+	float closest_point_dist = 9999999.0;
 
 	for (int i = 0; i < num_points; i++) {
 		int to_use = i - 1;
@@ -30,10 +31,10 @@ void fragment() {
 		vec2 p1 = global_position + points[i];
 		vec2 p2 = global_position + points[to_use];
 
-		if (abs(p1.x - position.x) + abs(p1.y - position.y) > 2000.0) {
+		if (abs(p1.x - position.x) + abs(p1.y - position.y) > 10000.0) {
 			continue;
 		}
-		if (abs(p2.x - position.x) + abs(p2.y - position.y) > 2000.0) {
+		if (abs(p2.x - position.x) + abs(p2.y - position.y) > 10000.0) {
 			continue;
 		}
 
@@ -67,5 +68,5 @@ void fragment() {
 	vec4 in_pixel = texture(in_tex, position / tex_scale);
 	vec4 edge_pixel = texture(edge_tex, position / tex_scale);
 
-	COLOR = mix(edge_pixel, in_pixel, fade_amm);
+	COLOR = mix(edge_pixel, in_pixel, fade_amm) * color_multiplier;
 }

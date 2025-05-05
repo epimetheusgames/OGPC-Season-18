@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=54 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://b2s21mlnq8264" path="res://Scripts/Entity/Diver/Diver.gd" id="1_soyuq"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="10_qg316"]
 [ext_resource type="Texture2D" uid="uid://y48rk6lmacle" path="res://Assets/Art/Entity/Player/PlayerSkinSideways.png" id="11_eo78x"]
 [ext_resource type="Texture2D" uid="uid://bddtl7rqt1vcg" path="res://Assets/Art/Entity/Player/PlayerWalkingRight.png" id="11_yxkba"]
+[ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="12_yxkba"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="13_arg6r"]
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
@@ -156,6 +157,67 @@ tracks/1/keys = {
 _data = {
 &"RESET": SubResource("Animation_c6fqq"),
 &"Walking": SubResource("Animation_vhq57")
+}
+
+[sub_resource type="Animation" id="Animation_yxkba"]
+resource_name = "Collect"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollectItemAnimationText:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.993661, 1, 1.94067),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-50, -129), Vector2(-49, -156), Vector2(-49, -156), Vector2(864, -529)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollectItemAnimationText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.93333, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.442178, 0.430947, 0.104868, 1), Color(0.440724, 0.429549, 0.105357, 0.332518), Color(0.44, 0.428853, 0.1056, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cos02"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollectItemAnimationText:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-20, -114)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollectItemAnimationText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.44, 0.428853, 0.1056, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s1j8x"]
+_data = {
+&"Collect": SubResource("Animation_yxkba"),
+&"RESET": SubResource("Animation_cos02")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wi5t0"]
@@ -480,9 +542,25 @@ offset_bottom = -100.0
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
 
+[node name="CollectItemAnimationText" type="Label" parent="Animation"]
+modulate = Color(0.44, 0.428853, 0.1056, 0)
+offset_left = -50.0
+offset_top = -129.0
+offset_right = 50.0
+offset_bottom = -86.0
+theme = ExtResource("12_yxkba")
+theme_override_font_sizes/font_size = 30
+text = "+10"
+horizontal_alignment = 1
+
 [node name="WalkingAnimation" type="AnimationPlayer" parent="Animation"]
 libraries = {
 &"": SubResource("AnimationLibrary_yxkba")
+}
+
+[node name="CollectAnimation" type="AnimationPlayer" parent="Animation"]
+libraries = {
+&"": SubResource("AnimationLibrary_s1j8x")
 }
 
 [node name="Stats" type="Node2D" parent="."]

@@ -9,7 +9,7 @@ func _ready() -> void:
 	component_name = "FabrikRope"
 	super()
 
-func _process(delta):
+func _physics_process(delta: float) -> void:
 	super(delta)
 	pull_toward_anchor2()
 	pull_toward_anchor1()

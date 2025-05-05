@@ -68,6 +68,7 @@ func _physics_process(delta: float) -> void:
 			Global.player.set_state(Diver.DiverState.IN_GRAVITY_AREA)
 			target_angle = 0.0
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = false
+			Global.player.scale.x = -1
 
 func _on_invunerability_cooldown_timeout():
 	invunerable = false
@@ -89,8 +90,12 @@ func get_input_vector() -> Vector2:
 	
 	if Input.is_action_pressed("right"):
 		input_vector.x += 1
+		if !get_parent().flipped:
+			get_parent().flip()
 	if Input.is_action_pressed("left"):
 		input_vector.x -= 1
+		if get_parent().flipped:
+			get_parent().flip()
 	if Input.is_action_pressed("up"):
 		input_vector.y -= .5
 	if Input.is_action_pressed("down"):
@@ -108,8 +113,6 @@ func update_current_angle(delta: float) -> void:
 func update_movement_velocity(delta: float):
 	if input_vector.x != 0.0:
 		velocity += input_vector.x * Util.angle_to_vector_radians(current_angle, CONST_ACCEL * delta)
-		#if input_vector.x * scale.x > 0:
-		#	get_parent().flip()
 	elif input_vector.y != 0.0:
 		velocity += Vector2(0, input_vector.y) * CONST_ACCEL * delta
 	

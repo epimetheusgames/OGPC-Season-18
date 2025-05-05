@@ -14,6 +14,8 @@ var collision_shapes : Array[CollisionPolygon2D]
 
 var players_inside : int = 0
 
+var flipped : bool = false
+
 func _ready() -> void:
 	hurtbox.damaged.connect(damaged)
 	hurtbox.died.connect(die)
@@ -36,6 +38,9 @@ func _ready() -> void:
 			collision_shapes.append(child)
 			child.global_position = old_pos
 			child.global_rotation = old_rot
+	
+	if get_node_or_null("Pivot"):
+		get_node("Pivot").set_node_variables()
 
 func _process(delta: float) -> void:
 	aura.global_rotation = 0.0
@@ -47,11 +52,12 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func flip():
+	flipped = !flipped
 	for child in get_children():
 		if "scale" in child:
 			child.scale.x = -child.scale.x
-		else:
-			print(child)
+		if "position" in child:
+			child.position.x = -child.position.x
 
 ## Called when cage breaks
 func cage_broken():
@@ -65,6 +71,7 @@ func damaged(damage_amount : float, by : Hurtbox):
 	Global.player.camera.shake(3, 0.5)
  
 func die():
+	Global.player.scale.x = -1
 	queue_free()
 
 func _on_submarine_area_area_entered(area: Area2D) -> void:

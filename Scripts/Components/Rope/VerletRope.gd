@@ -27,7 +27,7 @@ func _ready() -> void:
 	
 	normals.resize(point_amount)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	super(delta)
 	
 	if !is_on_screen:

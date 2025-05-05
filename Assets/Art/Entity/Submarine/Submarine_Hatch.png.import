@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxc68u4hulex3"
-path="res://.godot/imported/Coral1.png-0f6b5fab8b3b6849e1a17b395fdcf93a.ctex"
+uid="uid://d1t14t2bhk0sl"
+path="res://.godot/imported/Submarine_Hatch.png-6173ec5820211d3733c20687579b7689.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Art/Level/Coral1.png"
-dest_files=["res://.godot/imported/Coral1.png-0f6b5fab8b3b6849e1a17b395fdcf93a.ctex"]
+source_file="res://Assets/Art/Entity/Submarine/Submarine_Hatch.png"
+dest_files=["res://.godot/imported/Submarine_Hatch.png-6173ec5820211d3733c20687579b7689.ctex"]
 
 [params]
 

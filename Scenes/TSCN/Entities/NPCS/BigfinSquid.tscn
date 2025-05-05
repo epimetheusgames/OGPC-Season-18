@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bptkxkfwbumm5"]
+[gd_scene load_steps=12 format=3 uid="uid://bptkxkfwbumm5"]
 
 [ext_resource type="Script" uid="uid://bvtfj5a6g53tw" path="res://Scripts/Entity/Enemies/BigfinSquid/BigfinSquid.gd" id="1_0jv23"]
 [ext_resource type="Script" uid="uid://cxt7y067vc2qg" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
+[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Scripts/Entity/Enemies/EnemyFov.gd" id="2_t2knw"]
 [ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="5_mc2mg"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_dpvyl"]
+[ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Scripts/Entity/Enemies/StateMachine.gd" id="6_tcq12"]
+[ext_resource type="Script" uid="uid://crynjoiy8hntp" path="res://Scripts/Entity/Enemies/UniversalStates/Dead.gd" id="7_keq3i"]
+[ext_resource type="Script" uid="uid://bydnatlew8rpq" path="res://Scripts/Entity/Enemies/BigfinSquid/States/Wander.gd" id="8_tcq12"]
+[ext_resource type="Script" uid="uid://l13camro4t6p" path="res://Scripts/Entity/Enemies/BigfinSquid/States/Chase.gd" id="9_keq3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfi6i"]
 size = Vector2(45, 69)
@@ -11,8 +16,19 @@ size = Vector2(45, 69)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ey62v"]
 size = Vector2(113, 109.5)
 
-[node name="BigfinSquid" type="CharacterBody2D"]
+[node name="BigfinSquid" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "nav_agent", "enemy_fov", "state_machine", "dead_state")]
 script = ExtResource("1_0jv23")
+hurtbox = NodePath("Hurtbox")
+attackbox = NodePath("ContinuousAttack")
+nav_agent = NodePath("NavAgent")
+enemy_fov = NodePath("EnemyFov")
+state_machine = NodePath("StateMachine")
+dead_state = NodePath("StateMachine/Dead")
+
+[node name="EnemyFov" type="Node2D" parent="."]
+script = ExtResource("2_t2knw")
+view_radius = 650.0
+metadata/_custom_type_script = "uid://0j0vsqeeio1s"
 
 [node name="Head" type="Polygon2D" parent="."]
 position = Vector2(0, -22)
@@ -100,3 +116,22 @@ shape = SubResource("RectangleShape2D_ey62v")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(40.5, 3.00005)
 scale = Vector2(96.35, 91.7)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("6_tcq12")
+starting_state = NodePath("Wander")
+metadata/_custom_type_script = "uid://balgnejnh7c1p"
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("7_keq3i")
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("wander_state")]
+script = ExtResource("9_keq3i")
+wander_state = NodePath("../Wander")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_state")]
+script = ExtResource("8_tcq12")
+chase_state = NodePath("../Chase")
+
+[node name="WanderTimer" type="Timer" parent="StateMachine/Wander"]
+wait_time = 10.0

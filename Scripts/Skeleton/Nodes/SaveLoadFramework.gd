@@ -125,9 +125,12 @@ func _load_global_config() -> GlobalSave:
 	var blank_config = ConfigFile.new()
 	var slot_path := "user://global"
 	
-	blank_config.load(slot_path)
+	var error: Error = blank_config.load(slot_path)
 	
-	var game_save: GlobalSave = blank_config.get_value("Main", "GlobalSave")
+	if error == ERR_FILE_CANT_OPEN:
+		return GlobalSave.new()
+	
+	var game_save: GlobalSave = blank_config.get_value("Main", "GlobalSave", GlobalSave.new())
 	return game_save
 
 # Loads an entity from memory with a UID.

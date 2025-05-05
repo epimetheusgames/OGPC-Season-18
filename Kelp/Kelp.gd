@@ -10,7 +10,7 @@ extends Node2D
 var kelp_segments: Array[KelpSegment] = []
 var spawn_pos: Vector2 = Vector2(0, -8)
 var sway_amplitudes: Array[float]
-var segment_spacing := 1  # sway every 15th point
+var segment_spacing := 1
 var sway_frequency := 0.8
 var base_time := 0.0
 
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	
 	rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
 	
-	for i in range(length - 3):
+	for i in range(length - 6):
 		var kelp_segment: KelpSegment = kelp_segments[i]
 		kelp_segment.global_position = (drawer.points[i] + drawer.points[i + 1]) / 2.0
 		
