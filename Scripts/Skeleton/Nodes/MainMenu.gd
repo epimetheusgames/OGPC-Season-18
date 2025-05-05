@@ -10,8 +10,11 @@ func _ready():
 	
 	var save := Global.save_load_framework._load_global_config()
 	$SoundMenu/MasterVolumeSlider.value = save.master_volume
+	_on_master_volume_slider_value_changed(save.master_volume)
 	$SoundMenu/MusicVolumeSlider.value = save.music_volume
+	_on_music_volume_slider_value_changed(save.music_volume)
 	$SoundMenu/SFXVolumeSlider.value = save.sfx_volume
+	_on_sfx_volume_slider_value_changed(save.sfx_volume)
 	$BrightnessSlider.value = save.brightness
 	
 	while true:

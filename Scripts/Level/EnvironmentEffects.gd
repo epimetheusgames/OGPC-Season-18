@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	if !Global.player.diver_movement.is_in_gravity_area && playing == Playing.SUBMARINE:
 		animator.play("SubmarineToHappy")
 		playing = Playing.HAPPY
-	if Global.player.get_oxygen() < 55 && playing == Playing.HAPPY:
+	if (Global.player.get_oxygen() < 55 || Global.player.get_diver_health() < 40) && playing == Playing.HAPPY:
 		animator.play("HappyToScary")
 		playing = Playing.SCARY
 	if Global.player.diver_movement.is_in_gravity_area && playing == Playing.HAPPY:

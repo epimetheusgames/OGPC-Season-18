@@ -10,7 +10,7 @@ extends Node2D
 var kelp_segments: Array[KelpSegment] = []
 var spawn_pos: Vector2 = Vector2(0, -8)
 var sway_amplitudes: Array[float]
-var segment_spacing := 1  # sway every 15th point
+var segment_spacing := 1
 var sway_frequency := 0.8
 var base_time := 0.0
 
