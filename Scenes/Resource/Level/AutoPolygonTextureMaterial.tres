@@ -18,5 +18,6 @@ shader_parameter/num_points = 0
 shader_parameter/global_position = Vector2(0, 0)
 shader_parameter/fade_width = 115
 shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(1, 1, 1, 1)
 shader_parameter/in_tex = SubResource("GradientTexture1D_5bdf5")
 shader_parameter/edge_tex = ExtResource("2_vbjyk")

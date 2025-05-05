@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=65 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -278,6 +278,72 @@ shader_parameter/color_multiplier = Color(0.922352, 0.858406, 0.523811, 1)
 shader_parameter/in_tex = SubResource("GradientTexture1D_bdf5b")
 shader_parameter/edge_tex = SubResource("CompressedTexture2D_jw53c")
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gnr5v"]
+load_path = "res://.godot/imported/WallTexture.png-8f92dfb4a12958014b5b11ca79389a8a.ctex"
+
+[sub_resource type="Gradient" id="Gradient_jw53c"]
+offsets = PackedFloat32Array(0.0291971)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3svaj"]
+gradient = SubResource("Gradient_jw53c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdf5b"]
+resource_local_to_scene = true
+shader = ExtResource("8_gnr5v")
+shader_parameter/points = PackedVector2Array()
+shader_parameter/num_points = 0
+shader_parameter/global_position = Vector2(0, 0)
+shader_parameter/fade_width = 115
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(0.576305, 0.693348, 0.847649, 1)
+shader_parameter/in_tex = SubResource("GradientTexture1D_3svaj")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_gnr5v")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8qye6"]
+load_path = "res://.godot/imported/WallTexture.png-8f92dfb4a12958014b5b11ca79389a8a.ctex"
+
+[sub_resource type="Gradient" id="Gradient_3fu4r"]
+offsets = PackedFloat32Array(0.0291971)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mcejo"]
+gradient = SubResource("Gradient_3fu4r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_081ql"]
+resource_local_to_scene = true
+shader = ExtResource("8_gnr5v")
+shader_parameter/points = PackedVector2Array()
+shader_parameter/num_points = 0
+shader_parameter/global_position = Vector2(0, 0)
+shader_parameter/fade_width = 115
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(0.840281, 0.472253, 0.610461, 1)
+shader_parameter/in_tex = SubResource("GradientTexture1D_mcejo")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_8qye6")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3svaj"]
+load_path = "res://.godot/imported/WallTexture.png-8f92dfb4a12958014b5b11ca79389a8a.ctex"
+
+[sub_resource type="Gradient" id="Gradient_bdf5b"]
+offsets = PackedFloat32Array(0.0291971)
+colors = PackedColorArray(0.128576, 0.128576, 0.128576, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8qye6"]
+gradient = SubResource("Gradient_bdf5b")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3fu4r"]
+resource_local_to_scene = true
+shader = ExtResource("8_gnr5v")
+shader_parameter/points = PackedVector2Array()
+shader_parameter/num_points = 0
+shader_parameter/global_position = Vector2(0, 0)
+shader_parameter/fade_width = 115
+shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(0.608594, 0.765084, 0.560701, 1)
+shader_parameter/in_tex = SubResource("GradientTexture1D_8qye6")
+shader_parameter/edge_tex = SubResource("CompressedTexture2D_3svaj")
+
 [sub_resource type="Resource" id="Resource_xdqqp"]
 script = ExtResource("16_4wjdw")
 scene = ExtResource("16_cbdp8")
@@ -409,7 +475,7 @@ metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 
 [node name="2" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = ExtResource("6_l3b62")
+material = SubResource("ShaderMaterial_bdf5b")
 position = Vector2(-5860, -10195)
 texture = ExtResource("7_fukii")
 polygon = PackedVector2Array(-4139.6, 5186, -2879.2, 4470, -1819.6, 3734.8, -931.6, 2742, -195.2, 1044, 256.8, -638.4, 1803.6, 516.8, 1331.2, 1825.2, 901.6, 3320.8, 411.2, 4055.2, 116.8, 5928.4, -712, 4938, -1636, 5520.8, -2965.2, 6160, -3939.2, 5988)
@@ -418,7 +484,7 @@ metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 
 [node name="3" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = ExtResource("6_l3b62")
+material = SubResource("ShaderMaterial_081ql")
 position = Vector2(-6047, -10450)
 texture = ExtResource("7_fukii")
 polygon = PackedVector2Array(4325.2, 3647.6, 2860.8, 2366.4, 3032.4, -104, 1343.2, -2134.4, 5458.8, -1762, 8781.2, -1960, 9303.6, -3456.4, 10701.6, -2342.8, 12572.4, -2405.6, 11437.6, -834.8, 11530.8, 1245.6, 10096, 2437.6, 10187.2, 1308.8, 9531.6, 70.8, 7979, 1264, 6942, 2451, 7566, 490, 7177.6, -609.6, 5510.4, -401.6, 4268, 513.6, 3890.4, 2046.4)
@@ -427,7 +493,7 @@ metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 
 [node name="4" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
 z_index = 68
-material = ExtResource("6_l3b62")
+material = SubResource("ShaderMaterial_3fu4r")
 position = Vector2(3311, -267)
 texture = ExtResource("7_fukii")
 polygon = PackedVector2Array(2584.8, -6235.6, 3301.6, -5582.4, 1908, -3531.6, 4835.6, -5535.2, 6288, -4369, 7817, -5420, 9514.8, -5888.4, 9514.8, -7915.2, 7427, -7805, 5563, -8981, 5851, -7805, 3800.8, -7297.6)
