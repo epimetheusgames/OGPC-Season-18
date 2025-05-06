@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://ditralukui2v6" path="res://TangleKelp.tscn" id="20_k8n8v"]
 [ext_resource type="PackedScene" uid="uid://ctt8tds4p8vt0" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="21_obv2f"]
 [ext_resource type="Texture2D" uid="uid://ctwe161d8x2ne" path="res://Assets/Art/Misc/Bubble.png" id="22_l3b62"]
-[ext_resource type="PackedScene" path="res://Scenes/TSCN/Objects/CivillianSpawnPoint.tscn" id="23_jw53c"]
+[ext_resource type="PackedScene" uid="uid://bwtadftcthq27" path="res://Scenes/TSCN/Objects/CivillianSpawnPoint.tscn" id="23_jw53c"]
 [ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.tscn" id="26_k8n8v"]
 [ext_resource type="PackedScene" uid="uid://6kbux1lvwaw3" path="res://Scenes/TSCN/Objects/Items/RockItem.tscn" id="27_l3b62"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
@@ -716,6 +716,14 @@ rotation = -0.565163
 position = Vector2(-12503, -4052)
 rotation = 1.0596
 
+[node name="RockItem7" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-9328, -2918)
+rotation = -0.274804
+
+[node name="RockItem8" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-6381, -1907)
+rotation = 0.00711685
+
 [node name="RockItem6" parent="." instance=ExtResource("27_l3b62")]
 position = Vector2(-11208, -5615)
 
@@ -724,15 +732,22 @@ position = Vector2(-11694, -5249)
 rotation = 2.42563
 
 [node name="Jellyfish" parent="." instance=ExtResource("16_cbdp8")]
-position = Vector2(-10810, -6077)
+position = Vector2(-10332, -7906)
 
 [node name="GlowCoral" parent="." instance=ExtResource("30_obv2f")]
-position = Vector2(-9043, -5593)
+position = Vector2(-9011, -5561)
+rotation = -0.487964
 
 [node name="GlowCoral2" parent="." instance=ExtResource("30_obv2f")]
-position = Vector2(-8643, -5826)
+position = Vector2(-8588, -5814)
+rotation = -0.629721
 
 [node name="GlowCoral3" parent="." instance=ExtResource("30_obv2f")]
-position = Vector2(-9445, -5361)
+position = Vector2(-9402, -5343)
+rotation = -0.52406
+
+[node name="GlowCoral4" parent="." instance=ExtResource("30_obv2f")]
+position = Vector2(-4118, -4282)
+rotation = -1.05115
 
 [editable path="UILayer/IngameUI"]

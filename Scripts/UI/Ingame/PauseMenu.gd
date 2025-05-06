@@ -35,6 +35,7 @@ func _settings_open():
 
 func _on_exit_button_button_up() -> void:
 	get_tree().paused = false
+	Global.save_load_framework.save_state()
 	Global.save_load_framework.exit_to_menu()
 
 func _on_no_button_button_up() -> void:

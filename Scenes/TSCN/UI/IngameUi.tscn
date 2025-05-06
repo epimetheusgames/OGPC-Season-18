@@ -106,7 +106,7 @@ text = "Oxygen"
 
 [node name="WarningText" type="Label" parent="HUD/MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 6
 theme = ExtResource("5_6galc")
 horizontal_alignment = 2
 

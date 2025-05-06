@@ -23,7 +23,7 @@ func _ready() -> void:
 	verlet_nodes.resize(point_amount)
 	for i in range(point_amount):
 		verlet_nodes[i] = VerletNode.new()
-		verlet_nodes[i].set_up(spawn_pos + Vector2(0, i * 50)) 
+		verlet_nodes[i].set_up(spawn_pos) 
 	
 	normals.resize(point_amount)
 

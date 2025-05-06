@@ -24,7 +24,7 @@ func _ready() -> void:
 		var drawer := RopeLineDrawer.new()
 		drawer.rope = rope
 		drawer.resolution_multiplier = 6
-		drawer.smoothing_on = true
+		drawer.smoothing_on = false
 		drawer.z_index = arms[i].z_index
 		drawer.width = 4
 		drawer.default_color = arms[i].default_color

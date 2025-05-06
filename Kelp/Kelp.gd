@@ -40,7 +40,10 @@ func _process(delta: float) -> void:
 	
 	rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
 	
-	for i in range(length - 6):
+	if !rope.is_on_screen:
+		return
+	
+	for i in range(length - 3):
 		var kelp_segment: KelpSegment = kelp_segments[i]
 		kelp_segment.global_position = (drawer.points[i] + drawer.points[i + 1]) / 2.0
 		

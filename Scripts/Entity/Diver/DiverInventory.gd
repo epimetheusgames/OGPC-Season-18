@@ -75,6 +75,9 @@ func _process(delta: float) -> void:
 			collecting_money = false
 
 func _on_item_detection_area_area_entered(area: Area2D) -> void:
+	if !diver._is_node_owner():
+		return
+	
 	var hoverings_child: BaseItem 
 	if hovering_item != null:
 		hoverings_child = hovering_item_item
@@ -82,6 +85,9 @@ func _on_item_detection_area_area_entered(area: Area2D) -> void:
 		__collect_item(area)
 
 func __collect_item(area: BaseItem) -> void:
+	if !diver._is_node_owner():
+		return
+	
 	var res: InventoryItem = area.generate_inventory_item()
 	collected_item_paths.append(Global.current_mission_node.get_path_to(area))
 	area.queue_free()

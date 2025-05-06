@@ -38,7 +38,7 @@ func _time_changed(hour: int, minute: int):
 	time.text = "Current Time: " + Global.game_time_system.format_time(hour, minute)
 
 func _spawning_follower(pos: Vector2) -> void:
-	while true:
+	while Global.player.global_position.distance_squared_to(pos) < 300 ** 2:
 		var sanitized := (pos - Global.research_station.global_position) / 10.0
 		warning_text.text = "Civillians have spawned at the coordinates " + str(int(sanitized.x)) + ", " + str(int(sanitized.y))
 		await get_tree().create_timer(1).timeout

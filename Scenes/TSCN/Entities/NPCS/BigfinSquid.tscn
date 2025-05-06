@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bptkxkfwbumm5"]
+[gd_scene load_steps=13 format=3 uid="uid://bptkxkfwbumm5"]
 
 [ext_resource type="Script" uid="uid://bvtfj5a6g53tw" path="res://Scripts/Entity/Enemies/BigfinSquid/BigfinSquid.gd" id="1_0jv23"]
 [ext_resource type="Script" uid="uid://cxt7y067vc2qg" path="res://Scripts/Components/Rope/VerletRope.gd" id="2_rptbt"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://crynjoiy8hntp" path="res://Scripts/Entity/Enemies/UniversalStates/Dead.gd" id="7_keq3i"]
 [ext_resource type="Script" uid="uid://bydnatlew8rpq" path="res://Scripts/Entity/Enemies/BigfinSquid/States/Wander.gd" id="8_tcq12"]
 [ext_resource type="Script" uid="uid://l13camro4t6p" path="res://Scripts/Entity/Enemies/BigfinSquid/States/Chase.gd" id="9_keq3i"]
+[ext_resource type="Texture2D" uid="uid://cqbpc8nwxjnpq" path="res://Assets/Art/Entity/BigfinSquid.png" id="10_yrxye"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfi6i"]
 size = Vector2(45, 69)
@@ -30,34 +31,28 @@ script = ExtResource("2_t2knw")
 view_radius = 650.0
 metadata/_custom_type_script = "uid://0j0vsqeeio1s"
 
-[node name="Head" type="Polygon2D" parent="."]
-position = Vector2(0, -22)
-color = Color(0.2352, 0.48, 0.2352, 1)
-polygon = PackedVector2Array(-55, -22, -1, -61, 55, -20, 8, 21, 8, 45, -10, 46, -9, 20)
-metadata/_edit_lock_ = true
-
 [node name="RightFrontArm" type="Line2D" parent="."]
-points = PackedVector2Array(5, 22, 86, 24)
+points = PackedVector2Array(14, 13, 79, 45)
 width = 4.0
 default_color = Color(0.3234, 0.66, 0.3234, 1)
 metadata/_edit_lock_ = true
 
 [node name="LeftFrontArm" type="Line2D" parent="."]
-points = PackedVector2Array(-9, 22, -79, 27)
+points = PackedVector2Array(-5, 11, -78, 46)
 width = 4.0
 default_color = Color(0.321569, 0.658824, 0.321569, 1)
 metadata/_edit_lock_ = true
 
 [node name="RightBackArm" type="Line2D" parent="."]
 z_index = -1
-points = PackedVector2Array(6, 20, 37, 5)
+points = PackedVector2Array(10, 18, 37, 44)
 width = 4.0
 default_color = Color(0.487598, 0.924542, 0.486052, 1)
 metadata/_edit_lock_ = true
 
 [node name="LeftBackArm" type="Line2D" parent="."]
 z_index = -1
-points = PackedVector2Array(-9, 22, -36, 6)
+points = PackedVector2Array(-4, 9, -36, 43)
 width = 4.0
 default_color = Color(0.487598, 0.924542, 0.486052, 1)
 metadata/_edit_lock_ = true
@@ -135,3 +130,8 @@ chase_state = NodePath("../Chase")
 
 [node name="WanderTimer" type="Timer" parent="StateMachine/Wander"]
 wait_time = 10.0
+
+[node name="BigfinSquid" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("10_yrxye")
