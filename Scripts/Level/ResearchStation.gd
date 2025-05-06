@@ -14,6 +14,8 @@ extends Node2D
 
 var player_in_area := false
 
+signal follower_spawned(spawn_position: Vector2)
+
 func _ready() -> void:
 	Global.research_station = self
 	Global.game_time_system.day_ended.connect(_spawn)
@@ -61,9 +63,11 @@ func _spawn() -> void:
 	
 	# Ramp up difficulty
 	for i in range(Global.game_time_system._days):
+		var follower_spawn_positions := get_tree().get_nodes_in_group("civillian_spawn_points")
 		var follower_node: CivillianFollower = follower.instantiate()
-		follower_spawn_node.add_child(follower_node)
+		follower_spawn_positions.pick_random().add_child(follower_node)
 		follower_node.position += Util.random_vector(Global.rng, 50, 0)
+		follower_spawned.emit(follower_node.global_position)
 
 func _area_entered(area: Area2D) -> void:
 	if !area.is_in_group("player_area") || !black_background:

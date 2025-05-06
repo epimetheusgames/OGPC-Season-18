@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://brtj1ur8tgigg"]
+[gd_scene load_steps=6 format=3 uid="uid://brtj1ur8tgigg"]
 
 [ext_resource type="Script" uid="uid://bthrd0wdm5ufn" path="res://Scripts/Level/ResearchStation.gd" id="1_bt1gc"]
-[ext_resource type="Script" uid="uid://ckswqbls20qpx" path="res://Scripts/Objects/FollowerSpawner.gd" id="1_sxr26"]
 [ext_resource type="PackedScene" uid="uid://bp7br2o4yntou" path="res://Scenes/TSCN/UI/UnlockTerminal.tscn" id="2_bt1gc"]
 [ext_resource type="PackedScene" uid="uid://bi6i18nskixdt" path="res://Scenes/TSCN/Entities/NPCS/CivillianFollower.tscn" id="2_gk820"]
 
@@ -73,11 +72,6 @@ polygon = PackedVector2Array(-2946, 2247, -3260, 2177, -4047, 2299, -4273, 2494,
 [node name="ResearchStationPosition" type="Node2D" parent="."]
 z_index = 7
 position = Vector2(-25, 51)
-
-[node name="FollowerSpawnPosition" type="Node2D" parent="."]
-z_index = 7
-position = Vector2(-378, 197)
-script = ExtResource("1_sxr26")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)

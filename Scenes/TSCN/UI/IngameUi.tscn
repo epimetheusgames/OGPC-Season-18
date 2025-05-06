@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://b1to7rj6srtxg" path="res://Scripts/UI/Ingame/ChatPanel.gd" id="4_d8efl"]
 [ext_resource type="Texture2D" uid="uid://b4fwmgn77i3ts" path="res://Assets/Art/HealthBarProgress.png" id="4_s6r6i"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="5_6galc"]
-[ext_resource type="Script" uid="uid://ck4dghi3kpbdd" path="res://Scripts/UI/Bar.gd" id="5_s6r6i"]
+[ext_resource type="Script" path="res://Scripts/UI/Bar.gd" id="5_s6r6i"]
 [ext_resource type="Texture2D" uid="uid://cb7t2q24l4xf" path="res://Assets/Art/OxygenBar.png" id="5_ti1bd"]
 [ext_resource type="Texture2D" uid="uid://bbq3i5mso53js" path="res://Assets/Art/OxygenBarProgress.png" id="6_yehem"]
 
@@ -110,9 +110,18 @@ size_flags_horizontal = 10
 theme = ExtResource("5_6galc")
 horizontal_alignment = 2
 
+[node name="CoordsText" type="Label" parent="HUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_6galc")
+text = "Coordinates: 0,0"
+horizontal_alignment = 2
+
+[node name="Seperator3" type="VSeparator" parent="HUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 20.0
+
 [node name="TimeText" type="Label" parent="HUD/MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 10
 theme = ExtResource("5_6galc")
 text = "00:00"
 horizontal_alignment = 2

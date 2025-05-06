@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bwtadftcthq27"]
+
+[node name="CivillianSpawnPoint" type="Node2D" groups=["civillian_spawn_points"]]
