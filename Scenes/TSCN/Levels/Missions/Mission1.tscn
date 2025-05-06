@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=65 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://dl7oejcvhsgci" path="res://Kelp/Kelp.tscn" id="19_qhgdr"]
 [ext_resource type="PackedScene" uid="uid://ditralukui2v6" path="res://TangleKelp.tscn" id="20_k8n8v"]
 [ext_resource type="PackedScene" uid="uid://ctt8tds4p8vt0" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="21_obv2f"]
-[ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Texture2D" uid="uid://ctwe161d8x2ne" path="res://Assets/Art/Misc/Bubble.png" id="22_l3b62"]
 [ext_resource type="PackedScene" path="res://Scenes/TSCN/Objects/CivillianSpawnPoint.tscn" id="23_jw53c"]
 [ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.tscn" id="26_k8n8v"]
@@ -608,10 +607,6 @@ polygon = PackedVector2Array(-110, -72, -81, 109, -283, -69, 192, -134, 53, 87, 
 
 [node name="CivillianSpawnPoint2" parent="LevelContainer" instance=ExtResource("23_jw53c")]
 position = Vector2(-13469, -5847)
-
-[node name="LevelContainer_Player_Submarine#BuoyancyComponent" type="Node" parent="."]
-script = ExtResource("21_pr3qq")
-buoyancy_accel = 0.0
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3

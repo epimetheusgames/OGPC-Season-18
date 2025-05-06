@@ -136,7 +136,7 @@ func _on_general_detection_box_area_entered(area: Area2D) -> void:
 		is_in_gravity_area = true
 	elif area.is_in_group("research_station_area") and Global.godot_steam_abstraction and saveable_timer.time_left <= 0:
 		is_in_research_station = true
-		if spawned_in_research_station:
+		if spawned_in_research_station && !Global.is_multiplayer:
 			Global.save_load_framework.save_state()
 		else:
 			spawned_in_research_station = true
