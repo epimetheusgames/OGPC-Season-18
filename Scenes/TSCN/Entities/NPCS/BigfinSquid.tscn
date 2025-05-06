@@ -32,7 +32,7 @@ view_radius = 650.0
 metadata/_custom_type_script = "uid://0j0vsqeeio1s"
 
 [node name="RightFrontArm" type="Line2D" parent="."]
-points = PackedVector2Array(14, 13, 79, 45)
+points = PackedVector2Array(14, 13, 77, 46)
 width = 4.0
 default_color = Color(0.3234, 0.66, 0.3234, 1)
 metadata/_edit_lock_ = true

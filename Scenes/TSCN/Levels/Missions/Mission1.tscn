@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=65 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -14,6 +14,7 @@
 [ext_resource type="Shader" uid="uid://cgyujgfqy1jk6" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="8_gnr5v"]
 [ext_resource type="Texture2D" uid="uid://dyxe351do4ctp" path="res://Assets/Art/Level/WAFFLEHOUSE.png" id="8_jw53c"]
 [ext_resource type="PackedScene" uid="uid://brtj1ur8tgigg" path="res://Scenes/ResearchStation.tscn" id="13_eg3rs"]
+[ext_resource type="PackedScene" uid="uid://dl7oejcvhsgci" path="res://Kelp/Kelp.tscn" id="13_gnr5v"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
@@ -441,6 +442,7 @@ libraries = {
 }
 
 [node name="Background" type="ColorRect" parent="LevelContainer/Environment"]
+z_index = -2
 offset_left = -16513.0
 offset_top = -19959.0
 offset_right = 18529.0
@@ -451,11 +453,12 @@ metadata/_edit_lock_ = true
 [node name="Collisions" type="NavigationRegion2D" parent="LevelContainer/Environment" groups=["obstacles"]]
 navigation_polygon = SubResource("NavigationPolygon_jsraf")
 script = SubResource("GDScript_5py2y")
+metadata/_edit_lock_ = true
 
 [node name="World" type="Node2D" parent="LevelContainer/Environment/Collisions" groups=["environment_collision"]]
 
 [node name="Terrain1" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
-z_index = 68
+z_index = 120
 material = SubResource("ShaderMaterial_8qye6")
 position = Vector2(-7078, -9352)
 polygon = PackedVector2Array(-6440.8, -2558.8, -5072.2, -6529.8, -4334.2, -7756.8, -1210, -8654, 5113, -8846, 14395, -9229, 15974, -8501, 16438, -6814, 16103, -6312, 15217, -6206, 14420, -5563, 12658, -6555, 11031, -7143, 3218, -7228, -1721, -6397, -2827.2, -4743.8, -732.2, -4175.8, 1831.8, -4434.8, -493.2, -2169.8, -1334, -869, -1850.2, 314.201, -3432.2, 533.2, -4505, -486, -5888.4, 580.8, -5686, 3192, -6218, 3178, -6672, 3237, -6970.6, 3396.09, -6988, 3696, -6857, 3762, -4073, 3733, -5566.8, 4767.2, -5254, 5914, -4128.8, 6877.6, -2046, 6384.4, -1451.2, 7328, 1633.6, 7494.4, 3299.2, 4425.6, 3112.8, 6574.8, 3315.2, 7158.8, 4059.2, 7897.6, 5246, 6903, 5980.4, 8153.2, 7536.4, 6974.4, 7151.6, 5227.2, 5255.6, 4149.6, 8455.2, 3912.4, 11196.4, 2632, 9920, 5312.4, 9642, 6328, 10627.6, 6991.6, 14849.6, 7651.6, 17821.2, 7391.2, 20048.4, 6307.2, 20786, 7255.2, 21860.4, 7276.4, 22071.2, 5780.4, 20870, 4115.6, 21806, 2616, 22175.2, 624, 21973, -1163, 18758.4, -1140, 16888, -2108.4, 15716, -3058, 16466.6, -3190.93, 16300.8, -5080.4, 17244.4, -3164, 18010.8, -3095.2, 19160.4, -2662.8, 20497.2, -2839.6, 21530.4, -4176.8, 21269.6, -5228.4, 20029.6, -6356, 18458, -6670, 16443.2, -6814.8, 17548, -8153, 20615.6, -7575.6, 22522.4, -5629.2, 23060.4, -3858.8, 23872, -2032.4, 24403, 9119, -8653, 9226, -8833, 2533)
@@ -464,7 +467,7 @@ metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
 [node name="Terrain2" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
-z_index = 68
+z_index = 120
 material = SubResource("ShaderMaterial_bdf5b")
 position = Vector2(-5860, -10195)
 polygon = PackedVector2Array(-4139.6, 5186, -2879.2, 4470, -1819.6, 3734.8, -931.6, 2742, -195.2, 1044, 256.8, -638.4, 1803.6, 516.8, 1331.2, 1825.2, 901.6, 3320.8, 411.2, 4055.2, 116.8, 5928.4, -712, 4938, -1636, 5520.8, -2965.2, 6160, -3939.2, 5988)
@@ -473,7 +476,7 @@ metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
 [node name="Terrain3" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
-z_index = 68
+z_index = 120
 material = SubResource("ShaderMaterial_081ql")
 position = Vector2(-6047, -10450)
 polygon = PackedVector2Array(4325.2, 3647.6, 2860.8, 2366.4, 3032.4, -104, 1343.2, -2134.4, 5458.8, -1762, 8781.2, -1960, 9303.6, -3456.4, 10701.6, -2342.8, 12572.4, -2405.6, 11437.6, -834.8, 11530.8, 1245.6, 10096, 2437.6, 10187.2, 1308.8, 9531.6, 70.8, 7979, 1264, 6942, 2451, 7566, 490, 7177.6, -609.6, 5510.4, -401.6, 4268, 513.6, 3890.4, 2046.4)
@@ -482,7 +485,7 @@ metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
 [node name="Terrain4" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
-z_index = 68
+z_index = 120
 material = SubResource("ShaderMaterial_3fu4r")
 position = Vector2(3311, -267)
 polygon = PackedVector2Array(2584.8, -6235.6, 3301.6, -5582.4, 1908, -3531.6, 4835.6, -5535.2, 6288, -4369, 7817, -5420, 9514.8, -5888.4, 9514.8, -7915.2, 7427, -7805, 5563, -8981, 5851, -7805, 3800.8, -7297.6)
@@ -491,7 +494,7 @@ metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
 [node name="Terrain5" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
-z_index = 68
+z_index = 120
 material = ExtResource("6_l3b62")
 position = Vector2(3311, -267)
 polygon = PackedVector2Array(-5697, -13789, -3123, -13612, -1695, -14261, -1695, -14828, -4115, -15218, -6385, -15168, -7089, -14875, -6882, -14251)
@@ -532,6 +535,9 @@ position = Vector2(-2908, -2936)
 
 [node name="BigfinSquid7" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
 position = Vector2(-1718, -3951)
+
+[node name="Kelp" parent="LevelContainer/Environment" instance=ExtResource("13_gnr5v")]
+position = Vector2(-9569, -5177)
 
 [node name="Player" type="Node2D" parent="LevelContainer"]
 
