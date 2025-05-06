@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=64 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -18,7 +18,6 @@
 [ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_4wjdw"]
 [ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="16_cbdp8"]
 [ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_0qmxr"]
-[ext_resource type="PackedScene" uid="uid://dl7oejcvhsgci" path="res://Kelp/Kelp.tscn" id="19_qhgdr"]
 [ext_resource type="PackedScene" uid="uid://ditralukui2v6" path="res://TangleKelp.tscn" id="20_k8n8v"]
 [ext_resource type="PackedScene" uid="uid://ctt8tds4p8vt0" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="21_obv2f"]
 [ext_resource type="Texture2D" uid="uid://ctwe161d8x2ne" path="res://Assets/Art/Misc/Bubble.png" id="22_l3b62"]
@@ -505,21 +504,6 @@ color = Color(0, 0, 0.341176, 1)
 polygon = PackedVector2Array(-14300, -5622, -14109, -6071, -13450, -6438, -12794, -6473, -12222, -6229, -12057, -5734, -12069, -5408, -12862, -5339, -13606, -5305, -14247, -5433)
 metadata/_edit_lock_ = true
 
-[node name="Kelp" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
-position = Vector2(-6106, -1788)
-
-[node name="Kelp2" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
-position = Vector2(-6574, -1809)
-
-[node name="Kelp3" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
-position = Vector2(-7050, -1804)
-
-[node name="Kelp4" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
-position = Vector2(-7504, -1846)
-
-[node name="Kelp5" parent="LevelContainer/Environment" instance=ExtResource("19_qhgdr")]
-position = Vector2(-7882, -1863)
-
 [node name="BigfinSquid2" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
 position = Vector2(-11022, -3696)
 
@@ -575,12 +559,6 @@ player_view_dist = 1500
 enemy_close_dist = 2500
 draw_spawn_positions = true
 enemy_list = Array[ExtResource("16_4wjdw")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg")])
-
-[node name="Kelp" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
-position = Vector2(-11510, -5559)
-
-[node name="Kelp2" parent="LevelContainer" instance=ExtResource("19_qhgdr")]
-position = Vector2(-11310, -5559)
 
 [node name="TangleKelp" parent="LevelContainer" instance=ExtResource("20_k8n8v")]
 position = Vector2(-10185, -2695)

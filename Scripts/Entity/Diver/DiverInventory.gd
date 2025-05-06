@@ -27,6 +27,9 @@ func _ready() -> void:
 		item.queue_free()
 
 func _process(delta: float) -> void:
+	if !diver._is_node_owner():
+		return
+	
 	# Clean up inventory
 	for item in inventory:
 		if !is_instance_valid(item) || !item:
@@ -64,6 +67,11 @@ func _process(delta: float) -> void:
 			await get_tree().create_timer(2.5).timeout
 			
 			diver.diver_stats.current_money += income
+			
+			for player in Global.player_array:
+				player.diver_stats.current_money = diver.diver_stats.current_money
+				Global.godot_steam_abstraction.sync_var(player.diver_stats, "current_money")
+			
 			collecting_money = false
 
 func _on_item_detection_area_area_entered(area: Area2D) -> void:
