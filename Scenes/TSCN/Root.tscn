@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="5_jvequ"]
 [ext_resource type="Script" uid="uid://cwga2scp61606" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="6_pmicg"]
 [ext_resource type="Script" uid="uid://clgd0ups3ekte" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="7_vxmb5"]
-[ext_resource type="Resource" uid="uid://c2722x3n5nlk5" path="res://Scenes/Resource/Level/Tutorial.tres" id="8_c76v7"]
+[ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="8_41cf3"]
 [ext_resource type="Script" uid="uid://duycl57xwmfpr" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="9_y8obd"]
 [ext_resource type="Script" uid="uid://6ub1ahbtrw5b" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
@@ -42,7 +42,7 @@ file = "uid://c0nn12ilucaoj"
 
 [sub_resource type="Resource" id="Resource_1tmkv"]
 script = ExtResource("9_y8obd")
-missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_c76v7")])
+missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_41cf3")])
 
 [sub_resource type="Resource" id="Resource_wiowl"]
 resource_local_to_scene = true

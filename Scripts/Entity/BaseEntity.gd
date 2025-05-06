@@ -80,6 +80,9 @@ func _is_node_owner() -> bool:
 	if !Global.godot_steam_abstraction:
 		return true
 	
+	if !Global.is_multiplayer:
+		return true
+	
 	if node_owner == 0:
 		return Global.godot_steam_abstraction.is_lobby_owner
 	else:

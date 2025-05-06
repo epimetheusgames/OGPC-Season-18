@@ -68,7 +68,7 @@ func _ready() -> void:
 		ui.add_child(displayed_nametag)
 
 func _process(delta: float) -> void:
-	if diver.diver_movement.is_in_research_station:
+	if Global.player.diver_movement.is_in_research_station:
 		Global.brightness_modulate.color.v = 0.55
 	else:
 		Global.brightness_modulate.color.v = 0.1

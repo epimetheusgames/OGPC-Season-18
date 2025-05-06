@@ -12,7 +12,7 @@ extends Node2D
 @export var follower: PackedScene
 @export var unlock_terminal: UnlockTerminal
 
-var player_in_area := false
+var player_in_area := true
 
 signal follower_spawned(spawn_position: Vector2)
 
@@ -70,13 +70,13 @@ func _spawn() -> void:
 		follower_spawned.emit(follower_node.global_position)
 
 func _area_entered(area: Area2D) -> void:
-	if !area.is_in_group("player_area") || !black_background:
+	if !area.is_in_group("player_area") || !black_background || (!Global.player == area.get_parent().get_parent() && Global.player._is_node_owner()):
 		return
 	
 	player_in_area = true
 
 func _area_exited(area: Area2D) -> void:
-	if !area.is_in_group("player_area") || !black_background:
+	if !area.is_in_group("player_area") || !black_background || (!Global.player == area.get_parent().get_parent() && Global.player._is_node_owner()):
 		return
 	
 	player_in_area = false

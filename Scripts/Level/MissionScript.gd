@@ -9,7 +9,7 @@ var line_two_material
 var line_three_material
 var line_four_material
 var line_five_material
-var line_six_material
+var line_six_materiald
 
 var total_saved_civillians := 0
 

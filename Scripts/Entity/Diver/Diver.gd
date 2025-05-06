@@ -49,7 +49,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
-	if !Global.is_multiplayer || _is_node_owner():
+	if _is_node_owner():
 		Global.player = self
 
 func _physics_process(_delta: float):
@@ -67,12 +67,6 @@ func _physics_process(_delta: float):
 		z_index = 21
 	else:
 		z_index = 100
-	
-	# Camera
-	if !(Global.is_multiplayer && Global.godot_steam_abstraction && 	_is_node_owner()):
-		camera.enabled = true
-	else:
-		camera.enabled = false
 	
 	if diver_animation.in_unlock_terminal_area:
 		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2(3, 3), 0.2, _delta)

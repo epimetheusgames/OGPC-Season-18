@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://ctt8tds4p8vt0" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="21_obv2f"]
 [ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_pr3qq"]
 [ext_resource type="Texture2D" uid="uid://ctwe161d8x2ne" path="res://Assets/Art/Misc/Bubble.png" id="22_l3b62"]
-[ext_resource type="PackedScene" uid="uid://bwtadftcthq27" path="res://Scenes/TSCN/Objects/CivillianSpawnPoint.tscn" id="23_jw53c"]
+[ext_resource type="PackedScene" path="res://Scenes/TSCN/Objects/CivillianSpawnPoint.tscn" id="23_jw53c"]
 [ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.tscn" id="26_k8n8v"]
 [ext_resource type="PackedScene" uid="uid://6kbux1lvwaw3" path="res://Scenes/TSCN/Objects/Items/RockItem.tscn" id="27_l3b62"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="29_54jb5"]
