@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 					print("Submarine bounced with new velocity: " + str(velocity))
 					
 					var velocity_change : float = (reflection_velocity - velocity).length()
-					$"../Hurtbox".damage(velocity_change/30, null)
+					$"../Hurtbox".damage(velocity_change/30, Attackbox.new())
 					invunerability_timer.start(invunerability_length)
 					invunerable = true
 					break

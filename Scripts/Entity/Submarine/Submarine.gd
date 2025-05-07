@@ -16,6 +16,8 @@ var players_inside : int = 0
 
 var flipped : bool = false
 
+signal sub_flipped()
+
 func _ready() -> void:
 	hurtbox.damaged.connect(damaged)
 	hurtbox.died.connect(die)
@@ -53,6 +55,7 @@ func _physics_process(_delta: float) -> void:
 
 func flip():
 	flipped = !flipped
+	emit_signal("sub_flipped")
 	for child in get_children():
 		if "scale" in child:
 			child.scale.x = -child.scale.x
@@ -71,7 +74,7 @@ func damaged(damage_amount : float, by : Hurtbox):
 	Global.player.camera.shake(3, 0.5)
  
 func die():
-	Global.player.scale.x = -1
+	Global.player.scale.x *= Global.player.scale.x * Global.player.scale.y
 	queue_free()
 
 func _on_submarine_area_area_entered(area: Area2D) -> void:

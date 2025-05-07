@@ -32,6 +32,8 @@ var heat := 0.0 # Max heat 100
 var passive_heat_drain := false
 var cooling := false
 var overheating := false
+var flipped := false
+
 @export var heat_increase_per_shot : float
 @export var passive_decrease_cooldown : float # Amount of time before passive heat decrease begins
 @export var passive_heat_decrease_per_sec : float
@@ -40,6 +42,8 @@ var overheating := false
 
 ## NOTE: If we end up having a range that goes above 180 (PI) or -180 (-PI) (eg. min = 160, max = 200) then we might have some clamping issues
 func _ready() -> void:
+	$"../..".sub_flipped.connect(sub_flipped)
+	
 	max_rotation = rotation_degrees + rotation_range/2
 	min_rotation = rotation_degrees - rotation_range/2
 	# common kai W code
@@ -59,7 +63,14 @@ func _on_shot_cooldown_timeout() -> void:
 func _on_passive_decrease_timer_timeout() -> void:
 	passive_heat_drain = true
 
+func sub_flipped():
+	flipped = !flipped
+	var min_rotation_buffer = -(max_rotation + get_parent().rotation_degrees) + 180 - get_parent().rotation_degrees
+	max_rotation = -(min_rotation + get_parent().rotation_degrees) + 180 - get_parent().rotation_degrees
+	min_rotation = min_rotation_buffer
+
 func _physics_process(delta: float) -> void:
+	get_parent().scale.x = 1
 	heat_shader.set_shader_parameter("heat", heat)
 	
 	if passive_heat_drain:
