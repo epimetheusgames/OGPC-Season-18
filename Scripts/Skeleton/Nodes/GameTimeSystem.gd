@@ -26,6 +26,11 @@ func _ready() -> void:
 			_days += 1
 			day_ended.emit()
 		time_changed.emit(_hours, _minutes)
+		
+		if Global.is_multiplayer_host():
+			Global.godot_steam_abstraction.sync_var(self, "_minutes")
+			Global.godot_steam_abstraction.sync_var(self, "_hours")
+			Global.godot_steam_abstraction.sync_var(self, "_days")
 
 # Returns hours, minutes.
 func get_time() -> Array[int]:

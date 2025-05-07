@@ -65,8 +65,24 @@ func _spawn() -> void:
 	for i in range(Global.game_time_system._days):
 		var follower_spawn_positions := get_tree().get_nodes_in_group("civillian_spawn_points")
 		var follower_node: CivillianFollower = follower.instantiate()
-		follower_spawn_positions.pick_random().add_child(follower_node)
+		var spawn_node = follower_spawn_positions.pick_random()
+		spawn_node.add_child(follower_node)
 		follower_node.position += Util.random_vector(Global.rng, 50, 0)
+		follower_spawned.emit(follower_node.global_position)
+		if Global.is_multiplayer_host():
+			Global.godot_steam_abstraction.run_remote_function(self, "_spawn_remote", [
+				str(get_path_to(spawn_node)), 
+				follower_node.global_position, 
+				follower_node.name, 
+				Global.game_time_system._days
+			])
+
+func _spawn_remote(spawn_pos: String, pos: Vector2, custom_name: String, amount: int) -> void:
+	for i in range(amount):
+		var follower_node: CivillianFollower = follower.instantiate()
+		follower_node.name = custom_name
+		get_node(spawn_pos).add_child(follower_node, true)
+		follower_node.global_position = pos
 		follower_spawned.emit(follower_node.global_position)
 
 func _area_entered(area: Area2D) -> void:
