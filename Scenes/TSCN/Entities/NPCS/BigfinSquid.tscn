@@ -34,27 +34,27 @@ metadata/_custom_type_script = "uid://0j0vsqeeio1s"
 [node name="RightFrontArm" type="Line2D" parent="."]
 points = PackedVector2Array(14, 13, 77, 46)
 width = 4.0
-default_color = Color(0.3234, 0.66, 0.3234, 1)
+default_color = Color(0.486275, 0.701961, 0.258824, 1)
 metadata/_edit_lock_ = true
 
 [node name="LeftFrontArm" type="Line2D" parent="."]
 points = PackedVector2Array(-5, 11, -78, 46)
 width = 4.0
-default_color = Color(0.321569, 0.658824, 0.321569, 1)
+default_color = Color(0.486275, 0.701961, 0.258824, 1)
 metadata/_edit_lock_ = true
 
 [node name="RightBackArm" type="Line2D" parent="."]
 z_index = -1
 points = PackedVector2Array(10, 18, 37, 44)
 width = 4.0
-default_color = Color(0.487598, 0.924542, 0.486052, 1)
+default_color = Color(0.486275, 0.701961, 0.258824, 1)
 metadata/_edit_lock_ = true
 
 [node name="LeftBackArm" type="Line2D" parent="."]
 z_index = -1
 points = PackedVector2Array(-4, 9, -36, 43)
 width = 4.0
-default_color = Color(0.487598, 0.924542, 0.486052, 1)
+default_color = Color(0.486275, 0.701961, 0.258824, 1)
 metadata/_edit_lock_ = true
 
 [node name="RightFrontArmRope" type="Node" parent="."]

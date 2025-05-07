@@ -8,6 +8,7 @@ extends Line2D
 
 @export var smoothing_on: bool = false
 @export var resolution_multiplier: float = 4.0
+@export var max_length := -1
 
 func _process(delta: float) -> void:
 	if rope is VerletRope:
@@ -21,7 +22,13 @@ func _process(delta: float) -> void:
  
 	# Convert to a modifiable Array[Vector2] with explicit typing
 	var global_points: Array[Vector2] = []
+	var i := -1
 	for p in raw_points:
+		i += 1
+		
+		if i > max_length && max_length > 0:
+			break
+		
 		global_points.append(Vector2(p))
  
 	# Override endpoints if needed

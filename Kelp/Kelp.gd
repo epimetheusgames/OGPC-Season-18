@@ -17,13 +17,17 @@ var base_time := 0.0
 # Wait for ropelinedrawer to fill points.
 var first_time := true
 
+var waiting := true
+
 func _ready() -> void:
-	for i in range(length - 6):
+	drawer.max_length = length
+	
+	for i in range(50):
 		var new_kelp_segment: KelpSegment = kelp.instantiate()
 		new_kelp_segment.scale = Vector2(3, 3)
 		add_child(new_kelp_segment)
 		kelp_segments.append(new_kelp_segment)
-		new_kelp_segment.frame = i % new_kelp_segment.segment_frames
+		new_kelp_segment.get_node("KelpSegment").frame = i % new_kelp_segment.segment_frames
 	
 	for i in range(rope.points.size()):
 		if i % segment_spacing == 0:
@@ -38,14 +42,21 @@ func _process(delta: float) -> void:
 	
 	base_time += delta
 	
-	rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen()
+	rope.is_on_screen = $VisibleOnScreenNotifier2D.is_on_screen() || waiting
 	
 	if !rope.is_on_screen:
 		return
 	
-	for i in range(drawer.points.size()):
+	kelp_segments[0].visible = false
+	kelp_segments[1].visible = false
+	
+	for i in range(2, drawer.points.size()):
+		if i > length:
+			kelp_segments[i].visible = false
+			continue
+		
 		var kelp_segment: KelpSegment = kelp_segments[i]
-		kelp_segment.position = (drawer.points[i] + drawer.points[i + 1]) / 2.0
+		kelp_segment.position = (drawer.points[i - 1] + drawer.points[i]) / 2.0
 		
 		if i > 0 && i < length - 1:
 			var dir := drawer.points[i - 1].direction_to(drawer.points[i])
@@ -60,4 +71,6 @@ func _process(delta: float) -> void:
 			var phase := i * 1 + Global.rng.randf_range(-0.7, 0.7)
 			var sway := sin(base_time * sway_frequency + phase) * sway_amount + Global.rng.randf_range(-0.3, 0.3)
 			rope.points[i].x += sway
-	
+
+func _on_smooth_out_timer_timeout() -> void:
+	waiting = false

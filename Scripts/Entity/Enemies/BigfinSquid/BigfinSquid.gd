@@ -26,7 +26,7 @@ func _ready() -> void:
 		drawer.resolution_multiplier = 6
 		drawer.smoothing_on = true
 		drawer.z_index = arms[i].z_index
-		drawer.width = 4
+		drawer.width = 8
 		drawer.default_color = arms[i].default_color
 		add_child(drawer)
 		

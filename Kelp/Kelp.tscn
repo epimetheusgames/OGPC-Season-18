@@ -21,7 +21,7 @@ start_anchor_node = NodePath("..")
 metadata/_custom_type_script = "uid://cxt7y067vc2qg"
 
 [node name="RopeLineDrawer" type="Line2D" parent="." node_paths=PackedStringArray("rope")]
-default_color = Color(0.09, 1, 0.469167, 1)
+default_color = Color(4.71681e-06, 0.471002, 0.202595, 1)
 script = ExtResource("3_yqwc2")
 rope = NodePath("../VerletRope")
 smoothing_on = true
@@ -31,3 +31,10 @@ metadata/_custom_type_script = "uid://cdi0hiygq0pte"
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(11, -2618.25)
 scale = Vector2(27, 268.375)
+
+[node name="SmoothOutTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SmoothOutTimer" to="." method="_on_smooth_out_timer_timeout"]

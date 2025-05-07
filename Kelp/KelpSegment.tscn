@@ -102,9 +102,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="KelpSegment" type="AnimatedSprite2D"]
+[node name="KelpSegment" type="Node2D"]
+script = ExtResource("2_evsf2")
+
+[node name="KelpSegment" type="AnimatedSprite2D" parent="."]
+position = Vector2(-8, 0)
 sprite_frames = SubResource("SpriteFrames_yy0dx")
 animation = &"KelpSegments"
 frame_progress = 0.00818703
 offset = Vector2(6, 0)
-script = ExtResource("2_evsf2")
