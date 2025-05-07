@@ -1,7 +1,7 @@
 class_name GameTimeSystem
 extends Node
 
-@export var seconds_per_ten_minutes: int
+@export var seconds_per_ten_minutes: float
 
 var _hours: int = 0
 var _minutes: int = 0

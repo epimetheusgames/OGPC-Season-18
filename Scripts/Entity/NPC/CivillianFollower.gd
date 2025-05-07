@@ -47,12 +47,14 @@ func _on_save_nodes() -> void:
 	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self, ["position", "rotation", "velocity"]))
 
 func _physics_process(delta: float) -> void:
+	z_index = 100
+	
 	if !following:
 		if going_to_building:
 			going_to_building = false
 		return
 		
-	if global_position.distance_squared_to(navigation.target_position) < 5 ^ 2:
+	if global_position.distance_squared_to(navigation.target_position) < 5 ** 2:
 		return
 	
 	if !$AnimSkeleton/SwimmingAnimationPlayer.is_playing() && !is_in_gravity_area:
