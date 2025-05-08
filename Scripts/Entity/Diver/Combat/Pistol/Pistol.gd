@@ -23,7 +23,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-	
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !Global.player._is_node_owner():
 		return
 	

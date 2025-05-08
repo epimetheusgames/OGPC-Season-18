@@ -52,6 +52,16 @@ func _process(_delta: float) -> void:
 	if diver.diver_movement.is_in_gravity_area:
 		return
 	
+	if (primary_weapon || secondary_weapon) && !diver.diver_movement.is_in_research_station && !Global.pressable_buttons_panel.has("Switch Weapon"):
+		Global.pressable_buttons_panel.buttons.append(PressableButtonsPanel.ButtonPress.create("Switch Weapon", "Q"))
+	elif !((primary_weapon || secondary_weapon) && !diver.diver_movement.is_in_research_station):
+		Global.pressable_buttons_panel.remove("Switch Weapon")
+	
+	if ((primary_weapon && primary_weapon.enabled) || (secondary_weapon && secondary_weapon.enabled)) && !Global.pressable_buttons_panel.has("Attack"):
+		Global.pressable_buttons_panel.buttons.append(PressableButtonsPanel.ButtonPress.create("Attack", "Left Mouse"))
+	elif !((primary_weapon && primary_weapon.enabled) || (secondary_weapon && secondary_weapon.enabled)):
+		Global.pressable_buttons_panel.remove("Attack")
+	
 	if Input.is_action_just_pressed("swap") && primary_weapon && secondary_weapon:
 		if primary_weapon.enabled:
 			primary_weapon.enabled = false

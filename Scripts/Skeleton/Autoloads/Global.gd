@@ -92,6 +92,9 @@ var brightness_modulate: CanvasModulate
 ## The light that acts as the sun.
 var sun: DirectionalLight2D
 
+## Pressable buttons
+var pressable_buttons_panel: PressableButtonsPanel
+
 var death_menu: DeathScreen
 var success_menu: MissionSuccessScreen
 var pause_menu: PauseMenu

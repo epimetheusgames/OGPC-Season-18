@@ -58,6 +58,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		handle_swim_movement(delta)
 	
+	if is_in_ladder_area && !Global.pressable_buttons_panel.has("Use Ladder"):
+		Global.pressable_buttons_panel.buttons.append(PressableButtonsPanel.ButtonPress.create("Use Ladder", "E"))
+	elif !is_in_ladder_area:
+		Global.pressable_buttons_panel.remove("Use Ladder")
+	
 	diver.velocity *= 0.98
 
 func handle_boost() -> void:

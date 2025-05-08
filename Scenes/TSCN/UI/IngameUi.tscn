@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://71htappd3cxj"]
+[gd_scene load_steps=14 format=3 uid="uid://71htappd3cxj"]
 
 [ext_resource type="Script" uid="uid://1xmo13kpmgen" path="res://Scripts/UI/Ingame/TeamInfoPanel.gd" id="1_0ajfg"]
 [ext_resource type="Script" uid="uid://cdry0a2rsou8n" path="res://Scripts/UI/Ingame/PersonHUD.gd" id="1_0aoln"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ck4dghi3kpbdd" path="res://Scripts/UI/Bar.gd" id="5_s6r6i"]
 [ext_resource type="Texture2D" uid="uid://cb7t2q24l4xf" path="res://Assets/Art/OxygenBar.png" id="5_ti1bd"]
 [ext_resource type="Texture2D" uid="uid://bbq3i5mso53js" path="res://Assets/Art/OxygenBarProgress.png" id="6_yehem"]
+[ext_resource type="Script" uid="uid://bb8dl02c0kfky" path="res://Scripts/UI/Ingame/PressableButtonsPanel.gd" id="11_ti1bd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l72ri"]
 
@@ -428,6 +429,84 @@ shortcut_keys_enabled = false
 [node name="PanelContainer" type="PanelContainer" parent="StatsAndChatDraggable"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jrftq")
+
+[node name="PressableButtonsPanel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 1224.0
+offset_top = 1026.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("11_ti1bd")
+
+[node name="MarginContainer" type="MarginContainer" parent="PressableButtonsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PressableButtonsPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PressableButtonsPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("5_6galc")
+text = "Test"
+
+[node name="Label2" type="Label" parent="PressableButtonsPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_6galc")
+text = "Test"
+
+[node name="Label3" type="Label" parent="PressableButtonsPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_6galc")
+text = "Test"
+
+[node name="Label4" type="Label" parent="PressableButtonsPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_6galc")
+text = "Test"
+
+[node name="Label5" type="Label" parent="PressableButtonsPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_6galc")
+text = "Test"
+
+[node name="Label6" type="Label" parent="PressableButtonsPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_6galc")
+text = "Test"
+
+[node name="Label7" type="Label" parent="PressableButtonsPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_6galc")
+text = "Test"
+
+[node name="Label8" type="Label" parent="PressableButtonsPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_6galc")
+text = "Test"
+
+[node name="Label9" type="Label" parent="PressableButtonsPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("5_6galc")
+text = "Test"
 
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot1/TextureRect/SlotButton" to="Inventory" method="_on_slot_button_button_down"]
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot2/TextureRect/SlotButton2" to="Inventory" method="_on_slot_button_2_button_down"]

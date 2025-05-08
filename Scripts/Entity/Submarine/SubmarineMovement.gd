@@ -37,6 +37,16 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	decay_velocity(delta)
 	
+	if in_interaction_area && !Global.pressable_buttons_panel.has("Operate"):
+		Global.pressable_buttons_panel.buttons.append(PressableButtonsPanel.ButtonPress.create("Operate", "E"))
+	elif !in_interaction_area:
+		Global.pressable_buttons_panel.remove("Operate")
+	
+	if is_being_operated && !Global.pressable_buttons_panel.has("Shoot"):
+		Global.pressable_buttons_panel.buttons.append(PressableButtonsPanel.ButtonPress.create("Shoot", "Left Mouse"))
+	elif !is_being_operated:
+		Global.pressable_buttons_panel.remove("Shoot")
+	
 	if !Global.is_multiplayer || get_parent()._is_node_owner():
 		if !invunerable:
 			for i in range(get_parent().get_slide_collision_count()):
