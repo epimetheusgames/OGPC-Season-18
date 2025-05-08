@@ -45,6 +45,11 @@ func _ready() -> void:
 		get_node("Pivot").set_node_variables()
 
 func _process(delta: float) -> void:
+	if Global.is_multiplayer && _is_node_owner():
+		Global.godot_steam_abstraction.sync_var(self, "velocity")
+		Global.godot_steam_abstraction.sync_var(self, "position")
+		Global.godot_steam_abstraction.sync_var(self, "rotation")
+	
 	aura.global_rotation = 0.0
 	if Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
 		Global.player.global_transform = seat_pos.global_transform
@@ -54,6 +59,9 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func flip():
+	if Global.is_multiplayer && _is_node_owner():
+		Global.godot_steam_abstraction.run_remote_function(self, "flip", [])
+	
 	flipped = !flipped
 	emit_signal("sub_flipped")
 	for child in get_children():

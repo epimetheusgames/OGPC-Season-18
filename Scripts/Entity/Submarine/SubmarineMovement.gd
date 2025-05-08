@@ -9,7 +9,7 @@ const MAX_SPEED: float = 7500.0
 const MAX_ROTATION: float = PI/12
 const BOUNCE_VELOCITY_DECAY: float = .9
 
-@onready var buoyancy_component = get_parent().get_node("BuoyancyComponent")
+@onready var submarine : Submarine = get_parent()
 
 var in_interaction_area : bool = false
 var current_angle: float = 0.0
@@ -22,11 +22,17 @@ var invunerability_timer : Timer
 var invunerability_length : float = .25
 var invunerable : bool = false
 
+var is_being_operated : bool = false
+
 func _ready() -> void:
 	invunerability_timer = Timer.new()
 	invunerability_timer.one_shot = true
 	add_child(invunerability_timer)
 	invunerability_timer.connect("timeout", _on_invunerability_cooldown_timeout)
+
+func _process(delta: float) -> void:
+	if Global.is_multiplayer && submarine.is_multiplayer():
+		Global.godot_steam_abstraction.sync_var(self, "is_being_operated")
 
 func _physics_process(delta: float) -> void:
 	decay_velocity(delta)
@@ -61,12 +67,14 @@ func _physics_process(delta: float) -> void:
 			get_parent().rotation = current_angle
 	
 	if Input.is_action_just_pressed("interact"):
-		if Global.player.get_state() != Diver.DiverState.DRIVING_SUBMARINE and in_interaction_area: 
+		if Global.player.get_state() != Diver.DiverState.DRIVING_SUBMARINE and in_interaction_area and !is_being_operated: 
 			Global.player.set_state(Diver.DiverState.DRIVING_SUBMARINE)
+			is_being_operated = true
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = true
 		elif Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
 			Global.player.set_state(Diver.DiverState.IN_GRAVITY_AREA)
 			target_angle = 0.0
+			is_being_operated = false
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = false
 			Global.player.scale.x = -1
 
