@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dpuqudpawu2ly"]
+[gd_scene format=3 uid="uid://ccpwr2asewfok"]
 
 [node name="MiniSub" type="CharacterBody2D"]
 position = Vector2(98, 35)
