@@ -33,16 +33,6 @@ theme_override_font_sizes/font_size = 72
 text = "You Died!"
 horizontal_alignment = 1
 
-[node name="FunnyText" type="Label" parent="."]
-layout_mode = 0
-offset_top = 320.0
-offset_right = 1922.0
-offset_bottom = 421.0
-theme = ExtResource("2_hhqn4")
-theme_override_font_sizes/font_size = 25
-text = "That's sad. We'll sent a replacement as soon as we can!"
-horizontal_alignment = 1
-
 [node name="RestartButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 809.0

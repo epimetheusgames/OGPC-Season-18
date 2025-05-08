@@ -31,7 +31,7 @@ func _ready() -> void:
 	invunerability_timer.connect("timeout", _on_invunerability_cooldown_timeout)
 
 func _process(delta: float) -> void:
-	if Global.is_multiplayer && submarine.is_multiplayer():
+	if Global.is_multiplayer && submarine._is_node_owner():
 		Global.godot_steam_abstraction.sync_var(self, "is_being_operated")
 
 func _physics_process(delta: float) -> void:
