@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6e8byosr3kaa"]
+
+[ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_w1gk7"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_imj13"]
+[ext_resource type="Texture2D" uid="uid://cig5sr8a34pmn" path="res://Assets/Art/Items/BigfinSquidEye.png" id="3_omjru"]
+
+[sub_resource type="Resource" id="Resource_d8ox7"]
+script = ExtResource("2_imj13")
+file = "uid://b6e8byosr3kaa"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_imj13"]
+radius = 25.0
+
+[node name="BigfinSquidEye" type="Area2D"]
+script = ExtResource("1_w1gk7")
+scene = SubResource("Resource_d8ox7")
+icon = ExtResource("3_omjru")
+cost = 10
+item_name = "Bigfin Squid Eye"
+sellable_resource = true
+metadata/_custom_type_script = "uid://fpnredcqa4b5"
+
+[node name="BigfinSquidEye" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_omjru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_imj13")

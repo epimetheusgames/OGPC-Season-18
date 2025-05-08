@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dk5y5253vbhe4"]
+[gd_scene load_steps=22 format=3 uid="uid://dk5y5253vbhe4"]
 
 [ext_resource type="Script" uid="uid://baa5wmu4mxnlc" path="res://Scripts/Entity/Enemies/Jellyfish/Jellyfish.gd" id="1_dd7wo"]
 [ext_resource type="Script" uid="uid://b206cxohqlg3r" path="res://Scripts/Entity/Enemies/Jellyfish/JellyfishTentacles.gd" id="2_7lbwn"]
 [ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Scripts/Entity/Enemies/EnemyFov.gd" id="2_nxkv1"]
+[ext_resource type="PackedScene" uid="uid://mg1dxuml1f2v" path="res://Scenes/TSCN/Objects/Items/JellyfishTentacles.tscn" id="2_ylodk"]
 [ext_resource type="Script" uid="uid://cmyaowe8fevss" path="res://Scripts/Entity/Enemies/Jellyfish/TentacleData.gd" id="3_546cb"]
 [ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="4_i2om7"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_gyt63"]
@@ -13,6 +14,7 @@
 [ext_resource type="Script" uid="uid://itsqohytpwm2" path="res://Scripts/Entity/Enemies/Jellyfish/States/Spin.gd" id="11_i2om7"]
 [ext_resource type="Texture2D" uid="uid://cpr5p62p2pwcg" path="res://Assets/Art/Entity/JellyFishBellGlow.png" id="12_nxkv1"]
 [ext_resource type="Script" uid="uid://frjt5conmasl" path="res://Glow.gd" id="13_e3uxy"]
+[ext_resource type="Script" uid="uid://crynjoiy8hntp" path="res://Scripts/Entity/Enemies/UniversalStates/Dead.gd" id="14_miqq8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_05v0o"]
 radius = 35.0
@@ -44,13 +46,15 @@ fill_to = Vector2(0.901709, 0.538462)
 radius = 33.0
 height = 278.0
 
-[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov", "state_machine")]
+[node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov", "state_machine", "dead_state")]
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 hurtbox = NodePath("Hurtbox")
 nav_agent = NodePath("NavigationAgent2D")
 enemy_fov = NodePath("EnemyFov")
 state_machine = NodePath("StateMachine")
+dead_state = NodePath("StateMachine/Dead")
+drop_item = ExtResource("2_ylodk")
 
 [node name="EnemyFov" type="Node2D" parent="."]
 script = ExtResource("2_nxkv1")
@@ -67,6 +71,7 @@ metadata/_edit_lock_ = true
 script = ExtResource("6_gyt63")
 entity = NodePath("..")
 hurt_by_player = true
+max_health = 20.0
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -132,6 +137,9 @@ script = ExtResource("11_i2om7")
 wander_state = NodePath("../Wander")
 boost_state = NodePath("../Boost")
 
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("14_miqq8")
+
 [node name="ContinuousAttack" type="Area2D" parent="."]
 script = ExtResource("4_i2om7")
 attacker_type = 0
@@ -144,3 +152,5 @@ position = Vector2(0, -83)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_e3uxy")
 debug_color = Color(0.983468, 0.127033, 0, 0.42)
+
+[connection signal="died" from="Hurtbox" to="." method="_on_hurtbox_died"]

@@ -24,6 +24,8 @@ func _process(_delta: float) -> void:
 	
 	var readable_pos := (Global.player.global_position - Global.research_station.global_position) / 10
 	$MarginContainer/HBoxContainer/CoordsText.text = "Coordinates: " + str(int(readable_pos.x)) + ", " + str(int(readable_pos.y))
+	
+	$MarginContainer/HBoxContainer/SavedCivillians.text = "Saved Civillians: " + str(Global.current_mission_node.total_saved_civillians)
 
 func _saving_game() -> void:
 	$MarginContainer/HBoxContainer/SavingText.visible = true

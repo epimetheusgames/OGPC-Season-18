@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bi6i18nskixdt"]
+[gd_scene load_steps=26 format=3 uid="uid://bi6i18nskixdt"]
 
 [ext_resource type="Script" uid="uid://beofwn0pgkcaq" path="res://Scripts/Entity/NPC/CivillianFollower.gd" id="1_o7vjs"]
 [ext_resource type="Texture2D" uid="uid://y48rk6lmacle" path="res://Assets/Art/Entity/Player/PlayerSkinSideways.png" id="2_5cylf"]
@@ -189,6 +189,17 @@ _data = {
 &"RESET": SubResource("Animation_jhedc")
 }
 
+[sub_resource type="Gradient" id="Gradient_eo78x"]
+colors = PackedColorArray(1, 1, 1, 0.36, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5cylf"]
+gradient = SubResource("Gradient_eo78x")
+width = 1000
+height = 1000
+fill = 1
+fill_from = Vector2(0.5, 0.527778)
+fill_to = Vector2(0.692308, 0.732906)
+
 [node name="CivillianFollower" type="CharacterBody2D" node_paths=PackedStringArray("navigation", "detection_area")]
 collision_layer = 0
 script = ExtResource("1_o7vjs")
@@ -199,7 +210,6 @@ follow_distance = 300.0
 metadata/_custom_type_script = "uid://beofwn0pgkcaq"
 
 [node name="Nav" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 5)
@@ -568,3 +578,13 @@ position = Vector2(-40, 115)
 libraries = {
 &"": SubResource("AnimationLibrary_jhedc")
 }
+
+[node name="BodyLight" type="PointLight2D" parent="."]
+energy = 3.0
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.0
+texture = SubResource("GradientTexture2D_5cylf")
+texture_scale = 0.7
+metadata/_edit_lock_ = true

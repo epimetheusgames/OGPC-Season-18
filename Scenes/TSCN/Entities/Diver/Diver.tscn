@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 [ext_resource type="Script" uid="uid://bp6e1wanf5ku7" path="res://Scenes/TSCN/Entities/Diver/Weapons/SoundVariationPlayer.gd" id="20_gnc2j"]
-[ext_resource type="Script" uid="uid://ysnky678kpqd" path="res://Scenes/TSCN/Entities/Diver/DiverSound.gd" id="20_l44qt"]
+[ext_resource type="Script" path="res://Scenes/TSCN/Entities/Diver/DiverSound.gd" id="20_l44qt"]
 [ext_resource type="AudioStream" uid="uid://ddw8r2pp1mrg1" path="res://Assets/SFX/Edited/Diver/footstep-1.mp3" id="21_juvxq"]
 [ext_resource type="Script" uid="uid://dw54av5q4enf2" path="res://Scripts/Objects/Camera.gd" id="21_soyuq"]
 [ext_resource type="AudioStream" uid="uid://dm4p7pxgqnq5u" path="res://Assets/SFX/Edited/Diver/footstep-2.mp3" id="22_l44qt"]
@@ -224,11 +224,11 @@ _data = {
 radius = 25.0
 height = 110.0
 
-[sub_resource type="Gradient" id="Gradient_eo78x"]
+[sub_resource type="Gradient" id="Gradient_yxkba"]
 colors = PackedColorArray(1, 1, 1, 0.36, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_chbw5"]
-gradient = SubResource("Gradient_eo78x")
+gradient = SubResource("Gradient_yxkba")
 width = 1000
 height = 1000
 fill = 1

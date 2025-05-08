@@ -116,7 +116,7 @@ default_mission_tree = SubResource("Resource_1tmkv")
 
 [node name="GameTimeSystem" type="Node" parent="Skeleton"]
 script = ExtResource("10_5yeas")
-seconds_per_ten_minutes = 0.1
+seconds_per_ten_minutes = 1.0
 
 [node name="DiscordRPC" type="Node" parent="Skeleton"]
 script = ExtResource("11_bhkpb")

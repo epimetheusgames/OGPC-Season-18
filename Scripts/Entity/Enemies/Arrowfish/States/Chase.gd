@@ -27,7 +27,7 @@ func process_physics(delta: float) -> State:
 	var next_path_pos = enemy.nav_agent.get_next_path_position()
 	enemy.accelerate_towards(next_path_pos, chase_speed)
 	
-	if enemy.hurtbox.health < 250:
+	if enemy.hurtbox && enemy.hurtbox.health < 250:
 		pass
 		#return wander_state
 	

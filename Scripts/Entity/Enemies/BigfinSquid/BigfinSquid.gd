@@ -7,6 +7,7 @@ extends Enemy
 @onready var limbs: Array[Node2D]
 var targets: Array[Node2D] = []
 var end_targets: Array[Node2D] = []
+var dead := false
 
 func _ready() -> void:
 	super()
@@ -44,6 +45,9 @@ func _ready() -> void:
 		rope.damping = 0.95
 
 func _process(delta: float) -> void:
+	if dead:
+		return
+	
 	super(delta)
 	
 	var closest_player := get_closest_player()
@@ -71,7 +75,9 @@ func _process(delta: float) -> void:
 		!Global.is_multiplayer || !Global.godot_steam_abstraction) && \
 		closest_player.global_position.distance_squared_to(global_position) < 1000 ** 2
 	):
-		closest_player.global_position += (global_position - closest_player.global_position).normalized() * 1.5 * delta * 60
-	
-	if Global.godot_steam_abstraction && Global.is_multiplayer && !_is_node_owner():
-		return
+		closest_player.global_position += (global_position - closest_player.global_position).normalized() * 5 * delta * 60
+
+func _on_hurtbox_died() -> void:
+	for rope in ropes:
+		rope.end_pos_on = false
+	dead = true

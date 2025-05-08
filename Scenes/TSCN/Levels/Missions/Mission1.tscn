@@ -502,11 +502,6 @@ script = ExtResource("5_aep54")
 metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
-[node name="AvoidRegion1" type="Polygon2D" parent="LevelContainer/Environment/Collisions/World"]
-color = Color(0, 0, 0.341176, 1)
-polygon = PackedVector2Array(-14300, -5622, -14109, -6071, -13450, -6438, -12794, -6473, -12222, -6229, -12057, -5734, -12069, -5408, -12862, -5339, -13606, -5305, -14247, -5433)
-metadata/_edit_lock_ = true
-
 [node name="BigfinSquid2" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
 position = Vector2(-11022, -3696)
 
@@ -590,7 +585,7 @@ color = Color(0.65834, 0.65834, 0.65834, 1)
 polygon = PackedVector2Array(-110, -72, -81, 109, -283, -69, 192, -134, 53, 87, 23, -97)
 
 [node name="CivillianSpawnPoint2" parent="LevelContainer" instance=ExtResource("23_jw53c")]
-position = Vector2(-13469, -5847)
+position = Vector2(-13469, -5727)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3

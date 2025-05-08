@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://mg1dxuml1f2v"]
+
+[ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_xytkg"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_3kb2w"]
+[ext_resource type="Texture2D" uid="uid://bja24frklxilp" path="res://Assets/Art/Items/JellyfishTentacles.png" id="3_3kb2w"]
+
+[sub_resource type="Resource" id="Resource_t5h1n"]
+script = ExtResource("2_3kb2w")
+file = "uid://mg1dxuml1f2v"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3kb2w"]
+radius = 30.0167
+
+[node name="JellyfishTentacles" type="Area2D"]
+script = ExtResource("1_xytkg")
+scene = SubResource("Resource_t5h1n")
+icon = ExtResource("3_3kb2w")
+cost = 10
+item_name = "Jellyfish Tentacle"
+sellable_resource = true
+metadata/_custom_type_script = "uid://fpnredcqa4b5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 2)
+shape = SubResource("CircleShape2D_3kb2w")
+
+[node name="JellyfishTentacles" type="Sprite2D" parent="."]
+texture = ExtResource("3_3kb2w")

@@ -85,7 +85,8 @@ func load_node(mission: MissionRoot) -> void:
 		await add_to.get_tree().create_timer(0.2, false).timeout
 
 		# Ensure node name stays constant, sometimes Godot can put a number after it.
-		to_add.name = node_name
+		if to_add:
+			to_add.name = node_name
 
 ## Packs a node into this NodeSaver. Static function for this is create
 ## Child properties is path (String): variable names (Array[String]).

@@ -6,11 +6,17 @@ extends Enemy
 var boost_speed: float
 var boost_duration: float
 var boost_direction: Vector2
+var dead := false
 
 func _ready() -> void:
 	state_machine.init(self)
 
 func _physics_process(delta: float) -> void:
+	if dead:
+		move_and_slide()
+		velocity *= 0.95 * delta * 60
+		return
+	
 	state_machine.process_physics(delta)
 	
 	if boost_duration > 0:
@@ -26,10 +32,12 @@ func _physics_process(delta: float) -> void:
 		tentacles.tentacles_up(3)
 		velocity *= 0.99
 	
-	
 	move_and_slide()
 
 func boost(speed: float, duration: float, target_pos: Vector2):
 	boost_speed = speed
 	boost_duration = duration
 	boost_direction = (target_pos - global_position).normalized()
+
+func _on_hurtbox_died() -> void:
+	dead = true

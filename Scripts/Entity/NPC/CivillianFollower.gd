@@ -60,6 +60,9 @@ func _physics_process(delta: float) -> void:
 	if !$AnimSkeleton/SwimmingAnimationPlayer.is_playing() && !is_in_gravity_area:
 		$AnimSkeleton/SwimmingAnimationPlayer.play("LegOscillate")
 	
+	for area in $CivillianArea.get_overlapping_areas():
+		_area_entered(area)
+	
 	if going_to_building && global_position.distance_squared_to(following.global_position) < follow_distance ** 2:
 		var building: PlaceableBuilding = following.get_parent()
 		if !building.current_occupants >= building.max_occupants && building.placed:

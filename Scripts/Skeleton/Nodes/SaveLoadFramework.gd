@@ -62,14 +62,14 @@ func _save_entity(uid: UID, content: EntitySave) -> void:
 	save_state()
 
 # Save the current game state.
-func save_state() -> void:
+func save_state(call_signal := true) -> void:
 	if Global.current_game_save == null || Global.current_game_slot == -1:
 		Global.print_error("Attempting to save state while in the main menu. Printing stack (in console).")
 		print_stack()
 		return
 	
 	# Otherwise it's research station.
-	if Global.current_mission_node is MissionRoot:
+	if Global.current_mission_node is MissionRoot && call_signal:
 		Global.current_game_save.node_saves = []
 		save_nodes.emit()
 	_save_game_save(Global.current_game_save, Global.current_game_slot)
