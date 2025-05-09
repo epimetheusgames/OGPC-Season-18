@@ -74,6 +74,7 @@ func _ready() -> void:
 			placed_by = Global.player
 		if !placed_by._is_node_owner():
 			return
+		name = str(randi_range(0, 10000))
 		Global.godot_steam_abstraction.run_remote_function(placed_by.diver_inventory, "spawn_building", [name])
 
 func _process(delta: float) -> void:
@@ -123,6 +124,7 @@ func _process(delta: float) -> void:
 		Global.godot_steam_abstraction.sync_var(self, "rotation")
 		Global.godot_steam_abstraction.sync_var(self, "placed")
 		Global.godot_steam_abstraction.sync_var(building_sprite, "collision_layer")
+		Global.godot_steam_abstraction.sync_var(building_sprite, "position")
 
 # Returns an array of two vectors, the position and normal. 
 # Or null.

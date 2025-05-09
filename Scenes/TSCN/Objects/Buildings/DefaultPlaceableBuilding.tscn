@@ -22,7 +22,7 @@ base_position = NodePath("Node2D")
 detection_area = NodePath("BuildingArea")
 player_follower_dummy = NodePath("AnyFollowerDummy")
 max_occupants = 1
-building_status = NodePath("BuildingStatus")
+building_status = NodePath("Icon/BuildingStatus")
 
 [node name="Raycasts" type="Node2D" parent="."]
 
@@ -98,6 +98,15 @@ position = Vector2(0, -144)
 scale = Vector2(1.7, 1.7)
 texture = ExtResource("4_e6mh0")
 
+[node name="BuildingStatus" type="Label" parent="Icon"]
+offset_left = -125.294
+offset_top = -52.3529
+offset_right = 126.706
+offset_bottom = -28.3529
+theme = ExtResource("5_e6mh0")
+text = "Status: Unoccupied"
+horizontal_alignment = 1
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
@@ -105,12 +114,3 @@ polygon = PackedVector2Array(-211, 60, -191, -41, -163, -111, -97, -167, -9, -18
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(0, 48)
-
-[node name="BuildingStatus" type="Label" parent="."]
-offset_left = -125.0
-offset_top = -217.0
-offset_right = 127.0
-offset_bottom = -193.0
-theme = ExtResource("5_e6mh0")
-text = "Status: Unoccupied"
-horizontal_alignment = 1
