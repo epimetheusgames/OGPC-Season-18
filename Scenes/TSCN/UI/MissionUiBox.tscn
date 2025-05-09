@@ -1,8 +1,55 @@
-[gd_scene load_steps=11 format=3 uid="uid://chy3luehcqm2b"]
+[gd_scene load_steps=20 format=3 uid="uid://chy3luehcqm2b"]
 
 [ext_resource type="Script" uid="uid://dek63qm1l0ga8" path="res://Scripts/UI/MissionUiBox.gd" id="1_0up1m"]
 [ext_resource type="Theme" uid="uid://b8bvv1n5midlh" path="res://Scenes/Resource/UI/MainTheme.tres" id="1_xywor"]
-[ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="2_olbpw"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_05m3v"]
+[ext_resource type="Script" uid="uid://clgd0ups3ekte" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="3_2ouly"]
+[ext_resource type="Script" uid="uid://dibek110g765h" path="res://Scripts/ResourceScripts/Missions/MissionSuccessStateSequence.gd" id="4_hke2u"]
+[ext_resource type="Script" uid="uid://6py856oobeuv" path="res://Scripts/ResourceScripts/Missions/MissionSuccessState.gd" id="5_7ge1o"]
+
+[sub_resource type="Resource" id="Resource_mkq3y"]
+script = ExtResource("2_05m3v")
+file = "res://Scenes/TSCN/Levels/Missions/Mission1.tscn"
+
+[sub_resource type="Resource" id="Resource_wrh2p"]
+script = ExtResource("5_7ge1o")
+description = "Acquire Leviathan Bit"
+success_type = 0
+item_name = "Leviathan Bit"
+item_count = 1
+completion_area_name = ""
+something = ""
+
+[sub_resource type="Resource" id="Resource_2eygg"]
+script = ExtResource("5_7ge1o")
+description = "Get a rock"
+success_type = 0
+item_name = "Rock"
+item_count = 1
+completion_area_name = ""
+something = ""
+
+[sub_resource type="Resource" id="Resource_02qkb"]
+script = ExtResource("5_7ge1o")
+description = "Back to the docks"
+success_type = 1
+item_name = ""
+item_count = 0
+completion_area_name = "DocksArea"
+something = ""
+
+[sub_resource type="Resource" id="Resource_dft4t"]
+script = ExtResource("4_hke2u")
+sequence = Array[ExtResource("5_7ge1o")]([SubResource("Resource_wrh2p"), SubResource("Resource_2eygg"), SubResource("Resource_02qkb")])
+
+[sub_resource type="Resource" id="Resource_t3815"]
+script = ExtResource("3_2ouly")
+total_civillians_saved_to_complete = 3
+mission_filepath = SubResource("Resource_mkq3y")
+title = "First mission"
+description = "House three people"
+success_state_checker = SubResource("Resource_dft4t")
+unlocks = Array[ExtResource("2_05m3v")]([])
 
 [sub_resource type="Gradient" id="Gradient_2mbfx"]
 
@@ -49,7 +96,7 @@ offset_bottom = -775.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0up1m")
-associated_mission = ExtResource("2_olbpw")
+associated_mission = SubResource("Resource_t3815")
 
 [node name="MissionTexture" type="TextureRect" parent="."]
 layout_mode = 2

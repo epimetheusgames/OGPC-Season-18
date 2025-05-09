@@ -82,19 +82,20 @@ offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_lock_ = true
 
-[node name="Tutorial" parent="StationaryUI" instance=ExtResource("1_wmqaw")]
-layout_mode = 1
-associated_mission = ExtResource("2_t7gpn")
-metadata/_edit_lock_ = true
+[node name="HBoxContainer" type="HBoxContainer" parent="StationaryUI"]
+layout_mode = 0
+offset_left = 564.0
+offset_top = 298.0
+offset_right = 900.0
+offset_bottom = 670.0
 
-[node name="Mission1" parent="StationaryUI" node_paths=PackedStringArray("connects_to") instance=ExtResource("1_wmqaw")]
-layout_mode = 1
-offset_left = 825.0
-offset_top = 189.0
-offset_right = 825.0
-offset_bottom = 189.0
-connects_to = [NodePath("../Tutorial")]
-metadata/_edit_lock_ = true
+[node name="Tutorial" parent="StationaryUI/HBoxContainer" instance=ExtResource("1_wmqaw")]
+layout_mode = 2
+size_flags_horizontal = 3
+associated_mission = ExtResource("2_t7gpn")
+
+[node name="Mission1" parent="StationaryUI/HBoxContainer" instance=ExtResource("1_wmqaw")]
+layout_mode = 2
 
 [node name="MissionsTitle" type="Label" parent="StationaryUI"]
 layout_mode = 0

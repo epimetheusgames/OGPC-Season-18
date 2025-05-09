@@ -3,7 +3,8 @@ extends Control
 
 
 @export var associated_mission: Mission
-@export var connects_to: Array[MissionUIBox]
+# connects_to is useless, it literally is never mentioned once outside of definition
+# @export var connects_to: Array[MissionUIBox]
 
 func _ready() -> void:
 	if !self in Global.mission_system.mission_tree.get_available_missions():

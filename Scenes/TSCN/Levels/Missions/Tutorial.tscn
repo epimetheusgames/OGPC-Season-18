@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="23_30um5"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="24_uo1ug"]
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="25_q8g00"]
-[ext_resource type="PackedScene" uid="uid://c1oaylh32r500" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="26_dwjxp"]
+[ext_resource type="PackedScene" uid="uid://dxjynk0yqb3jk" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="26_dwjxp"]
 
 [sub_resource type="Animation" id="Animation_obv2f"]
 resource_name = "HappyToScary"
@@ -266,6 +266,7 @@ shader_parameter/num_points = 8
 shader_parameter/global_position = Vector2(992, 334)
 shader_parameter/fade_width = 115
 shader_parameter/tex_scale = 103.0
+shader_parameter/color_multiplier = Color(0, 0, 0, 1)
 shader_parameter/in_tex = SubResource("GradientTexture1D_30dfd")
 shader_parameter/edge_tex = SubResource("CompressedTexture2D_xdlvx")
 
