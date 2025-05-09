@@ -1,6 +1,5 @@
 extends Node
 
-
 var current_hours: int = 0
 var current_minutes: int = 0
 var current_day: int = 0

@@ -65,6 +65,7 @@ func _on_passive_decrease_timer_timeout() -> void:
 
 func sub_flipped():
 	flipped = !flipped
+	rotation = -(rotation + get_parent().rotation) + PI - get_parent().rotation
 	var min_rotation_buffer = -(max_rotation + get_parent().rotation_degrees) + 180 - get_parent().rotation_degrees
 	max_rotation = -(min_rotation + get_parent().rotation_degrees) + 180 - get_parent().rotation_degrees
 	min_rotation = min_rotation_buffer

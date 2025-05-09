@@ -66,7 +66,10 @@ func flip():
 	emit_signal("sub_flipped")
 	for child in get_children():
 		if "scale" in child:
-			child.scale.x = -child.scale.x
+			if child.name == "Headlight":
+				child.scale = -child.scale
+			else:
+				child.scale.x = -child.scale.x
 		if "position" in child:
 			child.position.x = -child.position.x
 
