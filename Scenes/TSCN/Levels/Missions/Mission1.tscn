@@ -399,7 +399,7 @@ collision_mode = 2
 collision_use_scale = true
 
 [node name="Mission1" type="Node2D"]
-skew = 1.00531
+skew = 1.22173
 script = ExtResource("1_314ux")
 
 [node name="GlobalVariableSaver" type="Node" parent="."]
