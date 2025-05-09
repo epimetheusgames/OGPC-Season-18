@@ -502,6 +502,13 @@ script = ExtResource("5_aep54")
 metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
 
+[node name="StaticBody2D" type="StaticBody2D" parent="LevelContainer/Environment/Collisions"]
+collision_layer = 4096
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Environment/Collisions/StaticBody2D"]
+polygon = PackedVector2Array(-12535, -5353, -12098, -5414, -12782, -6481)
+
 [node name="BigfinSquid2" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
 position = Vector2(-11022, -3696)
 
