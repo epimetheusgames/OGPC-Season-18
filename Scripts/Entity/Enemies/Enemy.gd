@@ -51,10 +51,11 @@ func _die() -> void:
 		item.global_position = global_position
 		
 	if hurtbox:
-		hurtbox.queue_free()
+		hurtbox.get_child(0).disabled = true
 	
 	if attackbox:
-		attackbox.queue_free()
+		attackbox.get_child(0).disabled = true
+	
 	if state_machine && dead_state:
 		state_machine.change_state(dead_state)
 	else:

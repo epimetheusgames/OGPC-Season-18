@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6tmbilbuib0l"]
+[gd_scene load_steps=6 format=3 uid="uid://b6tmbilbuib0l"]
 
 [ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_bgjow"]
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_v74yr"]
@@ -9,16 +9,13 @@ script = ExtResource("2_v74yr")
 file = "uid://b6tmbilbuib0l"
 metadata/_custom_type_script = "uid://dlliifnia7sm4"
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tk7fl"]
-size = Vector2(10, 10)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_bgjow"]
 radius = 41.0
 
 [node name="ArrowFishTail" type="Area2D"]
 script = ExtResource("1_bgjow")
 scene = SubResource("Resource_cs5ck")
-icon = SubResource("PlaceholderTexture2D_tk7fl")
+icon = ExtResource("3_v74yr")
 cost = 15
 item_name = "Arrow Fish Tail"
 sellable_resource = true
