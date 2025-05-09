@@ -67,9 +67,15 @@ func _ready() -> void:
 		child.target_position = child.target_position.normalized() * size.length() * raycast_length_mul
 	
 	Global.save_load_framework.save_nodes.connect(_save_self)
+	
+	if Global.is_multiplayer:
+		if !placed_by:
+			placed_by = Global.player
+		if !placed_by._is_node_owner():
+			return
+		Global.godot_steam_abstraction.run_remote_function(placed_by.diver_inventory, "spawn_building", [name])
 
 func _process(delta: float) -> void:
-	# TODO: Fix
 	if !placed_by:
 		placed_by = Global.player
 
@@ -107,6 +113,12 @@ func _process(delta: float) -> void:
 			
 		building_collision.collision_layer = 1
 		building_sprite.modulate.a = 1
+	
+	if Global.is_multiplayer:
+		Global.godot_steam_abstraction.sync_var(self, "global_position")
+		Global.godot_steam_abstraction.sync_var(self, "rotation")
+		Global.godot_steam_abstraction.sync_var(self, "placed")
+		Global.godot_steam_abstraction.sync_var(building_sprite, "collision_layer")
 
 # Returns an array of two vectors, the position and normal. 
 # Or null.

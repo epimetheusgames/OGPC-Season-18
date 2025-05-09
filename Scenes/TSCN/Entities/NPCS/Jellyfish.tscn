@@ -113,7 +113,6 @@ texture = SubResource("GradientTexture2D_miqq8")
 script = ExtResource("13_e3uxy")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]

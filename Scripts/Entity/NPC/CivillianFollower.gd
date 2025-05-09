@@ -49,6 +49,11 @@ func _on_save_nodes() -> void:
 func _physics_process(delta: float) -> void:
 	z_index = 100
 	
+	if Global.is_multiplayer && _is_node_owner():
+		move_and_slide()
+		position += velocity * delta * 60
+		return
+	
 	if !following:
 		if going_to_building:
 			going_to_building = false
@@ -69,6 +74,8 @@ func _physics_process(delta: float) -> void:
 			building.current_occupants += 1
 			Global.player.diver_stats.current_money += 15
 			Global.current_mission_node.total_saved_civillians += 1
+			if Global.is_multiplayer:
+				Global.godot_steam_abstraction.run_remote_function(self, "queue_free", [])
 			queue_free()
 	
 	velocity = (target_path_position - global_position).normalized() * swim_speed
@@ -81,6 +88,23 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	position += velocity * delta * 60
+	
+	if Global.is_multiplayer:
+		Global.godot_steam_abstraction.sync_var(self, "position")
+		Global.godot_steam_abstraction.sync_var(self, "velocity")
+		Global.godot_steam_abstraction.sync_var(self, "rotation")
+		if !$AnimSkeleton/SwimmingAnimationPlayer.is_playing() && !is_in_gravity_area:
+			Global.godot_steam_abstraction.run_remote_function(
+				$AnimSkeleton/SwimmingAnimationPlayer, 
+				"play",
+				["LegOscillate"]
+			)
+		if is_in_gravity_area:
+			Global.godot_steam_abstraction.run_remote_function(
+				$AnimSkeleton/SwimmingAnimationPlayer,
+				"play",
+				["RESET"]
+			)
 
 ## Gets position the following civillian should navigate to, in global coordinates.
 func get_follow_position() -> Vector2:

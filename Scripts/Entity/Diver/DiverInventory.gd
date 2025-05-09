@@ -6,6 +6,7 @@ extends Node2D
 var hovering_item: Node2D
 var hovering_resource: InventoryItem
 @onready var diver: Diver = get_parent()
+@export var default_placeable_building: PackedScene
 
 #🤔
 var hovering_item_item: BaseItem
@@ -101,6 +102,11 @@ func __collect_item(area: BaseItem) -> void:
 		return
 	inventory.append(res)
 	Global.print_debug("DEBUG: Item collected by player. Name: " + res.name + ". Cost: " + str(res.cost))
+
+func spawn_building(building_name: String) -> void:
+	var node: PlaceableBuilding = default_placeable_building.instantiate()
+	node.name = building_name
+	Global.player.get_parent().add_child(node, true)
 
 func __select_item(index: int) -> void:
 	if index >= inventory.size():

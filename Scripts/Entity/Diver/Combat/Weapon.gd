@@ -13,6 +13,8 @@ var head_pos: Vector2
 var mouse_pos: Vector2
 
 func _process(_delta: float) -> void:
+	if !Global.player:
+		return
 	head_pos = Global.player.diver_animation.arm1.get_parent().global_position
 	mouse_pos = get_global_mouse_position()
 
