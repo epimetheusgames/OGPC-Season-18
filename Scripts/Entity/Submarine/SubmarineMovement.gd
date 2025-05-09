@@ -86,7 +86,7 @@ func _physics_process(delta: float) -> void:
 			target_angle = 0.0
 			is_being_operated = false
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = false
-			Global.player.scale.x = -1
+			Global.player.scale = Vector2(1,1)
 
 func _on_invunerability_cooldown_timeout():
 	invunerable = false

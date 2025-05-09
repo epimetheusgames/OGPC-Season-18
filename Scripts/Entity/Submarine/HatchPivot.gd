@@ -8,6 +8,12 @@ var players_inside : int = 0
 @export var max_rotation : float = -PI * 8 / 9
 @export var rotation_rate : float = .5
 
+func _ready() -> void:
+	get_parent().sub_flipped.connect(flipped)
+
+func flipped():
+	max_rotation = -max_rotation
+
 func set_node_variables() -> void:
 	hatch = $"../Hatch"
 	hatch_navigation = $"../NavigationObstacle/Hatch"

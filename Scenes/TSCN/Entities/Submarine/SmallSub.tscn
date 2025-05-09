@@ -45,6 +45,7 @@ shape = SubResource("RectangleShape2D_fvx1j")
 
 [node name="SeatPos" type="Node2D" parent="InteractionArea"]
 position = Vector2(-148, 31)
+scale = Vector2(-1, 1)
 
 [node name="SubmarineArea" type="Area2D" parent="." groups=["Submarine Area", "gravity_areas"]]
 
@@ -121,11 +122,11 @@ metadata/_edit_lock_ = true
 [node name="Headlight" type="PointLight2D" parent="."]
 position = Vector2(-276, 156)
 rotation = 4.71239
-scale = Vector2(1.5, 1.5)
 energy = 10.0
 range_z_max = 10
 texture = ExtResource("6_qnb0f")
 offset = Vector2(0, 20)
+texture_scale = 1.5
 metadata/_edit_lock_ = true
 
 [node name="SubmarineInteriorLight" type="PointLight2D" parent="."]

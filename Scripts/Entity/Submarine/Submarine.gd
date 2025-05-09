@@ -82,7 +82,7 @@ func damaged(damage_amount : float, by : Hurtbox):
 	Global.player.camera.shake(3, 0.5)
  
 func die():
-	Global.player.scale.x *= Global.player.scale.x * Global.player.scale.y
+	Global.player.scale = Vector2(1,1)
 	queue_free()
 
 func _on_submarine_area_area_entered(area: Area2D) -> void:
