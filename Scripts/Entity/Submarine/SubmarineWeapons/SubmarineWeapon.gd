@@ -71,6 +71,13 @@ func sub_flipped():
 	min_rotation = min_rotation_buffer
 
 func _physics_process(delta: float) -> void:
+	if Global.is_multiplayer && get_parent().get_parent()._is_node_owner():
+		Global.godot_steam_abstraction.sync_var(self, "rotation")
+		Global.godot_steam_abstraction.sync_var(self, "heat")
+		Global.godot_steam_abstraction.sync_var(self, "passive_heat_drain")
+		Global.godot_steam_abstraction.sync_var(self, "cooling")
+		Global.godot_steam_abstraction.sync_var(self, "overheating")
+	
 	get_parent().scale.x = 1
 	heat_shader.set_shader_parameter("heat", heat)
 	
