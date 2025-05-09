@@ -106,6 +106,7 @@ func __collect_item(area: BaseItem) -> void:
 func spawn_building(building_name: String) -> void:
 	var node: PlaceableBuilding = default_placeable_building.instantiate()
 	node.name = building_name
+	node.placed_remotely = true
 	Global.player.get_parent().add_child(node, true)
 
 func __select_item(index: int) -> void:

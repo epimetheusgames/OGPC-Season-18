@@ -21,6 +21,7 @@ var placed := false
 var offset: Vector2
 var size: Vector2
 var placed_by: Diver
+var placed_remotely := false
 
 func _ready() -> void:
 	if !building_sprite:
@@ -68,7 +69,7 @@ func _ready() -> void:
 	
 	Global.save_load_framework.save_nodes.connect(_save_self)
 	
-	if Global.is_multiplayer:
+	if Global.is_multiplayer && !placed_remotely:
 		if !placed_by:
 			placed_by = Global.player
 		if !placed_by._is_node_owner():
@@ -78,6 +79,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !placed_by:
 		placed_by = Global.player
+	
+	if placed_remotely:
+		return
 
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !placed_by._is_node_owner():
 		return

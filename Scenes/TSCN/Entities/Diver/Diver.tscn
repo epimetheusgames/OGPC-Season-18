@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=56 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://b2s21mlnq8264" path="res://Scripts/Entity/Diver/Diver.gd" id="1_soyuq"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -6,8 +6,9 @@
 [ext_resource type="Script" uid="uid://1laqql4gx1r2" path="res://Scripts/Entity/Diver/DiverInventory.gd" id="3_r5rx4"]
 [ext_resource type="Script" uid="uid://cdrx7funwnj4w" path="res://Scripts/ResourceScripts/Misc/InventoryItem.gd" id="4_7u6dt"]
 [ext_resource type="Script" uid="uid://dtbbn6le46dor" path="res://Scripts/Public/InventoryPublic.gd" id="4_lqvql"]
-[ext_resource type="Texture2D" uid="uid://kbno8w3pbkse" path="res://Assets/Art/Icons/LightLineIcon.png" id="5_v3mw5"]
+[ext_resource type="Texture2D" uid="uid://d3bcpcbk620w" path="res://Assets/Art/Level/House.png" id="4_s1j8x"]
 [ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="6_3bvk2"]
+[ext_resource type="PackedScene" uid="uid://d2lyihyk6qgq2" path="res://Scenes/TSCN/Objects/Buildings/DefaultPlaceableBuilding.tscn" id="6_s1j8x"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="7_3b7lw"]
 [ext_resource type="Script" uid="uid://dl6v2p1fxvitc" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
 [ext_resource type="PackedScene" uid="uid://c3vsej6l54pdk" path="res://Scenes/TSCN/Entities/Diver/Weapons/Speargun.tscn" id="8_ntafm"]
@@ -23,7 +24,7 @@
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 [ext_resource type="Script" uid="uid://bp6e1wanf5ku7" path="res://Scenes/TSCN/Entities/Diver/Weapons/SoundVariationPlayer.gd" id="20_gnc2j"]
-[ext_resource type="Script" uid="uid://ysnky678kpqd" path="res://Scenes/TSCN/Entities/Diver/DiverSound.gd" id="20_l44qt"]
+[ext_resource type="Script" path="res://Scenes/TSCN/Entities/Diver/DiverSound.gd" id="20_l44qt"]
 [ext_resource type="AudioStream" uid="uid://ddw8r2pp1mrg1" path="res://Assets/SFX/Edited/Diver/footstep-1.mp3" id="21_juvxq"]
 [ext_resource type="Script" uid="uid://dw54av5q4enf2" path="res://Scripts/Objects/Camera.gd" id="21_soyuq"]
 [ext_resource type="AudioStream" uid="uid://dm4p7pxgqnq5u" path="res://Assets/SFX/Edited/Diver/footstep-2.mp3" id="22_l44qt"]
@@ -43,18 +44,20 @@ height = 158.0
 radius = 24.0
 height = 146.0
 
-[sub_resource type="Resource" id="Resource_og7y3"]
+[sub_resource type="Resource" id="Resource_y37s4"]
 script = ExtResource("6_3bvk2")
-file = "res://Scenes/TSCN/Objects/Items/LightLineItem.tscn"
+file = "uid://dbhho2ec64bks"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
 
-[sub_resource type="Resource" id="Resource_k67wg"]
+[sub_resource type="Resource" id="Resource_bs6f5"]
 script = ExtResource("4_7u6dt")
-name = "Light Line"
-scene = SubResource("Resource_og7y3")
-cost = 25
-icon = ExtResource("5_v3mw5")
-count = 5
+name = "Building"
+scene = SubResource("Resource_y37s4")
+cost = 20
+icon = ExtResource("4_s1j8x")
+count = 1
 sellable_resource = false
+metadata/_custom_type_script = "uid://cdrx7funwnj4w"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d3kj"]
 radius = 51.0
@@ -254,7 +257,8 @@ shape = SubResource("CapsuleShape2D_auddj")
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("3_r5rx4")
-inventory = Array[ExtResource("4_7u6dt")]([SubResource("Resource_k67wg")])
+inventory = Array[ExtResource("4_7u6dt")]([SubResource("Resource_bs6f5")])
+default_placeable_building = ExtResource("6_s1j8x")
 
 [node name="ItemDetectionArea" type="Area2D" parent="Inventory"]
 visible = false
@@ -545,10 +549,10 @@ metadata/_edit_lock_ = true
 
 [node name="CollectItemAnimationText" type="Label" parent="Animation"]
 modulate = Color(0.44, 0.428853, 0.1056, 0)
-offset_left = 864.0
-offset_top = -529.0
-offset_right = 1054.0
-offset_bottom = -366.0
+offset_left = -20.0
+offset_top = -114.0
+offset_right = 170.0
+offset_bottom = 49.0
 theme = ExtResource("12_yxkba")
 theme_override_font_sizes/font_size = 80
 text = "+10"
@@ -700,6 +704,8 @@ component_container = NodePath("..")
 [node name="Attackbox" type="Area2D" parent="."]
 script = ExtResource("34_cos02")
 metadata/_custom_type_script = "uid://bx1v8dey6m5c"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
 
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
 [connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Movement" method="_on_general_detection_box_area_entered"]

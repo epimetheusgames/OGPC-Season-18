@@ -15,6 +15,7 @@ var current_money: int = 0
 
 
 func _ready() -> void:
+	return
 	while true:
 		await get_tree().create_timer(2).timeout
 		hurtbox.damage(5, diver.get_node("Attackbox"))
