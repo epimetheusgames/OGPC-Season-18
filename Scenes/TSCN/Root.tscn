@@ -322,33 +322,12 @@ text = "Keybinds"
 visible = false
 layout_mode = 0
 offset_left = 824.0
-offset_top = 583.0
+offset_top = 511.0
 offset_right = 1081.0
-offset_bottom = 657.0
+offset_bottom = 585.0
 theme = ExtResource("13_wogkx")
 theme_override_font_sizes/font_size = 36
 text = "Back"
-
-[node name="BrightnessSlider" type="HSlider" parent="UI/MainMenu"]
-process_mode = 3
-visible = false
-layout_mode = 0
-offset_left = 831.0
-offset_top = 507.0
-offset_right = 1074.0
-offset_bottom = 597.0
-theme = ExtResource("13_wogkx")
-value = 50.0
-
-[node name="Label" type="Label" parent="UI/MainMenu/BrightnessSlider"]
-layout_mode = 0
-offset_top = -3.0
-offset_right = 243.0
-offset_bottom = 33.0
-theme = ExtResource("13_wogkx")
-theme_override_font_sizes/font_size = 25
-text = "Game Brightness"
-horizontal_alignment = 1
 
 [node name="SoundMenu" type="Control" parent="UI/MainMenu"]
 visible = false
@@ -611,7 +590,6 @@ metadata/_edit_lock_ = true
 [connection signal="button_up" from="UI/MainMenu/QuitButton" to="UI/MainMenu" method="_on_quit_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/SoundButton" to="UI/MainMenu" method="_on_sound_button_button_up"]
 [connection signal="button_up" from="UI/MainMenu/BackButton" to="UI/MainMenu" method="_on_back_button_button_up"]
-[connection signal="value_changed" from="UI/MainMenu/BrightnessSlider" to="UI/MainMenu" method="_on_brightness_slider_value_changed"]
 [connection signal="value_changed" from="UI/MainMenu/SoundMenu/MasterVolumeSlider" to="UI/MainMenu" method="_on_master_volume_slider_value_changed"]
 [connection signal="value_changed" from="UI/MainMenu/SoundMenu/MusicVolumeSlider" to="UI/MainMenu" method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="UI/MainMenu/SoundMenu/SFXVolumeSlider" to="UI/MainMenu" method="_on_sfx_volume_slider_value_changed"]

@@ -47,6 +47,7 @@ radius = 33.0
 height = 278.0
 
 [node name="Jellyfish" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "nav_agent", "enemy_fov", "state_machine", "dead_state")]
+collision_mask = 4097
 motion_mode = 1
 script = ExtResource("1_dd7wo")
 hurtbox = NodePath("Hurtbox")

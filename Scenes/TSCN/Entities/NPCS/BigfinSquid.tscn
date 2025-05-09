@@ -19,6 +19,7 @@ size = Vector2(45, 69)
 size = Vector2(113, 109.5)
 
 [node name="BigfinSquid" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "nav_agent", "enemy_fov", "state_machine", "dead_state")]
+collision_mask = 4097
 script = ExtResource("1_0jv23")
 hurtbox = NodePath("Hurtbox")
 attackbox = NodePath("ContinuousAttack")

@@ -15,7 +15,6 @@ func _ready():
 	_on_music_volume_slider_value_changed(save.music_volume)
 	$SoundMenu/SFXVolumeSlider.value = save.sfx_volume
 	_on_sfx_volume_slider_value_changed(save.sfx_volume)
-	$BrightnessSlider.value = save.brightness
 	
 	while true:
 		await get_tree().create_timer(1).timeout
@@ -40,7 +39,6 @@ func _open_sound_button() -> void:
 	$SoundButton.visible = false
 	$KeybindButton.visible = false
 	$BackButton.visible = false
-	$BrightnessSlider.visible = false
 	$SoundMenu.visible = true
 
 func _lobby_list_updated(_lobbies: Array):
@@ -56,7 +54,6 @@ func update_global_save() -> void:
 	save.master_volume = $SoundMenu/MasterVolumeSlider.value
 	save.music_volume = $SoundMenu/MusicVolumeSlider.value
 	save.sfx_volume = $SoundMenu/SFXVolumeSlider.value
-	save.brightness = $BrightnessSlider.value
 	Global.save_load_framework._save_global_config(save)
 
 func _on_quit_button_button_up() -> void:
@@ -149,7 +146,6 @@ func _on_settings_button_up() -> void:
 	$SoundButton.visible = true
 	$KeybindButton.visible = true
 	$BackButton.visible = true
-	$BrightnessSlider.visible = true
 	$StartButton.visible = false
 	$SettingsButton.visible = false
 	$QuitButton.visible = false
@@ -161,20 +157,17 @@ func _on_brightness_slider_value_changed(value: float) -> void:
 
 func _on_sound_button_button_up() -> void:
 	$SoundMenu.visible = true
-	$BrightnessSlider.visible = false
 	$BackButton.visible = false
 	$KeybindButton.visible = false
 	$SoundButton.visible = false
 
 func _on_sound_menu_back_button_button_up() -> void:
 	$SoundMenu.visible = false
-	$BrightnessSlider.visible = true
 	$BackButton.visible = true
 	$KeybindButton.visible = true
 	$SoundButton.visible = true
 
 func _on_back_button_button_up() -> void:
-	$BrightnessSlider.visible = false
 	$BackButton.visible = false
 	$KeybindButton.visible = false
 	$SoundButton.visible = false
