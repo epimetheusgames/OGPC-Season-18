@@ -1,59 +1,55 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdjlclue36iw6"]
+[gd_scene load_steps=16 format=3 uid="uid://cdjlclue36iw6"]
 
 [ext_resource type="Texture2D" uid="uid://c63kp7rpxgd22" path="res://Assets/Art/Level/Kelp.png" id="1_yifkv"]
 [ext_resource type="Script" uid="uid://blocsbnryedbt" path="res://Kelp/KelpSegment.gd" id="2_evsf2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yifkv"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 468, 75, 39)
+region = Rect2(96, 471, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_evsf2"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 429, 75, 39)
+region = Rect2(96, 430, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_waljp"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 390, 75, 39)
+region = Rect2(96, 389, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pdr1p"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 351, 75, 39)
+region = Rect2(96, 348, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6peca"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 312, 75, 39)
+region = Rect2(96, 307, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_76cs1"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 273, 75, 39)
+region = Rect2(96, 266, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_42qic"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 234, 75, 39)
+region = Rect2(96, 225, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qmvnw"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 195, 75, 39)
+region = Rect2(96, 184, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bvwkj"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 156, 75, 39)
+region = Rect2(96, 143, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5oqbi"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 117, 75, 39)
+region = Rect2(96, 102, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1130g"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 78, 75, 39)
+region = Rect2(96, 61, 32, 41)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0tvl"]
 atlas = ExtResource("1_yifkv")
-region = Rect2(57, 39, 75, 39)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5c6yq"]
-atlas = ExtResource("1_yifkv")
-region = Rect2(57, 0, 75, 39)
+region = Rect2(96, 20, 32, 41)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yy0dx"]
 animations = [{
@@ -93,9 +89,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q0tvl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5c6yq")
 }],
 "loop": true,
 "name": &"KelpSegments",
@@ -106,7 +99,7 @@ animations = [{
 script = ExtResource("2_evsf2")
 
 [node name="KelpSegment" type="AnimatedSprite2D" parent="."]
-position = Vector2(-8, 0)
+position = Vector2(10, 0)
 sprite_frames = SubResource("SpriteFrames_yy0dx")
 animation = &"KelpSegments"
 frame_progress = 0.00818703

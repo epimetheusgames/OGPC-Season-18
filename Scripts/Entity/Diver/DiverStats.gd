@@ -14,6 +14,11 @@ var current_money: int = 0
 @onready var diver: Diver = get_parent()
 
 
+func _ready() -> void:
+	while true:
+		await get_tree().create_timer(2).timeout
+		hurtbox.damage(5, diver.get_node("Attackbox"))
+
 func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
 		return
@@ -26,11 +31,9 @@ func _process(delta: float) -> void:
 	else:
 		oxygen -= oxygen_loss * delta * 60
 	
-	
 	if Global.godot_steam_abstraction:
 		Global.godot_steam_abstraction.sync_var(self, "health")
 		Global.godot_steam_abstraction.sync_var(self, "oxygen")
-
 
 func get_health() -> float:
 	return hurtbox.health

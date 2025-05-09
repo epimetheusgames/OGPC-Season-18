@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://d1t14t2bhk0sl" path="res://Assets/Art/Entity/Submarine/Submarine_Hatch.png" id="7_ynqne"]
 [ext_resource type="Texture2D" uid="uid://mx8o4yak3yo8" path="res://Assets/Art/Entity/Submarine/SubmarineAura.png" id="8_bxi20"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="9_3dfve"]
-[ext_resource type="Script" uid="uid://dyi7jpsbk30wn" path="res://Scripts/Entity/Submarine/HatchPivot.gd" id="9_b36t8"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/HatchPivot.gd" id="9_b36t8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvx1j"]
 size = Vector2(96, 139)

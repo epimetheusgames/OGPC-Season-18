@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=55 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://b2s21mlnq8264" path="res://Scripts/Entity/Diver/Diver.gd" id="1_soyuq"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://bs068epl16t1g" path="res://Scripts/Entity/Diver/Combat/DiverCombat.gd" id="13_uoshl"]
 [ext_resource type="PackedScene" uid="uid://c6p45ud1ea7gh" path="res://Scenes/TSCN/UI/ReloadBar.tscn" id="16_o1yih"]
 [ext_resource type="Script" uid="uid://bp6e1wanf5ku7" path="res://Scenes/TSCN/Entities/Diver/Weapons/SoundVariationPlayer.gd" id="20_gnc2j"]
-[ext_resource type="Script" path="res://Scenes/TSCN/Entities/Diver/DiverSound.gd" id="20_l44qt"]
+[ext_resource type="Script" uid="uid://ysnky678kpqd" path="res://Scenes/TSCN/Entities/Diver/DiverSound.gd" id="20_l44qt"]
 [ext_resource type="AudioStream" uid="uid://ddw8r2pp1mrg1" path="res://Assets/SFX/Edited/Diver/footstep-1.mp3" id="21_juvxq"]
 [ext_resource type="Script" uid="uid://dw54av5q4enf2" path="res://Scripts/Objects/Camera.gd" id="21_soyuq"]
 [ext_resource type="AudioStream" uid="uid://dm4p7pxgqnq5u" path="res://Assets/SFX/Edited/Diver/footstep-2.mp3" id="22_l44qt"]
@@ -33,6 +33,7 @@
 [ext_resource type="AudioStream" uid="uid://dnlsincpw3bl2" path="res://Assets/SFX/Edited/Diver/footstep-6.mp3" id="26_cos02"]
 [ext_resource type="AudioStream" uid="uid://8ljhmcohhsrd" path="res://Assets/SFX/Edited/Diver/damaged.mp3" id="28_vhq57"]
 [ext_resource type="AudioStream" uid="uid://btbekaobwwiwe" path="res://Assets/SFX/PixabayRaw/bubbles-4.mp3" id="29_vhq57"]
+[ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="34_cos02"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ghsq1"]
 radius = 24.0
@@ -695,6 +696,10 @@ gravity = 20
 buoyancy_accel = 1.0
 max_buoyancy_vel = 10.0
 component_container = NodePath("..")
+
+[node name="Attackbox" type="Area2D" parent="."]
+script = ExtResource("34_cos02")
+metadata/_custom_type_script = "uid://bx1v8dey6m5c"
 
 [connection signal="area_entered" from="Inventory/ItemDetectionArea" to="Inventory" method="_on_item_detection_area_area_entered"]
 [connection signal="area_entered" from="Stats/GeneralDetectionBox" to="Movement" method="_on_general_detection_box_area_entered"]
