@@ -22,7 +22,18 @@ var flipped : bool = false
 
 signal sub_flipped()
 
+func _save() -> void:
+	Global.current_game_save.node_saves.append(
+		NodeSaver.create(Global.current_mission_node, self,
+		[
+			"position",
+			"rotation",
+			"flipped",
+		])
+	)
+
 func _ready() -> void:
+	Global.save_load_framework.save_nodes.connect(_save)
 	hurtbox.damaged.connect(damaged)
 	hurtbox.died.connect(die)
 	if !Global.submarine:
@@ -56,7 +67,8 @@ func _process(delta: float) -> void:
 	
 	aura.global_rotation = 0.0
 	if Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
-		Global.player.global_transform = seat_pos.global_transform
+		Global.player.global_position = seat_pos.global_position
+		Global.player.global_rotation = seat_pos.global_rotation + PI
 
 func _physics_process(_delta: float) -> void:
 	velocity = submarine_movement.get_velocity()
@@ -64,7 +76,7 @@ func _physics_process(_delta: float) -> void:
 
 func flip():
 	if Global.is_multiplayer && _is_node_owner():
-		Global.godot_steam_abstraction.run_remote_function(self, "flip", [])
+		Global.godot_steam_abstraction.run_reBuildingmote_function(self, "flip", [])
 	
 	flipped = !flipped
 	emit_signal("sub_flipped")
@@ -72,7 +84,7 @@ func flip():
 		if "scale" in child:
 			if child.name == "Headlight":
 				child.scale = -child.scale
-			else:
+			elif child.name != "InteractionArea" and child.name != "LadderArea":
 				child.scale.x = -child.scale.x
 		if "position" in child:
 			child.position.x = -child.position.x
@@ -93,7 +105,7 @@ func damaged(damage_amount : float, by : Hurtbox):
 func die():
 	if Global.is_multiplayer && _is_node_owner():
 		Global.godot_steam_abstraction.run_remote_function(self, "die", [])
-	Global.player.scale = Vector2(1,1)
+	#Global.player.scale = Vector2(1,1)
 	queue_free()
 
 func _on_submarine_area_area_entered(area: Area2D) -> void:

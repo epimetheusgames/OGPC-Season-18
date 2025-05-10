@@ -38,13 +38,12 @@ metadata/_custom_type_script = "uid://0js7gtnvp1vm"
 script = ExtResource("2_eisgo")
 
 [node name="InteractionArea" type="Area2D" parent="."]
+position = Vector2(-148, 31)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(-148, 31)
 shape = SubResource("RectangleShape2D_fvx1j")
 
 [node name="SeatPos" type="Node2D" parent="InteractionArea"]
-position = Vector2(-148, 31)
 scale = Vector2(-1, 1)
 
 [node name="SubmarineArea" type="Area2D" parent="." groups=["Submarine Area", "gravity_areas"]]
