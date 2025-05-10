@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bpcsoat0wk1ci" path="res://Scripts/Entity/Submarine/SubmarineMovement.gd" id="2_eisgo"]
 [ext_resource type="Texture2D" uid="uid://bavqga36vpmcv" path="res://Assets/Art/Entity/Submarine/Submarine_Interior.png" id="3_56jjg"]
 [ext_resource type="Texture2D" uid="uid://cxvnwfururehw" path="res://Assets/Art/Entity/Submarine/Submarine_Exterior.png" id="4_5me6m"]
-[ext_resource type="Script" uid="uid://dxlkbqcv2x2hh" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineWeaponSlot.gd" id="4_j4tp4"]
+[ext_resource type="Script" path="res://Scripts/Entity/Submarine/SubmarineWeapons/SubmarineWeaponSlot.gd" id="4_j4tp4"]
 [ext_resource type="Texture2D" uid="uid://tg2ls6pbclu0" path="res://Assets/Art/Entity/Submarine/Submarine_Bars.png" id="5_lhhcb"]
 [ext_resource type="PackedScene" uid="uid://yigraya7x7v4" path="res://Scenes/TSCN/Entities/Submarine/SubmarineWeapons/SubmarineBurstWeapon.tscn" id="5_qnb0f"]
 [ext_resource type="Texture2D" uid="uid://bfoc8j7in635n" path="res://Assets/Art/Entity/Player/FlashLightPlaceholder.png" id="6_qnb0f"]
