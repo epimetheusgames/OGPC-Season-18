@@ -16,7 +16,13 @@ var player_in_area := true
 
 signal follower_spawned(spawn_position: Vector2)
 
+func _save() -> void:
+	Global.current_game_save.node_saves.append(
+		NodeSaver.create(Global.current_mission_node, self, ["player_in_area"])
+	)
+
 func _ready() -> void:
+	Global.save_load_framework.save_nodes.connect(_save)
 	Global.research_station = self
 	Global.game_time_system.day_ended.connect(_spawn)
 
