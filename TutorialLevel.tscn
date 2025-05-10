@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://bvr5rlwohvheu"]
+[gd_scene load_steps=6 format=4 uid="uid://ctrrjjea6rrm0"]
 
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="1_1ud0p"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="2_yv1sa"]
