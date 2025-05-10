@@ -56,10 +56,12 @@ texture_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_6galc")
-value = 100.0
+max_value = 125.0
+value = 125.0
 texture_over = ExtResource("3_txvd7")
 texture_progress = ExtResource("4_s6r6i")
 script = ExtResource("5_s6r6i")
+shake_below_value = 35.0
 
 [node name="HealthText" type="RichTextLabel" parent="HUD/MarginContainer/HBoxContainer/HealthVBox/HBoxContainer/HealthProgress"]
 custom_minimum_size = Vector2(120, 0)

@@ -66,6 +66,7 @@ script = ExtResource("4_34ujk")
 delay_time = 0.5
 attacker_type = 0
 damage_amount = 5.0
+knockback_force = 1000.0
 metadata/_custom_type_script = "uid://bf0bikj8np6x"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousAttack"]

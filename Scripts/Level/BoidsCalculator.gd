@@ -34,6 +34,7 @@ var mutex: Mutex
 var semaphore: Semaphore
 var thread: Thread
 var exit_thread := false
+var paused := false
 
 # Load compute shader, and resize arrays.
 func _ready() -> void:
@@ -62,6 +63,9 @@ func _ready() -> void:
 		sync_at_integrals()
 
 func _process(delta: float) -> void:
+	if paused:
+		return
+	
 	var boids_list = get_tree().get_nodes_in_group("Boids")
 	
 	mutex.lock()
@@ -110,7 +114,11 @@ func _boids_compute() -> void:
 		var delta = threads_delta
 		var boids_list = get_tree().get_nodes_in_group("Boids")
 		var num_boids_copy = boids_list.size()
+		var is_paused = paused
 		mutex.unlock()
+		
+		if is_paused:
+			continue
 		
 		if num_boids_copy == 0:
 			continue

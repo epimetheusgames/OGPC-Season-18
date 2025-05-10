@@ -210,11 +210,11 @@ _data = {
 radius = 25.0
 height = 110.0
 
-[sub_resource type="Gradient" id="Gradient_yxkba"]
+[sub_resource type="Gradient" id="Gradient_c6fqq"]
 colors = PackedColorArray(1, 1, 1, 0.36, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_chbw5"]
-gradient = SubResource("Gradient_yxkba")
+gradient = SubResource("Gradient_c6fqq")
 width = 1000
 height = 1000
 fill = 1
@@ -558,6 +558,8 @@ metadata/_edit_lock_ = true
 script = ExtResource("7_3b7lw")
 entity = NodePath("../..")
 hurt_by_enemy = true
+max_health = 125.0
+dead_health = 25.0
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/Hurtbox"]

@@ -147,6 +147,7 @@ func start_game_remote(slot_num: int, custom_mission_id: int = -1):
 func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	var level_data := _load_game_save(slot_num)
 	
+	Global.boids_calculator_node.paused = true
 	Global.current_game_slot = slot_num
 	Global.current_game_save = level_data
 	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = true
@@ -203,6 +204,7 @@ func exit_to_menu() -> void:
 	# Don't save state, because that will be done when the player goes to the research station.
 	# In the future there should be a popup warning the player about this.
 	# save_state()
+	Global.boids_calculator_node.paused = false
 	Global.current_game_save = null
 	Global.current_game_slot = -1
 	Global.ui_root_node.visible = true

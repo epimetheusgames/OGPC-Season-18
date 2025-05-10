@@ -70,7 +70,7 @@ func _physics_process(_delta: float):
 	
 	if diver_animation.in_unlock_terminal_area:
 		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2(3, 3), 0.2, _delta)
-		camera.global_position = Util.better_vec2_lerp(camera.global_position, Global.research_station.unlock_terminal.global_position, 0.1, _delta)
+		camera.global_position = Util.better_vec2_lerp(camera.global_position, diver_animation.unlock_terminal_in.global_position, 0.1, _delta)
 	else:
 		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2.ONE, 0.2, _delta)
 		camera.position = Util.better_vec2_lerp(camera.position, Vector2.ZERO, 0.1, _delta)
@@ -116,6 +116,7 @@ func _save() -> void:
 					"velocity",
 					"current_angle",
 					"is_in_gravity_area",
+					"is_in_research_station",
 				],
 				get_path_to(diver_stats): [
 					"health",

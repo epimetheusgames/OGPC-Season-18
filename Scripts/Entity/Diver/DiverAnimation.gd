@@ -42,6 +42,7 @@ var osc_speed: float = 2.0
 var hand1_weapon_control: bool = false
 var hand2_weapon_control: bool = false
 var in_unlock_terminal_area := false
+var unlock_terminal_in: UnlockTerminal
 
 func _ready() -> void:
 	mod_stack = mod_stack.duplicate(true)
@@ -197,8 +198,10 @@ func animate_collected_item(cost: int):
 
 func _on_general_detection_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("unlock_terminal_area"):
+		unlock_terminal_in = area.get_parent()
 		in_unlock_terminal_area = true
 
 func _on_general_detection_box_area_exited(area: Area2D) -> void:
 	if area.is_in_group("unlock_terminal_area"):
+		unlock_terminal_in = null
 		in_unlock_terminal_area = false
