@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cadmtimivo2ra"]
+[gd_scene load_steps=36 format=3 uid="uid://cadmtimivo2ra"]
 
 [ext_resource type="Script" uid="uid://85ej1y3m338v" path="res://Scenes/TSCN/Levels/Missions/TutorialHandler.gd" id="1_e845f"]
 [ext_resource type="Script" uid="uid://bn44me3sxajlb" path="res://Scripts/Skeleton/Nodes/Ingame/LocalGameTimeSaver.gd" id="2_umxmc"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="12_rtq4m"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="13_ehb7s"]
 [ext_resource type="PackedScene" uid="uid://6kbux1lvwaw3" path="res://Scenes/TSCN/Objects/Items/RockItem.tscn" id="14_n64d8"]
+[ext_resource type="PackedScene" uid="uid://ctt8tds4p8vt0" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="14_n87b7"]
+[ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="15_3q7hw"]
 [ext_resource type="PackedScene" uid="uid://dd4arsu8r6mkx" path="res://Scripts/Entity/Enemies/Arrowfish/Arrowfish.tscn" id="19_n64d8"]
 [ext_resource type="PackedScene" uid="uid://bwtadftcthq27" path="res://Scenes/TSCN/Objects/CivillianSpawnPoint.tscn" id="20_e845f"]
 [ext_resource type="PackedScene" uid="uid://brtj1ur8tgigg" path="res://Scenes/ResearchStation.tscn" id="20_sis5m"]
@@ -378,6 +380,17 @@ rotation = 1.45746
 [node name="RockItem4" parent="LevelContainer" instance=ExtResource("14_n64d8")]
 position = Vector2(-6382, -8167)
 rotation = -0.0756491
+
+[node name="Submarine" parent="LevelContainer" instance=ExtResource("14_n87b7")]
+position = Vector2(-4998, -9143)
+
+[node name="TutorialNPC" parent="LevelContainer" instance=ExtResource("15_3q7hw")]
+position = Vector2(428, -391)
+npc_name = "tutorial_npc"
+choice_given = false
+dialog_speed = 2
+has_dialog = true
+talking_sound = "uid://cw2lob3ywej83"
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3

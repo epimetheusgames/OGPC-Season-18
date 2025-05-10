@@ -14,21 +14,21 @@ enum State {
 }
 
 var state := State.START
-@onready var dialog: NPC = $LevelContainer/TutorialDailog
+@onready var dialog: NPC = $LevelContainer/TutorialNPC
 
 func _ready():
 	super._ready()
-	Global.ingame_dialog.dialog("Hello, welcome to the Tutorial.")
+	Global.ingame_dialog.dialog("Hello, welcome to the GURI  Remote introductorial Testing System (RITS)")
 	Global.game_time_system.pause_time = true
 	Global.player.diver_inventory.building_bought.connect(bought)
 
 func _process(delta: float) -> void:
 	if state == State.START:
 		state = State.POOL
-		Global.ingame_dialog.dialog("Welcome to the testing enclosure. Here you will learn the basics of the game. You can start by entering the water.")
+		Global.ingame_dialog.dialog("Welcome to the simulated testing enclosure. Here you will learn the basics of the game. You can start by entering the water.")
 	if !Global.player.diver_movement.is_in_gravity_area && state == State.POOL:
 		state = State.ITEM
-		Global.ingame_dialog.dialog("Good job. Here you can swim around. On the walls there are items that you can pick up.")
+		Global.ingame_dialog.dialog("Good job. Here you can swim around through WASD, and Space to bost yourself farther. On the walls there are items that you can pick up.")
 	if Global.player.diver_inventory.inventory.size() > 0 && state == State.ITEM:
 		state = State.SELLING
 		Global.ingame_dialog.dialog("Items are sold when you enter the research station (where you started the tutorial).")
@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 	if $Arrowfish.state_machine.current_state.name == "Dead" && state == State.KILLING:
 		state = State.HOUSE
 		Global.player.diver_stats.current_money += 10
-		Global.ingame_dialog.dialog("Good job! You can now return to the research station to buy a house. In the unlock terminal hit back, Items, and buy the Building.")
+		Global.ingame_dialog.dialog("Good job! You can now return to the research station to buy a house. In the unlock terminal hit back, Items, and buy the Building. Feel free to try to drive the submarine, done by going into to the hatch at the top and Presing E to interact. This durable and portable weapons system will allow you to fight swarms of carnivorous fish without fearing for your life (We hope!).")
 
 func bought() -> void:
 	state = State.CIVILLIANS
