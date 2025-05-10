@@ -212,6 +212,7 @@ func exit_to_menu() -> void:
 	# tf do you mean "???", its a function to open the menu 
 	Global.ui_root_node.get_node("MainMenu").visible = true # ???
 	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = false
+	Global.ui_root_node.get_node("MainMenu/Sunlight").play()
 	# CARSON ACTUALLY WHAT IS THIS WHY IS THERE TWO
 	#Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D2").disabled = false
 	

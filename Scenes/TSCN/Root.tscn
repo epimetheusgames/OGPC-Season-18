@@ -769,8 +769,6 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/MainMenu"]
-
 [node name="Boid" parent="UI" instance=ExtResource("17_g72ff")]
 modulate = Color(0.704, 0.771, 0.885, 0.536)
 z_index = -1

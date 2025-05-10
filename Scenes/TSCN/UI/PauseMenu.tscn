@@ -64,8 +64,7 @@ offset_bottom = 608.0
 theme = ExtResource("2_whtnb")
 theme_override_font_sizes/font_size = 36
 action_mode = 0
-text = "Settings
-"
+text = "Sound"
 
 [node name="QuitButton" type="Button" parent="."]
 process_mode = 3
@@ -142,8 +141,86 @@ theme = ExtResource("2_whtnb")
 theme_override_font_sizes/font_size = 24
 text = "No, Go Back"
 
+[node name="SoundMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 128.0
+offset_bottom = 128.0
+
+[node name="MasterVolumeSlider" type="HSlider" parent="SoundMenu"]
+layout_mode = 2
+offset_left = 833.0
+offset_top = 337.0
+offset_right = 1072.0
+offset_bottom = 403.0
+theme = ExtResource("2_whtnb")
+
+[node name="Label" type="Label" parent="SoundMenu/MasterVolumeSlider"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -8.0
+offset_right = 234.0
+offset_bottom = 28.0
+theme = ExtResource("2_whtnb")
+theme_override_font_sizes/font_size = 25
+text = "Master"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider" type="HSlider" parent="SoundMenu"]
+layout_mode = 2
+offset_left = 833.0
+offset_top = 393.0
+offset_right = 1072.0
+offset_bottom = 459.0
+theme = ExtResource("2_whtnb")
+
+[node name="Label" type="Label" parent="SoundMenu/MusicVolumeSlider"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -8.0
+offset_right = 234.0
+offset_bottom = 28.0
+theme = ExtResource("2_whtnb")
+theme_override_font_sizes/font_size = 25
+text = "Music"
+horizontal_alignment = 1
+
+[node name="SFXVolumeSlider" type="HSlider" parent="SoundMenu"]
+layout_mode = 2
+offset_left = 832.0
+offset_top = 449.0
+offset_right = 1072.0
+offset_bottom = 515.0
+theme = ExtResource("2_whtnb")
+
+[node name="Label" type="Label" parent="SoundMenu/SFXVolumeSlider"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -8.0
+offset_right = 234.0
+offset_bottom = 28.0
+theme = ExtResource("2_whtnb")
+theme_override_font_sizes/font_size = 25
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SoundMenuBackButton" type="Button" parent="SoundMenu"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 503.0
+offset_right = 1081.0
+offset_bottom = 577.0
+theme = ExtResource("2_whtnb")
+theme_override_font_sizes/font_size = 36
+text = "Back"
+
 [connection signal="button_up" from="ResumeButton" to="." method="_on_resume_button_button_up"]
 [connection signal="pressed" from="SettingsButton" to="." method="_settings_open"]
 [connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]
 [connection signal="button_up" from="AreYouSurePanel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/ExitButton" to="." method="_on_exit_button_button_up"]
 [connection signal="button_up" from="AreYouSurePanel/MarginContainer/VBoxContainer/MarginContainer2/HBoxContainer/NoButton" to="." method="_on_no_button_button_up"]
+[connection signal="value_changed" from="SoundMenu/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="SoundMenu/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="SoundMenu/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="button_up" from="SoundMenu/SoundMenuBackButton" to="." method="_on_sound_menu_back_button_button_up"]

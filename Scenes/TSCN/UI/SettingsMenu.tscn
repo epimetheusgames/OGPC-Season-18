@@ -142,15 +142,5 @@ layout_mode = 2
 theme = ExtResource("2_ltcfv")
 text = "Turn On"
 
-[node name="Background" type="ColorRect" parent="."]
-z_index = -2
-layout_direction = 2
-offset_left = -3.0
-offset_right = 1930.0
-offset_bottom = 1076.0
-size_flags_horizontal = 3
-mouse_filter = 2
-color = Color(0.262932, 0.262932, 0.262932, 1)
-
 [connection signal="changed" from="SoundSubMenu/VBoxContainer/MasterVolumeSlider" to="." method="_master_volume_changed"]
 [connection signal="value_changed" from="ContainTheDumbShit/HBoxContainer/VBoxContainer/VBoxContainer/BrightnessSlider" to="." method="_brightness_slider_value_changed"]
