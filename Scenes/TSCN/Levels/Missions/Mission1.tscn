@@ -541,7 +541,7 @@ script = ExtResource("4_iytd7")
 spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
-z_index = 20
+z_index = 140
 position = Vector2(-13196, -5783)
 
 [node name="ResearchStation" parent="LevelContainer" node_paths=PackedStringArray("parallax_bubbles") instance=ExtResource("13_eg3rs")]

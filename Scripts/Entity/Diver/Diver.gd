@@ -66,7 +66,7 @@ func _physics_process(_delta: float):
 	if get_state() == DiverState.IN_SUBMARINE || get_state() == DiverState.DRIVING_SUBMARINE:
 		z_index = 21
 	else:
-		z_index = 100
+		z_index = 200
 	
 	if diver_animation.in_unlock_terminal_area:
 		camera.zoom = Util.better_vec2_lerp(camera.zoom, Vector2(3, 3), 0.2, _delta)

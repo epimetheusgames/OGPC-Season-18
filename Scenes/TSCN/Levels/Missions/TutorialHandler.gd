@@ -1,3 +1,4 @@
+class_name Tutorial
 extends MissionRoot
 
 enum State {

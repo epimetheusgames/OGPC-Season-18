@@ -69,7 +69,7 @@ func save_state(call_signal := true) -> void:
 		return
 	
 	# Otherwise it's research station.
-	if Global.current_mission_node is MissionRoot && call_signal && !Global.current_mission_node.name == "Tutorial":
+	if Global.current_mission_node is MissionRoot && call_signal && !Global.current_mission_node is Tutorial:
 		Global.current_game_save.node_saves = []
 		save_nodes.emit()
 	_save_game_save(Global.current_game_save, Global.current_game_slot)
@@ -189,7 +189,7 @@ func load_level(level_path: String, save: GameSave = null):
 	if(level_path!="res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"):
 		Global.brightness_modulate.visible = true
 		
-	if !save || Global.is_multiplayer || instantiated.name == "Tutorial":
+	if !save || Global.is_multiplayer || instantiated is Tutorial:
 		return
 	
 	for saver in save.node_saves:

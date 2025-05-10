@@ -373,6 +373,26 @@ rotation = 1.45746
 position = Vector2(-5872, -8159)
 rotation = -0.0637625
 
+[node name="RockItem7" parent="LevelContainer" instance=ExtResource("14_n64d8")]
+position = Vector2(-3600, -8556)
+rotation = -0.0637625
+
+[node name="RockItem8" parent="LevelContainer" instance=ExtResource("14_n64d8")]
+position = Vector2(-2113, -9015)
+rotation = -0.709078
+
+[node name="RockItem9" parent="LevelContainer" instance=ExtResource("14_n64d8")]
+position = Vector2(-1652, -10233)
+rotation = -1.43736
+
+[node name="RockItem5" parent="LevelContainer" instance=ExtResource("14_n64d8")]
+position = Vector2(-4790, -8376)
+rotation = -0.0637625
+
+[node name="RockItem6" parent="LevelContainer" instance=ExtResource("14_n64d8")]
+position = Vector2(-4790, -8376)
+rotation = -0.0637625
+
 [node name="RockItem3" parent="LevelContainer" instance=ExtResource("14_n64d8")]
 position = Vector2(-7117, -8515)
 rotation = 1.45746
@@ -429,6 +449,9 @@ editor_only = true
 
 [node name="Arrowfish" parent="." instance=ExtResource("19_n64d8")]
 position = Vector2(-3795, -9077)
+
+[node name="Arrowfish2" parent="." instance=ExtResource("19_n64d8")]
+position = Vector2(-2875, -9736)
 
 [node name="CivillianSpawnPoint" parent="." instance=ExtResource("20_e845f")]
 position = Vector2(-8175, -9996)
