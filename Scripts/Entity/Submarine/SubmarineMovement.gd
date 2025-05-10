@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 			is_being_operated = false
 			drive_exited.emit()
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = false
-			Global.player.scale = Vector2(1,1)
+			#Global.player.scale = Vector2(1,1)
 
 func _on_invunerability_cooldown_timeout():
 	invunerable = false
