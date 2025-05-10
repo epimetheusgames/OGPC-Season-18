@@ -91,6 +91,8 @@ func __collect_item(area: BaseItem) -> void:
 	if !diver._is_node_owner():
 		return
 	
+	if Global.is_multiplayer:
+		Global.godot_steam_abstraction.run_remote_function(area, "queue_free", [])
 	var res: InventoryItem = area.generate_inventory_item()
 	collected_item_paths.append(Global.current_mission_node.get_path_to(area))
 	area.queue_free()
