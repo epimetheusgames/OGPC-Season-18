@@ -211,6 +211,7 @@ func exit_to_menu() -> void:
 	Global.current_game_save = null
 	Global.current_game_slot = -1
 	Global.ui_root_node.visible = true
+	Global.brightness_modulate.color = Color.WHITE
 	# tf do you mean "???", its a function to open the menu 
 	Global.ui_root_node.get_node("MainMenu").visible = true # ???
 	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = false
