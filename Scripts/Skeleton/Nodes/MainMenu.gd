@@ -95,6 +95,7 @@ func _on_start_button_button_up() -> void:
 	$QuitButton.text = "Back"
 
 func _on_singleplayer_button_button_up() -> void:
+	$Sunlight.stop()
 	$"../StaticBody2D/CollisionPolygon2D".disabled = true
 	# Carsons code is straight doo doo
 	#$"../StaticBody2D/CollisionPolygon2D2".disabled = true
@@ -134,6 +135,7 @@ func _on_multiplayer_host_game_button_button_up() -> void:
 			$MultiplayerHostGameButton.disabled = false
 			$MultiplayerHostGameButton.text = "Start"
 	else:
+		$Sunlight.stop()
 		Global.print_debug("Starting game.")
 		for child in $"../BoidsGroup".get_children():
 			child.queue_free()
