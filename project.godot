@@ -206,8 +206,6 @@ avoidance/gdscript/max_call_stack=2047
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality.mobile=3
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3

@@ -1,4 +1,4 @@
-extends Enemy
+"extends Enemy
 class_name BiterFish
 
 var group: Array[Enemy] = []
@@ -42,3 +42,4 @@ func _process(delta: float) -> void:
 	
 	if position.distance_to(target_position) < 50:
 		_target_reached()
+"
