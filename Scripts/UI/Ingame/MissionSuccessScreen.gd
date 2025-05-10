@@ -19,6 +19,7 @@ func _process(_delta: float) -> void:
 
 func _on_return_to_station_button_up() -> void:
 	get_tree().paused = false
+	Global.brightness_modulate.color = Color.WHITE
 	Global.current_game_save.node_saves = []
 	Global.save_load_framework.save_state(false)
 	Global.save_load_framework.exit_to_menu()

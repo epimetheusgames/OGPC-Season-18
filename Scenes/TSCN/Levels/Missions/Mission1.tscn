@@ -28,7 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://dxjynk0yqb3jk" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="30_ec8ks"]
 [ext_resource type="PackedScene" uid="uid://bitnixx3cf0fb" path="res://Scenes/TSCN/Objects/GlowCoral.tscn" id="30_obv2f"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
-[ext_resource type="PackedScene" path="res://Scenes/TSCN/Objects/Buildings/WaffleHouse.tscn" id="33_3svaj"]
+[ext_resource type="PackedScene" uid="uid://b3jb4b6erblcr" path="res://Scenes/TSCN/Objects/Buildings/WaffleHouse.tscn" id="33_3svaj"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
 [ext_resource type="PackedScene" uid="uid://mg1dxuml1f2v" path="res://Scenes/TSCN/Objects/Items/JellyfishTentacles.tscn" id="33_jw53c"]
 [ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="35_47o3q"]

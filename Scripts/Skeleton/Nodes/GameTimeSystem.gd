@@ -6,6 +6,7 @@ extends Node
 var _hours: int = 0
 var _minutes: int = 0
 var _days: int = 0
+var pause_time: bool = false
 
 signal day_ended
 signal time_changed(hours: int, minutes: int)
@@ -16,6 +17,8 @@ func _ready() -> void:
 	while true:
 		await get_tree().create_timer(seconds_per_ten_minutes).timeout
 		if get_tree().paused:
+			continue
+		if pause_time:
 			continue
 		if _minutes < 50:
 			_minutes += 10

@@ -99,6 +99,8 @@ var death_menu: DeathScreen
 var success_menu: MissionSuccessScreen
 var pause_menu: PauseMenu
 
+var ingame_dialog: IngameDialog
+
 ## Values as shown in Collision Bitmasks section of GDSCRIPTRULESL.md
 var bitmask_conversion = {
 	"General Collision": 1,

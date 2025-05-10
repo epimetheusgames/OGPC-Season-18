@@ -18,6 +18,8 @@ var collecting_money := false
 ## Relative to mission root, saved, so they can be deleted.
 var collected_item_paths: Array[NodePath]
 
+signal building_bought
+
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
 	
@@ -92,6 +94,8 @@ func __collect_item(area: BaseItem) -> void:
 	var res: InventoryItem = area.generate_inventory_item()
 	collected_item_paths.append(Global.current_mission_node.get_path_to(area))
 	area.queue_free()
+	if res.name == "Building":
+		building_bought.emit()
 	for item in inventory:
 		if !item:
 			continue

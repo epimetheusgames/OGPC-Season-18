@@ -69,7 +69,7 @@ func save_state(call_signal := true) -> void:
 		return
 	
 	# Otherwise it's research station.
-	if Global.current_mission_node is MissionRoot && call_signal:
+	if Global.current_mission_node is MissionRoot && call_signal && !Global.current_mission_node.name == "Tutorial":
 		Global.current_game_save.node_saves = []
 		save_nodes.emit()
 	_save_game_save(Global.current_game_save, Global.current_game_slot)

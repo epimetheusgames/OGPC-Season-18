@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://71htappd3cxj"]
+[gd_scene load_steps=15 format=3 uid="uid://71htappd3cxj"]
 
 [ext_resource type="Script" uid="uid://1xmo13kpmgen" path="res://Scripts/UI/Ingame/TeamInfoPanel.gd" id="1_0ajfg"]
 [ext_resource type="Script" uid="uid://cdry0a2rsou8n" path="res://Scripts/UI/Ingame/PersonHUD.gd" id="1_0aoln"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cb7t2q24l4xf" path="res://Assets/Art/OxygenBar.png" id="5_ti1bd"]
 [ext_resource type="Texture2D" uid="uid://bbq3i5mso53js" path="res://Assets/Art/OxygenBarProgress.png" id="6_yehem"]
 [ext_resource type="Script" uid="uid://bb8dl02c0kfky" path="res://Scripts/UI/Ingame/PressableButtonsPanel.gd" id="11_ti1bd"]
+[ext_resource type="Script" uid="uid://dthgwjfgxeirg" path="res://Scripts/UI/Ingame/Dialog.gd" id="12_yehem"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l72ri"]
 
@@ -511,8 +512,42 @@ size_flags_stretch_ratio = 0.0
 theme = ExtResource("5_6galc")
 text = "Test"
 
+[node name="Dialog" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 626.0
+offset_top = 86.0
+offset_right = 1280.0
+offset_bottom = 186.0
+script = ExtResource("12_yehem")
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialog"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dialog/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Dialog/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_6galc")
+text = "Welcome to the tutorial!"
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="Dialog/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Dialog/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_6galc")
+text = "OK"
+
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot1/TextureRect/SlotButton" to="Inventory" method="_on_slot_button_button_down"]
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot2/TextureRect/SlotButton2" to="Inventory" method="_on_slot_button_2_button_down"]
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot3/TextureRect/SlotButton3" to="Inventory" method="_on_slot_button_3_button_down"]
 [connection signal="button_down" from="Inventory/MarginContainer/HBoxContainer/Slot4/TextureRect/SlotButton4" to="Inventory" method="_on_slot_button_4_button_down"]
 [connection signal="text_submitted" from="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable/ChatPanel/MarginContainer/VBox/LineEdit" to="StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable/ChatPanel" method="_on_line_edit_text_submitted"]
+[connection signal="button_up" from="Dialog/MarginContainer/VBoxContainer/Button" to="Dialog" method="_on_button_button_up"]

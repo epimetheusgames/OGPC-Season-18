@@ -47,7 +47,7 @@ func _on_save_nodes() -> void:
 	Global.current_game_save.node_saves.append(NodeSaver.create(Global.current_mission_node, self, ["position", "rotation", "velocity"]))
 
 func _physics_process(delta: float) -> void:
-	z_index = 100
+	z_index = 200
 	
 	if Global.is_multiplayer && _is_node_owner():
 		move_and_slide()

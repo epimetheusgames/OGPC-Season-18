@@ -51,6 +51,8 @@ func _ready() -> void:
 		Global.player.diver_combat.secondary_weapon = Global.player.diver_combat.instantiated_weapons[secondary_weapon]
 
 func _process(delta: float) -> void:
+	z_index = 57
+	
 	for i in range(icons.size()):
 		buttons[i].button.disabled = Global.player.diver_stats.current_money < icons[i].cost && \
 									 !Global.player.diver_combat.unlocked_weapons.get("has_" + icons[i].name)

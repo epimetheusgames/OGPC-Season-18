@@ -84,9 +84,9 @@ metadata/_edit_lock_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="StationaryUI"]
 layout_mode = 0
-offset_left = 564.0
+offset_left = 740.0
 offset_top = 298.0
-offset_right = 900.0
+offset_right = 1076.0
 offset_bottom = 670.0
 
 [node name="Tutorial" parent="StationaryUI/HBoxContainer" instance=ExtResource("1_wmqaw")]
