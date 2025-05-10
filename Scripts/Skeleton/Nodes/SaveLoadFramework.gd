@@ -186,7 +186,8 @@ func load_level(level_path: String, save: GameSave = null):
 	Global.game_time_system.set_time(0, 0)
 	if(level_path!="res://Scenes/TSCN/Levels/Playable/ResearchStation.tscn"):
 		Global.brightness_modulate.visible = true
-	if !save || Global.is_multiplayer:
+		
+	if !save || Global.is_multiplayer || instantiated.name == "Tutorial":
 		return
 	
 	for saver in save.node_saves:
