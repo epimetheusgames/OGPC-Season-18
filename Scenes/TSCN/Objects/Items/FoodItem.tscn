@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://26nnvoeot5gs"]
+
+[ext_resource type="Script" uid="uid://fpnredcqa4b5" path="res://Scripts/Objects/Items/BaseItem.gd" id="1_ctdjv"]
+[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="2_icim8"]
+[ext_resource type="Texture2D" uid="uid://dtoqcyu5gap2w" path="res://Assets/Art/Items/Poo.png" id="3_icim8"]
+
+[sub_resource type="Resource" id="Resource_b4udv"]
+script = ExtResource("2_icim8")
+file = "uid://26nnvoeot5gs"
+metadata/_custom_type_script = "uid://dlliifnia7sm4"
+
+[node name="FoodItem" type="Area2D"]
+script = ExtResource("1_ctdjv")
+scene = SubResource("Resource_b4udv")
+icon = ExtResource("3_icim8")
+cost = 3
+item_name = "Food"
+metadata/_custom_type_script = "uid://fpnredcqa4b5"
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.363762, 0.223113, 0.0715944, 1)
+polygon = PackedVector2Array(-52, 73, -29, 101, 10, 101, 56, 56, 99, -31, 64, -66, 7, -66, 3, -40, 13, -19, 1, 21, -55, 25)

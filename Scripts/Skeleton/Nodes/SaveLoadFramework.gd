@@ -148,6 +148,8 @@ func start_game(slot_num: int, custom_mission: Mission = null) -> void:
 	var level_data := _load_game_save(slot_num)
 	
 	Global.boids_calculator_node.paused = true
+	for node in get_parent().get_parent().get_node("UI/BoidsGroup").get_children():
+		node.queue_free()
 	Global.current_game_slot = slot_num
 	Global.current_game_save = level_data
 	Global.ui_root_node.get_node("StaticBody2D/CollisionPolygon2D").disabled = true

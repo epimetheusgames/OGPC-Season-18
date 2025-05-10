@@ -139,7 +139,7 @@ func __select_item(index: int) -> void:
 	else:
 		hovering_item_item = Util.find_all_children_of_type(hovering_item, "BaseItem")[0]
 	
-	if hovering_resource.name == "Building" && hovering_resource.count > 1:
+	if (hovering_resource.name == "Building" || hovering_resource.name == "Food") && hovering_resource.count > 1:
 		hovering_resource.count -= 1
 		hovering_resource = hovering_resource.duplicate()
 	else: 
