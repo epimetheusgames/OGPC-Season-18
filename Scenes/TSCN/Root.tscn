@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=41 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -27,10 +27,6 @@
 [ext_resource type="Script" uid="uid://k5m6873n63pf" path="res://Scripts/UI/DialogHandler.gd" id="23_1chc7"]
 [ext_resource type="PackedScene" uid="uid://bp2ach8thhbsd" path="res://Scenes/TSCN/UI/FakeButton.tscn" id="24_wosnj"]
 [ext_resource type="Script" uid="uid://d0u6amg8og288" path="res://Scripts/UI/UiGenerator.gd" id="25_w4o83"]
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_v8psd"]
-
-[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_bpaox"]
 
 [sub_resource type="Resource" id="Resource_41cf3"]
 script = ExtResource("5_jvequ")
@@ -316,14 +312,8 @@ script = ExtResource("2_ati64")
 
 [node name="GodotSteamAbstraction" type="Node" parent="Skeleton" node_paths=PackedStringArray("local_player", "networked_player")]
 script = ExtResource("3_c684j")
-local_player = NodePath("LocalPlayer")
-networked_player = NodePath("NetworkedPlayer")
-
-[node name="LocalPlayer" type="AudioStreamPlayer" parent="Skeleton/GodotSteamAbstraction"]
-stream = SubResource("AudioStreamGenerator_v8psd")
-
-[node name="NetworkedPlayer" type="AudioStreamPlayer" parent="Skeleton/GodotSteamAbstraction"]
-stream = SubResource("AudioStreamGenerator_bpaox")
+local_player = NodePath("")
+networked_player = NodePath("")
 
 [node name="SaveLoadFramework" type="Node" parent="Skeleton" node_paths=PackedStringArray("game_container")]
 script = ExtResource("4_l11nu")
@@ -764,7 +754,6 @@ offset_bottom = 766.0
 [node name="Sunlight" type="AudioStreamPlayer" parent="UI/MainMenu"]
 stream = ExtResource("18_lb45j")
 autoplay = true
-bus = &"Music"
 parameters/looping = true
 
 [node name="Boid" parent="UI" instance=ExtResource("17_g72ff")]

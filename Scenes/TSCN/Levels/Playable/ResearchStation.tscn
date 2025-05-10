@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0nn12ilucaoj"]
+[gd_scene load_steps=12 format=3 uid="uid://c0nn12ilucaoj"]
 
 [ext_resource type="PackedScene" uid="uid://chy3luehcqm2b" path="res://Scenes/TSCN/UI/MissionUiBox.tscn" id="1_wmqaw"]
 [ext_resource type="Script" uid="uid://ctrw12xhthtmp" path="res://Scripts/Level/ResearchStationCamera.gd" id="2_e3xfe"]
 [ext_resource type="Resource" uid="uid://c2722x3n5nlk5" path="res://Scenes/Resource/Level/Tutorial.tres" id="2_t7gpn"]
+[ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="3_x6tje"]
 [ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="4_6wu4g"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="5_thj6v"]
 
@@ -83,6 +84,7 @@ associated_mission = ExtResource("2_t7gpn")
 
 [node name="Mission1" parent="StationaryUI/HBoxContainer" instance=ExtResource("1_wmqaw")]
 layout_mode = 2
+associated_mission = ExtResource("3_x6tje")
 
 [node name="MissionsTitle" type="Label" parent="StationaryUI"]
 layout_mode = 0

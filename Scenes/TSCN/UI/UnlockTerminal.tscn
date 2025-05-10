@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://ritdw7h4f83y" path="res://Scenes/TSCN/Objects/Items/LightLineItem.tscn" id="3_q42uy"]
 [ext_resource type="PackedScene" uid="uid://dbhho2ec64bks" path="res://Scenes/TSCN/Objects/Items/PlaceableBuildingItem.tscn" id="4_2ocmr"]
 [ext_resource type="PackedScene" uid="uid://6nnlp7fpthm4" path="res://Scenes/TSCN/UI/UnlockableItemButton.tscn" id="5_rasfv"]
-[ext_resource type="PackedScene" uid="uid://26nnvoeot5gs" path="res://Scenes/TSCN/Objects/Items/FoodItem.tscn" id="5_slo63"]
+[ext_resource type="PackedScene" uid="uid://sobt4m87if1" path="res://Scenes/TSCN/Objects/Items/FoodItem.tscn" id="5_slo63"]
 [ext_resource type="Texture2D" uid="uid://kbno8w3pbkse" path="res://Assets/Art/Icons/LightLineIcon.png" id="6_l73cy"]
-[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="9_3phen"]
 [ext_resource type="Texture2D" uid="uid://d3bcpcbk620w" path="res://Assets/Art/Level/House.png" id="9_slo63"]
+[ext_resource type="Texture2D" uid="uid://btp5rgr8jysxl" path="res://Assets/Art/FoodItem.png" id="11_slo63"]
 
 [sub_resource type="Resource" id="Resource_fm50s"]
 script = ExtResource("2_1re2d")
@@ -157,7 +157,7 @@ texture = ExtResource("9_slo63")
 layout_mode = 2
 size_flags_vertical = 3
 item_name = "Food"
-texture = ExtResource("9_3phen")
+texture = ExtResource("11_slo63")
 
 [node name="HSeparator" type="HSeparator" parent="SubViewportContainer/SubViewport/ItemUnlock"]
 layout_mode = 2
