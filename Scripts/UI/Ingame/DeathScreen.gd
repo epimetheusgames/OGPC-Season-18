@@ -10,7 +10,7 @@ func _ready() -> void:
 	Global.death_menu = self
 
 func _process(_delta: float) -> void:
-	if Global.player && Global.player.get_diver_health() <= 0:
+	if Global.player && Global.player.get_diver_health() <= 25:
 		if vignette_shader:
 			vignette_shader.material.set_shader_parameter("vignette_strength", 1.5)
 		ingame_ui.visible = false

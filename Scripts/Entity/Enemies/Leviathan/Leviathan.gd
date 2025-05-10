@@ -1,6 +1,7 @@
 ## This is a big fish enemy
 # Owned by: kaitaobenson
-"""
+
+
 class_name Leviathan
 extends Enemy
 
@@ -18,8 +19,9 @@ var nav_target: Vector2
 func _ready() -> void:
 	super()
 	
+	state_machine.init(self)
+	
 	# Set rope data
-	rope.point_amount = node_amount
 	rope.point_separation = node_separation
 	rope.start_pos_on = true
 	
@@ -31,26 +33,17 @@ func _ready() -> void:
 		
 		add_child(new_node)
 		leviathan_nodes.append(new_node)
-	
-	while true:
-		await get_tree().create_timer(0.1).timeout
-		$Nav.target_position = target_position
-		nav_target = $Nav.get_next_path_position()
-		if !$Nav.is_target_reachable():
-			_target_reached()
-
-func _process(delta: float) -> void:
-	super(delta)
 
 func _physics_process(delta: float) -> void:
+	state_machine.process_physics(delta)
 	update_leviathan_nodes(delta)
+	move_and_slide()
 	
-	velocity = Util.better_vec2_lerp(velocity, (nav_target - position).normalized() * target_speed, 0.2, delta)
-	global_position += velocity * delta * 60
+	if state_machine.current_state.name == "Chase" && $Head/AnimatedSprite2D.animation == "CloseMouth":
+		$Head/AnimatedSprite2D.play("OpenMouth")
+	if state_machine.current_state.name == "Wander" && $Head/AnimatedSprite2D.animation == "OpenMouth":
+		$Head/AnimatedSprite2D.play("CloseMouth")
 	
-	if global_position.distance_to(target_position) < 20:
-		_target_reached()
-		
 	if Global.is_multiplayer && has_multiplayer_sync && _is_node_owner():
 		Global.godot_steam_abstraction.sync_var(rope, "points")
 
@@ -58,15 +51,16 @@ func update_leviathan_nodes(delta: float) -> void:
 	rope.start_pos_on = true
 	rope.start_pos = global_position
 	
+	var next_path_pos = nav_agent.get_next_path_position()
+	
 	for i in range(rope.point_amount - 1):
 		leviathan_nodes[i].global_position = rope.points[i]
 		if i == 0:
-			leviathan_nodes[i].global_rotation = \
+			leviathan_nodes[i].rotation = \
 				Util.better_angle_lerp(
 					leviathan_nodes[i].global_rotation, 
-					rope.points[i].angle_to_point(target_position), 
+					rope.points[i].angle_to_point(next_path_pos), 
 					0.2, delta)
 		else:
 			leviathan_nodes[i].global_rotation = rope.points[i].angle_to_point(rope.points[i - 1])
 		
-"""

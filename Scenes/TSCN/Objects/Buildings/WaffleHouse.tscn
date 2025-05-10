@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3jb4b6erblcr"]
+
+[ext_resource type="Texture2D" uid="uid://dyxe351do4ctp" path="res://Assets/Art/Level/WAFFLEHOUSE.png" id="1_dx5ip"]
+[ext_resource type="PackedScene" uid="uid://bp7br2o4yntou" path="res://Scenes/TSCN/UI/UnlockTerminal.tscn" id="1_wm8ts"]
+
+[sub_resource type="Gradient" id="Gradient_yxkba"]
+colors = PackedColorArray(1, 1, 1, 0.36, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wm8ts"]
+gradient = SubResource("Gradient_yxkba")
+width = 1000
+height = 1000
+fill = 1
+fill_from = Vector2(0.5, 0.527778)
+fill_to = Vector2(0.692308, 0.732906)
+
+[node name="WaffleHouse" type="Node2D"]
+
+[node name="BodyLight" type="PointLight2D" parent="."]
+position = Vector2(4, 101)
+energy = 2.0
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 1.0
+texture = SubResource("GradientTexture2D_wm8ts")
+texture_scale = 3.0
+metadata/_edit_lock_ = true
+
+[node name="UnlockTerminal" parent="." instance=ExtResource("1_wm8ts")]
+position = Vector2(4, 101)
+only_items = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dx5ip")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-373, 1, -318, -65, -343, -175, -359, -207, 360, -205, 333, -171, 320, -62, 373, -2)
+
+[node name="Area2D" type="Area2D" parent="." groups=["gravity_areas"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-300, 216, 296, 207, 296, -17, -291, -24)

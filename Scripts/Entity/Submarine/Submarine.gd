@@ -86,9 +86,13 @@ func cage_broken():
 	$"Hurtboxes/BubbleHurtbox".hurt_by_enemy = true
 
 func damaged(damage_amount : float, by : Hurtbox):
+	if Global.is_multiplayer && _is_node_owner():
+		Global.godot_steam_abstraction.run_remote_function(self, "damaged", [damage_amount, by])
 	Global.player.camera.shake(3, 0.5)
  
 func die():
+	if Global.is_multiplayer && _is_node_owner():
+		Global.godot_steam_abstraction.run_remote_function(self, "die", [])
 	Global.player.scale = Vector2(1,1)
 	queue_free()
 

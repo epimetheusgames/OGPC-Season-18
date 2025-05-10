@@ -2,6 +2,8 @@ class_name MainMenu
 extends Control
 
 
+var playing_credits := false
+
 func _ready():
 	Global.chat = $MinimalChat
 	Steam.lobby_match_list.connect(_lobby_list_updated)
@@ -15,6 +17,8 @@ func _ready():
 	_on_music_volume_slider_value_changed(save.music_volume)
 	$SoundMenu/SFXVolumeSlider.value = save.sfx_volume
 	_on_sfx_volume_slider_value_changed(save.sfx_volume)
+	
+	$CreditsMenu/CreditsAnimationPlayer.play("MAIN")
 	
 	while true:
 		await get_tree().create_timer(1).timeout
@@ -30,6 +34,10 @@ func _process(_delta: float) -> void:
 	
 	if !Global.current_mission_node:
 		Global.chat = $MinimalChat
+	
+	if Input.is_action_just_pressed("esc") && playing_credits:
+		$CreditsMenu/CreditsAnimationPlayer.play("RESET")
+		playing_credits = false
 
 # Should be remotely called.
 func set_multiplayer_status(status: String):
@@ -37,7 +45,7 @@ func set_multiplayer_status(status: String):
 
 func _open_sound_button() -> void:
 	$SoundButton.visible = false
-	$KeybindButton.visible = false
+	$CreditsButton.visible = false
 	$BackButton.visible = false
 	$SoundMenu.visible = true
 
@@ -87,8 +95,6 @@ func _on_start_button_button_up() -> void:
 	$QuitButton.text = "Back"
 
 func _on_singleplayer_button_button_up() -> void:
-	for child in $"../BoidsGroup".get_children():
-		child.queue_free()
 	$"../StaticBody2D/CollisionPolygon2D".disabled = true
 	# Carsons code is straight doo doo
 	#$"../StaticBody2D/CollisionPolygon2D2".disabled = true
@@ -144,11 +150,17 @@ func _on_multiplayer_join_game_button_button_up() -> void:
 
 func _on_settings_button_up() -> void:
 	$SoundButton.visible = true
-	$KeybindButton.visible = true
+	$CreditsButton.visible = true
 	$BackButton.visible = true
 	$StartButton.visible = false
 	$SettingsButton.visible = false
 	$QuitButton.visible = false
+	$MultiplayerJoinButton.visible = false
+	$MultiplayerButton.visible = false
+	$SingleplayerButton.visible = false
+	$MultiplayerHostButton.visible = false
+	$MultiplayerJoinGameButton.visible = false
+	$MultiplayerHostGameButton.visible = false
 	$Members.visible = false
 
 func _on_brightness_slider_value_changed(value: float) -> void:
@@ -158,18 +170,18 @@ func _on_brightness_slider_value_changed(value: float) -> void:
 func _on_sound_button_button_up() -> void:
 	$SoundMenu.visible = true
 	$BackButton.visible = false
-	$KeybindButton.visible = false
+	$CreditsButton.visible = false
 	$SoundButton.visible = false
 
 func _on_sound_menu_back_button_button_up() -> void:
 	$SoundMenu.visible = false
 	$BackButton.visible = true
-	$KeybindButton.visible = true
+	$CreditsButton.visible = true
 	$SoundButton.visible = true
 
 func _on_back_button_button_up() -> void:
 	$BackButton.visible = false
-	$KeybindButton.visible = false
+	$CreditsButton.visible = false
 	$SoundButton.visible = false
 	$StartButton.visible = true
 	$SettingsButton.visible = true
@@ -187,3 +199,7 @@ func _on_music_volume_slider_value_changed(value: float) -> void:
 func _on_sfx_volume_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("SFX"), value / 100.0)
 	update_global_save()
+
+func _on_credits_button_button_up() -> void:
+	$CreditsMenu/CreditsAnimationPlayer.play("CreditsAnimation")
+	playing_credits = true

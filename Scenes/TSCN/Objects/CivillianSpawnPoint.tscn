@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://bwtadftcthq27"]
+[gd_scene load_steps=3 format=3 uid="uid://bwtadftcthq27"]
 
-[node name="CivillianSpawnPoint" type="Node2D" groups=["civillian_spawn_points"]]
+[ext_resource type="Script" uid="uid://crawj8ara8hib" path="res://Scripts/Objects/CivillianSpawnPoint.gd" id="1_gvvub"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74rjk"]
+radius = 680.106
+
+[node name="CivillianSpawnPoint" type="Node2D"]
+script = ExtResource("1_gvvub")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_74rjk")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

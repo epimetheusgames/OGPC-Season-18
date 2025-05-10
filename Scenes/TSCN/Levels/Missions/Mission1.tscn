@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dh0cluhw5hbar"]
+[gd_scene load_steps=66 format=3 uid="uid://dh0cluhw5hbar"]
 
 [ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_314ux"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="2_3fu4r"]
@@ -12,7 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://ciqgqnvf6arsr" path="res://Assets/Music/Submarine.mp3" id="6_fukii"]
 [ext_resource type="Material" uid="uid://cexuq6aqq46ng" path="res://Scenes/Resource/Level/AutoPolygonTextureMaterial.tres" id="6_l3b62"]
 [ext_resource type="Shader" uid="uid://cgyujgfqy1jk6" path="res://Scripts/GLSL/GDShader/PolygonDepthShader.gdshader" id="8_gnr5v"]
-[ext_resource type="Texture2D" uid="uid://dyxe351do4ctp" path="res://Assets/Art/Level/WAFFLEHOUSE.png" id="8_jw53c"]
 [ext_resource type="PackedScene" uid="uid://brtj1ur8tgigg" path="res://Scenes/ResearchStation.tscn" id="13_eg3rs"]
 [ext_resource type="PackedScene" uid="uid://dl7oejcvhsgci" path="res://Kelp/Kelp.tscn" id="13_gnr5v"]
 [ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_gg62y"]
@@ -29,7 +28,9 @@
 [ext_resource type="PackedScene" uid="uid://dxjynk0yqb3jk" path="res://Scenes/TSCN/UI/SettingsMenu.tscn" id="30_ec8ks"]
 [ext_resource type="PackedScene" uid="uid://bitnixx3cf0fb" path="res://Scenes/TSCN/Objects/GlowCoral.tscn" id="30_obv2f"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="32_kyt52"]
+[ext_resource type="PackedScene" uid="uid://b3jb4b6erblcr" path="res://Scenes/TSCN/Objects/Buildings/WaffleHouse.tscn" id="33_3svaj"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="33_aiin4"]
+[ext_resource type="PackedScene" uid="uid://mg1dxuml1f2v" path="res://Scenes/TSCN/Objects/Items/JellyfishTentacles.tscn" id="33_jw53c"]
 [ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="35_47o3q"]
 [ext_resource type="PackedScene" uid="uid://c1sxg2d10k1y7" path="res://Scenes/TSCN/UI/PauseMenu.tscn" id="35_upo23"]
 
@@ -291,8 +292,8 @@ gradient = SubResource("Gradient_jw53c")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bdf5b"]
 resource_local_to_scene = true
 shader = ExtResource("8_gnr5v")
-shader_parameter/points = PackedVector2Array(-4139.6, 5186, -2879.2, 4470, -1819.6, 3734.8, -931.6, 2742, -195.2, 1044, 256.8, -638.4, 1803.6, 516.8, 1331.2, 1825.2, 901.6, 3320.8, 411.2, 4055.2, 116.8, 5928.4, -712, 4938, -1636, 5520.8, -2965.2, 6160, -3939.2, 5988)
-shader_parameter/num_points = 15
+shader_parameter/points = PackedVector2Array(-4139.6, 5186, -2879.2, 4470, -1819.6, 3734.8, -931.6, 2742, -195.2, 1044, 256.8, -638.4, 390, -513, 1015, -499, 730, -287, 1803.6, 516.8, 1331.2, 1825.2, 901.6, 3320.8, 411.2, 4055.2, 116.8, 5928.4, -712, 4938, -1636, 5520.8, -2965.2, 6160, -3939.2, 5988)
+shader_parameter/num_points = 18
 shader_parameter/global_position = Vector2(-5860, -10195)
 shader_parameter/fade_width = 200
 shader_parameter/tex_scale = 103.0
@@ -470,7 +471,7 @@ metadata/_edit_lock_ = true
 z_index = 120
 material = SubResource("ShaderMaterial_bdf5b")
 position = Vector2(-5860, -10195)
-polygon = PackedVector2Array(-4139.6, 5186, -2879.2, 4470, -1819.6, 3734.8, -931.6, 2742, -195.2, 1044, 256.8, -638.4, 1803.6, 516.8, 1331.2, 1825.2, 901.6, 3320.8, 411.2, 4055.2, 116.8, 5928.4, -712, 4938, -1636, 5520.8, -2965.2, 6160, -3939.2, 5988)
+polygon = PackedVector2Array(-4139.6, 5186, -2879.2, 4470, -1819.6, 3734.8, -931.6, 2742, -195.2, 1044, 256.8, -638.4, 390, -513, 1015, -499, 730, -287, 1803.6, 516.8, 1331.2, 1825.2, 901.6, 3320.8, 411.2, 4055.2, 116.8, 5928.4, -712, 4938, -1636, 5520.8, -2965.2, 6160, -3939.2, 5988)
 script = ExtResource("5_aep54")
 metadata/_custom_type_script = "uid://xurg5qfsdg1m"
 metadata/_edit_lock_ = true
@@ -521,14 +522,6 @@ position = Vector2(-6326, -3125)
 [node name="BigfinSquid5" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
 position = Vector2(-4738, -4834)
 
-[node name="Wafflehouse" type="Sprite2D" parent="LevelContainer/Environment"]
-position = Vector2(886, -12534)
-texture = ExtResource("8_jw53c")
-
-[node name="Wafflehouse2" type="Sprite2D" parent="LevelContainer/Environment"]
-position = Vector2(12072, -8382)
-texture = ExtResource("8_jw53c")
-
 [node name="BigfinSquid" parent="LevelContainer/Environment" instance=ExtResource("18_0qmxr")]
 position = Vector2(-640, -2729)
 
@@ -549,7 +542,7 @@ spawn_filepath = "res://Scenes/TSCN/Entities/Diver/Diver.tscn"
 
 [node name="Diver" parent="LevelContainer/Player/MultiplayerPlayerSpawnerComponent" instance=ExtResource("4_0aydx")]
 z_index = 20
-position = Vector2(-12300, -5783)
+position = Vector2(-13196, -5783)
 
 [node name="ResearchStation" parent="LevelContainer" node_paths=PackedStringArray("parallax_bubbles") instance=ExtResource("13_eg3rs")]
 z_index = 82
@@ -732,8 +725,56 @@ rotation = -0.274804
 position = Vector2(-6381, -1907)
 rotation = 0.00711685
 
+[node name="RockItem19" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-3441, -1863)
+rotation = 0.554321
+
+[node name="RockItem21" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-436, -4429)
+rotation = 3.58274
+
+[node name="RockItem20" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-5082, -2493)
+rotation = -0.85423
+
 [node name="RockItem6" parent="." instance=ExtResource("27_l3b62")]
 position = Vector2(-11208, -5615)
+
+[node name="RockItem9" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-7986, -6242)
+rotation = -0.528749
+
+[node name="RockItem10" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-7467, -1960)
+rotation = 0.0864477
+
+[node name="RockItem11" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-8115, -10685)
+rotation = -4.15626
+
+[node name="RockItem12" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-4946, -10334)
+rotation = -5.54757
+
+[node name="RockItem13" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-4528, -8390)
+rotation = -4.41937
+
+[node name="RockItem14" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-4625, -8039)
+rotation = -4.41937
+
+[node name="RockItem15" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-4768, -7520)
+rotation = -4.41937
+
+[node name="RockItem17" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-4936, -6995)
+rotation = -4.41937
+
+[node name="RockItem18" parent="." instance=ExtResource("27_l3b62")]
+position = Vector2(-5475, -6022)
+rotation = -4.41937
 
 [node name="RockItem16" parent="." instance=ExtResource("27_l3b62")]
 position = Vector2(-11694, -5249)
@@ -793,5 +834,45 @@ length = 15
 z_index = -1
 position = Vector2(-10230, -2581)
 length = 15
+
+[node name="JellyfishTentacles" parent="." instance=ExtResource("33_jw53c")]
+position = Vector2(-3138, -9037)
+rotation = 0.714932
+
+[node name="WaffleHouse" parent="." instance=ExtResource("33_3svaj")]
+position = Vector2(-568, -12472)
+
+[node name="WaffleHouse2" parent="." instance=ExtResource("33_3svaj")]
+position = Vector2(324, -5602)
+
+[node name="WaffleHouse3" parent="." instance=ExtResource("33_3svaj")]
+position = Vector2(-1259, -15710)
+
+[node name="WaffleHouse4" parent="." instance=ExtResource("33_3svaj")]
+position = Vector2(11536, -8355)
+
+[node name="WaffleHouse5" parent="." instance=ExtResource("33_3svaj")]
+position = Vector2(-5162, -10951)
+
+[node name="CivillianSpawnPoint" parent="." instance=ExtResource("23_jw53c")]
+position = Vector2(-5164, -10875)
+
+[node name="CivillianSpawnPoint2" parent="." instance=ExtResource("23_jw53c")]
+position = Vector2(274, -5529)
+
+[node name="CivillianSpawnPoint3" parent="." instance=ExtResource("23_jw53c")]
+position = Vector2(-593, -12394)
+
+[node name="CivillianSpawnPoint4" parent="." instance=ExtResource("23_jw53c")]
+position = Vector2(-1236, -15675)
+
+[node name="Jellyfish2" parent="." instance=ExtResource("16_cbdp8")]
+position = Vector2(-2956, -5175)
+
+[node name="Jellyfish3" parent="." instance=ExtResource("16_cbdp8")]
+position = Vector2(-7558, -3579)
+
+[node name="Jellyfish4" parent="." instance=ExtResource("16_cbdp8")]
+position = Vector2(-275, -8490)
 
 [editable path="UILayer/IngameUI"]

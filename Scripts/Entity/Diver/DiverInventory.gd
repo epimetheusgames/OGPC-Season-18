@@ -138,5 +138,5 @@ func __select_item(index: int) -> void:
 	if hovering_resource.name == "Building" && hovering_resource.count > 1:
 		hovering_resource.count -= 1
 		hovering_resource = hovering_resource.duplicate()
-	
-	inventory[index] = null
+	else: 
+		inventory[index] = null

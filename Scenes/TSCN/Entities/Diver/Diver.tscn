@@ -1,13 +1,10 @@
-[gd_scene load_steps=56 format=3 uid="uid://5g1k55gpynrt"]
+[gd_scene load_steps=51 format=3 uid="uid://5g1k55gpynrt"]
 
 [ext_resource type="Script" uid="uid://b2s21mlnq8264" path="res://Scripts/Entity/Diver/Diver.gd" id="1_soyuq"]
 [ext_resource type="Script" uid="uid://bt0004c6vgx2d" path="res://Scripts/Entity/Diver/DiverMovement.gd" id="2_lxvv3"]
 [ext_resource type="Script" uid="uid://cqnwbqciaog6v" path="res://Scripts/Entity/Diver/DiverAnimation.gd" id="3_k6pml"]
 [ext_resource type="Script" uid="uid://1laqql4gx1r2" path="res://Scripts/Entity/Diver/DiverInventory.gd" id="3_r5rx4"]
-[ext_resource type="Script" uid="uid://cdrx7funwnj4w" path="res://Scripts/ResourceScripts/Misc/InventoryItem.gd" id="4_7u6dt"]
 [ext_resource type="Script" uid="uid://dtbbn6le46dor" path="res://Scripts/Public/InventoryPublic.gd" id="4_lqvql"]
-[ext_resource type="Texture2D" uid="uid://d3bcpcbk620w" path="res://Assets/Art/Level/House.png" id="4_s1j8x"]
-[ext_resource type="Script" uid="uid://dlliifnia7sm4" path="res://Scripts/ResourceScripts/Misc/FilepathResource.gd" id="6_3bvk2"]
 [ext_resource type="PackedScene" uid="uid://d2lyihyk6qgq2" path="res://Scenes/TSCN/Objects/Buildings/DefaultPlaceableBuilding.tscn" id="6_s1j8x"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="7_3b7lw"]
 [ext_resource type="Script" uid="uid://dl6v2p1fxvitc" path="res://Scripts/Entity/Diver/DiverStats.gd" id="7_ju8q7"]
@@ -43,21 +40,6 @@ height = 158.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_auddj"]
 radius = 24.0
 height = 146.0
-
-[sub_resource type="Resource" id="Resource_y37s4"]
-script = ExtResource("6_3bvk2")
-file = "uid://dbhho2ec64bks"
-metadata/_custom_type_script = "uid://dlliifnia7sm4"
-
-[sub_resource type="Resource" id="Resource_bs6f5"]
-script = ExtResource("4_7u6dt")
-name = "Building"
-scene = SubResource("Resource_y37s4")
-cost = 20
-icon = ExtResource("4_s1j8x")
-count = 1
-sellable_resource = false
-metadata/_custom_type_script = "uid://cdrx7funwnj4w"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5d3kj"]
 radius = 51.0
@@ -228,11 +210,11 @@ _data = {
 radius = 25.0
 height = 110.0
 
-[sub_resource type="Gradient" id="Gradient_yxkba"]
+[sub_resource type="Gradient" id="Gradient_c6fqq"]
 colors = PackedColorArray(1, 1, 1, 0.36, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_chbw5"]
-gradient = SubResource("Gradient_yxkba")
+gradient = SubResource("Gradient_c6fqq")
 width = 1000
 height = 1000
 fill = 1
@@ -257,7 +239,6 @@ shape = SubResource("CapsuleShape2D_auddj")
 
 [node name="Inventory" type="Node2D" parent="."]
 script = ExtResource("3_r5rx4")
-inventory = Array[ExtResource("4_7u6dt")]([SubResource("Resource_bs6f5")])
 default_placeable_building = ExtResource("6_s1j8x")
 
 [node name="ItemDetectionArea" type="Area2D" parent="Inventory"]
@@ -549,10 +530,10 @@ metadata/_edit_lock_ = true
 
 [node name="CollectItemAnimationText" type="Label" parent="Animation"]
 modulate = Color(0.44, 0.428853, 0.1056, 0)
-offset_left = 864.0
-offset_top = -529.0
-offset_right = 1054.0
-offset_bottom = -366.0
+offset_left = -20.0
+offset_top = -114.0
+offset_right = 170.0
+offset_bottom = 49.0
 theme = ExtResource("12_yxkba")
 theme_override_font_sizes/font_size = 80
 text = "+10"
@@ -577,6 +558,8 @@ metadata/_edit_lock_ = true
 script = ExtResource("7_3b7lw")
 entity = NodePath("../..")
 hurt_by_enemy = true
+max_health = 125.0
+dead_health = 25.0
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Stats/Hurtbox"]

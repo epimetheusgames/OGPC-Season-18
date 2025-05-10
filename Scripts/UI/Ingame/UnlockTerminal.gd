@@ -7,6 +7,7 @@ extends Node2D
 @export var items: Array[PackedScene]
 @export var primary_button: Button
 @export var secondary_button: Button
+@export var only_items := false
 
 var selected_icon: WeaponIcon = null;
 var primary_weapon: String
@@ -35,6 +36,12 @@ func _ready() -> void:
 	
 	for i in range(actual_items.size()):
 		item_buttons[i].button.button_up.connect(_item_button_up.bind(actual_items[i].name))
+	
+	if only_items:
+		$SubViewportContainer/SubViewport/MainMenu.visible = false
+		$SubViewportContainer/SubViewport/WeaponUnlock.visible = false
+		$SubViewportContainer/SubViewport/ItemUnlock.visible = true
+		$SubViewportContainer/SubViewport/ItemUnlock/BackButton.visible = false
 	
 	await get_tree().create_timer(0.1).timeout
 	

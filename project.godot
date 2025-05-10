@@ -73,6 +73,7 @@ submarine_area="The area of the submarine interior"
 ladder_area=""
 environment_collision=""
 civillian_spawn_points=""
+civillian_followers=""
 
 [input]
 

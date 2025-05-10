@@ -10,6 +10,7 @@ extends Area2D
 @export var hurt_by_enemy: bool = false
 @export var hurt_by_player: bool = false
 @export var max_health: float = 100.0
+@export var dead_health: float = 0.0
 
 var health: float = max_health
 var is_invincible: bool = false
@@ -50,7 +51,7 @@ func damage(damage_amount: float, by: Attackbox) -> void:
 	
 	damaged.emit(abs(health - new_health), by)
 	
-	if health == 0:
+	if health <= dead_health:
 		died.emit()
 		if get_parent() is Enemy:
 			get_parent()._die()

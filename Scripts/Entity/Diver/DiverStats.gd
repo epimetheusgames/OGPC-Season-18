@@ -15,10 +15,10 @@ var current_money: int = 0
 
 
 func _ready() -> void:
-	return
 	while true:
 		await get_tree().create_timer(2).timeout
-		hurtbox.damage(5, diver.get_node("Attackbox"))
+		if oxygen <= 25:
+			hurtbox.damage(5, diver.get_node("Attackbox"))
 
 func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():

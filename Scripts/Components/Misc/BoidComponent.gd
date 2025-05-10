@@ -92,6 +92,9 @@ func _process(_delta: float) -> void:
 		boids_calculator = Global.boids_calculator_node
 		return
 	
+	if boids_calculator.paused:
+		return
+	
 	if component_container && boids_calculator.shader_output.size() - 1 > boids_index:
 		var output := boids_calculator.get_shader_output()
 		component_container_node.velocity.x = output[boids_index * 3]
