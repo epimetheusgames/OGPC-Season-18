@@ -20,6 +20,9 @@ func _ready():
 	super._ready()
 	Global.ingame_dialog.dialog("Hello, welcome to the Tutorial.")
 	Global.game_time_system.pause_time = true
+	
+	await get_tree().create_timer(0.1).timeout
+	
 	Global.player.diver_inventory.building_bought.connect(bought)
 
 func _process(delta: float) -> void:
@@ -46,7 +49,7 @@ func _process(delta: float) -> void:
 		Global.player.diver_stats.current_money += 10
 		Global.ingame_dialog.dialog("Good job! You can now return to the research station to buy a house. In the unlock terminal hit back, Items, and buy the Building.")
 
-func bought() -> void:
+func bought(called_remote := false) -> void:
 	state = State.CIVILLIANS
 	var follower_spawn_positions := get_tree().get_nodes_in_group("civillian_spawn_points")
 	var follower_node: CivillianFollower = Global.research_station.follower.instantiate()
@@ -54,11 +57,6 @@ func bought() -> void:
 	spawn_node.add_child(follower_node)
 	follower_node.position += Util.random_vector(Global.rng, 50, 0)
 	Global.research_station.follower_spawned.emit(follower_node.global_position)
-	if Global.is_multiplayer_host():
-		Global.godot_steam_abstraction.run_remote_function(self, "_spawn_remote", [
-			str(get_path_to(spawn_node)), 
-			follower_node.global_position, 
-			follower_node.name, 
-			Global.game_time_system._days
-		])
+	if !called_remote:
+		Global.godot_steam_abstraction.run_remote_function(self, "bought", [true])
 	Global.ingame_dialog.dialog("Outside of the research station you can select the house in your inventory to place the house. After this lead the civillian to the house. Once you house enough civillians you will win the mission.")
