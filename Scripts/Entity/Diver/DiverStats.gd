@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	if Global.godot_steam_abstraction && Global.is_multiplayer && !diver._is_node_owner():
 		return
 	
-	if diver.get_state() == Diver.DiverState.IN_GRAVITY_AREA:
+	if diver.get_state() == Diver.DiverState.IN_GRAVITY_AREA || diver.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
 		oxygen = 100
 	
 	if diver.diver_movement.is_boosting:
