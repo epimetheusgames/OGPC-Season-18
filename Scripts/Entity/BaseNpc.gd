@@ -15,6 +15,9 @@ var ready_run_count = 0
 # Make dialog name in dialog.json this name
 @export var npc_name:String
 
+# Controls whether or not the response buttons and ability to interact exist. if false, dialog is chosen and started by callling the functions (mainly intended for tutorial)
+@export var choice_given:bool
+
 
 # Dialog speed in characters per second 
 @export var dialog_speed: int

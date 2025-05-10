@@ -1,6 +1,9 @@
 class_name DiverMovement
 extends Node2D
 
+# Triggers when the diver moves, exists for tutorial purposes
+signal diver_moved
+
 # Swim
 const SWIM_BASE_SPEED := 350.0
 const SWIM_AIMING_SPEED := 150.0
@@ -50,13 +53,17 @@ func _physics_process(delta: float) -> void:
 	input_vector = get_wasd_input_vector()
 	if input_vector.length() > 0:
 		input_angle = input_vector.angle() + PI / 2
+		diver_moved.emit()
 	
 	if is_climbing_ladder:
 		handle_ladder_movement(delta)
+		diver_moved.emit()
 	elif is_in_gravity_area:
 		handle_walk_movement(delta)
+		diver_moved.emit()
 	else:
 		handle_swim_movement(delta)
+		diver_moved.emit()
 	
 	if is_in_ladder_area && !Global.pressable_buttons_panel.has("Use Ladder"):
 		Global.pressable_buttons_panel.buttons.append(PressableButtonsPanel.ButtonPress.create("Use Ladder", "E"))

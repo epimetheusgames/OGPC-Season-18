@@ -13,8 +13,8 @@ func _ready() -> void:
 	
 	if Global.save_load_framework:
 		Global.save_load_framework.save_nodes.connect(_saving_game)
-	
-	Global.research_station.follower_spawned.connect(_spawning_follower)
+	if(Global.research_station):
+		Global.research_station.follower_spawned.connect(_spawning_follower)
 
 func _process(_delta: float) -> void:
 	health_progress.value = Global.player.get_diver_health()

@@ -2,6 +2,10 @@
 class_name Submarine
 extends Entity
 
+# Tutorial stuff
+signal entered_submarine
+signal driving_submarine
+
 @onready var submarine_movement = $"SubmarineMovement"
 @onready var seat_pos = $"InteractionArea/SeatPos"
 @onready var aura = $"SubmarineAura"
@@ -91,6 +95,7 @@ func die():
 func _on_submarine_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_area"):
 		players_inside += 1
+		entered_submarine.emit()
 		interior_texture.visible = true
 		exterior_texture.visible = false
 

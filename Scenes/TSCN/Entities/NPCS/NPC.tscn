@@ -6,6 +6,8 @@
 [node name="NPC" type="CharacterBody2D"]
 process_mode = 4
 script = ExtResource("1_3od1n")
+dialog_area = NodePath("DialogHitbox")
+choice_given = true
 
 [node name="AudioHandler" type="Node2D" parent="."]
 

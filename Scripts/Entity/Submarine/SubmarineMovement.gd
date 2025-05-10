@@ -4,6 +4,10 @@
 class_name SubmarineMovement
 extends Node2D
 
+# Tutorial stuff
+signal drive_entered
+signal drive_exited
+
 const CONST_ACCEL: int = 40
 const MAX_SPEED: float = 7500.0
 const MAX_ROTATION: float = PI/12
@@ -80,11 +84,13 @@ func _physics_process(delta: float) -> void:
 		if Global.player.get_state() != Diver.DiverState.DRIVING_SUBMARINE and in_interaction_area and !is_being_operated: 
 			Global.player.set_state(Diver.DiverState.DRIVING_SUBMARINE)
 			is_being_operated = true
+			drive_entered.emit()
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = true
 		elif Global.player.get_state() == Diver.DiverState.DRIVING_SUBMARINE:
 			Global.player.set_state(Diver.DiverState.IN_GRAVITY_AREA)
 			target_angle = 0.0
 			is_being_operated = false
+			drive_exited.emit()
 			$"../SubmarineWeaponSlot/SubmarineBurstWeapon".is_being_operated = false
 			Global.player.scale = Vector2(1,1)
 
