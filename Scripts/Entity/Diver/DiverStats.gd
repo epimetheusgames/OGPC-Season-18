@@ -17,7 +17,7 @@ var current_money: int = 0
 func _ready() -> void:
 	while true:
 		await get_tree().create_timer(2).timeout
-		if oxygen <= 0:
+		if oxygen <= 25:
 			hurtbox.damage(5, diver.get_node("Attackbox"))
 
 func _process(delta: float) -> void:

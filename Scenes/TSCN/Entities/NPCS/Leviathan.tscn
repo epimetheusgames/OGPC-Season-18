@@ -1,14 +1,90 @@
-[gd_scene load_steps=10 format=3 uid="uid://co2canly84hyf"]
+[gd_scene load_steps=27 format=3 uid="uid://co2canly84hyf"]
 
 [ext_resource type="Script" uid="uid://baedw6bviawtd" path="res://Scripts/Components/Rope/FabrikRope.gd" id="1_7l8up"]
 [ext_resource type="PackedScene" uid="uid://dwxcjl4jrkyw3" path="res://Scenes/TSCN/Entities/NPCS/LeviathanNode.tscn" id="1_ljr6s"]
 [ext_resource type="Script" uid="uid://bmq6c6h4ure25" path="res://Scripts/Entity/Enemies/Leviathan/Leviathan.gd" id="1_ucxug"]
-[ext_resource type="Script" uid="uid://ck16solkwfpgw" path="res://Scripts/Components/Rope/RopeAttachment.gd" id="4_6mv3f"]
-[ext_resource type="Script" uid="uid://bx1v8dey6m5c" path="res://Scripts/Components/Damage/Attackbox.gd" id="5_on45p"]
+[ext_resource type="PackedScene" uid="uid://c7x8wspgj0vcv" path="res://Scenes/TSCN/Objects/Items/LeviathanBit.tscn" id="3_xmq8b"]
+[ext_resource type="Script" uid="uid://dc6d4gjmiwxua" path="res://Scripts/Entity/Enemies/Leviathan/LeviathanNode.gd" id="5_o2mdg"]
 [ext_resource type="Script" uid="uid://ctpnlukrn1asj" path="res://Scripts/Components/Damage/Hurtbox.gd" id="6_6n4cc"]
+[ext_resource type="Texture2D" uid="uid://ck2es28dcl6pi" path="res://Assets/Art/Entity/LeviathanHeadSpritesheet.png" id="6_a3u4h"]
+[ext_resource type="Script" uid="uid://bf0bikj8np6x" path="res://Scripts/Components/Damage/ContinuousAttack.gd" id="6_js0mp"]
+[ext_resource type="Script" uid="uid://0j0vsqeeio1s" path="res://Scripts/Entity/Enemies/EnemyFov.gd" id="7_v7oj8"]
+[ext_resource type="Script" uid="uid://balgnejnh7c1p" path="res://Scripts/Entity/Enemies/StateMachine.gd" id="9_nosed"]
+[ext_resource type="Script" uid="uid://crynjoiy8hntp" path="res://Scripts/Entity/Enemies/UniversalStates/Dead.gd" id="10_nosed"]
+[ext_resource type="Script" uid="uid://dw187qr44e14p" path="res://Scripts/Entity/Enemies/Leviathan/States/Chase.gd" id="11_d5wvv"]
+[ext_resource type="Script" uid="uid://bngsg3ugex5xq" path="res://Scripts/Entity/Enemies/Leviathan/States/Wander.gd" id="12_iu7tl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_27gx5"]
-size = Vector2(210, 202)
+[sub_resource type="CircleShape2D" id="CircleShape2D_pq0sw"]
+radius = 42.107
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35wmv"]
+atlas = ExtResource("6_a3u4h")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhdiv"]
+atlas = ExtResource("6_a3u4h")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gu5b"]
+atlas = ExtResource("6_a3u4h")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhwgr"]
+atlas = ExtResource("6_a3u4h")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pgr0"]
+atlas = ExtResource("6_a3u4h")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0mv5y"]
+atlas = ExtResource("6_a3u4h")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01roj"]
+atlas = ExtResource("6_a3u4h")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7bsm"]
+atlas = ExtResource("6_a3u4h")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v8vl6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35wmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhdiv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gu5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhwgr")
+}],
+"loop": false,
+"name": &"CloseMouth",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pgr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0mv5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01roj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7bsm")
+}],
+"loop": false,
+"name": &"OpenMouth",
+"speed": 10.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_swi4c"]
 size = Vector2(151, 157)
@@ -16,16 +92,32 @@ size = Vector2(151, 157)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6nwr"]
 size = Vector2(82, 82)
 
-[node name="Leviathan" type="CharacterBody2D"]
-position = Vector2(296, 288)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7oj8"]
+size = Vector2(115, 124)
+
+[node name="Leviathan" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox", "attackbox", "nav_agent", "enemy_fov", "state_machine", "dead_state")]
 collision_mask = 2049
 motion_mode = 1
 script = ExtResource("1_ucxug")
+LEVIATHAN_NODE = ExtResource("1_ljr6s")
+hurtbox = NodePath("Hurtbox")
+attackbox = NodePath("ContinuousAttack")
+nav_agent = NodePath("Nav")
+enemy_fov = NodePath("EnemyFov")
+state_machine = NodePath("StateMachine")
+dead_state = NodePath("StateMachine/Dead")
+drop_item = ExtResource("3_xmq8b")
 
-[node name="Head" parent="." instance=ExtResource("1_ljr6s")]
+[node name="EnemyFov" type="Node2D" parent="."]
+script = ExtResource("7_v7oj8")
+view_radius = 500.0
+metadata/_custom_type_script = "uid://0j0vsqeeio1s"
 
-[node name="Polygon2D" parent="Head" index="0"]
-polygon = PackedVector2Array(-40, 2, -38, -32, -18, -36, 7, -43, 26, -35, 44, -12, 44, 17, 25, 38, 1, 39, -31, 35)
+[node name="Head" type="CollisionShape2D" parent="."]
+z_index = 5
+shape = SubResource("CircleShape2D_pq0sw")
+disabled = true
+script = ExtResource("5_o2mdg")
 
 [node name="Polygon2D3" type="Polygon2D" parent="Head"]
 position = Vector2(-36, -9)
@@ -38,72 +130,23 @@ position = Vector2(-29, -11)
 color = Color(0, 0, 1, 1)
 polygon = PackedVector2Array(50, 16, 72, 8, 50, 45, 42, 33)
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Head"]
+sprite_frames = SubResource("SpriteFrames_v8vl6")
+animation = &"OpenMouth"
+autoplay = "CloseMouth"
+frame = 3
+frame_progress = 1.0
+
 [node name="FabrikRope" type="Node2D" parent="."]
 script = ExtResource("1_7l8up")
 point_amount = 60
 component_container = NodePath("..")
 
-[node name="Legs" type="Node2D" parent="."]
-
-[node name="RopeAttachment" type="Node2D" parent="Legs" node_paths=PackedStringArray("rope")]
-script = ExtResource("4_6mv3f")
-rope = NodePath("../../FabrikRope")
-rope_node_index = 3
-attachment_pos = Vector2(100, 0)
-
-[node name="ColorRect" type="ColorRect" parent="Legs/RopeAttachment"]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(1, 1, 0.27451, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="RopeAttachment2" type="Node2D" parent="Legs" node_paths=PackedStringArray("rope")]
-script = ExtResource("4_6mv3f")
-rope = NodePath("../../FabrikRope")
-rope_node_index = 3
-attachment_pos = Vector2(-100, 0)
-
-[node name="ColorRect" type="ColorRect" parent="Legs/RopeAttachment2"]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(1, 1, 0.27451, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="RopeAttachment3" type="Node2D" parent="Legs" node_paths=PackedStringArray("rope")]
-script = ExtResource("4_6mv3f")
-rope = NodePath("../../FabrikRope")
-rope_node_index = 29
-attachment_pos = Vector2(100, 0)
-
-[node name="ColorRect" type="ColorRect" parent="Legs/RopeAttachment3"]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(1, 1, 0.27451, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="RopeAttachment4" type="Node2D" parent="Legs" node_paths=PackedStringArray("rope")]
-script = ExtResource("4_6mv3f")
-rope = NodePath("../../FabrikRope")
-rope_node_index = 29
-attachment_pos = Vector2(-100, 0)
-
-[node name="ColorRect" type="ColorRect" parent="Legs/RopeAttachment4"]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(1, 1, 0.27451, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="Nav" type="NavigationAgent2D" parent="."]
 
-[node name="Attackbox" type="Area2D" parent="."]
-script = ExtResource("5_on45p")
-attacker_type = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
-shape = SubResource("RectangleShape2D_27gx5")
-
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("6_6n4cc")
+entity = NodePath("..")
 hurt_by_player = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -117,4 +160,33 @@ position = Vector2(0, -56)
 position = Vector2(1, 57)
 shape = SubResource("RectangleShape2D_l6nwr")
 
-[editable path="Head"]
+[node name="ContinuousAttack" type="Area2D" parent="."]
+script = ExtResource("6_js0mp")
+attacker_type = 0
+damage_amount = 5.0
+knockback_force = 1000.0
+metadata/_custom_type_script = "uid://bf0bikj8np6x"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousAttack"]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_v7oj8")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+script = ExtResource("9_nosed")
+starting_state = NodePath("Wander")
+metadata/_custom_type_script = "uid://balgnejnh7c1p"
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("10_nosed")
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("wander_state")]
+script = ExtResource("11_d5wvv")
+wander_state = NodePath("../Wander")
+
+[node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_state")]
+script = ExtResource("12_iu7tl")
+chase_state = NodePath("../Chase")
+
+[node name="Timer" type="Timer" parent="StateMachine/Wander"]
+wait_time = 20.0
+autostart = true

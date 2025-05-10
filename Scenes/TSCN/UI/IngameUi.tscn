@@ -108,6 +108,7 @@ theme_override_font_sizes/normal_font_size = 21
 text = "Oxygen"
 
 [node name="WarningText" type="Label" parent="HUD/MarginContainer/HBoxContainer"]
+modulate = Color(2.5, 2.5, 2.5, 1)
 layout_mode = 2
 size_flags_horizontal = 6
 theme = ExtResource("5_6galc")

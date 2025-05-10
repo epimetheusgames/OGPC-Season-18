@@ -6,6 +6,7 @@ extends PanelContainer
 @onready var oxygen_progress: TextureProgressBar = $MarginContainer/HBoxContainer/OxygenVBox/HBoxContainer/OxygenProgress
 @onready var time: Label = $MarginContainer/HBoxContainer/TimeText
 @onready var warning_text: Label = $MarginContainer/HBoxContainer/WarningText
+var oxygen_low := false
 
 func _ready() -> void:
 	if Global.game_time_system:
@@ -26,6 +27,9 @@ func _process(_delta: float) -> void:
 	$MarginContainer/HBoxContainer/CoordsText.text = "Coordinates: " + str(int(readable_pos.x)) + ", " + str(int(readable_pos.y))
 	
 	$MarginContainer/HBoxContainer/SavedCivillians.text = "Saved Civillians: " + str(Global.current_mission_node.total_saved_civillians)
+	
+	if Global.player.get_oxygen() <= 25 && !oxygen_low:
+		_oxygen_low()
 
 func _saving_game() -> void:
 	$MarginContainer/HBoxContainer/SavingText.visible = true
@@ -38,9 +42,20 @@ func _saving_game() -> void:
 
 func _time_changed(hour: int, minute: int):
 	time.text = "Current Time: " + Global.game_time_system.format_time(hour, minute)
+	
+func _oxygen_low() -> void:
+	oxygen_low = true
+	while Global.player.diver_stats.oxygen <= 25:
+		warning_text.text = "Oxygen Low!"
+		await get_tree().create_timer(1).timeout
+		warning_text.text = ""
+		await get_tree().create_timer(1).timeout
+	oxygen_low = false
 
 func _spawning_follower(pos: Vector2) -> void:
-	while true:
+	for i in range(30):
+		if Global.player.diver_stats.oxygen <= 25:
+			return
 		var sanitized := (pos - Global.research_station.global_position) / 10.0
 		warning_text.text = "Civillians have spawned at the coordinates " + str(int(sanitized.x)) + ", " + str(int(sanitized.y))
 		await get_tree().create_timer(1).timeout
