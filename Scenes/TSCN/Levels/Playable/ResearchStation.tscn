@@ -1,14 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c0nn12ilucaoj"]
+[gd_scene load_steps=11 format=3 uid="uid://c0nn12ilucaoj"]
 
 [ext_resource type="PackedScene" uid="uid://chy3luehcqm2b" path="res://Scenes/TSCN/UI/MissionUiBox.tscn" id="1_wmqaw"]
 [ext_resource type="Script" uid="uid://ctrw12xhthtmp" path="res://Scripts/Level/ResearchStationCamera.gd" id="2_e3xfe"]
 [ext_resource type="Resource" uid="uid://c2722x3n5nlk5" path="res://Scenes/Resource/Level/Tutorial.tres" id="2_t7gpn"]
 [ext_resource type="Shader" uid="uid://jjrct8kg35ci" path="res://Scripts/GLSL/GDShader/OceanDepthShader.gdshader" id="4_6wu4g"]
 [ext_resource type="Texture2D" uid="uid://csm2uyfjisnoh" path="res://Assets/Art/Level/OceanDepthTextureToBlack.png" id="5_thj6v"]
-[ext_resource type="Texture2D" uid="uid://bumrrftvhwmy0" path="res://Assets/Art/Misc/ResearchStationLeftRoom.png" id="8_d4l3m"]
-[ext_resource type="Texture2D" uid="uid://c464qop8nquax" path="res://Assets/Art/Misc/ResearchStationHallway.png" id="9_65861"]
-[ext_resource type="Script" uid="uid://s4npen7ydnt2" path="res://Scripts/UI/Ingame/MinimalChat.gd" id="9_fb75n"]
-[ext_resource type="Texture2D" uid="uid://nurn5d348emh" path="res://Assets/Art/Misc/ResearchStationRightRoom.png" id="10_7lt0g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xhoms"]
 shader = ExtResource("4_6wu4g")
@@ -34,7 +30,6 @@ shader_parameter/max_alpha = 0.2
 shader_parameter/height = 1.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j3cqg"]
-load_path = "res://.godot/imported/OceanDepthTextureToBlack.png-327f5b874898d4dde69f55c283418e46.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dc2in"]
 shader = ExtResource("4_6wu4g")
@@ -49,25 +44,17 @@ shader_parameter/height = 3.5
 [node name="ResearchStation" type="Node2D"]
 scale = Vector2(0.5, 0.5)
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -94.0
+offset_top = -54.0
+offset_right = 2084.0
+offset_bottom = 1186.0
+color = Color(0.0117647, 0.0117647, 0.0901961, 1)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(5655, 3000, 5756, 2773, 6112, 2766, 5936, 3159, 5575, 3116, 5963, 3282, 6285, 2717, 5782, 2685)
-
-[node name="Filler" type="Polygon2D" parent="."]
-z_index = 7
-color = Color(0.266667, 0.34902, 0.384314, 1)
-polygon = PackedVector2Array(22, 133, 125, 16, 1854, 16, 1982, 108, 1974, 536, 2014, 592, 2530, 576, 2592, 480, 2604, 76, 2750, 20, 4434, 18, 4576, 112, 4606, 20, 4620, -112, -9, -115, -21, 82)
-
-[node name="Filler2" type="Polygon2D" parent="."]
-z_index = 7
-color = Color(0.266667, 0.34902, 0.384314, 1)
-polygon = PackedVector2Array(-2, 1052, 2, 1864, 4636, 1848, 4646, 1062)
-
-[node name="Filler3" type="Polygon2D" parent="."]
-z_index = 7
-color = Color(0.265023, 0.265023, 0.265023, 1)
-polygon = PackedVector2Array(4646, 1064, 4658, 1064, 4824, 1126, 4830, 1350, 4830, 1630, 4618, 1636)
 
 [node name="TempDock" type="Polygon2D" parent="."]
 color = Color(0.35, 0.189, 0.1085, 1)
@@ -84,9 +71,9 @@ metadata/_edit_lock_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="StationaryUI"]
 layout_mode = 0
-offset_left = 740.0
+offset_left = 660.0
 offset_top = 298.0
-offset_right = 1076.0
+offset_right = 996.0
 offset_bottom = 670.0
 
 [node name="Tutorial" parent="StationaryUI/HBoxContainer" instance=ExtResource("1_wmqaw")]
@@ -218,31 +205,3 @@ offset_right = 40266.0
 offset_bottom = 12192.0
 scale = Vector2(-1, 1)
 color = Color(0.0117, 0.0117, 0.09, 0.807843)
-
-[node name="ResearchStationLeftRoom" type="Sprite2D" parent="."]
-z_index = 86
-position = Vector2(988, 540)
-texture = ExtResource("8_d4l3m")
-
-[node name="ResearchStationHallway" type="Sprite2D" parent="."]
-z_index = 165
-position = Vector2(2288, 775)
-texture = ExtResource("9_65861")
-
-[node name="ResearchStationRightRoom" type="Sprite2D" parent="."]
-z_index = 80
-position = Vector2(3638, 540)
-texture = ExtResource("10_7lt0g")
-
-[node name="MinimalChat" type="PanelContainer" parent="." node_paths=PackedStringArray("text")]
-offset_left = 1134.0
-offset_top = 190.0
-offset_right = 1648.0
-offset_bottom = 472.0
-script = ExtResource("9_fb75n")
-text = NodePath("RichTextLabel")
-set_default_onready = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MinimalChat"]
-layout_mode = 2
-bbcode_enabled = true
