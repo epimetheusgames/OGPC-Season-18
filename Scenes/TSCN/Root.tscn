@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=44 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -19,6 +19,7 @@
 [ext_resource type="FontFile" uid="uid://b8shwbf3tge0e" path="res://Assets/Fonts/Michroma/Michroma-Regular.ttf" id="16_nfklf"]
 [ext_resource type="PackedScene" uid="uid://co07maqfriti4" path="res://Scenes/TSCN/Entities/NPCS/Boid.tscn" id="17_g72ff"]
 [ext_resource type="Script" uid="uid://s4npen7ydnt2" path="res://Scripts/UI/Ingame/MinimalChat.gd" id="18_al4tj"]
+[ext_resource type="AudioStream" uid="uid://cqn1ekjfcc0fx" path="res://Assets/Music/Sunlight.mp3" id="18_lb45j"]
 [ext_resource type="Script" uid="uid://bcfo5ahloonou" path="res://Scripts/ResourceScripts/Misc/UIDContainer.gd" id="18_vsi4y"]
 [ext_resource type="Script" uid="uid://dku55y4bp1fny" path="res://Scripts/Skeleton/Nodes/KeypressHandler.gd" id="20_kh2s0"]
 [ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="21_stqyc"]
@@ -659,7 +660,7 @@ horizontal_alignment = 1
 polygon = PackedVector2Array(758, 1201.43, 1153, 1216.43, 1172, 3178.43, 959, 3385.43, 736, 3172.43)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="UI/MainMenu/CreditsMenu/Control/StaticBody2D"]
-polygon = PackedVector2Array(786, 1551.67, 1119, 1547.67, 1373, 1119.67, 972, 849, 492, 1127.67)
+polygon = PackedVector2Array(786, 1551.67, 1119, 1547.67, 1373, 1119.67, 961, 1038, 492, 1127.67)
 
 [node name="CreditsAnimationPlayer" type="AnimationPlayer" parent="UI/MainMenu/CreditsMenu"]
 libraries = {
@@ -758,6 +759,14 @@ offset_left = 825.0
 offset_top = 623.0
 offset_right = 1081.0
 offset_bottom = 766.0
+
+[node name="Sunlight" type="AudioStreamPlayer" parent="UI/MainMenu"]
+stream = ExtResource("18_lb45j")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/MainMenu"]
 
 [node name="Boid" parent="UI" instance=ExtResource("17_g72ff")]
 modulate = Color(0.704, 0.771, 0.885, 0.536)
