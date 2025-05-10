@@ -133,6 +133,7 @@ func print_debug(message: String):
 ## Prints an error the the console allways, but only to the ingame console
 ## if verbsoe debug is on.
 func print_error(message: String, error_type := Util.ErrorType.ERROR):
+	return
 	if chat is ChatPanel:
 		chat.typing_command_override = true
 	
