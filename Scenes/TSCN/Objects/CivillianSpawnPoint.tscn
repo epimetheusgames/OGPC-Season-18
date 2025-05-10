@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwtadftcthq27"]
 
-[ext_resource type="Script" uid="uid://crawj8ara8hib" path="res://Scripts/Objects/CivillianSpawnPoint.gd" id="1_gvvub"]
+[ext_resource type="Script" path="res://Scripts/Objects/CivillianSpawnPoint.gd" id="1_gvvub"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_74rjk"]
 radius = 680.106

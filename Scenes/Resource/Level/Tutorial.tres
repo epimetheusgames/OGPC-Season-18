@@ -32,7 +32,7 @@ metadata/_custom_type_script = "uid://dlliifnia7sm4"
 
 [resource]
 script = ExtResource("2_qkhmx")
-total_civillians_saved_to_complete = 0
+total_civillians_saved_to_complete = 1
 mission_filepath = SubResource("Resource_pr8o8")
 title = "Tutorial"
 description = "Get a hang of the basics"

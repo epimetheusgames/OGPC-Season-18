@@ -1,4 +1,5 @@
 # code made by sequoia
+class_name DialogCore
 extends TextureRect
 
 signal dialog_option_chosen

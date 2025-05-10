@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cgroth3nseo6"]
+[gd_scene load_steps=45 format=3 uid="uid://cgroth3nseo6"]
 
 [ext_resource type="Script" uid="uid://d2icxmhi5wfg5" path="res://Scripts/Skeleton/Nodes/Root.gd" id="1_thbo5"]
 [ext_resource type="Script" uid="uid://dv70ovn5u08i2" path="res://Scripts/Level/BoidsCalculator.gd" id="2_ati64"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cwga2scp61606" path="res://Scripts/Skeleton/Nodes/MissionSystem.gd" id="6_pmicg"]
 [ext_resource type="Script" uid="uid://clgd0ups3ekte" path="res://Scripts/ResourceScripts/Missions/Mission.gd" id="7_vxmb5"]
 [ext_resource type="Resource" uid="uid://c2722x3n5nlk5" path="res://Scenes/Resource/Level/Tutorial.tres" id="8_41cf3"]
+[ext_resource type="Resource" uid="uid://b41cmtc2q6li2" path="res://Scenes/Resource/Level/Mission1.tres" id="9_1f6oh"]
 [ext_resource type="Script" uid="uid://duycl57xwmfpr" path="res://Scripts/ResourceScripts/Missions/MissionTree.gd" id="9_y8obd"]
 [ext_resource type="Script" uid="uid://6ub1ahbtrw5b" path="res://Scripts/Skeleton/Nodes/GameTimeSystem.gd" id="10_5yeas"]
 [ext_resource type="Script" uid="uid://bgbde4rlptnwx" path="res://Scripts/Objects/BoidsGroup.gd" id="10_n133v"]
@@ -44,7 +45,7 @@ file = "uid://c0nn12ilucaoj"
 
 [sub_resource type="Resource" id="Resource_1tmkv"]
 script = ExtResource("9_y8obd")
-missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_41cf3")])
+missions = Array[ExtResource("7_vxmb5")]([ExtResource("8_41cf3"), ExtResource("9_1f6oh")])
 
 [sub_resource type="Animation" id="Animation_41cf3"]
 resource_name = "CreditsAnimation"
@@ -134,6 +135,45 @@ tracks/6/keys = {
 "values": [false, false, true]
 }
 
+[sub_resource type="Animation" id="Animation_1f6oh"]
+resource_name = "MAIN"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SoundButton:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CreditsButton:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../BackButton:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_lb45j"]
 length = 0.001
 tracks/0/type = "value"
@@ -219,45 +259,6 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_1f6oh"]
-resource_name = "MAIN"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../SoundButton:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../CreditsButton:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../BackButton:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lb45j"]

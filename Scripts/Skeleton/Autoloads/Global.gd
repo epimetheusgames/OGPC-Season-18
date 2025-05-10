@@ -41,7 +41,7 @@ var player: Diver
 
 ## The current submarine in the mission scene.
 var submarine : Entity
-var dialog_core: TextureRect = null
+var dialog_core: DialogCore = null
 
 ## List of enemy targets
 var enemy_targets : Array[Vector2]

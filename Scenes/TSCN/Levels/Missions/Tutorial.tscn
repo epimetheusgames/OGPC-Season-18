@@ -1,6 +1,6 @@
-[gd_scene load_steps=41 format=4 uid="uid://cadmtimivo2ra"]
+[gd_scene load_steps=30 format=4 uid="uid://cadmtimivo2ra"]
 
-[ext_resource type="Script" uid="uid://b5lp2yd4sopow" path="res://Scripts/Level/MissionScript.gd" id="1_b5vb5"]
+[ext_resource type="Script" uid="uid://85ej1y3m338v" path="res://Scenes/TSCN/Levels/Missions/TutorialHandler.gd" id="1_e845f"]
 [ext_resource type="Script" uid="uid://bn44me3sxajlb" path="res://Scripts/Skeleton/Nodes/Ingame/LocalGameTimeSaver.gd" id="2_umxmc"]
 [ext_resource type="Script" uid="uid://dd7sv4ths4dth" path="res://Scripts/Level/EnvironmentEffects.gd" id="3_581sq"]
 [ext_resource type="AudioStream" uid="uid://bsp8qc1ilhyv1" path="res://Assets/SFX/PixabayRaw/underwater-ambience.mp3" id="4_a4g38"]
@@ -11,16 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dunejohnej7p3" path="res://Assets/Art/Tilesets/copiedfromprojectprometheus.png" id="9_ul5c1"]
 [ext_resource type="Script" uid="uid://cqr2vbfidme0q" path="res://Scripts/Components/Multiplayer/MultiplayerPlayerSpawnerComponent.gd" id="12_rtq4m"]
 [ext_resource type="PackedScene" uid="uid://5g1k55gpynrt" path="res://Scenes/TSCN/Entities/Diver/Diver.tscn" id="13_ehb7s"]
-[ext_resource type="Script" uid="uid://dkv3wdadaqub7" path="res://Scripts/Level/EnemySpawner.gd" id="15_sm620"]
-[ext_resource type="Script" uid="uid://dbwht88doa5vw" path="res://Scripts/ResourceScripts/Misc/EnemySpawnerInfo.gd" id="16_f8gvd"]
-[ext_resource type="PackedScene" uid="uid://dk5y5253vbhe4" path="res://Scenes/TSCN/Entities/NPCS/Jellyfish.tscn" id="17_lm7fu"]
-[ext_resource type="PackedScene" uid="uid://bptkxkfwbumm5" path="res://Scenes/TSCN/Entities/NPCS/BigfinSquid.tscn" id="18_gxoke"]
-[ext_resource type="PackedScene" uid="uid://b8ci245vh1xeo" path="res://Scenes/TSCN/Entities/NPCS/NPC.tscn" id="18_sis5m"]
-[ext_resource type="PackedScene" uid="uid://co2canly84hyf" path="res://Scenes/TSCN/Entities/NPCS/Leviathan.tscn" id="19_0oo6k"]
-[ext_resource type="Texture2D" uid="uid://cdbh2li6uk2l6" path="res://Assets/Art/Misc/icon.svg" id="19_30dfd"]
 [ext_resource type="PackedScene" uid="uid://ctt8tds4p8vt0" path="res://Scenes/TSCN/Entities/Submarine/SmallSub.tscn" id="19_xdlvx"]
 [ext_resource type="PackedScene" uid="uid://brtj1ur8tgigg" path="res://Scenes/ResearchStation.tscn" id="20_sis5m"]
-[ext_resource type="Script" uid="uid://bled6xgnlmdd7" path="res://Scripts/Components/Misc/BuoyancyComponent.gd" id="21_ftg1d"]
 [ext_resource type="PackedScene" uid="uid://71htappd3cxj" path="res://Scenes/TSCN/UI/IngameUi.tscn" id="22_rw4pk"]
 [ext_resource type="PackedScene" uid="uid://blcwv5ro6f2ce" path="res://Scenes/TSCN/UI/DeathScreen.tscn" id="23_30um5"]
 [ext_resource type="PackedScene" uid="uid://ci1hceptj3hwn" path="res://Scenes/TSCN/UI/MissionSuccessScreen.tscn" id="24_uo1ug"]
@@ -254,121 +246,152 @@ func _ready() -> void:
 texture = ExtResource("9_ul5c1")
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 0:2/size_in_atlas = Vector2i(2, 2)
 0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 0:4/size_in_atlas = Vector2i(2, 2)
 0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 0:6/size_in_atlas = Vector2i(2, 2)
 0:6/0 = 0
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 2:6/size_in_atlas = Vector2i(2, 2)
 2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 4:6/size_in_atlas = Vector2i(2, 2)
 4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 6:6/size_in_atlas = Vector2i(2, 2)
 6:6/0 = 0
+6:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 2:4/size_in_atlas = Vector2i(2, 2)
 2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 4:4/size_in_atlas = Vector2i(2, 2)
 4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 6:4/size_in_atlas = Vector2i(2, 2)
 6:4/0 = 0
+6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 2:0/size_in_atlas = Vector2i(2, 2)
 2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 2:2/size_in_atlas = Vector2i(2, 2)
 2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 4:0/size_in_atlas = Vector2i(2, 2)
 4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 4:2/size_in_atlas = Vector2i(2, 2)
 4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 6:0/size_in_atlas = Vector2i(2, 2)
 6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 6:2/size_in_atlas = Vector2i(2, 2)
 6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 8:0/size_in_atlas = Vector2i(2, 2)
 8:0/0 = 0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 8:2/size_in_atlas = Vector2i(2, 2)
 8:2/0 = 0
+8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 8:4/size_in_atlas = Vector2i(2, 2)
 8:4/0 = 0
+8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 10:0/size_in_atlas = Vector2i(2, 2)
 10:0/0 = 0
+10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 10:2/size_in_atlas = Vector2i(2, 2)
 10:2/0 = 0
+10:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 10:4/size_in_atlas = Vector2i(2, 2)
 10:4/0 = 0
+10:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 12:0/size_in_atlas = Vector2i(2, 2)
 12:0/0 = 0
+12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 12:4/size_in_atlas = Vector2i(2, 2)
 12:4/0 = 0
+12:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 14:0/size_in_atlas = Vector2i(2, 2)
 14:0/0 = 0
+14:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 14:2/size_in_atlas = Vector2i(2, 2)
 14:2/0 = 0
+14:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 14:4/size_in_atlas = Vector2i(2, 2)
 14:4/0 = 0
+14:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 16:0/size_in_atlas = Vector2i(2, 2)
 16:0/0 = 0
+16:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 16:2/size_in_atlas = Vector2i(2, 2)
 16:2/0 = 0
+16:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 18:0/size_in_atlas = Vector2i(2, 2)
 18:0/0 = 0
+18:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 20:0/size_in_atlas = Vector2i(2, 2)
 20:0/0 = 0
+20:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 22:0/size_in_atlas = Vector2i(2, 2)
 22:0/0 = 0
+22:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 18:2/size_in_atlas = Vector2i(2, 2)
 18:2/0 = 0
+18:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 20:2/size_in_atlas = Vector2i(2, 2)
 20:2/0 = 0
+20:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 22:2/size_in_atlas = Vector2i(2, 2)
 22:2/0 = 0
+22:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 8:6/size_in_atlas = Vector2i(2, 2)
 8:6/0 = 0
+8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 10:6/size_in_atlas = Vector2i(2, 2)
 10:6/0 = 0
+10:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 12:6/size_in_atlas = Vector2i(2, 2)
 12:6/0 = 0
+12:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 14:6/size_in_atlas = Vector2i(2, 2)
 14:6/0 = 0
+14:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 16:4/size_in_atlas = Vector2i(2, 2)
 16:4/0 = 0
+16:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 16:6/size_in_atlas = Vector2i(2, 2)
 16:6/0 = 0
+16:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 18:4/size_in_atlas = Vector2i(2, 2)
 18:4/0 = 0
+18:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 18:6/size_in_atlas = Vector2i(2, 2)
 18:6/0 = 0
+18:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 20:4/size_in_atlas = Vector2i(2, 2)
 20:4/0 = 0
+20:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 20:6/size_in_atlas = Vector2i(2, 2)
 20:6/0 = 0
+20:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 22:4/size_in_atlas = Vector2i(2, 2)
 22:4/0 = 0
+22:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 22:6/size_in_atlas = Vector2i(2, 2)
 22:6/0 = 0
+22:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 12:2/size_in_atlas = Vector2i(2, 2)
 12:2/0 = 0
+12:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.1657, -16.1873, 16.0074, -15.6477, 16.547, 17.2664, -16.1873, 16.7269)
 
 [sub_resource type="TileSet" id="TileSet_sis5m"]
+physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_xdlvx")
-
-[sub_resource type="Resource" id="Resource_xdqqp"]
-script = ExtResource("16_f8gvd")
-scene = ExtResource("17_lm7fu")
-group_size = 1
-probability = 10
-
-[sub_resource type="Resource" id="Resource_a077w"]
-script = ExtResource("16_f8gvd")
-scene = ExtResource("18_gxoke")
-group_size = 1
-probability = 4
-
-[sub_resource type="Resource" id="Resource_2j7sg"]
-script = ExtResource("16_f8gvd")
-scene = ExtResource("19_0oo6k")
-group_size = 1
-probability = 2
 
 [sub_resource type="Environment" id="Environment_5ulyy"]
 background_mode = 3
@@ -383,7 +406,7 @@ glow_levels/6 = 0.2
 glow_blend_mode = 0
 
 [node name="Mission1" type="Node2D"]
-script = ExtResource("1_b5vb5")
+script = ExtResource("1_e845f")
 
 [node name="GlobalVariableSaver" type="Node" parent="."]
 script = ExtResource("2_umxmc")
@@ -470,31 +493,16 @@ position = Vector2(-7325, -9998)
 
 [node name="Entities" type="Node2D" parent="LevelContainer"]
 
-[node name="EnemySpawner" type="Node2D" parent="LevelContainer/Entities"]
-script = ExtResource("15_sm620")
-player_view_dist = 1500
-enemy_close_dist = 2500
-draw_spawn_positions = true
-enemy_list = Array[ExtResource("16_f8gvd")]([SubResource("Resource_xdqqp"), SubResource("Resource_a077w"), SubResource("Resource_2j7sg")])
-
-[node name="Tutorial_dialog" parent="LevelContainer" instance=ExtResource("18_sis5m")]
-position = Vector2(-20998, -14013)
-npc_name = "Tutorial_dialog"
-choice_given = false
-dialog_speed = 3
-npc_texture = ExtResource("19_30dfd")
-has_dialog = true
-talking_sound = "uid://cw2lob3ywej83"
-
 [node name="Submarine" parent="LevelContainer" instance=ExtResource("19_xdlvx")]
 position = Vector2(-6150, -8605)
 
 [node name="ResearchStation" parent="LevelContainer" instance=ExtResource("20_sis5m")]
 position = Vector2(-4284, -3458)
 
-[node name="LevelContainer_Player_Submarine#BuoyancyComponent" type="Node" parent="."]
-script = ExtResource("21_ftg1d")
-buoyancy_accel = 0.0
+[node name="Gravity" type="Area2D" parent="LevelContainer" groups=["gravity_areas"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelContainer/Gravity"]
+polygon = PackedVector2Array(-7579, -9880, -2889, -9814, -5421, -11312)
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 3
@@ -502,10 +510,9 @@ layer = 3
 [node name="IngameUI" parent="UILayer" instance=ExtResource("22_rw4pk")]
 metadata/_edit_lock_ = true
 
-[node name="ChatPanel" parent="UILayer/IngameUI/StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable" index="1" node_paths=PackedStringArray("teleport_places", "enemy_root")]
+[node name="ChatPanel" parent="UILayer/IngameUI/StatsAndChatDraggable/StatsAndChat/ChatPanelDraggable" index="1" node_paths=PackedStringArray("teleport_places")]
 teleport_place_names = Array[String](["research-station", "submarine"])
 teleport_places = [null, null]
-enemy_root = NodePath("../../../../../../LevelContainer/Entities/EnemySpawner")
 
 [node name="DeathScreen" parent="UILayer" node_paths=PackedStringArray("ingame_ui") instance=ExtResource("23_30um5")]
 visible = false
