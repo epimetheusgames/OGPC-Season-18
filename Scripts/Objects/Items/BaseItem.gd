@@ -11,8 +11,6 @@ var ammount: int = 1
 func _ready() -> void:
 	collision_layer = 128
 	collision_mask = 0
-	Global.player.diver_stats.hurtbox.heal(25)
-	queue_free()
 
 func generate_inventory_item() -> InventoryItem:
 	var item := InventoryItem.new()
